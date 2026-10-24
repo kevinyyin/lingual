@@ -10,7 +10,7 @@ beforeEach(() => {
   document.body.innerHTML = `
     <p id="caption"></p><p id="plan"></p><span id="state"></span>
     <div id="picker" role="group" aria-label="Which sign did you mean?" hidden></div><p id="you-said"></p>
-    <form id="dev" hidden><input id="dev-text" /></form>`;
+    <form id="dev" hidden><input id="dev-text" /></form><button id="talk" type="button">Hold to talk</button>`;
   sent = [];
   bindControls({ send: (m) => sent.push(m), buffered: () => 0 });
   sent.length = 0; // the mode it starts in (tested below)
@@ -126,16 +126,45 @@ describe("voice / signing switch", () => {
 
   test("switching tells the server, is remembered, and changes what ready asks for", () => {
     renderMsg({ type: "state", state: "ready" });
-    expect(document.getElementById("state")!.textContent).toBe("Ready: speak");
+    expect(document.getElementById("state")!.textContent).toBe("Ready: hold to talk");
     getByRole(document.body, "button", { name: "Signing" }).click();
     expect(sent).toContainEqual({ type: "mode", mode: "signing" });
     expect(document.getElementById("state")!.textContent).toBe("Ready: sign");
     expect(localStorage.getItem("lingual.mode")).toBe("signing");
   });
 
+  test("push to talk: speech is heard only while Space or the button is held, in voice mode", () => {
+    const talk = () => sent.filter((m) => m.type === "talk");
+    const key = (type: string, init: KeyboardEventInit = {}, target: EventTarget = document.body) => {
+      const e = new KeyboardEvent(type, { code: "Space", key: " ", bubbles: true, cancelable: true, ...init });
+      target.dispatchEvent(e);
+      return e;
+    };
+    expect(key("keydown").defaultPrevented).toBe(true); // no button click, no page scroll
+    key("keydown", { repeat: true }); // the key's auto-repeat while held
+    key("keyup");
+    expect(talk()).toEqual([{ type: "talk", on: true }, { type: "talk", on: false }]);
+    const button = getByRole(document.body, "button", { name: /Hold to talk/ });
+    button.dispatchEvent(new Event("pointerdown"));
+    expect(button.getAttribute("aria-pressed")).toBe("true");
+    button.dispatchEvent(new Event("pointerup"));
+    expect(talk()).toHaveLength(4);
+    key("keydown", {}, document.getElementById("dev-text")!); // typing a space in the dev box
+    expect(talk()).toHaveLength(4);
+    getByRole(document.body, "button", { name: "Signing" }).click();
+    expect(key("keydown").defaultPrevented).toBe(false); // signing mode: Space still presses a focused button
+    expect(talk()).toHaveLength(4);
+  });
+
+  test("switching to signing mid-talk lets go", () => {
+    document.dispatchEvent(new KeyboardEvent("keydown", { code: "Space", key: " " }));
+    getByRole(document.body, "button", { name: "Signing" }).click();
+    expect(sent.filter((m) => m.type === "talk").at(-1)).toEqual({ type: "talk", on: false });
+  });
+
   test("voice mode never asks to calibrate the camera", () => {
     renderMsg({ type: "state", state: "calibrating" });
-    expect(document.getElementById("state")!.textContent).toBe("Ready: speak");
+    expect(document.getElementById("state")!.textContent).toBe("Ready: hold to talk");
     expect(document.getElementById("state")!.dataset.state).toBe("ready");
   });
 });

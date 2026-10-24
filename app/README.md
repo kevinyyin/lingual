@@ -64,7 +64,7 @@ uv run asl-server             # backend on :8000 (from app/)
 npm --prefix web run dev      # page on :5173 (from app/)
 ```
 
-Open http://localhost:5173 and pick **Voice** (you talk, the avatar signs) or **Signing** (you sign, it speaks). In
+Open http://localhost:5173 and pick **Voice** (hold Space or the Hold to talk button and talk; the avatar signs) or **Signing** (you sign, it speaks). In
 signing mode the camera tells you where to sit and calibrates by itself once you're in position (and again if you
 move). Sign one sign per movement, pause briefly between signs, lower your hands for about half a second to finish.
 If the picker appears, press 1-3 (Esc: none of these). `?dev=1` adds a box to type what the hearing person says;

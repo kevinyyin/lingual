@@ -167,10 +167,8 @@ async def ws_endpoint(ws: WebSocket):
     await send(S.StateMsg(state="calibrating"))
     mic = None
     if os.environ.get("CARTESIA_API_KEY"):
-        # silent while our own voice or avatar output plays and in signing mode; words during a camera turn take over
-        # (session.py)
         mic = asyncio.create_task(MicTranscriber(
-            sess.on_transcript, lambda: sess.state not in ("speaking", "avatar") and sess.mode != "signing",
+            sess.on_transcript, sess.hears_speech,
             api_key=os.environ["CARTESIA_API_KEY"], **({"mic": client_mic} if client_mic else {})).run())
     else:
         log.warning("CARTESIA_API_KEY missing: no speech input (use ?dev=1 to type what the hearing person says)")

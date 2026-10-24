@@ -5,7 +5,7 @@ import pytest
 from frames import make_frame
 from server import plush
 from server.protocol import (
-    AvatarDoneMsg, CalibrateMsg, CheerMsg, FrameMsg, ModeMsg, PickMsg, PracticeMsg, RedoMsg, SayMsg, SignPlanMsg, SignToken,
+    AvatarDoneMsg, CalibrateMsg, CheerMsg, FrameMsg, ModeMsg, PickMsg, PracticeMsg, RedoMsg, SayMsg, SignPlanMsg, SignToken, TalkMsg,
 )
 from server.session import Baseline, Segment, Session, TurnEnd, TurnStart, compute_baseline
 from server.vocab import load_vocab
@@ -176,6 +176,20 @@ async def test_finished_speech_closes_an_open_picker_and_is_signed(tmp_path):
     await s.idle()
     assert [m for m in sent if m.type == "sign_plan"]
     assert not [m for m in sent if m.type == "you_said"]  # the abandoned sign turn says nothing
+
+
+async def test_the_mic_is_heard_only_while_talk_is_held_in_voice_mode(tmp_path):
+    s, _ = make_session(tmp_path)
+    await s.on_client(ModeMsg(mode="voice"))
+    await calibrate(s)
+    assert not s.hears_speech()  # push to talk: nothing said nearby is translated until it's held
+    await s.on_client(TalkMsg(on=True))
+    assert s.hears_speech()
+    await s.on_client(ModeMsg(mode="signing"))
+    assert not s.hears_speech()
+    await s.on_client(ModeMsg(mode="voice"))
+    await s.on_client(TalkMsg(on=False))
+    assert not s.hears_speech()
 
 
 async def test_signing_mode_ignores_speech(tmp_path):
