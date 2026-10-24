@@ -1,0 +1,12 @@
+{
+ "judge": "Claude (hearing, non-signer). A = meaning preserved for the barista; B = borderline (understandable but changed or lossy); W = wrong meaning. Judged on meaning only, not on ASL quality. All outputs need Deaf advisor review.",
+ "g2e_v1": {"0":"A","1":"W","2":"A","3":"A","4":"W","5":"A","6":"B","7":"W","8":"A","9":"A","10":"A","11":"A","12":"W","13":"A","14":"A","15":"A","16":"A","17":"A","18":"A","19":"A","20":"A","21":"W","22":"A","23":"A","24":"A","25":"A","26":"A","27":"A","28":"A","29":"A",
+            "30":"A","31":"B","32":"W","33":"W","34":"B","35":"A","36":"A","37":"A","38":"A","39":"W"},
+ "g2e_v1_notes": {"1":"'It's hot.' instead of 'Hot, please.' (no context)","4":"invented 'oat milk latte'","7":"'I'm here.' instead of 'For here.'","12":"invented 'bathroom'","21":"lost 'I'm Deaf', changed who writes","32":"missing NONE: 'I don't want oat milk or sugar' (inverted)","33":"KIND->FISH kept as fish","39":"DAY->DOG kept as dog"},
+ "g2e_v2": {"0":"A","1":"A","2":"A","3":"A","4":"A","5":"A","6":"A","7":"A","8":"A","9":"A","10":"A","11":"A","12":"A","13":"A","14":"A","15":"A","16":"A","17":"A","18":"A","19":"A","20":"A","21":"B","22":"B","23":"A","24":"A","25":"A","26":"A","27":"A","28":"A","29":"A",
+            "30":"A","31":"B","32":"A","33":"W","34":"B","35":"A","36":"A","37":"A","38":"A","39":"B"},
+ "g2e_v2_notes": {"21":"'Can I write my order?' (ref: 'Can you write it down?')","22":"asks for nut-free muffins instead of whether the muffin has nuts","31":"'Yes, you have milk?' (OAT missing)","33":"FISH still surfaces","34":"'Is it warm?' instead of 'Can you warm it up?'","39":"'Thank you, it's good.' (DOG dropped but meaning lost)"},
+ "e2g_v2_meaning": {"0":"A","1":"B","2":"A","3":"A","4":"B","5":"A","6":"A","7":"B","8":"B","9":"A","10":"A","11":"A","12":"A","13":"B","14":"A","15":"A","16":"A","17":"A","18":"A","19":"A","20":"A","21":"A","22":"B","23":"W","24":"A","25":"A","26":"A","27":"A","28":"A","29":"A"},
+ "e2g_v2_nmm_errors": {"25":"'Can you show me again?' is a yes/no question but AGAIN got lowered brows","1":"OR left neutral inside a yes/no question (minor)"},
+ "e2g_v2_notes": {"1":"redundant COLD","4":"'regular' dropped","7":"'or' dropped","8":"minimal NAME YOU","13":"'over there' rendered HERE ... INSIDE","22":"suggestion rendered as yes/no question on TASTE YOU","23":"INSIDE OUTSIDE contradictory"}
+}

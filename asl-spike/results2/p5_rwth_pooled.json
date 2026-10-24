@@ -1,0 +1,41 @@
+{
+ "a": {
+  "recall": 0.0546,
+  "precision": 0.2083,
+  "tp": 10,
+  "n_ref": 183,
+  "n_hyp": 48,
+  "n_sentences": 75,
+  "signers": 3,
+  "recall_ci_signer": [
+   0.0145,
+   0.0722
+  ]
+ },
+ "b": {
+  "recall": 0.2077,
+  "precision": 0.7037,
+  "tp": 38,
+  "n_ref": 183,
+  "n_hyp": 54,
+  "n_sentences": 75,
+  "signers": 3,
+  "recall_ci_signer": [
+   0.1159,
+   0.2556
+  ]
+ },
+ "c": {
+  "recall": 0.2596,
+  "precision": 0.675,
+  "tp": 27,
+  "n_ref": 104,
+  "n_hyp": 40,
+  "n_sentences": 44,
+  "signers": 3,
+  "recall_ci_signer": [
+   0.1389,
+   0.3462
+  ]
+ }
+}

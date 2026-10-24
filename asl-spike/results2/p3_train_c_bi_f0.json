@@ -1,0 +1,64 @@
+{
+ "tag": "c_bi_f0",
+ "mode": "bi",
+ "minutes": 5.0,
+ "train_s": 300,
+ "steps": 456,
+ "params": 794065,
+ "init_tensors_from_round1": [
+  [],
+  []
+ ],
+ "init": "cache/s2r2/p3_b_bi_f0.pt",
+ "rwth_fold": 0,
+ "rwth_calib": true,
+ "seed": 0,
+ "lr": 0.0003,
+ "history": [
+  {
+   "step": 50,
+   "loss": 0.2488,
+   "s": 47
+  },
+  {
+   "step": 100,
+   "loss": 0.2387,
+   "s": 75
+  },
+  {
+   "step": 150,
+   "loss": 0.3097,
+   "s": 104
+  },
+  {
+   "step": 200,
+   "loss": 0.2026,
+   "s": 134
+  },
+  {
+   "step": 250,
+   "loss": 0.1784,
+   "s": 162
+  },
+  {
+   "step": 300,
+   "loss": 0.1092,
+   "s": 193
+  },
+  {
+   "step": 350,
+   "loss": 0.2573,
+   "s": 223
+  },
+  {
+   "step": 400,
+   "loss": 0.2153,
+   "s": 258
+  },
+  {
+   "step": 450,
+   "loss": 0.1287,
+   "s": 296
+  }
+ ]
+}

@@ -1,0 +1,183 @@
+[
+ {
+  "label": "wh: And what size: small, medium or large?",
+  "sentence": {
+   "signs": [
+    {
+     "gloss": "SMALL",
+     "nmm": {
+      "brows": "lower",
+      "headshake": false,
+      "mouth": null
+     },
+     "span": 1
+    },
+    {
+     "gloss": "OR",
+     "nmm": {
+      "brows": "lower",
+      "headshake": false,
+      "mouth": null
+     },
+     "span": 1
+    },
+    {
+     "gloss": "MEDIUM",
+     "nmm": {
+      "brows": "lower",
+      "headshake": false,
+      "mouth": null
+     },
+     "span": 1
+    },
+    {
+     "gloss": "OR",
+     "nmm": {
+      "brows": "lower",
+      "headshake": false,
+      "mouth": null
+     },
+     "span": 1
+    },
+    {
+     "gloss": "LARGE",
+     "nmm": {
+      "brows": "lower",
+      "headshake": false,
+      "mouth": null
+     },
+     "span": 1
+    },
+    {
+     "gloss": "WHICH",
+     "nmm": {
+      "brows": "lower",
+      "headshake": false,
+      "mouth": null
+     },
+     "span": 1
+    }
+   ]
+  },
+  "dropped_glosses": [
+   "SIZE"
+  ]
+ },
+ {
+  "label": "yn: Why don't you try the chocolate cake? It's really good.",
+  "sentence": {
+   "signs": [
+    {
+     "gloss": "CHOCOLATE",
+     "nmm": {
+      "brows": "neutral",
+      "headshake": false,
+      "mouth": null
+     },
+     "span": 0
+    },
+    {
+     "gloss": "CAKE",
+     "nmm": {
+      "brows": "neutral",
+      "headshake": false,
+      "mouth": null
+     },
+     "span": 0
+    },
+    {
+     "gloss": "TASTE",
+     "nmm": {
+      "brows": "raise",
+      "headshake": false,
+      "mouth": null
+     },
+     "span": 0
+    },
+    {
+     "gloss": "YOU",
+     "nmm": {
+      "brows": "raise",
+      "headshake": false,
+      "mouth": null
+     },
+     "span": 0
+    },
+    {
+     "gloss": "GOOD",
+     "nmm": {
+      "brows": "neutral",
+      "headshake": false,
+      "mouth": null
+     },
+     "span": 0
+    },
+    {
+     "gloss": "DELICIOUS",
+     "nmm": {
+      "brows": "neutral",
+      "headshake": false,
+      "mouth": null
+     },
+     "span": 0
+    }
+   ]
+  },
+  "dropped_glosses": []
+ },
+ {
+  "label": "neg: Sorry, we're out of oat milk today.",
+  "sentence": {
+   "signs": [
+    {
+     "gloss": "MILK",
+     "nmm": {
+      "brows": "neutral",
+      "headshake": false,
+      "mouth": null
+     },
+     "span": 1
+    },
+    {
+     "gloss": "DAY",
+     "nmm": {
+      "brows": "neutral",
+      "headshake": false,
+      "mouth": null
+     },
+     "span": 1
+    },
+    {
+     "gloss": "FINISH",
+     "nmm": {
+      "brows": "neutral",
+      "headshake": true,
+      "mouth": null
+     },
+     "span": 1
+    },
+    {
+     "gloss": "NONE",
+     "nmm": {
+      "brows": "neutral",
+      "headshake": true,
+      "mouth": null
+     },
+     "span": 1
+    },
+    {
+     "gloss": "SORRY",
+     "nmm": {
+      "brows": "neutral",
+      "headshake": false,
+      "mouth": null
+     },
+     "span": 0
+    }
+   ]
+  },
+  "dropped_glosses": [
+   "OAT"
+  ]
+ }
+]

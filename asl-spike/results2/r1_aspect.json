@@ -1,0 +1,29 @@
+{
+ "citizen_aspect_median": 1.3333333333333333,
+ "citizen_face_ratio_px": 0.7951691150665283,
+ "popsign_face_ratio_norm": 1.086030719605359,
+ "popsign_aspect_estimated": 0.7321792106907218,
+ "x_scale_applied": 0.5491344080180414,
+ "n": 20358,
+ "signers": 21,
+ "top1": {
+  "acc": 0.3655,
+  "ci": [
+   0.3257,
+   0.4042
+  ],
+  "n": 20358,
+  "signers": 21
+ },
+ "top3": {
+  "acc": 0.5212,
+  "ci": [
+   0.4737,
+   0.5638
+  ],
+  "n": 20358,
+  "signers": 21
+ },
+ "round1_top1": 0.3373,
+ "round1_top3": 0.4984
+}

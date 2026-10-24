@@ -1,0 +1,20 @@
+{
+ "stt": {
+  "model": "ink-2",
+  "encoding": "pcm_s16le",
+  "sample_rate": 16000,
+  "cartesia_version": "2026-08-14"
+ },
+ "keyterms": [
+  "oat",
+  "almond",
+  "Maya",
+  "decaf",
+  "muffin",
+  "latte"
+ ],
+ "chunk_ms": 100,
+ "tts_voice": "6ccbfb76-1fc6-48f7-b71d-91ac6298247b",
+ "speech_end": "last sample above -45 dBFS at its scheduled send time",
+ "lead_silence_s": 0.5
+}

@@ -1,0 +1,208 @@
+{
+ "val": {
+  "n": 500,
+  "split": "val",
+  "mixed_signer_signs": 0,
+  "signs": 1863,
+  "mixed_rate": 0.0,
+  "mean_frames": 175.4,
+  "mean_signs": 4.57,
+  "unk_rate": 0.185
+ },
+ "test": {
+  "n": 2000,
+  "split": "test",
+  "mixed_signer_signs": 0,
+  "signs": 7485,
+  "mixed_rate": 0.0,
+  "mean_frames": 179.5,
+  "mean_signs": 4.57,
+  "unk_rate": 0.181
+ },
+ "val_script": {
+  "n": 140,
+  "split": "val",
+  "mixed_signer_signs": 102,
+  "signs": 420,
+  "mixed_rate": 0.243,
+  "mean_frames": 133.7,
+  "mean_signs": 3.36,
+  "unk_rate": 0.106
+ },
+ "test_script": {
+  "n": 462,
+  "split": "test",
+  "mixed_signer_signs": 12,
+  "signs": 1386,
+  "mixed_rate": 0.009,
+  "mean_frames": 133.1,
+  "mean_signs": 3.36,
+  "unk_rate": 0.106
+ },
+ "script_lines": [
+  [
+   "HELLO",
+   "IX-1P",
+   "WANT",
+   "COFFEE",
+   "PLEASE"
+  ],
+  [
+   "HOT"
+  ],
+  [
+   "LARGE",
+   "PLEASE"
+  ],
+  [
+   "YES",
+   "YOU",
+   "HAVE",
+   "<unk>",
+   "MILK"
+  ],
+  [
+   "<unk>",
+   "MILK",
+   "SWEET",
+   "NONE"
+  ],
+  [
+   "<unk>",
+   "WHAT",
+   "KIND"
+  ],
+  [
+   "BLUEBERRY",
+   "ONE",
+   "WARM",
+   "CAN"
+  ],
+  [
+   "HERE"
+  ],
+  [
+   "MY",
+   "NAME",
+   "<unk>"
+  ],
+  [
+   "SORRY",
+   "HOW-MUCH",
+   "AGAIN",
+   "PLEASE"
+  ],
+  [
+   "CARD",
+   "PAY",
+   "CAN"
+  ],
+  [
+   "<unk>",
+   "NOT",
+   "NEED",
+   "THANK-YOU"
+  ],
+  [
+   "WHERE",
+   "IX-1P",
+   "UNDERSTAND",
+   "NOT"
+  ],
+  [
+   "FINE",
+   "THANK-YOU",
+   "GOOD",
+   "DAY"
+  ],
+  [
+   "TEA",
+   "HOT",
+   "SMALL",
+   "PLEASE"
+  ],
+  [
+   "COFFEE",
+   "ICE",
+   "MEDIUM"
+  ],
+  [
+   "YOU",
+   "HAVE",
+   "<unk>"
+  ],
+  [
+   "MILK",
+   "NOT",
+   "WANT"
+  ],
+  [
+   "COOKIE",
+   "TWO",
+   "PLEASE"
+  ],
+  [
+   "BATHROOM",
+   "WHERE"
+  ],
+  [
+   "HOW-MUCH",
+   "CAKE"
+  ],
+  [
+   "IX-1P",
+   "DEAF",
+   "WRITE",
+   "CAN"
+  ],
+  [
+   "<unk>",
+   "NUTS",
+   "IX-1P",
+   "<unk>",
+   "HAVE",
+   "NUTS"
+  ],
+  [
+   "WAIT",
+   "HOW-MANY",
+   "MINUTE"
+  ],
+  [
+   "<unk>",
+   "WRONG",
+   "IX-1P",
+   "WANT",
+   "<unk>",
+   "MILK"
+  ],
+  [
+   "SORRY",
+   "COFFEE",
+   "COLD"
+  ],
+  [
+   "<unk>",
+   "PAY",
+   "CAN"
+  ],
+  [
+   "TABLE",
+   "OUTSIDE",
+   "HAVE"
+  ],
+  [
+   "SANDWICH",
+   "WHAT",
+   "KIND",
+   "HAVE"
+  ],
+  [
+   "<unk>",
+   "TWO",
+   "LARGE",
+   "<unk>",
+   "MILK"
+  ]
+ ]
+}

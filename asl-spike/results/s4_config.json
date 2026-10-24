@@ -1,0 +1,65 @@
+{
+ "model": "sonic-3.6",
+ "cartesia_version": "2026-08-14",
+ "sample_rate": 24000,
+ "voices": {
+  "Leo": "0834f3df-e650-4766-a20c-5a93a43aa6e3",
+  "Maya": "cbaf8084-f009-4838-a096-07ee2e6612b1",
+  "Gavin": "f4a3a8e4-694c-4c45-9ca0-27caf97901b5"
+ },
+ "emotions": [
+  "neutral",
+  "happy",
+  "sad",
+  "angry"
+ ],
+ "sentences": [
+  "Hi! I'd like a coffee, please.",
+  "Large, please.",
+  "Do you have oat milk?",
+  "Oat milk, and no sugar.",
+  "What kinds of muffins do you have?",
+  "One blueberry. Can you warm it up?",
+  "My name is Maya.",
+  "Sorry, how much? Again, please.",
+  "Can I pay with a card?",
+  "No receipt, thanks.",
+  "Where? I don't understand.",
+  "Okay, thank you! Have a good day."
+ ],
+ "mismatch": [
+  [
+   "Thank you so much, this is perfect!",
+   "angry",
+   "happy"
+  ],
+  [
+   "I'm really upset, this is the wrong order.",
+   "happy",
+   "angry"
+  ],
+  [
+   "Yes! That's amazing, I love it!",
+   "sad",
+   "happy"
+  ],
+  [
+   "Have a wonderful day, see you tomorrow!",
+   "angry",
+   "happy"
+  ],
+  [
+   "Sorry, I'm not feeling well today.",
+   "happy",
+   "sad"
+  ],
+  [
+   "This is ridiculous, I've been waiting twenty minutes!",
+   "sad",
+   "angry"
+  ]
+ ],
+ "seed": 13,
+ "n_jobs": 696,
+ "concurrency": 1
+}

@@ -1,0 +1,99 @@
+{
+ "session.created": {
+  "count": 1,
+  "first_ms": 1555.7,
+  "example": {
+   "type": "session.created",
+   "event_id": "event_EYgs9xeHEIHULdoGLZpyb",
+   "session": {
+    "id": "sess_EYgs9P0JKbgKdfrjFuGnJ",
+    "type": "translation",
+    "expires_at": 1791940261,
+    "model": "gpt-realtime-translate",
+    "audio": {
+     "input": {
+      "noise_reduction": null,
+      "transcription": null
+     },
+     "output": {
+      "language": "es"
+     }
+    },
+    "include": null
+   }
+  },
+  "last_ms": 1555.7
+ },
+ "session.updated": {
+  "count": 1,
+  "first_ms": 2157.9,
+  "example": {
+   "type": "session.updated",
+   "event_id": "event_EYgsAuHeouhutFYmdwXaZ",
+   "session": {
+    "id": "sess_EYgs9P0JKbgKdfrjFuGnJ",
+    "type": "translation",
+    "expires_at": 1791940261,
+    "model": "gpt-realtime-translate",
+    "audio": {
+     "input": {
+      "noise_reduction": null,
+      "transcription": {
+       "model": "gpt-realtime-whisper"
+      }
+     },
+     "output": {
+      "language": "es"
+     }
+    },
+    "include": null
+   }
+  },
+  "last_ms": 2157.9
+ },
+ "session.output_audio.delta": {
+  "count": 59,
+  "first_ms": 3351.4,
+  "example": {
+   "type": "session.output_audio.delta",
+   "event_id": "event_EYgsB4kc3xW1i8RuD4GmM",
+   "delta": "DgAOAA4ADgAOAA8ADwAPAA8ADwAPAA8AEAAPABAAEAAQABEAEQARABIAEQARABIAEQASABIAEgATABIA...(+25520 chars)",
+   "sample_rate": 24000,
+   "channels": 1,
+   "format": "pcm16",
+   "elapsed_ms": 200
+  },
+  "last_ms": 14855.5
+ },
+ "session.input_transcript.delta": {
+  "count": 15,
+  "first_ms": 3720.8,
+  "example": {
+   "type": "session.input_transcript.delta",
+   "event_id": "event_EYgsBGtYjBvdV6zUJtDZp",
+   "delta": " Could",
+   "elapsed_ms": 800
+  },
+  "last_ms": 6697.0
+ },
+ "session.output_transcript.delta": {
+  "count": 16,
+  "first_ms": 4564.1,
+  "example": {
+   "type": "session.output_transcript.delta",
+   "event_id": "event_EYgsCJuSiuVOPiaY6CnLj",
+   "delta": "¿",
+   "elapsed_ms": 1800
+  },
+  "last_ms": 8305.2
+ },
+ "session.closed": {
+  "count": 1,
+  "first_ms": 15116.9,
+  "example": {
+   "type": "session.closed",
+   "event_id": "event_EYgsNfYxpTZdUVXfKbj00"
+  },
+  "last_ms": 15116.9
+ }
+}

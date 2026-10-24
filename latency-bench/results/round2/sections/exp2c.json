@@ -1,0 +1,168 @@
+{
+ "summary": [
+  {
+   "system": "openai/best-a20-noise_bed_m50",
+   "category": "long",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2081.496,
+   "start_lag_ci": [
+    1187.452,
+    2457.057
+   ],
+   "end_arrival_med": 2645.732,
+   "end_play_med": 2750.692,
+   "end_play_ci": [
+    2592.936,
+    7097.137
+   ],
+   "end_play_p90": 6705.3778,
+   "end_play_max": 7097.137,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.766,
+   "chrf_med": 78.78
+  },
+  {
+   "system": "openai/best-a20-noise_bed_m50",
+   "category": "medium",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2011.42,
+   "start_lag_ci": [
+    1560.527,
+    3663.94
+   ],
+   "end_arrival_med": 2557.628,
+   "end_play_med": 2874.922,
+   "end_play_ci": [
+    2472.93,
+    8937.21
+   ],
+   "end_play_p90": 16836.892799999994,
+   "end_play_max": 58628.245,
+   "stalls": 3,
+   "stall_rate": 0.2,
+   "stall_ci": [
+    0.0704754929173392,
+    0.45185448924055305
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.817,
+   "chrf_med": 81.59
+  },
+  {
+   "system": "openai/best-a20-noise_bed_m50",
+   "category": "noisy",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 1880.332,
+   "start_lag_ci": [
+    1590.724,
+    2287.426
+   ],
+   "end_arrival_med": 2096.639,
+   "end_play_med": 2428.887,
+   "end_play_ci": [
+    1895.582,
+    2814.844
+   ],
+   "end_play_p90": 19803.441999999992,
+   "end_play_max": 61163.701,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.886,
+   "chrf_med": 82.11
+  },
+  {
+   "system": "openai/best-a20-noise_bed_m50",
+   "category": "sentences",
+   "n_runs": 30,
+   "n_clips": 6,
+   "n_failed": 0,
+   "start_lag_med": 1937.2075,
+   "start_lag_ci": [
+    1619.381,
+    2278.5245
+   ],
+   "end_arrival_med": 2213.1555,
+   "end_play_med": 2575.5495,
+   "end_play_ci": [
+    2436.7625,
+    2951.6465
+   ],
+   "end_play_p90": 22274.829400000013,
+   "end_play_max": 61163.701,
+   "stalls": 3,
+   "stall_rate": 0.1,
+   "stall_ci": [
+    0.03459988847741868,
+    0.256210827331743
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.863,
+   "chrf_med": 82.11
+  },
+  {
+   "system": "openai/best-a20-noise_bed_m50",
+   "category": "short",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 1902.056,
+   "start_lag_ci": [
+    1519.604,
+    2327.964
+   ],
+   "end_arrival_med": 2523.304,
+   "end_play_med": 2961.922,
+   "end_play_ci": [
+    2351.346,
+    29649.186
+   ],
+   "end_play_p90": 32431.7986,
+   "end_play_max": 33016.794,
+   "stalls": 2,
+   "stall_rate": 0.13333333333333333,
+   "stall_ci": [
+    0.03736125876428492,
+    0.37881983053980567
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.181,
+   "chrf_med": 73.68
+  }
+ ],
+ "paired_vs_round1": {
+  "openai/best-a20-noise_bed_m50": {
+   "per_clip_ms": {
+    "es_en_long_1": -2.3,
+    "es_en_medium_1": 4786.2,
+    "es_en_medium_2": -973.8,
+    "es_en_medium_3": 350.0,
+    "es_en_noisy_1": -161.3,
+    "es_en_noisy_2": -378.6,
+    "es_en_noisy_3": -332.5,
+    "es_en_short_1": 650.4,
+    "es_en_short_2": 29280.4,
+    "es_en_short_3": 113.3
+   },
+   "median_ms": 55.5,
+   "n_clips": 10,
+   "n_faster": 5
+  }
+ }
+}

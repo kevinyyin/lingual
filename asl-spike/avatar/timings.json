@@ -1,0 +1,23 @@
+[
+ {
+  "label": "wh: And what size: small, medium or large?",
+  "lexicon_ms": 9.800000190734863,
+  "build_ms": 63.59999990463257,
+  "first_motion_ms": 81,
+  "duration_ms": 10241.53183288557
+ },
+ {
+  "label": "yn: Why don't you try the chocolate cake? It's really good.",
+  "lexicon_ms": 0,
+  "build_ms": 29.700000286102295,
+  "first_motion_ms": 29.90000009536743,
+  "duration_ms": 12871.445016470481
+ },
+ {
+  "label": "neg: Sorry, we're out of oat milk today.",
+  "lexicon_ms": 0,
+  "build_ms": 17.199999809265137,
+  "first_motion_ms": 23.09999990463257,
+  "duration_ms": 7367.286769048558
+ }
+]

@@ -1,0 +1,1696 @@
+{
+ "n_sequences": 20358,
+ "n_signers": 21,
+ "n_classes": 53,
+ "overall": {
+  "top1": {
+   "acc": 0.3373,
+   "ci": [
+    0.2967,
+    0.3786
+   ],
+   "n": 20358,
+   "signers": 21
+  },
+  "top3": {
+   "acc": 0.4984,
+   "ci": [
+    0.448,
+    0.5474
+   ],
+   "n": 20358,
+   "signers": 21
+  }
+ },
+ "by_sign_type": {
+  "AsymmetricalDifferentHandshape": {
+   "classes": 3,
+   "top1": {
+    "acc": 0.2451,
+    "ci": [
+     0.1789,
+     0.3169
+    ],
+    "n": 1130,
+    "signers": 21
+   },
+   "top3": {
+    "acc": 0.469,
+    "ci": [
+     0.391,
+     0.5492
+    ],
+    "n": 1130,
+    "signers": 21
+   }
+  },
+  "AsymmetricalSameHandshape": {
+   "classes": 3,
+   "top1": {
+    "acc": 0.0769,
+    "ci": [
+     0.0508,
+     0.1054
+    ],
+    "n": 1131,
+    "signers": 21
+   },
+   "top3": {
+    "acc": 0.1273,
+    "ci": [
+     0.0845,
+     0.1717
+    ],
+    "n": 1131,
+    "signers": 21
+   }
+  },
+  "OneHanded": {
+   "classes": 37,
+   "top1": {
+    "acc": 0.3973,
+    "ci": [
+     0.3454,
+     0.4482
+    ],
+    "n": 14407,
+    "signers": 21
+   },
+   "top3": {
+    "acc": 0.5667,
+    "ci": [
+     0.5043,
+     0.6242
+    ],
+    "n": 14407,
+    "signers": 21
+   }
+  },
+  "SymmetricalOrAlternating": {
+   "classes": 10,
+   "top1": {
+    "acc": 0.2111,
+    "ci": [
+     0.1917,
+     0.2306
+    ],
+    "n": 3690,
+    "signers": 21
+   },
+   "top3": {
+    "acc": 0.3547,
+    "ci": [
+     0.3215,
+     0.3859
+    ],
+    "n": 3690,
+    "signers": 21
+   }
+  }
+ },
+ "one_vs_two_handed": {
+  "one_handed": {
+   "classes": 37,
+   "top1": {
+    "acc": 0.3973,
+    "ci": [
+     0.3454,
+     0.4482
+    ],
+    "n": 14407,
+    "signers": 21
+   },
+   "top3": {
+    "acc": 0.5667,
+    "ci": [
+     0.5043,
+     0.6242
+    ],
+    "n": 14407,
+    "signers": 21
+   }
+  },
+  "two_handed": {
+   "classes": 16,
+   "top1": {
+    "acc": 0.1921,
+    "ci": [
+     0.1697,
+     0.2146
+    ],
+    "n": 5951,
+    "signers": 21
+   },
+   "top3": {
+    "acc": 0.3332,
+    "ci": [
+     0.3016,
+     0.364
+    ],
+    "n": 5951,
+    "signers": 21
+   }
+  }
+ },
+ "per_class": {
+  "ALL": {
+   "sign_type": "AsymmetricalSameHandshape",
+   "popsign_top1": 0.15,
+   "popsign_top3": 0.205,
+   "n": 386,
+   "citizen_test_top1": 0.92,
+   "both_frac_popsign": 0.006,
+   "both_frac_citizen": 0.744,
+   "top_confusions": {
+    "HAPPY": 27,
+    "WELCOME": 26,
+    "NOT": 25
+   },
+   "dom_loc_popsign": [
+    0.48,
+    0.57
+   ],
+   "dom_loc_citizen": [
+    0.47,
+    1.15
+   ],
+   "dom_flex_popsign": 53.3,
+   "dom_flex_citizen": 25.5,
+   "delta_loc_sw": 0.59,
+   "delta_flex_deg": 27.9,
+   "signed_one_handed": true,
+   "likely_variant": false
+  },
+  "APPLE": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.711,
+   "popsign_top3": 0.854,
+   "n": 377,
+   "citizen_test_top1": 0.818,
+   "both_frac_popsign": 0.006,
+   "both_frac_citizen": 0.025,
+   "top_confusions": {
+    "HEARING": 24,
+    "IX-1P": 18,
+    "NEED": 17
+   },
+   "dom_loc_popsign": [
+    0.54,
+    0.37
+   ],
+   "dom_loc_citizen": [
+    0.55,
+    0.68
+   ],
+   "dom_flex_popsign": 103.9,
+   "dom_flex_citizen": 90.6,
+   "delta_loc_sw": 0.31,
+   "delta_flex_deg": 13.3,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "BAD": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.338,
+   "popsign_top3": 0.543,
+   "n": 376,
+   "citizen_test_top1": 0.769,
+   "both_frac_popsign": 0.008,
+   "both_frac_citizen": 0.071,
+   "top_confusions": {
+    "THANK-YOU": 85,
+    "BYE": 17,
+    "HAPPY": 15
+   },
+   "dom_loc_popsign": [
+    0.53,
+    0.5
+   ],
+   "dom_loc_citizen": [
+    0.39,
+    1.09
+   ],
+   "dom_flex_popsign": 15.6,
+   "dom_flex_citizen": 17.9,
+   "delta_loc_sw": 0.61,
+   "delta_flex_deg": 2.2,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "BATHROOM": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.556,
+   "popsign_top3": 0.678,
+   "n": 351,
+   "citizen_test_top1": 0.962,
+   "both_frac_popsign": 0.003,
+   "both_frac_citizen": 0.001,
+   "top_confusions": {
+    "YES": 32,
+    "NEED": 28,
+    "LUNCH": 22
+   },
+   "dom_loc_popsign": [
+    0.56,
+    0.53
+   ],
+   "dom_loc_citizen": [
+    0.66,
+    0.98
+   ],
+   "dom_flex_popsign": 83.7,
+   "dom_flex_citizen": 113.6,
+   "delta_loc_sw": 0.46,
+   "delta_flex_deg": 30.0,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "BYE": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.512,
+   "popsign_top3": 0.694,
+   "n": 402,
+   "citizen_test_top1": 1.0,
+   "both_frac_popsign": 0.005,
+   "both_frac_citizen": 0.01,
+   "top_confusions": {
+    "NINE": 17,
+    "NO": 15,
+    "DRINK": 15
+   },
+   "dom_loc_popsign": [
+    0.59,
+    0.49
+   ],
+   "dom_loc_citizen": [
+    0.68,
+    0.89
+   ],
+   "dom_flex_popsign": 34.8,
+   "dom_flex_citizen": 45.7,
+   "delta_loc_sw": 0.41,
+   "delta_flex_deg": 10.9,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "CAN": {
+   "sign_type": "SymmetricalOrAlternating",
+   "popsign_top1": 0.06,
+   "popsign_top3": 0.197,
+   "n": 366,
+   "citizen_test_top1": 0.826,
+   "both_frac_popsign": 0.002,
+   "both_frac_citizen": 0.699,
+   "top_confusions": {
+    "YES": 113,
+    "NEED": 76,
+    "LUNCH": 38
+   },
+   "dom_loc_popsign": [
+    0.59,
+    0.48
+   ],
+   "dom_loc_citizen": [
+    0.47,
+    1.08
+   ],
+   "dom_flex_popsign": 101.6,
+   "dom_flex_citizen": 77.6,
+   "delta_loc_sw": 0.61,
+   "delta_flex_deg": 24.0,
+   "signed_one_handed": true,
+   "likely_variant": true
+  },
+  "CENT": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.331,
+   "popsign_top3": 0.536,
+   "n": 390,
+   "citizen_test_top1": 0.909,
+   "both_frac_popsign": 0.006,
+   "both_frac_citizen": 0.033,
+   "top_confusions": {
+    "HEARING": 46,
+    "NEED": 45,
+    "OUTSIDE": 32
+   },
+   "dom_loc_popsign": [
+    0.67,
+    0.28
+   ],
+   "dom_loc_citizen": [
+    0.64,
+    0.52
+   ],
+   "dom_flex_popsign": 88.8,
+   "dom_flex_citizen": 83.7,
+   "delta_loc_sw": 0.24,
+   "delta_flex_deg": 5.1,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "CHOCOLATE": {
+   "sign_type": "AsymmetricalDifferentHandshape",
+   "popsign_top1": 0.184,
+   "popsign_top3": 0.433,
+   "n": 386,
+   "citizen_test_top1": 0.867,
+   "both_frac_popsign": 0.006,
+   "both_frac_citizen": 0.743,
+   "top_confusions": {
+    "FINE": 66,
+    "DRINK": 46,
+    "LUNCH": 19
+   },
+   "dom_loc_popsign": [
+    0.49,
+    0.58
+   ],
+   "dom_loc_citizen": [
+    0.34,
+    1.06
+   ],
+   "dom_flex_popsign": 41.0,
+   "dom_flex_citizen": 34.9,
+   "delta_loc_sw": 0.5,
+   "delta_flex_deg": 6.2,
+   "signed_one_handed": true,
+   "likely_variant": false
+  },
+  "DRINK": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.7,
+   "popsign_top3": 0.802,
+   "n": 400,
+   "citizen_test_top1": 0.875,
+   "both_frac_popsign": 0.006,
+   "both_frac_citizen": 0.01,
+   "top_confusions": {
+    "STRAWBERRY": 18,
+    "FINE": 12,
+    "HEARING": 12
+   },
+   "dom_loc_popsign": [
+    0.41,
+    0.39
+   ],
+   "dom_loc_citizen": [
+    0.4,
+    0.66
+   ],
+   "dom_flex_popsign": 46.4,
+   "dom_flex_citizen": 60.4,
+   "delta_loc_sw": 0.28,
+   "delta_flex_deg": 14.0,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "EAT": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.74,
+   "popsign_top3": 0.821,
+   "n": 392,
+   "citizen_test_top1": 0.923,
+   "both_frac_popsign": 0.006,
+   "both_frac_citizen": 0.033,
+   "top_confusions": {
+    "SANDWICH": 25,
+    "CUP": 14,
+    "BUY": 12
+   },
+   "dom_loc_popsign": [
+    0.37,
+    0.47
+   ],
+   "dom_loc_citizen": [
+    0.28,
+    0.89
+   ],
+   "dom_flex_popsign": 43.8,
+   "dom_flex_citizen": 45.7,
+   "delta_loc_sw": 0.43,
+   "delta_flex_deg": 2.0,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "FAST": {
+   "sign_type": "SymmetricalOrAlternating",
+   "popsign_top1": 0.006,
+   "popsign_top3": 0.039,
+   "n": 362,
+   "citizen_test_top1": 1.0,
+   "both_frac_popsign": 0.005,
+   "both_frac_citizen": 0.738,
+   "top_confusions": {
+    "MILK": 169,
+    "LUNCH": 19,
+    "NEED": 17
+   },
+   "dom_loc_popsign": [
+    0.6,
+    0.53
+   ],
+   "dom_loc_citizen": [
+    0.52,
+    1.12
+   ],
+   "dom_flex_popsign": 96.5,
+   "dom_flex_citizen": 80.8,
+   "delta_loc_sw": 0.6,
+   "delta_flex_deg": 15.7,
+   "signed_one_handed": true,
+   "likely_variant": true
+  },
+  "FINE": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.511,
+   "popsign_top3": 0.664,
+   "n": 360,
+   "citizen_test_top1": 0.941,
+   "both_frac_popsign": 0.002,
+   "both_frac_citizen": 0.026,
+   "top_confusions": {
+    "IX-1P": 29,
+    "LIKE": 25,
+    "LUNCH": 18
+   },
+   "dom_loc_popsign": [
+    0.46,
+    0.67
+   ],
+   "dom_loc_citizen": [
+    0.35,
+    1.18
+   ],
+   "dom_flex_popsign": 19.0,
+   "dom_flex_citizen": 31.0,
+   "delta_loc_sw": 0.52,
+   "delta_flex_deg": 12.0,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "FINISH": {
+   "sign_type": "SymmetricalOrAlternating",
+   "popsign_top1": 0.116,
+   "popsign_top3": 0.247,
+   "n": 388,
+   "citizen_test_top1": 0.857,
+   "both_frac_popsign": 0.002,
+   "both_frac_citizen": 0.834,
+   "top_confusions": {
+    "HOT": 51,
+    "NINE": 49,
+    "BYE": 32
+   },
+   "dom_loc_popsign": [
+    0.64,
+    0.52
+   ],
+   "dom_loc_citizen": [
+    0.67,
+    1.02
+   ],
+   "dom_flex_popsign": 16.7,
+   "dom_flex_citizen": 15.1,
+   "delta_loc_sw": 0.5,
+   "delta_flex_deg": 1.6,
+   "signed_one_handed": true,
+   "likely_variant": false
+  },
+  "FOR": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.279,
+   "popsign_top3": 0.516,
+   "n": 384,
+   "citizen_test_top1": 0.833,
+   "both_frac_popsign": 0.004,
+   "both_frac_citizen": 0.003,
+   "top_confusions": {
+    "HEARING": 68,
+    "CENT": 66,
+    "NEED": 60
+   },
+   "dom_loc_popsign": [
+    0.68,
+    0.25
+   ],
+   "dom_loc_citizen": [
+    0.72,
+    0.46
+   ],
+   "dom_flex_popsign": 83.1,
+   "dom_flex_citizen": 81.0,
+   "delta_loc_sw": 0.21,
+   "delta_flex_deg": 2.2,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "GIVE": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.023,
+   "popsign_top3": 0.046,
+   "n": 346,
+   "citizen_test_top1": 0.727,
+   "both_frac_popsign": 0.004,
+   "both_frac_citizen": 0.057,
+   "top_confusions": {
+    "IX-1P": 27,
+    "LUNCH": 26,
+    "WHAT": 25
+   },
+   "dom_loc_popsign": [
+    0.56,
+    0.56
+   ],
+   "dom_loc_citizen": [
+    0.51,
+    1.12
+   ],
+   "dom_flex_popsign": 51.6,
+   "dom_flex_citizen": 49.1,
+   "delta_loc_sw": 0.56,
+   "delta_flex_deg": 2.5,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "GO": {
+   "sign_type": "SymmetricalOrAlternating",
+   "popsign_top1": 0.0,
+   "popsign_top3": 0.005,
+   "n": 388,
+   "citizen_test_top1": 0.846,
+   "both_frac_popsign": 0.002,
+   "both_frac_citizen": 0.758,
+   "top_confusions": {
+    "OUTSIDE": 66,
+    "FOUR": 37,
+    "LUNCH": 35
+   },
+   "dom_loc_popsign": [
+    0.64,
+    0.46
+   ],
+   "dom_loc_citizen": [
+    0.47,
+    1.1
+   ],
+   "dom_flex_popsign": 52.6,
+   "dom_flex_citizen": 74.0,
+   "delta_loc_sw": 0.66,
+   "delta_flex_deg": 21.4,
+   "signed_one_handed": true,
+   "likely_variant": true
+  },
+  "HAPPY": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.496,
+   "popsign_top3": 0.646,
+   "n": 379,
+   "citizen_test_top1": 0.75,
+   "both_frac_popsign": 0.005,
+   "both_frac_citizen": 0.093,
+   "top_confusions": {
+    "WELCOME": 49,
+    "PLEASE": 19,
+    "MY": 15
+   },
+   "dom_loc_popsign": [
+    0.55,
+    0.62
+   ],
+   "dom_loc_citizen": [
+    0.45,
+    1.25
+   ],
+   "dom_flex_popsign": 14.5,
+   "dom_flex_citizen": 13.4,
+   "delta_loc_sw": 0.64,
+   "delta_flex_deg": 1.1,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "HAVE": {
+   "sign_type": "SymmetricalOrAlternating",
+   "popsign_top1": 0.101,
+   "popsign_top3": 0.516,
+   "n": 337,
+   "citizen_test_top1": 0.917,
+   "both_frac_popsign": 0.002,
+   "both_frac_citizen": 0.79,
+   "top_confusions": {
+    "PREFER": 178,
+    "IX-1P": 45,
+    "LUNCH": 21
+   },
+   "dom_loc_popsign": [
+    0.67,
+    0.58
+   ],
+   "dom_loc_citizen": [
+    0.61,
+    1.17
+   ],
+   "dom_flex_popsign": 71.7,
+   "dom_flex_citizen": 75.5,
+   "delta_loc_sw": 0.59,
+   "delta_flex_deg": 3.8,
+   "signed_one_handed": true,
+   "likely_variant": false
+  },
+  "HEARING": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.511,
+   "popsign_top3": 0.704,
+   "n": 405,
+   "citizen_test_top1": 0.919,
+   "both_frac_popsign": 0.004,
+   "both_frac_citizen": 0.007,
+   "top_confusions": {
+    "BYE": 34,
+    "NEED": 31,
+    "OUTSIDE": 25
+   },
+   "dom_loc_popsign": [
+    0.58,
+    0.36
+   ],
+   "dom_loc_citizen": [
+    0.58,
+    0.73
+   ],
+   "dom_flex_popsign": 64.6,
+   "dom_flex_citizen": 68.2,
+   "delta_loc_sw": 0.37,
+   "delta_flex_deg": 3.6,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "HELLO": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.356,
+   "popsign_top3": 0.505,
+   "n": 390,
+   "citizen_test_top1": 0.929,
+   "both_frac_popsign": 0.004,
+   "both_frac_citizen": 0.003,
+   "top_confusions": {
+    "BYE": 55,
+    "HEARING": 27,
+    "KNOW": 23
+   },
+   "dom_loc_popsign": [
+    0.62,
+    0.3
+   ],
+   "dom_loc_citizen": [
+    0.65,
+    0.49
+   ],
+   "dom_flex_popsign": 18.0,
+   "dom_flex_citizen": 13.6,
+   "delta_loc_sw": 0.19,
+   "delta_flex_deg": 4.4,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "HOT": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.29,
+   "popsign_top3": 0.54,
+   "n": 383,
+   "citizen_test_top1": 0.727,
+   "both_frac_popsign": 0.004,
+   "both_frac_citizen": 0.055,
+   "top_confusions": {
+    "TASTE": 46,
+    "BAD": 37,
+    "STRAWBERRY": 36
+   },
+   "dom_loc_popsign": [
+    0.52,
+    0.49
+   ],
+   "dom_loc_citizen": [
+    0.42,
+    1.02
+   ],
+   "dom_flex_popsign": 34.7,
+   "dom_flex_citizen": 50.4,
+   "delta_loc_sw": 0.54,
+   "delta_flex_deg": 15.7,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "HOW-MANY": {
+   "sign_type": "SymmetricalOrAlternating",
+   "popsign_top1": 0.05,
+   "popsign_top3": 0.164,
+   "n": 377,
+   "citizen_test_top1": 0.75,
+   "both_frac_popsign": 0.002,
+   "both_frac_citizen": 0.788,
+   "top_confusions": {
+    "MILK": 80,
+    "WHAT": 53,
+    "FOUR": 33
+   },
+   "dom_loc_popsign": [
+    0.6,
+    0.56
+   ],
+   "dom_loc_citizen": [
+    0.54,
+    1.22
+   ],
+   "dom_flex_popsign": 63.7,
+   "dom_flex_citizen": 65.5,
+   "delta_loc_sw": 0.66,
+   "delta_flex_deg": 1.9,
+   "signed_one_handed": true,
+   "likely_variant": true
+  },
+  "HUNGRY": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.187,
+   "popsign_top3": 0.353,
+   "n": 385,
+   "citizen_test_top1": 0.917,
+   "both_frac_popsign": 0.003,
+   "both_frac_citizen": 0.074,
+   "top_confusions": {
+    "HAPPY": 51,
+    "LIKE": 42,
+    "IX-1P": 33
+   },
+   "dom_loc_popsign": [
+    0.46,
+    0.64
+   ],
+   "dom_loc_citizen": [
+    0.31,
+    1.37
+   ],
+   "dom_flex_popsign": 49.5,
+   "dom_flex_citizen": 67.4,
+   "delta_loc_sw": 0.75,
+   "delta_flex_deg": 17.9,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "LATER": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.271,
+   "popsign_top3": 0.377,
+   "n": 377,
+   "citizen_test_top1": 0.917,
+   "both_frac_popsign": 0.003,
+   "both_frac_citizen": 0.035,
+   "top_confusions": {
+    "NEED": 51,
+    "LUNCH": 33,
+    "DEAF": 19
+   },
+   "dom_loc_popsign": [
+    0.59,
+    0.48
+   ],
+   "dom_loc_citizen": [
+    0.63,
+    0.9
+   ],
+   "dom_flex_popsign": 78.1,
+   "dom_flex_citizen": 76.0,
+   "delta_loc_sw": 0.42,
+   "delta_flex_deg": 2.1,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "LIKE": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.556,
+   "popsign_top3": 0.723,
+   "n": 376,
+   "citizen_test_top1": 0.917,
+   "both_frac_popsign": 0.004,
+   "both_frac_citizen": 0.114,
+   "top_confusions": {
+    "PLEASE": 21,
+    "LUNCH": 17,
+    "IX-1P": 17
+   },
+   "dom_loc_popsign": [
+    0.54,
+    0.65
+   ],
+   "dom_loc_citizen": [
+    0.41,
+    1.32
+   ],
+   "dom_flex_popsign": 25.3,
+   "dom_flex_citizen": 25.5,
+   "delta_loc_sw": 0.68,
+   "delta_flex_deg": 0.2,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "MILK": {
+   "sign_type": "SymmetricalOrAlternating",
+   "popsign_top1": 0.756,
+   "popsign_top3": 0.82,
+   "n": 377,
+   "citizen_test_top1": 0.913,
+   "both_frac_popsign": 0.002,
+   "both_frac_citizen": 0.354,
+   "top_confusions": {
+    "LUNCH": 16,
+    "IX-1P": 15,
+    "LIKE": 8
+   },
+   "dom_loc_popsign": [
+    0.62,
+    0.49
+   ],
+   "dom_loc_citizen": [
+    0.63,
+    0.99
+   ],
+   "dom_flex_popsign": 109.0,
+   "dom_flex_citizen": 106.5,
+   "delta_loc_sw": 0.5,
+   "delta_flex_deg": 2.5,
+   "signed_one_handed": true,
+   "likely_variant": false
+  },
+  "MORNING": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.081,
+   "popsign_top3": 0.304,
+   "n": 372,
+   "citizen_test_top1": 0.786,
+   "both_frac_popsign": 0.003,
+   "both_frac_citizen": 0.432,
+   "top_confusions": {
+    "OUTSIDE": 92,
+    "FIVE-DOLLARS": 73,
+    "KNOW": 42
+   },
+   "dom_loc_popsign": [
+    0.62,
+    0.41
+   ],
+   "dom_loc_citizen": [
+    0.32,
+    1.19
+   ],
+   "dom_flex_popsign": 19.7,
+   "dom_flex_citizen": 33.4,
+   "delta_loc_sw": 0.83,
+   "delta_flex_deg": 13.8,
+   "signed_one_handed": false,
+   "likely_variant": true
+  },
+  "MY": {
+   "sign_type": "AsymmetricalDifferentHandshape",
+   "popsign_top1": 0.447,
+   "popsign_top3": 0.665,
+   "n": 376,
+   "citizen_test_top1": 0.846,
+   "both_frac_popsign": 0.002,
+   "both_frac_citizen": 0.4,
+   "top_confusions": {
+    "PLEASE": 88,
+    "HAPPY": 28,
+    "LUNCH": 13
+   },
+   "dom_loc_popsign": [
+    0.44,
+    0.65
+   ],
+   "dom_loc_citizen": [
+    0.34,
+    1.07
+   ],
+   "dom_flex_popsign": 12.7,
+   "dom_flex_citizen": 30.5,
+   "delta_loc_sw": 0.43,
+   "delta_flex_deg": 17.8,
+   "signed_one_handed": true,
+   "likely_variant": false
+  },
+  "NEED": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.313,
+   "popsign_top3": 0.517,
+   "n": 348,
+   "citizen_test_top1": 0.8,
+   "both_frac_popsign": 0.004,
+   "both_frac_citizen": 0.008,
+   "top_confusions": {
+    "BATHROOM": 76,
+    "LUNCH": 35,
+    "YES": 16
+   },
+   "dom_loc_popsign": [
+    0.61,
+    0.49
+   ],
+   "dom_loc_citizen": [
+    0.72,
+    0.94
+   ],
+   "dom_flex_popsign": 82.9,
+   "dom_flex_citizen": 79.8,
+   "delta_loc_sw": 0.47,
+   "delta_flex_deg": 3.1,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "NICE": {
+   "sign_type": "AsymmetricalSameHandshape",
+   "popsign_top1": 0.056,
+   "popsign_top3": 0.113,
+   "n": 355,
+   "citizen_test_top1": 0.667,
+   "both_frac_popsign": 0.006,
+   "both_frac_citizen": 0.618,
+   "top_confusions": {
+    "FINE": 64,
+    "IX-1P": 61,
+    "LUNCH": 36
+   },
+   "dom_loc_popsign": [
+    0.49,
+    0.58
+   ],
+   "dom_loc_citizen": [
+    0.33,
+    1.19
+   ],
+   "dom_flex_popsign": 24.7,
+   "dom_flex_citizen": 22.4,
+   "delta_loc_sw": 0.63,
+   "delta_flex_deg": 2.3,
+   "signed_one_handed": true,
+   "likely_variant": true
+  },
+  "NO": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.611,
+   "popsign_top3": 0.746,
+   "n": 370,
+   "citizen_test_top1": 1.0,
+   "both_frac_popsign": 0.002,
+   "both_frac_citizen": 0.035,
+   "top_confusions": {
+    "THREE": 32,
+    "LUNCH": 29,
+    "NEED": 14
+   },
+   "dom_loc_popsign": [
+    0.56,
+    0.52
+   ],
+   "dom_loc_citizen": [
+    0.59,
+    1.03
+   ],
+   "dom_flex_popsign": 54.7,
+   "dom_flex_citizen": 63.6,
+   "delta_loc_sw": 0.51,
+   "delta_flex_deg": 8.9,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "NOT": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.167,
+   "popsign_top3": 0.369,
+   "n": 377,
+   "citizen_test_top1": 0.833,
+   "both_frac_popsign": 0.005,
+   "both_frac_citizen": 0.115,
+   "top_confusions": {
+    "YES": 74,
+    "NUTS": 72,
+    "IX-1P": 33
+   },
+   "dom_loc_popsign": [
+    0.39,
+    0.57
+   ],
+   "dom_loc_citizen": [
+    0.24,
+    1.17
+   ],
+   "dom_flex_popsign": 92.2,
+   "dom_flex_citizen": 104.9,
+   "delta_loc_sw": 0.62,
+   "delta_flex_deg": 12.7,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "NOW": {
+   "sign_type": "SymmetricalOrAlternating",
+   "popsign_top1": 0.295,
+   "popsign_top3": 0.585,
+   "n": 369,
+   "citizen_test_top1": 1.0,
+   "both_frac_popsign": 0.003,
+   "both_frac_citizen": 0.758,
+   "top_confusions": {
+    "JUICE": 77,
+    "WHAT": 50,
+    "PREFER": 24
+   },
+   "dom_loc_popsign": [
+    0.57,
+    0.59
+   ],
+   "dom_loc_citizen": [
+    0.59,
+    1.24
+   ],
+   "dom_flex_popsign": 101.4,
+   "dom_flex_citizen": 102.8,
+   "delta_loc_sw": 0.65,
+   "delta_flex_deg": 1.5,
+   "signed_one_handed": true,
+   "likely_variant": false
+  },
+  "NUTS": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.495,
+   "popsign_top3": 0.741,
+   "n": 402,
+   "citizen_test_top1": 0.8,
+   "both_frac_popsign": 0.004,
+   "both_frac_citizen": 0.425,
+   "top_confusions": {
+    "YES": 59,
+    "NOT": 26,
+    "ORANGE": 19
+   },
+   "dom_loc_popsign": [
+    0.37,
+    0.46
+   ],
+   "dom_loc_citizen": [
+    0.39,
+    1.01
+   ],
+   "dom_flex_popsign": 91.5,
+   "dom_flex_citizen": 83.7,
+   "delta_loc_sw": 0.55,
+   "delta_flex_deg": 7.7,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "ORANGE": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.728,
+   "popsign_top3": 0.779,
+   "n": 390,
+   "citizen_test_top1": 0.846,
+   "both_frac_popsign": 0.003,
+   "both_frac_citizen": 0.01,
+   "top_confusions": {
+    "IX-1P": 16,
+    "NUTS": 13,
+    "NOT": 12
+   },
+   "dom_loc_popsign": [
+    0.3,
+    0.45
+   ],
+   "dom_loc_citizen": [
+    0.21,
+    0.85
+   ],
+   "dom_flex_popsign": 94.4,
+   "dom_flex_citizen": 87.4,
+   "delta_loc_sw": 0.41,
+   "delta_flex_deg": 7.0,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "OUTSIDE": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.601,
+   "popsign_top3": 0.689,
+   "n": 386,
+   "citizen_test_top1": 0.833,
+   "both_frac_popsign": 0.005,
+   "both_frac_citizen": 0.003,
+   "top_confusions": {
+    "NEED": 25,
+    "LUNCH": 21,
+    "FOUR": 19
+   },
+   "dom_loc_popsign": [
+    0.77,
+    0.34
+   ],
+   "dom_loc_citizen": [
+    0.88,
+    0.49
+   ],
+   "dom_flex_popsign": 27.6,
+   "dom_flex_citizen": 31.3,
+   "delta_loc_sw": 0.19,
+   "delta_flex_deg": 3.8,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "PHONE": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.623,
+   "popsign_top3": 0.774,
+   "n": 385,
+   "citizen_test_top1": 1.0,
+   "both_frac_popsign": 0.005,
+   "both_frac_citizen": 0.007,
+   "top_confusions": {
+    "JUICE": 36,
+    "NOW": 34,
+    "PREFER": 15
+   },
+   "dom_loc_popsign": [
+    0.6,
+    0.37
+   ],
+   "dom_loc_citizen": [
+    0.51,
+    0.64
+   ],
+   "dom_flex_popsign": 97.6,
+   "dom_flex_citizen": 91.9,
+   "delta_loc_sw": 0.28,
+   "delta_flex_deg": 5.8,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "PLEASE": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.464,
+   "popsign_top3": 0.701,
+   "n": 384,
+   "citizen_test_top1": 0.846,
+   "both_frac_popsign": 0.003,
+   "both_frac_citizen": 0.016,
+   "top_confusions": {
+    "MY": 49,
+    "IX-1P": 19,
+    "WELCOME": 19
+   },
+   "dom_loc_popsign": [
+    0.49,
+    0.66
+   ],
+   "dom_loc_citizen": [
+    0.4,
+    1.25
+   ],
+   "dom_flex_popsign": 11.7,
+   "dom_flex_citizen": 9.8,
+   "delta_loc_sw": 0.59,
+   "delta_flex_deg": 2.0,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "SAME": {
+   "sign_type": "SymmetricalOrAlternating",
+   "popsign_top1": 0.547,
+   "popsign_top3": 0.637,
+   "n": 380,
+   "citizen_test_top1": 0.964,
+   "both_frac_popsign": 0.004,
+   "both_frac_citizen": 0.402,
+   "top_confusions": {
+    "LUNCH": 19,
+    "ICE": 16,
+    "NOT": 14
+   },
+   "dom_loc_popsign": [
+    0.45,
+    0.59
+   ],
+   "dom_loc_citizen": [
+    0.41,
+    1.17
+   ],
+   "dom_flex_popsign": 58.8,
+   "dom_flex_citizen": 67.6,
+   "delta_loc_sw": 0.58,
+   "delta_flex_deg": 8.8,
+   "signed_one_handed": true,
+   "likely_variant": false
+  },
+  "SEE": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.099,
+   "popsign_top3": 0.261,
+   "n": 802,
+   "citizen_test_top1": 0.462,
+   "both_frac_popsign": 0.005,
+   "both_frac_citizen": 0.002,
+   "top_confusions": {
+    "TWO": 210,
+    "NO": 141,
+    "STRAWBERRY": 38
+   },
+   "dom_loc_popsign": [
+    0.56,
+    0.48
+   ],
+   "dom_loc_citizen": [
+    0.51,
+    0.96
+   ],
+   "dom_flex_popsign": 60.9,
+   "dom_flex_citizen": 64.8,
+   "delta_loc_sw": 0.48,
+   "delta_flex_deg": 3.9,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "SIT": {
+   "sign_type": "AsymmetricalDifferentHandshape",
+   "popsign_top1": 0.103,
+   "popsign_top3": 0.307,
+   "n": 368,
+   "citizen_test_top1": 1.0,
+   "both_frac_popsign": 0.001,
+   "both_frac_citizen": 0.795,
+   "top_confusions": {
+    "NO": 120,
+    "NEED": 89,
+    "LUNCH": 28
+   },
+   "dom_loc_popsign": [
+    0.59,
+    0.48
+   ],
+   "dom_loc_citizen": [
+    0.51,
+    1.09
+   ],
+   "dom_flex_popsign": 59.5,
+   "dom_flex_citizen": 44.4,
+   "delta_loc_sw": 0.62,
+   "delta_flex_deg": 15.1,
+   "signed_one_handed": true,
+   "likely_variant": true
+  },
+  "TABLE": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.172,
+   "popsign_top3": 0.288,
+   "n": 337,
+   "citizen_test_top1": 1.0,
+   "both_frac_popsign": 0.004,
+   "both_frac_citizen": 0.487,
+   "top_confusions": {
+    "IX-1P": 46,
+    "FINE": 42,
+    "PLEASE": 24
+   },
+   "dom_loc_popsign": [
+    0.43,
+    0.51
+   ],
+   "dom_loc_citizen": [
+    0.17,
+    0.98
+   ],
+   "dom_flex_popsign": 17.2,
+   "dom_flex_citizen": 13.5,
+   "delta_loc_sw": 0.54,
+   "delta_flex_deg": 3.7,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "TASTE": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.518,
+   "popsign_top3": 0.663,
+   "n": 392,
+   "citizen_test_top1": 0.833,
+   "both_frac_popsign": 0.004,
+   "both_frac_citizen": 0.018,
+   "top_confusions": {
+    "THANK-YOU": 29,
+    "GOOD": 26,
+    "THREE": 21
+   },
+   "dom_loc_popsign": [
+    0.46,
+    0.54
+   ],
+   "dom_loc_citizen": [
+    0.32,
+    1.03
+   ],
+   "dom_flex_popsign": 16.1,
+   "dom_flex_citizen": 16.6,
+   "delta_loc_sw": 0.51,
+   "delta_flex_deg": 0.5,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "THANK-YOU": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.51,
+   "popsign_top3": 0.695,
+   "n": 357,
+   "citizen_test_top1": 0.5,
+   "both_frac_popsign": 0.004,
+   "both_frac_citizen": 0.027,
+   "top_confusions": {
+    "HAPPY": 30,
+    "BAD": 22,
+    "WELCOME": 18
+   },
+   "dom_loc_popsign": [
+    0.5,
+    0.58
+   ],
+   "dom_loc_citizen": [
+    0.38,
+    1.2
+   ],
+   "dom_flex_popsign": 15.0,
+   "dom_flex_citizen": 12.0,
+   "delta_loc_sw": 0.63,
+   "delta_flex_deg": 3.0,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "THIRSTY": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.231,
+   "popsign_top3": 0.511,
+   "n": 360,
+   "citizen_test_top1": 0.833,
+   "both_frac_popsign": 0.009,
+   "both_frac_citizen": 0.025,
+   "top_confusions": {
+    "IX-1P": 125,
+    "HEARING": 26,
+    "SIGN": 23
+   },
+   "dom_loc_popsign": [
+    0.46,
+    0.65
+   ],
+   "dom_loc_citizen": [
+    0.34,
+    1.24
+   ],
+   "dom_flex_popsign": 94.0,
+   "dom_flex_citizen": 96.8,
+   "delta_loc_sw": 0.6,
+   "delta_flex_deg": 2.8,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "TIME": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.014,
+   "popsign_top3": 0.209,
+   "n": 363,
+   "citizen_test_top1": 0.833,
+   "both_frac_popsign": 0.002,
+   "both_frac_citizen": 0.681,
+   "top_confusions": {
+    "NEED": 219,
+    "LUNCH": 30,
+    "IX-1P": 29
+   },
+   "dom_loc_popsign": [
+    0.65,
+    0.41
+   ],
+   "dom_loc_citizen": [
+    0.39,
+    1.07
+   ],
+   "dom_flex_popsign": 85.6,
+   "dom_flex_citizen": 86.6,
+   "delta_loc_sw": 0.71,
+   "delta_flex_deg": 1.0,
+   "signed_one_handed": false,
+   "likely_variant": true
+  },
+  "WAIT": {
+   "sign_type": "SymmetricalOrAlternating",
+   "popsign_top1": 0.159,
+   "popsign_top3": 0.353,
+   "n": 346,
+   "citizen_test_top1": 0.692,
+   "both_frac_popsign": 0.005,
+   "both_frac_citizen": 0.829,
+   "top_confusions": {
+    "THREE": 71,
+    "WHAT": 32,
+    "FIVE-DOLLARS": 28
+   },
+   "dom_loc_popsign": [
+    0.59,
+    0.62
+   ],
+   "dom_loc_citizen": [
+    0.48,
+    1.29
+   ],
+   "dom_flex_popsign": 16.9,
+   "dom_flex_citizen": 16.2,
+   "delta_loc_sw": 0.67,
+   "delta_flex_deg": 0.6,
+   "signed_one_handed": true,
+   "likely_variant": false
+  },
+  "WATER": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.695,
+   "popsign_top3": 0.766,
+   "n": 384,
+   "citizen_test_top1": 0.917,
+   "both_frac_popsign": 0.007,
+   "both_frac_citizen": 0.035,
+   "top_confusions": {
+    "FINE": 18,
+    "NUTS": 14,
+    "IX-1P": 14
+   },
+   "dom_loc_popsign": [
+    0.34,
+    0.62
+   ],
+   "dom_loc_citizen": [
+    0.19,
+    1.18
+   ],
+   "dom_flex_popsign": 21.6,
+   "dom_flex_citizen": 22.9,
+   "delta_loc_sw": 0.58,
+   "delta_flex_deg": 1.4,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "WHERE": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.336,
+   "popsign_top3": 0.535,
+   "n": 372,
+   "citizen_test_top1": 0.846,
+   "both_frac_popsign": 0.004,
+   "both_frac_citizen": 0.021,
+   "top_confusions": {
+    "NEED": 41,
+    "BATHROOM": 38,
+    "NO": 34
+   },
+   "dom_loc_popsign": [
+    0.54,
+    0.61
+   ],
+   "dom_loc_citizen": [
+    0.53,
+    1.29
+   ],
+   "dom_flex_popsign": 73.8,
+   "dom_flex_citizen": 86.9,
+   "delta_loc_sw": 0.67,
+   "delta_flex_deg": 13.0,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "WHO": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.355,
+   "popsign_top3": 0.635,
+   "n": 403,
+   "citizen_test_top1": 0.643,
+   "both_frac_popsign": 0.005,
+   "both_frac_citizen": 0.043,
+   "top_confusions": {
+    "NUTS": 41,
+    "APPLE": 41,
+    "YOU": 29
+   },
+   "dom_loc_popsign": [
+    0.38,
+    0.52
+   ],
+   "dom_loc_citizen": [
+    0.27,
+    1.0
+   ],
+   "dom_flex_popsign": 82.3,
+   "dom_flex_citizen": 86.5,
+   "delta_loc_sw": 0.49,
+   "delta_flex_deg": 4.2,
+   "signed_one_handed": false,
+   "likely_variant": false
+  },
+  "WHY": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.091,
+   "popsign_top3": 0.25,
+   "n": 364,
+   "citizen_test_top1": 0.929,
+   "both_frac_popsign": 0.004,
+   "both_frac_citizen": 0.02,
+   "top_confusions": {
+    "OUTSIDE": 146,
+    "BYE": 26,
+    "FIVE-DOLLARS": 20
+   },
+   "dom_loc_popsign": [
+    0.67,
+    0.33
+   ],
+   "dom_loc_citizen": [
+    0.66,
+    0.53
+   ],
+   "dom_flex_popsign": 26.2,
+   "dom_flex_citizen": 49.7,
+   "delta_loc_sw": 0.2,
+   "delta_flex_deg": 23.5,
+   "signed_one_handed": false,
+   "likely_variant": true
+  },
+  "WINDOW": {
+   "sign_type": "AsymmetricalSameHandshape",
+   "popsign_top1": 0.023,
+   "popsign_top3": 0.064,
+   "n": 390,
+   "citizen_test_top1": 0.923,
+   "both_frac_popsign": 0.002,
+   "both_frac_citizen": 0.736,
+   "top_confusions": {
+    "CUP": 161,
+    "HEARING": 77,
+    "WELCOME": 15
+   },
+   "dom_loc_popsign": [
+    0.5,
+    0.47
+   ],
+   "dom_loc_citizen": [
+    0.56,
+    0.8
+   ],
+   "dom_flex_popsign": 78.8,
+   "dom_flex_citizen": 30.4,
+   "delta_loc_sw": 0.34,
+   "delta_flex_deg": 48.4,
+   "signed_one_handed": true,
+   "likely_variant": true
+  },
+  "YES": {
+   "sign_type": "OneHanded",
+   "popsign_top1": 0.422,
+   "popsign_top3": 0.712,
+   "n": 386,
+   "citizen_test_top1": 1.0,
+   "both_frac_popsign": 0.003,
+   "both_frac_citizen": 0.004,
+   "top_confusions": {
+    "NEED": 100,
+    "LUNCH": 28,
+    "APPLE": 26
+   },
+   "dom_loc_popsign": [
+    0.56,
+    0.44
+   ],
+   "dom_loc_citizen": [
+    0.65,
+    0.89
+   ],
+   "dom_flex_popsign": 89.5,
+   "dom_flex_citizen": 78.2,
+   "delta_loc_sw": 0.46,
+   "delta_flex_deg": 11.3,
+   "signed_one_handed": false,
+   "likely_variant": false
+  }
+ },
+ "both_frac_by_type": {
+  "AsymmetricalDifferentHandshape": {
+   "classes": 3,
+   "popsign": 0.003,
+   "citizen": 0.646
+  },
+  "AsymmetricalSameHandshape": {
+   "classes": 3,
+   "popsign": 0.005,
+   "citizen": 0.699
+  },
+  "OneHanded": {
+   "classes": 37,
+   "popsign": 0.004,
+   "citizen": 0.083
+  },
+  "SymmetricalOrAlternating": {
+   "classes": 10,
+   "popsign": 0.003,
+   "citizen": 0.695
+  }
+ },
+ "decomposition": {
+  "citizen_test_top1_same_classes_weighted": 0.848,
+  "popsign_top1_actual": 0.337,
+  "gap": 0.511,
+  "classes_signed_one_handed": [
+   "ALL",
+   "CAN",
+   "CHOCOLATE",
+   "FAST",
+   "FINISH",
+   "GO",
+   "HAVE",
+   "HOW-MANY",
+   "MILK",
+   "MY",
+   "NICE",
+   "NOW",
+   "SAME",
+   "SIT",
+   "WAIT",
+   "WINDOW"
+  ],
+  "classes_likely_variant": [
+   "MORNING",
+   "TIME",
+   "WHY"
+  ],
+  "clean_classes_popsign_top1": 0.425,
+  "explained_by_one_handed": 0.068,
+  "explained_by_variants": 0.02,
+  "remaining_gap_after_both": 0.423,
+  "method": "class-level counterfactual: replace the PopSign accuracy of each affected group by the accuracy of the unaffected ('clean') classes, weighted by sequence counts. 'signed one-handed' = two-handed in ASL-LEX and PopSign both-hands fraction more than 0.35 below ASL Citizen; 'likely variant' = under 15% top-1 and dominant-hand location differs by > 0.6 shoulder widths or PIP flexion by > 20.0 deg"
+ }
+}

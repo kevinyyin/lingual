@@ -1,0 +1,37 @@
+[
+ {
+  "hold_speed": 0.3,
+  "path_ratio_min": 0.785,
+  "below_90": 2,
+  "median_s": 0.835,
+  "mean_s": 1.028
+ },
+ {
+  "hold_speed": 0.6,
+  "path_ratio_min": 0.663,
+  "below_90": 1,
+  "median_s": 0.834,
+  "mean_s": 1.014
+ },
+ {
+  "hold_speed": 1.0,
+  "path_ratio_min": 0.663,
+  "below_90": 6,
+  "median_s": 0.802,
+  "mean_s": 0.974
+ },
+ {
+  "hold_speed": 1.5,
+  "path_ratio_min": 0.537,
+  "below_90": 14,
+  "median_s": 0.769,
+  "mean_s": 0.926
+ },
+ {
+  "hold_speed": 2.0,
+  "path_ratio_min": 0.603,
+  "below_90": 28,
+  "median_s": 0.733,
+  "mean_s": 0.885
+ }
+]

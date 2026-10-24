@@ -1,0 +1,46 @@
+<!doctype html>
+<!-- The iOS app's start screen: paste the laptop's tunnel URL, open the app from it. -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>lingual</title>
+    <style>
+      body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #F6F7FB; color: #232A63;
+        font: 18px -apple-system, system-ui, sans-serif; }
+      form { width: min(90vw, 420px); display: grid; gap: 16px; }
+      h1 { margin: 0; font-size: 32px; }
+      label { font-weight: 600; }
+      input, button { font: inherit; min-height: 56px; border-radius: 14px; padding: 0 16px; }
+      input { border: 2px solid rgb(35 42 99 / .55); background: #fff; color: inherit; }
+      button { border: 0; background: #232A63; color: #fff; font-weight: 700; }
+      #err { color: #B4234A; min-height: 1.4em; margin: 0; }
+    </style>
+  </head>
+  <body>
+    <form id="f">
+      <h1>lingual</h1>
+      <label for="url">Laptop address</label>
+      <input id="url" type="url" inputmode="url" autocapitalize="off" autocorrect="off" spellcheck="false"
+        placeholder="https://….trycloudflare.com" required />
+      <button>Open</button>
+      <p id="err" role="alert"></p>
+    </form>
+    <script>
+      const input = document.getElementById("url");
+      try { input.value = localStorage.getItem("lingual.url") || ""; } catch {}
+      document.getElementById("f").onsubmit = (e) => {
+        e.preventDefault();
+        let url;
+        try { url = new URL(input.value.trim()); } catch {}
+        if (url?.protocol !== "https:") {
+          document.getElementById("err").textContent = "The address must start with https://";
+          return;
+        }
+        url = url.origin; // a pasted page address (…/teach.html) still opens the app
+        try { localStorage.setItem("lingual.url", url); } catch {}
+        location.href = url + "/teach.html?phone=1";
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,317 @@
+{
+ "summary": [
+  {
+   "system": "cascade/gpt41mini-pipelined",
+   "category": "long",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2624.162,
+   "start_lag_ci": [
+    2506.792,
+    2660.152
+   ],
+   "end_arrival_med": 1508.464,
+   "end_play_med": 9855.003,
+   "end_play_ci": [
+    9300.652,
+    10027.016
+   ],
+   "end_play_p90": 9983.254799999999,
+   "end_play_max": 10027.016,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.106,
+   "chrf_med": 81.42
+  },
+  {
+   "system": "cascade/gpt41mini-pipelined",
+   "category": "medium",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2520.416,
+   "start_lag_ci": [
+    2478.255,
+    3150.165
+   ],
+   "end_arrival_med": 1033.002,
+   "end_play_med": 3749.251,
+   "end_play_ci": [
+    3213.434,
+    3921.466
+   ],
+   "end_play_p90": 4533.465,
+   "end_play_max": 4905.588,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.924,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/gpt41mini-pipelined",
+   "category": "noisy",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2642.589,
+   "start_lag_ci": [
+    2572.874,
+    3064.798
+   ],
+   "end_arrival_med": 988.387,
+   "end_play_med": 3603.949,
+   "end_play_ci": [
+    3409.742,
+    4545.996
+   ],
+   "end_play_p90": 4641.1872,
+   "end_play_max": 8172.861,
+   "stalls": 1,
+   "stall_rate": 0.06666666666666667,
+   "stall_ci": [
+    0.01186689536153232,
+    0.2981653010887565
+   ],
+   "held_until_flush": 1,
+   "ratio_span_med": 0.945,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/gpt41mini-pipelined",
+   "category": "sentences",
+   "n_runs": 30,
+   "n_clips": 6,
+   "n_failed": 0,
+   "start_lag_med": 2625.429,
+   "start_lag_ci": [
+    2534.934,
+    2851.312
+   ],
+   "end_arrival_med": 1000.4780000000001,
+   "end_play_med": 3690.634,
+   "end_play_ci": [
+    3429.76,
+    3806.1585
+   ],
+   "end_play_p90": 4628.7645,
+   "end_play_max": 8172.861,
+   "stalls": 1,
+   "stall_rate": 0.03333333333333333,
+   "stall_ci": [
+    0.005908590316197976,
+    0.16670391146115726
+   ],
+   "held_until_flush": 1,
+   "ratio_span_med": 0.9345000000000001,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/gpt41mini-pipelined",
+   "category": "short",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2220.224,
+   "start_lag_ci": [
+    1765.617,
+    2891.117
+   ],
+   "end_arrival_med": 901.491,
+   "end_play_med": 3072.62,
+   "end_play_ci": [
+    2132.258,
+    3137.843
+   ],
+   "end_play_p90": 3215.4584,
+   "end_play_max": 3329.44,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.161,
+   "chrf_med": 100.0
+  },
+  {
+   "system": "cascade/gpt41mini-serial",
+   "category": "long",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2524.724,
+   "start_lag_ci": [
+    2414.427,
+    2742.809
+   ],
+   "end_arrival_med": 1419.06,
+   "end_play_med": 9910.061,
+   "end_play_ci": [
+    9394.327,
+    10411.036
+   ],
+   "end_play_p90": 10340.9176,
+   "end_play_max": 10411.036,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.113,
+   "chrf_med": 80.54
+  },
+  {
+   "system": "cascade/gpt41mini-serial",
+   "category": "medium",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2646.542,
+   "start_lag_ci": [
+    2581.573,
+    3012.439
+   ],
+   "end_arrival_med": 1074.475,
+   "end_play_med": 3740.656,
+   "end_play_ci": [
+    3313.217,
+    3922.115
+   ],
+   "end_play_p90": 4758.5761999999995,
+   "end_play_max": 4945.274,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.965,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/gpt41mini-serial",
+   "category": "noisy",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2550.821,
+   "start_lag_ci": [
+    2517.684,
+    3080.644
+   ],
+   "end_arrival_med": 1060.588,
+   "end_play_med": 3681.776,
+   "end_play_ci": [
+    3239.918,
+    3753.698199999986
+   ],
+   "end_play_p90": 4297.9652,
+   "end_play_max": 4894.411,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.902,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/gpt41mini-serial",
+   "category": "sentences",
+   "n_runs": 30,
+   "n_clips": 6,
+   "n_failed": 0,
+   "start_lag_med": 2631.951,
+   "start_lag_ci": [
+    2545.227,
+    2851.9314999999997
+   ],
+   "end_arrival_med": 1061.6625,
+   "end_play_med": 3690.224,
+   "end_play_ci": [
+    3308.6235,
+    3781.773
+   ],
+   "end_play_p90": 4596.9827000000005,
+   "end_play_max": 4945.274,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.11351339476145204
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.9285,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/gpt41mini-serial",
+   "category": "short",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2145.614,
+   "start_lag_ci": [
+    1767.901,
+    2889.776
+   ],
+   "end_arrival_med": 1184.492,
+   "end_play_med": 2667.569,
+   "end_play_ci": [
+    2119.398,
+    3102.094
+   ],
+   "end_play_p90": 3126.571,
+   "end_play_max": 3144.744,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.067,
+   "chrf_med": 100.0
+  }
+ ],
+ "llm": {
+  "cascade/gpt41mini-pipelined": {
+   "fragments": 200,
+   "first_token_med": 451.53395,
+   "first_token_p90": 585.08791,
+   "complete_med": 526.2806,
+   "complete_p90": 666.36537
+  },
+  "cascade/gpt41mini-serial": {
+   "fragments": 200,
+   "first_token_med": 436.4869,
+   "first_token_p90": 552.94119,
+   "complete_med": 511.1383,
+   "complete_p90": 646.83245
+  }
+ },
+ "pass": {
+  "cascade/gpt41mini-pipelined": false,
+  "cascade/gpt41mini-serial": false
+ },
+ "blocked": {
+  "Groq serial / Groq pipelined": "no GROQ_API_KEY; those conditions were skipped"
+ }
+}

@@ -1,0 +1,2297 @@
+{
+ "downloads": {
+  "instances": 2202,
+  "ok": 1146,
+  "extracted": 1146,
+  "failed_reasons": {
+   "HTTPError: HTTP Error 403: Forbidden": 259,
+   "HTTPError: HTTP Error 404: Not Found": 217,
+   "aslpro Flash .swf (unsupported video format)": 171,
+   "RuntimeError: tiny response (114 bytes)": 168,
+   "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] ce": 108,
+   "RuntimeError: ERROR: unable to download video data: HTTP Err": 9,
+   "RuntimeError: ERROR: The downloaded file is empty": 2,
+   "RuntimeError: ERROR: [youtube] HZMTQJdBZ9g: This video is un": 1,
+   "RuntimeError: ERROR: [youtube] Lk2Vws8homw: This video is un": 1,
+   "RuntimeError: ERROR: [youtube] 6gU3Ln98sWA: This video is un": 1,
+   "RuntimeError: ERROR: [youtube] Ddd2ZZNFhVI: This video is un": 1,
+   "RuntimeError: ERROR: [youtube] j2hvnGiBrRI: This video is un": 1
+  },
+  "success_by_source": {
+   "asl5200": "132/132",
+   "aslbrick": "59/59",
+   "asldeafined": "178/178",
+   "aslpro": "0/171",
+   "aslsearch": "0/168",
+   "aslsignbank": "0/108",
+   "aslu": "224/227",
+   "elementalasl": "6/6",
+   "handspeak": "1/218",
+   "lillybauer": "0/62",
+   "nabboud": "0/59",
+   "northtexas": "47/56",
+   "scott": "18/18",
+   "signingsavvy": "0/259",
+   "signschool": "206/206",
+   "spreadthesign": "132/132",
+   "startasl": "103/103",
+   "valencia-asl": "40/40"
+  }
+ },
+ "n": 1146,
+ "signers": 48,
+ "classes": 136,
+ "round1_pipeline": {
+  "top1": {
+   "acc": 0.7234,
+   "ci": [
+    0.6989,
+    0.7493
+   ],
+   "n": 1146,
+   "signers": 48
+  },
+  "top3": {
+   "acc": 0.87,
+   "ci": [
+    0.8517,
+    0.8899
+   ],
+   "n": 1146,
+   "signers": 48
+  },
+  "top5": {
+   "acc": 0.9075,
+   "ci": [
+    0.8911,
+    0.925
+   ],
+   "n": 1146,
+   "signers": 48
+  },
+  "by_sign_type": {
+   "AsymmetricalDifferentHandshape": {
+    "top1": {
+     "acc": 0.6343,
+     "ci": [
+      0.5689,
+      0.6995
+     ],
+     "n": 175,
+     "signers": 34
+    },
+    "top3": 0.8286
+   },
+   "AsymmetricalSameHandshape": {
+    "top1": {
+     "acc": 0.7292,
+     "ci": [
+      0.6428,
+      0.8154
+     ],
+     "n": 96,
+     "signers": 27
+    },
+    "top3": 0.8542
+   },
+   "DominanceViolation": {
+    "top1": {
+     "acc": 0.6667,
+     "ci": [
+      0.5185,
+      0.8261
+     ],
+     "n": 24,
+     "signers": 12
+    },
+    "top3": 0.75
+   },
+   "OneHanded": {
+    "top1": {
+     "acc": 0.7504,
+     "ci": [
+      0.7169,
+      0.7857
+     ],
+     "n": 565,
+     "signers": 43
+    },
+    "top3": 0.8956
+   },
+   "SymmetricalOrAlternating": {
+    "top1": {
+     "acc": 0.7338,
+     "ci": [
+      0.6861,
+      0.7911
+     ],
+     "n": 278,
+     "signers": 42
+    },
+    "top3": 0.8597
+   },
+   "SymmetryViolation": {
+    "top1": {
+     "acc": 0.5,
+     "ci": [
+      0.125,
+      0.875
+     ],
+     "n": 8,
+     "signers": 8
+    },
+    "top3": 0.875
+   }
+  },
+  "by_variation": {
+   "0": {
+    "top1": {
+     "acc": 0.7429,
+     "ci": [
+      0.7185,
+      0.7716
+     ],
+     "n": 1089,
+     "signers": 48
+    },
+    "top3": 0.8871
+   },
+   ">=1": {
+    "top1": {
+     "acc": 0.3509,
+     "ci": [
+      0.2325,
+      0.45
+     ],
+     "n": 57,
+     "signers": 21
+    },
+    "top3": 0.5439
+   }
+  },
+  "by_source": {
+   "asl5200": {
+    "top1": {
+     "acc": 0.697,
+     "ci": [
+      0.697,
+      0.697
+     ],
+     "n": 132,
+     "signers": 1
+    },
+    "top3": 0.8333
+   },
+   "aslbrick": {
+    "top1": {
+     "acc": 0.7458,
+     "ci": [
+      0.6842,
+      0.8049
+     ],
+     "n": 59,
+     "signers": 4
+    },
+    "top3": 0.9322
+   },
+   "asldeafined": {
+    "top1": {
+     "acc": 0.6966,
+     "ci": [
+      0.5405,
+      0.7955
+     ],
+     "n": 178,
+     "signers": 5
+    },
+    "top3": 0.8708
+   },
+   "aslu": {
+    "top1": {
+     "acc": 0.7143,
+     "ci": [
+      0.6364,
+      0.7183
+     ],
+     "n": 224,
+     "signers": 2
+    },
+    "top3": 0.8661
+   },
+   "elementalasl": {
+    "top1": {
+     "acc": 0.5,
+     "ci": [
+      0.0,
+      0.75
+     ],
+     "n": 6,
+     "signers": 2
+    },
+    "top3": 0.6667
+   },
+   "handspeak": {
+    "top1": {
+     "acc": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n": 1,
+     "signers": 1
+    },
+    "top3": 0.0
+   },
+   "northtexas": {
+    "top1": {
+     "acc": 0.7447,
+     "ci": [
+      0.7447,
+      0.7447
+     ],
+     "n": 47,
+     "signers": 1
+    },
+    "top3": 0.9149
+   },
+   "scott": {
+    "top1": {
+     "acc": 0.8333,
+     "ci": [
+      0.6667,
+      0.9167
+     ],
+     "n": 18,
+     "signers": 2
+    },
+    "top3": 1.0
+   },
+   "signschool": {
+    "top1": {
+     "acc": 0.7087,
+     "ci": [
+      0.6346,
+      0.7866
+     ],
+     "n": 206,
+     "signers": 12
+    },
+    "top3": 0.8592
+   },
+   "spreadthesign": {
+    "top1": {
+     "acc": 0.7348,
+     "ci": [
+      0.6604,
+      0.7928
+     ],
+     "n": 132,
+     "signers": 13
+    },
+    "top3": 0.8409
+   },
+   "startasl": {
+    "top1": {
+     "acc": 0.767,
+     "ci": [
+      0.75,
+      0.7872
+     ],
+     "n": 103,
+     "signers": 2
+    },
+    "top3": 0.9029
+   },
+   "valencia-asl": {
+    "top1": {
+     "acc": 0.85,
+     "ci": [
+      0.8,
+      0.8621
+     ],
+     "n": 40,
+     "signers": 3
+    },
+    "top3": 0.925
+   }
+  },
+  "by_youtube": {
+   "False": {
+    "top1": {
+     "acc": 0.7197,
+     "ci": [
+      0.679,
+      0.7546
+     ],
+     "n": 685,
+     "signers": 39
+    },
+    "top3": 0.8686
+   },
+   "True": {
+    "top1": {
+     "acc": 0.7289,
+     "ci": [
+      0.7076,
+      0.8079
+     ],
+     "n": 461,
+     "signers": 9
+    },
+    "top3": 0.872
+   }
+  },
+  "per_sign": {
+   "AGAIN": {
+    "top1": 0.714,
+    "top3": 0.929,
+    "instances": 14,
+    "signers": 9
+   },
+   "ALL": {
+    "top1": 0.7,
+    "top3": 0.7,
+    "instances": 10,
+    "signers": 7
+   },
+   "APPLE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 10,
+    "signers": 10
+   },
+   "BAD": {
+    "top1": 0.778,
+    "top3": 0.778,
+    "instances": 9,
+    "signers": 8
+   },
+   "BANANA": {
+    "top1": 0.857,
+    "top3": 0.857,
+    "instances": 7,
+    "signers": 6
+   },
+   "BATHROOM": {
+    "top1": 0.765,
+    "top3": 0.882,
+    "instances": 17,
+    "signers": 8
+   },
+   "BLUEBERRY": {
+    "top1": 0.333,
+    "top3": 0.667,
+    "instances": 3,
+    "signers": 3
+   },
+   "BREAD": {
+    "top1": 0.833,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "BREAKFAST": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 3,
+    "signers": 3
+   },
+   "BUTTER": {
+    "top1": 0.6,
+    "top3": 0.6,
+    "instances": 5,
+    "signers": 5
+   },
+   "BUY": {
+    "top1": 0.417,
+    "top3": 0.5,
+    "instances": 12,
+    "signers": 9
+   },
+   "BYE": {
+    "top1": 0.667,
+    "top3": 0.667,
+    "instances": 3,
+    "signers": 3
+   },
+   "CAKE": {
+    "top1": 0.4,
+    "top3": 0.6,
+    "instances": 5,
+    "signers": 5
+   },
+   "CAN": {
+    "top1": 0.875,
+    "top3": 0.875,
+    "instances": 8,
+    "signers": 5
+   },
+   "CARD": {
+    "top1": 0.0,
+    "top3": 0.0,
+    "instances": 3,
+    "signers": 3
+   },
+   "CENT": {
+    "top1": 0.75,
+    "top3": 0.75,
+    "instances": 4,
+    "signers": 4
+   },
+   "CHANGE": {
+    "top1": 0.455,
+    "top3": 0.909,
+    "instances": 11,
+    "signers": 10
+   },
+   "CHEAP": {
+    "top1": 0.333,
+    "top3": 0.5,
+    "instances": 6,
+    "signers": 6
+   },
+   "CHEESE": {
+    "top1": 0.714,
+    "top3": 0.857,
+    "instances": 7,
+    "signers": 6
+   },
+   "CHOCOLATE": {
+    "top1": 0.833,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 5
+   },
+   "COFFEE": {
+    "top1": 0.889,
+    "top3": 1.0,
+    "instances": 9,
+    "signers": 8
+   },
+   "COLD": {
+    "top1": 0.857,
+    "top3": 0.857,
+    "instances": 7,
+    "signers": 7
+   },
+   "COOKIE": {
+    "top1": 0.5,
+    "top3": 0.875,
+    "instances": 8,
+    "signers": 8
+   },
+   "CUP": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 11,
+    "signers": 9
+   },
+   "DAY": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 8
+   },
+   "DEAF": {
+    "top1": 0.692,
+    "top3": 1.0,
+    "instances": 13,
+    "signers": 10
+   },
+   "DELICIOUS": {
+    "top1": 0.857,
+    "top3": 1.0,
+    "instances": 7,
+    "signers": 5
+   },
+   "DIFFERENT": {
+    "top1": 0.9,
+    "top3": 1.0,
+    "instances": 10,
+    "signers": 8
+   },
+   "DOLLAR": {
+    "top1": 0.667,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 4
+   },
+   "DRINK": {
+    "top1": 0.917,
+    "top3": 0.917,
+    "instances": 12,
+    "signers": 9
+   },
+   "EAT": {
+    "top1": 0.933,
+    "top3": 1.0,
+    "instances": 15,
+    "signers": 10
+   },
+   "EGG": {
+    "top1": 0.8,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 5
+   },
+   "EIGHT": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 5
+   },
+   "EXCUSE-ME": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 3,
+    "signers": 3
+   },
+   "EXPENSIVE": {
+    "top1": 0.875,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 7
+   },
+   "FAST": {
+    "top1": 0.75,
+    "top3": 0.75,
+    "instances": 8,
+    "signers": 7
+   },
+   "FINE": {
+    "top1": 0.762,
+    "top3": 0.857,
+    "instances": 21,
+    "signers": 13
+   },
+   "FINISH": {
+    "top1": 0.643,
+    "top3": 0.714,
+    "instances": 14,
+    "signers": 10
+   },
+   "FOR": {
+    "top1": 0.5,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 5
+   },
+   "FOUR": {
+    "top1": 0.5,
+    "top3": 0.75,
+    "instances": 4,
+    "signers": 4
+   },
+   "FRESH": {
+    "top1": 0.444,
+    "top3": 0.778,
+    "instances": 9,
+    "signers": 7
+   },
+   "GET": {
+    "top1": 0.917,
+    "top3": 1.0,
+    "instances": 12,
+    "signers": 9
+   },
+   "GIVE": {
+    "top1": 0.1,
+    "top3": 0.6,
+    "instances": 10,
+    "signers": 6
+   },
+   "GO": {
+    "top1": 0.778,
+    "top3": 0.889,
+    "instances": 9,
+    "signers": 8
+   },
+   "GOOD": {
+    "top1": 0.667,
+    "top3": 0.889,
+    "instances": 9,
+    "signers": 9
+   },
+   "HALF": {
+    "top1": 0.667,
+    "top3": 0.833,
+    "instances": 6,
+    "signers": 5
+   },
+   "HAPPY": {
+    "top1": 0.625,
+    "top3": 0.875,
+    "instances": 8,
+    "signers": 7
+   },
+   "HAVE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 9,
+    "signers": 8
+   },
+   "HEARING": {
+    "top1": 0.8,
+    "top3": 0.85,
+    "instances": 20,
+    "signers": 15
+   },
+   "HELLO": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "HELP": {
+    "top1": 0.5,
+    "top3": 0.833,
+    "instances": 6,
+    "signers": 6
+   },
+   "HERE": {
+    "top1": 0.625,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 7
+   },
+   "HOT": {
+    "top1": 0.571,
+    "top3": 1.0,
+    "instances": 14,
+    "signers": 11
+   },
+   "HOW": {
+    "top1": 0.778,
+    "top3": 0.889,
+    "instances": 9,
+    "signers": 8
+   },
+   "HOW-MANY": {
+    "top1": 0.636,
+    "top3": 0.818,
+    "instances": 11,
+    "signers": 8
+   },
+   "HOW-MUCH": {
+    "top1": 0.556,
+    "top3": 0.889,
+    "instances": 9,
+    "signers": 7
+   },
+   "HUNGRY": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "INSIDE": {
+    "top1": 0.846,
+    "top3": 0.923,
+    "instances": 13,
+    "signers": 10
+   },
+   "IX-1P": {
+    "top1": 0.625,
+    "top3": 0.625,
+    "instances": 8,
+    "signers": 7
+   },
+   "KIND": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 3,
+    "signers": 3
+   },
+   "KNOW": {
+    "top1": 0.8,
+    "top3": 0.9,
+    "instances": 10,
+    "signers": 8
+   },
+   "LARGE": {
+    "top1": 0.786,
+    "top3": 0.929,
+    "instances": 14,
+    "signers": 9
+   },
+   "LATER": {
+    "top1": 0.4,
+    "top3": 0.6,
+    "instances": 10,
+    "signers": 7
+   },
+   "LIKE": {
+    "top1": 0.857,
+    "top3": 0.929,
+    "instances": 14,
+    "signers": 9
+   },
+   "LOVE": {
+    "top1": 0.8,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 5
+   },
+   "LUNCH": {
+    "top1": 0.667,
+    "top3": 0.833,
+    "instances": 6,
+    "signers": 6
+   },
+   "MEDIUM": {
+    "top1": 0.333,
+    "top3": 0.778,
+    "instances": 9,
+    "signers": 6
+   },
+   "MILK": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 7
+   },
+   "MINUTE": {
+    "top1": 0.4,
+    "top3": 0.6,
+    "instances": 5,
+    "signers": 5
+   },
+   "MONEY": {
+    "top1": 0.667,
+    "top3": 0.833,
+    "instances": 6,
+    "signers": 5
+   },
+   "MORE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 9,
+    "signers": 9
+   },
+   "MORNING": {
+    "top1": 0.857,
+    "top3": 0.857,
+    "instances": 7,
+    "signers": 7
+   },
+   "MY": {
+    "top1": 0.7,
+    "top3": 1.0,
+    "instances": 10,
+    "signers": 8
+   },
+   "NAME": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 9,
+    "signers": 8
+   },
+   "NEED": {
+    "top1": 0.778,
+    "top3": 0.889,
+    "instances": 18,
+    "signers": 11
+   },
+   "NICE": {
+    "top1": 0.769,
+    "top3": 1.0,
+    "instances": 13,
+    "signers": 11
+   },
+   "NINE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 2,
+    "signers": 2
+   },
+   "NO": {
+    "top1": 0.667,
+    "top3": 0.917,
+    "instances": 12,
+    "signers": 10
+   },
+   "NONE": {
+    "top1": 0.909,
+    "top3": 1.0,
+    "instances": 11,
+    "signers": 8
+   },
+   "NOT": {
+    "top1": 0.444,
+    "top3": 0.889,
+    "instances": 9,
+    "signers": 7
+   },
+   "NOW": {
+    "top1": 0.583,
+    "top3": 0.667,
+    "instances": 12,
+    "signers": 9
+   },
+   "NUTS": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 3,
+    "signers": 3
+   },
+   "ONE": {
+    "top1": 0.4,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 5
+   },
+   "OR": {
+    "top1": 0.3,
+    "top3": 0.4,
+    "instances": 10,
+    "signers": 6
+   },
+   "ORANGE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 13,
+    "signers": 10
+   },
+   "OUTSIDE": {
+    "top1": 0.429,
+    "top3": 0.429,
+    "instances": 7,
+    "signers": 7
+   },
+   "PAY": {
+    "top1": 0.714,
+    "top3": 0.857,
+    "instances": 7,
+    "signers": 5
+   },
+   "PHONE": {
+    "top1": 0.818,
+    "top3": 0.818,
+    "instances": 11,
+    "signers": 8
+   },
+   "PLEASE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 8
+   },
+   "PREFER": {
+    "top1": 0.0,
+    "top3": 0.5,
+    "instances": 6,
+    "signers": 4
+   },
+   "READY": {
+    "top1": 0.857,
+    "top3": 1.0,
+    "instances": 7,
+    "signers": 7
+   },
+   "RIGHT": {
+    "top1": 0.5,
+    "top3": 0.75,
+    "instances": 12,
+    "signers": 9
+   },
+   "SALAD": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 5
+   },
+   "SAME": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 5
+   },
+   "SANDWICH": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "SEE": {
+    "top1": 0.75,
+    "top3": 1.0,
+    "instances": 4,
+    "signers": 4
+   },
+   "SEVEN": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 4,
+    "signers": 4
+   },
+   "SIGN": {
+    "top1": 0.3,
+    "top3": 0.55,
+    "instances": 20,
+    "signers": 14
+   },
+   "SIT": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 16,
+    "signers": 10
+   },
+   "SIX": {
+    "top1": 0.75,
+    "top3": 1.0,
+    "instances": 4,
+    "signers": 4
+   },
+   "SLOW": {
+    "top1": 0.857,
+    "top3": 0.857,
+    "instances": 7,
+    "signers": 7
+   },
+   "SMALL": {
+    "top1": 0.111,
+    "top3": 0.222,
+    "instances": 9,
+    "signers": 7
+   },
+   "SODA": {
+    "top1": 0.833,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "SOME": {
+    "top1": 0.625,
+    "top3": 0.75,
+    "instances": 8,
+    "signers": 8
+   },
+   "SORRY": {
+    "top1": 0.857,
+    "top3": 0.857,
+    "instances": 7,
+    "signers": 6
+   },
+   "SOUP": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 5
+   },
+   "STRAW": {
+    "top1": 0.8,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 4
+   },
+   "STRAWBERRY": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 3,
+    "signers": 3
+   },
+   "SWEET": {
+    "top1": 0.833,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "TABLE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 7,
+    "signers": 6
+   },
+   "TASTE": {
+    "top1": 0.8,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 4
+   },
+   "TEA": {
+    "top1": 0.778,
+    "top3": 1.0,
+    "instances": 9,
+    "signers": 8
+   },
+   "THANK-YOU": {
+    "top1": 0.167,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "THIRSTY": {
+    "top1": 0.667,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "THREE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 3,
+    "signers": 3
+   },
+   "TIME": {
+    "top1": 0.875,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 8
+   },
+   "TWO": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 3,
+    "signers": 3
+   },
+   "UNDERSTAND": {
+    "top1": 0.625,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 8
+   },
+   "WAIT": {
+    "top1": 0.667,
+    "top3": 0.889,
+    "instances": 9,
+    "signers": 8
+   },
+   "WANT": {
+    "top1": 0.2,
+    "top3": 0.6,
+    "instances": 10,
+    "signers": 9
+   },
+   "WARM": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 5
+   },
+   "WATER": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 9,
+    "signers": 8
+   },
+   "WELCOME": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 4,
+    "signers": 3
+   },
+   "WHAT": {
+    "top1": 0.111,
+    "top3": 0.667,
+    "instances": 9,
+    "signers": 9
+   },
+   "WHEN": {
+    "top1": 0.571,
+    "top3": 0.857,
+    "instances": 7,
+    "signers": 7
+   },
+   "WHERE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 8
+   },
+   "WHO": {
+    "top1": 0.615,
+    "top3": 0.692,
+    "instances": 13,
+    "signers": 11
+   },
+   "WHY": {
+    "top1": 0.625,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 8
+   },
+   "WINDOW": {
+    "top1": 0.875,
+    "top3": 0.875,
+    "instances": 8,
+    "signers": 7
+   },
+   "WITH": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 9,
+    "signers": 8
+   },
+   "WITHOUT": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "WRITE": {
+    "top1": 0.636,
+    "top3": 0.727,
+    "instances": 11,
+    "signers": 10
+   },
+   "WRONG": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 16,
+    "signers": 10
+   },
+   "YES": {
+    "top1": 0.769,
+    "top3": 1.0,
+    "instances": 13,
+    "signers": 11
+   },
+   "YOU": {
+    "top1": 0.364,
+    "top3": 0.727,
+    "instances": 11,
+    "signers": 8
+   },
+   "YOUR": {
+    "top1": 0.7,
+    "top3": 0.8,
+    "instances": 10,
+    "signers": 7
+   }
+  }
+ },
+ "aspect_fix": {
+  "top1": {
+   "acc": 0.7286,
+   "ci": [
+    0.7022,
+    0.7557
+   ],
+   "n": 1146,
+   "signers": 48
+  },
+  "top3": {
+   "acc": 0.8682,
+   "ci": [
+    0.8472,
+    0.8925
+   ],
+   "n": 1146,
+   "signers": 48
+  },
+  "top5": {
+   "acc": 0.9136,
+   "ci": [
+    0.8982,
+    0.9301
+   ],
+   "n": 1146,
+   "signers": 48
+  },
+  "by_sign_type": {
+   "AsymmetricalDifferentHandshape": {
+    "top1": {
+     "acc": 0.6514,
+     "ci": [
+      0.5862,
+      0.7155
+     ],
+     "n": 175,
+     "signers": 34
+    },
+    "top3": 0.8343
+   },
+   "AsymmetricalSameHandshape": {
+    "top1": {
+     "acc": 0.7396,
+     "ci": [
+      0.641,
+      0.8214
+     ],
+     "n": 96,
+     "signers": 27
+    },
+    "top3": 0.8646
+   },
+   "DominanceViolation": {
+    "top1": {
+     "acc": 0.7083,
+     "ci": [
+      0.5833,
+      0.8333
+     ],
+     "n": 24,
+     "signers": 12
+    },
+    "top3": 0.75
+   },
+   "OneHanded": {
+    "top1": {
+     "acc": 0.7451,
+     "ci": [
+      0.7136,
+      0.7828
+     ],
+     "n": 565,
+     "signers": 43
+    },
+    "top3": 0.8903
+   },
+   "SymmetricalOrAlternating": {
+    "top1": {
+     "acc": 0.7446,
+     "ci": [
+      0.6954,
+      0.7969
+     ],
+     "n": 278,
+     "signers": 42
+    },
+    "top3": 0.8525
+   },
+   "SymmetryViolation": {
+    "top1": {
+     "acc": 0.625,
+     "ci": [
+      0.25,
+      0.875
+     ],
+     "n": 8,
+     "signers": 8
+    },
+    "top3": 1.0
+   }
+  },
+  "by_variation": {
+   "0": {
+    "top1": {
+     "acc": 0.7475,
+     "ci": [
+      0.7217,
+      0.776
+     ],
+     "n": 1089,
+     "signers": 48
+    },
+    "top3": 0.8861
+   },
+   ">=1": {
+    "top1": {
+     "acc": 0.3684,
+     "ci": [
+      0.2326,
+      0.4906
+     ],
+     "n": 57,
+     "signers": 21
+    },
+    "top3": 0.5263
+   }
+  },
+  "by_source": {
+   "asl5200": {
+    "top1": {
+     "acc": 0.697,
+     "ci": [
+      0.697,
+      0.697
+     ],
+     "n": 132,
+     "signers": 1
+    },
+    "top3": 0.8182
+   },
+   "aslbrick": {
+    "top1": {
+     "acc": 0.7797,
+     "ci": [
+      0.6842,
+      0.8393
+     ],
+     "n": 59,
+     "signers": 4
+    },
+    "top3": 0.9322
+   },
+   "asldeafined": {
+    "top1": {
+     "acc": 0.6966,
+     "ci": [
+      0.5405,
+      0.7955
+     ],
+     "n": 178,
+     "signers": 5
+    },
+    "top3": 0.8708
+   },
+   "aslu": {
+    "top1": {
+     "acc": 0.7188,
+     "ci": [
+      0.6364,
+      0.723
+     ],
+     "n": 224,
+     "signers": 2
+    },
+    "top3": 0.8482
+   },
+   "elementalasl": {
+    "top1": {
+     "acc": 0.5,
+     "ci": [
+      0.0,
+      0.75
+     ],
+     "n": 6,
+     "signers": 2
+    },
+    "top3": 0.8333
+   },
+   "handspeak": {
+    "top1": {
+     "acc": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n": 1,
+     "signers": 1
+    },
+    "top3": 0.0
+   },
+   "northtexas": {
+    "top1": {
+     "acc": 0.7447,
+     "ci": [
+      0.7447,
+      0.7447
+     ],
+     "n": 47,
+     "signers": 1
+    },
+    "top3": 0.9362
+   },
+   "scott": {
+    "top1": {
+     "acc": 0.7778,
+     "ci": [
+      0.6667,
+      0.8333
+     ],
+     "n": 18,
+     "signers": 2
+    },
+    "top3": 0.9444
+   },
+   "signschool": {
+    "top1": {
+     "acc": 0.7087,
+     "ci": [
+      0.6417,
+      0.7744
+     ],
+     "n": 206,
+     "signers": 12
+    },
+    "top3": 0.8592
+   },
+   "spreadthesign": {
+    "top1": {
+     "acc": 0.7348,
+     "ci": [
+      0.6604,
+      0.7928
+     ],
+     "n": 132,
+     "signers": 13
+    },
+    "top3": 0.8409
+   },
+   "startasl": {
+    "top1": {
+     "acc": 0.8252,
+     "ci": [
+      0.8036,
+      0.8511
+     ],
+     "n": 103,
+     "signers": 2
+    },
+    "top3": 0.9417
+   },
+   "valencia-asl": {
+    "top1": {
+     "acc": 0.8,
+     "ci": [
+      0.6,
+      0.8333
+     ],
+     "n": 40,
+     "signers": 3
+    },
+    "top3": 0.9
+   }
+  },
+  "by_youtube": {
+   "False": {
+    "top1": {
+     "acc": 0.7314,
+     "ci": [
+      0.6888,
+      0.7682
+     ],
+     "n": 685,
+     "signers": 39
+    },
+    "top3": 0.8759
+   },
+   "True": {
+    "top1": {
+     "acc": 0.7245,
+     "ci": [
+      0.7034,
+      0.7759
+     ],
+     "n": 461,
+     "signers": 9
+    },
+    "top3": 0.8568
+   }
+  },
+  "per_sign": {
+   "AGAIN": {
+    "top1": 0.714,
+    "top3": 0.929,
+    "instances": 14,
+    "signers": 9
+   },
+   "ALL": {
+    "top1": 0.7,
+    "top3": 0.7,
+    "instances": 10,
+    "signers": 7
+   },
+   "APPLE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 10,
+    "signers": 10
+   },
+   "BAD": {
+    "top1": 0.778,
+    "top3": 1.0,
+    "instances": 9,
+    "signers": 8
+   },
+   "BANANA": {
+    "top1": 0.857,
+    "top3": 0.857,
+    "instances": 7,
+    "signers": 6
+   },
+   "BATHROOM": {
+    "top1": 0.706,
+    "top3": 0.882,
+    "instances": 17,
+    "signers": 8
+   },
+   "BLUEBERRY": {
+    "top1": 0.333,
+    "top3": 0.667,
+    "instances": 3,
+    "signers": 3
+   },
+   "BREAD": {
+    "top1": 0.833,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "BREAKFAST": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 3,
+    "signers": 3
+   },
+   "BUTTER": {
+    "top1": 0.6,
+    "top3": 0.8,
+    "instances": 5,
+    "signers": 5
+   },
+   "BUY": {
+    "top1": 0.417,
+    "top3": 0.5,
+    "instances": 12,
+    "signers": 9
+   },
+   "BYE": {
+    "top1": 0.667,
+    "top3": 0.667,
+    "instances": 3,
+    "signers": 3
+   },
+   "CAKE": {
+    "top1": 0.4,
+    "top3": 0.6,
+    "instances": 5,
+    "signers": 5
+   },
+   "CAN": {
+    "top1": 0.875,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 5
+   },
+   "CARD": {
+    "top1": 0.0,
+    "top3": 0.0,
+    "instances": 3,
+    "signers": 3
+   },
+   "CENT": {
+    "top1": 0.75,
+    "top3": 1.0,
+    "instances": 4,
+    "signers": 4
+   },
+   "CHANGE": {
+    "top1": 0.545,
+    "top3": 0.909,
+    "instances": 11,
+    "signers": 10
+   },
+   "CHEAP": {
+    "top1": 0.5,
+    "top3": 0.5,
+    "instances": 6,
+    "signers": 6
+   },
+   "CHEESE": {
+    "top1": 0.857,
+    "top3": 0.857,
+    "instances": 7,
+    "signers": 6
+   },
+   "CHOCOLATE": {
+    "top1": 0.833,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 5
+   },
+   "COFFEE": {
+    "top1": 0.889,
+    "top3": 1.0,
+    "instances": 9,
+    "signers": 8
+   },
+   "COLD": {
+    "top1": 0.857,
+    "top3": 0.857,
+    "instances": 7,
+    "signers": 7
+   },
+   "COOKIE": {
+    "top1": 0.625,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 8
+   },
+   "CUP": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 11,
+    "signers": 9
+   },
+   "DAY": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 8
+   },
+   "DEAF": {
+    "top1": 0.692,
+    "top3": 1.0,
+    "instances": 13,
+    "signers": 10
+   },
+   "DELICIOUS": {
+    "top1": 0.714,
+    "top3": 0.857,
+    "instances": 7,
+    "signers": 5
+   },
+   "DIFFERENT": {
+    "top1": 0.9,
+    "top3": 1.0,
+    "instances": 10,
+    "signers": 8
+   },
+   "DOLLAR": {
+    "top1": 0.833,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 4
+   },
+   "DRINK": {
+    "top1": 0.917,
+    "top3": 0.917,
+    "instances": 12,
+    "signers": 9
+   },
+   "EAT": {
+    "top1": 0.933,
+    "top3": 1.0,
+    "instances": 15,
+    "signers": 10
+   },
+   "EGG": {
+    "top1": 0.8,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 5
+   },
+   "EIGHT": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 5
+   },
+   "EXCUSE-ME": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 3,
+    "signers": 3
+   },
+   "EXPENSIVE": {
+    "top1": 0.875,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 7
+   },
+   "FAST": {
+    "top1": 0.75,
+    "top3": 0.75,
+    "instances": 8,
+    "signers": 7
+   },
+   "FINE": {
+    "top1": 0.714,
+    "top3": 0.857,
+    "instances": 21,
+    "signers": 13
+   },
+   "FINISH": {
+    "top1": 0.643,
+    "top3": 0.643,
+    "instances": 14,
+    "signers": 10
+   },
+   "FOR": {
+    "top1": 0.5,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 5
+   },
+   "FOUR": {
+    "top1": 0.75,
+    "top3": 0.75,
+    "instances": 4,
+    "signers": 4
+   },
+   "FRESH": {
+    "top1": 0.556,
+    "top3": 0.778,
+    "instances": 9,
+    "signers": 7
+   },
+   "GET": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 12,
+    "signers": 9
+   },
+   "GIVE": {
+    "top1": 0.1,
+    "top3": 0.4,
+    "instances": 10,
+    "signers": 6
+   },
+   "GO": {
+    "top1": 0.778,
+    "top3": 0.889,
+    "instances": 9,
+    "signers": 8
+   },
+   "GOOD": {
+    "top1": 0.556,
+    "top3": 0.889,
+    "instances": 9,
+    "signers": 9
+   },
+   "HALF": {
+    "top1": 0.667,
+    "top3": 0.833,
+    "instances": 6,
+    "signers": 5
+   },
+   "HAPPY": {
+    "top1": 0.625,
+    "top3": 0.875,
+    "instances": 8,
+    "signers": 7
+   },
+   "HAVE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 9,
+    "signers": 8
+   },
+   "HEARING": {
+    "top1": 0.8,
+    "top3": 0.85,
+    "instances": 20,
+    "signers": 15
+   },
+   "HELLO": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "HELP": {
+    "top1": 0.5,
+    "top3": 0.833,
+    "instances": 6,
+    "signers": 6
+   },
+   "HERE": {
+    "top1": 0.75,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 7
+   },
+   "HOT": {
+    "top1": 0.571,
+    "top3": 0.857,
+    "instances": 14,
+    "signers": 11
+   },
+   "HOW": {
+    "top1": 0.778,
+    "top3": 0.889,
+    "instances": 9,
+    "signers": 8
+   },
+   "HOW-MANY": {
+    "top1": 0.455,
+    "top3": 0.818,
+    "instances": 11,
+    "signers": 8
+   },
+   "HOW-MUCH": {
+    "top1": 0.556,
+    "top3": 0.889,
+    "instances": 9,
+    "signers": 7
+   },
+   "HUNGRY": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "INSIDE": {
+    "top1": 0.846,
+    "top3": 0.923,
+    "instances": 13,
+    "signers": 10
+   },
+   "IX-1P": {
+    "top1": 0.625,
+    "top3": 0.625,
+    "instances": 8,
+    "signers": 7
+   },
+   "KIND": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 3,
+    "signers": 3
+   },
+   "KNOW": {
+    "top1": 0.7,
+    "top3": 0.9,
+    "instances": 10,
+    "signers": 8
+   },
+   "LARGE": {
+    "top1": 0.786,
+    "top3": 0.929,
+    "instances": 14,
+    "signers": 9
+   },
+   "LATER": {
+    "top1": 0.4,
+    "top3": 0.6,
+    "instances": 10,
+    "signers": 7
+   },
+   "LIKE": {
+    "top1": 0.857,
+    "top3": 0.929,
+    "instances": 14,
+    "signers": 9
+   },
+   "LOVE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 5
+   },
+   "LUNCH": {
+    "top1": 0.667,
+    "top3": 0.833,
+    "instances": 6,
+    "signers": 6
+   },
+   "MEDIUM": {
+    "top1": 0.333,
+    "top3": 0.778,
+    "instances": 9,
+    "signers": 6
+   },
+   "MILK": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 7
+   },
+   "MINUTE": {
+    "top1": 0.4,
+    "top3": 0.6,
+    "instances": 5,
+    "signers": 5
+   },
+   "MONEY": {
+    "top1": 0.333,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 5
+   },
+   "MORE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 9,
+    "signers": 9
+   },
+   "MORNING": {
+    "top1": 0.857,
+    "top3": 0.857,
+    "instances": 7,
+    "signers": 7
+   },
+   "MY": {
+    "top1": 0.7,
+    "top3": 1.0,
+    "instances": 10,
+    "signers": 8
+   },
+   "NAME": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 9,
+    "signers": 8
+   },
+   "NEED": {
+    "top1": 0.778,
+    "top3": 0.889,
+    "instances": 18,
+    "signers": 11
+   },
+   "NICE": {
+    "top1": 0.769,
+    "top3": 1.0,
+    "instances": 13,
+    "signers": 11
+   },
+   "NINE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 2,
+    "signers": 2
+   },
+   "NO": {
+    "top1": 0.75,
+    "top3": 0.917,
+    "instances": 12,
+    "signers": 10
+   },
+   "NONE": {
+    "top1": 0.909,
+    "top3": 1.0,
+    "instances": 11,
+    "signers": 8
+   },
+   "NOT": {
+    "top1": 0.444,
+    "top3": 0.889,
+    "instances": 9,
+    "signers": 7
+   },
+   "NOW": {
+    "top1": 0.667,
+    "top3": 0.667,
+    "instances": 12,
+    "signers": 9
+   },
+   "NUTS": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 3,
+    "signers": 3
+   },
+   "ONE": {
+    "top1": 0.4,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 5
+   },
+   "OR": {
+    "top1": 0.4,
+    "top3": 0.4,
+    "instances": 10,
+    "signers": 6
+   },
+   "ORANGE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 13,
+    "signers": 10
+   },
+   "OUTSIDE": {
+    "top1": 0.429,
+    "top3": 0.429,
+    "instances": 7,
+    "signers": 7
+   },
+   "PAY": {
+    "top1": 0.714,
+    "top3": 0.857,
+    "instances": 7,
+    "signers": 5
+   },
+   "PHONE": {
+    "top1": 0.818,
+    "top3": 0.818,
+    "instances": 11,
+    "signers": 8
+   },
+   "PLEASE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 8
+   },
+   "PREFER": {
+    "top1": 0.0,
+    "top3": 0.333,
+    "instances": 6,
+    "signers": 4
+   },
+   "READY": {
+    "top1": 0.857,
+    "top3": 1.0,
+    "instances": 7,
+    "signers": 7
+   },
+   "RIGHT": {
+    "top1": 0.5,
+    "top3": 0.75,
+    "instances": 12,
+    "signers": 9
+   },
+   "SALAD": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 5
+   },
+   "SAME": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 5
+   },
+   "SANDWICH": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "SEE": {
+    "top1": 0.75,
+    "top3": 0.75,
+    "instances": 4,
+    "signers": 4
+   },
+   "SEVEN": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 4,
+    "signers": 4
+   },
+   "SIGN": {
+    "top1": 0.35,
+    "top3": 0.6,
+    "instances": 20,
+    "signers": 14
+   },
+   "SIT": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 16,
+    "signers": 10
+   },
+   "SIX": {
+    "top1": 0.75,
+    "top3": 1.0,
+    "instances": 4,
+    "signers": 4
+   },
+   "SLOW": {
+    "top1": 0.857,
+    "top3": 0.857,
+    "instances": 7,
+    "signers": 7
+   },
+   "SMALL": {
+    "top1": 0.111,
+    "top3": 0.222,
+    "instances": 9,
+    "signers": 7
+   },
+   "SODA": {
+    "top1": 0.833,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "SOME": {
+    "top1": 0.5,
+    "top3": 0.75,
+    "instances": 8,
+    "signers": 8
+   },
+   "SORRY": {
+    "top1": 0.857,
+    "top3": 1.0,
+    "instances": 7,
+    "signers": 6
+   },
+   "SOUP": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 5
+   },
+   "STRAW": {
+    "top1": 0.8,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 4
+   },
+   "STRAWBERRY": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 3,
+    "signers": 3
+   },
+   "SWEET": {
+    "top1": 0.833,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "TABLE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 7,
+    "signers": 6
+   },
+   "TASTE": {
+    "top1": 0.8,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 4
+   },
+   "TEA": {
+    "top1": 0.778,
+    "top3": 1.0,
+    "instances": 9,
+    "signers": 8
+   },
+   "THANK-YOU": {
+    "top1": 0.167,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "THIRSTY": {
+    "top1": 0.667,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "THREE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 3,
+    "signers": 3
+   },
+   "TIME": {
+    "top1": 0.875,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 8
+   },
+   "TWO": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 3,
+    "signers": 3
+   },
+   "UNDERSTAND": {
+    "top1": 0.75,
+    "top3": 0.875,
+    "instances": 8,
+    "signers": 8
+   },
+   "WAIT": {
+    "top1": 0.556,
+    "top3": 0.667,
+    "instances": 9,
+    "signers": 8
+   },
+   "WANT": {
+    "top1": 0.2,
+    "top3": 0.5,
+    "instances": 10,
+    "signers": 9
+   },
+   "WARM": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 5,
+    "signers": 5
+   },
+   "WATER": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 9,
+    "signers": 8
+   },
+   "WELCOME": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 4,
+    "signers": 3
+   },
+   "WHAT": {
+    "top1": 0.222,
+    "top3": 0.667,
+    "instances": 9,
+    "signers": 9
+   },
+   "WHEN": {
+    "top1": 0.714,
+    "top3": 0.857,
+    "instances": 7,
+    "signers": 7
+   },
+   "WHERE": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 8
+   },
+   "WHO": {
+    "top1": 0.615,
+    "top3": 0.692,
+    "instances": 13,
+    "signers": 11
+   },
+   "WHY": {
+    "top1": 0.75,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 8
+   },
+   "WINDOW": {
+    "top1": 0.75,
+    "top3": 1.0,
+    "instances": 8,
+    "signers": 7
+   },
+   "WITH": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 9,
+    "signers": 8
+   },
+   "WITHOUT": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 6,
+    "signers": 6
+   },
+   "WRITE": {
+    "top1": 0.636,
+    "top3": 0.727,
+    "instances": 11,
+    "signers": 10
+   },
+   "WRONG": {
+    "top1": 1.0,
+    "top3": 1.0,
+    "instances": 16,
+    "signers": 10
+   },
+   "YES": {
+    "top1": 0.769,
+    "top3": 1.0,
+    "instances": 13,
+    "signers": 11
+   },
+   "YOU": {
+    "top1": 0.364,
+    "top3": 0.727,
+    "instances": 11,
+    "signers": 8
+   },
+   "YOUR": {
+    "top1": 0.7,
+    "top3": 0.8,
+    "instances": 10,
+    "signers": 7
+   }
+  }
+ },
+ "hand_detection_rate_median": 0.6506980302161025,
+ "aspect_values": {
+  "1.78": 596,
+  "1.33": 310,
+  "1.5": 164,
+  "1.74": 38,
+  "1.77": 29,
+  "1.31": 9
+ },
+ "split_summary": {
+  "test_signers": 14,
+  "val_signers": 5,
+  "train_signers": 29,
+  "test_class_coverage": 1.0
+ }
+}

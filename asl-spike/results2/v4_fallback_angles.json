@@ -1,0 +1,26 @@
+{
+ "a": {
+  "pose_detection_rate_median": 0.911,
+  "signs_with_any_hand_frame": 111,
+  "hand_frames": 1324,
+  "finger_angle_abs_error_deg_median": 26.2
+ },
+ "b": {
+  "pose_detection_rate_median": 0.865,
+  "signs_with_any_hand_frame": 103,
+  "hand_frames": 991,
+  "finger_angle_abs_error_deg_median": 25.1
+ },
+ "c": {
+  "pose_detection_rate_median": 0.814,
+  "signs_with_any_hand_frame": 104,
+  "hand_frames": 961,
+  "finger_angle_abs_error_deg_median": 16.7
+ },
+ "d": {
+  "pose_detection_rate_median": 0.828,
+  "signs_with_any_hand_frame": 92,
+  "hand_frames": 775,
+  "finger_angle_abs_error_deg_median": 19.8
+ }
+}

@@ -1,0 +1,40 @@
+{
+ "grid": [
+  {
+   "pad": 2,
+   "removed_mean": 0.53,
+   "val_top1": 0.8733,
+   "val_top3": 0.9421
+  },
+  {
+   "pad": 4,
+   "removed_mean": 0.475,
+   "val_top1": 0.8857,
+   "val_top3": 0.9477
+  },
+  {
+   "pad": 6,
+   "removed_mean": 0.422,
+   "val_top1": 0.8871,
+   "val_top3": 0.949
+  },
+  {
+   "pad": 9,
+   "removed_mean": 0.352,
+   "val_top1": 0.8857,
+   "val_top3": 0.9518
+  },
+  {
+   "pad": 12,
+   "removed_mean": 0.297,
+   "val_top1": 0.8884,
+   "val_top3": 0.9518
+  }
+ ],
+ "val_untrimmed_top1": 0.8884297520661157,
+ "chosen_pad": 4,
+ "test_trimmed_top1": 0.8396464646464646,
+ "test_trimmed_top3": 0.9263468013468014,
+ "test_removed_median": 0.46702898550724636,
+ "test_seconds_after_median": 1.2335188914027149
+}

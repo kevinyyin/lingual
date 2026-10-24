@@ -1,0 +1,164 @@
+"""Motion-energy segmentation: sign/fingerspell segments inside a turn, and end of turn (hands back to rest).
+
+Energy per frame = wrist speed + fingertip-spread change, in shoulder widths per 30 fps frame interval, lightly
+smoothed. Durations are in ms, not frames: the browser delivers 12-15 frames/s (MediaPipe's cost), not the 30 the
+thresholds were set at, which doubled the end-of-turn wait and dropped short signs.
+"""
+
+from collections import deque
+
+import numpy as np
+
+from .protocol import Frame
+from .session import Baseline, Segment, SegEvent, TurnEnd, TurnStart
+
+FRAME_MS = 1000.0 / 30  # energy unit
+REST_MS = 450.0  # hands below the rest line this long ends the turn (15 frames at 30 fps)
+# low energy this long splits segments. 90 ms cut live signs at their holds (HELLO at the forehead read as five signs);
+# training.eval_live, sign spoken without a pick, curated signs: 90 ms 0.381, 200 0.395, 300 0.406, 450 0.415 (450 merges
+# the brief pauses between signs in a sentence, which one-sign videos can't show)
+PAUSE_MS = 300.0
+PAUSE_K = 1.5  # pause threshold = max(motion_floor * PAUSE_K, MIN_ENERGY)
+MIN_ENERGY = 0.02  # shoulder widths per 30 fps frame
+MIN_SEG_MS = 160.0  # shorter segments are noise (6 frames at 30 fps)
+SPELL_BOX = 0.6  # wrist stays inside this many shoulder widths
+SPELL_RATIO = 2.0  # fingertip motion / wrist motion above this = fingerspelling
+# Context handed to the sign recognizer around each segment, never past halfway to a neighbouring sign. ASL Citizen
+# test signers, ST-GCN top-1 by margin around the hands-visible span: 150 ms 0.49, 300 ms 0.57, 500 ms 0.60, whole clip
+# 0.61 (training/eval_recognition.py cache).
+CONTEXT_MS = 500.0
+PRE_ROLL = 30  # frames kept from before the turn starts (the hands rising), >= CONTEXT_MS at any frame rate
+TIPS = [4, 8, 12, 16, 20]
+
+
+def _width(f: Frame) -> float:
+    a, b = np.asarray(f.pose[11][:2]), np.asarray(f.pose[12][:2])
+    return max(float(np.linalg.norm(a - b)), 1e-3)
+
+
+def _wrists(f: Frame) -> np.ndarray:
+    return np.asarray([f.pose[15][:2], f.pose[16][:2]], dtype=np.float32)
+
+
+def _tips(hand) -> np.ndarray:
+    h = np.asarray(hand, dtype=np.float32)[:, :2]
+    return h[TIPS] - h[0]
+
+
+def _finger_motion(a: Frame, b: Frame) -> float:
+    d = [np.linalg.norm(_tips(getattr(b, s)) - _tips(getattr(a, s)), axis=1).mean()
+         for s in ("left", "right") if getattr(a, s) is not None and getattr(b, s) is not None]
+    return float(max(d)) if d else 0.0
+
+
+class Segmenter:
+    def __init__(self, baseline: Baseline):
+        self.b = baseline
+        self.thresh = max(baseline.motion_floor * PAUSE_K, MIN_ENERGY)
+        self.turn: list[Frame] | None = None
+        self.segments: list[Segment] = []
+        self.cur: list[Frame] | None = None
+        self.low = 0  # trailing low-energy frames in the open segment
+        self.low_t: float | None = None  # when they began
+        self.still_t: float | None = None  # when the hands went below the rest line
+        self.energy = 0.0
+        self.prev: Frame | None = None
+        self.before: deque[Frame] = deque(maxlen=PRE_ROLL)  # frames outside a turn
+        self.pre: list[Frame] = []  # the pre-roll of the current turn
+
+    def _raised(self, f: Frame) -> bool:
+        return bool((_wrists(f)[:, 1] < self.b.rest_y).any())
+
+    def push(self, f: Frame) -> SegEvent | None:
+        raised = self._raised(f)
+        if self.turn is None:
+            if not raised:
+                self.before.append(f)
+                return None
+            self.turn, self.segments, self.cur, self.low, self.energy, self.prev = [f], [], None, 0, 0.0, f
+            self.low_t = self.still_t = None
+            self.pre = list(self.before)
+            self.before.clear()
+            return TurnStart()
+
+        self.turn.append(f)
+        w = _width(f)
+        raw = (np.linalg.norm(_wrists(f) - _wrists(self.prev), axis=1).max() + _finger_motion(self.prev, f)) / w
+        dt = f.t - self.prev.t
+        raw *= FRAME_MS / dt if dt > 0 else 1.0
+        self.energy = 0.5 * self.energy + 0.5 * float(raw)
+        self.prev = f
+
+        if not raised:
+            if self.still_t is None:
+                self.still_t = f.t
+            if self.cur is not None:
+                self._close()  # hands down ends the sign in progress
+            if f.t - self.still_t >= REST_MS:
+                return self._end()
+            return None
+        self.still_t = None
+        if self.energy >= self.thresh:
+            if self.cur is None:
+                self.cur = []
+            self.cur.append(f)
+            self.low, self.low_t = 0, None
+        else:
+            self._idle_frame(f)
+        return None
+
+    def _idle_frame(self, f: Frame) -> None:
+        if self.cur is None:
+            return
+        self.cur.append(f)
+        self.low += 1
+        if self.low_t is None:
+            self.low_t = f.t
+        if f.t - self.low_t >= PAUSE_MS:
+            self._close()
+
+    def _close(self) -> None:
+        frames = self.cur[: len(self.cur) - self.low] if self.cur else []
+        self.cur, self.low, self.low_t = None, 0, None
+        if frames and frames[-1].t - frames[0].t >= MIN_SEG_MS:
+            self.segments.append(Segment(frames=frames, kind=_kind(frames)))
+
+    def _end(self) -> TurnEnd:
+        self._close()
+        turn, self.turn = self.turn, None
+        rest_ms = turn[-1].t - self.still_t
+        _add_context(self.segments, self.pre + turn)
+        merged: list[Segment] = []
+        for s in self.segments:  # letters split by tiny holds belong to one spelled word
+            if merged and s.kind == merged[-1].kind == "spell":
+                merged[-1] = Segment(frames=merged[-1].frames + s.frames, kind="spell")
+            else:
+                merged.append(s)
+        return TurnEnd(segments=merged, frames=turn, rest_ms=rest_ms)
+
+
+def _add_context(segments: list[Segment], frames: list[Frame]) -> None:
+    for k, s in enumerate(segments):
+        start, end = s.frames[0].t, s.frames[-1].t
+        lo, hi = start - CONTEXT_MS, end + CONTEXT_MS
+        if k > 0:
+            lo = max(lo, (segments[k - 1].frames[-1].t + start) / 2)
+        if k + 1 < len(segments):
+            hi = min(hi, (end + segments[k + 1].frames[0].t) / 2)
+        s.context = [f for f in frames if lo <= f.t <= hi]
+
+
+def _kind(frames: list[Frame]) -> str:
+    with_hand = [f for f in frames if f.left is not None or f.right is not None]
+    if not with_hand or any(f.left is not None and f.right is not None for f in with_hand):
+        return "sign"
+    w = np.median([_width(f) for f in frames])
+    side = "right" if sum(f.right is not None for f in with_hand) >= len(with_hand) / 2 else "left"
+    hand = [f for f in with_hand if getattr(f, side) is not None]
+    wrist = np.asarray([getattr(f, side)[0][:2] for f in hand])
+    box = (wrist.max(0) - wrist.min(0)).max() / w
+    wrist_motion = np.linalg.norm(np.diff(wrist, axis=0), axis=1).mean() / w if len(hand) > 1 else 0.0
+    finger = np.mean([_finger_motion(a, b) for a, b in zip(hand, hand[1:])]) / w if len(hand) > 1 else 0.0
+    if box < SPELL_BOX and finger > SPELL_RATIO * max(wrist_motion, 1e-3):
+        return "spell"
+    return "sign"

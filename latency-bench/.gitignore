@@ -1,0 +1,23 @@
+# secrets
+.env
+
+# environment
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# generated corpus artifacts (re-create with `bench prepare`)
+corpus/prepared/
+corpus/cache/
+
+# run outputs (raw data can be large; keep locally, commit selectively)
+results/raw/*
+results/audio/*
+results/analysis/
+results/cache/
+results/selftest/
+results/summary.csv
+results/report.html
+!results/raw/.gitkeep
+!results/audio/.gitkeep

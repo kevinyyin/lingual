@@ -1,0 +1,48 @@
+// @vitest-environment jsdom
+import { beforeEach, expect, test, vi } from "vitest";
+import { getByRole } from "@testing-library/dom";
+vi.mock("../ws", () => ({ connect: () => ({ send() {}, buffered: () => 0 }) }));
+vi.mock("../camera", () => ({ startCamera: () => new Promise(() => {}) }));
+vi.mock("../avatar", () => ({ loadAvatar: () => new Promise(() => {}) }));
+vi.mock("../avatar/stage", () => ({ createStage: vi.fn() }));
+import { runLesson, type LessonHost } from "./lessonView";
+
+const host: LessonHost = { english: (g) => g.toLowerCase(), sound: () => false, say() {},
+  cameraOn: () => false, disableCamera() {}, quit() {}, finish: () => { throw new Error("not reached"); } };
+const opt = (word: string) => getByRole(document.body, "button", { name: new RegExp(`^\\d${word}$`) });
+const answer = (word: string) => { opt(word).click(); getByRole(document.body, "button", { name: "Check" }).click(); };
+
+beforeEach(() => runLesson(document.body, [{ kind: "watch", gloss: "HELLO", options: ["MEET", "GOODBYE", "NICE", "HELLO"] }], host));
+
+test("a right answer is circled and nothing is struck", () => {
+  answer("hello");
+  expect(opt("hello").querySelector(".mark.loop")).not.toBeNull();
+  expect(document.querySelector(".mark.strike")).toBeNull();
+  expect(document.querySelector(".verdict h3")!.textContent).toMatch(/^(Spot on\.|That's it!|Nailed it\.|Exactly right\.|Got it\.)$/);
+});
+
+test("a wrong answer strikes the choice and circles the right one", () => {
+  answer("meet");
+  expect(opt("meet").querySelector(".mark.strike")).not.toBeNull();
+  expect(opt("hello").querySelector(".mark.loop")).not.toBeNull();
+  expect(document.querySelector(".verdict")!.textContent).toContain("Not quite.");
+  expect(document.querySelector(".verdict")!.textContent).toContain("Answer: hello");
+});
+
+test("Continue is the plain ink button, not a colored one", () => {
+  answer("meet");
+  expect(document.querySelector(".lesson-foot .btn.red, .lesson-foot .btn.green")).toBeNull();
+});
+
+test("a new sign's tag sits under the prompt, not above it", () => {
+  runLesson(document.body, [{ kind: "intro", gloss: "HELLO" }], host);
+  expect(document.querySelector(".prompt")!.previousElementSibling).toBeNull();
+  expect(document.querySelector(".prompt + .ex-tag")?.textContent).toBe("New sign");
+});
+
+test("a retry's tag sits under the prompt too", () => {
+  answer("meet");
+  getByRole(document.body, "button", { name: /Continue/ }).click();
+  expect(document.querySelector(".prompt")!.previousElementSibling).toBeNull();
+  expect(document.querySelector(".prompt + .ex-tag.retry")?.textContent).toBe("Try this one again");
+});

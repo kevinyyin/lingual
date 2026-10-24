@@ -1,0 +1,422 @@
+{
+ "c00": {
+  "run_id": "0126_b_Gavin_s6_neutral",
+  "cond": "b",
+  "voice": "Gavin",
+  "intended": "neutral",
+  "text": "My name is Maya."
+ },
+ "c01": {
+  "run_id": "0066_c_Leo_s3_neutral",
+  "cond": "c",
+  "voice": "Leo",
+  "intended": "neutral",
+  "text": "Oat milk, and no sugar."
+ },
+ "c02": {
+  "run_id": "0068_a_Leo_s6_none",
+  "cond": "a",
+  "voice": "Leo",
+  "intended": null,
+  "text": "My name is Maya."
+ },
+ "c03": {
+  "run_id": "0231_b_Maya_s2_sad",
+  "cond": "b",
+  "voice": "Maya",
+  "intended": "sad",
+  "text": "Do you have oat milk?"
+ },
+ "c04": {
+  "run_id": "0338_b_Leo_s0_angry",
+  "cond": "b",
+  "voice": "Leo",
+  "intended": "angry",
+  "text": "Hi! I'd like a coffee, please."
+ },
+ "c05": {
+  "run_id": "0178_a_Maya_s4_none",
+  "cond": "a",
+  "voice": "Maya",
+  "intended": null,
+  "text": "What kinds of muffins do you have?"
+ },
+ "c06": {
+  "run_id": "0025_c_Gavin_s11_sad",
+  "cond": "c",
+  "voice": "Gavin",
+  "intended": "sad",
+  "text": "Okay, thank you! Have a good day."
+ },
+ "c07": {
+  "run_id": "0265_a_Leo_s4_none",
+  "cond": "a",
+  "voice": "Leo",
+  "intended": null,
+  "text": "What kinds of muffins do you have?"
+ },
+ "c08": {
+  "run_id": "0032_a_Gavin_s6_none",
+  "cond": "a",
+  "voice": "Gavin",
+  "intended": null,
+  "text": "My name is Maya."
+ },
+ "c09": {
+  "run_id": "0157_b_Leo_s1_neutral",
+  "cond": "b",
+  "voice": "Leo",
+  "intended": "neutral",
+  "text": "Large, please."
+ },
+ "c10": {
+  "run_id": "0088_a_Gavin_s8_none",
+  "cond": "a",
+  "voice": "Gavin",
+  "intended": null,
+  "text": "Can I pay with a card?"
+ },
+ "c11": {
+  "run_id": "0174_a_Gavin_s5_none",
+  "cond": "a",
+  "voice": "Gavin",
+  "intended": null,
+  "text": "One blueberry. Can you warm it up?"
+ },
+ "c12": {
+  "run_id": "0186_a_Maya_s9_none",
+  "cond": "a",
+  "voice": "Maya",
+  "intended": null,
+  "text": "No receipt, thanks."
+ },
+ "c13": {
+  "run_id": "0245_a_Maya_s0_none",
+  "cond": "a",
+  "voice": "Maya",
+  "intended": null,
+  "text": "Hi! I'd like a coffee, please."
+ },
+ "c14": {
+  "run_id": "0028_a_Gavin_s0_none",
+  "cond": "a",
+  "voice": "Gavin",
+  "intended": null,
+  "text": "Hi! I'd like a coffee, please."
+ },
+ "c15": {
+  "run_id": "0175_c_Maya_s0_neutral",
+  "cond": "c",
+  "voice": "Maya",
+  "intended": "neutral",
+  "text": "Hi! I'd like a coffee, please."
+ },
+ "c16": {
+  "run_id": "d047_d_Leo_s2_happy",
+  "cond": "d",
+  "voice": "Leo",
+  "intended": "happy",
+  "text": "<emotion value=\"happy\"/> Do you have oat milk?"
+ },
+ "c17": {
+  "run_id": "0009_c_Leo_s10_sad",
+  "cond": "c",
+  "voice": "Leo",
+  "intended": "sad",
+  "text": "Where? I don't understand."
+ },
+ "c18": {
+  "run_id": "d123_d_Maya_s8_sad",
+  "cond": "d",
+  "voice": "Maya",
+  "intended": "sad",
+  "text": "<emotion value=\"sad\"/> Can I pay with a card?"
+ },
+ "c19": {
+  "run_id": "0102_a_Gavin_s9_none",
+  "cond": "a",
+  "voice": "Gavin",
+  "intended": null,
+  "text": "No receipt, thanks."
+ },
+ "c20": {
+  "run_id": "d056_d_Gavin_s11_sad",
+  "cond": "d",
+  "voice": "Gavin",
+  "intended": "sad",
+  "text": "<emotion value=\"sad\"/> Okay, thank you! Have a good day."
+ },
+ "c21": {
+  "run_id": "0275_a_Leo_s3_none",
+  "cond": "a",
+  "voice": "Leo",
+  "intended": null,
+  "text": "Oat milk, and no sugar."
+ },
+ "c22": {
+  "run_id": "0198_a_Leo_s11_none",
+  "cond": "a",
+  "voice": "Leo",
+  "intended": null,
+  "text": "Okay, thank you! Have a good day."
+ },
+ "c23": {
+  "run_id": "0158_c_Maya_s0_happy",
+  "cond": "c",
+  "voice": "Maya",
+  "intended": "happy",
+  "text": "Hi! I'd like a coffee, please."
+ },
+ "c24": {
+  "run_id": "d009_d_Leo_s5_neutral",
+  "cond": "d",
+  "voice": "Leo",
+  "intended": "neutral",
+  "text": "<emotion value=\"neutral\"/> One blueberry. Can you warm it up?"
+ },
+ "c25": {
+  "run_id": "0119_b_Leo_s11_sad",
+  "cond": "b",
+  "voice": "Leo",
+  "intended": "sad",
+  "text": "Okay, thank you! Have a good day."
+ },
+ "c26": {
+  "run_id": "d007_d_Gavin_s4_angry",
+  "cond": "d",
+  "voice": "Gavin",
+  "intended": "angry",
+  "text": "<emotion value=\"angry\"/> What kinds of muffins do you have?"
+ },
+ "c27": {
+  "run_id": "0087_b_Leo_s0_happy",
+  "cond": "b",
+  "voice": "Leo",
+  "intended": "happy",
+  "text": "Hi! I'd like a coffee, please."
+ },
+ "c28": {
+  "run_id": "0008_c_Leo_s11_happy",
+  "cond": "c",
+  "voice": "Leo",
+  "intended": "happy",
+  "text": "Okay, thank you! Have a good day."
+ },
+ "c29": {
+  "run_id": "0131_a_Maya_s2_none",
+  "cond": "a",
+  "voice": "Maya",
+  "intended": null,
+  "text": "Do you have oat milk?"
+ },
+ "c30": {
+  "run_id": "0279_a_Gavin_s2_none",
+  "cond": "a",
+  "voice": "Gavin",
+  "intended": null,
+  "text": "Do you have oat milk?"
+ },
+ "c31": {
+  "run_id": "0285_b_Gavin_s8_happy",
+  "cond": "b",
+  "voice": "Gavin",
+  "intended": "happy",
+  "text": "Can I pay with a card?"
+ },
+ "c32": {
+  "run_id": "0238_a_Leo_s0_none",
+  "cond": "a",
+  "voice": "Leo",
+  "intended": null,
+  "text": "Hi! I'd like a coffee, please."
+ },
+ "c33": {
+  "run_id": "0015_b_Gavin_s7_sad",
+  "cond": "b",
+  "voice": "Gavin",
+  "intended": "sad",
+  "text": "Sorry, how much? Again, please."
+ },
+ "c34": {
+  "run_id": "d138_d_Leo_s6_sad",
+  "cond": "d",
+  "voice": "Leo",
+  "intended": "sad",
+  "text": "<emotion value=\"sad\"/> My name is Maya."
+ },
+ "c35": {
+  "run_id": "d076_d_Gavin_s2_neutral",
+  "cond": "d",
+  "voice": "Gavin",
+  "intended": "neutral",
+  "text": "<emotion value=\"neutral\"/> Do you have oat milk?"
+ },
+ "c36": {
+  "run_id": "0091_b_Maya_s4_angry",
+  "cond": "b",
+  "voice": "Maya",
+  "intended": "angry",
+  "text": "What kinds of muffins do you have?"
+ },
+ "c37": {
+  "run_id": "0051_b_Maya_s0_neutral",
+  "cond": "b",
+  "voice": "Maya",
+  "intended": "neutral",
+  "text": "Hi! I'd like a coffee, please."
+ },
+ "c38": {
+  "run_id": "0121_a_Leo_s1_none",
+  "cond": "a",
+  "voice": "Leo",
+  "intended": null,
+  "text": "Large, please."
+ },
+ "c39": {
+  "run_id": "0168_c_Maya_s4_sad",
+  "cond": "c",
+  "voice": "Maya",
+  "intended": "sad",
+  "text": "What kinds of muffins do you have?"
+ },
+ "c40": {
+  "run_id": "d089_d_Maya_s10_neutral",
+  "cond": "d",
+  "voice": "Maya",
+  "intended": "neutral",
+  "text": "<emotion value=\"neutral\"/> Where? I don't understand."
+ },
+ "c41": {
+  "run_id": "0109_c_Gavin_s10_happy",
+  "cond": "c",
+  "voice": "Gavin",
+  "intended": "happy",
+  "text": "Where? I don't understand."
+ },
+ "c42": {
+  "run_id": "d127_d_Maya_s7_angry",
+  "cond": "d",
+  "voice": "Maya",
+  "intended": "angry",
+  "text": "<emotion value=\"angry\"/> Sorry, how much? Again, please."
+ },
+ "c43": {
+  "run_id": "d036_d_Gavin_s3_happy",
+  "cond": "d",
+  "voice": "Gavin",
+  "intended": "happy",
+  "text": "<emotion value=\"happy\"/> Oat milk, and no sugar."
+ },
+ "c44": {
+  "run_id": "0325_a_Gavin_s10_none",
+  "cond": "a",
+  "voice": "Gavin",
+  "intended": null,
+  "text": "Where? I don't understand."
+ },
+ "c45": {
+  "run_id": "0212_a_Leo_s9_none",
+  "cond": "a",
+  "voice": "Leo",
+  "intended": null,
+  "text": "No receipt, thanks."
+ },
+ "c46": {
+  "run_id": "0073_b_Maya_s10_happy",
+  "cond": "b",
+  "voice": "Maya",
+  "intended": "happy",
+  "text": "Where? I don't understand."
+ },
+ "c47": {
+  "run_id": "0346_a_Maya_s1_none",
+  "cond": "a",
+  "voice": "Maya",
+  "intended": null,
+  "text": "Large, please."
+ },
+ "c48": {
+  "run_id": "0190_a_Maya_s11_none",
+  "cond": "a",
+  "voice": "Maya",
+  "intended": null,
+  "text": "Okay, thank you! Have a good day."
+ },
+ "c49": {
+  "run_id": "0286_b_Gavin_s11_angry",
+  "cond": "b",
+  "voice": "Gavin",
+  "intended": "angry",
+  "text": "Okay, thank you! Have a good day."
+ },
+ "c50": {
+  "run_id": "0010_a_Maya_s10_none",
+  "cond": "a",
+  "voice": "Maya",
+  "intended": null,
+  "text": "Where? I don't understand."
+ },
+ "c51": {
+  "run_id": "0193_c_Leo_s7_angry",
+  "cond": "c",
+  "voice": "Leo",
+  "intended": "angry",
+  "text": "Sorry, how much? Again, please."
+ },
+ "c52": {
+  "run_id": "0125_c_Maya_s1_angry",
+  "cond": "c",
+  "voice": "Maya",
+  "intended": "angry",
+  "text": "Large, please."
+ },
+ "c53": {
+  "run_id": "0184_c_Gavin_s10_angry",
+  "cond": "c",
+  "voice": "Gavin",
+  "intended": "angry",
+  "text": "Where? I don't understand."
+ },
+ "c54": {
+  "run_id": "0046_a_Gavin_s4_none",
+  "cond": "a",
+  "voice": "Gavin",
+  "intended": null,
+  "text": "What kinds of muffins do you have?"
+ },
+ "c55": {
+  "run_id": "0079_a_Leo_s2_none",
+  "cond": "a",
+  "voice": "Leo",
+  "intended": null,
+  "text": "Do you have oat milk?"
+ },
+ "c56": {
+  "run_id": "d004_d_Maya_s0_happy",
+  "cond": "d",
+  "voice": "Maya",
+  "intended": "happy",
+  "text": "<emotion value=\"happy\"/> Hi! I'd like a coffee, please."
+ },
+ "c57": {
+  "run_id": "0227_c_Gavin_s9_neutral",
+  "cond": "c",
+  "voice": "Gavin",
+  "intended": "neutral",
+  "text": "No receipt, thanks."
+ },
+ "c58": {
+  "run_id": "0309_a_Maya_s3_none",
+  "cond": "a",
+  "voice": "Maya",
+  "intended": null,
+  "text": "Oat milk, and no sugar."
+ },
+ "c59": {
+  "run_id": "d141_d_Leo_s5_angry",
+  "cond": "d",
+  "voice": "Leo",
+  "intended": "angry",
+  "text": "<emotion value=\"angry\"/> One blueberry. Can you warm it up?"
+ }
+}

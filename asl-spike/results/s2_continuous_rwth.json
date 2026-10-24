@@ -1,0 +1,1726 @@
+{
+ "thresholds": {
+  "0.3": {
+   "recall": 0.235,
+   "precision": 0.153,
+   "tp": 43,
+   "n_gt_vocab_tokens": 183,
+   "n_pred": 281,
+   "false_positives": 238,
+   "oov_tokens": 185,
+   "fp_per_oov_token": 1.286,
+   "compute_ms_median": 177.0284,
+   "compute_ms_p90": 295.2846200000001
+  },
+  "0.5": {
+   "recall": 0.186,
+   "precision": 0.228,
+   "tp": 34,
+   "n_gt_vocab_tokens": 183,
+   "n_pred": 149,
+   "false_positives": 115,
+   "oov_tokens": 185,
+   "fp_per_oov_token": 0.622,
+   "compute_ms_median": 207.6072,
+   "compute_ms_p90": 317.00446000000005
+  },
+  "0.7": {
+   "recall": 0.131,
+   "precision": 0.333,
+   "tp": 24,
+   "n_gt_vocab_tokens": 183,
+   "n_pred": 72,
+   "false_positives": 48,
+   "oov_tokens": 185,
+   "fp_per_oov_token": 0.259,
+   "compute_ms_median": 208.5159,
+   "compute_ms_p90": 329.73276000000016
+  },
+  "0.85": {
+   "recall": 0.022,
+   "precision": 0.235,
+   "tp": 4,
+   "n_gt_vocab_tokens": 183,
+   "n_pred": 17,
+   "false_positives": 13,
+   "oov_tokens": 185,
+   "fp_per_oov_token": 0.07,
+   "compute_ms_median": 192.8393,
+   "compute_ms_p90": 314.33886000000007
+  }
+ },
+ "note": "boundary error not measurable: RWTH annotations have no per-sign times",
+ "n_utterances": 75,
+ "n_signers": 3,
+ "fps": [
+  25.0
+ ],
+ "delay_model": "delay after the last sign = rest detection hold (300 ms of low hand speed) + windowed classification compute of the whole utterance (compute_ms above, CPU)",
+ "per_utterance": {
+  "003": {
+   "gt": [
+    "IX-1P",
+    "SEE"
+   ],
+   "orth": "IX-1P SEE JOHN YESTERDAY IX",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "CUP",
+    "LUNCH"
+   ],
+   "pred@0.5": [],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "004": {
+   "gt": [
+    "IX-1P",
+    "SEE"
+   ],
+   "orth": "JOHN IX-1P SEE IX YESTERDAY",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "STRAWBERRY",
+    "CUP",
+    "NUTS",
+    "NOT",
+    "LIKE"
+   ],
+   "pred@0.5": [
+    "STRAWBERRY",
+    "CUP",
+    "NUTS"
+   ],
+   "pred@0.7": [
+    "NUTS"
+   ],
+   "pred@0.85": []
+  },
+  "008": {
+   "gt": [
+    "CAN",
+    "GO",
+    "CAN"
+   ],
+   "orth": "JOHN CAN GO CAN",
+   "signer": "man-1",
+   "pred@0.3": [
+    "HOW",
+    "CAN"
+   ],
+   "pred@0.5": [
+    "CAN"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "009": {
+   "gt": [
+    "CAN",
+    "GO",
+    "CAN"
+   ],
+   "orth": "JOHN CAN GO CAN",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "CAN"
+   ],
+   "pred@0.5": [
+    "CAN"
+   ],
+   "pred@0.7": [
+    "CAN"
+   ],
+   "pred@0.85": []
+  },
+  "010": {
+   "gt": [
+    "CAN",
+    "GO",
+    "CAN"
+   ],
+   "orth": "JOHN CAN GO CAN",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "DAY",
+    "CAN",
+    "SAME"
+   ],
+   "pred@0.5": [
+    "CAN",
+    "SAME"
+   ],
+   "pred@0.7": [
+    "CAN",
+    "SAME"
+   ],
+   "pred@0.85": []
+  },
+  "011": {
+   "gt": [
+    "CAN",
+    "GO",
+    "CAN"
+   ],
+   "orth": "JOHN CAN GO CAN",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "CUP",
+    "FINE",
+    "SAME"
+   ],
+   "pred@0.5": [
+    "FINE",
+    "SAME"
+   ],
+   "pred@0.7": [
+    "FINE"
+   ],
+   "pred@0.85": []
+  },
+  "013": {
+   "gt": [
+    "CAN",
+    "GO",
+    "CAN"
+   ],
+   "orth": "JOHN CAN GO CAN",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "NO",
+    "FINE",
+    "KIND",
+    "FINE"
+   ],
+   "pred@0.5": [
+    "KIND"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "014": {
+   "gt": [
+    "CAN",
+    "GO",
+    "CAN"
+   ],
+   "orth": "JOHN CAN GO CAN",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "LIKE",
+    "FINE",
+    "CAN"
+   ],
+   "pred@0.5": [
+    "FINE"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "019": {
+   "gt": [
+    "EAT",
+    "CAN",
+    "EAT"
+   ],
+   "orth": "JOHN FISH WONT EAT BUT CAN EAT CHICKEN",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "CUP",
+    "BREAKFAST",
+    "CAN"
+   ],
+   "pred@0.5": [
+    "BREAKFAST",
+    "CAN"
+   ],
+   "pred@0.7": [
+    "CAN"
+   ],
+   "pred@0.85": []
+  },
+  "020": {
+   "gt": [
+    "EAT",
+    "CAN",
+    "EAT"
+   ],
+   "orth": "JOHN FISH WONT EAT BUT CAN EAT CHICKEN",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "LIKE",
+    "CUP",
+    "NO",
+    "BREAKFAST",
+    "BANANA",
+    "CAN",
+    "STRAWBERRY",
+    "CAN"
+   ],
+   "pred@0.5": [
+    "LIKE",
+    "CAN"
+   ],
+   "pred@0.7": [
+    "CAN"
+   ],
+   "pred@0.85": []
+  },
+  "034": {
+   "gt": [
+    "IX-1P",
+    "BUY"
+   ],
+   "orth": "JOHN SAY MARY IX-1P BUY HOUSE",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "CUP",
+    "HERE",
+    "LIKE"
+   ],
+   "pred@0.5": [
+    "CUP",
+    "LIKE"
+   ],
+   "pred@0.7": [
+    "CUP"
+   ],
+   "pred@0.85": []
+  },
+  "035": {
+   "gt": [
+    "KNOW",
+    "LIKE"
+   ],
+   "orth": "MARY VEGETABLE KNOW IX LIKE CORN",
+   "signer": "man-1",
+   "pred@0.3": [
+    "SAME",
+    "STRAWBERRY",
+    "IX-1P"
+   ],
+   "pred@0.5": [
+    "STRAWBERRY"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "037": {
+   "gt": [
+    "IX-1P",
+    "KNOW",
+    "LIKE"
+   ],
+   "orth": "MARY VEGETABLE IX-1P KNOW IX LIKE CORN",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "NO",
+    "CUP",
+    "STRAWBERRY",
+    "NO"
+   ],
+   "pred@0.5": [
+    "NO",
+    "CUP"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "038": {
+   "gt": [
+    "KNOW",
+    "LIKE"
+   ],
+   "orth": "MARY VEGETABLE KNOW IX LIKE CORN",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "SAME",
+    "ICE",
+    "CUP",
+    "KNOW"
+   ],
+   "pred@0.5": [
+    "CUP",
+    "KNOW"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "042": {
+   "gt": [
+    "CAN",
+    "BUY"
+   ],
+   "orth": "JOHN CAN BUY HOUSE",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "CUP",
+    "ALL",
+    "IX-1P"
+   ],
+   "pred@0.5": [
+    "ALL"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "045": {
+   "gt": [
+    "NOT",
+    "BUY"
+   ],
+   "orth": "JOHN FUTURE NOT BUY HOUSE",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "SAME",
+    "CUP",
+    "CHOCOLATE"
+   ],
+   "pred@0.5": [
+    "CUP",
+    "CHOCOLATE"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "051": {
+   "gt": [
+    "BUY",
+    "NOT"
+   ],
+   "orth": "JOHN BUY CAR FUTURE NOT",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "MONEY",
+    "CUP",
+    "SORRY"
+   ],
+   "pred@0.5": [
+    "MONEY",
+    "SORRY"
+   ],
+   "pred@0.7": [
+    "MONEY"
+   ],
+   "pred@0.85": []
+  },
+  "052": {
+   "gt": [
+    "NOT",
+    "BUY"
+   ],
+   "orth": "JOHN SHOULD NOT BUY HOUSE",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "WHO",
+    "CUP",
+    "HERE"
+   ],
+   "pred@0.5": [
+    "CUP"
+   ],
+   "pred@0.7": [
+    "CUP"
+   ],
+   "pred@0.85": []
+  },
+  "053": {
+   "gt": [
+    "NOT",
+    "BUY"
+   ],
+   "orth": "JOHN SHOULD NOT BUY HOUSE",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "LUNCH",
+    "CUP",
+    "SANDWICH",
+    "ALL",
+    "LIKE"
+   ],
+   "pred@0.5": [
+    "CUP",
+    "SANDWICH"
+   ],
+   "pred@0.7": [
+    "CUP",
+    "SANDWICH"
+   ],
+   "pred@0.85": []
+  },
+  "059": {
+   "gt": [
+    "NOT",
+    "BUY"
+   ],
+   "orth": "JOHN FUTURE NOT BUY HOUSE",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "RIGHT",
+    "CUP",
+    "FINE"
+   ],
+   "pred@0.5": [
+    "RIGHT",
+    "CUP"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "060": {
+   "gt": [
+    "PREFER",
+    "GO"
+   ],
+   "orth": "JOHN PREFER GO MOVIE",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "TASTE",
+    "BANANA",
+    "CHEESE",
+    "SLOW"
+   ],
+   "pred@0.5": [
+    "BANANA",
+    "CHEESE"
+   ],
+   "pred@0.7": [
+    "CHEESE"
+   ],
+   "pred@0.85": []
+  },
+  "064": {
+   "gt": [
+    "PREFER",
+    "GO"
+   ],
+   "orth": "JOHN PREFER GO MOVIE TOMORROW",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "TASTE",
+    "SANDWICH",
+    "CUP",
+    "SORRY"
+   ],
+   "pred@0.5": [
+    "TASTE"
+   ],
+   "pred@0.7": [
+    "TASTE"
+   ],
+   "pred@0.85": []
+  },
+  "066": {
+   "gt": [
+    "NOT",
+    "BUY"
+   ],
+   "orth": "JOHN FUTURE NOT BUY HOUSE",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "BREAKFAST",
+    "CUP",
+    "ALL",
+    "SAME"
+   ],
+   "pred@0.5": [
+    "CUP",
+    "ALL"
+   ],
+   "pred@0.7": [
+    "ALL"
+   ],
+   "pred@0.85": []
+  },
+  "078": {
+   "gt": [
+    "FINISH",
+    "SEE"
+   ],
+   "orth": "JOHN FUTURE FINISH SEE MARY",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "LUNCH",
+    "CUP",
+    "BREAKFAST"
+   ],
+   "pred@0.5": [
+    "BREAKFAST"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "081": {
+   "gt": [
+    "LIKE",
+    "CHOCOLATE"
+   ],
+   "orth": "JOHN LIKE CHOCOLATE",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "CUP",
+    "CHEESE"
+   ],
+   "pred@0.5": [
+    "CHEESE"
+   ],
+   "pred@0.7": [
+    "CHEESE"
+   ],
+   "pred@0.85": []
+  },
+  "082": {
+   "gt": [
+    "NOT",
+    "LIKE",
+    "CHOCOLATE"
+   ],
+   "orth": "JOHN SHOULD NOT LIKE CHOCOLATE",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "NOT",
+    "CHOCOLATE",
+    "CHEESE"
+   ],
+   "pred@0.5": [
+    "NOT",
+    "CHOCOLATE"
+   ],
+   "pred@0.7": [
+    "NOT",
+    "CHOCOLATE"
+   ],
+   "pred@0.85": []
+  },
+  "087": {
+   "gt": [
+    "GIVE",
+    "FRESH"
+   ],
+   "orth": "JOHN GIVE IX MAN IX NEW COAT",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "LUNCH",
+    "SALAD",
+    "CREAM",
+    "HOW",
+    "LIKE"
+   ],
+   "pred@0.5": [
+    "CREAM",
+    "HOW"
+   ],
+   "pred@0.7": [
+    "CREAM",
+    "HOW"
+   ],
+   "pred@0.85": [
+    "CREAM"
+   ]
+  },
+  "088": {
+   "gt": [
+    "GIVE",
+    "FRESH"
+   ],
+   "orth": "JOHN GIVE IX MAN NEW COAT",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "CUP",
+    "CREAM",
+    "HOW"
+   ],
+   "pred@0.5": [
+    "HOW"
+   ],
+   "pred@0.7": [
+    "HOW"
+   ],
+   "pred@0.85": []
+  },
+  "102": {
+   "gt": [
+    "WHO",
+    "WHAT"
+   ],
+   "orth": "JOHN SEARCH-FOR WHO POSS BOOK WHAT",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "CUP",
+    "LUNCH",
+    "CHEESE",
+    "HERE",
+    "LIKE"
+   ],
+   "pred@0.5": [
+    "CHEESE",
+    "LIKE"
+   ],
+   "pred@0.7": [
+    "CHEESE"
+   ],
+   "pred@0.85": [
+    "CHEESE"
+   ]
+  },
+  "110": {
+   "gt": [
+    "WHAT",
+    "WHAT"
+   ],
+   "orth": "WHAT SOMETHING-ONE WHAT WOMAN ARRIVE",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "HERE",
+    "ELEVEN",
+    "GOOD",
+    "SAME"
+   ],
+   "pred@0.5": [
+    "HERE",
+    "GOOD",
+    "SAME"
+   ],
+   "pred@0.7": [
+    "GOOD",
+    "SAME"
+   ],
+   "pred@0.85": []
+  },
+  "111": {
+   "gt": [
+    "WHAT",
+    "WHAT",
+    "HERE"
+   ],
+   "orth": "WHAT WOMAN WHAT ARRIVE HERE",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "LIKE",
+    "HERE",
+    "CUP",
+    "WHAT",
+    "FRESH"
+   ],
+   "pred@0.5": [
+    "HERE",
+    "CUP",
+    "FRESH"
+   ],
+   "pred@0.7": [
+    "HERE",
+    "FRESH"
+   ],
+   "pred@0.85": []
+  },
+  "127": {
+   "gt": [
+    "SEE",
+    "WHO",
+    "WHAT"
+   ],
+   "orth": "JOHN SEE WHO WHAT",
+   "signer": "man-1",
+   "pred@0.3": [
+    "HOW",
+    "STRAWBERRY",
+    "WHO",
+    "CUP",
+    "HERE"
+   ],
+   "pred@0.5": [
+    "STRAWBERRY",
+    "WHO",
+    "HERE"
+   ],
+   "pred@0.7": [
+    "STRAWBERRY",
+    "WHO",
+    "HERE"
+   ],
+   "pred@0.85": []
+  },
+  "128": {
+   "gt": [
+    "SEE",
+    "WHO",
+    "WHO"
+   ],
+   "orth": "IX JOHN SEE WHO IX WHO",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "YOU",
+    "STRAWBERRY",
+    "WHO"
+   ],
+   "pred@0.5": [
+    "WHO"
+   ],
+   "pred@0.7": [
+    "WHO"
+   ],
+   "pred@0.85": [
+    "WHO"
+   ]
+  },
+  "129": {
+   "gt": [
+    "WHAT",
+    "EAT",
+    "WHAT"
+   ],
+   "orth": "WHAT MARY WONT EAT WHAT",
+   "signer": "man-1",
+   "pred@0.3": [
+    "LIKE",
+    "HERE",
+    "NO",
+    "SAME",
+    "EAT",
+    "HERE"
+   ],
+   "pred@0.5": [
+    "HERE",
+    "SAME",
+    "HERE"
+   ],
+   "pred@0.7": [
+    "HERE"
+   ],
+   "pred@0.85": []
+  },
+  "132": {
+   "gt": [
+    "WHO",
+    "PREFER",
+    "WHAT"
+   ],
+   "orth": "WHO VEGETABLE PREFER POTATO WHAT",
+   "signer": "man-1",
+   "pred@0.3": [
+    "LIKE",
+    "WHO",
+    "ORANGE",
+    "STRAWBERRY",
+    "LUNCH",
+    "PAY",
+    "HERE"
+   ],
+   "pred@0.5": [
+    "WHO",
+    "ORANGE",
+    "PAY",
+    "HERE"
+   ],
+   "pred@0.7": [
+    "HERE"
+   ],
+   "pred@0.85": [
+    "HERE"
+   ]
+  },
+  "133": {
+   "gt": [
+    "WHAT",
+    "LOVE",
+    "WHAT"
+   ],
+   "orth": "WHAT JOHN LOVE WHAT",
+   "signer": "man-1",
+   "pred@0.3": [
+    "HERE"
+   ],
+   "pred@0.5": [
+    "HERE"
+   ],
+   "pred@0.7": [
+    "HERE"
+   ],
+   "pred@0.85": []
+  },
+  "134": {
+   "gt": [
+    "WHAT",
+    "LOVE",
+    "WHAT"
+   ],
+   "orth": "WHAT JOHN LOVE WHAT",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "CUP",
+    "LOVE",
+    "BUY",
+    "HERE",
+    "GET"
+   ],
+   "pred@0.5": [
+    "LOVE"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "135": {
+   "gt": [
+    "WHAT",
+    "LOVE",
+    "WHAT"
+   ],
+   "orth": "WHAT JOHN LOVE WHAT",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "HELP"
+   ],
+   "pred@0.5": [],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "137": {
+   "gt": [
+    "BUY",
+    "WHAT"
+   ],
+   "orth": "JOHN BUY WHAT YESTERDAY BOOK",
+   "signer": "man-1",
+   "pred@0.3": [
+    "CUP",
+    "HERE",
+    "SANDWICH"
+   ],
+   "pred@0.5": [
+    "CUP",
+    "SANDWICH"
+   ],
+   "pred@0.7": [
+    "CUP",
+    "SANDWICH"
+   ],
+   "pred@0.85": [
+    "CUP"
+   ]
+  },
+  "138": {
+   "gt": [
+    "BUY",
+    "WHAT"
+   ],
+   "orth": "JOHN BUY WHAT YESTERDAY BOOK",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "MONEY",
+    "WANT",
+    "NUTS",
+    "SMALL",
+    "SANDWICH"
+   ],
+   "pred@0.5": [
+    "MONEY",
+    "WANT",
+    "SANDWICH"
+   ],
+   "pred@0.7": [
+    "WANT",
+    "SANDWICH"
+   ],
+   "pred@0.85": [
+    "WANT",
+    "SANDWICH"
+   ]
+  },
+  "140": {
+   "gt": [
+    "BUY",
+    "WHAT"
+   ],
+   "orth": "JOHN BUY YESTERDAY WHAT BOOK",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "HOW",
+    "CUP",
+    "HERE",
+    "SANDWICH"
+   ],
+   "pred@0.5": [
+    "HOW",
+    "HERE",
+    "SANDWICH"
+   ],
+   "pred@0.7": [
+    "SANDWICH"
+   ],
+   "pred@0.85": [
+    "SANDWICH"
+   ]
+  },
+  "141": {
+   "gt": [
+    "BUY",
+    "WHAT"
+   ],
+   "orth": "JOHN BUY WHAT BOOK",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "CUP",
+    "WHAT",
+    "SMALL",
+    "SANDWICH"
+   ],
+   "pred@0.5": [
+    "CUP",
+    "WHAT",
+    "SMALL",
+    "SANDWICH"
+   ],
+   "pred@0.7": [
+    "SANDWICH"
+   ],
+   "pred@0.85": [
+    "SANDWICH"
+   ]
+  },
+  "145": {
+   "gt": [
+    "WHO",
+    "WHAT"
+   ],
+   "orth": "WHO TELL BILL WHAT MARY",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "WHO",
+    "CUP",
+    "BREAKFAST",
+    "WHAT",
+    "WANT",
+    "BREAKFAST",
+    "DRINK"
+   ],
+   "pred@0.5": [
+    "WHO",
+    "CUP",
+    "WANT"
+   ],
+   "pred@0.7": [
+    "WHO",
+    "CUP"
+   ],
+   "pred@0.85": [
+    "CUP"
+   ]
+  },
+  "146": {
+   "gt": [
+    "WHO",
+    "WHAT"
+   ],
+   "orth": "WHO JOHN VISIT WHAT MARY",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "LUNCH",
+    "SEE",
+    "BREAKFAST",
+    "DRINK"
+   ],
+   "pred@0.5": [
+    "DRINK"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "148": {
+   "gt": [
+    "BUY",
+    "WHAT"
+   ],
+   "orth": "JOHN BUY YESTERDAY WHAT BOOK",
+   "signer": "man-1",
+   "pred@0.3": [
+    "CUP",
+    "WHAT",
+    "SANDWICH"
+   ],
+   "pred@0.5": [
+    "CUP",
+    "WHAT",
+    "SANDWICH"
+   ],
+   "pred@0.7": [
+    "CUP"
+   ],
+   "pred@0.85": [
+    "CUP"
+   ]
+  },
+  "149": {
+   "gt": [
+    "WHO",
+    "SEE",
+    "WHAT"
+   ],
+   "orth": "WHO JOHN SEE WHAT MARY",
+   "signer": "man-1",
+   "pred@0.3": [
+    "WHO",
+    "CUP",
+    "SAME"
+   ],
+   "pred@0.5": [
+    "WHO",
+    "SAME"
+   ],
+   "pred@0.7": [
+    "WHO",
+    "SAME"
+   ],
+   "pred@0.85": []
+  },
+  "150": {
+   "gt": [
+    "SEE",
+    "APPLE",
+    "WHO"
+   ],
+   "orth": "JOHN SEE THROW APPLE WHO MARY",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "STRAWBERRY",
+    "DAY",
+    "STRAWBERRY"
+   ],
+   "pred@0.5": [
+    "STRAWBERRY",
+    "DAY"
+   ],
+   "pred@0.7": [
+    "DAY"
+   ],
+   "pred@0.85": []
+  },
+  "151": {
+   "gt": [
+    "SEE",
+    "APPLE",
+    "WHO"
+   ],
+   "orth": "JOHN SEE THROW APPLE WHO MARY",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "STRAWBERRY",
+    "SEE",
+    "STRAWBERRY",
+    "WHO"
+   ],
+   "pred@0.5": [],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "152": {
+   "gt": [
+    "SEE",
+    "APPLE",
+    "WHO"
+   ],
+   "orth": "JOHN SEE THROW APPLE WHO MARY",
+   "signer": "man-1",
+   "pred@0.3": [
+    "CUP",
+    "TWO",
+    "MILK",
+    "WHO",
+    "SAME"
+   ],
+   "pred@0.5": [
+    "MILK",
+    "WHO",
+    "SAME"
+   ],
+   "pred@0.7": [
+    "WHO",
+    "SAME"
+   ],
+   "pred@0.85": []
+  },
+  "159": {
+   "gt": [
+    "LOVE",
+    "WHO"
+   ],
+   "orth": "LOVE JOHN WHO",
+   "signer": "man-1",
+   "pred@0.3": [
+    "LOVE",
+    "CUP",
+    "WHO"
+   ],
+   "pred@0.5": [
+    "CUP",
+    "WHO"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "160": {
+   "gt": [
+    "LOVE",
+    "WHO"
+   ],
+   "orth": "LOVE JOHN WHO",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "LOVE",
+    "STRAWBERRY",
+    "WHO"
+   ],
+   "pred@0.5": [
+    "LOVE",
+    "WHO"
+   ],
+   "pred@0.7": [
+    "LOVE",
+    "WHO"
+   ],
+   "pred@0.85": [
+    "LOVE",
+    "WHO"
+   ]
+  },
+  "161": {
+   "gt": [
+    "WHO",
+    "LOVE",
+    "WHO"
+   ],
+   "orth": "WHO JOHN LOVE WHO",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "CUP",
+    "COFFEE"
+   ],
+   "pred@0.5": [
+    "CUP"
+   ],
+   "pred@0.7": [
+    "CUP"
+   ],
+   "pred@0.85": []
+  },
+  "162": {
+   "gt": [
+    "WHAT",
+    "LIKE"
+   ],
+   "orth": "WHAT JOHN LIKE",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "BUY",
+    "CUP",
+    "LIKE"
+   ],
+   "pred@0.5": [
+    "CUP",
+    "LIKE"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "176": {
+   "gt": [
+    "HOW-MANY",
+    "GIVE"
+   ],
+   "orth": "MANY PEOPLE GIVE JANA TOY",
+   "signer": "man-1",
+   "pred@0.3": [
+    "COLD",
+    "FAST",
+    "CHANGE",
+    "RIGHT",
+    "NOT",
+    "WHICH"
+   ],
+   "pred@0.5": [
+    "COLD",
+    "FAST",
+    "RIGHT",
+    "WHICH"
+   ],
+   "pred@0.7": [
+    "RIGHT"
+   ],
+   "pred@0.85": [
+    "RIGHT"
+   ]
+  },
+  "182": {
+   "gt": [
+    "ALL",
+    "GIVE",
+    "APPLE"
+   ],
+   "orth": "ALL BOY GIVE TEACHER APPLE",
+   "signer": "man-1",
+   "pred@0.3": [
+    "YES",
+    "LUNCH",
+    "ALL",
+    "RIGHT",
+    "SODA",
+    "ORANGE"
+   ],
+   "pred@0.5": [
+    "YES",
+    "RIGHT",
+    "SODA",
+    "ORANGE"
+   ],
+   "pred@0.7": [
+    "SODA"
+   ],
+   "pred@0.85": []
+  },
+  "183": {
+   "gt": [
+    "ALL",
+    "GIVE",
+    "APPLE"
+   ],
+   "orth": "ALL BOY GIVE TEACHER APPLE",
+   "signer": "man-1",
+   "pred@0.3": [
+    "LUNCH",
+    "CENT",
+    "FAST",
+    "BLUEBERRY",
+    "SODA",
+    "ORANGE"
+   ],
+   "pred@0.5": [
+    "FAST",
+    "ORANGE"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "187": {
+   "gt": [
+    "GIVE",
+    "GIVE",
+    "GIVE"
+   ],
+   "orth": "TEACHER GIVE GIVE GIVE BOY BOOK",
+   "signer": "man-1",
+   "pred@0.3": [
+    "SODA",
+    "WHO",
+    "LUNCH",
+    "SANDWICH"
+   ],
+   "pred@0.5": [
+    "SODA",
+    "LUNCH",
+    "SANDWICH"
+   ],
+   "pred@0.7": [
+    "LUNCH",
+    "SANDWICH"
+   ],
+   "pred@0.85": [
+    "SANDWICH"
+   ]
+  },
+  "194": {
+   "gt": [
+    "CAN",
+    "GET",
+    "CAN"
+   ],
+   "orth": "JOHN CAN GET CAN",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "BREAKFAST",
+    "CUP",
+    "SAME"
+   ],
+   "pred@0.5": [
+    "CUP",
+    "SAME"
+   ],
+   "pred@0.7": [
+    "CUP",
+    "SAME"
+   ],
+   "pred@0.85": []
+  },
+  "197": {
+   "gt": [
+    "NOT",
+    "WHAT"
+   ],
+   "orth": "JOHN ARRIVE NOT WHAT",
+   "signer": "man-1",
+   "pred@0.3": [
+    "CUP",
+    "HERE"
+   ],
+   "pred@0.5": [
+    "HERE"
+   ],
+   "pred@0.7": [
+    "HERE"
+   ],
+   "pred@0.85": []
+  },
+  "198": {
+   "gt": [
+    "LIKE",
+    "CHOCOLATE",
+    "WHO"
+   ],
+   "orth": "LIKE CHOCOLATE WHO",
+   "signer": "man-1",
+   "pred@0.3": [
+    "CHOCOLATE",
+    "WHO"
+   ],
+   "pred@0.5": [
+    "CHOCOLATE",
+    "WHO"
+   ],
+   "pred@0.7": [
+    "CHOCOLATE",
+    "WHO"
+   ],
+   "pred@0.85": []
+  },
+  "200": {
+   "gt": [
+    "WHO",
+    "WHAT"
+   ],
+   "orth": "JOHN VISIT WHO WHAT",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "STRAWBERRY",
+    "LUNCH",
+    "WHO",
+    "CUP"
+   ],
+   "pred@0.5": [
+    "STRAWBERRY",
+    "WHO"
+   ],
+   "pred@0.7": [
+    "WHO"
+   ],
+   "pred@0.85": []
+  },
+  "007": {
+   "gt": [
+    "CAN",
+    "GO",
+    "CAN"
+   ],
+   "orth": "JOHN CAN GO CAN",
+   "signer": "man-1",
+   "pred@0.3": [
+    "NO",
+    "CAN",
+    "LIKE"
+   ],
+   "pred@0.5": [
+    "CAN"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "012": {
+   "gt": [
+    "CAN",
+    "GO",
+    "CAN"
+   ],
+   "orth": "JOHN CAN GO CAN",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "CAN",
+    "FINE",
+    "CAN"
+   ],
+   "pred@0.5": [
+    "CAN"
+   ],
+   "pred@0.7": [
+    "CAN"
+   ],
+   "pred@0.85": []
+  },
+  "021": {
+   "gt": [
+    "EAT",
+    "CAN",
+    "EAT"
+   ],
+   "orth": "JOHN FISH WONT EAT BUT CAN EAT CHICKEN",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "SLOW",
+    "CUP",
+    "BREAKFAST",
+    "DIFFERENT",
+    "CAN"
+   ],
+   "pred@0.5": [
+    "CUP",
+    "BREAKFAST",
+    "CAN"
+   ],
+   "pred@0.7": [
+    "CAN"
+   ],
+   "pred@0.85": []
+  },
+  "036": {
+   "gt": [
+    "KNOW",
+    "LIKE"
+   ],
+   "orth": "MARY VEGETABLE KNOW IX LIKE CORN",
+   "signer": "man-1",
+   "pred@0.3": [
+    "NOT",
+    "SAME",
+    "STRAWBERRY",
+    "WHO",
+    "FINE",
+    "NO"
+   ],
+   "pred@0.5": [
+    "SAME",
+    "STRAWBERRY",
+    "FINE"
+   ],
+   "pred@0.7": [
+    "FINE"
+   ],
+   "pred@0.85": []
+  },
+  "043": {
+   "gt": [
+    "NEED",
+    "BUY"
+   ],
+   "orth": "JOHN MUST BUY HOUSE",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "HOW",
+    "YOU",
+    "ALL"
+   ],
+   "pred@0.5": [
+    "ALL"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "054": {
+   "gt": [
+    "NOT",
+    "BUY"
+   ],
+   "orth": "JOHN SHOULD NOT BUY HOUSE",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "CUP",
+    "LIKE"
+   ],
+   "pred@0.5": [
+    "CUP",
+    "LIKE"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "067": {
+   "gt": [
+    "NOT",
+    "BUY"
+   ],
+   "orth": "JOHN FUTURE NOT BUY HOUSE",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "FINE",
+    "HEARING",
+    "DOLLAR"
+   ],
+   "pred@0.5": [
+    "HEARING"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "089": {
+   "gt": [
+    "GIVE",
+    "FRESH"
+   ],
+   "orth": "JOHN IX GIVE MAN IX NEW COAT",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "LUNCH",
+    "DAY",
+    "CUP",
+    "CREAM",
+    "LIKE"
+   ],
+   "pred@0.5": [
+    "CUP",
+    "CREAM"
+   ],
+   "pred@0.7": [
+    "CUP"
+   ],
+   "pred@0.85": []
+  },
+  "139": {
+   "gt": [
+    "BUY",
+    "WHAT"
+   ],
+   "orth": "JOHN BUY WHAT YESTERDAY BOOK",
+   "signer": "man-1",
+   "pred@0.3": [
+    "LIKE",
+    "CUP",
+    "HERE",
+    "SMALL",
+    "SANDWICH"
+   ],
+   "pred@0.5": [
+    "LIKE",
+    "CUP",
+    "HERE",
+    "SANDWICH"
+   ],
+   "pred@0.7": [
+    "HERE"
+   ],
+   "pred@0.85": []
+  },
+  "142": {
+   "gt": [
+    "BUY",
+    "WHAT"
+   ],
+   "orth": "JOHN BUY YESTERDAY WHAT BOOK",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "BUY",
+    "WHAT",
+    "SMALL",
+    "SANDWICH",
+    "CHEESE"
+   ],
+   "pred@0.5": [
+    "BUY",
+    "WHAT",
+    "SMALL",
+    "SANDWICH"
+   ],
+   "pred@0.7": [
+    "BUY",
+    "WHAT",
+    "SANDWICH"
+   ],
+   "pred@0.85": [
+    "SANDWICH"
+   ]
+  },
+  "158": {
+   "gt": [
+    "LOVE",
+    "WHO"
+   ],
+   "orth": "LOVE JOHN WHO",
+   "signer": "man-1",
+   "pred@0.3": [
+    "LOVE",
+    "CUP",
+    "WHO"
+   ],
+   "pred@0.5": [
+    "WHO"
+   ],
+   "pred@0.7": [
+    "WHO"
+   ],
+   "pred@0.85": []
+  },
+  "184": {
+   "gt": [
+    "ALL",
+    "GIVE",
+    "APPLE"
+   ],
+   "orth": "ALL BOY GIVE TEACHER APPLE",
+   "signer": "man-1",
+   "pred@0.3": [
+    "LUNCH",
+    "MILK",
+    "SODA",
+    "ORANGE"
+   ],
+   "pred@0.5": [
+    "MILK",
+    "SODA"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  },
+  "199": {
+   "gt": [
+    "LIKE",
+    "CHOCOLATE",
+    "WHO"
+   ],
+   "orth": "LIKE CHOCOLATE WHO",
+   "signer": "woman-1",
+   "pred@0.3": [
+    "LIKE",
+    "CHOCOLATE",
+    "WHO",
+    "YOU"
+   ],
+   "pred@0.5": [
+    "LIKE",
+    "CHOCOLATE",
+    "WHO",
+    "YOU"
+   ],
+   "pred@0.7": [
+    "LIKE",
+    "WHO",
+    "YOU"
+   ],
+   "pred@0.85": [
+    "WHO"
+   ]
+  },
+  "201": {
+   "gt": [
+    "IX-1P",
+    "BUY"
+   ],
+   "orth": "JOHN TELL MARY IX-1P BUY HOUSE",
+   "signer": "woman-2",
+   "pred@0.3": [
+    "CUP",
+    "SANDWICH",
+    "HERE"
+   ],
+   "pred@0.5": [
+    "CUP",
+    "HERE"
+   ],
+   "pred@0.7": [],
+   "pred@0.85": []
+  }
+ }
+}

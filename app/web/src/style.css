@@ -1,0 +1,209 @@
+/* Translator: teaching mode's motion lines world (cool paper, indigo ink, Shantell Sans over Atkinson Hyperlegible
+   Next), kept calm because a live conversation runs through it: no hand trail, and nothing drawn beyond the mark and
+   the status edge. Light only. All text pairs meet WCAG AA (4.5:1); every status edge is 3:1 or more on the stage.
+   On a phone (the plushie) the page is one full-screen stage: avatar, a big caption, status as the stage's coloured
+   edge, the camera as a corner preview, everything else behind one button. */
+:root {
+  --paper: #F6F7FB; --surface: #FFFFFF; --wash: #E3E8FF;
+  --ink: #232A63; --ink-2: #565D8C; --outline: rgb(35 42 99 / .55); --hairline: rgb(35 42 99 / .12);
+  --go: #F2592A; --go-ink: #C2410C;
+  --r-panel: 30px 26px 32px 24px / 26px 32px 24px 30px;
+  --r-tile: 16px 20px 15px 21px / 19px 15px 21px 16px;
+  /* status: tint + ink for the pill, a stronger hue for the stage edge; no green */
+  --ready-bg: var(--wash); --ready-fg: var(--ink); --ready-edge: var(--ink-2);
+  --in-bg: #DCEEFF; --in-fg: #0F5A9E; --in-edge: #2B83D6;
+  --out-bg: #FFF0EA; --out-fg: var(--go-ink); --out-edge: #E24A17;
+  --wait-bg: #FFF2CC; --wait-fg: #8A5300; --wait-edge: #B07300;
+  --err-bg: #FFE4EA; --err-fg: #B4234A; --err-edge: #E2466C;
+  --shadow: 0 1px 2px rgb(35 42 99 / .06), 0 8px 24px rgb(35 42 99 / .1);
+  --shadow-float: 0 10px 18px -10px rgb(0 0 0 / .45);
+  --display: "Shantell Sans", "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  --text: "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  color-scheme: light;
+  font-family: var(--text);
+  color: var(--ink);
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; } /* component display rules (e.g. #picker grid) must not unhide */
+body { margin: 0; background: var(--paper); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;
+  font: 400 16px/1.5 var(--text); -webkit-font-smoothing: antialiased; padding-bottom: env(safe-area-inset-bottom); }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+::selection { background: var(--wash); color: var(--ink); }
+input { caret-color: var(--go); }
+
+/* --- top bar: mark, live status, recovery, actions --- */
+#topbar { display: flex; align-items: center; gap: 12px; padding: 12px 24px;
+  padding-top: calc(12px + env(safe-area-inset-top)); } /* the iOS app draws under the status bar */
+.brand { display: flex; align-items: center; gap: 6px; margin: 0 auto 0 0; color: var(--ink); white-space: nowrap;
+  font: 800 26px/1 var(--display); font-variation-settings: "INFM" 45, "BNCE" 15; }
+.brand .mark { display: grid; place-items: center; width: 34px; height: 34px; }
+.brand .mark svg { width: 32px; height: 32px; }
+.mode-name { margin-left: 4px; font: 600 0.95rem var(--text); font-variation-settings: normal; color: var(--ink-2); }
+.actions { display: flex; gap: 8px; }
+.btn.icon-btn { display: none; } /* the phone's "More" button */
+
+.badge {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px;
+  font: 700 18px var(--text); background: #ECEEF6; color: var(--ink-2); transition: background-color 200ms ease, color 200ms ease;
+}
+.badge::before { content: ""; flex: none; width: 11px; height: 11px; border-radius: 50%; background: currentColor; }
+.badge[data-state="ready"] { background: var(--ready-bg); color: var(--ready-fg); }
+.badge[data-state="calibrating"], .badge[data-state="picking"] { background: var(--wait-bg); color: var(--wait-fg); }
+.badge[data-state="listening"], .badge[data-state="signing"] { background: var(--in-bg); color: var(--in-fg); }
+.badge[data-state="speaking"], .badge[data-state="avatar"] { background: var(--out-bg); color: var(--out-fg); }
+.badge[data-state="error"] { background: var(--err-bg); color: var(--err-fg); }
+.badge[data-state="listening"]::before, .badge[data-state="signing"]::before,
+.badge[data-state="speaking"]::before, .badge[data-state="avatar"]::before { animation: pulse 1.2s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.35; } }
+
+/* Teaching mode's ink pill, at the translator's 44px; it presses in, with no ledge under it */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px;
+  border: 0; border-radius: 999px; background: var(--ink); color: #fff; font: 700 1rem var(--text); cursor: pointer;
+  box-shadow: var(--shadow-float); transition: transform 120ms var(--ease), background-color 160ms var(--ease);
+}
+.btn:hover { background: color-mix(in srgb, var(--ink) 88%, #fff); }
+.btn:active { transform: scale(.97); }
+.btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--outline); }
+.btn.ghost:hover { background: var(--wash); }
+
+/* --- layout --- */
+#app { position: relative; flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 20px; padding: 0 24px 24px; }
+.card { background: var(--surface); border: 1.5px solid var(--hairline); border-radius: var(--r-panel); padding: 18px; margin: 0; }
+.card-title { display: block; margin: 0 0 6px; font: 700 1.05rem var(--display); color: var(--ink); }
+
+/* --- avatar stage: the hearing person reads the caption from across a table (or 1 m from the plushie) --- */
+#avatar-panel {
+  position: relative; display: flex; flex-direction: column; min-height: 0; border-radius: var(--r-panel); background: var(--wash);
+  overflow: hidden;
+}
+/* whose turn it is, readable from across the room: the stage's edge takes the status colour */
+#avatar-panel::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 2;
+  box-shadow: inset 0 0 0 0 transparent; transition: box-shadow 250ms var(--ease);
+}
+body:has(#state[data-state="listening"]) #avatar-panel::after,
+body:has(#state[data-state="signing"]) #avatar-panel::after { box-shadow: inset 0 0 0 5px var(--in-edge); }
+body:has(#state[data-state="speaking"]) #avatar-panel::after,
+body:has(#state[data-state="avatar"]) #avatar-panel::after { box-shadow: inset 0 0 0 5px var(--out-edge); }
+body:has(#state[data-state="calibrating"]) #avatar-panel::after,
+body:has(#state[data-state="picking"]) #avatar-panel::after { box-shadow: inset 0 0 0 5px var(--wait-edge); }
+body:has(#state[data-state="error"]) #avatar-panel::after { box-shadow: inset 0 0 0 5px var(--err-edge); }
+
+#avatar { display: block; width: 100%; flex: 1; min-height: 360px; }
+.caption-box { padding: 18px 28px 22px; background: var(--surface); border-top: 1.5px solid var(--hairline); }
+#caption {
+  margin: 0; min-height: 2.6rem; text-align: center; text-wrap: balance; color: var(--ink);
+  font: 700 clamp(2rem, 2.6vw, 2.8rem)/1.2 var(--text);
+}
+#caption:empty::before { content: "Speak, and the avatar signs it here."; color: var(--ink-2); font-weight: 400; font-size: 1.25rem; }
+
+/* sign plan as chips: whole signs as pills, fingerspelled words as tight letter runs; the current one fills with ink */
+.plan { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 12px 0 0; min-height: 36px; }
+.plan span {
+  display: inline-flex; align-items: center; min-height: 34px; padding: 0 14px; border-radius: 999px;
+  background: var(--surface); box-shadow: inset 0 0 0 1.5px var(--outline); font: 600 1rem var(--text); color: var(--ink-2);
+  transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+}
+.plan span.letter { padding: 0 9px; border-radius: 9px; margin-right: -3px; }
+.plan span.letter.word-end { margin-right: 6px; }
+.plan span.on { background: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); color: #fff; }
+
+/* --- side column --- */
+#side { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.cam-card { padding: 0; overflow: hidden; }
+#cam { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--ink); }
+.cam-card figcaption { padding: 10px 14px; font-size: 15px; color: var(--ink-2); }
+
+#you-said { margin: 0; font: 700 1.4rem/1.35 var(--text); color: var(--ink); }
+#you-said:empty::before { content: "When the signer signs, the spoken sentence shows here."; color: var(--ink-2); font-weight: 400; font-size: 1rem; }
+#you-said .emo { display: inline-block; margin-left: 8px; padding: 3px 12px; border-radius: 999px; font: 600 15px var(--text);
+  background: var(--out-bg); color: var(--out-fg); vertical-align: middle; text-transform: capitalize; }
+
+/* picker: the signer must answer it fast, so big targets with their key shown */
+#picker { display: grid; gap: 10px; border: 2px solid var(--wait-edge); background: var(--surface); }
+#picker .card-title { color: var(--wait-fg); }
+#picker button {
+  display: flex; align-items: center; gap: 12px; min-height: 58px; padding: 8px 16px; text-align: left;
+  border-radius: var(--r-tile); border: 0; background: var(--surface); box-shadow: inset 0 0 0 2px var(--outline);
+  color: var(--ink); font: 700 1.3rem var(--text); cursor: pointer; transition: background-color 150ms ease;
+}
+#picker button:hover, #picker button:focus-visible { background: var(--wash); }
+#picker .key { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 1rem; flex: none; }
+#picker .gloss { margin-left: auto; font: 400 15px var(--text); color: var(--ink-2); }
+#picker button.none { box-shadow: none; background: transparent; font: 700 1rem var(--text); color: var(--go-ink); justify-content: center; min-height: 48px; }
+#picker button.none:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.dev-row { display: flex; gap: 8px; }
+#dev-text {
+  flex: 1; min-width: 0; min-height: 44px; padding: 0 16px; border-radius: var(--r-tile); border: 2px solid var(--outline);
+  background: var(--surface); color: var(--ink); font: 400 17px var(--text);
+}
+#dev-text:focus { outline: none; border-color: var(--ink); }
+#dev-text::placeholder { color: var(--ink-2); }
+
+@media (max-width: 900px) {
+  #app { grid-template-columns: 1fr; padding: 0 16px 16px; }
+  #topbar { padding: calc(12px + env(safe-area-inset-top)) 16px 12px; }
+  #avatar { min-height: 300px; }
+}
+
+/* --- the phone, upright in the plushie: one screen, no scrolling --- */
+@media (max-width: 600px) {
+  body { height: 100dvh; overflow: hidden; }
+  #topbar { flex-wrap: nowrap; gap: 8px; padding: calc(8px + env(safe-area-inset-top)) 12px 8px; }
+  .brand { margin: 0; }
+  .brand .word, .mode-name { display: none; }
+  /* one or two lines in a fixed height, so the stage never resizes; the long states take the mark's room */
+  .badge { flex: 1; min-width: 0; height: 52px; white-space: normal; line-height: 1.15; overflow: hidden; }
+  body:has(#state[data-state="calibrating"]) .brand, body:has(#state[data-state="error"]) .brand { display: none; }
+  #reclaim { flex: none; padding: 0 14px; }
+  body:has(#reclaim:not([hidden])) .brand { display: none; } /* room for the whole message next to its fix */
+  .btn.icon-btn { display: inline-flex; flex: none; width: 44px; padding: 0; }
+  .actions { display: none; position: absolute; z-index: 40; right: 12px; top: calc(68px + env(safe-area-inset-top));
+    flex-direction: column; gap: 8px; padding: 10px; border-radius: var(--r-panel); background: var(--surface); box-shadow: var(--shadow), inset 0 0 0 1px var(--hairline); }
+  .actions.open { display: flex; }
+
+  #app { display: flex; flex-direction: column; gap: 10px; padding: 0 10px 10px; min-height: 0; }
+  #avatar-panel { flex: 1; min-height: 0; }
+  #avatar { min-height: 0; }
+  .caption-box { padding: 14px 16px 16px; }
+  #caption { font-size: 2.25rem; line-height: 1.15; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  #caption:empty::before { font-size: 1.15rem; }
+  .plan span { min-height: 38px; font-size: 1.1rem; }
+
+  #side { display: contents; }
+  /* the signer sees themselves in the stage's corner, like a video call */
+  .cam-card { position: absolute; z-index: 3; top: 10px; right: 20px; width: 30%; border-radius: var(--r-tile); box-shadow: var(--shadow); }
+  .cam-card figcaption { display: none; }
+  .cam-card:has(#cam[hidden]) { display: none; }
+  .said-card { flex: none; padding: 14px 16px; }
+  .said-card:has(#you-said:empty) { display: none; }
+  .said-card .card-title { font-size: 0.95rem; margin-bottom: 2px; }
+  #you-said { font-size: 1.6rem; }
+  /* the picker covers the lower stage so it can't be missed */
+  #picker { position: fixed; z-index: 30; left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom)); box-shadow: 0 -8px 40px rgb(35 42 99 / .2); }
+  #dev { flex: none; padding: 12px; }
+  #dev .card-title { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* --- recorder / review pages --- */
+#review, #recorder { width: 100%; max-width: 1400px; margin: 0 auto; padding: 20px 24px; }
+#review h1, #recorder h1 { margin: 0 0 12px; font: 600 1.6rem var(--font-read); }
+#review p { color: var(--ink-2); }
+#review label { font-weight: 600; }
+#review select, #review button {
+  min-height: 40px; margin-left: 6px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--fg); font: 600 1rem var(--font-ui); cursor: pointer;
+}
+#review #info { margin-left: 10px; color: var(--ink-2); }
+#review .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
+#review canvas, #review video { width: 100%; height: 460px; background: var(--wash); border-radius: var(--r-tile); box-shadow: var(--shadow); }
+#review video { background: #000; object-fit: contain; }
+
+a.btn { text-decoration: none; }

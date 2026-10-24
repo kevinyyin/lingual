@@ -1,0 +1,87 @@
+{
+ "sign_to_speech": {
+  "stages": [
+   {
+    "stage": "landmarks for the last frame (MediaPipe Holistic, CPU)",
+    "median": 142.7,
+    "p90": 194.2,
+    "n": 400,
+    "source": "S2 extraction, ms per frame over 400 ASL Citizen videos while 7 extraction workers shared the CPU; a single unloaded process measured ~40 ms/frame on RWTH"
+   },
+   {
+    "stage": "hands-at-rest detected (hold time)",
+    "median": 300.0,
+    "p90": 300.0,
+    "n": null,
+    "source": "design parameter (300 ms of low hand speed); not measured on real end-of-turn behaviour"
+   },
+   {
+    "stage": "gloss sequence final (windowed classifier over the utterance)",
+    "median": 207.6072,
+    "p90": 317.00446000000005,
+    "n": 75,
+    "source": "S2 continuous test (RWTH, CPU)"
+   },
+   {
+    "stage": "LLM gloss -> English (claude-haiku-5-5)",
+    "median": 1238.7,
+    "p90": 2245.2,
+    "n": 40,
+    "source": "S5 v2, non-streaming request, sequential"
+   },
+   {
+    "stage": "Cartesia Sonic 3.6 first audio byte",
+    "median": 121.5,
+    "p90": 152.6,
+    "n": 696,
+    "source": "S4, WebSocket, warm connection"
+   }
+  ],
+  "median_sum": 2010.5,
+  "p90_sum": 3209.0,
+  "biggest": "LLM gloss -> English (claude-haiku-5-5)"
+ },
+ "speech_to_sign": {
+  "stages": [
+   {
+    "stage": "Ink 2 turn.end (final transcript)",
+    "median": 720.9,
+    "p90": 922.7,
+    "n": 30,
+    "source": "S8 Ink test, 30 barista lines, real-time streaming"
+   },
+   {
+    "stage": "LLM English -> gloss + NMM (incl. one repair retry when invalid)",
+    "median": 1484.5,
+    "p90": 3006.1,
+    "n": 30,
+    "source": "S5 v2"
+   },
+   {
+    "stage": "first avatar motion after gloss JSON",
+    "median": 7.2,
+    "p90": 9.7,
+    "n": 15,
+    "source": "S6, Edge + Intel Arc GPU; lexicon preloaded (cold first run: 47 ms)"
+   }
+  ],
+  "median_sum": 2212.6,
+  "p90_sum": 3938.5,
+  "biggest": "LLM English -> gloss + NMM (incl. one repair retry when invalid)",
+  "eager_end_variant": {
+   "ink_eager_end_ms": {
+    "n": 29,
+    "median": 334.2,
+    "p90": 741.6,
+    "max": 988.3,
+    "min": -84.8
+   },
+   "note": "start the LLM on turn.eager_end and discard on turn.resume"
+  }
+ },
+ "not_included": [
+  "camera capture and network transport (S7 deferred)",
+  "audio playback buffering on the phone/glasses",
+  "sign duration itself: the avatar takes 7-11 s to sign these sentences at citation speed"
+ ]
+}

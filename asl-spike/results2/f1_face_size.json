@@ -1,0 +1,59 @@
+{
+ "n_wh": 60,
+ "n_non_wh": 60,
+ "signers": 120,
+ "native_face_width_px_median": 128.3,
+ "by_scale": {
+  "native": {
+   "detection_rate_mean": 1.0,
+   "corr_browDown_median": 1.0,
+   "corr_browInnerUp_median": 1.0,
+   "auc_wh_sustained_browDown": 0.708,
+   "n_clips_scored": 120
+  },
+  "40": {
+   "detection_rate_mean": 1.0,
+   "corr_browDown_median": 0.837,
+   "corr_browInnerUp_median": 0.86,
+   "auc_wh_sustained_browDown": 0.706,
+   "n_clips_scored": 120
+  },
+  "60": {
+   "detection_rate_mean": 1.0,
+   "corr_browDown_median": 0.927,
+   "corr_browInnerUp_median": 0.938,
+   "auc_wh_sustained_browDown": 0.712,
+   "n_clips_scored": 120
+  },
+  "80": {
+   "detection_rate_mean": 1.0,
+   "corr_browDown_median": 0.962,
+   "corr_browInnerUp_median": 0.973,
+   "auc_wh_sustained_browDown": 0.717,
+   "n_clips_scored": 120
+  },
+  "120": {
+   "detection_rate_mean": 1.0,
+   "corr_browDown_median": 0.99,
+   "corr_browInnerUp_median": 0.992,
+   "auc_wh_sustained_browDown": 0.708,
+   "n_clips_scored": 120
+  },
+  "160": {
+   "detection_rate_mean": 1.0,
+   "corr_browDown_median": 0.995,
+   "corr_browInnerUp_median": 0.995,
+   "auc_wh_sustained_browDown": 0.708,
+   "n_clips_scored": 120
+  }
+ },
+ "min_reliable_face_width_px": 40,
+ "criterion": "detection >= 90%, browDown correlation with native >= 0.8, wh AUC within 0.05 of native",
+ "max_distance_m": {
+  "landscape_1920_hfov70": 5.14,
+  "landscape_1920_hfov80": 4.29,
+  "portrait_1080_hfov70": 2.89,
+  "portrait_1080_hfov80": 2.41
+ },
+ "assumptions": "face width 0.15 m; 1080p camera; HFOV 70-80 deg (landscape) - portrait uses the 1080-px width"
+}

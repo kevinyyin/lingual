@@ -1,0 +1,566 @@
+{
+ "summary": [
+  {
+   "system": "gemini",
+   "category": "hesitation",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2997.837,
+   "start_lag_ci": [
+    2910.509,
+    3400.828
+   ],
+   "end_arrival_med": 2906.383,
+   "end_play_med": 3246.2435,
+   "end_play_ci": [
+    3240.5299999999997,
+    3430.9925000000003
+   ],
+   "end_play_p90": 3368.4155,
+   "end_play_max": 3430.9925000000003,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.033,
+   "chrf_med": 91.14
+  },
+  {
+   "system": "gemini",
+   "category": "long",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 3028.644,
+   "start_lag_ci": [
+    2978.02,
+    3478.597
+   ],
+   "end_arrival_med": 2462.929,
+   "end_play_med": 2868.755,
+   "end_play_ci": [
+    2612.501,
+    3032.002
+   ],
+   "end_play_p90": 3021.164,
+   "end_play_max": 3032.002,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.902,
+   "chrf_med": 82.91
+  },
+  {
+   "system": "gemini",
+   "category": "medium",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 3037.081,
+   "start_lag_ci": [
+    2913.891,
+    3093.976
+   ],
+   "end_arrival_med": 2576.915,
+   "end_play_med": 3099.678,
+   "end_play_ci": [
+    2789.397,
+    3167.682
+   ],
+   "end_play_p90": 3228.386,
+   "end_play_max": 3330.617,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.92,
+   "chrf_med": 90.36
+  },
+  {
+   "system": "gemini",
+   "category": "noisy",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2973.899,
+   "start_lag_ci": [
+    2930.774,
+    3065.945
+   ],
+   "end_arrival_med": 2396.852,
+   "end_play_med": 2834.57,
+   "end_play_ci": [
+    2718.036,
+    3038.68
+   ],
+   "end_play_p90": 3125.8361999999997,
+   "end_play_max": 3260.19,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.898,
+   "chrf_med": 93.22
+  },
+  {
+   "system": "gemini",
+   "category": "same_language",
+   "n_runs": 10,
+   "n_clips": 2,
+   "n_failed": 0,
+   "start_lag_med": 2933.966,
+   "start_lag_ci": [
+    2847.557,
+    2997.321
+   ],
+   "end_arrival_med": 1657.0545,
+   "end_play_med": 2064.4455,
+   "end_play_ci": [
+    1562.648,
+    2385.139
+   ],
+   "end_play_p90": 2412.9169,
+   "end_play_max": 2477.732,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.2775328030260577
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": null,
+   "chrf_med": null
+  },
+  {
+   "system": "gemini",
+   "category": "sentences",
+   "n_runs": 30,
+   "n_clips": 6,
+   "n_failed": 0,
+   "start_lag_med": 3007.2405,
+   "start_lag_ci": [
+    2961.709,
+    3055.1865
+   ],
+   "end_arrival_med": 2435.067,
+   "end_play_med": 2869.6105,
+   "end_play_ci": [
+    2795.2075,
+    3073.5555
+   ],
+   "end_play_p90": 3186.3135,
+   "end_play_max": 3330.617,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.11351339476145204
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.9125000000000001,
+   "chrf_med": 90.36
+  },
+  {
+   "system": "gemini",
+   "category": "short",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2987.604,
+   "start_lag_ci": [
+    2936.606,
+    3071.537
+   ],
+   "end_arrival_med": 3158.818,
+   "end_play_med": 3576.043,
+   "end_play_ci": [
+    3405.307,
+    3611.407
+   ],
+   "end_play_p90": 3736.415,
+   "end_play_max": 3772.408,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.097,
+   "chrf_med": 82.1
+  },
+  {
+   "system": "gemini",
+   "category": "silence",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": null,
+   "start_lag_ci": null,
+   "end_arrival_med": null,
+   "end_play_med": null,
+   "end_play_ci": null,
+   "end_play_p90": null,
+   "end_play_max": null,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": null,
+   "chrf_med": null
+  },
+  {
+   "system": "gemini",
+   "category": "three_turns",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2920.55,
+   "start_lag_ci": [
+    2808.194,
+    2961.275
+   ],
+   "end_arrival_med": 2417.257,
+   "end_play_med": 2886.575,
+   "end_play_ci": [
+    2746.1059999999998,
+    3056.099
+   ],
+   "end_play_p90": 3020.609,
+   "end_play_max": 3056.099,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.686,
+   "chrf_med": 65.7
+  },
+  {
+   "system": "gemini",
+   "category": "two_utterances",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 3028.393,
+   "start_lag_ci": [
+    2892.519,
+    3131.065
+   ],
+   "end_arrival_med": 2245.289,
+   "end_play_med": 3410.933,
+   "end_play_ci": [
+    3296.2785000000003,
+    3690.4694999999997
+   ],
+   "end_play_p90": 3590.0099,
+   "end_play_max": 3690.4694999999997,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.774,
+   "chrf_med": 91.49
+  },
+  {
+   "system": "openai/none-control",
+   "category": "hesitation",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2004.967,
+   "start_lag_ci": [
+    1285.683,
+    2088.314
+   ],
+   "end_arrival_med": 2442.083,
+   "end_play_med": 2700.9205,
+   "end_play_ci": [
+    2672.9815,
+    2888.2844999999998
+   ],
+   "end_play_p90": 2826.5253,
+   "end_play_max": 2888.2844999999998,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.869,
+   "chrf_med": 81.09
+  },
+  {
+   "system": "openai/none-control",
+   "category": "long",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 1895.264,
+   "start_lag_ci": [
+    1586.998,
+    20413.852
+   ],
+   "end_arrival_med": 2556.666,
+   "end_play_med": 3041.917,
+   "end_play_ci": [
+    2799.949,
+    19298.369
+   ],
+   "end_play_p90": 12889.237400000002,
+   "end_play_max": 19298.369,
+   "stalls": 1,
+   "stall_rate": 0.2,
+   "stall_ci": [
+    0.03622410822563066,
+    0.6244653729700049
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.76,
+   "chrf_med": 76.02
+  },
+  {
+   "system": "openai/none-control",
+   "category": "medium",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 1708.976,
+   "start_lag_ci": [
+    1564.335,
+    2261.664
+   ],
+   "end_arrival_med": 2135.126,
+   "end_play_med": 2340.261,
+   "end_play_ci": [
+    2033.842,
+    2808.658
+   ],
+   "end_play_p90": 8375.920799999996,
+   "end_play_max": 25468.941,
+   "stalls": 1,
+   "stall_rate": 0.06666666666666667,
+   "stall_ci": [
+    0.01186689536153232,
+    0.2981653010887565
+   ],
+   "held_until_flush": 1,
+   "ratio_span_med": 0.879,
+   "chrf_med": 90.36
+  },
+  {
+   "system": "openai/none-control",
+   "category": "noisy",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 1678.995,
+   "start_lag_ci": [
+    1627.251,
+    2276.91
+   ],
+   "end_arrival_med": 2236.743,
+   "end_play_med": 2618.978,
+   "end_play_ci": [
+    2169.176,
+    2968.15
+   ],
+   "end_play_p90": 3545.4604,
+   "end_play_max": 27055.686,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.893,
+   "chrf_med": 84.93
+  },
+  {
+   "system": "openai/none-control",
+   "category": "same_language",
+   "n_runs": 10,
+   "n_clips": 2,
+   "n_failed": 0,
+   "start_lag_med": null,
+   "start_lag_ci": null,
+   "end_arrival_med": null,
+   "end_play_med": null,
+   "end_play_ci": null,
+   "end_play_p90": null,
+   "end_play_max": null,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.2775328030260577
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": null,
+   "chrf_med": null
+  },
+  {
+   "system": "openai/none-control",
+   "category": "sentences",
+   "n_runs": 30,
+   "n_clips": 6,
+   "n_failed": 0,
+   "start_lag_med": 1693.9855,
+   "start_lag_ci": [
+    1629.2555,
+    2024.8890000000001
+   ],
+   "end_arrival_med": 2158.584,
+   "end_play_med": 2488.0785,
+   "end_play_ci": [
+    2251.809,
+    2707.8605
+   ],
+   "end_play_p90": 4426.875400000012,
+   "end_play_max": 27055.686,
+   "stalls": 1,
+   "stall_rate": 0.03333333333333333,
+   "stall_ci": [
+    0.005908590316197976,
+    0.16670391146115726
+   ],
+   "held_until_flush": 1,
+   "ratio_span_med": 0.886,
+   "chrf_med": 88.08500000000001
+  },
+  {
+   "system": "openai/none-control",
+   "category": "short",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 1347.372,
+   "start_lag_ci": [
+    1166.42,
+    2049.644
+   ],
+   "end_arrival_med": 1706.342,
+   "end_play_med": 2225.002,
+   "end_play_ci": [
+    1930.868,
+    2621.306
+   ],
+   "end_play_p90": 3101.3938,
+   "end_play_max": 3826.702,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.252,
+   "chrf_med": 75.12
+  },
+  {
+   "system": "openai/none-control",
+   "category": "silence",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": null,
+   "start_lag_ci": null,
+   "end_arrival_med": null,
+   "end_play_med": null,
+   "end_play_ci": null,
+   "end_play_p90": null,
+   "end_play_max": null,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": null,
+   "chrf_med": null
+  },
+  {
+   "system": "openai/none-control",
+   "category": "three_turns",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 1743.339,
+   "start_lag_ci": [
+    1109.127,
+    2054.202
+   ],
+   "end_arrival_med": 1886.069,
+   "end_play_med": 2541.665,
+   "end_play_ci": [
+    2361.9395,
+    2789.632
+   ],
+   "end_play_p90": 2705.8376,
+   "end_play_max": 2789.632,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.514,
+   "chrf_med": 59.55
+  },
+  {
+   "system": "openai/none-control",
+   "category": "two_utterances",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 1791.613,
+   "start_lag_ci": [
+    697.098,
+    2155.082
+   ],
+   "end_arrival_med": 1360.747,
+   "end_play_med": 2961.546,
+   "end_play_ci": [
+    2681.632,
+    3244.9790000000003
+   ],
+   "end_play_p90": 3173.5988,
+   "end_play_max": 3244.9790000000003,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.735,
+   "chrf_med": 85.47
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+{
+ "n_test": 2376,
+ "missing_landmarks": 0,
+ "full_2731": {
+  "top1": 0.5345117845117845,
+  "top5": 0.7760942760942761,
+  "top10": 0.8371212121212122
+ },
+ "vocab_restricted": {
+  "top1": 0.8114478114478114,
+  "top3": 0.9204545454545454,
+  "top5": 0.9465488215488216
+ },
+ "note": "released checkpoint, no fine-tuning; landmarks from the MediaPipe Tasks Holistic Landmarker (the repo used legacy mp.solutions.holistic), so small preprocessing differences are possible",
+ "split": "test"
+}

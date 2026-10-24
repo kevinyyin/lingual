@@ -1,0 +1,1498 @@
+{
+ "n_clips": 696,
+ "n_failed": 0,
+ "classifier": "speechbrain/emotion-recognition-wav2vec2-IEMOCAP (neu/ang/hap/sad), 16 kHz",
+ "latency": {
+  "ttfb_ms": {
+   "n": 696,
+   "median": 121.5,
+   "p90": 152.6,
+   "max": 1228.1,
+   "min": 106.0
+  },
+  "total_ms": {
+   "n": 696,
+   "median": 316.9,
+   "p90": 460.2,
+   "max": 1352.8,
+   "min": 195.9
+  },
+  "by_condition": {
+   "a": {
+    "ttfb_ms": {
+     "n": 36,
+     "median": 146.0,
+     "p90": 160.6,
+     "max": 367.8,
+     "min": 106.2
+    },
+    "total_ms": {
+     "n": 36,
+     "median": 304.7,
+     "p90": 359.5,
+     "max": 758.2,
+     "min": 202.3
+    }
+   },
+   "b": {
+    "ttfb_ms": {
+     "n": 144,
+     "median": 142.3,
+     "p90": 152.7,
+     "max": 230.8,
+     "min": 109.4
+    },
+    "total_ms": {
+     "n": 144,
+     "median": 297.8,
+     "p90": 352.4,
+     "max": 962.7,
+     "min": 209.8
+    }
+   },
+   "c": {
+    "ttfb_ms": {
+     "n": 144,
+     "median": 142.3,
+     "p90": 160.4,
+     "max": 362.4,
+     "min": 108.8
+    },
+    "total_ms": {
+     "n": 144,
+     "median": 302.8,
+     "p90": 362.5,
+     "max": 507.5,
+     "min": 207.0
+    }
+   },
+   "d": {
+    "ttfb_ms": {
+     "n": 144,
+     "median": 112.7,
+     "p90": 121.3,
+     "max": 238.3,
+     "min": 106.0
+    },
+    "total_ms": {
+     "n": 144,
+     "median": 276.7,
+     "p90": 327.5,
+     "max": 656.0,
+     "min": 195.9
+    }
+   },
+   "e": {
+    "ttfb_ms": {
+     "n": 96,
+     "median": 116.0,
+     "p90": 124.6,
+     "max": 170.0,
+     "min": 108.0
+    },
+    "total_ms": {
+     "n": 96,
+     "median": 442.0,
+     "p90": 519.2,
+     "max": 665.2,
+     "min": 263.0
+    }
+   },
+   "f": {
+    "ttfb_ms": {
+     "n": 96,
+     "median": 117.7,
+     "p90": 124.7,
+     "max": 145.6,
+     "min": 108.5
+    },
+    "total_ms": {
+     "n": 96,
+     "median": 441.2,
+     "p90": 514.2,
+     "max": 653.9,
+     "min": 277.6
+    }
+   },
+   "mm_contra": {
+    "ttfb_ms": {
+     "n": 18,
+     "median": 138.3,
+     "p90": 167.6,
+     "max": 1228.1,
+     "min": 109.5
+    },
+    "total_ms": {
+     "n": 18,
+     "median": 362.1,
+     "p90": 423.0,
+     "max": 1352.8,
+     "min": 282.3
+    }
+   },
+   "mm_match": {
+    "ttfb_ms": {
+     "n": 18,
+     "median": 146.2,
+     "p90": 162.7,
+     "max": 178.0,
+     "min": 112.0
+    },
+    "total_ms": {
+     "n": 18,
+     "median": 361.7,
+     "p90": 408.4,
+     "max": 451.9,
+     "min": 289.4
+    }
+   }
+  }
+ },
+ "detection": {
+  "a": {
+   "hit_rate": 0.25,
+   "n": 144,
+   "ci": [
+    0.186,
+    0.327
+   ],
+   "by_voice": {
+    "Gavin": {
+     "rate": 0.25,
+     "k": 12,
+     "n": 48
+    },
+    "Leo": {
+     "rate": 0.25,
+     "k": 12,
+     "n": 48
+    },
+    "Maya": {
+     "rate": 0.25,
+     "k": 12,
+     "n": 48
+    }
+   },
+   "by_emotion": {
+    "neutral": {
+     "rate": 0.583,
+     "k": 21,
+     "n": 36
+    },
+    "happy": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 36
+    },
+    "sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 36
+    },
+    "angry": {
+     "rate": 0.417,
+     "k": 15,
+     "n": 36
+    }
+   },
+   "by_voice_emotion": {
+    "Gavin/neutral": {
+     "rate": 0.833,
+     "k": 10,
+     "n": 12
+    },
+    "Gavin/happy": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Gavin/sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Gavin/angry": {
+     "rate": 0.167,
+     "k": 2,
+     "n": 12
+    },
+    "Leo/neutral": {
+     "rate": 0.25,
+     "k": 3,
+     "n": 12
+    },
+    "Leo/happy": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Leo/sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Leo/angry": {
+     "rate": 0.75,
+     "k": 9,
+     "n": 12
+    },
+    "Maya/neutral": {
+     "rate": 0.667,
+     "k": 8,
+     "n": 12
+    },
+    "Maya/happy": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Maya/sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Maya/angry": {
+     "rate": 0.333,
+     "k": 4,
+     "n": 12
+    }
+   }
+  },
+  "b": {
+   "hit_rate": 0.2222222222222222,
+   "n": 144,
+   "ci": [
+    0.162,
+    0.297
+   ],
+   "by_voice": {
+    "Gavin": {
+     "rate": 0.229,
+     "k": 11,
+     "n": 48
+    },
+    "Leo": {
+     "rate": 0.25,
+     "k": 12,
+     "n": 48
+    },
+    "Maya": {
+     "rate": 0.188,
+     "k": 9,
+     "n": 48
+    }
+   },
+   "by_emotion": {
+    "neutral": {
+     "rate": 0.583,
+     "k": 21,
+     "n": 36
+    },
+    "happy": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 36
+    },
+    "sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 36
+    },
+    "angry": {
+     "rate": 0.306,
+     "k": 11,
+     "n": 36
+    }
+   },
+   "by_voice_emotion": {
+    "Gavin/neutral": {
+     "rate": 0.833,
+     "k": 10,
+     "n": 12
+    },
+    "Gavin/happy": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Gavin/sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Gavin/angry": {
+     "rate": 0.083,
+     "k": 1,
+     "n": 12
+    },
+    "Leo/neutral": {
+     "rate": 0.25,
+     "k": 3,
+     "n": 12
+    },
+    "Leo/happy": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Leo/sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Leo/angry": {
+     "rate": 0.75,
+     "k": 9,
+     "n": 12
+    },
+    "Maya/neutral": {
+     "rate": 0.667,
+     "k": 8,
+     "n": 12
+    },
+    "Maya/happy": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Maya/sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Maya/angry": {
+     "rate": 0.083,
+     "k": 1,
+     "n": 12
+    }
+   }
+  },
+  "c": {
+   "hit_rate": 0.2569444444444444,
+   "n": 144,
+   "ci": [
+    0.193,
+    0.334
+   ],
+   "by_voice": {
+    "Gavin": {
+     "rate": 0.271,
+     "k": 13,
+     "n": 48
+    },
+    "Leo": {
+     "rate": 0.25,
+     "k": 12,
+     "n": 48
+    },
+    "Maya": {
+     "rate": 0.25,
+     "k": 12,
+     "n": 48
+    }
+   },
+   "by_emotion": {
+    "neutral": {
+     "rate": 0.639,
+     "k": 23,
+     "n": 36
+    },
+    "happy": {
+     "rate": 0.028,
+     "k": 1,
+     "n": 36
+    },
+    "sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 36
+    },
+    "angry": {
+     "rate": 0.361,
+     "k": 13,
+     "n": 36
+    }
+   },
+   "by_voice_emotion": {
+    "Gavin/neutral": {
+     "rate": 0.833,
+     "k": 10,
+     "n": 12
+    },
+    "Gavin/happy": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Gavin/sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Gavin/angry": {
+     "rate": 0.25,
+     "k": 3,
+     "n": 12
+    },
+    "Leo/neutral": {
+     "rate": 0.333,
+     "k": 4,
+     "n": 12
+    },
+    "Leo/happy": {
+     "rate": 0.083,
+     "k": 1,
+     "n": 12
+    },
+    "Leo/sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Leo/angry": {
+     "rate": 0.583,
+     "k": 7,
+     "n": 12
+    },
+    "Maya/neutral": {
+     "rate": 0.75,
+     "k": 9,
+     "n": 12
+    },
+    "Maya/happy": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Maya/sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Maya/angry": {
+     "rate": 0.25,
+     "k": 3,
+     "n": 12
+    }
+   }
+  },
+  "d": {
+   "hit_rate": 0.25,
+   "n": 144,
+   "ci": [
+    0.186,
+    0.327
+   ],
+   "by_voice": {
+    "Gavin": {
+     "rate": 0.25,
+     "k": 12,
+     "n": 48
+    },
+    "Leo": {
+     "rate": 0.229,
+     "k": 11,
+     "n": 48
+    },
+    "Maya": {
+     "rate": 0.271,
+     "k": 13,
+     "n": 48
+    }
+   },
+   "by_emotion": {
+    "neutral": {
+     "rate": 0.611,
+     "k": 22,
+     "n": 36
+    },
+    "happy": {
+     "rate": 0.028,
+     "k": 1,
+     "n": 36
+    },
+    "sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 36
+    },
+    "angry": {
+     "rate": 0.361,
+     "k": 13,
+     "n": 36
+    }
+   },
+   "by_voice_emotion": {
+    "Gavin/neutral": {
+     "rate": 0.917,
+     "k": 11,
+     "n": 12
+    },
+    "Gavin/happy": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Gavin/sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Gavin/angry": {
+     "rate": 0.083,
+     "k": 1,
+     "n": 12
+    },
+    "Leo/neutral": {
+     "rate": 0.25,
+     "k": 3,
+     "n": 12
+    },
+    "Leo/happy": {
+     "rate": 0.083,
+     "k": 1,
+     "n": 12
+    },
+    "Leo/sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Leo/angry": {
+     "rate": 0.583,
+     "k": 7,
+     "n": 12
+    },
+    "Maya/neutral": {
+     "rate": 0.667,
+     "k": 8,
+     "n": 12
+    },
+    "Maya/happy": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Maya/sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Maya/angry": {
+     "rate": 0.417,
+     "k": 5,
+     "n": 12
+    }
+   }
+  },
+  "e": {
+   "hit_rate": 0.4791666666666667,
+   "n": 96,
+   "ci": [
+    0.382,
+    0.578
+   ],
+   "by_voice": {
+    "Leo": {
+     "rate": 0.479,
+     "k": 23,
+     "n": 48
+    },
+    "Maya": {
+     "rate": 0.479,
+     "k": 23,
+     "n": 48
+    }
+   },
+   "by_emotion": {
+    "neutral": {
+     "rate": 0.75,
+     "k": 18,
+     "n": 24
+    },
+    "happy": {
+     "rate": 0.708,
+     "k": 17,
+     "n": 24
+    },
+    "sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 24
+    },
+    "angry": {
+     "rate": 0.458,
+     "k": 11,
+     "n": 24
+    }
+   },
+   "by_voice_emotion": {
+    "Leo/neutral": {
+     "rate": 0.583,
+     "k": 7,
+     "n": 12
+    },
+    "Leo/happy": {
+     "rate": 0.75,
+     "k": 9,
+     "n": 12
+    },
+    "Leo/sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Leo/angry": {
+     "rate": 0.583,
+     "k": 7,
+     "n": 12
+    },
+    "Maya/neutral": {
+     "rate": 0.917,
+     "k": 11,
+     "n": 12
+    },
+    "Maya/happy": {
+     "rate": 0.667,
+     "k": 8,
+     "n": 12
+    },
+    "Maya/sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Maya/angry": {
+     "rate": 0.333,
+     "k": 4,
+     "n": 12
+    }
+   }
+  },
+  "f": {
+   "hit_rate": 0.4895833333333333,
+   "n": 96,
+   "ci": [
+    0.392,
+    0.588
+   ],
+   "by_voice": {
+    "Leo": {
+     "rate": 0.521,
+     "k": 25,
+     "n": 48
+    },
+    "Maya": {
+     "rate": 0.458,
+     "k": 22,
+     "n": 48
+    }
+   },
+   "by_emotion": {
+    "neutral": {
+     "rate": 0.792,
+     "k": 19,
+     "n": 24
+    },
+    "happy": {
+     "rate": 0.667,
+     "k": 16,
+     "n": 24
+    },
+    "sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 24
+    },
+    "angry": {
+     "rate": 0.5,
+     "k": 12,
+     "n": 24
+    }
+   },
+   "by_voice_emotion": {
+    "Leo/neutral": {
+     "rate": 0.583,
+     "k": 7,
+     "n": 12
+    },
+    "Leo/happy": {
+     "rate": 0.833,
+     "k": 10,
+     "n": 12
+    },
+    "Leo/sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Leo/angry": {
+     "rate": 0.667,
+     "k": 8,
+     "n": 12
+    },
+    "Maya/neutral": {
+     "rate": 1.0,
+     "k": 12,
+     "n": 12
+    },
+    "Maya/happy": {
+     "rate": 0.5,
+     "k": 6,
+     "n": 12
+    },
+    "Maya/sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 12
+    },
+    "Maya/angry": {
+     "rate": 0.333,
+     "k": 4,
+     "n": 12
+    }
+   }
+  }
+ },
+ "detection_hubert": {
+  "a": {
+   "hit_rate": 0.25,
+   "n": 144,
+   "ci": [
+    0.186,
+    0.327
+   ],
+   "by_emotion": {
+    "neutral": {
+     "rate": 0.167,
+     "k": 6,
+     "n": 36
+    },
+    "happy": {
+     "rate": 0.583,
+     "k": 21,
+     "n": 36
+    },
+    "sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 36
+    },
+    "angry": {
+     "rate": 0.25,
+     "k": 9,
+     "n": 36
+    }
+   },
+   "by_voice": {
+    "Gavin": {
+     "rate": 0.25,
+     "k": 12,
+     "n": 48
+    },
+    "Leo": {
+     "rate": 0.25,
+     "k": 12,
+     "n": 48
+    },
+    "Maya": {
+     "rate": 0.25,
+     "k": 12,
+     "n": 48
+    }
+   }
+  },
+  "b": {
+   "hit_rate": 0.25,
+   "n": 144,
+   "ci": [
+    0.186,
+    0.327
+   ],
+   "by_emotion": {
+    "neutral": {
+     "rate": 0.139,
+     "k": 5,
+     "n": 36
+    },
+    "happy": {
+     "rate": 0.611,
+     "k": 22,
+     "n": 36
+    },
+    "sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 36
+    },
+    "angry": {
+     "rate": 0.25,
+     "k": 9,
+     "n": 36
+    }
+   },
+   "by_voice": {
+    "Gavin": {
+     "rate": 0.229,
+     "k": 11,
+     "n": 48
+    },
+    "Leo": {
+     "rate": 0.312,
+     "k": 15,
+     "n": 48
+    },
+    "Maya": {
+     "rate": 0.208,
+     "k": 10,
+     "n": 48
+    }
+   }
+  },
+  "c": {
+   "hit_rate": 0.2569444444444444,
+   "n": 144,
+   "ci": [
+    0.193,
+    0.334
+   ],
+   "by_emotion": {
+    "neutral": {
+     "rate": 0.194,
+     "k": 7,
+     "n": 36
+    },
+    "happy": {
+     "rate": 0.528,
+     "k": 19,
+     "n": 36
+    },
+    "sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 36
+    },
+    "angry": {
+     "rate": 0.306,
+     "k": 11,
+     "n": 36
+    }
+   },
+   "by_voice": {
+    "Gavin": {
+     "rate": 0.25,
+     "k": 12,
+     "n": 48
+    },
+    "Leo": {
+     "rate": 0.229,
+     "k": 11,
+     "n": 48
+    },
+    "Maya": {
+     "rate": 0.292,
+     "k": 14,
+     "n": 48
+    }
+   }
+  },
+  "d": {
+   "hit_rate": 0.2222222222222222,
+   "n": 144,
+   "ci": [
+    0.162,
+    0.297
+   ],
+   "by_emotion": {
+    "neutral": {
+     "rate": 0.111,
+     "k": 4,
+     "n": 36
+    },
+    "happy": {
+     "rate": 0.528,
+     "k": 19,
+     "n": 36
+    },
+    "sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 36
+    },
+    "angry": {
+     "rate": 0.25,
+     "k": 9,
+     "n": 36
+    }
+   },
+   "by_voice": {
+    "Gavin": {
+     "rate": 0.229,
+     "k": 11,
+     "n": 48
+    },
+    "Leo": {
+     "rate": 0.208,
+     "k": 10,
+     "n": 48
+    },
+    "Maya": {
+     "rate": 0.229,
+     "k": 11,
+     "n": 48
+    }
+   }
+  },
+  "e": {
+   "hit_rate": 0.3958333333333333,
+   "n": 96,
+   "ci": [
+    0.304,
+    0.496
+   ],
+   "by_emotion": {
+    "neutral": {
+     "rate": 0.375,
+     "k": 9,
+     "n": 24
+    },
+    "happy": {
+     "rate": 1.0,
+     "k": 24,
+     "n": 24
+    },
+    "sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 24
+    },
+    "angry": {
+     "rate": 0.208,
+     "k": 5,
+     "n": 24
+    }
+   },
+   "by_voice": {
+    "Leo": {
+     "rate": 0.333,
+     "k": 16,
+     "n": 48
+    },
+    "Maya": {
+     "rate": 0.458,
+     "k": 22,
+     "n": 48
+    }
+   }
+  },
+  "f": {
+   "hit_rate": 0.3854166666666667,
+   "n": 96,
+   "ci": [
+    0.294,
+    0.485
+   ],
+   "by_emotion": {
+    "neutral": {
+     "rate": 0.292,
+     "k": 7,
+     "n": 24
+    },
+    "happy": {
+     "rate": 1.0,
+     "k": 24,
+     "n": 24
+    },
+    "sad": {
+     "rate": 0.0,
+     "k": 0,
+     "n": 24
+    },
+    "angry": {
+     "rate": 0.25,
+     "k": 6,
+     "n": 24
+    }
+   },
+   "by_voice": {
+    "Leo": {
+     "rate": 0.375,
+     "k": 18,
+     "n": 48
+    },
+    "Maya": {
+     "rate": 0.396,
+     "k": 19,
+     "n": 48
+    }
+   }
+  }
+ },
+ "classifier2": "superb/hubert-large-superb-er (neu/hap/ang/sad), 16 kHz",
+ "confusion_hubert_b": {
+  "sad": {
+   "happy": 24,
+   "neutral": 5,
+   "angry": 7
+  },
+  "neutral": {
+   "neutral": 5,
+   "happy": 22,
+   "angry": 9
+  },
+  "angry": {
+   "angry": 9,
+   "happy": 22,
+   "neutral": 5
+  },
+  "happy": {
+   "happy": 22,
+   "neutral": 6,
+   "angry": 8
+  }
+ },
+ "confusion_hubert_c": {
+  "happy": {
+   "angry": 11,
+   "happy": 19,
+   "neutral": 6
+  },
+  "neutral": {
+   "angry": 9,
+   "neutral": 7,
+   "happy": 20
+  },
+  "sad": {
+   "happy": 22,
+   "angry": 6,
+   "neutral": 8
+  },
+  "angry": {
+   "angry": 11,
+   "happy": 20,
+   "neutral": 5
+  }
+ },
+ "confusion_hubert_d": {
+  "neutral": {
+   "angry": 8,
+   "happy": 24,
+   "neutral": 4
+  },
+  "angry": {
+   "angry": 9,
+   "happy": 21,
+   "neutral": 6
+  },
+  "sad": {
+   "angry": 14,
+   "happy": 16,
+   "neutral": 6
+  },
+  "happy": {
+   "happy": 19,
+   "angry": 12,
+   "neutral": 5
+  }
+ },
+ "confusion_hubert_e": {
+  "angry": {
+   "happy": 13,
+   "neutral": 6,
+   "angry": 5
+  },
+  "sad": {
+   "happy": 14,
+   "neutral": 10
+  },
+  "happy": {
+   "happy": 24
+  },
+  "neutral": {
+   "neutral": 9,
+   "happy": 14,
+   "angry": 1
+  }
+ },
+ "confusion_hubert_f": {
+  "sad": {
+   "happy": 15,
+   "neutral": 9
+  },
+  "neutral": {
+   "happy": 16,
+   "neutral": 7,
+   "angry": 1
+  },
+  "happy": {
+   "happy": 24
+  },
+  "angry": {
+   "happy": 10,
+   "neutral": 8,
+   "angry": 6
+  }
+ },
+ "confusion_b": {
+  "sad": {
+   "angry": 13,
+   "neutral": 22,
+   "happy": 1
+  },
+  "neutral": {
+   "neutral": 21,
+   "angry": 15
+  },
+  "angry": {
+   "angry": 11,
+   "neutral": 24,
+   "happy": 1
+  },
+  "happy": {
+   "neutral": 19,
+   "angry": 17
+  }
+ },
+ "confusion_c": {
+  "happy": {
+   "neutral": 22,
+   "angry": 13,
+   "happy": 1
+  },
+  "neutral": {
+   "angry": 11,
+   "neutral": 23,
+   "happy": 2
+  },
+  "sad": {
+   "angry": 11,
+   "happy": 2,
+   "neutral": 23
+  },
+  "angry": {
+   "neutral": 22,
+   "angry": 13,
+   "happy": 1
+  }
+ },
+ "confusion_d": {
+  "neutral": {
+   "angry": 14,
+   "neutral": 22
+  },
+  "angry": {
+   "angry": 13,
+   "neutral": 22,
+   "happy": 1
+  },
+  "sad": {
+   "angry": 17,
+   "neutral": 18,
+   "happy": 1
+  },
+  "happy": {
+   "neutral": 23,
+   "angry": 12,
+   "happy": 1
+  }
+ },
+ "confusion_e": {
+  "angry": {
+   "neutral": 13,
+   "angry": 11
+  },
+  "sad": {
+   "neutral": 20,
+   "happy": 4
+  },
+  "happy": {
+   "happy": 17,
+   "neutral": 6,
+   "angry": 1
+  },
+  "neutral": {
+   "neutral": 18,
+   "angry": 5,
+   "happy": 1
+  }
+ },
+ "confusion_f": {
+  "sad": {
+   "neutral": 20,
+   "happy": 4
+  },
+  "neutral": {
+   "neutral": 19,
+   "angry": 5
+  },
+  "happy": {
+   "happy": 16,
+   "neutral": 5,
+   "angry": 3
+  },
+  "angry": {
+   "angry": 12,
+   "neutral": 12
+  }
+ },
+ "no_emotion_pred_distribution": {
+  "angry": 15,
+  "neutral": 21
+ },
+ "mismatch": {
+  "mm_contra": {
+   "hit_rate": {
+    "rate": 0.167,
+    "k": 3,
+    "n": 18
+   },
+   "hit_rate_hubert": {
+    "rate": 0.333,
+    "k": 6,
+    "n": 18
+   },
+   "pred_is_text_emotion": {
+    "rate": 0.444,
+    "k": 8,
+    "n": 18
+   },
+   "items": [
+    {
+     "text": "Yes! That's amazing, I love it!",
+     "voice": "Gavin",
+     "tag": "sad",
+     "pred": "happy"
+    },
+    {
+     "text": "Yes! That's amazing, I love it!",
+     "voice": "Maya",
+     "tag": "sad",
+     "pred": "happy"
+    },
+    {
+     "text": "This is ridiculous, I've been waiting twenty minutes!",
+     "voice": "Gavin",
+     "tag": "sad",
+     "pred": "angry"
+    },
+    {
+     "text": "This is ridiculous, I've been waiting twenty minutes!",
+     "voice": "Leo",
+     "tag": "sad",
+     "pred": "angry"
+    },
+    {
+     "text": "I'm really upset, this is the wrong order.",
+     "voice": "Leo",
+     "tag": "happy",
+     "pred": "neutral"
+    },
+    {
+     "text": "Have a wonderful day, see you tomorrow!",
+     "voice": "Gavin",
+     "tag": "angry",
+     "pred": "neutral"
+    },
+    {
+     "text": "Sorry, I'm not feeling well today.",
+     "voice": "Leo",
+     "tag": "happy",
+     "pred": "neutral"
+    },
+    {
+     "text": "Have a wonderful day, see you tomorrow!",
+     "voice": "Leo",
+     "tag": "angry",
+     "pred": "angry"
+    },
+    {
+     "text": "I'm really upset, this is the wrong order.",
+     "voice": "Maya",
+     "tag": "happy",
+     "pred": "neutral"
+    },
+    {
+     "text": "Thank you so much, this is perfect!",
+     "voice": "Leo",
+     "tag": "angry",
+     "pred": "happy"
+    },
+    {
+     "text": "Yes! That's amazing, I love it!",
+     "voice": "Leo",
+     "tag": "sad",
+     "pred": "happy"
+    },
+    {
+     "text": "Have a wonderful day, see you tomorrow!",
+     "voice": "Maya",
+     "tag": "angry",
+     "pred": "angry"
+    },
+    {
+     "text": "This is ridiculous, I've been waiting twenty minutes!",
+     "voice": "Maya",
+     "tag": "sad",
+     "pred": "angry"
+    },
+    {
+     "text": "Thank you so much, this is perfect!",
+     "voice": "Maya",
+     "tag": "angry",
+     "pred": "angry"
+    },
+    {
+     "text": "I'm really upset, this is the wrong order.",
+     "voice": "Gavin",
+     "tag": "happy",
+     "pred": "neutral"
+    },
+    {
+     "text": "Sorry, I'm not feeling well today.",
+     "voice": "Gavin",
+     "tag": "happy",
+     "pred": "neutral"
+    },
+    {
+     "text": "Thank you so much, this is perfect!",
+     "voice": "Gavin",
+     "tag": "angry",
+     "pred": "happy"
+    },
+    {
+     "text": "Sorry, I'm not feeling well today.",
+     "voice": "Maya",
+     "tag": "happy",
+     "pred": "neutral"
+    }
+   ]
+  },
+  "mm_match": {
+   "hit_rate": {
+    "rate": 0.5,
+    "k": 9,
+    "n": 18
+   },
+   "hit_rate_hubert": {
+    "rate": 0.667,
+    "k": 12,
+    "n": 18
+   },
+   "pred_is_text_emotion": {
+    "rate": 0.5,
+    "k": 9,
+    "n": 18
+   },
+   "items": [
+    {
+     "text": "Thank you so much, this is perfect!",
+     "voice": "Maya",
+     "tag": "happy",
+     "pred": "happy"
+    },
+    {
+     "text": "I'm really upset, this is the wrong order.",
+     "voice": "Gavin",
+     "tag": "angry",
+     "pred": "neutral"
+    },
+    {
+     "text": "Have a wonderful day, see you tomorrow!",
+     "voice": "Maya",
+     "tag": "happy",
+     "pred": "angry"
+    },
+    {
+     "text": "Sorry, I'm not feeling well today.",
+     "voice": "Leo",
+     "tag": "sad",
+     "pred": "neutral"
+    },
+    {
+     "text": "I'm really upset, this is the wrong order.",
+     "voice": "Leo",
+     "tag": "angry",
+     "pred": "happy"
+    },
+    {
+     "text": "Thank you so much, this is perfect!",
+     "voice": "Leo",
+     "tag": "happy",
+     "pred": "angry"
+    },
+    {
+     "text": "Sorry, I'm not feeling well today.",
+     "voice": "Gavin",
+     "tag": "sad",
+     "pred": "neutral"
+    },
+    {
+     "text": "Yes! That's amazing, I love it!",
+     "voice": "Leo",
+     "tag": "happy",
+     "pred": "happy"
+    },
+    {
+     "text": "This is ridiculous, I've been waiting twenty minutes!",
+     "voice": "Gavin",
+     "tag": "angry",
+     "pred": "angry"
+    },
+    {
+     "text": "Yes! That's amazing, I love it!",
+     "voice": "Maya",
+     "tag": "happy",
+     "pred": "happy"
+    },
+    {
+     "text": "Have a wonderful day, see you tomorrow!",
+     "voice": "Gavin",
+     "tag": "happy",
+     "pred": "angry"
+    },
+    {
+     "text": "Thank you so much, this is perfect!",
+     "voice": "Gavin",
+     "tag": "happy",
+     "pred": "happy"
+    },
+    {
+     "text": "Have a wonderful day, see you tomorrow!",
+     "voice": "Leo",
+     "tag": "happy",
+     "pred": "happy"
+    },
+    {
+     "text": "Sorry, I'm not feeling well today.",
+     "voice": "Maya",
+     "tag": "sad",
+     "pred": "neutral"
+    },
+    {
+     "text": "This is ridiculous, I've been waiting twenty minutes!",
+     "voice": "Leo",
+     "tag": "angry",
+     "pred": "angry"
+    },
+    {
+     "text": "Yes! That's amazing, I love it!",
+     "voice": "Gavin",
+     "tag": "happy",
+     "pred": "happy"
+    },
+    {
+     "text": "I'm really upset, this is the wrong order.",
+     "voice": "Maya",
+     "tag": "angry",
+     "pred": "neutral"
+    },
+    {
+     "text": "This is ridiculous, I've been waiting twenty minutes!",
+     "voice": "Maya",
+     "tag": "angry",
+     "pred": "angry"
+    }
+   ]
+  }
+ }
+}
