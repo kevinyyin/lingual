@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 import csv
 import json
 import os
+import sys
 
 import anthropic
 
@@ -28,6 +29,7 @@ from .spike_classifier import DEFAULT_MODEL as SPIKE_MODEL, SpikeSignPredictor
 from .compose import Composer
 from .fingerspell import DEFAULT_MODEL as LETTER_MODEL, SpellReader
 from .fingerspell_ctc import DEFAULT_MODEL as CTC_MODEL, CtcSpellReader
+from .fingerspell_coreml import DEFAULT_MODEL as COREML_MODEL, CoreMLSpellReader
 from .gloss import Gloss
 from .protocol import RecordMsg, RecordedMsg, parse_client
 from .phone_audio import ClientMic, WsPlayer
@@ -91,10 +93,13 @@ RECOGNIZER = _recognizer()
 
 
 def _speller():
-    """Our own letter model if trained; else the CTC reader trained on Kaggle's real fingerspelling (letter CER ~0.43
-    on held-out signers vs 0.95 for the best pretrained letter model); None sends spelled segments to the sign model."""
+    """Our own letter model if trained; else the pretrained Core ML reader (Kaggle letter CER ~0.11-0.18 as the app feeds
+    it, fingerspell_coreml.py; Macs only); else our CTC reader trained on Kaggle's real fingerspelling (~0.43 on held-out
+    signers vs 0.95 for the best pretrained letter model); None sends spelled segments to the sign model."""
     if LETTER_MODEL.exists():
         return SpellReader(LETTER_MODEL)
+    if COREML_MODEL.exists() and sys.platform == "darwin":
+        return CoreMLSpellReader(COREML_MODEL)
     if CTC_MODEL.exists():
         return CtcSpellReader(CTC_MODEL)
     return None

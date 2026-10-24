@@ -8,7 +8,8 @@ import { renderHome, TAB_IDS, weekDone, type HomeCtx, type Tab } from "./home";
 import { buildLesson, practiceSigns, type Exercise } from "./lesson";
 import { runLesson } from "./lessonView";
 import { dayKey, finishLesson, fresh, type Progress } from "./progress";
-import { isPlaying, playTokens, practice } from "./signer";
+import { isPlaying, playTokens, practice, reloadSigner } from "./signer";
+import { BUDDIES, saveBuddy } from "../buddies";
 import { lookupSign } from "./showMe";
 import { fetchVocab, type VocabSign } from "../avatar/stage";
 import { rememberPhone } from "../phone";
@@ -46,6 +47,13 @@ const ctx = (): HomeCtx => ({
     void playTokens([t]);
   },
   reset: () => { setProgress(fresh()); home(); },
+  pickBuddy: (id) => {
+    saveBuddy(id);
+    reloadSigner();
+    practice.buddy(id);
+    if (settings.sound) practice.say(`Hi! I'm ${BUDDIES.find((b) => b.id === id)!.name}!`);
+    home();
+  },
 });
 
 function home() {

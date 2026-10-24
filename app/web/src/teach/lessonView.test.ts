@@ -196,3 +196,11 @@ test("Back returns to the exercise before, and each step is saved for picking up
   expect(saves).toHaveLength(3);
   expect(saves.at(-1)).toMatchObject({ done: 0, queue: [{ ex: { gloss: "NICE" } }, { ex: { gloss: "MEET" } }] });
 });
+
+test("after each attempt the mini buddy in the camera card signs back what was read", async () => {
+  await vi.waitFor(() => expect(cam.onFrame).not.toBeNull());
+  sock.toPage(miss);
+  expect(document.querySelector(".cam-slot .mini-buddy")!.textContent).toBe("I saw: nice");
+  sock.toPage({ type: "recognized", segments: [[{ gloss: "HELLO", english: "hello", p: 0.9 }]] });
+  expect(document.querySelector(".mini-buddy")!.textContent).toBe("I saw: hello");
+});

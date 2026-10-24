@@ -8,8 +8,11 @@ drives it like the MPFB character; the face carries the 20 ARKit shapes the app 
 
 Two skinned meshes: toon_body (skin, shirt, hair, nose, ears; vertex colours; the hands' collision surface) and toon_face
 (eyes, brows, mouth, cheeks; the morph targets, which are built by re-generating the features with changed parameters).
+Buddies with more hair than Leo's short cut (curls, puffs, a ponytail, a bob) carry it in a third mesh, toon_hair, which
+the hands don't collide with: the head the hands meet stays the same for every buddy.
 
-Run (from app/): uv run --with pygltflib python scripts/build_toon_avatar.py [web/public/avatar/toon]
+One file per signing buddy (web/src/buddies.ts), Leo by default:
+Run (from app/): for b in leo benji zeke lexi avery daisy; do uv run --with pygltflib python scripts/build_toon_avatar.py $b; done
 """
 import sys
 from pathlib import Path
@@ -19,7 +22,8 @@ import pygltflib as G
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "web" / "public" / "avatar" / "mpfb" / "avatar.glb"
-OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "web" / "public" / "avatar" / "toon"
+OUT = ROOT / "web" / "public" / "avatar" / "toon"
+BUDDY = sys.argv[1] if len(sys.argv) > 1 else "leo"
 
 
 def srgb(h: str) -> np.ndarray:  # glTF vertex colours are linear
@@ -27,10 +31,18 @@ def srgb(h: str) -> np.ndarray:  # glTF vertex colours are linear
     return np.where(c <= 0.04045, c / 12.92, ((c + 0.055) / 1.055) ** 2.4)
 
 
-SKIN, SHIRT, PANTS, SHOE = srgb("#F4C4A0"), srgb("#E8383D"), srgb("#FFC629"), srgb("#F2F2F2")  # red top, yellow pants
-HAIR, EYE, SHINE, BROW = srgb("#6B3F2A"), srgb("#2A1E1A"), srgb("#FFFFFF"), srgb("#4A2E22")
-MOUTH, BLUSH, NOSE = srgb("#8A3B3B"), srgb("#FF9AA2"), srgb("#EDB08E")
-HAIR_LIGHT = srgb("#8C5A3E")  # the lighter strands in the hair's texture
+# skin, nose, hair, the hair's lighter strands, brows, top, trousers, hair style
+LOOKS = {
+    "leo": ("#F4C4A0", "#EDB08E", "#6B3F2A", "#8C5A3E", "#4A2E22", "#E8383D", "#FFC629", "swoop"),  # red top, yellow pants
+    "benji": ("#C68642", "#B87638", "#1E1410", "#3A2A20", "#1A1210", "#3B82F6", "#FFC629", "curly"),
+    "zeke": ("#F7D2B6", "#EFBFA0", "#C98B3C", "#E0A85A", "#9A6A2C", "#F97316", "#3D4A6B", "quiff"),
+    "lexi": ("#8D5524", "#7E4A1E", "#1A1A1A", "#333030", "#1A1414", "#8B5CF6", "#FFC629", "puffs"),
+    "avery": ("#F4C4A0", "#EDB08E", "#8A3B2A", "#A85440", "#6A2E22", "#14B8A6", "#3D4A6B", "ponytail"),
+    "daisy": ("#E0A57A", "#D4946A", "#2B1D16", "#4A3428", "#241812", "#EC4899", "#FFC629", "bob"),
+}
+*_look, STYLE = LOOKS[BUDDY]
+SKIN, NOSE, HAIR, HAIR_LIGHT, BROW, SHIRT, PANTS = map(srgb, _look)
+SHOE, EYE, SHINE, MOUTH, BLUSH, TIE = srgb("#F2F2F2"), srgb("#2A1E1A"), srgb("#FFFFFF"), srgb("#8A3B3B"), srgb("#FF9AA2"), srgb("#FFC629")
 
 # ---- skeleton from the MPFB glb ----
 src = G.GLTF2().load(str(SRC))
@@ -246,8 +258,12 @@ for sx in (1, -1):
 HH = HR * np.array([1.09, 1.1, 1.1])
 Vh, Fh = ellipsoid(HC, HH, seg=200, rings=140)  # fine enough that the slanted edge and the shading on it stay smooth
 d = (Vh - HC) / HH
-ang = np.arctan2(d[:, 0], d[:, 2])
-fringe = 0.53 + 0.15 * np.tanh(2.0 * ang) - 0.06 * smooth(0.7, 1.3, np.abs(ang))  # high at the part, sweeping low to the right temple
+SWEPT = STYLE in ("swoop", "quiff")  # a side part and a roll over the forehead; Zeke's (the quiff) mirrored and taller
+ang = (-1.0 if STYLE == "quiff" else 1.0) * np.arctan2(d[:, 0], d[:, 2])
+if SWEPT:  # high at the part, sweeping low to the right temple
+    fringe = 0.53 + 0.15 * np.tanh(2.0 * ang) - 0.06 * smooth(0.7, 1.3, np.abs(ang))
+else:  # straight across: the bob's bangs, everyone else's hairline pulled back
+    fringe = (0.44 if STYLE == "bob" else 0.58) - 0.06 * smooth(0.7, 1.3, np.abs(ang))
 front = smooth(0.0, 0.35, d[:, 2]) * (1 - smooth(1.15, 1.45, np.abs(ang)))  # the face side, not over the ears
 show = np.minimum(1 - front * (1 - smooth(fringe - 0.035, fringe + 0.035, d[:, 1])), smooth(-0.55, -0.35, d[:, 1] + 0.25 * np.clip(-d[:, 2], 0, 1)))
 show = np.minimum(show, 1 - smooth(0.85, 1.0, np.abs(d[:, 0])) * (1 - smooth(0.05, 0.25, d[:, 1])))
@@ -257,15 +273,41 @@ show = np.minimum(show, 1 - smooth(0.75, 1.0, np.abs(ang)) * (1 - smooth(1.75, 2
 # down at the back), as soft lighter and darker strands in the colour only: a ripple in the surface met the cel shading's
 # steps as zigzag ridges
 flow = 11 * ang - 7 * d[:, 1]
-part = np.exp(-(((ang - 0.62) / 0.05) ** 2)) * smooth(0.45, 0.6, d[:, 1]) * smooth(-0.2, 0.3, d[:, 2])  # a shallow groove from the hairline back over the crown
+part = SWEPT * np.exp(-(((ang - 0.62) / 0.05) ** 2)) * smooth(0.45, 0.6, d[:, 1]) * smooth(-0.2, 0.3, d[:, 2])  # a shallow groove from the hairline back over the crown
 volume = (1 + 0.04 * smooth(0.3, 0.9, d[:, 1])  # a full crown
-          + 0.07 * np.exp(-((ang + 0.15) ** 2) / 0.30 - ((d[:, 1] - 0.62) ** 2) / 0.035) * smooth(0.0, 0.4, d[:, 2])  # the roll over the forehead
+          + {"swoop": 0.07, "quiff": 0.12}.get(STYLE, 0.0) * np.exp(-((ang + 0.15) ** 2) / 0.30 - ((d[:, 1] - 0.62) ** 2) / 0.035) * smooth(0.0, 0.4, d[:, 2])  # the roll over the forehead
           + 0.05 * front * np.exp(-(((d[:, 1] - fringe - 0.07) / 0.06) ** 2))  # a rounded lip along the edge: the hair has thickness
           - 0.03 * part)
 Vh = HC + (Vh - HC) * ((0.86 + 0.14 * show) * np.where(show > 0.5, volume, 1.0))[:, None]  # hidden parts end up inside the head (0.86 x 1.1 < 1)
 wave = 0.6 * np.sin(2.3 * flow + 0.7) + 0.4 * np.sin(3.9 * flow + 2.0)  # two gentle frequencies: strands of uneven width
 streak = (0.5 + 0.5 * wave) * 0.18  # 0 = the base brown, at most 18% of the way to the lighter strand colour
 parts.append(Part(Vh, Fh, HAIR[None] * (1 - streak[:, None]) + HAIR_LIGHT[None] * streak[:, None], ["head"]))
+
+# more hair, in toon_hair (no collision, so the face the hands touch is Leo's for every buddy)
+extra: list[Part] = []
+if STYLE == "curly":  # curls over the crown and the back, none in the face
+    k = np.arange(220) + 0.5
+    phi_, th_ = np.arccos(1 - 2 * k / len(k)), np.pi * (1 + 5 ** 0.5) * k  # evenly spread directions (Fibonacci sphere)
+    dirs = np.stack([np.sin(phi_) * np.cos(th_), np.cos(phi_), np.sin(phi_) * np.sin(th_)], -1)
+    a = np.abs(np.arctan2(dirs[:, 0], dirs[:, 2]))
+    keep = dirs[:, 1] > np.where(a < 1.2, 0.66, np.where(a < 2.2, 0.38, -0.3))
+    rng = np.random.default_rng(7)
+    for v, r in zip(dirs[keep], HEAD * rng.uniform(0.020, 0.027, keep.sum())):
+        extra.append(Part(*ellipsoid(HC + v * HH * 1.02, np.array([r, r, r]), seg=16, rings=10), HAIR, ["head"]))
+elif STYLE == "puffs":  # two round puffs high on the head
+    for sx in (1, -1):
+        extra.append(Part(*ellipsoid(HC + HEAD * np.array([sx * 0.105, 0.11, -0.02]), HEAD * np.array([0.07, 0.066, 0.068]), seg=48, rings=32), HAIR, ["head"]))
+elif STYLE == "ponytail":  # tied at the back, swinging out to the character's left so it shows from the front
+    tie = HC + HEAD * np.array([0.08, 0.06, -0.11])
+    extra.append(Part(*ellipsoid(tie, HEAD * np.array([0.028, 0.028, 0.028]), seg=24, rings=16), TIE, ["head"]))
+    extra.append(Part(*capsule(tie, HC + HEAD * np.array([0.17, -0.11, -0.1]), HEAD * 0.04, HEAD * 0.022, seg=32, cap=8, mid=4), HAIR, ["head"]))
+elif STYLE == "bob":  # a second, fuller shell over the sides and back, ending at the jaw
+    HB = HR * np.array([1.17, 1.12, 1.16])
+    Vb, Fb = ellipsoid(HC, HB, seg=160, rings=110)
+    db = (Vb - HC) / HB
+    shown = smooth(0.95, 1.25, np.abs(np.arctan2(db[:, 0], db[:, 2]))) * smooth(-0.78, -0.62, db[:, 1]) * (1 - smooth(0.35, 0.5, db[:, 1]))
+    Vb = HC + (Vb - HC) * np.where(shown > 0.5, 1 + 0.08 * smooth(0.2, -0.7, db[:, 1]), 0.8)[:, None]  # hidden parts end up inside the head
+    extra.append(Part(Vb, Fb, HAIR, ["head"]))
 
 
 def surf(x, y):
@@ -412,6 +454,7 @@ def mesh(name: str, ps: list[Part], targets: list[np.ndarray] | None = None) -> 
 
 out.materials = [G.Material(name="toon", pbrMetallicRoughness=G.PbrMetallicRoughness(baseColorFactor=[1, 1, 1, 1], metallicFactor=0, roughnessFactor=0.8))]
 mb, mf = mesh("toon_body", parts), mesh("toon_face", face, deltas)
+mh = mesh("toon_hair", extra) if extra else None
 # skeleton nodes copied as they are (the bones hang below "Human.rig"'s Root); the two meshes sit at the rig's origin
 rig = next(i for i, n in enumerate(src.nodes) if n.name == "Human.rig")
 keep = sorted(set(skin0.joints) | {i for i, n in enumerate(src.nodes) if n.mesh is None and i != rig})
@@ -421,16 +464,18 @@ for o in keep:
     out.nodes.append(G.Node(name=n.name, translation=n.translation, rotation=n.rotation, scale=n.scale, matrix=n.matrix,
                             children=[remap[c] for c in (n.children or []) if c in remap] or None))
 top = [remap[c] for c in src.nodes[rig].children if c in remap]
-nb, nf = len(out.nodes), len(out.nodes) + 1
+nb = len(out.nodes)
 out.nodes += [G.Node(name="toon_body", mesh=mb, skin=0), G.Node(name="toon_face", mesh=mf, skin=0)]
-out.nodes.append(G.Node(name="Human.rig", children=top + [nb, nf]))
+if mh is not None:
+    out.nodes.append(G.Node(name="toon_hair", mesh=mh, skin=0))
+out.nodes.append(G.Node(name="Human.rig", children=top + list(range(nb, len(out.nodes)))))
 out.scenes = [G.Scene(nodes=[len(out.nodes) - 1])]
 out.scene = 0
 out.skins = [G.Skin(joints=[remap[j] for j in skin0.joints], inverseBindMatrices=add(IBM.astype(np.float32), G.FLOAT, "MAT4"))]
 out.buffers = [G.Buffer(byteLength=len(buf))]
 out.set_binary_blob(bytes(buf))
 OUT.mkdir(parents=True, exist_ok=True)
-out.save_binary(str(OUT / "avatar.glb"))
+out.save_binary(str(OUT / f"{BUDDY}.glb"))
 (OUT / "LICENSE.txt").write_text("Generated by app/scripts/build_toon_avatar.py (geometry, colours, face shapes): MIT, as the repository.\n"
                                  "Skeleton (bone names and bind pose) from the MPFB character in ../mpfb/ (MakeHuman for Blender, CC0).\n")
-print(f"wrote {OUT / 'avatar.glb'} ({(OUT / 'avatar.glb').stat().st_size // 1024} KB)")
+print(f"wrote {OUT / f'{BUDDY}.glb'} ({(OUT / f'{BUDDY}.glb').stat().st_size // 1024} KB)")

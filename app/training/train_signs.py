@@ -1,6 +1,10 @@
-"""Train the sign classifier on ASL Citizen (+ our recordings) and save models/signs.pt.
+"""Train the sign classifier for the camera's signs on ASL Citizen (+ our recordings) and save models/signs.pt.
 
-Run: uv run python -m training.train_signs [--train-signers kevin,ana] [--holdout-signer sam] [--epochs 60]
+Besides each whole clip, every training sign is also shown inside sentences (--sentences per clip): between two other
+clips' signs, joined by short blends, and cut a random 0-0.5 s into its neighbours as the live segmenter cuts it. A
+model trained on whole clips only read 48% of signs inside replayed sentences against 64% alone.
+
+Run: uv run python -m training.train_signs [--sentences 2] [--train-signers kevin,ana] [--holdout-signer sam]
 Splits: ASL Citizen train (+ ours except holdout) / ASL Citizen val / ASL Citizen test + holdout signer.
 """
 
@@ -12,7 +16,7 @@ import torch
 from torch import nn
 
 from server.classifier import DEFAULT_MODEL, SignNet, save_checkpoint
-from server.features import sequence_features
+from server.features import frame_features, resample
 from server.vocab import load_vocab
 from training.landmarks import load_npz
 
@@ -21,16 +25,69 @@ LM = ROOT / "data" / "landmarks" / "asl_citizen"
 OURS = ROOT / "data" / "ours"
 
 
-def load_dir(root: Path, labels: list[str]) -> tuple[np.ndarray, np.ndarray]:
-    X, y = [], []
+def load_clips(root: Path, labels: list[str]) -> list[tuple[np.ndarray, int]]:
+    """Each clip's per-frame features (n, F) and label index."""
+    out = []
     for i, g in enumerate(labels):
         for p in sorted((root / g).glob("*.npz")):
             frames = load_npz(p)
             if len(frames) >= 4:
-                X.append(sequence_features(frames))
-                y.append(i)
-    if not X:
+                out.append((np.stack([frame_features(f) for f in frames]), i))
+    return out
+
+
+def stack(clips: list[tuple[np.ndarray, int]]) -> tuple[np.ndarray, np.ndarray]:
+    if not clips:
         return np.zeros((0, 32, 0), np.float32), np.zeros(0, int)
+    return np.stack([resample(x) for x, _ in clips]), np.array([i for _, i in clips])
+
+
+def load_dir(root: Path, labels: list[str]) -> tuple[np.ndarray, np.ndarray]:
+    return stack(load_clips(root, labels))
+
+
+def hand_span(x: np.ndarray) -> tuple[int, int]:
+    """[first, last + 1) of the frames where a hand is seen (presence flags 63 and 127): the sign without its rest."""
+    seen = np.flatnonzero((x[:, 63] > 0) | (x[:, 127] > 0))
+    return (int(seen[0]), int(seen[-1]) + 1) if len(seen) else (0, len(x))
+
+
+def blend(a: np.ndarray, b: np.ndarray, n: int) -> np.ndarray:
+    """n frames from a to b: arms and wrists move linearly; a hand seen on only one side is the nearer side's (blending
+    toward a missing hand's zeros would fold it into the wrist)."""
+    w = (np.arange(1, n + 1, dtype=np.float32) / (n + 1))[:, None]
+    out = a[None] * (1 - w) + b[None] * w
+    near = np.where(w < 0.5, a[None], b[None])
+    for lo in (0, 64):
+        if not (a[lo + 63] > 0 and b[lo + 63] > 0):
+            out[:, lo:lo + 64] = near[:, lo:lo + 64]
+    return out
+
+
+def in_sentence(target: np.ndarray, prev: np.ndarray | None, nxt: np.ndarray | None, rng, trans: int = 4,
+                max_ctx: int = 15) -> np.ndarray:
+    """The target clip's sign between prev's and nxt's signs (None: its own rest), cut from up to max_ctx frames before
+    it to up to max_ctx after (0.5 s at ASL Citizen's 30 frames/s, the segmenter's CONTEXT_MS)."""
+    a, z = hand_span(target)
+    sign = target[a:z]
+    before = prev[slice(*hand_span(prev))] if prev is not None else target[:a]
+    after = nxt[slice(*hand_span(nxt))] if nxt is not None else target[z:]
+    parts = [before, blend(before[-1], sign[0], trans) if prev is not None else before[:0], sign,
+             blend(sign[-1], after[0], trans) if nxt is not None else after[:0], after]
+    seq = np.concatenate(parts)
+    s = len(parts[0]) + len(parts[1])
+    lo, hi = max(0, s - int(rng.integers(0, max_ctx + 1))), min(len(seq), s + len(sign) + int(rng.integers(0, max_ctx + 1)))
+    return seq[lo:hi]
+
+
+def sentence_samples(clips: list[tuple[np.ndarray, int]], per_clip: int, rng) -> tuple[np.ndarray, np.ndarray]:
+    """per_clip sentence pieces of every clip; a neighbour is missing 15% of the time (the sentence's first or last)."""
+    X, y = [], []
+    pick = lambda: clips[int(rng.integers(len(clips)))][0] if rng.random() > 0.15 else None  # noqa: E731
+    for x, i in clips:
+        for _ in range(per_clip):
+            X.append(resample(in_sentence(x, pick(), pick(), rng)))
+            y.append(i)
     return np.stack(X), np.array(y)
 
 
@@ -41,7 +98,9 @@ SWAP = np.r_[64:128, 0:64, 131:134, 128:131, 134:137, 140:143, 137:140, 146:149,
 
 
 def augment(x: torch.Tensor) -> torch.Tensor:
-    """x: (B, T, F). Rotate ±10° and scale ±10% in x/y, time warp 0.8–1.2x, drop ~10% frames, swap hands with x-mirror."""
+    """x: (B, T, F). Rotate ±10° and scale ±10% in x/y, stretch y ±20% (cameras of other shapes: MediaPipe divides x by
+    the width and y by the height, and features are in shoulder widths), time warp 0.8–1.2x, drop ~10% frames, swap
+    hands with x-mirror."""
     B, T, F = x.shape
     out = x.clone()
     xyz = out[..., TRIPLES]  # (B, T, N, 3)
@@ -49,7 +108,7 @@ def augment(x: torch.Tensor) -> torch.Tensor:
     c, s = torch.cos(ang), torch.sin(ang)
     scale = 1 + (torch.rand(B, 1, 1) - 0.5) * 0.2
     nx = (xyz[..., 0] * c - xyz[..., 1] * s) * scale
-    ny = (xyz[..., 0] * s + xyz[..., 1] * c) * scale
+    ny = (xyz[..., 0] * s + xyz[..., 1] * c) * scale * (1 + (torch.rand(B, 1, 1) - 0.5) * 0.4)
     swap = torch.rand(B) < 0.5
     nx = torch.where(swap[:, None, None], -nx, nx)
     out[..., TRIPLES] = torch.stack([nx, ny, xyz[..., 2] * scale], -1)
@@ -105,20 +164,30 @@ def main() -> None:
     ap.add_argument("--train-signers", default="")
     ap.add_argument("--holdout-signer", default="")
     ap.add_argument("--epochs", type=int, default=60)
+    ap.add_argument("--sentences", type=int, default=2, help="sentence pieces per training clip")
     ap.add_argument("--out", default=str(DEFAULT_MODEL))
     a = ap.parse_args()
-    labels = [s.gloss for s in load_vocab().active]
-    X, y = load_dir(LM / "train", labels)
+    rng = np.random.default_rng(0)
+    labels = sorted(s.gloss for s in load_vocab(extended=None).active if (LM / "train" / s.gloss).is_dir())  # the camera's
+    clips = load_clips(LM / "train", labels)
     for signer in filter(None, a.train_signers.split(",")):
-        Xo, yo = load_dir(OURS / signer, labels)
-        if len(Xo):
-            X, y = np.concatenate([X, Xo]), np.concatenate([y, yo])
-    Xv, yv = load_dir(LM / "val", labels)
+        clips += load_clips(OURS / signer, labels)
+    X, y = stack(clips)
+    if a.sentences:
+        Xs, ys = sentence_samples(clips, a.sentences, rng)
+        X, y = np.concatenate([X, Xs]), np.concatenate([y, ys])
+    val = load_clips(LM / "val", labels)
+    Xv, yv = stack(val)  # whole clips and one sentence piece each: the model is picked for both
+    if val:
+        Xs, ys = sentence_samples(val, 1, rng)
+        Xv, yv = np.concatenate([Xv, Xs]), np.concatenate([yv, ys])
     print(f"train {len(X)}  val {len(Xv)}  classes {len(labels)}")
     model = fit(X, y, Xv, yv, len(labels), a.epochs)
     save_checkpoint(model, labels, a.out)
-    Xt, yt = load_dir(LM / "test", labels)
-    print("ASL Citizen test top-1 %.3f top-3 %.3f (target top-1 >= 0.80)" % topk_acc(model, Xt, yt))
+    test = load_clips(LM / "test", labels)
+    print("ASL Citizen test, whole clips: top-1 %.3f top-3 %.3f (target top-1 >= 0.80)" % topk_acc(model, *stack(test)))
+    if test:
+        print("ASL Citizen test, in sentences: top-1 %.3f top-3 %.3f" % topk_acc(model, *sentence_samples(test, 1, rng)))
     if a.holdout_signer:
         Xh, yh = load_dir(OURS / a.holdout_signer, labels)
         print("holdout %s top-1 %.3f top-3 %.3f (target 0.70 / 0.90)" % ((a.holdout_signer,) + topk_acc(model, Xh, yh)))

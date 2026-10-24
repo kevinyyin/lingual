@@ -1,7 +1,7 @@
 import math
 
 from frames import make_frame
-from server.segmenter import CONTEXT_MS, PAUSE_MS, REST_MS, Segmenter
+from server.segmenter import CONTEXT_MS, HOLD_KEEP_MS, PAUSE_MS, REST_MS, Segmenter
 from server.session import Baseline, TurnEnd, TurnStart, compute_baseline
 
 BASE = Baseline(rest_y=0.8, brow={}, motion_floor=0.0)
@@ -83,6 +83,21 @@ def test_still_wrist_busy_fingers_is_spell():
     assert [s.kind for s in end.segments] == ["spell"]
 
 
+def test_fingers_moving_somewhat_more_than_the_wrist_is_spell():
+    # real spelling (Kaggle, 185 phrases): fingers move 1.8x the wrist (median), 1.3x at the 10th percentile
+    spell = [frame(3 + i, (0.4 + 0.01 * (i % 2), 0.5), spread=0.03 + 0.015 * (i % 2)) for i in range(20)]
+    end = run(rest(0, 3) + spell + rest(23, REST_FRAMES + 2))[-1]
+    assert [s.kind for s in end.segments] == ["spell"]
+
+
+def test_the_other_hand_seen_for_a_moment_does_not_stop_spelling():
+    spell = [frame(3 + i, (0.4, 0.5), spread=0.01 + 0.05 * (i % 2)) for i in range(20)]
+    for f in spell[5:7]:
+        f.left = [[0.6, 0.7, 0.0]] * 21  # the resting hand drifts into the picture
+    end = run(rest(0, 3) + spell + rest(23, REST_FRAMES + 2))[-1]
+    assert [s.kind for s in end.segments] == ["spell"]
+
+
 def test_hand_drops_out_mid_sign_no_crash():
     fs = moving(3, 14)
     for f in fs[5:10]:
@@ -153,16 +168,40 @@ def test_a_hand_moving_during_calibration_does_not_lift_the_rest_line():
     assert isinstance(seg.push(frame(60, (0.4, REST_Y - 0.1))), TurnStart)  # a sign low in front of the body
 
 
+def wrist_path(frames):
+    return [tuple(f.pose[16][:2]) for f in frames]
+
+
+def contains_run(frames, piece):
+    a, b = wrist_path(frames), wrist_path(piece)
+    return any(a[i:i + len(b)] == b for i in range(len(a) - len(b) + 1))
+
+
+def assert_closed_up(whole):
+    """No gap where frames were cut: steps stay the frame interval."""
+    assert max(b.t - a.t for a, b in zip(whole, whole[1:])) <= 33.0 + 1e-6
+
+
 def test_turn_end_carries_the_whole_turn_for_reading_as_one_sign():
     # a 1.3 s hold between the pieces: longer than both contexts together, so they leave a gap the whole turn must fill
     fs = rest(0, 20) + moving(20, 12) + still(32, 40) + moving(72, 12, x0=0.45) + rest(84, REST_FRAMES + 2)
     end = run(fs)[-1]
     first, second = end.segments
-    whole = [f.t for f in end.whole]
-    assert whole[0] < end.frames[0].t  # the hands rising, from before the turn opened
-    assert whole[-1] > second.frames[-1].t  # and settling after the last sign
-    assert first.frames[0].t in whole and second.frames[-1].t in whole
-    assert whole == [f.t for f in fs if whole[0] <= f.t <= whole[-1]]  # every frame between, the pause included
+    assert end.whole[0].t < end.frames[0].t  # the hands rising, from before the turn opened
+    assert contains_run(end.whole, first.frames) and contains_run(end.whole, second.frames)  # both pieces, whole
+    assert wrist_path(end.whole)[-1] != wrist_path(second.frames)[-1]  # and settling after the last sign
+    assert_closed_up(end.whole)
+
+
+def test_a_hold_in_the_whole_turn_is_cut_to_its_start():
+    # a learner raises the hands, holds them in position, then signs: the sign model learned from recordings that flow
+    # from rest straight into the sign, and read the held version worse (course replays, 1 s hold: 87% vs 92%)
+    fs = rest(0, 3) + moving(3, 10) + still(13, 30) + moving(43, 12, x0=0.45) + rest(55, REST_FRAMES + 2)
+    end = run(fs)[-1]
+    held = sum(p == (0.4, 0.5) for p in wrist_path(end.whole))
+    assert 1 <= held <= HOLD_KEEP_MS / 33 + 4  # of 30 still frames, the hold's start (smoothed energy falls in ~3 frames)
+    assert contains_run(end.whole, fs[3:13]) and contains_run(end.whole, fs[43:55])  # the rise and the sign, whole
+    assert_closed_up(end.whole)
 
 
 def down(t0, n, x=0.4, y0=0.5):

@@ -21,13 +21,21 @@ PAUSE_MS = 300.0
 PAUSE_K = 1.5  # pause threshold = max(motion_floor * PAUSE_K, MIN_ENERGY)
 MIN_ENERGY = 0.02  # shoulder widths per 30 fps frame
 MIN_SEG_MS = 160.0  # shorter segments are noise (6 frames at 30 fps)
-SPELL_BOX = 0.6  # wrist stays inside this many shoulder widths
-SPELL_RATIO = 2.0  # fingertip motion / wrist motion above this = fingerspelling
+# Fingerspelling: one hand, the wrist staying put, the fingers busier than it. Real spelling (Kaggle, 185 phrases) vs
+# WLASL sign pieces (1,444): box 0.6, ratio 2.0 and never a second hand caught 32% of spelling (0.7% of signs); these
+# catch 95% (3.5%, which the letter reader then hands back to the sign model: session._read_segment).
+SPELL_BOX = 0.7  # wrist stays inside this many shoulder widths
+SPELL_RATIO = 1.1  # fingertip motion / wrist motion above this = fingerspelling
+SPELL_TWO_HANDS = 0.2  # the other hand in at most this share of frames (the resting hand drifts into the picture)
 # Context handed to the sign recognizer around each segment, never past halfway to a neighbouring sign. ASL Citizen
 # test signers, ST-GCN top-1 by margin around the hands-visible span: 150 ms 0.49, 300 ms 0.57, 500 ms 0.60, whole clip
 # 0.61 (training/eval_recognition.py cache).
 CONTEXT_MS = 500.0
 PRE_ROLL = 30  # frames kept from before the turn starts (the hands rising), >= CONTEXT_MS at any frame rate
+# The whole turn (a lesson's read) keeps this much of each still stretch. The sign model learned from recordings flowing
+# from rest straight into the sign; a learner raising the hands and holding in position first read worse (course
+# replays, 1 s hold: 87% pass vs 92%). Cut to 200 ms: 93%, recordings without a hold unchanged, false passes the same.
+HOLD_KEEP_MS = 200.0
 # After the last sign's hold the hands going back down to rest are cut as a piece of their own (29% of one-sign turns),
 # read as a junk word. A last piece moving mostly down (DOWN_FRAC of the moving wrist's path) and fast (under DOWN_MS)
 # is that: single-sign WLASL replays drop 112 of 141 such pieces, and 10 of 371 real signs ending a sentence.
@@ -70,6 +78,7 @@ class Segmenter:
         self.prev: Frame | None = None
         self.before: deque[Frame] = deque(maxlen=PRE_ROLL)  # frames outside a turn
         self.pre: list[Frame] = []  # the pre-roll of the current turn
+        self.still: set[float] = set()  # times of the turn's frames with too little energy to be signing
 
     def _raised(self, f: Frame) -> bool:
         return bool((_wrists(f)[:, 1] < self.b.rest_y).any())
@@ -87,6 +96,7 @@ class Segmenter:
             self.turn, self.segments, self.cur, self.low, self.energy, self.prev = [f], [], None, 0, 0.0, f
             self.low_t = self.still_t = None
             self.pre = list(self.before)
+            self.still = set()
             self.before.clear()
             return TurnStart()
 
@@ -97,6 +107,8 @@ class Segmenter:
         raw *= FRAME_MS / dt if dt > 0 else 1.0
         self.energy = 0.5 * self.energy + 0.5 * float(raw)
         self.prev = f
+        if self.energy < self.thresh:
+            self.still.add(f.t)
 
         if not raised or unseen:
             if self.still_t is None:
@@ -146,7 +158,7 @@ class Segmenter:
         whole = []  # TurnEnd.whole: every frame from the first sign's context to the last's, holds between included
         if self.segments:
             lo, hi = self.segments[0].context[0].t, end + CONTEXT_MS
-            whole = [f for f in frames if lo <= f.t <= hi]
+            whole = _cut_holds([f for f in frames if lo <= f.t <= hi], self.still)
         merged: list[Segment] = []
         for s in self.segments:  # letters split by tiny holds belong to one spelled word
             if merged and s.kind == merged[-1].kind == "spell":
@@ -154,6 +166,22 @@ class Segmenter:
             else:
                 merged.append(s)
         return TurnEnd(segments=merged, frames=turn, rest_ms=rest_ms, whole=whole)
+
+
+def _cut_holds(frames: list[Frame], still: set[float]) -> list[Frame]:
+    """Each still stretch cut to its first HOLD_KEEP_MS; later frames' times moved up to close the gap (the sign model
+    resamples by time, and would fill a gap with the hold again)."""
+    out, since, shift = [], None, 0.0
+    for prev, f in zip([None, *frames], frames):
+        if f.t in still:
+            since = f.t if since is None else since
+            if f.t - since > HOLD_KEEP_MS:
+                shift += f.t - prev.t
+                continue
+        else:
+            since = None
+        out.append(f.model_copy(update={"t": f.t - shift}) if shift else f)
+    return out
 
 
 def _to_rest(s: Segment) -> bool:
@@ -180,7 +208,7 @@ def _add_context(segments: list[Segment], frames: list[Frame]) -> None:
 
 def _kind(frames: list[Frame]) -> str:
     with_hand = [f for f in frames if f.left is not None or f.right is not None]
-    if not with_hand or any(f.left is not None and f.right is not None for f in with_hand):
+    if not with_hand or np.mean([f.left is not None and f.right is not None for f in with_hand]) > SPELL_TWO_HANDS:
         return "sign"
     w = np.median([_width(f) for f in frames])
     side = "right" if sum(f.right is not None for f in with_hand) >= len(with_hand) / 2 else "left"

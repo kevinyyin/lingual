@@ -33,7 +33,11 @@ def frame_features(f: Frame) -> np.ndarray:
 
 
 def sequence_features(frames: list[Frame], T: int = 32) -> np.ndarray:
-    x = np.stack([frame_features(f) for f in frames])
+    return resample(np.stack([frame_features(f) for f in frames]), T)
+
+
+def resample(x: np.ndarray, T: int = 32) -> np.ndarray:
+    """(n, F) per-frame features -> (T, F), linearly between frames."""
     src = np.linspace(0, len(x) - 1, T)
     lo = np.floor(src).astype(int)
     hi = np.minimum(lo + 1, len(x) - 1)

@@ -13,14 +13,20 @@ import numpy as np
 
 from . import plush
 from .protocol import (
-    AvatarDoneMsg, CalibrateMsg, CaptionMsg, CheerMsg, FrameMsg, ModeMsg, PickMsg, PickOption, PickRequestMsg, PracticeMsg, RedoMsg,
+    AvatarDoneMsg, BuddyMsg, CalibrateMsg, CaptionMsg, CheerMsg, FrameMsg, ModeMsg, PickMsg, PickOption, PickRequestMsg, PracticeMsg, RedoMsg,
     SayMsg, RecognizedMsg, SignPlanMsg, SignToken, StateMsg, TalkMsg, YouSaidMsg, Frame,
 )
 from .vocab import Vocab
+from .voice import BUDDY_VOICES
 
-# A sign read less surely than this goes to the picker instead of being spoken. One-sign replays of all 160 signs
-# (WLASL videos): at 0.6 a wrong word was spoken in 33% of turns, at 0.95 in 15%, the picker showing in 43% (was 16%).
+# A sign read less surely than this goes to the picker instead of being spoken; a sign model may set its own
+# (pick_threshold: scores differ between models). This one is the ASL Citizen ST-GCN's: one-sign replays of all 160
+# signs (WLASL videos): at 0.6 a wrong word was spoken in 33% of turns, at 0.95 in 15%, the picker showing in 43%.
 PICK_THRESHOLD = 0.95
+# A piece taken for spelling whose letter read is shorter or less sure than this goes to the sign model instead: the
+# Core ML reader gave mislabelled WLASL signs no letters or one unsure one (2% read 2+ letters at 0.5+: BUS, JULY,
+# often spelled anyway); Kaggle letter-only phrases always read 2+ letters at 0.5+.
+SPELL_MIN_LETTERS, SPELL_MIN_P = 2, 0.5
 SPELL_PICK_THRESHOLD = 0.6  # the letter reader's score (mean letter confidence) has its own scale: not re-tuned
 SAY_EMOTION = {"label": "happy", "intensity": 0.4}  # the plushie's lesson lines: warm, not excited
 PRACTICE_TOP_K = 5  # guesses per turn sent to teaching mode, which grades on its own
@@ -138,6 +144,7 @@ class Session:
         self.send, self.vocab = send, vocab
         self.make_segmenter, self.recognizer, self.readers = make_segmenter, recognizer, readers
         self.composer, self.voice, self.gloss = composer, voice, gloss
+        self.pick_threshold = getattr(recognizer, "pick_threshold", PICK_THRESHOLD)
         self.spell_reader = spell_reader
         self.log_path = Path(log_path)
         self.state = "calibrating"
@@ -241,6 +248,8 @@ class Session:
                 await self._idle()
         elif isinstance(msg, TalkMsg):
             self.talking = msg.on
+        elif isinstance(msg, BuddyMsg):
+            self.voice.voice_id = BUDDY_VOICES[msg.buddy]  # the next line is said in it
         elif isinstance(msg, RedoMsg) and self.practice:
             if self._busy():  # the attempt still being read is dropped unread
                 self._task.cancel()
@@ -349,7 +358,7 @@ class Session:
                 await self.send(RecognizedMsg(segments=[
                     [PickOption(gloss=g, english=self._english(g, r), p=p) for g, p in t] for r, t in zip(reads, tops)]))
                 return
-            read = [(s, await asyncio.to_thread(self._read_segment, s)) for s in ev.segments]
+            read = await asyncio.to_thread(self._read_turn, ev)
             read = [(s, t) for s, t in read if t]  # unreadable segments (e.g. no confident letters) are dropped
             segments, tops = [s for s, _ in read], [t for _, t in read]
             grammar, emotion = await asyncio.to_thread(self.readers.read, ev.frames, self.baseline)
@@ -359,7 +368,7 @@ class Session:
             picks = 0
             for i, t in enumerate(tops):
                 spelled = segments[i].kind == "spell" and self.spell_reader is not None  # read by the letter reader
-                if t[0][1] < (SPELL_PICK_THRESHOLD if spelled else PICK_THRESHOLD):
+                if t[0][1] < (SPELL_PICK_THRESHOLD if spelled else self.pick_threshold):
                     await self._set("picking")
                     self._pick = asyncio.get_running_loop().create_future()
                     await self.send(PickRequestMsg(segment=i, options=[
@@ -379,10 +388,12 @@ class Session:
             turn.stamps["composed"] = now_ms()
             turn.result = {"signs": signs, "spelled": spelled, "grammar": grammar, "emotion": emotion, "text": text, "picks": picks,
                            "top3": turn.result["top3"]}
+            read = [SignToken(kind="sign", gloss=c) if s.kind == "sign" else SignToken(kind="spell", word=c)
+                    for c, s in zip(choice, segments)]
             if not text:  # the signs make no sentence: say so on screen, speak nothing
-                await self.send(YouSaidMsg(text="", emotion=emotion["label"], unclear=True))
+                await self.send(YouSaidMsg(text="", emotion=emotion["label"], unclear=True, read=read))
                 return
-            await self.send(YouSaidMsg(text=text, emotion=emotion["label"]))
+            await self.send(YouSaidMsg(text=text, emotion=emotion["label"], read=read))
             await self._set("speaking")
             async for e in self.voice.speak(text, emotion):
                 if e == "first_audio":
@@ -397,9 +408,36 @@ class Session:
                 self._log(turn)
             await self._set("ready")
 
+    def _read_turn(self, ev: TurnEnd) -> list[tuple[Segment, list[tuple[str, float]]]]:
+        """Each piece and its guesses, in order: spelled ones by the letter reader; each run of signed ones cut again
+        where the sign model is surest (recut.py), or as the segmenter cut them when that finds no cut."""
+        from .recut import recut  # recut builds on the segmenter, which imports this module
+
+        around = sorted({f.t: f for f in [*ev.frames, *(f for s in ev.segments for f in s.context or [])]}.values(),
+                        key=lambda f: f.t)
+        out, run = [], []
+
+        def flush():
+            if run:
+                frames = [f for f in around if run[0].frames[0].t <= f.t <= run[-1].frames[-1].t]
+                out.extend(recut(frames, around, self.recognizer) or [(s, self._read_segment(s)) for s in run])
+                run.clear()
+
+        for s in ev.segments:
+            if s.kind == "sign":
+                run.append(s)
+            else:
+                flush()
+                out.append((s, self._read_segment(s)))
+        flush()
+        return out
+
     def _read_segment(self, s: Segment) -> list[tuple[str, float]]:
         if s.kind == "spell" and self.spell_reader is not None:
-            return self.spell_reader.recognize(s)
+            top = self.spell_reader.recognize(s)
+            if top and len(top[0][0]) >= SPELL_MIN_LETTERS and top[0][1] >= SPELL_MIN_P:
+                return top
+            s.kind = "sign"  # a sign with busy fingers, not a spelled word: read, picked and composed as a sign
         return self.recognizer.recognize(s)
 
     def _read_practice(self, s: Segment) -> list[tuple[str, float]]:

@@ -13,11 +13,11 @@ WLASL, ASL-LEX and the Kaggle competitions are for **non-commercial research onl
 
 | Part | Model | Where it comes from |
 |---|---|---|
-| Sign recognition | ASL Citizen ST-GCN (Microsoft Research): 2,731 signs from 27 pose + hand keypoints, ensembled with the asl-spike model (143 signs) | `models/asl-citizen/` (GitHub release `checkpoints_v1`), `models/asl-sign-models/` (teammate bundle) |
-| Fingerspelling | CTC reader trained here on Google's Kaggle ASL Fingerspelling landmarks (Deaf signers) | `models/fingerspell_ctc.pt` (`training.train_fingerspell_ctc`) |
+| Sign recognition | Our own model for the camera's signs (BiGRU over shoulder-normalized landmarks), trained on ASL Citizen videos of 155 of them, also as pieces of sentences: 69% of new WLASL signers' single signs right (ST-GCN 58%), 53% inside sentences (48%); replayed sentences through the translator, signs wrong 75% -> 60% with `server/recut.py`. Without it: the ASL Citizen ST-GCN (Microsoft Research, 2,731 signs from 27 keypoints), ensembled with the asl-spike model when present | `models/signs.pt` (`training.extract_asl_citizen --remote`, then `training.train_signs`; research use only), `models/asl-citizen/` (GitHub release `checkpoints_v1`), `models/asl-sign-models/` (teammate bundle) |
+| Fingerspelling | Pretrained CTC reader on MediaPipe Holistic landmarks, run by Core ML on the Mac (Apache-2.0; trained on Google's Kaggle ASL Fingerspelling corpus, CC-BY 4.0): ~17% of letters wrong on Kaggle names fed as the app does; else a CTC reader trained here (~43%) | `models/fingerspell_coreml/` (Hugging Face `Skunk0/openglasses-fingerspelling-ctc`), `models/fingerspell_ctc.pt` (`training.train_fingerspell_ctc`) |
 | English -> sign plan | Claude (`claude-haiku-5-5`), prompted with ASL grammar rules and the signs the avatar can show | `server/gloss.py` |
 | Signs -> English | Claude, from recognized signs + facial grammar + emotion | `server/compose.py` |
-| Avatar | Our stylized "toon" character is the default: rounded shapes, flat colours, big eyes, painted-on face with the 20 ARKit shapes the app drives, on MPFB's rig (`scripts/build_toon_avatar.py`, no Blender needed). `?model=Male_Adult_11` loads Microsoft Rocketbox (MIT); `?model=mpfb` loads our own MPFB character (MakeHuman for Blender, CC0: V-taper build, hooded eyes, charcoal tee, 52 ARKit face shapes; `scripts/build_avatar.py`, needs Blender 4.5 + MPFB); `?model=Male_Adult_07` the other Rocketbox | `web/public/avatar/toon/`, `web/public/avatar/mpfb/`, `web/public/avatar/rocketbox/` |
+| Avatar | Our stylized "toon" character is the default: rounded shapes, flat colours, big eyes, painted-on face with the 20 ARKit shapes the app drives, on MPFB's rig (`scripts/build_toon_avatar.py`, no Blender needed), as six signing buddies picked on the Profile tab, each with its own Cartesia voice (`web/src/buddies.ts`, `server/voice.py`). `?model=Male_Adult_11` loads Microsoft Rocketbox (MIT); `?model=mpfb` loads our own MPFB character (MakeHuman for Blender, CC0: V-taper build, hooded eyes, charcoal tee, 52 ARKit face shapes; `scripts/build_avatar.py`, needs Blender 4.5 + MPFB); `?model=Male_Adult_07` the other Rocketbox | `web/public/avatar/toon/`, `web/public/avatar/mpfb/`, `web/public/avatar/rocketbox/` |
 | Avatar motion | Clips from WLASL dictionary videos (MediaPipe), the most typical of up to 4 takes per sign. Wrists placed where the signer's were relative to their body (relative to the nose near the face), elbows by two-bone IK, every finger bone aimed; hands kept out of the body | `web/public/signs/` (`training.clips_from_wlasl`), `web/src/avatar/rocketbox.ts` |
 | Fingerspelling handshapes | A-Z from Deaf signers in the Kaggle data: the reader's surest frame per letter, depth and knuckle bend corrected | `web/public/letters/` (`training.letters_from_kaggle`) |
 | Voice, speech-to-text | Cartesia Sonic 3.6, Ink 2 | `.env` keys |
@@ -48,6 +48,14 @@ mkdir -p models/asl-citizen && curl -L -o models/asl-citizen/w.zip \
 uv run python -c "import zipfile; zipfile.ZipFile('models/asl-citizen/w.zip').extractall('models/asl-citizen')"
 uv run python -m training.remote_zip ASL_Citizen/splits/train.csv ASL_Citizen/splits/val.csv ASL_Citizen/splits/test.csv
 #   ^ reads just the label CSVs out of the 42.8 GB ASL Citizen zip with HTTP range requests (label order of the model)
+
+# our sign model: landmarks of the ASL Citizen videos of the camera's signs (~5,600, fetched one at a time out of the
+# 42.8 GB zip, ~1.5 h), then ~7 min of training -> models/signs.pt
+uv run python -m training.extract_asl_citizen --remote
+uv run python -m training.train_signs
+
+# fingerspelling reader (Core ML, Macs only; 18 MB)
+uv run --with huggingface_hub python -c "from huggingface_hub import snapshot_download; snapshot_download('Skunk0/openglasses-fingerspelling-ctc', local_dir='models/fingerspell_coreml', allow_patterns=['*.mlpackage/*', 'vocab.txt', 'LICENSE'])"
 
 uv run python -m training.build_vocab        # ~2,900-sign vocabulary (ASL Citizen + ASL-LEX + WLASL)
 uv run python -m training.clips_from_wlasl   # avatar clips from WLASL videos (resumable; --workers 8)
