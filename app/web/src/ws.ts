@@ -21,6 +21,7 @@ export type ClientMsg =
   | { type: "avatar_done" }
   | { type: "practice"; on: boolean; signs?: string[] }
   | { type: "mode"; mode: Mode }
+  | { type: "talk"; on: boolean }
   | { type: "redo" }
   | { type: "say"; text: string }
   | { type: "cheer" }

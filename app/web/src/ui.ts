@@ -15,7 +15,7 @@ const STATE_LABEL: Record<State, string> = {
 };
 
 /** What "ready" asks for in each mode. */
-const READY: Record<Mode, string> = { voice: "Ready: speak", signing: "Ready: sign" };
+const READY: Record<Mode, string> = { voice: "Ready: hold to talk", signing: "Ready: sign" };
 const MODE_KEY = "lingual.mode";
 let mode: Mode = "voice";
 let shown: State | null = null; // the last state, re-labelled when the mode changes
@@ -83,7 +83,7 @@ export function renderMsg(m: ServerMsg): void {
       else if (cam?.srcObject && cam.paused) void cam.play().catch(() => {});
       hinted = null; // a new state shows; the next camera frame hints again if it still applies
       if (cameraOff && m.state === "calibrating") {
-        $("state").textContent = "Ready: speak or type";
+        $("state").textContent = "Ready: hold to talk or type";
         $("state").dataset.state = "ready";
       } else if (m.state === "ready" || (m.state === "calibrating" && mode === "voice")) { // voice mode needs no calibrated camera
         $("state").textContent = READY[mode];
@@ -140,12 +140,23 @@ export function highlight(gloss: string | null): void {
 /** Shows `m` on the switch and the page, tells the server and remembers it for next time. */
 function setMode(m: Mode, sock: Socket, onMode?: (m: Mode) => void): void {
   mode = m;
+  setTalk(false);
   document.body.dataset.mode = m; // style.css hides the camera preview in voice mode
   document.querySelectorAll<HTMLButtonElement>("#mode button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.mode === m)));
   sock.send({ type: "mode", mode: m });
   try { localStorage.setItem(MODE_KEY, m); } catch { /* private mode: the switch just isn't remembered */ }
   if (shown) renderMsg({ type: "state", state: shown });
   onMode?.(m);
+}
+
+let talking = false;
+/** Push to talk: the backend hears the mic only while Space or the Hold to talk button is held (it used to translate
+ *  every word said near it). */
+function setTalk(on: boolean): void {
+  if (on === talking || (on && mode !== "voice")) return;
+  talking = on;
+  document.getElementById("talk")?.setAttribute("aria-pressed", String(on));
+  socket?.send({ type: "talk", on });
 }
 
 /** `onMode`: called with the mode it starts in and on every switch (main.ts opens the camera for signing). */
@@ -158,7 +169,19 @@ export function bindControls(sock: Socket, onMode?: (m: Mode) => void): void {
   document.addEventListener("keydown", (e) => {
     if (pending && ["1", "2", "3"].includes(e.key)) choose(Number(e.key) - 1);
     else if (pending && e.key === "Escape") choose(-1);
+    else if (e.code === "Space" && mode === "voice" && !(e.target instanceof HTMLInputElement)) { // a typed space stays a space
+      e.preventDefault(); // not a click on the focused button, not a page scroll
+      if (!e.repeat) setTalk(true);
+    }
   });
+  document.addEventListener("keyup", (e) => { if (e.code === "Space") setTalk(false); });
+  window.addEventListener("blur", () => setTalk(false)); // let go while another window had the keyboard
+  const talk = $<HTMLButtonElement>("talk");
+  talk.onpointerdown = (e) => {
+    talk.setPointerCapture?.(e.pointerId); // a finger sliding off the button still ends on release
+    setTalk(true);
+  };
+  talk.onpointerup = talk.onpointercancel = () => setTalk(false);
   // on the phone, Calibrate and Teaching mode sit behind one button so a stray tap can't derail a conversation
   const more = document.getElementById("more");
   const setMenu = (open: boolean) => {

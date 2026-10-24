@@ -43,7 +43,7 @@ the avatar, its front camera watches the kid, and its speaker gives the plushie 
 | Direction | What happens |
 |---|---|
 | **Sign to speech** | The camera reads the signer's hands, body and face. The backend splits the movement into signs, recognizes each one (or reads fingerspelling), reads facial grammar (yes/no question, wh-question, negation) separately from emotion, and Claude writes a natural English sentence. Cartesia speaks it in a voice whose emotion, speed and volume follow the signer's. If the recognizer isn't sure, a **picker** asks the signer which of three signs they meant. |
-| **Speech to sign** | The hearing person talks. Cartesia transcribes them, Claude turns the English into an ASL-order sign plan (paraphrasing into signs the avatar knows, fingerspelling names and the rest), and the avatar signs it with the matching brows and head movement. The caption and a row of sign chips show what is being signed; the current sign lights up. |
+| **Speech to sign** | The hearing person holds Space (or the Hold to talk button) and talks; nothing said otherwise is translated. Cartesia transcribes them, Claude turns the English into an ASL-order sign plan (paraphrasing into signs the avatar knows, fingerspelling names and the rest), and the avatar signs it with the matching brows and head movement. The caption and a row of sign chips show what is being signed; the current sign lights up. |
 
 Turn-taking is one direction at a time: the **Voice / Signing** switch at the top picks it (voice mode ignores the
 camera, signing mode ignores the mic). The status pill says whose turn it is, and on the phone the whole stage's edge

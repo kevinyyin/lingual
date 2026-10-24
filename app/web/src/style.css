@@ -109,7 +109,13 @@ body:has(#state:is([data-state="reading"], [data-state="listening"])) #avatar-pa
   margin: 0; min-height: 2.6rem; text-align: center; text-wrap: balance; color: var(--ink);
   font: 700 clamp(2rem, 2.6vw, 2.8rem)/1.2 var(--text);
 }
-#caption:empty::before { content: "Speak, and the avatar signs it here."; color: var(--ink-2); font-weight: 400; font-size: 1.25rem; }
+#caption:empty::before { content: "Hold to talk, and the avatar signs it here."; color: var(--ink-2); font-weight: 400; font-size: 1.25rem; }
+/* push to talk (ui.ts): held, it fills like the badge does while listening */
+.btn.talk { display: flex; margin: 14px auto 0; min-width: 220px; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.btn.talk[aria-pressed="true"] { background: var(--in-bg); color: var(--in-fg); box-shadow: inset 0 0 0 2px var(--in-edge); transform: scale(.97); }
+.btn.talk kbd { padding: 1px 7px; border-radius: 6px; background: rgb(255 255 255 / .2); font: 700 .8rem var(--text); }
+body[data-mode="signing"] .btn.talk { display: none; } /* speech is ignored in signing mode */
+@media (pointer: coarse) { .btn.talk kbd { display: none; } } /* a tablet with no keyboard: just hold the button */
 
 /* sign plan as chips: whole signs as pills, fingerspelled words as tight letter runs; the current one fills with ink */
 .plan { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 12px 0 0; min-height: 36px; }

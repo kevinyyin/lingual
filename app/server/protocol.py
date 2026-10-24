@@ -52,6 +52,13 @@ class ModeMsg(BaseModel):
     mode: Literal["voice", "signing"]
 
 
+class TalkMsg(BaseModel):
+    """Translator's push to talk: speech is heard only while Space or the Hold to talk button is held (it heard every
+    word said near the mic)."""
+    type: Literal["talk"] = "talk"
+    on: bool
+
+
 class RedoMsg(BaseModel):
     """Teaching mode: the learner tapped the frozen camera to sign again: the attempt still being read is dropped."""
     type: Literal["redo"] = "redo"
@@ -76,7 +83,7 @@ class RecordMsg(BaseModel):
 
 
 ClientMsg = Annotated[
-    Union[FrameMsg, CalibrateMsg, PickMsg, AvatarDoneMsg, PracticeMsg, ModeMsg, SayMsg, CheerMsg, RedoMsg, RecordMsg],
+    Union[FrameMsg, CalibrateMsg, PickMsg, AvatarDoneMsg, PracticeMsg, ModeMsg, TalkMsg, SayMsg, CheerMsg, RedoMsg, RecordMsg],
     Field(discriminator="type"),
 ]
 _client = TypeAdapter(ClientMsg)

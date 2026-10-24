@@ -14,7 +14,7 @@ import numpy as np
 from . import plush
 from .protocol import (
     AvatarDoneMsg, CalibrateMsg, CaptionMsg, CheerMsg, FrameMsg, ModeMsg, PickMsg, PickOption, PickRequestMsg, PracticeMsg, RedoMsg,
-    SayMsg, RecognizedMsg, SignPlanMsg, SignToken, StateMsg, YouSaidMsg, Frame,
+    SayMsg, RecognizedMsg, SignPlanMsg, SignToken, StateMsg, TalkMsg, YouSaidMsg, Frame,
 )
 from .vocab import Vocab
 
@@ -153,8 +153,14 @@ class Session:
         self.practice = False
         self.practice_signs: set[str] = set()
         self.mode: str | None = None  # the translator's switch (ModeMsg): "voice" or "signing"; None runs both
+        self.talking = False  # push to talk held (TalkMsg)
         self._say_lock = asyncio.Lock()
         self._says: set[asyncio.Task] = set()  # asyncio keeps only weak refs to tasks
+
+    def hears_speech(self) -> bool:
+        """The mic's gate (stt.MicTranscriber sends silence otherwise): never over our own voice or avatar output or in
+        signing mode, and only while push to talk is held; words during a camera turn take over (on_transcript)."""
+        return self.talking and self.state not in ("speaking", "avatar") and self.mode != "signing"
 
     # --- plumbing ---
 
@@ -233,6 +239,8 @@ class Session:
                 await self._yield_to_speech()  # a sign turn in flight is dropped
             elif msg.mode == "signing" and self.state == "listening":
                 await self._idle()
+        elif isinstance(msg, TalkMsg):
+            self.talking = msg.on
         elif isinstance(msg, RedoMsg) and self.practice:
             if self._busy():  # the attempt still being read is dropped unread
                 self._task.cancel()
