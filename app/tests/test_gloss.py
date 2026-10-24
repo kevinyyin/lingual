@@ -92,6 +92,26 @@ async def test_english_echoed_for_captions():
     assert (await Gloss(c, V).plan("Hello there")).english == "Hello there"
 
 
+async def test_fillers_are_dropped_and_the_caption_shows_what_they_meant():
+    c = fake_client(json.dumps({"tokens": [{"kind": "sign", "value": "HELLO"}], "grammar": "statement", "tone": "warm",
+                                "meant": "Hello!"}))
+    plan = await Gloss(c, V).plan("Um, uh, hello, like, hello!")
+    assert [t.gloss for t in plan.tokens] == ["HELLO"] and plan.english == "Hello!" and not plan.unclear
+
+
+async def test_gibberish_is_flagged_not_signed():
+    c = fake_client(json.dumps({"tokens": [{"kind": "spell", "value": "BLORP"}], "grammar": "statement", "tone": "neutral",
+                                "meant": "", "unclear": True}))
+    plan = await Gloss(c, V).plan("blorp fizzle wug")
+    assert plan.unclear and plan.tokens == [] and plan.english == "blorp fizzle wug"  # the caption shows what was heard
+
+
+def test_the_prompt_asks_for_fillers_dropped_and_gibberish_flagged():
+    from server.gloss import SCHEMA, SYSTEM
+    assert "filler" in SYSTEM and '"unclear": true' in SYSTEM
+    assert {"meant", "unclear"} <= set(SCHEMA["properties"]) and {"meant", "unclear"} <= set(SCHEMA["required"])
+
+
 async def test_system_prompt_lists_vocab():
     c = fake_client(reply([("sign", "HELLO")]))
     await Gloss(c, V).plan("Hello")

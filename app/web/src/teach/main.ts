@@ -49,7 +49,7 @@ const ctx = (): HomeCtx => ({
 });
 
 function home() {
-  document.title = "Teaching mode · lingual";
+  document.title = "ASL Dragon";
   renderHome(root, tabOf(), ctx());
 }
 

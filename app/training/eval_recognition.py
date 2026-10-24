@@ -72,7 +72,7 @@ def citizen_test_videos(vocab, per_gloss: int) -> list[dict]:
         for row in list(csv.reader(fh))[1:]:
             name = row[2].strip()
             base = re.sub(r"\d+$", "", name) or name
-            g = want.get(name) or want.get(base) or want.get(ALIASES.get(base, ""))
+            g = want.get(ALIASES.get(base)) or want.get(name) or want.get(base)  # same order as to_app_gloss
             if g and len(picked[g]) < per_gloss and all(p["signer"] != row[0] for p in picked[g]):
                 picked[g].append({"gloss": g, "signer": row[0], "file": row[1]})
     items = [it for v in picked.values() for it in v]

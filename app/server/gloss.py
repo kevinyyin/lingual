@@ -39,6 +39,11 @@ listed sign), sign the idea the speaker meant with listed signs, keeping their q
 (letters only; write numbers without a sign as words, e.g. "TWENTY").
 
 Rules:
+- The words come from live speech recognition: drop fillers and false starts ("um", "uh", "like", "you know", \
+"I mean", a word said twice by mistake) and sign what the speaker meant; where a word was clearly misheard, sign the \
+word they most likely said.
+- If the words make no sense at all (noise, a mumble, unrelated random words), never invent a meaning: reply \
+{{"tokens": [], "grammar": "statement", "tone": "neutral", "meant": "", "unclear": true}}.
 - Keep every word that carries meaning: each noun, verb, adjective, place, time and number must appear as a sign, \
 a paraphrase, or fingerspelling. Never add signs for things that were not said, and never repeat a sign unless \
 the speaker repeated the word.
@@ -56,7 +61,8 @@ Examples (signs in order, grammar):
 - "My grandmother taught me how to cook." -> MY GRANDMOTHER TEACH I COOK (statement)
 - "To be or not to be?" (a quote: sign its meaning) -> LIVE OR DIE WHICH (wh)
 - "It's raining cats and dogs." (an idiom: sign its meaning) -> RAIN HEAVY (statement)
-Reply as JSON: {{"tokens": [{{"kind": "sign" | "spell", "value": "..."}}], "grammar": "...", "tone": "..."}}"""
+Reply as JSON: {{"tokens": [{{"kind": "sign" | "spell", "value": "..."}}], "grammar": "...", "tone": "...", \
+"meant": "<what they meant: one clean English sentence, fillers dropped>", "unclear": false}}"""
 
 SCHEMA = {
     "type": "object",
@@ -67,8 +73,10 @@ SCHEMA = {
             "required": ["kind", "value"], "additionalProperties": False}},
         "grammar": {"type": "string", "enum": ["yn", "wh", "neg", "statement"]},
         "tone": {"type": "string", "enum": ["warm", "apologetic", "urgent", "neutral"]},
+        "meant": {"type": "string"},
+        "unclear": {"type": "boolean"},
     },
-    "required": ["tokens", "grammar", "tone"],
+    "required": ["tokens", "grammar", "tone", "meant", "unclear"],
     "additionalProperties": False,
 }
 
@@ -86,6 +94,8 @@ def validate_plan(raw: dict, vocab: Vocab, english: str, lenient: bool) -> SignP
     to be" -> NOT NOT NOT, "grandmother" -> MOTHER MOTHER), raises PlanError. Lenient: the sign becomes a fingerspelled
     word and the repeat is dropped."""
     # shortcut: any doubled English word ("no, no") allows any doubled sign; compare per word if that ever misfires
+    if raw.get("unclear") is True:  # gibberish: the caption shows what was heard, and nothing is signed
+        return SignPlanMsg(tokens=[], grammar="statement", tone="neutral", english=english, unclear=True)
     may_repeat = re.search(r"\b(\w+)\W+\1\b", english.lower()) is not None
     tokens: list[SignToken] = []
     for t in raw.get("tokens") or []:
@@ -103,7 +113,8 @@ def validate_plan(raw: dict, vocab: Vocab, english: str, lenient: bool) -> SignP
             tokens.append(SignToken(kind="spell", word=word))
     grammar = raw.get("grammar") if raw.get("grammar") in ("yn", "wh", "neg", "statement") else "statement"
     tone = raw.get("tone") if raw.get("tone") in ("warm", "apologetic", "urgent", "neutral") else "neutral"
-    return SignPlanMsg(tokens=tokens, grammar=grammar, tone=tone, english=english)
+    meant = str(raw.get("meant") or "").strip()  # the caption: what they meant, without the ums
+    return SignPlanMsg(tokens=tokens, grammar=grammar, tone=tone, english=meant or english)
 
 
 class Gloss:

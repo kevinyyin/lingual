@@ -12,17 +12,25 @@ from typing import Any, AsyncIterator, Awaitable, Callable, Literal, Protocol, T
 import numpy as np
 
 from .protocol import (
-    AvatarDoneMsg, CalibrateMsg, CaptionMsg, FrameMsg, PickMsg, PickOption, PickRequestMsg, PracticeMsg, SayMsg,
+    AvatarDoneMsg, CalibrateMsg, CaptionMsg, FrameMsg, ModeMsg, PickMsg, PickOption, PickRequestMsg, PracticeMsg, SayMsg,
     RecognizedMsg, SignPlanMsg, SignToken, StateMsg, YouSaidMsg, Frame,
 )
 from .vocab import Vocab
 
-PICK_THRESHOLD = 0.6  # top-1 below this goes to the picker; tuned in plan Task 18
+# A sign read less surely than this goes to the picker instead of being spoken. One-sign replays of all 160 signs
+# (WLASL videos): at 0.6 a wrong word was spoken in 33% of turns, at 0.95 in 15%, the picker showing in 43% (was 16%).
+PICK_THRESHOLD = 0.95
+SPELL_PICK_THRESHOLD = 0.6  # the letter reader's score (mean letter confidence) has its own scale: not re-tuned
 SAY_EMOTION = {"label": "happy", "intensity": 0.4}  # the plushie's lesson lines: warm, not excited
-PRACTICE_TOP_K = 5  # guesses per segment sent to teaching mode, which grades on its own
-CALIBRATION_FRAMES = 60  # ~2 s at 30 fps
+PRACTICE_TOP_K = 5  # guesses per turn sent to teaching mode, which grades on its own
+CALIBRATION_MS = 2000.0  # by time: the browser sends 8-15 frames/s, so 60 frames took 4-8 s
 REST_MARGIN = 0.05  # rest line sits this far above resting wrists (image y grows downward)
 FRAME_TIMEOUT_S = 3.0  # no frames this long mid-turn (signer left the frame) ends the turn
+# A lesson attempt is also read as its last 1.5 s alone, so a wrong sign corrected without resting counts the correction.
+# Replayed WLASL course signs, a wrong sign + 300 ms pause + the right one: the right one passes 79% (whole turn alone
+# 44%); a correct single sign 86% (81%); a wrong one 3.6% (1.5%). Cutting at the segmenter's pauses instead did as well
+# only after a long (600 ms+) pause.
+PRACTICE_LATEST_MS = 1500.0
 
 
 class Grammar(TypedDict):
@@ -37,7 +45,7 @@ class Emotion(TypedDict):
 
 @dataclass
 class Baseline:
-    rest_y: float  # wrist y above which (smaller y) the hands count as raised
+    rest_y: float | tuple[float, float]  # wrist y above which (smaller y) a hand counts as raised; per wrist (15, 16)
     brow: dict[str, float]  # resting brow* blendshapes
     motion_floor: float  # mean wrist speed at rest, per frame
     speed: float | None = None  # mean signing wrist speed, set from the first turn (emotion.py)
@@ -63,6 +71,7 @@ class TurnEnd:
     segments: list[Segment]
     frames: list[Frame]  # the whole turn, for the face readers
     rest_ms: float  # how long ago (browser clock) the hands came to rest
+    whole: list[Frame] = field(default_factory=list)  # first sign's context to the last's: the turn read as one sign
 
 
 SegEvent = TurnStart | TurnEnd
@@ -74,6 +83,8 @@ class Segmenter(Protocol):
 
 class Recognizer(Protocol):
     def recognize(self, seg: Segment) -> list[tuple[str, float]]: ...
+
+    def topk(self, frames: list[Frame], k: int) -> list[tuple[str, float]]: ...
 
 
 class Readers(Protocol):
@@ -102,7 +113,9 @@ def compute_baseline(frames: list[Frame]) -> Baseline:
     faces = [f.blend for f in frames if f.blend]
     keys = {k for b in faces for k in b if k.startswith("brow")}
     brow = {k: float(np.mean([b.get(k, 0.0) for b in faces])) for k in keys}
-    return Baseline(rest_y=float(w[:, :, 1].mean()) - REST_MARGIN, brow=brow, motion_floor=float(speed))
+    # each wrist's own resting height (hands may rest at different heights); the median ignores a hand moved briefly
+    left, right = np.median(w[:, :, 1], axis=0) - REST_MARGIN
+    return Baseline(rest_y=(float(left), float(right)), brow=brow, motion_floor=float(speed))
 
 
 def now_ms() -> float:
@@ -137,6 +150,8 @@ class Session:
         self._pending_speech: _Turn | None = None
         self._turn_ids = 0
         self.practice = False
+        self.practice_signs: set[str] = set()
+        self.mode: str | None = None  # the translator's switch (ModeMsg): "voice" or "signing"; None runs both
         self._say_lock = asyncio.Lock()
         self._says: set[asyncio.Task] = set()  # asyncio keeps only weak refs to tasks
         self._say_waiting: asyncio.Task | None = None  # the one line queued behind the playing one
@@ -214,8 +229,14 @@ class Session:
             await self._set("calibrating")
         elif isinstance(msg, FrameMsg):
             await self._on_frame(msg)
+        elif isinstance(msg, ModeMsg):
+            self.mode = msg.mode
+            if msg.mode == "voice" and self.state in ("signing", "picking"):
+                await self._yield_to_speech()  # a sign turn in flight is dropped
+            elif msg.mode == "signing" and self.state == "listening":
+                await self._idle()
         elif isinstance(msg, PracticeMsg):
-            self.practice = msg.on
+            self.practice, self.practice_signs = msg.on, set(msg.signs)
         elif isinstance(msg, SayMsg) and self.practice:  # translator speech is the session's own; never page-chosen
             if self._say_waiting:  # a newer line makes the waiting one stale: never more than one in line
                 self._say_waiting.cancel()
@@ -233,9 +254,11 @@ class Session:
             await self._idle()
 
     async def _on_frame(self, f: Frame) -> None:
+        if self.mode == "voice":
+            return  # the camera is off in voice mode (the page stops sending too)
         if self.state == "calibrating":
             self._calib.append(f)
-            if len(self._calib) >= CALIBRATION_FRAMES:
+            if self._calib[-1].t - self._calib[0].t >= CALIBRATION_MS:
                 self.baseline = compute_baseline(self._calib)
                 self.segmenter = self.make_segmenter(self.baseline)
                 await self._set("ready")
@@ -261,8 +284,8 @@ class Session:
         await self._set("ready")
 
     async def on_transcript(self, text: str, final: bool) -> None:
-        if self.practice:
-            return  # lessons are sign -> page only; the mic would start speech turns mid-exercise
+        if self.practice or self.mode == "signing":
+            return  # lessons and signing mode are sign -> page only; the mic would start speech turns mid-sign
         if final and text.strip() and self.state in ("signing", "picking"):
             await self._yield_to_speech()  # never while voice or avatar output plays (those states drop speech)
         # Calibration is only for the signer's camera; speech -> sign doesn't need it.
@@ -299,25 +322,27 @@ class Session:
         try:
             if not ev.segments:
                 return
+            if self.practice:  # one sign per exercise: the hands going down, or a slow sign cut in two, is not a second sign
+                whole = ev.whole or ev.frames  # read whole, and its last PRACTICE_LATEST_MS alone; the page takes either
+                latest = [f for f in whole if f.t >= whole[-1].t - PRACTICE_LATEST_MS]
+                reads = [Segment(frames=fs, kind="sign") for fs in ([whole, latest] if len(latest) < len(whole) else [whole])]
+                tops = [await asyncio.to_thread(self._read_practice, r) for r in reads]
+                turn.stamps["recognized"] = now_ms()
+                turn.result = {"top3": [[[g, round(p, 3)] for g, p in t[:3]] for t in tops]}
+                await self.send(RecognizedMsg(segments=[
+                    [PickOption(gloss=g, english=self._english(g, r), p=p) for g, p in t] for r, t in zip(reads, tops)]))
+                return
             read = [(s, await asyncio.to_thread(self._read_segment, s)) for s in ev.segments]
             read = [(s, t) for s, t in read if t]  # unreadable segments (e.g. no confident letters) are dropped
             segments, tops = [s for s, _ in read], [t for _, t in read]
             grammar, emotion = await asyncio.to_thread(self.readers.read, ev.frames, self.baseline)
             turn.stamps["recognized"] = now_ms()
             turn.result = {"top3": [[[g, round(p, 3)] for g, p in t[:3]] for t in tops]}  # logged even if cancelled
-            if self.practice:  # one sign asked for: read the whole attempt as one, however the segmenter cut it
-                if len(segments) > 1 and all(s.kind == "sign" for s in segments):
-                    whole = sorted({f.t: f for s in segments for f in (s.context or s.frames)}.values(), key=lambda f: f.t)
-                    one = Segment(frames=whole, kind="sign", context=whole)
-                    segments, tops = [one], [await asyncio.to_thread(self.recognizer.recognize, one)]
-                await self.send(RecognizedMsg(segments=[
-                    [PickOption(gloss=g, english=self._english(g, s), p=p) for g, p in t[:PRACTICE_TOP_K]]
-                    for s, t in zip(segments, tops)]))
-                return
             choice = [t[0][0] for t in tops]
             picks = 0
             for i, t in enumerate(tops):
-                if t[0][1] < PICK_THRESHOLD:
+                spelled = segments[i].kind == "spell" and self.spell_reader is not None  # read by the letter reader
+                if t[0][1] < (SPELL_PICK_THRESHOLD if spelled else PICK_THRESHOLD):
                     await self._set("picking")
                     self._pick = asyncio.get_running_loop().create_future()
                     await self.send(PickRequestMsg(segment=i, options=[
@@ -337,6 +362,9 @@ class Session:
             turn.stamps["composed"] = now_ms()
             turn.result = {"signs": signs, "spelled": spelled, "grammar": grammar, "emotion": emotion, "text": text, "picks": picks,
                            "top3": turn.result["top3"]}
+            if not text:  # the signs make no sentence: say so on screen, speak nothing
+                await self.send(YouSaidMsg(text="", emotion=emotion["label"], unclear=True))
+                return
             await self.send(YouSaidMsg(text=text, emotion=emotion["label"]))
             await self._set("speaking")
             async for e in self.voice.speak(text, emotion):
@@ -356,6 +384,15 @@ class Session:
         if s.kind == "spell" and self.spell_reader is not None:
             return self.spell_reader.recognize(s)
         return self.recognizer.recognize(s)
+
+    def _read_practice(self, s: Segment) -> list[tuple[str, float]]:
+        """Guesses among the course's signs only: the lesson knows the sign it asked for, and among all ~2,900 signs
+        rare look-alikes beat it (correct signing passed 48% of the time, 88% among the course's)."""
+        top = self.recognizer.topk(s.frames, 10**6)
+        if self.practice_signs:
+            top = [(g, p) for g, p in top if g in self.practice_signs]
+        z = sum(p for _, p in top) or 1.0
+        return [(g, p / z) for g, p in top[:PRACTICE_TOP_K]]
 
     def _english(self, gloss: str, s: Segment) -> str:
         sign = self.vocab.get(gloss)
@@ -437,6 +474,9 @@ class DemoRecognizer:
         self.word += 1
         alts = [g for g in ("PLEASE", "THANK-YOU", "HELLO") if g != gloss][:2]
         return [(gloss, 0.9), *((g, 0.05) for g in alts)]
+
+    def topk(self, frames: list[Frame], k: int = 3) -> list[tuple[str, float]]:
+        return self.recognize(Segment(frames=frames, kind="sign"))[:k]
 
 
 class StubReaders:

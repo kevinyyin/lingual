@@ -57,6 +57,16 @@ async def test_empty_text_falls_back():
     assert await Composer(c, V).compose(["HELLO"], [], YN, NEUTRAL) == "hello"
 
 
+async def test_signs_that_make_no_sentence_come_back_empty():
+    c = fake_client(json.dumps({"text": "", "unclear": True}))
+    assert await Composer(c, V).compose(["PIZZA", "WHO", "SICK"], [], YN, NEUTRAL) == ""
+
+
+def test_the_prompt_asks_to_flag_signs_that_make_no_sentence():
+    from server.compose import SYSTEM
+    assert '"unclear": true' in SYSTEM
+
+
 @pytest.mark.live
 @pytest.mark.skipif(not os.environ.get("ANTHROPIC_API_KEY"), reason="needs ANTHROPIC_API_KEY")
 async def test_live_compose():

@@ -1,24 +1,23 @@
-/* Translator: teaching mode's motion lines world (cool paper, indigo ink, Shantell Sans over Atkinson Hyperlegible
-   Next), kept calm because a live conversation runs through it: no hand trail, and nothing drawn beyond the mark and
+/* Translator: teaching mode's motion lines world (cool paper, indigo ink, green, Comic Sans), kept calm because a live conversation runs through it: no hand trail, and nothing drawn beyond the mark and
    the status edge. Light only. All text pairs meet WCAG AA (4.5:1); every status edge is 3:1 or more on the stage.
    On a phone (the plushie) the page is one full-screen stage: avatar, a big caption, status as the stage's coloured
    edge, the camera as a corner preview, everything else behind one button. */
 :root {
   --paper: #F6F7FB; --surface: #FFFFFF; --wash: #E3E8FF;
   --ink: #232A63; --ink-2: #565D8C; --outline: rgb(35 42 99 / .55); --hairline: rgb(35 42 99 / .12);
-  --go: #F2592A; --go-ink: #C2410C;
+  --go: #18943F; --go-ink: #13723A;
   --r-panel: 30px 26px 32px 24px / 26px 32px 24px 30px;
   --r-tile: 16px 20px 15px 21px / 19px 15px 21px 16px;
-  /* status: tint + ink for the pill, a stronger hue for the stage edge; no green */
+  /* status: tint + ink for the pill, a stronger hue for the stage edge */
   --ready-bg: var(--wash); --ready-fg: var(--ink); --ready-edge: var(--ink-2);
   --in-bg: #DCEEFF; --in-fg: #0F5A9E; --in-edge: #2B83D6;
-  --out-bg: #FFF0EA; --out-fg: var(--go-ink); --out-edge: #E24A17;
+  --out-bg: #E3F5E8; --out-fg: var(--go-ink); --out-edge: var(--go);
   --wait-bg: #FFF2CC; --wait-fg: #8A5300; --wait-edge: #B07300;
   --err-bg: #FFE4EA; --err-fg: #B4234A; --err-edge: #E2466C;
   --shadow: 0 1px 2px rgb(35 42 99 / .06), 0 8px 24px rgb(35 42 99 / .1);
   --shadow-float: 0 10px 18px -10px rgb(0 0 0 / .45);
-  --display: "Shantell Sans", "Atkinson Hyperlegible Next", system-ui, sans-serif;
-  --text: "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  --display: "Comic Sans MS", "Comic Neue", "Comic Sans", system-ui, sans-serif;
+  --text: "Comic Sans MS", "Comic Neue", "Comic Sans", system-ui, sans-serif;
   --ease: cubic-bezier(.2, .8, .2, 1);
   color-scheme: light;
   font-family: var(--text);
@@ -42,6 +41,12 @@ input { caret-color: var(--go); }
 .brand .mark svg { width: 32px; height: 32px; }
 .mode-name { margin-left: 4px; font: 600 0.95rem var(--text); font-variation-settings: normal; color: var(--ink-2); }
 .actions { display: flex; gap: 8px; }
+/* Voice / Signing: who talks now; the server ignores the other input (ModeMsg) */
+.mode-switch { display: flex; flex: none; padding: 4px; border-radius: 999px; background: var(--surface); box-shadow: inset 0 0 0 1.5px var(--outline); }
+.mode-switch button { min-height: 40px; padding: 0 18px; border: 0; border-radius: 999px; background: transparent; color: var(--ink-2);
+  font: 700 1rem var(--text); cursor: pointer; transition: background-color 160ms var(--ease), color 160ms var(--ease); }
+.mode-switch button[aria-pressed="true"] { background: var(--go-ink); color: #fff; }
+body[data-mode="voice"] .cam-card { display: none; } /* the camera is ignored in voice mode */
 .btn.icon-btn { display: none; } /* the phone's "More" button */
 
 .badge {
@@ -61,10 +66,10 @@ input { caret-color: var(--go); }
 /* Teaching mode's ink pill, at the translator's 44px; it presses in, with no ledge under it */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px;
-  border: 0; border-radius: 999px; background: var(--ink); color: #fff; font: 700 1rem var(--text); cursor: pointer;
+  border: 0; border-radius: 999px; background: var(--go-ink); color: #fff; font: 700 1rem var(--text); cursor: pointer;
   box-shadow: var(--shadow-float); transition: transform 120ms var(--ease), background-color 160ms var(--ease);
 }
-.btn:hover { background: color-mix(in srgb, var(--ink) 88%, #fff); }
+.btn:hover { background: color-mix(in srgb, var(--go-ink) 88%, #fff); }
 .btn:active { transform: scale(.97); }
 .btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--outline); }
 .btn.ghost:hover { background: var(--wash); }
@@ -92,6 +97,11 @@ body:has(#state[data-state="calibrating"]) #avatar-panel::after,
 body:has(#state[data-state="picking"]) #avatar-panel::after { box-shadow: inset 0 0 0 5px var(--wait-edge); }
 body:has(#state[data-state="error"]) #avatar-panel::after { box-shadow: inset 0 0 0 5px var(--err-edge); }
 
+/* working on it: signs being read, or words heard and turned into signs (the badge says which) */
+body:has(#state:is([data-state="signing"], [data-state="listening"])) #avatar-panel::before { content: ""; position: absolute; z-index: 3;
+  top: 18px; left: 18px; width: 34px; height: 34px; border: 4px solid var(--in-bg); border-top-color: var(--in-edge);
+  border-radius: 50%; animation: spin 800ms linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
 #avatar { display: block; width: 100%; flex: 1; min-height: 360px; }
 .caption-box { padding: 18px 28px 22px; background: var(--surface); border-top: 1.5px solid var(--hairline); }
 #caption {
@@ -110,6 +120,9 @@ body:has(#state[data-state="error"]) #avatar-panel::after { box-shadow: inset 0 
 .plan span.letter { padding: 0 9px; border-radius: 9px; margin-right: -3px; }
 .plan span.letter.word-end { margin-right: 6px; }
 .plan span.on { background: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); color: #fff; }
+/* words or signs that made no sense: said as a note, not a chip (ui.ts) */
+.plan span.unclear { background: none; box-shadow: none; padding: 0; color: var(--ink-2); font-weight: 700; }
+#you-said .unclear { color: var(--ink-2); font-size: 1.1rem; }
 
 /* --- side column --- */
 #side { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
@@ -147,13 +160,14 @@ body:has(#state[data-state="error"]) #avatar-panel::after { box-shadow: inset 0 
 @media (max-width: 900px) {
   #app { grid-template-columns: 1fr; padding: 0 16px 16px; }
   #topbar { padding: calc(12px + env(safe-area-inset-top)) 16px 12px; }
+  .mode-name { display: none; } /* room for the Voice / Signing switch */
   #avatar { min-height: 300px; }
 }
 
 /* --- the phone, upright in the plushie: one screen, no scrolling --- */
 @media (max-width: 600px) {
   body { height: 100dvh; overflow: hidden; }
-  #topbar { flex-wrap: nowrap; gap: 8px; padding: calc(8px + env(safe-area-inset-top)) 12px 8px; }
+  #topbar { flex-wrap: wrap; gap: 8px; padding: calc(8px + env(safe-area-inset-top)) 12px 8px; }
   .brand { margin: 0; }
   .brand .word, .mode-name { display: none; }
   /* one or two lines in a fixed height, so the stage never resizes; the long states take the mark's room */
@@ -162,6 +176,8 @@ body:has(#state[data-state="error"]) #avatar-panel::after { box-shadow: inset 0 
   #reclaim { flex: none; padding: 0 14px; }
   body:has(#reclaim:not([hidden])) .brand { display: none; } /* room for the whole message next to its fix */
   .btn.icon-btn { display: inline-flex; flex: none; width: 44px; padding: 0; }
+  .mode-switch { order: 10; flex: 1 1 100%; } /* its own row: the status pill needs the room for position hints */
+  .mode-switch button { flex: 1; min-height: 44px; }
   .actions { display: none; position: absolute; z-index: 40; right: 12px; top: calc(68px + env(safe-area-inset-top));
     flex-direction: column; gap: 8px; padding: 10px; border-radius: var(--r-panel); background: var(--surface); box-shadow: var(--shadow), inset 0 0 0 1px var(--hairline); }
   .actions.open { display: flex; }

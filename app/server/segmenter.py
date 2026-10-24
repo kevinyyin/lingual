@@ -28,6 +28,11 @@ SPELL_RATIO = 2.0  # fingertip motion / wrist motion above this = fingerspelling
 # 0.61 (training/eval_recognition.py cache).
 CONTEXT_MS = 500.0
 PRE_ROLL = 30  # frames kept from before the turn starts (the hands rising), >= CONTEXT_MS at any frame rate
+# After the last sign's hold the hands going back down to rest are cut as a piece of their own (29% of one-sign turns),
+# read as a junk word. A last piece moving mostly down (DOWN_FRAC of the moving wrist's path) and fast (under DOWN_MS)
+# is that: single-sign WLASL replays drop 112 of 141 such pieces, and 10 of 371 real signs ending a sentence.
+DOWN_FRAC = 0.8
+DOWN_MS = 700.0
 TIPS = [4, 8, 12, 16, 20]
 
 
@@ -127,14 +132,33 @@ class Segmenter:
         self._close()
         turn, self.turn = self.turn, None
         rest_ms = turn[-1].t - self.still_t
-        _add_context(self.segments, self.pre + turn)
+        frames = self.pre + turn
+        end = self.segments[-1].frames[-1].t if self.segments else 0.0  # the whole turn still includes the settling
+        if len(self.segments) > 1 and _to_rest(self.segments[-1]):
+            self.segments.pop()
+        _add_context(self.segments, frames)
+        whole = []  # TurnEnd.whole: every frame from the first sign's context to the last's, holds between included
+        if self.segments:
+            lo, hi = self.segments[0].context[0].t, end + CONTEXT_MS
+            whole = [f for f in frames if lo <= f.t <= hi]
         merged: list[Segment] = []
         for s in self.segments:  # letters split by tiny holds belong to one spelled word
             if merged and s.kind == merged[-1].kind == "spell":
                 merged[-1] = Segment(frames=merged[-1].frames + s.frames, kind="spell")
             else:
                 merged.append(s)
-        return TurnEnd(segments=merged, frames=turn, rest_ms=rest_ms)
+        return TurnEnd(segments=merged, frames=turn, rest_ms=rest_ms, whole=whole)
+
+
+def _to_rest(s: Segment) -> bool:
+    """The hands going back down to rest, not a sign (DOWN_FRAC, DOWN_MS). A spelled word's wrist barely moves, so
+    any drift could look downward: never one of those."""
+    if s.kind != "sign" or s.frames[-1].t - s.frames[0].t >= DOWN_MS:
+        return False
+    steps = np.diff(np.stack([_wrists(f) for f in s.frames]), axis=0)  # (frames - 1, wrist, xy)
+    path = np.linalg.norm(steps, axis=2).sum(0)
+    k = int(np.argmax(path))  # the wrist that moved most
+    return path[k] > 0 and steps[:, k, 1].clip(min=0).sum() >= DOWN_FRAC * path[k]  # image y grows downward
 
 
 def _add_context(segments: list[Segment], frames: list[Frame]) -> None:

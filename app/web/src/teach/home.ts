@@ -34,7 +34,7 @@ const TABS: { id: Tab; label: string; icon: string }[] = [
 export function renderHome(root: HTMLElement, tab: Tab, ctx: HomeCtx): void {
   const now = new Date();
   const header = h("header", { class: "topbar" },
-    h("a", { class: "logo", href: "#/learn" }, h("span", { class: "mark" }, svg(ICON.mark)), h("span", { class: "word" }, "lingual")),
+    h("a", { class: "logo", href: "#/learn" }, h("span", { class: "mark" }, svg(ICON.mark)), h("span", { class: "word" }, "ASL Dragon")),
     h("nav", { class: "tabs", "aria-label": "Main" },
       ...TABS.map((t) => h("a", { class: "tab", href: `#/${t.id}`, "aria-current": t.id === tab ? "page" : null }, svg(t.icon), h("span", { class: "label" }, t.label)))),
     stats(ctx),
@@ -82,7 +82,7 @@ function hero(ctx: HomeCtx, now: Date, states: Map<string, StopState>): HTMLElem
   const loading = h("div", { class: "loading" }, "Loading signer…");
   const slot = h("div", { class: "avatar-slot hero-avatar" }, loading,
     h("div", { class: "controls" },
-      h("button", { class: "round hero-play", "aria-label": "Watch the first sign", onclick: () => void playSigns([next.l!.signs[0]]) }, svg(ICON.play))));
+      h("button", { class: "round hero-play", "aria-label": "Watch the first sign", title: "Watch the first sign", onclick: () => void playSigns([next.l!.signs[0]]) }, svg(ICON.play))));
   mountSigner(slot);
   const drop = () => loading.remove();
   requestAnimationFrame(() => setTimeout(() => void loadStage().then(drop, drop))); // after the home has painted: the avatar is slow to load

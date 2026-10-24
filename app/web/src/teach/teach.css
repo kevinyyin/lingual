@@ -1,21 +1,21 @@
 /* Teaching mode: motion lines. Drawn the way a sign moves: one line for the course, arrows for motion, a teacher's
-   circle for a right answer. Cool paper and indigo ink, one tangerine ("go") for motion, rose for a wrong answer.
-   Shantell Sans to display, Atkinson Hyperlegible Next to read. Light only. Every text pair meets WCAG AA. */
+   circle for a right answer. Cool paper and indigo ink, one green ("go") for motion and the buttons, rose for a wrong
+   answer. Comic Sans throughout (Comic Neue on phones, which lack it). Light only. Every text pair meets WCAG AA. */
 :root {
   --paper: #F6F7FB; --surface: #FFFFFF; --wash: #E3E8FF;
   --ink: #232A63; --ink-2: #565D8C; --guide: #AEB7E2; --outline: rgb(35 42 99 / .55); --hairline: rgb(35 42 99 / .12);
-  --go: #F2592A; --go-ink: #C2410C; /* go is for marks only (3.1:1 on paper); go-ink is its text-safe twin */
+  --go: #18943F; --go-ink: #13723A; /* go is for marks only (3.7:1 on paper); go-ink is its text-safe twin (white on it 6:1) */
   --rose: #E2466C; --rose-ink: #B4234A; /* the same split for a wrong answer */
   /* soft corners, each a little different, like a box drawn by hand */
   --r-panel: 30px 26px 32px 24px / 26px 32px 24px 30px;
   --r-tile: 16px 20px 15px 21px / 19px 15px 21px 16px;
   --shadow-float: 0 10px 18px -10px rgb(0 0 0 / .45);
-  --display: "Shantell Sans", "Atkinson Hyperlegible Next", system-ui, sans-serif;
-  --text: "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  --display: "Comic Sans MS", "Comic Neue", "Comic Sans", system-ui, sans-serif;
+  --text: "Comic Sans MS", "Comic Neue", "Comic Sans", system-ui, sans-serif;
   --ease: cubic-bezier(.2, .8, .2, 1);
   /* drawn marks as backgrounds: an underline swoosh, and a loop around a small thing */
-  --swoosh: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12' preserveAspectRatio='none'%3E%3Cpath d='M3 8C30 2 70 2 97 7' fill='none' stroke='%23F2592A' stroke-width='3.5' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
-  --loop: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 60' preserveAspectRatio='none'%3E%3Cpath d='M16 38C8 20 28 8 44 9C62 10 70 22 66 36C62 50 40 54 26 50C14 46 10 36 18 24' fill='none' stroke='%23F2592A' stroke-width='3' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --swoosh: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12' preserveAspectRatio='none'%3E%3Cpath d='M3 8C30 2 70 2 97 7' fill='none' stroke='%2318943F' stroke-width='3.5' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --loop: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 60' preserveAspectRatio='none'%3E%3Cpath d='M16 38C8 20 28 8 44 9C62 10 70 22 66 36C62 50 40 54 26 50C14 46 10 36 18 24' fill='none' stroke='%2318943F' stroke-width='3' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
   color-scheme: light;
 }
 * { box-sizing: border-box; }
@@ -36,10 +36,10 @@ p { margin: 0; }
 /* --- buttons: an ink pill that presses in; no ledge under it --- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px;
-  border: 0; border-radius: 999px; background: var(--ink); color: #fff; font: 700 18px var(--text); cursor: pointer;
+  border: 0; border-radius: 999px; background: var(--go-ink); color: #fff; font: 700 18px var(--text); cursor: pointer;
   box-shadow: var(--shadow-float); transition: transform 120ms var(--ease), background-color 160ms var(--ease);
 }
-.btn:hover:not(:disabled) { background: color-mix(in srgb, var(--ink) 88%, #fff); }
+.btn:hover:not(:disabled) { background: color-mix(in srgb, var(--go-ink) 88%, #fff); }
 .btn:active:not(:disabled) { transform: scale(.97); }
 .btn:disabled { background: var(--wash); color: var(--ink-2); box-shadow: none; cursor: default; }
 .btn .icon { width: 20px; height: 20px; stroke-width: 2.4; }
@@ -102,7 +102,7 @@ p { margin: 0; }
 .hero h1 { font-size: 34px; }
 .hero h1:has(span) { font-size: 22px; color: var(--ink-2); font-weight: 700; }
 /* the title's longest word (--chars, set by home.ts) always fits the column beside the avatar.
-   shortcut: Shantell 800 runs under .72em a letter for every lesson title; measure again if titles change */
+   shortcut: Comic Sans bold runs under .65em a letter for every lesson title (Comic Neue .57); measure again if titles change */
 .hero h1 span { display: block; width: fit-content; max-width: 100%; margin-top: 2px; padding-bottom: 10px; font-size: min(46px, 100cqi / (var(--chars, 5) * .72));
   font-weight: 800; color: var(--ink); font-variation-settings: "INFM" 50, "BNCE" 20; line-height: 1.05; background: var(--swoosh) left bottom / 100% 12px no-repeat; }
 .hero p { margin-top: 6px; color: var(--ink-2); font-size: 16px; }
@@ -165,6 +165,7 @@ p { margin: 0; }
 .quest + .quest { border-top: 1.5px solid var(--hairline); }
 .q-icon { width: 32px; height: 32px; display: grid; place-items: center; color: var(--ink-2); }
 .q-icon .icon { width: 22px; height: 22px; }
+.q-icon.sun { color: #B98900; } .q-icon.aqua { color: var(--go); } .q-icon.red { color: var(--rose); }
 .q-title { display: flex; justify-content: space-between; gap: 8px; font-weight: 700; font-size: 15px; margin-bottom: 8px; }
 .q-done { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; box-shadow: inset 0 0 0 2px var(--guide); color: transparent; }
 .q-done .icon { width: 18px; height: 18px; stroke-width: 3; }
@@ -282,6 +283,10 @@ p { margin: 0; }
 .round.small { width: 40px; height: 40px; }
 .round.small .icon { width: 19px; height: 19px; }
 .avatar-slot.playing .round { opacity: .5; }
+/* while it plays, a header says at which speed (signer.ts sets data-mode): the round buttons alone didn't say */
+.avatar-slot.playing[data-mode]::after { content: attr(data-mode); position: absolute; top: 12px; right: 12px; z-index: 3; padding: 3px 14px 5px;
+  border-radius: 999px; background: var(--ink); color: #fff; font: 700 15px var(--display); white-space: nowrap; animation: mode-in 220ms var(--ease); }
+@keyframes mode-in { from { opacity: 0; transform: translateY(-6px); } }
 .intro-word { text-align: center; }
 .intro-word b { display: block; font: 800 40px var(--display); font-variation-settings: "INFM" 50, "BNCE" 15; }
 .intro-word small { color: var(--ink-2); font-size: 15px; letter-spacing: .06em; }
@@ -331,6 +336,11 @@ svg.mark.strike path { stroke: var(--rose); }
 .cam-slot[data-status="ready"] { --edge: var(--ink-2); }
 .cam-slot[data-status="signing"] { --edge: var(--go); }
 .cam-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* working on it while the camera starts or a sign is read: the dark box never looks stuck */
+.cam-slot:is([data-status="starting"], [data-status="signing"]) .cam-status::before { content: ""; display: inline-block; width: 14px; height: 14px;
+  margin-right: 10px; vertical-align: -2px; border: 2.5px solid rgb(255 255 255 / .35); border-top-color: #fff; border-radius: 50%; animation: spin 800ms linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.face-line { text-align: center; color: var(--ink-2); font-weight: 700; } /* what the learner's face reads as (lessonView faceLine) */
 .cam-status { position: absolute; left: 10px; right: 10px; bottom: 10px; z-index: 1; padding: 8px 12px; border-radius: var(--r-tile); background: rgb(35 42 99 / .78); color: #fff; font-size: 16px; text-align: center; }
 .perform .avatar-slot { height: 300px; }
 .heard { color: var(--ink-2); text-align: center; min-height: 1.5em; font-size: 16px; }
@@ -359,8 +369,8 @@ svg.mark.strike path { stroke: var(--rose); }
 .score { display: flex; align-items: center; gap: 10px; margin: 4px 0; font-weight: 700; font-size: 15px; }
 .score-track { flex: 1; max-width: 180px; height: 4px; border-radius: 2px; background: rgb(35 42 99 / .1); overflow: hidden; }
 .score-track i { display: block; height: 100%; border-radius: inherit; }
-.score.good { color: var(--ink); } .score.good i { background: var(--ink); }
-.score.ok { color: var(--go-ink); } .score.ok i { background: var(--go); }
+.score.good { color: var(--go-ink); } .score.good i { background: var(--go); }
+.score.ok { color: var(--ink); } .score.ok i { background: var(--ink-2); }
 .score.low { color: var(--rose-ink); } .score.low i { background: var(--rose); }
 
 /* --- results, streak: on the paper itself, no card --- */

@@ -3,7 +3,7 @@ import json
 import pytest
 
 from frames import make_frame
-from server.protocol import AvatarDoneMsg, CalibrateMsg, FrameMsg, PickMsg, PracticeMsg, SayMsg, SignPlanMsg, SignToken
+from server.protocol import AvatarDoneMsg, CalibrateMsg, FrameMsg, ModeMsg, PickMsg, PracticeMsg, SayMsg, SignPlanMsg, SignToken
 from server.session import Baseline, Segment, Session, TurnEnd, TurnStart, compute_baseline
 from server.vocab import load_vocab
 
@@ -60,7 +60,7 @@ def seg():
     return Segment(frames=[make_frame()] * 8, kind="sign")
 
 
-def make_session(tmp_path, events=(), results=(), voice=None, composer=None):
+def make_session(tmp_path, events=(), results=(), voice=None, composer=None, recognizer=None):
     sent = []
 
     async def send(m):
@@ -70,7 +70,7 @@ def make_session(tmp_path, events=(), results=(), voice=None, composer=None):
         send=send,
         vocab=load_vocab(),
         make_segmenter=lambda b: FakeSegmenter(events),
-        recognizer=FakeRecognizer(results),
+        recognizer=recognizer or FakeRecognizer(results),
         readers=FakeReaders(),
         composer=composer or FakeComposer(),
         voice=voice or FakeVoice(),
@@ -82,7 +82,7 @@ def make_session(tmp_path, events=(), results=(), voice=None, composer=None):
 
 async def calibrate(s):
     await s.on_client(CalibrateMsg())
-    for i in range(60):
+    for i in range(62):  # 2 s at 30 fps
         await s.on_client(FrameMsg(**make_frame(t=i * 33).model_dump()))
 
 
@@ -107,12 +107,22 @@ async def test_calibration_sets_baseline(tmp_path):
     assert s.state == "ready"
     rest = make_frame().pose[15][1]
     # Image y grows downward: the rest line sits above (smaller y than) the resting wrists.
-    assert s.baseline.rest_y < rest
+    assert all(y < rest for y in s.baseline.rest_y)
+
+
+async def test_calibration_takes_two_seconds_at_the_phones_frame_rate(tmp_path):
+    s, sent = make_session(tmp_path)
+    await s.on_client(CalibrateMsg())
+    for i in range(20):  # 10 frames/s: 1.9 s
+        await s.on_client(FrameMsg(**make_frame(t=i * 100).model_dump()))
+    assert s.state == "calibrating"
+    await s.on_client(FrameMsg(**make_frame(t=2000).model_dump()))
+    assert s.state == "ready"
 
 
 async def test_sign_turn_speaks_and_logs(tmp_path):
     events = [TurnStart(), TurnEnd(segments=[seg(), seg()], frames=[make_frame()] * 20, rest_ms=500)]
-    s, sent = make_session(tmp_path, events, [[("COFFEE", 0.9)], [("HAVE", 0.8)]])
+    s, sent = make_session(tmp_path, events, [[("COFFEE", 0.99)], [("HAVE", 0.98)]])
     await calibrate(s)
     await push_frames(s, 2)
     said = [m for m in sent if m.type == "you_said"]
@@ -165,6 +175,43 @@ async def test_finished_speech_closes_an_open_picker_and_is_signed(tmp_path):
     assert not [m for m in sent if m.type == "you_said"]  # the abandoned sign turn says nothing
 
 
+async def test_signing_mode_ignores_speech(tmp_path):
+    s, sent = make_session(tmp_path)
+    await s.on_client(ModeMsg(mode="signing"))
+    await calibrate(s)
+    await s.on_transcript("hello there", True)
+    await s.idle()
+    assert s.state == "ready" and not [m for m in sent if m.type in ("sign_plan", "caption")]
+
+
+async def test_voice_mode_ignores_the_camera_and_drops_a_sign_turn_in_flight(tmp_path):
+    s, sent = make_session(tmp_path, [TurnStart(), TurnStart()])
+    await calibrate(s)
+    await push_frames(s, 1)
+    assert s.state == "signing"
+    await s.on_client(ModeMsg(mode="voice"))
+    assert s.state == "ready"
+    await push_frames(s, 1)  # a hand raised while talking starts no sign turn
+    assert s.state == "ready"
+    await s.on_transcript("hello", True)
+    await s.idle()
+    assert [m for m in sent if m.type == "sign_plan"]
+
+
+async def test_signs_that_make_no_sentence_are_shown_as_unclear_and_not_spoken(tmp_path):
+    class NoSentence(FakeComposer):
+        async def compose(self, signs, spelled, grammar, emotion):
+            return ""
+
+    events = [TurnStart(), TurnEnd(segments=[seg()], frames=[make_frame()] * 20, rest_ms=0)]
+    voice = RecordingVoice()
+    s, sent = make_session(tmp_path, events, [[("PIZZA", 0.99)]], composer=NoSentence(), voice=voice)
+    await calibrate(s)
+    await push_frames(s, 2)
+    (said,) = [m for m in sent if m.type == "you_said"]
+    assert said.unclear and said.text == "" and not voice.said and s.state == "ready"
+
+
 async def test_transcript_during_speaking_dropped(tmp_path):
     s, sent = make_session(tmp_path)
     await calibrate(s)
@@ -192,7 +239,7 @@ async def test_blank_transcript_ignored(tmp_path):
 
 async def test_voice_failure_still_shows_text(tmp_path):
     events = [TurnStart(), TurnEnd(segments=[seg()], frames=[make_frame()] * 20, rest_ms=0)]
-    s, sent = make_session(tmp_path, events, [[("COFFEE", 0.9)]], voice=FakeVoice(fail=True))
+    s, sent = make_session(tmp_path, events, [[("COFFEE", 0.99)]], voice=FakeVoice(fail=True))
     await calibrate(s)
     await push_frames(s, 2)
     assert [m for m in sent if m.type == "you_said"]
@@ -248,7 +295,7 @@ async def test_spell_segment_routed_to_spell_reader(tmp_path):
     spell = Segment(frames=[make_frame()] * 8, kind="spell")
     events = [TurnStart(), TurnEnd(segments=[seg(), spell], frames=[make_frame()] * 20, rest_ms=0)]
     composer = FakeComposer()
-    s, _ = make_session(tmp_path, events, [[("NAME", 0.9)]], composer=composer)
+    s, _ = make_session(tmp_path, events, [[("NAME", 0.99)]], composer=composer)
     s.spell_reader = FakeSpell()
     await calibrate(s)
     await push_frames(s, 2)
@@ -265,12 +312,23 @@ async def test_unreadable_spell_segment_is_dropped(tmp_path):
     spell = Segment(frames=[make_frame()] * 8, kind="spell")
     events = [TurnStart(), TurnEnd(segments=[seg(), spell], frames=[make_frame()] * 20, rest_ms=0)]
     composer = FakeComposer()
-    s, sent = make_session(tmp_path, events, [[("NAME", 0.9)]], composer=composer)
+    s, sent = make_session(tmp_path, events, [[("NAME", 0.99)]], composer=composer)
     s.spell_reader = EmptySpell()
     await calibrate(s)
     await push_frames(s, 2)
     assert composer.calls[0][:2] == (["NAME"], [])
     assert not [m for m in sent if m.type == "pick_request"] and s.state == "ready"
+
+
+async def test_a_sign_read_only_90_percent_sure_asks_the_signer(tmp_path):
+    events = [TurnStart(), TurnEnd(segments=[seg()], frames=[make_frame()] * 20, rest_ms=0)]
+    composer = FakeComposer()
+    s, sent = make_session(tmp_path, events, [[("COFFEE", 0.9), ("TEA", 0.06), ("MILK", 0.04)]], composer=composer)
+    await calibrate(s)
+    await push_frames(s, 2)
+    (req,) = [m for m in sent if m.type == "pick_request"]
+    assert [o.gloss for o in req.options] == ["COFFEE", "TEA", "MILK"]
+    assert not composer.calls and s.state == "picking"  # nothing spoken until the signer picks
 
 
 async def test_log_records_pick_count(tmp_path):
@@ -300,7 +358,7 @@ class SlowComposer(FakeComposer):
 async def test_second_turn_end_while_busy_is_ignored(tmp_path):
     end = TurnEnd(segments=[seg()], frames=[make_frame()] * 20, rest_ms=0)
     composer = SlowComposer()
-    s, sent = make_session(tmp_path, [TurnStart(), end, TurnStart(), end], [[("COFFEE", 0.9)], [("TEA", 0.9)]], composer=composer)
+    s, sent = make_session(tmp_path, [TurnStart(), end, TurnStart(), end], [[("COFFEE", 0.99)], [("TEA", 0.99)]], composer=composer)
     await calibrate(s)
     for i in range(4):
         await s.on_client(FrameMsg(**make_frame(t=10_000 + i).model_dump()))
@@ -386,29 +444,61 @@ def test_demo_recognizer_follows_script_one_sentence_per_turn():
     assert r.recognize(seg(9000))[0][0] == "I"  # wraps around the script
 
 
-async def test_practice_turn_sends_guesses_without_speaking(tmp_path):
-    events = [TurnStart(), TurnEnd(segments=[seg()], frames=[make_frame()] * 20, rest_ms=0)]
+class WholeTurnRecognizer:
+    """The full distribution for any frames, and every frame list it was asked about."""
+
+    def __init__(self, dist):
+        self.dist, self.asked = dist, []
+
+    def topk(self, frames, k=3):
+        self.asked.append(frames)
+        return self.dist[:k]
+
+
+async def test_practice_reads_the_whole_turn_as_one_sign_among_the_course_signs(tmp_path):
+    whole = [make_frame(t=i * 66) for i in range(30)]
+    events = [TurnStart(), TurnEnd(segments=[seg(), seg()], frames=whole[5:25], rest_ms=0, whole=whole)]  # sign + hands down
+    rec = WholeTurnRecognizer([("HAIRCLIPPER", 0.5), ("GOODBYE", 0.2), ("SPACESHIP", 0.15), ("HELLO", 0.1), ("THANK-YOU", 0.05)])
     composer = FakeComposer()
-    s, sent = make_session(tmp_path, events, [[("COFFEE", 0.3), ("TEA", 0.2)]], composer=composer)
-    await s.on_client(PracticeMsg(on=True))
+    s, sent = make_session(tmp_path, events, recognizer=rec, composer=composer)
+    await s.on_client(PracticeMsg(on=True, signs=["HELLO", "GOODBYE", "THANK-YOU"]))
     await calibrate(s)
     await push_frames(s, 2)
-    (rec,) = [m for m in sent if m.type == "recognized"]
-    assert [[o.gloss for o in seg_] for seg_ in rec.segments] == [["COFFEE", "TEA"]]
-    assert rec.segments[0][0].english == "coffee"
+    (msg,) = [m for m in sent if m.type == "recognized"]
+    guesses, latest = msg.segments  # one sign per exercise however the segmenter cut it, and its last 1.5 s alone
+    assert [o.gloss for o in guesses] == ["GOODBYE", "HELLO", "THANK-YOU"] == [o.gloss for o in latest]
+    assert guesses[0].english == "goodbye" and abs(sum(o.p for o in guesses) - 1) < 1e-6
+    assert rec.asked == [whole, [f for f in whole if f.t >= whole[-1].t - 1500]]
     assert not composer.calls and not [m for m in sent if m.type in ("pick_request", "you_said")]
     assert states(sent)[-2:] == ["signing", "ready"]
 
 
-async def test_practice_reads_a_sign_cut_into_pieces_as_one(tmp_path):
-    events = [TurnStart(), TurnEnd(segments=[seg(), seg()], frames=[make_frame()] * 20, rest_ms=0)]
-    pieces, whole = [("DARK", 0.2)], [("HELLO", 0.6), ("NICE", 0.1)]
-    s, sent = make_session(tmp_path, events, [pieces, pieces, whole])
+async def test_practice_without_a_course_list_reads_among_every_sign(tmp_path):
+    events = [TurnStart(), TurnEnd(segments=[seg()], frames=[make_frame()] * 20, rest_ms=0)]
+    rec = WholeTurnRecognizer([("COFFEE", 0.6), ("TEA", 0.4)])
+    s, sent = make_session(tmp_path, events, recognizer=rec)
+    await s.on_client(PracticeMsg(on=True))
+    await calibrate(s)
+    await push_frames(s, 2)
+    (msg,) = [m for m in sent if m.type == "recognized"]
+    assert [o.gloss for o in msg.segments[0]] == ["COFFEE", "TEA"]
+    assert rec.asked == [[make_frame()] * 20]  # no whole span from the segmenter: the turn's own frames
+
+
+async def test_practice_reads_a_corrected_sign_on_its_own_too(tmp_path):
+    """A wrong sign, then the right one without resting between: the whole turn reads as neither, its end as the right one."""
+    class Corrected:
+        def topk(self, frames, k=3):
+            return [("DARK", 0.5), ("NICE", 0.3)] if frames[-1].t - frames[0].t > 1500 else [("HELLO", 0.7), ("NICE", 0.2)]
+
+    whole = [make_frame(t=i * 66) for i in range(50)]  # 3.2 s: the wrong sign, a beat, the right one
+    events = [TurnStart(), TurnEnd(segments=[seg()], frames=whole, rest_ms=0, whole=whole)]
+    s, sent = make_session(tmp_path, events, recognizer=Corrected())
     await s.on_client(PracticeMsg(on=True))
     await calibrate(s)
     await push_frames(s, 2)
     (rec,) = [m for m in sent if m.type == "recognized"]
-    assert [[o.gloss for o in seg_] for seg_ in rec.segments] == [["HELLO", "NICE"]]
+    assert [[o.gloss for o in seg_] for seg_ in rec.segments] == [["DARK", "NICE"], ["HELLO", "NICE"]]
 
 
 async def test_practice_mode_ignores_speech(tmp_path):

@@ -64,21 +64,24 @@ _current_ws: WebSocket | None = None
 # vs 1.0 for the spike model in the ensemble. training.eval_recognition, 4,286 runs (online videos x 7 qualities),
 # top-1 on the live-like span: 1:1 0.471, 2:1 0.461, ST-GCN alone 0.463.
 CITIZEN_WEIGHT = 1.0
+# The camera reads only the 160 hand-checked everyday signs (the avatar still shows ~2,000): among all ~2,900, rare
+# look-alikes won. One-sign turns of an everyday conversation (WLASL videos, live path): right 24% -> 41%.
+CAMERA_VOCAB = load_vocab(extended=None)
 
 
 def _recognizer():
-    """Our own trained model if present; else the published ASL Citizen ST-GCN (limited to our vocabulary), ensembled
-    with the asl-spike model when both exist; else whichever exists; else the scripted demo."""
+    """Our own trained model if present; else the published ASL Citizen ST-GCN (limited to the camera's vocabulary),
+    ensembled with the asl-spike model when both exist; else whichever exists; else the scripted demo."""
     if DEFAULT_MODEL.exists():
         return SignPredictor(DEFAULT_MODEL)
     members = []
     if CITIZEN_MODEL.exists() and CITIZEN_CSV.exists():
-        members.append((CitizenSignPredictor(VOCAB, restrict_to_vocab=True), CITIZEN_WEIGHT))
+        members.append((CitizenSignPredictor(CAMERA_VOCAB, restrict_to_vocab=True), CITIZEN_WEIGHT))
     if SPIKE_MODEL.exists():
         members.append((SpikeSignPredictor(SPIKE_MODEL), 1.0))
     if members:
         log.warning("sign recognizer: %s (curated prior)", " + ".join(type(m).__name__ for m, _ in members))
-        return PriorRecognizer(members[0][0] if len(members) == 1 else EnsembleRecognizer(members, VOCAB), VOCAB)
+        return PriorRecognizer(members[0][0] if len(members) == 1 else EnsembleRecognizer(members, CAMERA_VOCAB), VOCAB)
     log.warning("no sign model (models/asl-citizen or the asl-spike bundle): demo recognizer reads each sign as the "
                 "next word of a scripted conversation")
     return S.DemoRecognizer()
@@ -164,10 +167,11 @@ async def ws_endpoint(ws: WebSocket):
     await send(S.StateMsg(state="calibrating"))
     mic = None
     if os.environ.get("CARTESIA_API_KEY"):
-        # silent only while our own voice or avatar output plays; words during a camera turn take over (session.py)
-        mic = asyncio.create_task(MicTranscriber(sess.on_transcript, lambda: sess.state not in ("speaking", "avatar"),
-                                                 api_key=os.environ["CARTESIA_API_KEY"],
-                                                 **({"mic": client_mic} if client_mic else {})).run())
+        # silent while our own voice or avatar output plays and in signing mode; words during a camera turn take over
+        # (session.py)
+        mic = asyncio.create_task(MicTranscriber(
+            sess.on_transcript, lambda: sess.state not in ("speaking", "avatar") and sess.mode != "signing",
+            api_key=os.environ["CARTESIA_API_KEY"], **({"mic": client_mic} if client_mic else {})).run())
     else:
         log.warning("CARTESIA_API_KEY missing: no speech input (use ?dev=1 to type what the hearing person says)")
     try:
@@ -282,4 +286,4 @@ mount_web(app, ROOT / "web" / "dist", ROOT / "web" / "public")
 def run():
     import uvicorn
     # uvloop rejects happy_eyeballs_delay (voice.WS_OPTIONS); asyncio has it
-    uvicorn.run("server.main:app", host="127.0.0.1", port=8000, loop="asyncio")
+    uvicorn.run("server.main:app", host="127.0.0.1", port=int(os.environ.get("PORT", 8000)), loop="asyncio")

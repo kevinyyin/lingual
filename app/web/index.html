@@ -3,24 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Two-Way ASL</title>
+    <title>ASL Dragon · Translator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400..800&family=Shantell+Sans:wght,BNCE,INFM@400..800,-100..100,0..100&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <header id="topbar">
-      <h1 class="brand"><span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="7" cy="23" r="2.8" fill="#F2592A"/><path d="M7 23C9 13 17 7 26 9M20.6 4.4 26 9l-6.7 1.9" fill="none" stroke="#F2592A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="word">Two-Way ASL</span> <span class="mode-name">Translator</span></h1>
+      <h1 class="brand"><span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="7" cy="23" r="2.8" fill="#18943F"/><path d="M7 23C9 13 17 7 26 9M20.6 4.4 26 9l-6.7 1.9" fill="none" stroke="#18943F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="word">ASL Dragon</span> <span class="mode-name">Translator</span></h1>
+      <div id="mode" class="mode-switch" role="group" aria-label="Who is talking">
+        <button type="button" data-mode="voice" aria-pressed="true" title="Voice: speak, and the avatar signs it">Voice</button>
+        <button type="button" data-mode="signing" aria-pressed="false" title="Signing: sign to the camera, and it is said out loud">Signing</button>
+      </div>
       <span id="state" class="badge" role="status" aria-atomic="true" data-state="connecting">Connecting…</span>
       <button id="reclaim" type="button" class="btn" hidden onclick="location.reload()">Use it here</button>
       <button id="more" type="button" class="btn ghost icon-btn" aria-expanded="false" aria-controls="actions" aria-label="More">
         <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22"><path d="M5 12h.01M12 12h.01M19 12h.01" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
       </button>
       <div id="actions" class="actions">
-        <button id="calibrate" type="button" class="btn ghost" title="Rest your hands and keep a neutral face, then tap: the camera re-learns your resting pose">
-          <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Recalibrate
-        </button>
         <a class="btn ghost" href="/teach.html">Teaching mode</a>
       </div>
     </header>

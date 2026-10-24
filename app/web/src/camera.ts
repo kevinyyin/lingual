@@ -44,12 +44,14 @@ export async function startCamera(video: HTMLVideoElement, onFrame: (f: Frame) =
   const [hands, pose, face] = await loadTrackers();
 
   // Feed MediaPipe the unmirrored stream; the preview is mirrored with CSS only.
-  video.srcObject = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480, frameRate: 30 }, audio: false });
+  const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480, frameRate: 30 }, audio: false });
+  video.srcObject = stream;
   video.style.transform = "scaleX(-1)";
   await video.play();
 
   let last = -1;
   const tick = () => {
+    if (video.srcObject !== stream) return; // a fresh feed (startCamera again on this video) has its own loop
     requestAnimationFrame(tick); // first: a detector that throws on one frame must not end tracking for good
     const t = performance.now();
     if (!paused() && video.currentTime !== last) {

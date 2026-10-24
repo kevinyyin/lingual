@@ -19,21 +19,25 @@ export type ClientMsg =
   | { type: "calibrate" }
   | { type: "pick"; segment: number; gloss: string }
   | { type: "avatar_done" }
-  | { type: "practice"; on: boolean }
+  | { type: "practice"; on: boolean; signs?: string[] }
+  | { type: "mode"; mode: Mode }
   | { type: "say"; text: string }
   | { type: "record"; signer: string; gloss: string; frames: Frame[] };
 
+/** The translator's switch: voice (speech -> avatar; the camera is ignored) or signing (camera -> speech; speech ignored). */
+export type Mode = "voice" | "signing";
 export type State = "calibrating" | "ready" | "signing" | "picking" | "speaking" | "listening" | "avatar";
 export type Grammar = "yn" | "wh" | "neg" | "statement";
 export type Tone = "warm" | "apologetic" | "urgent" | "neutral";
 export interface SignToken { kind: "sign" | "spell"; gloss?: string | null; word?: string | null }
-export interface SignPlan { type: "sign_plan"; tokens: SignToken[]; grammar: Grammar; tone: Tone; english: string }
+/** `unclear`: the words made no sense, so nothing is signed and `english` is what was heard. */
+export interface SignPlan { type: "sign_plan"; tokens: SignToken[]; grammar: Grammar; tone: Tone; english: string; unclear?: boolean }
 export interface PickOption { gloss: string; english: string; p: number }
 
 export type ServerMsg =
   | { type: "state"; state: State }
   | { type: "pick_request"; segment: number; options: PickOption[] }
-  | { type: "you_said"; text: string; emotion: string }
+  | { type: "you_said"; text: string; emotion: string; unclear?: boolean } // unclear: the signs made no sentence
   | { type: "caption"; text: string; final: boolean }
   | SignPlan
   | { type: "recognized"; segments: PickOption[][] }
