@@ -3,7 +3,8 @@ import { createStage } from "./avatar/stage";
 import { loadAvatar } from "./avatar";
 import { startCamera } from "./camera";
 import { rememberPhone } from "./phone";
-import { bindControls, highlight, renderMsg, setCameraOff } from "./ui";
+import { PositionWatch } from "./position";
+import { bindControls, currentMode, currentState, highlight, renderMsg, setCameraOff, showHint } from "./ui";
 import { connect } from "./ws";
 
 const MAX_BUFFERED = 256 * 1024; // drop frames rather than queue stale ones
@@ -43,18 +44,28 @@ function converse() {
     reclaim.textContent = e.code === 4001 ? "Use it here" : "Reconnect";
     reclaim.hidden = false;
   }, { mic: true });
-  bindControls(sock);
   if (params.get("camera") === "0") { // speech -> sign only: no signer turns from stray hand movement
+    document.getElementById("mode")!.hidden = true; // nothing to switch to
+    bindControls(sock);
     setCameraOff();
     document.querySelector(".cam-card figcaption")!.textContent = "Camera off · speech to sign only";
     document.getElementById("cam")!.hidden = true;
     return;
   }
-  startCamera(document.getElementById("cam") as HTMLVideoElement, (f) => {
-    if (sock.buffered() < MAX_BUFFERED) sock.send({ type: "frame", ...f });
-  }, () => playing).catch((e) => {
+  // opened the first time signing mode is on (voice mode never asks for the camera); detection runs only in signing
+  // mode and not while the avatar signs
+  let camera: Promise<void> | null = null;
+  const watch = new PositionWatch(); // directs the signer into position; calibrates again when they move (position.ts)
+  const openCamera = () => (camera ??= startCamera(document.getElementById("cam") as HTMLVideoElement, (f) => {
+    const { hint, send, recalibrate } = watch.check(f, currentState(), performance.now());
+    showHint(hint);
+    if (recalibrate) sock.send({ type: "calibrate" });
+    if (send && sock.buffered() < MAX_BUFFERED) sock.send({ type: "frame", ...f });
+  }, () => playing || currentMode() !== "signing").catch((e) => {
+    camera = null; // switching to signing again retries
     const badge = document.getElementById("state")!;
-    badge.textContent = e.name === "NotAllowedError" ? "Camera blocked: allow it in Settings, speech still works" : "No camera: speech still works";
+    badge.textContent = e.name === "NotAllowedError" ? "Camera blocked: allow it in Settings" : "No camera: use Voice";
     badge.dataset.state = "error";
-  });
+  }));
+  bindControls(sock, (m) => { if (m === "signing") void openCamera(); });
 }

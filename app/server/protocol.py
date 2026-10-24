@@ -42,6 +42,14 @@ class PracticeMsg(BaseModel):
     """Teaching mode (teach.html): sign turns are graded by the page, not composed or spoken; speech is ignored."""
     type: Literal["practice"] = "practice"
     on: bool
+    signs: list[str] = []  # the course's signs: each turn is read as one of these (empty: any sign)
+
+
+class ModeMsg(BaseModel):
+    """Translator's switch: voice (the hearing person talks, the avatar signs; the camera is ignored) or signing (the
+    camera reads signs and they are said aloud; speech is ignored). Until a page sends one, both directions run."""
+    type: Literal["mode"] = "mode"
+    mode: Literal["voice", "signing"]
 
 
 class SayMsg(BaseModel):
@@ -58,7 +66,7 @@ class RecordMsg(BaseModel):
 
 
 ClientMsg = Annotated[
-    Union[FrameMsg, CalibrateMsg, PickMsg, AvatarDoneMsg, PracticeMsg, SayMsg, RecordMsg],
+    Union[FrameMsg, CalibrateMsg, PickMsg, AvatarDoneMsg, PracticeMsg, ModeMsg, SayMsg, RecordMsg],
     Field(discriminator="type"),
 ]
 _client = TypeAdapter(ClientMsg)
@@ -97,6 +105,7 @@ class YouSaidMsg(BaseModel):
     type: Literal["you_said"] = "you_said"
     text: str
     emotion: str
+    unclear: bool = False  # the signs made no sentence: nothing was said aloud (text is empty)
 
 
 class CaptionMsg(BaseModel):
@@ -117,10 +126,12 @@ class SignPlanMsg(BaseModel):
     grammar: Literal["yn", "wh", "neg", "statement"]
     tone: Literal["warm", "apologetic", "urgent", "neutral"]
     english: str
+    unclear: bool = False  # the words made no sense: nothing is signed, and english is what was heard
 
 
 class RecognizedMsg(BaseModel):
-    """Practice-mode result: the top guesses for each segment of the turn, best first."""
+    """Practice-mode result: the top guesses for each read of the turn (the whole turn, then its last moments alone; the
+    page counts the sign in either), best first."""
     type: Literal["recognized"] = "recognized"
     segments: list[list[PickOption]]
 

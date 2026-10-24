@@ -17,7 +17,7 @@ import { QuatFilter } from "./rotationFilter";
 import { ndcToCanvas } from "./trail";
 import { createHeadMotion } from "./headMotion";
 import { RotationSpring, type SpringParams } from "./motionSmoother";
-import { backwardFingers, capsuleContact, carry, constrainBone, crossOverlap, coveredHand, jointFrame, palm, relaxedDir, selfOverlap, type Capsule, type Palm } from "./handModel";
+import { backwardFingers, capsuleContact, carry, constrainBone, crossOverlap, coveredHand, jointFrame, palm, relaxedDir, selfOverlap, splay, type Capsule, type Palm } from "./handModel";
 
 export interface FacePose { browUp: number; browDown: number; headYawDeg: number; headPitchDeg: number; expressions: Record<string, number> }
 
@@ -469,7 +469,7 @@ export async function loadRocketbox(canvas: HTMLCanvasElement): Promise<Avatar> 
       let bend: number | undefined; // the previous joint's bend as posed: the end joint follows the middle one
       chain.forEach((j, k) => {
         let want = L[idx[k + 1]].clone().sub(L[idx[k]]);
-        if (Pa && toAvatarPalm && r && want.lengthSq() > 1e-12) want = constrainBone(Pa, c, k, r, hinge, want.applyQuaternion(toAvatarPalm), bend).dir;
+        if (Pa && toAvatarPalm && r && want.lengthSq() > 1e-12) want = constrainBone(Pa, c, k, r, hinge, splay(Pa, c, k, r, want.applyQuaternion(toAvatarPalm)), bend).dir;
         const q = aimLocal(j, want);
         if (Number.isFinite(q.x + q.y + q.z + q.w)) j.bone.quaternion.copy(t === undefined ? q : arm.fingerFilters[c][k].filter(q, t));
         const now = boneDir(j);

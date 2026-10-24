@@ -1,4 +1,4 @@
-# lingual: Two-Way ASL
+# ASL Dragon (lingual): Two-Way ASL
 
 A conversation and learning tool for American Sign Language. It has two halves that share one avatar, one camera
 pipeline and one backend:
@@ -45,9 +45,10 @@ the avatar, its front camera watches the kid, and its speaker gives the plushie 
 | **Sign to speech** | The camera reads the signer's hands, body and face. The backend splits the movement into signs, recognizes each one (or reads fingerspelling), reads facial grammar (yes/no question, wh-question, negation) separately from emotion, and Claude writes a natural English sentence. Cartesia speaks it in a voice whose emotion, speed and volume follow the signer's. If the recognizer isn't sure, a **picker** asks the signer which of three signs they meant. |
 | **Speech to sign** | The hearing person talks. Cartesia transcribes them, Claude turns the English into an ASL-order sign plan (paraphrasing into signs the avatar knows, fingerspelling names and the rest), and the avatar signs it with the matching brows and head movement. The caption and a row of sign chips show what is being signed; the current sign lights up. |
 
-Turn-taking is one direction at a time. The status pill says whose turn it is, and on the phone the whole stage's edge
-takes the status colour: **blue** listening or reading signs, **purple** speaking or signing, **yellow** calibrating or
-picking, **red** an error.
+Turn-taking is one direction at a time: the **Voice / Signing** switch at the top picks it (voice mode ignores the
+camera, signing mode ignores the mic). The status pill says whose turn it is, and on the phone the whole stage's edge
+takes the status colour: **blue** listening or reading signs, **green** speaking or signing, **yellow** getting into
+position, calibrating or picking, **red** an error.
 
 ### Teaching mode (`/teach.html`)
 
@@ -172,9 +173,9 @@ npm --prefix web run dev         # page on :5173
 
 Open <http://localhost:5173> for the translator or <http://localhost:5173/teach.html> for teaching mode.
 
-**Signing tips:** sit head-to-waist in frame with steady light from the front. Rest your hands and keep a neutral face
-for two seconds while it calibrates (**Recalibrate** in the top bar, or the ⋯ menu on a phone, redoes it). Sign one sign per movement, pause briefly
-between signs, and lower your hands for about half a second to finish a turn.
+**Signing tips:** sit head-to-waist in frame with steady light from the front. The camera tells you where to sit (closer,
+back, to the middle, hands in your lap) and calibrates by itself once you're there; if you move, it calibrates again.
+Sign one sign per movement, pause briefly between signs, and lower your hands for about half a second to finish a turn.
 
 ---
 
@@ -289,7 +290,7 @@ fingers; two-hand contact signs can overlap slightly.
 
 | Part | How |
 |---|---|
-| Sign recognition | The published ASL Citizen ST-GCN (Microsoft Research, 2,731 signs from 27 pose and hand keypoints), ensembled with the team's asl-spike model (143 signs). On signers neither model trained on, choosing among ~2,900 signs: top-1 0.60, top-3 0.81, holding up under 240p, blur, low light and half frame rate. |
+| Sign recognition | The published ASL Citizen ST-GCN (Microsoft Research, 2,731 signs from 27 pose and hand keypoints), ensembled with the team's asl-spike model (143 signs). On signers neither model trained on, choosing among ~2,900 signs: top-1 0.60, top-3 0.81, holding up under 240p, blur, low light and half frame rate. The camera now reads only the 160 hand-checked signs (a lesson only its course's): replayed one sign per turn through the live path, 61% of everyday signs come out right in the translator (18% after the picker) and 14% as a wrong word, and 87% of correct signing passes a lesson. |
 | Fingerspelling | A CTC reader trained here on Google's Kaggle ASL Fingerspelling landmarks from Deaf signers; 0.36 letter error rate on held-out signers. |
 | Facial grammar and emotion | Rules over MediaPipe's face blendshapes and head angle: brows and headshake for grammar, mouth, eyes and signing speed and size for emotion, kept separate so a raised-brow question isn't read as "surprised". |
 | Signs to English | Claude (`claude-haiku-5-5`) composes a sentence from the recognized signs, grammar and emotion. |
@@ -297,7 +298,8 @@ fingers; two-hand contact signs can overlap slightly.
 | Voice and speech-to-text | Cartesia Sonic 3.6 (emotion, speed and volume controls over a kept-open socket) and Ink 2 (turn-detecting transcription). |
 
 Vocabulary: 160 hand-checked signs (`app/vocab/vocab.yaml`) plus every ASL Citizen and WLASL sign (~2,900) in the
-generated `vocab_extended.yaml`, with English meanings from ASL-LEX 2.0.
+generated `vocab_extended.yaml`, with English meanings from ASL-LEX 2.0. The camera reads only the 160; the avatar
+shows any sign it has a clip for.
 
 Laptop latency (simulated input): sign to speech p50 1.42 s from hands at rest to first audio; speech to sign 1.4 s
 from the speaker stopping to the avatar starting.

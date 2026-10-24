@@ -9,6 +9,6 @@ test("no icon carries one of the old colors", () => {
 });
 
 test("the mark is the motion arrow: a start dot and a curved arrow in go", () => {
-  expect(ICON.mark).toMatch(/<circle[^>]*fill="#F2592A"/);
-  expect(ICON.mark).toMatch(/<path[^>]*stroke="#F2592A"/);
+  expect(ICON.mark).toMatch(/<circle[^>]*fill="#18943F"/);
+  expect(ICON.mark).toMatch(/<path[^>]*stroke="#18943F"/);
 });

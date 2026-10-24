@@ -2,7 +2,7 @@ import math
 
 from frames import make_frame
 from server.segmenter import CONTEXT_MS, PAUSE_MS, REST_MS, Segmenter
-from server.session import Baseline, TurnEnd, TurnStart
+from server.session import Baseline, TurnEnd, TurnStart, compute_baseline
 
 BASE = Baseline(rest_y=0.8, brow={}, motion_floor=0.0)
 REST_Y = 0.95  # wrists below the rest line
@@ -125,3 +125,67 @@ def test_turn_ends_after_the_same_rest_time_at_the_browsers_15_fps():
             assert (i + 1) <= REST_FRAMES // 2 + 1  # ~half the frames, the same ~0.45 s
             return
     raise AssertionError("no TurnEnd")
+
+
+def uneven(t, left_y=0.95, right_y=0.75):
+    """Hands resting at different heights (one on the lap, one on the desk); no hand landmarks."""
+    f = make_frame(t=t * 33.0, left=False, right=False)
+    f.pose[15] = [0.6, left_y, 0.0, 1.0]
+    f.pose[16] = [0.4, right_y, 0.0, 1.0]
+    return f
+
+
+def test_hands_resting_at_different_heights_do_not_start_a_turn():
+    seg = Segmenter(compute_baseline([uneven(i) for i in range(60)]))
+    assert [e for e in (seg.push(uneven(60 + i)) for i in range(30)) if e is not None] == []
+
+
+def test_the_lower_resting_hand_counts_as_raised_against_its_own_rest():
+    seg = Segmenter(compute_baseline([uneven(i, right_y=0.88) for i in range(60)]))
+    assert isinstance(seg.push(uneven(60, left_y=0.87, right_y=0.88)), TurnStart)  # 0.08 above where it rested
+
+
+def test_a_hand_moving_during_calibration_does_not_lift_the_rest_line():
+    calib = [frame(i, (0.4, 0.5 if i % 10 < 3 else REST_Y), hands=()) for i in range(60)]  # mid-sign for 30% of it
+    seg = Segmenter(compute_baseline(calib))
+    assert isinstance(seg.push(frame(60, (0.4, REST_Y - 0.1))), TurnStart)  # a sign low in front of the body
+
+
+def test_turn_end_carries_the_whole_turn_for_reading_as_one_sign():
+    # a 1.3 s hold between the pieces: longer than both contexts together, so they leave a gap the whole turn must fill
+    fs = rest(0, 20) + moving(20, 12) + still(32, 40) + moving(72, 12, x0=0.45) + rest(84, REST_FRAMES + 2)
+    end = run(fs)[-1]
+    first, second = end.segments
+    whole = [f.t for f in end.whole]
+    assert whole[0] < end.frames[0].t  # the hands rising, from before the turn opened
+    assert whole[-1] > second.frames[-1].t  # and settling after the last sign
+    assert first.frames[0].t in whole and second.frames[-1].t in whole
+    assert whole == [f.t for f in fs if whole[0] <= f.t <= whole[-1]]  # every frame between, the pause included
+
+
+def down(t0, n, x=0.4, y0=0.5):
+    """The right wrist going from signing height back to rest over n frames."""
+    return [frame(t0 + i, (x, y0 + (REST_Y - y0) * (i + 1) / n)) for i in range(n)]
+
+
+def test_the_hands_going_back_down_after_the_last_signs_hold_is_not_a_sign():
+    fs = rest(0, 3) + moving(3, 12) + still(15, PAUSE_FRAMES + 3) + down(22, 10) + rest(32, REST_FRAMES + 2)
+    end = run(fs)[-1]
+    assert len(end.segments) == 1 and end.segments[0].frames[-1].t < 22 * 33.0  # the sign, not the hands going down
+
+
+def test_a_last_sign_flowing_straight_into_rest_is_kept():
+    fs = (rest(0, 3) + moving(3, 12) + still(15, PAUSE_FRAMES + 3) + moving(22, 20, x0=0.45) + down(42, 10, x=0.45)
+          + rest(52, REST_FRAMES + 2))
+    assert len(run(fs)[-1].segments) == 2
+
+
+def test_a_turns_only_piece_is_kept_even_when_it_only_goes_down():
+    fs = rest(0, 3) + still(3, PAUSE_FRAMES + 3) + down(10, 10) + rest(20, REST_FRAMES + 2)  # a downward sign, raised fast
+    assert len(run(fs)[-1].segments) == 1
+
+
+def test_a_spelled_word_ending_the_turn_is_kept_even_if_the_wrist_drifts_down():
+    spell = [frame(22 + i, (0.4, 0.5 + 0.002 * i), spread=0.01 + 0.05 * (i % 2)) for i in range(10)]
+    fs = rest(0, 3) + moving(3, 12) + still(15, PAUSE_FRAMES + 3) + spell + rest(32, REST_FRAMES + 2)
+    assert [s.kind for s in run(fs)[-1].segments] == ["sign", "spell"]

@@ -41,9 +41,10 @@ def citizen_glosses(path: Path = TRAIN_CSV) -> list[str]:
 
 def to_app_gloss(citizen: str, by_citizen: dict[str, str]) -> str:
     """ASL Citizen gloss -> our gloss when the vocabulary has the sign (variants WANT1/WANT2 merge), else its own
-    name without the variant number."""
+    name without the variant number. Aliases go first (vocab_extended.yaml has its own BYE, ME and EXCUSE) and have no
+    "" default: the 609 signs without an ASL Citizen name all sit under the key ""."""
     base = re.sub(r"\d+$", "", citizen) or citizen
-    return by_citizen.get(citizen) or by_citizen.get(base) or by_citizen.get(ALIASES.get(base, "")) or base
+    return by_citizen.get(ALIASES.get(base)) or by_citizen.get(citizen) or by_citizen.get(base) or base
 
 
 def _downsample(frames: np.ndarray, max_frames: int) -> np.ndarray:

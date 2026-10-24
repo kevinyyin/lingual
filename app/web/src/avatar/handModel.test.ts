@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { describe, expect, test } from "vitest";
-import { angles, capsuleContact, carry, constrainBone, crossOverlap, DIP_COUPLE, FINGER, implausibleHand, jointFrame, limitDir, limitThumbBase, palm, relaxedDir, selfOverlap, THUMB } from "./handModel";
+import { angles, capsuleContact, carry, constrainBone, crossOverlap, DIP_COUPLE, FINGER, implausibleHand, jointFrame, limitDir, limitThumbBase, palm, relaxedDir, selfOverlap, SPLAY, splay, THUMB } from "./handModel";
 
 const v = (x: number, y: number, z: number) => new THREE.Vector3(x, y, z);
 const deg = (r: number) => (r * Math.PI) / 180;
@@ -134,6 +134,20 @@ describe("finger joints", () => {
     };
     expect(spread(0)).toBeCloseTo(FINGER.mcp.side, 0);
     expect(spread(85)).toBeLessThan(FINGER.mcp.side * 0.5);
+  });
+  test("straight fingers fan out a little from the middle one, curled ones barely, the thumb not at all", () => {
+    for (const P of [RIGHT, LEFT]) {
+      const { p: pp, h: hh } = jointFrame(P, P.F, null, false);
+      const side = (c: number, curl: number) => angles(splay(P, c, 0, P.F, v(0, Math.cos(deg(curl)), Math.sin(deg(curl)))), P.F, pp, hh).side;
+      expect(side(1, 0)).toBeCloseTo(SPLAY[0]); // index toward the thumb
+      expect(side(2, 0)).toBeCloseTo(0); // middle stays
+      expect(side(4, 0)).toBeCloseTo(SPLAY[3]); // little finger away from it
+      expect(Math.abs(side(4, 85))).toBeLessThan(1); // a fist stays closed
+      expect(splay(P, 1, 1, P.F, P.F)).toEqual(P.F); // only the knuckle spreads
+      expect(splay(P, 0, 0, P.F, P.F)).toEqual(P.F);
+    }
+    expect(SPLAY[0]).toBeGreaterThan(0);
+    expect(SPLAY[3]).toBeLessThan(0);
   });
   test("the relaxed hand is within every joint's range, fingers lightly curled", () => {
     for (const P of [RIGHT, LEFT]) for (let c = 0; c < 5; c++) {

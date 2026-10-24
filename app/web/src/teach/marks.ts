@@ -2,7 +2,7 @@
 import { svg } from "./dom";
 
 /** Where the course line has got to: a V pointing down the line, its tip on the stop. */
-export const ARROWHEAD = '<svg viewBox="0 0 24 24"><path d="M5 8l7 8 7-8" fill="none" stroke="#F2592A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+export const ARROWHEAD = '<svg viewBox="0 0 24 24"><path d="M5 8l7 8 7-8" fill="none" stroke="#18943F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
 const PATHS = {
   loop: "M10 64C0 34 28 6 52 6C80 6 99 22 97 50C95 80 70 96 46 95C20 94 2 78 5 52C7 34 20 20 36 14",

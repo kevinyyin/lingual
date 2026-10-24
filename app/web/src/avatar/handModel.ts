@@ -61,10 +61,24 @@ export function limitDir(d: THREE.Vector3, r: THREE.Vector3, p: THREE.Vector3, h
   const a = angles(d.clone().normalize(), r, p, h);
   const bend = clamp(a.bend, lim.bend[0], lim.bend[1]), side = clamp(a.side, -lim.side, lim.side);
   if (bend === a.bend && side === a.side) return { dir: d.clone().normalize(), clamped: false, ...a };
-  const t = bend * RAD, s = side * RAD;
-  const dir = r.clone().multiplyScalar(Math.cos(t)).add(p.clone().multiplyScalar(Math.sin(t))).multiplyScalar(Math.cos(s))
-    .add(h.clone().multiplyScalar(Math.sin(s))).normalize();
-  return { dir, clamped: true, ...a };
+  return { dir: fromAngles(bend, side, r, p, h), clamped: true, ...a };
+}
+
+/** The unit direction at bend and sideways angles (degrees) in a joint's frame: angles' inverse. */
+const fromAngles = (bend: number, side: number, r: THREE.Vector3, p: THREE.Vector3, h: THREE.Vector3) =>
+  r.clone().multiplyScalar(Math.cos(bend * RAD)).add(p.clone().multiplyScalar(Math.sin(bend * RAD))).multiplyScalar(Math.cos(side * RAD))
+    .add(h.clone().multiplyScalar(Math.sin(side * RAD))).normalize();
+
+/** Extra sideways spread at each finger's knuckle (index, middle, ring, little; degrees, + toward the thumb), fading as
+ *  the knuckle curls: fingers held a little apart read better on a small screen than the clips' close-held ones. */
+export const SPLAY = [4, 0, -3, -5];
+
+/** `want` for chain c's bone k with SPLAY added, at a finger's knuckle only (constrainBone's frame for it). */
+export function splay(P: Palm, c: number, k: number, r: THREE.Vector3, want: THREE.Vector3): THREE.Vector3 {
+  if (c === 0 || k > 0 || !SPLAY[c - 1]) return want;
+  const { p, h } = jointFrame(P, r, null, false);
+  const a = angles(want.clone().normalize(), r, p, h);
+  return fromAngles(a.bend, a.side + SPLAY[c - 1] * (1 - clamp(a.bend / FINGER.mcp.bend[1], 0, 1)), r, p, h);
 }
 
 /** The thumb metacarpal's direction clamped into its cone in the palm frame. */
@@ -135,7 +149,7 @@ export function relaxedDir(P: Palm, c: number, k: number, r: THREE.Vector3, hing
   }
   const b = c === 0 ? RELAXED.thumb[k + 1] : RELAXED.fingers[c - 1][k];
   const { p, h } = jointFrame(P, r, hinge, c === 0);
-  const dir = limitDir(r, r, p, h, { bend: [b, b], side: 0 }).dir;
+  const dir = fromAngles(b, c > 0 && k === 0 ? SPLAY[c - 1] * (1 - b / FINGER.mcp.bend[1]) : 0, r, p, h);
   return { dir, hinge: c === 0 ? null : carry(h, r, dir) };
 }
 

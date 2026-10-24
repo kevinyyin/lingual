@@ -1,4 +1,4 @@
-# Two-Way ASL
+# ASL Dragon: Two-Way ASL
 
 A Deaf ASL signer and a hearing person talk face to face on one laptop. Signing becomes spoken English in a voice
 that carries the signer's emotion; speech becomes a 3D avatar signing with facial grammar and the speaker's tone,
@@ -23,11 +23,15 @@ WLASL, ASL-LEX and the Kaggle competitions are for **non-commercial research onl
 | Voice, speech-to-text | Cartesia Sonic 3.6, Ink 2 | `.env` keys |
 
 The vocabulary is the 160 hand-checked signs in `vocab/vocab.yaml` plus every ASL Citizen and WLASL sign
-(~2,900) in the generated `vocab/vocab_extended.yaml`, with English meanings from ASL-LEX 2.0.
+(~2,900) in the generated `vocab/vocab_extended.yaml`, with English meanings from ASL-LEX 2.0. The camera reads only
+the 160 hand-checked signs (a lesson only its course's signs); the avatar shows any sign it has a clip for.
 
 Measured (details in the execution record): sign recognition on signers no model trained on, choosing among all
 ~2,900 signs, top-1 0.60 / top-3 0.81, holding up under 240p, blur, low light and half frame rate; on WLASL's mixed
-online videos top-1 ~0.25 / top-3 ~0.49 (the top-3 picker covers the gap). English -> sign plans: 182/182 checks
+online videos top-1 ~0.25 / top-3 ~0.49 (the top-3 picker covers the gap). Through the live path (WLASL videos
+replayed at 15 fps, one sign per turn): 61% of everyday signs come out right in the translator (18% after the
+picker) and 14% as a wrong word, and 87% of correct signing passes a lesson's camera check. Which signs read best:
+`reports/sign_reliability.md`. English -> sign plans: 182/182 checks
 passed. Fingerspelling: 0.36 letter error rate on held-out Deaf signers.
 
 ## Setup
@@ -62,9 +66,9 @@ uv run asl-server             # backend on :8000 (from app/)
 npm --prefix web run dev      # page on :5173 (from app/)
 ```
 
-Open http://localhost:5173, sit head-to-waist in frame with hands resting and a neutral face; it calibrates by itself
-in 2 s (**Calibrate** redoes it). Sign one sign per movement, pause briefly between signs, lower your hands for about
-half a second to finish.
+Open http://localhost:5173 and pick **Voice** (you talk, the avatar signs) or **Signing** (you sign, it speaks). In
+signing mode the camera tells you where to sit and calibrates by itself once you're in position (and again if you
+move). Sign one sign per movement, pause briefly between signs, lower your hands for about half a second to finish.
 If the picker appears, press 1-3 (Esc: none of these). `?dev=1` adds a box to type what the hearing person says;
 `?dev=1&camera=0` is speech-to-sign only. `?mode=review` plays each avatar clip beside the video it came from.
 

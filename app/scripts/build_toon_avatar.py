@@ -27,7 +27,7 @@ def srgb(h: str) -> np.ndarray:  # glTF vertex colours are linear
     return np.where(c <= 0.04045, c / 12.92, ((c + 0.055) / 1.055) ** 2.4)
 
 
-SKIN, SHIRT, PANTS, SHOE = srgb("#F4C4A0"), srgb("#2F5FD0"), srgb("#2B2F4A"), srgb("#F2F2F2")
+SKIN, SHIRT, PANTS, SHOE = srgb("#F4C4A0"), srgb("#E8383D"), srgb("#FFC629"), srgb("#F2F2F2")  # red top, yellow pants
 HAIR, EYE, SHINE, BROW = srgb("#6B3F2A"), srgb("#2A1E1A"), srgb("#FFFFFF"), srgb("#4A2E22")
 MOUTH, BLUSH, NOSE = srgb("#8A3B3B"), srgb("#FF9AA2"), srgb("#EDB08E")
 HAIR_LIGHT = srgb("#8C5A3E")  # the lighter strands in the hair's texture

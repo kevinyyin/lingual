@@ -17,6 +17,9 @@ Rules:
 - negation true: the sentence is negated, even if no NOT sign appears.
 - Fingerspelled words are names or terms: use them verbatim.
 - Never add facts that were not signed. Emotion may color word choice slightly but must not change the meaning.
+- The signs come from a camera that sometimes misreads one: if they don't fit together in the order read, write the \
+most natural sentence they make together.
+- If no sensible sentence can be made from them at all, never invent one: reply {"text": "", "unclear": true}.
 Reply as JSON: {"text": "<sentence>"}"""
 
 
@@ -36,6 +39,7 @@ class Composer:
             pass  # a 1-token reply never parses; only the round trip matters
 
     async def compose(self, signs, spelled, grammar, emotion) -> str:
+        """The sentence; "" when the signs make no sentence (a misread turn), which the session shows instead of saying."""
         user = json.dumps({"signs": signs, "fingerspelled": spelled, "question": grammar["question"],
                            "negation": grammar["negation"], "emotion": emotion["label"],
                            "intensity": round(emotion["intensity"], 2)})
@@ -43,7 +47,7 @@ class Composer:
         tasks = [asyncio.create_task(self._ask(user, n)) for n in (1, 2)]
         try:
             for done in asyncio.as_completed(tasks):
-                if text := await done:
+                if (text := await done) is not None:  # "" = the signs make no sentence
                     return text
         finally:
             for t in tasks:
@@ -53,7 +57,10 @@ class Composer:
     async def _ask(self, user: str, attempt: int) -> str | None:
         try:
             # no output schema: it added 0.5-1.1 s per call (measured); the prompt asks for JSON and ask_json checks it
-            text = str((await ask_json(self.client, SYSTEM, user, None, max_tokens=200)).get("text", "")).strip()
+            out = await ask_json(self.client, SYSTEM, user, None, max_tokens=200)
+            if out.get("unclear") is True:
+                return ""
+            text = str(out.get("text", "")).strip()
             if text:
                 return text
             log.warning("compose attempt %d: empty text", attempt)

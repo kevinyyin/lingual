@@ -134,7 +134,7 @@ export function ndcToCanvas(ndc: { x: number; y: number; z: number }, w: number,
   return [((ndc.x + 1) / 2) * w, ((1 - ndc.y) / 2) * h];
 }
 
-const GO = "#F2592A";
+const GO = "#18943F";
 
 /** Draws both hands' trails on `canvas` (a 2D canvas over the avatar's), fed one stage frame at a time. */
 export function attachTrail(canvas: HTMLCanvasElement, palms: () => Record<"L" | "R", Pt | null> | undefined, opts: { still: boolean }) {

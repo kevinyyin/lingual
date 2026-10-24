@@ -4,9 +4,9 @@ const line = (paths: string) =>
   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;
 
 export const ICON = {
-  /** lingual's mark: a start dot and a motion arrow, the way ASL dictionaries draw a sign's movement. */
-  mark: `<svg viewBox="0 0 32 32"><circle cx="7" cy="23" r="2.8" fill="#F2592A"/><path d="M7 23C9 13 17 7 26 9M20.6 4.4 26 9l-6.7 1.9" fill="none" stroke="#F2592A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  flame: `<svg viewBox="0 0 24 24"><path d="M12 2.5c.8 3 4.5 5 4.5 10a4.5 4.5 0 0 1-9 0c0-2.2 1-3.7 2.2-4.8.2 1.5.9 2.4 1.9 2.8C11.2 8 11.4 5 12 2.5z" fill="#F2592A" stroke="#C2410C" stroke-width="1.5" stroke-linejoin="round"/></svg>`,
+  /** ASL Dragon's mark: a start dot and a motion arrow, the way ASL dictionaries draw a sign's movement. */
+  mark: `<svg viewBox="0 0 32 32"><circle cx="7" cy="23" r="2.8" fill="#18943F"/><path d="M7 23C9 13 17 7 26 9M20.6 4.4 26 9l-6.7 1.9" fill="none" stroke="#18943F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  flame: `<svg viewBox="0 0 24 24"><path d="M12 2.5c.8 3 4.5 5 4.5 10a4.5 4.5 0 0 1-9 0c0-2.2 1-3.7 2.2-4.8.2 1.5.9 2.4 1.9 2.8C11.2 8 11.4 5 12 2.5z" fill="#18943F" stroke="#13723A" stroke-width="1.5" stroke-linejoin="round"/></svg>`,
   flameOff: line(`<path d="M12 2.5c.8 3 4.5 5 4.5 10a4.5 4.5 0 0 1-9 0c0-2.2 1-3.7 2.2-4.8.2 1.5.9 2.4 1.9 2.8C11.2 8 11.4 5 12 2.5z"/>`),
   bolt: line(`<path d="M13 2.5 4.5 13.5H12l-1 8 8.5-11H12z"/>`),
   check: line(`<path d="m5 12.5 4.5 4.5L19 7.5"/>`),

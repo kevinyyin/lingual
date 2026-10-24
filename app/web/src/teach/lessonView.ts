@@ -5,7 +5,8 @@ import { chime, h, svg } from "./dom";
 import { ICON } from "./icons";
 import { markSvg } from "./marks";
 import { LessonRun, shuffle, signScore, type Exercise } from "./lesson";
-import { loadStage, mountSigner, playSigns, practice, type CamStatus } from "./signer";
+import { loadStage, mountSigner, playSigns, practice, type CamStatus, type Feeling } from "./signer";
+import { FEELING_FACE } from "./curriculum";
 import type { Earned } from "./progress";
 
 export interface LessonHost {
@@ -225,7 +226,7 @@ function toast(text: string) {
 /** One short burst of drawn strokes from the middle of the screen, where the results card sits. */
 function confetti() {
   const layer = h("div", { class: "confetti", "aria-hidden": "true" });
-  const colors = ["#F2592A", "#232A63", "#E2466C"];
+  const colors = ["#18943F", "#232A63", "#E2466C", "#FFC629", "#2B83D6"];
   for (let i = 0; i < 20; i++) {
     layer.append(h("i", { style: `--a: ${Math.round(Math.random() * 360)}deg; --d: ${90 + Math.round(Math.random() * 100)}px; background: ${colors[i % colors.length]}` }));
   }
@@ -255,8 +256,8 @@ function avatarSlot(signs: () => string[], small = false, label?: (gloss: string
   const tag = h("div", { class: "sign-label", "aria-hidden": "true", hidden: "" });
   const slot = h("div", { class: `avatar-slot ${small ? "small" : ""}` }, loading, label ? tag : null,
     h("div", { class: "controls" },
-      h("button", { class: "round", "aria-label": "Play the sign again", onclick: () => void playSigns(signs()) }, svg(ICON.play)),
-      h("button", { class: "round small", "aria-label": "Play slowly", onclick: () => void playSigns(signs(), { speed: 0.5 }) }, svg(ICON.slow))));
+      h("button", { class: "round", "aria-label": "Play at normal speed", title: "Play at normal speed", onclick: () => void playSigns(signs()) }, svg(ICON.play)),
+      h("button", { class: "round small", "aria-label": "Play in slow motion", title: "Play in slow motion", onclick: () => void playSigns(signs(), { speed: 0.5 }) }, svg(ICON.slow))));
   mountSigner(slot);
   if (label) slot.addEventListener("signitem", (e) => { // keeps the last sign up through blends and after playback
     const g = (e as CustomEvent<string | null>).detail;
@@ -392,6 +393,7 @@ function mount(ex: Exercise, host: LessonHost, grade: Grade, skip: () => void): 
 const CAM_TEXT: Record<CamStatus, string> = {
   off: "Camera off",
   starting: "Starting camera…",
+  position: "Get into position",
   calibrating: "Rest your hands in your lap, neutral face…",
   ready: "Go! Sign it now, then rest your hands",
   signing: "Reading your sign…",
@@ -406,15 +408,33 @@ function scoreBar(score: number): HTMLElement {
     h("span", { class: "score-track", "aria-hidden": "true" }, h("i", { style: `width: ${score}%` })));
 }
 
+/** The emotion line under the camera: what the learner's face reads as and, for a feeling sign, whether it fits the
+ *  sign's face. The sign's face wins (the avatar always makes it): the line only nudges. */
+export function faceLine(seen: Feeling, gloss: string, english: string): string {
+  const face = FEELING_FACE[gloss];
+  if (!face) return `Your face: ${seen}`;
+  const want = face === "warm" ? "happy" : gloss === "ANGRY" ? "angry" : "sad";
+  if (seen === want) return `Your face: ${seen}. Just right for “${english}”!`;
+  return `Your face: ${seen}. “${english}” needs ${want === "angry" ? "an" : "a"} ${want} face!`;
+}
+
 function mountPerform(gloss: string, host: LessonHost, grade: Grade, skip: () => void): Mounted {
   const status = h("div", { class: "cam-status", role: "status" }, CAM_TEXT[practice.status]);
-  const cam = h("div", { class: "cam-slot", "data-status": practice.status }, practice.video, status);
+  const cam = h("div", { class: "cam-slot", "data-status": practice.status }, practice.video, practice.trailCanvas, status);
   const heard = h("p", { class: "heard", "aria-live": "polite" });
+  const face = (seen: Feeling) => faceLine(seen, gloss, host.english(gloss));
+  const faceEl = h("p", { class: "face-line" }, face(practice.seen));
   let tries = 0;
+  let asked = false;
   const stop = () => { practice.active = false; practice.listener = null; }; // graded or left: later segments must not say "try again"
   const setStatus = (s: CamStatus, detail?: string) => {
     cam.dataset.status = s;
     status.textContent = detail ? `${CAM_TEXT[s]}: ${detail}` : CAM_TEXT[s];
+    // only once calibrated: signing while it measures the resting hands puts the rest line at signing height
+    if (s === "ready" && !asked) {
+      asked = true;
+      host.say(LINES.yourTurn(host.english(gloss)));
+    }
   };
   const onRecognized = (segments: PickOption[][]) => {
     const { score, rank } = signScore(segments, gloss);
@@ -435,10 +455,10 @@ function mountPerform(gloss: string, host: LessonHost, grade: Grade, skip: () =>
       h("div", { class: "ex-tag" }, svg(ICON.camera), "Your turn"),
       h("h2", { class: "prompt" }, `Sign “${host.english(gloss)}”`),
       h("div", { class: "perform" }, cam, avatarSlot(() => [gloss], false, host.english)),
+      faceEl,
       heard),
     onShow: () => {
-      practice.listener = { status: setStatus, recognized: onRecognized };
-      host.say(LINES.yourTurn(host.english(gloss)));
+      practice.listener = { status: setStatus, recognized: onRecognized, face: (seen) => (faceEl.textContent = face(seen)) };
       practice.active = true;
       setStatus(practice.status);
       practice.start().catch(() => {});
