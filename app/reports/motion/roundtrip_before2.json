@@ -1,0 +1,1213 @@
+{
+  "label": "before2",
+  "model": "Male_Adult_11",
+  "top1": 0.08666666666666667,
+  "top3": 0.17333333333333334,
+  "top5": 0.24,
+  "n": 150,
+  "glosses": [
+    "AGAIN",
+    "ALL",
+    "ANGRY",
+    "APPLE",
+    "BABY",
+    "BAD",
+    "BATHROOM",
+    "BIG",
+    "BREAD",
+    "BUS",
+    "BUY",
+    "CAKE",
+    "CAN",
+    "CAR",
+    "CHANGE",
+    "CHEESE",
+    "CLOSE",
+    "COFFEE",
+    "COLD",
+    "COME",
+    "COOKIE",
+    "CUP",
+    "DAY",
+    "DEAF",
+    "DIFFERENT",
+    "DOCTOR",
+    "DRINK",
+    "EASY",
+    "EAT",
+    "EIGHT",
+    "EXCITED",
+    "EXPENSIVE",
+    "FAMILY",
+    "FAST",
+    "FATHER",
+    "FAVORITE",
+    "FEEL",
+    "FINE",
+    "FINISH",
+    "FIVE",
+    "FOOD",
+    "FORGET",
+    "FOUR",
+    "FRIEND",
+    "GIVE",
+    "GO",
+    "GOOD",
+    "GOODBYE",
+    "HAPPY",
+    "HARD",
+    "HAVE",
+    "HE-SHE",
+    "HEARING",
+    "HELLO",
+    "HELP",
+    "HERE",
+    "HOME",
+    "HOSPITAL",
+    "HOT",
+    "HOUR",
+    "HOW",
+    "HUNGRY",
+    "HURT",
+    "I",
+    "KNOW",
+    "LATER",
+    "LEARN",
+    "LIKE",
+    "LOVE",
+    "MAKE",
+    "MANY",
+    "MEET",
+    "MILK",
+    "MINUTE",
+    "MONEY",
+    "MORE",
+    "MORNING",
+    "MOTHER",
+    "MY",
+    "NAME",
+    "NEED",
+    "NEVER",
+    "NEW",
+    "NICE",
+    "NIGHT",
+    "NINE",
+    "NO",
+    "NONE",
+    "NOT",
+    "NOW",
+    "OK",
+    "OLD",
+    "ONE",
+    "OPEN",
+    "PAY",
+    "PERSON",
+    "PIZZA",
+    "PLEASE",
+    "READ",
+    "READY",
+    "REMEMBER",
+    "RESTAURANT",
+    "RIGHT",
+    "SAD",
+    "SAME",
+    "SANDWICH",
+    "SCARED",
+    "SCHOOL",
+    "SEE",
+    "SEVEN",
+    "SICK",
+    "SIGN",
+    "SIT",
+    "SIX",
+    "SLEEP",
+    "SLOW",
+    "SMALL",
+    "SOON",
+    "SORRY",
+    "STOP",
+    "STORE",
+    "SUGAR",
+    "TALK",
+    "TEA",
+    "TEN",
+    "THANK-YOU",
+    "THEY",
+    "THINK",
+    "THIRSTY",
+    "THREE",
+    "TIME",
+    "TIRED",
+    "TODAY",
+    "TOMORROW",
+    "TRY",
+    "TWO",
+    "UNDERSTAND",
+    "WAIT",
+    "WANT",
+    "WATER",
+    "WE",
+    "WEEK",
+    "WELCOME",
+    "WHAT",
+    "WHEN",
+    "WHERE",
+    "WHICH",
+    "WHO",
+    "WHY",
+    "WORK"
+  ],
+  "errors": {},
+  "predictions": {
+    "AGAIN": [
+      "CREAM",
+      "LIFT",
+      "BABYSITTER",
+      "AGAIN",
+      "BAKE"
+    ],
+    "ALL": [
+      "FRY",
+      "SCREWDRIVER",
+      "BUY",
+      "BAKE",
+      "INTERPRETER"
+    ],
+    "ANGRY": [
+      "CURTSEY",
+      "LIFT",
+      "TOOMUCH",
+      "OPEN",
+      "ERUPT"
+    ],
+    "APPLE": [
+      "CATCHBASEBALL",
+      "PUNCHFACE",
+      "CRY",
+      "TURKEY",
+      "LIFT"
+    ],
+    "BABY": [
+      "CONCERNED",
+      "BACKPACK",
+      "PANTS",
+      "UNDERWEAR",
+      "JACKET"
+    ],
+    "BAD": [
+      "DONTLIKE",
+      "SHARP",
+      "POSTPONE",
+      "ROAR",
+      "STRAWBERRY"
+    ],
+    "BATHROOM": [
+      "FLIPSWITCH",
+      "REFUSE",
+      "DOG",
+      "BATHROOM",
+      "TOILET"
+    ],
+    "BIG": [
+      "CURTSEY",
+      "FAT",
+      "AUSTRALIA",
+      "SKIRT",
+      "DRESS"
+    ],
+    "BREAD": [
+      "DROWN",
+      "BATHTUB",
+      "ENJOY",
+      "FLASHLIGHT",
+      "BREAD"
+    ],
+    "BUS": [
+      "SQUEEZE",
+      "REACH",
+      "GOODYGOODYSHOEOPPOSITE",
+      "DOG",
+      "TOAST"
+    ],
+    "BUY": [
+      "BUY",
+      "COINS",
+      "SUNBATHE",
+      "COVERUP",
+      "BOW"
+    ],
+    "CAKE": [
+      "BULLDOZER",
+      "SAUCE",
+      "SCORE",
+      "RECORD",
+      "SURGEON"
+    ],
+    "CAN": [
+      "CAN",
+      "MOTORCYCLE",
+      "PUT",
+      "STRETCH-CA",
+      "CURTSEY"
+    ],
+    "CAR": [
+      "TRACTOR",
+      "SPEND",
+      "DIGUP",
+      "SHOOT",
+      "LIFT"
+    ],
+    "CHANGE": [
+      "LIFT",
+      "BRAIDS",
+      "SUIT",
+      "CHAIN",
+      "CHANGE"
+    ],
+    "CHEESE": [
+      "NICE",
+      "HEAP",
+      "BABY",
+      "RESTALLDAY",
+      "CHEERLEADER"
+    ],
+    "CLOSE": [
+      "POUR",
+      "BAKE",
+      "CLOSEDOOR",
+      "BOOTS",
+      "RESTALLDAY"
+    ],
+    "COFFEE": [
+      "WALK-TIGHTROPE-CL",
+      "NAILCLIPPER",
+      "LIFT",
+      "EGGBEATER",
+      "CARDS"
+    ],
+    "COLD": [
+      "MOTORCYCLE",
+      "MANAGE",
+      "VANISH",
+      "CURTSEY",
+      "BASKET"
+    ],
+    "COME": [
+      "RETIRE",
+      "SPEND",
+      "SHOOT",
+      "LIVE",
+      "STRONG"
+    ],
+    "COOKIE": [
+      "PLOW",
+      "UNDERWEAR",
+      "SPREAD",
+      "FRY",
+      "GLUE"
+    ],
+    "CUP": [
+      "LIFT",
+      "HIGHHEELS",
+      "ERUPT",
+      "BUY",
+      "SHOOT"
+    ],
+    "DAY": [
+      "DAY",
+      "DRUG",
+      "DINOSAUR",
+      "STING",
+      "DRILL"
+    ],
+    "DEAF": [
+      "SHRIMP",
+      "CORN",
+      "CANDY",
+      "PERFUME",
+      "OR"
+    ],
+    "DIFFERENT": [
+      "CURTSEY",
+      "ENVELOPE",
+      "VANISH",
+      "CLOCK",
+      "THUNDER"
+    ],
+    "DOCTOR": [
+      "TRUTH",
+      "FRY",
+      "MIX",
+      "INTUITIVE",
+      "BRA"
+    ],
+    "DRINK": [
+      "RESTALLDAY",
+      "DRINK",
+      "FOX",
+      "INHALE",
+      "CELLPHONE"
+    ],
+    "EASY": [
+      "FRY",
+      "EXPERT",
+      "EASYTODO",
+      "COOL",
+      "LIVE"
+    ],
+    "EAT": [
+      "EXPERT",
+      "STINK",
+      "RESTALLDAY",
+      "SANDWICH",
+      "IMMATURE"
+    ],
+    "EIGHT": [
+      "GOODYGOODY",
+      "REFUSE",
+      "OHISEE",
+      "SILVER",
+      "POUR"
+    ],
+    "EXCITED": [
+      "MONKEY",
+      "MAYBE",
+      "DOG",
+      "BOWLING",
+      "JUMPROPE"
+    ],
+    "EXPENSIVE": [
+      "BLINDS",
+      "EXPENSIVE",
+      "CHAOS",
+      "STUDENT",
+      "STRETCH-CA"
+    ],
+    "FAMILY": [
+      "GETTOGETHER",
+      "CATEGORY",
+      "TRANSGENDER",
+      "CHAIN",
+      "FAMILY"
+    ],
+    "FAST": [
+      "CURTSEY",
+      "LIFT",
+      "MANAGE",
+      "DEMAND",
+      "RETRIEVE"
+    ],
+    "FATHER": [
+      "FAINT",
+      "MAKEBELIEVE",
+      "RESTALLDAY",
+      "SHARK",
+      "ESCALATOR"
+    ],
+    "FAVORITE": [
+      "BOW",
+      "COLOR",
+      "TASTE",
+      "RIBBONAWARD",
+      "SURGEON"
+    ],
+    "FEEL": [
+      "TURN",
+      "VACUUM",
+      "FEEL",
+      "UPSET",
+      "UNDERWEAR"
+    ],
+    "FINE": [
+      "BOW",
+      "PENGUIN",
+      "NAVEL",
+      "BOILINGMAD",
+      "NICE"
+    ],
+    "FINISH": [
+      "DOG",
+      "SQUEEZE",
+      "THESE",
+      "BOWLING",
+      "CURTSEY"
+    ],
+    "FIVE": [
+      "BOW",
+      "COLOR",
+      "PIPE",
+      "TASTE",
+      "CHOKE"
+    ],
+    "FOOD": [
+      "GOATEE",
+      "HANDSOME",
+      "CHOKE",
+      "EXPERT",
+      "PRECIOUS"
+    ],
+    "FORGET": [
+      "BLINDS",
+      "LION",
+      "RAINBOW",
+      "BECAUSE",
+      "HOWL"
+    ],
+    "FOUR": [
+      "SIDE",
+      "CURTSEY",
+      "FOUR",
+      "STAIRS",
+      "TOOMUCH"
+    ],
+    "FRIEND": [
+      "NECKLACE",
+      "LIFT",
+      "SAVE",
+      "FRIEND",
+      "PROBLEM"
+    ],
+    "GIVE": [
+      "MILK",
+      "BEFORE",
+      "EXPERT",
+      "FAIR",
+      "BUY"
+    ],
+    "GO": [
+      "AUSTRALIA",
+      "GIFT",
+      "VANISH",
+      "CURTSEY",
+      "KICK"
+    ],
+    "GOOD": [
+      "EASYTODO",
+      "COLOR",
+      "BOW",
+      "TIMEPROGRESS",
+      "FRY"
+    ],
+    "GOODBYE": [
+      "PENGUIN",
+      "POUR",
+      "FASHION",
+      "CURTSEY",
+      "SILVER"
+    ],
+    "HAPPY": [
+      "MONKEY",
+      "HIGHHEELS",
+      "PANTS",
+      "BALANCE",
+      "CONCERNED"
+    ],
+    "HARD": [
+      "EQUAL",
+      "BELT",
+      "CLIP",
+      "EVEN",
+      "HURDLE-TRIP"
+    ],
+    "HAVE": [
+      "LIVE",
+      "LIFT",
+      "STRONG",
+      "SWEATER",
+      "HAVE"
+    ],
+    "HE-SHE": [
+      "PINCH",
+      "COCACOLA",
+      "DEODORANT",
+      "TEMPTATION",
+      "CRACKER"
+    ],
+    "HEARING": [
+      "TRIP",
+      "SHAVE",
+      "SOMERSAULT",
+      "SNEEZE",
+      "METAL"
+    ],
+    "HELLO": [
+      "NONSENSE",
+      "LAMP",
+      "HELLO",
+      "RISK",
+      "DISRUPT"
+    ],
+    "HELP": [
+      "CREAM",
+      "THERAPY",
+      "STRAIN",
+      "ERASER",
+      "IRON"
+    ],
+    "HERE": [
+      "PENGUIN",
+      "JUMPROPE",
+      "COWBOY",
+      "LIFT",
+      "DIAPER"
+    ],
+    "HOME": [
+      "FLIPSWITCH",
+      "THIEF",
+      "AND",
+      "INHALE",
+      "ESCALATOR"
+    ],
+    "HOSPITAL": [
+      "DEODORANT",
+      "ARM",
+      "ROLLUPSLEEVES",
+      "DAY",
+      "PAGEANT"
+    ],
+    "HOT": [
+      "MILK",
+      "BLOUSE",
+      "DRESS",
+      "SELF",
+      "CALIFORNIA"
+    ],
+    "HOUR": [
+      "TOAST",
+      "ELEVATOR",
+      "LAW",
+      "LIGHTCANDLE",
+      "UNIQUE"
+    ],
+    "HOW": [
+      "SCREWDRIVER",
+      "HOW",
+      "SURGEON",
+      "CHERRY",
+      "LIVE"
+    ],
+    "HUNGRY": [
+      "UPSET",
+      "BOW",
+      "BURP",
+      "DISLIKE",
+      "PINCH"
+    ],
+    "HURT": [
+      "WHEEL",
+      "PAIN",
+      "ACCORDION",
+      "WHEELCHAIR",
+      "LIGHTWEIGHT"
+    ],
+    "I": [
+      "REFUSE",
+      "DRINK",
+      "FLIPSWITCH",
+      "FURNITURE",
+      "GROWUP"
+    ],
+    "KNOW": [
+      "PINEAPPLE",
+      "HAIR",
+      "STRAWBERRY",
+      "MEDITATE",
+      "IMMERSE"
+    ],
+    "LATER": [
+      "VANISH",
+      "BRAIDS",
+      "PARACHUTE",
+      "TOAST",
+      "DECIDE"
+    ],
+    "LEARN": [
+      "LEARN",
+      "STUDENT",
+      "CHAOS",
+      "GIRAFFE",
+      "UNIQUE"
+    ],
+    "LIKE": [
+      "CURIOUS",
+      "BOW",
+      "FLASHLIGHT",
+      "VOLUNTEER",
+      "BOILINGMAD"
+    ],
+    "LOVE": [
+      "CRACKER",
+      "LOVE",
+      "DEODORANT",
+      "PINCH",
+      "UMBRELLA"
+    ],
+    "MAKE": [
+      "TEARRIP",
+      "LEAF",
+      "THESE",
+      "SPECIALIST",
+      "CEMETERY"
+    ],
+    "MANY": [
+      "SHIRT",
+      "SIGNINGFLUENTLY",
+      "YOUNG",
+      "EXERCISE",
+      "STRETCH-CA"
+    ],
+    "MEET": [
+      "SHORTWORD",
+      "MEET",
+      "ECLIPSE",
+      "MAGNET",
+      "DILEMMA"
+    ],
+    "MILK": [
+      "DOG",
+      "MILK",
+      "REFUSE",
+      "FLIPSWITCH",
+      "GROWUP"
+    ],
+    "MINUTE": [
+      "NUT",
+      "PROPELLER",
+      "WINDMILL",
+      "CANDY",
+      "WALK-TIGHTROPE-CL"
+    ],
+    "MONEY": [
+      "BOW",
+      "COLOR",
+      "RELAX",
+      "STRAIN",
+      "LAYDOWN"
+    ],
+    "MORE": [
+      "SANDWICH",
+      "TEACH",
+      "EXPERT",
+      "FRECKLES",
+      "SHIRT"
+    ],
+    "MORNING": [
+      "WAIT",
+      "FRY",
+      "SURGEON",
+      "BOW",
+      "COOL"
+    ],
+    "MOTHER": [
+      "RESTALLDAY",
+      "PINEAPPLE",
+      "FOX",
+      "DRINK",
+      "STAIRS"
+    ],
+    "MY": [
+      "BOW",
+      "UPSET",
+      "TRUTH",
+      "TIE",
+      "COMPLAIN"
+    ],
+    "NAME": [
+      "LIFT",
+      "PROBLEM",
+      "TRUTH",
+      "HURDLE-TRIP",
+      "BUCKLE"
+    ],
+    "NEED": [
+      "CANDY",
+      "YOU",
+      "GIFT",
+      "NUT",
+      "NEED"
+    ],
+    "NEVER": [
+      "FORFEIT",
+      "WHYNOT",
+      "INHALE",
+      "AFRICA",
+      "STRAIGHT"
+    ],
+    "NEW": [
+      "BAKE",
+      "BELT",
+      "DRESSER",
+      "PANTS",
+      "MORNING"
+    ],
+    "NICE": [
+      "TRUTH",
+      "PLOW",
+      "LAYDOWN",
+      "BOW",
+      "CHEERLEADER"
+    ],
+    "NIGHT": [
+      "PINCH",
+      "DEODORANT",
+      "WRISTWATCH",
+      "COFFEE",
+      "PLOW"
+    ],
+    "NINE": [
+      "FRENCHFRIES",
+      "FURNITURE",
+      "SILVER",
+      "GOODYGOODY",
+      "NINE"
+    ],
+    "NO": [
+      "INHALE",
+      "STRICT",
+      "CASTLE",
+      "STAIRS",
+      "SPECIAL"
+    ],
+    "NONE": [
+      "MOTORCYCLE",
+      "STEAM",
+      "TEACH",
+      "VERYINTERESTED",
+      "WALK-TIGHTROPE-CL"
+    ],
+    "NOT": [
+      "ORANGE",
+      "MICROPHONE",
+      "SHAVE",
+      "SECRET",
+      "MYSELF"
+    ],
+    "NOW": [
+      "FRY",
+      "PANTS",
+      "VANISH",
+      "BASKET",
+      "BACKPACK"
+    ],
+    "OK": [
+      "OK",
+      "YUCKY",
+      "THROW",
+      "CAN",
+      "DICE"
+    ],
+    "OLD": [
+      "BURP",
+      "SHAVE",
+      "FRACTION",
+      "GARLIC",
+      "SQUEEZE"
+    ],
+    "ONE": [
+      "GLASS",
+      "DENTIST",
+      "DISAPPOINT",
+      "RECENT",
+      "FLIPSWITCH"
+    ],
+    "OPEN": [
+      "BACKOUT",
+      "TUBE",
+      "PLATFORM",
+      "GETOFF",
+      "TEARRIP"
+    ],
+    "PAY": [
+      "CURTSEY",
+      "UNDERWEAR",
+      "PAY",
+      "TAIL",
+      "WHEEL"
+    ],
+    "PERSON": [
+      "PENGUIN",
+      "SKIRT",
+      "GLUE",
+      "CURTSEY",
+      "DIAPER"
+    ],
+    "PIZZA": [
+      "SQUEEZE",
+      "REACH",
+      "STAIRS",
+      "BITE",
+      "LEAVE"
+    ],
+    "PLEASE": [
+      "BOW",
+      "COLOR",
+      "CHOKE",
+      "KNIGHT",
+      "PIPE"
+    ],
+    "READ": [
+      "PAINTBRUSH",
+      "TOAST",
+      "READ",
+      "RESEARCH",
+      "FORK"
+    ],
+    "READY": [
+      "TUBE",
+      "WALK-TIGHTROPE-CL",
+      "CURTSEY",
+      "GETOFF",
+      "BACKOUT"
+    ],
+    "REMEMBER": [
+      "REMEMBER",
+      "DEPTH",
+      "SLIDE",
+      "STUDENT",
+      "DROWN"
+    ],
+    "RESTAURANT": [
+      "INHALE",
+      "ELEVATOR",
+      "RESTALLDAY",
+      "SPECIAL",
+      "DUCK"
+    ],
+    "RIGHT": [
+      "CURTSEY",
+      "THESE",
+      "ESCALATE",
+      "SEVERAL",
+      "THROWAWAY"
+    ],
+    "SAD": [
+      "REGISTER",
+      "CAPE",
+      "DRESS",
+      "BURN",
+      "VANISH"
+    ],
+    "SAME": [
+      "YESTERDAY",
+      "PRIDE",
+      "SENATE",
+      "RESIST",
+      "SAUCE"
+    ],
+    "SANDWICH": [
+      "EXPERT",
+      "DEMAND",
+      "CATCHBASEBALL",
+      "PROJECT",
+      "RESTALLDAY"
+    ],
+    "SCARED": [
+      "INSPIRE",
+      "RETIRE",
+      "SCARED",
+      "MATCH",
+      "SCOOP"
+    ],
+    "SCHOOL": [
+      "MEAT",
+      "BASIC",
+      "CHEERLEADER",
+      "TABLE",
+      "PROTECTION"
+    ],
+    "SEE": [
+      "OFFHAND",
+      "MAD",
+      "VERYINTERESTED",
+      "DORMITORY",
+      "TRAVEL"
+    ],
+    "SEVEN": [
+      "GOODYGOODY",
+      "POUR",
+      "EXPERT",
+      "GOODYGOODYSHOEOPPOSITE",
+      "DOG"
+    ],
+    "SICK": [
+      "SICK",
+      "GOTHROUGH",
+      "ROOF",
+      "WINDOWOPEN",
+      "SHOOT"
+    ],
+    "SIGN": [
+      "STRUGGLE",
+      "SHARPEN",
+      "SIGN",
+      "TANKTOP",
+      "BIB"
+    ],
+    "SIT": [
+      "WALK-TIGHTROPE-CL",
+      "CHERRY",
+      "CLIP",
+      "HURDLE-TRIP",
+      "RETIRE"
+    ],
+    "SIX": [
+      "RESTALLDAY",
+      "COLOR",
+      "PIPE",
+      "EXPERT",
+      "GOODYGOODY"
+    ],
+    "SLEEP": [
+      "REALLYINTO",
+      "KNIGHT",
+      "GOATEE",
+      "INHALE",
+      "FLOWER"
+    ],
+    "SLOW": [
+      "NAVEL",
+      "ZIPPER",
+      "DEODORANT",
+      "THESE",
+      "SQUEEZE"
+    ],
+    "SMALL": [
+      "BOWLING",
+      "VANISH",
+      "WANT",
+      "DOG",
+      "OWN"
+    ],
+    "SOON": [
+      "SOON",
+      "STINK",
+      "CELLPHONE",
+      "KNOW",
+      "EXPERT"
+    ],
+    "SORRY": [
+      "BOW",
+      "MICROPHONE",
+      "ZIPPER",
+      "COMPLAIN",
+      "TIE"
+    ],
+    "STOP": [
+      "STRAIN",
+      "PROTECTION",
+      "MEAT",
+      "CRAWL",
+      "MOVIE"
+    ],
+    "STORE": [
+      "STORE",
+      "MOTORCYCLE",
+      "SPACESHIP",
+      "EXPERT",
+      "WORKOUT"
+    ],
+    "SUGAR": [
+      "PREFER",
+      "MILK",
+      "HAHA",
+      "MONEY",
+      "HADENOUGH"
+    ],
+    "TALK": [
+      "RESTALLDAY",
+      "BOW",
+      "KNIGHT",
+      "STRAWBERRY",
+      "WHISPER"
+    ],
+    "TEA": [
+      "BLANKET",
+      "GRIEVE",
+      "LIFT",
+      "MOUNTAIN",
+      "OWN"
+    ],
+    "TEN": [
+      "REFUSE",
+      "FLIPSWITCH",
+      "MILK",
+      "GROWUP",
+      "DOG"
+    ],
+    "THANK-YOU": [
+      "TASTE",
+      "TOSS",
+      "EXPERT",
+      "BUY",
+      "SANDWICH"
+    ],
+    "THEY": [
+      "DRY",
+      "LONG",
+      "SENATE",
+      "THEY",
+      "WE"
+    ],
+    "THINK": [
+      "STAIRS",
+      "MAD",
+      "OFFHAND",
+      "KNIGHT",
+      "VERYINTERESTED"
+    ],
+    "THIRSTY": [
+      "MICROPHONE",
+      "PINON",
+      "TIE",
+      "CHOKE",
+      "GLASS"
+    ],
+    "THREE": [
+      "HAIRDRYER",
+      "SIDE",
+      "ANGRY",
+      "STAIRS",
+      "ESCALATOR"
+    ],
+    "TIME": [
+      "TIME",
+      "MIX",
+      "SANDALS",
+      "DUE",
+      "OWE"
+    ],
+    "TIRED": [
+      "TIRED",
+      "ANIMAL",
+      "HOW",
+      "LIFT",
+      "TEAM"
+    ],
+    "TODAY": [
+      "FRY",
+      "TOWEL",
+      "JUMPROPE",
+      "VIOLIN",
+      "GUITAR"
+    ],
+    "TOMORROW": [
+      "ZIPPER",
+      "FLIPSWITCH",
+      "SHOOT",
+      "JACKET",
+      "LIFT"
+    ],
+    "TRY": [
+      "MOTORCYCLE",
+      "BASKET",
+      "CURTSEY",
+      "VANISH",
+      "FLY"
+    ],
+    "TWO": [
+      "PIPE",
+      "BOW",
+      "STUCK",
+      "GLASS",
+      "EXPERT"
+    ],
+    "UNDERSTAND": [
+      "CANDY",
+      "PEN",
+      "FLIPSWITCH",
+      "DIRECTOR",
+      "HAIRDRYER"
+    ],
+    "WAIT": [
+      "STICKY",
+      "COLOR",
+      "PENGUIN",
+      "EXPERT",
+      "GLUE"
+    ],
+    "WANT": [
+      "COOL",
+      "FRY",
+      "SCREWDRIVER",
+      "WAIT",
+      "ART"
+    ],
+    "WATER": [
+      "RESTALLDAY",
+      "KNIGHT",
+      "BOW",
+      "STRAWBERRY",
+      "DROWN"
+    ],
+    "WE": [
+      "WE",
+      "US",
+      "DOLPHIN",
+      "PERFUME",
+      "MEMBER"
+    ],
+    "WEEK": [
+      "TOW",
+      "FLOAT",
+      "LIFT",
+      "DRY",
+      "DRAG"
+    ],
+    "WELCOME": [
+      "PANTS",
+      "CURTSEY",
+      "BOOTS",
+      "UNDERWEAR",
+      "FOLD"
+    ],
+    "WHAT": [
+      "COOL",
+      "FRY",
+      "EXPERT",
+      "VANISH",
+      "LIVE"
+    ],
+    "WHEN": [
+      "WHEEL",
+      "LIFT",
+      "ABOUT",
+      "ROPE",
+      "HURDLE-TRIP"
+    ],
+    "WHERE": [
+      "DIFFERENTSITUATION",
+      "EAR",
+      "STAIRS",
+      "FOUL",
+      "ESCALATOR"
+    ],
+    "WHICH": [
+      "LIVE",
+      "LIFT",
+      "VANISH",
+      "MANAGE",
+      "STRONG"
+    ],
+    "WHO": [
+      "TEARRIP",
+      "DISAPPOINT",
+      "MICROPHONE",
+      "INHALE",
+      "TIE"
+    ],
+    "WHY": [
+      "REFUSE",
+      "FLIPSWITCH",
+      "SHOOT",
+      "DOG",
+      "MILK"
+    ],
+    "WORK": [
+      "WORK",
+      "NIGHT",
+      "INSTITUTE",
+      "ABSOLUTELYNOTHING",
+      "AT"
+    ]
+  }
+}

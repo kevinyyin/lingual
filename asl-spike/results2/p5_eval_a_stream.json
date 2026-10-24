@@ -1,0 +1,438 @@
+{
+ "model": "a_stream",
+ "mode": "stream",
+ "tau": 12,
+ "tau_grid_val": [
+  {
+   "tau": 0,
+   "script_top1": 0.4214,
+   "free_fallback": 0.775
+  },
+  {
+   "tau": 1,
+   "script_top1": 0.45,
+   "free_fallback": 0.735
+  },
+  {
+   "tau": 2,
+   "script_top1": 0.5571,
+   "free_fallback": 0.69
+  },
+  {
+   "tau": 4,
+   "script_top1": 0.6929,
+   "free_fallback": 0.61
+  },
+  {
+   "tau": 6,
+   "script_top1": 0.7857,
+   "free_fallback": 0.475
+  },
+  {
+   "tau": 8,
+   "script_top1": 0.85,
+   "free_fallback": 0.34
+  },
+  {
+   "tau": 12,
+   "script_top1": 0.8857,
+   "free_fallback": 0.215
+  },
+  {
+   "tau": 16,
+   "script_top1": 0.8929,
+   "free_fallback": 0.105
+  },
+  {
+   "tau": 24,
+   "script_top1": 0.8929,
+   "free_fallback": 0.015
+  },
+  {
+   "tau": 1000000000.0,
+   "script_top1": 0.8929,
+   "free_fallback": 0.0
+  }
+ ],
+ "synthetic_free": {
+  "greedy": {
+   "wer": 0.5449,
+   "wer_ci": [
+    0.4954,
+    0.587
+   ],
+   "recall": 0.5221,
+   "recall_ci": [
+    0.4829,
+    0.5943
+   ],
+   "precision": 0.6402,
+   "n_sentences": 2000,
+   "signers": 11
+  },
+  "beam": {
+   "wer": 0.547,
+   "wer_ci": [
+    0.4795,
+    0.5664
+   ],
+   "recall": 0.4534,
+   "recall_ci": [
+    0.4295,
+    0.5452
+   ],
+   "precision": 0.8018,
+   "n_sentences": 2000,
+   "signers": 11
+  },
+  "errors": {
+   "sub": [
+    {
+     "ref": "PAY",
+     "hyp": "<unk>",
+     "count": 14
+    },
+    {
+     "ref": "UNDERSTAND",
+     "hyp": "CENT",
+     "count": 11
+    },
+    {
+     "ref": "CAN",
+     "hyp": "<unk>",
+     "count": 10
+    },
+    {
+     "ref": "PLEASE",
+     "hyp": "<unk>",
+     "count": 10
+    },
+    {
+     "ref": "<unk>",
+     "hyp": "WAIT",
+     "count": 9
+    },
+    {
+     "ref": "<unk>",
+     "hyp": "MILK",
+     "count": 9
+    },
+    {
+     "ref": "HOW-MUCH",
+     "hyp": "<unk>",
+     "count": 9
+    },
+    {
+     "ref": "<unk>",
+     "hyp": "HOT",
+     "count": 8
+    },
+    {
+     "ref": "COFFEE",
+     "hyp": "<unk>",
+     "count": 8
+    },
+    {
+     "ref": "SODA",
+     "hyp": "<unk>",
+     "count": 8
+    },
+    {
+     "ref": "<unk>",
+     "hyp": "NUTS",
+     "count": 7
+    },
+    {
+     "ref": "MEDIUM",
+     "hyp": "<unk>",
+     "count": 7
+    },
+    {
+     "ref": "<unk>",
+     "hyp": "MY",
+     "count": 7
+    },
+    {
+     "ref": "KIND",
+     "hyp": "<unk>",
+     "count": 7
+    },
+    {
+     "ref": "LARGE",
+     "hyp": "FAST",
+     "count": 6
+    }
+   ],
+   "del": [
+    {
+     "ref": "<unk>",
+     "hyp": null,
+     "count": 616
+    },
+    {
+     "ref": "SORRY",
+     "hyp": null,
+     "count": 90
+    },
+    {
+     "ref": "IX-1P",
+     "hyp": null,
+     "count": 88
+    },
+    {
+     "ref": "PLEASE",
+     "hyp": null,
+     "count": 85
+    },
+    {
+     "ref": "COFFEE",
+     "hyp": null,
+     "count": 83
+    },
+    {
+     "ref": "NUTS",
+     "hyp": null,
+     "count": 73
+    },
+    {
+     "ref": "HOW-MUCH",
+     "hyp": null,
+     "count": 65
+    },
+    {
+     "ref": "PAY",
+     "hyp": null,
+     "count": 59
+    },
+    {
+     "ref": "TWO",
+     "hyp": null,
+     "count": 54
+    },
+    {
+     "ref": "NOT",
+     "hyp": null,
+     "count": 52
+    },
+    {
+     "ref": "HELLO",
+     "hyp": null,
+     "count": 50
+    },
+    {
+     "ref": "MY",
+     "hyp": null,
+     "count": 46
+    },
+    {
+     "ref": "THANK-YOU",
+     "hyp": null,
+     "count": 46
+    },
+    {
+     "ref": "CARD",
+     "hyp": null,
+     "count": 45
+    },
+    {
+     "ref": "MILK",
+     "hyp": null,
+     "count": 44
+    }
+   ],
+   "ins": [
+    {
+     "ref": null,
+     "hyp": "<unk>",
+     "count": 19
+    },
+    {
+     "ref": null,
+     "hyp": "HOT",
+     "count": 8
+    },
+    {
+     "ref": null,
+     "hyp": "WAIT",
+     "count": 8
+    },
+    {
+     "ref": null,
+     "hyp": "HERE",
+     "count": 7
+    },
+    {
+     "ref": null,
+     "hyp": "CAKE",
+     "count": 6
+    },
+    {
+     "ref": null,
+     "hyp": "MILK",
+     "count": 6
+    },
+    {
+     "ref": null,
+     "hyp": "HOW-MANY",
+     "count": 4
+    },
+    {
+     "ref": null,
+     "hyp": "WRONG",
+     "count": 4
+    },
+    {
+     "ref": null,
+     "hyp": "ONE",
+     "count": 3
+    },
+    {
+     "ref": null,
+     "hyp": "YOU",
+     "count": 3
+    },
+    {
+     "ref": null,
+     "hyp": "YES",
+     "count": 3
+    },
+    {
+     "ref": null,
+     "hyp": "COLD",
+     "count": 2
+    },
+    {
+     "ref": null,
+     "hyp": "KIND",
+     "count": 2
+    },
+    {
+     "ref": null,
+     "hyp": "OUTSIDE",
+     "count": 2
+    },
+    {
+     "ref": null,
+     "hyp": "WANT",
+     "count": 2
+    }
+   ]
+  }
+ },
+ "script_lines": {
+  "top1": 0.8398,
+  "top1_ci": [
+   0.7684,
+   0.9091
+  ],
+  "top3": 0.9329,
+  "top3_ci": [
+   0.8809,
+   0.9805
+  ],
+  "fallback_rate": 0.0216,
+  "n": 462,
+  "signers": 11,
+  "per_line_top1": {
+   "0": 0.758,
+   "1": 1.0,
+   "2": 0.909,
+   "3": 0.879,
+   "4": 0.909,
+   "5": 0.697,
+   "6": 0.879,
+   "7": 1.0,
+   "8": 0.818,
+   "9": 0.576,
+   "10": 0.758,
+   "11": 0.818,
+   "12": 0.909,
+   "13": 0.848
+  }
+ },
+ "script_lines_no_fallback": {
+  "top1": 0.8485,
+  "top1_ci": [
+   0.777,
+   0.9177
+  ],
+  "top3": 0.9329,
+  "top3_ci": [
+   0.8809,
+   0.9805
+  ],
+  "fallback_rate": 0.0,
+  "n": 462,
+  "signers": 11,
+  "per_line_top1": {
+   "0": 0.758,
+   "1": 1.0,
+   "2": 0.909,
+   "3": 0.909,
+   "4": 0.909,
+   "5": 0.697,
+   "6": 0.879,
+   "7": 1.0,
+   "8": 0.818,
+   "9": 0.636,
+   "10": 0.758,
+   "11": 0.818,
+   "12": 0.939,
+   "13": 0.848
+  }
+ },
+ "delay": {
+  "final_ms": {
+   "median": 300.5,
+   "p90": 301.1,
+   "max": 302.3,
+   "n": 300
+  },
+  "model_emission_ms": {
+   "median": 0.0,
+   "p90": 66.7,
+   "max": 233.3,
+   "n": 300
+  },
+  "compute_ms_per_utterance": {
+   "median": 45.7,
+   "p90": 108.9,
+   "max": 308.3,
+   "n": 300
+  },
+  "n": 300,
+  "hold_ms": 300
+ },
+ "rwth": {
+  "greedy": {
+   "wer": 0.8804,
+   "wer_ci": [
+    0.8265,
+    0.9094
+   ],
+   "recall": 0.0656,
+   "recall_ci": [
+    0.029,
+    0.0758
+   ],
+   "precision": 0.2264,
+   "n_sentences": 75,
+   "signers": 3
+  },
+  "beam": {
+   "wer": 0.8451,
+   "wer_ci": [
+    0.8133,
+    0.8826
+   ],
+   "recall": 0.0273,
+   "recall_ci": [
+    0.0145,
+    0.0333
+   ],
+   "precision": 0.2273,
+   "n_sentences": 75,
+   "signers": 3
+  }
+ }
+}

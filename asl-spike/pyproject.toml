@@ -1,0 +1,37 @@
+[project]
+name = "asl-spike"
+version = "0.0.1"
+description = "Pre-event research spike; not product code."
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "numpy<2.1",
+  "pandas",
+  "pyarrow",
+  "scipy",
+  "scikit-learn",
+  "tqdm",
+  "pyyaml",
+  "python-dotenv",
+  "mediapipe",
+  "opencv-python-headless",
+  "torch",
+  "kaggle",
+  "httpx",
+  "websockets",
+  "anthropic",
+  "soundfile",
+  "lxml",
+  "matplotlib",
+  "gdown>=6.4.2",
+  "speechbrain>=1.1.2",
+  "transformers>=5.20.0",
+  "soxr>=1.1.0",
+  "huggingface-hub>=2.2.0",
+  "hsemotion-onnx>=0.3.1",
+  "onnxruntime>=1.31.0",
+  "playwright>=1.64.0",
+  "yt-dlp>=2026.8.19",
+]
+
+[tool.uv]
+package = false

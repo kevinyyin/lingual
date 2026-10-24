@@ -1,0 +1,36 @@
+{
+ "model": "b_bi_f0",
+ "mode": "bi",
+ "rwth": {
+  "greedy": {
+   "wer": 0.6214,
+   "wer_ci": [
+    0.6008,
+    0.6008
+   ],
+   "recall": 0.2281,
+   "recall_ci": [
+    0.2273,
+    0.2273
+   ],
+   "precision": 0.8125,
+   "n_sentences": 22,
+   "signers": 1
+  },
+  "beam": {
+   "wer": 0.6408,
+   "wer_ci": [
+    0.6288,
+    0.6288
+   ],
+   "recall": 0.193,
+   "recall_ci": [
+    0.1894,
+    0.1894
+   ],
+   "precision": 0.7857,
+   "n_sentences": 22,
+   "signers": 1
+  }
+ }
+}

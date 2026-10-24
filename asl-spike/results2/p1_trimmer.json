@@ -1,0 +1,156 @@
+{
+ "params": {
+  "rise_sw": 0.15,
+  "speed_sw_per_s": 0.3,
+  "hysteresis_s": 0.15,
+  "min_hold_s_static": 0.3,
+  "pad_frames": 2,
+  "rest_height": "10th percentile of the clip's dominant-wrist height",
+  "aspect": "x multiplied by width/height before geometry"
+ },
+ "grid_val": [
+  {
+   "rise": 0.15,
+   "speed": 0.3,
+   "removed_mean": 0.53,
+   "val_top1": 0.8733,
+   "val_top3": 0.9421
+  },
+  {
+   "rise": 0.15,
+   "speed": 0.6,
+   "removed_mean": 0.532,
+   "val_top1": 0.8733,
+   "val_top3": 0.9421
+  },
+  {
+   "rise": 0.15,
+   "speed": 1.0,
+   "removed_mean": 0.537,
+   "val_top1": 0.8705,
+   "val_top3": 0.9408
+  },
+  {
+   "rise": 0.15,
+   "speed": 1.5,
+   "removed_mean": 0.546,
+   "val_top1": 0.8664,
+   "val_top3": 0.9353
+  },
+  {
+   "rise": 0.25,
+   "speed": 0.3,
+   "removed_mean": 0.53,
+   "val_top1": 0.8664,
+   "val_top3": 0.9339
+  },
+  {
+   "rise": 0.25,
+   "speed": 0.6,
+   "removed_mean": 0.533,
+   "val_top1": 0.8678,
+   "val_top3": 0.9339
+  },
+  {
+   "rise": 0.25,
+   "speed": 1.0,
+   "removed_mean": 0.536,
+   "val_top1": 0.865,
+   "val_top3": 0.9325
+  },
+  {
+   "rise": 0.25,
+   "speed": 1.5,
+   "removed_mean": 0.54,
+   "val_top1": 0.8526,
+   "val_top3": 0.9242
+  },
+  {
+   "rise": 0.35,
+   "speed": 0.3,
+   "removed_mean": 0.49,
+   "val_top1": 0.8485,
+   "val_top3": 0.9215
+  },
+  {
+   "rise": 0.35,
+   "speed": 0.6,
+   "removed_mean": 0.492,
+   "val_top1": 0.8471,
+   "val_top3": 0.9215
+  },
+  {
+   "rise": 0.35,
+   "speed": 1.0,
+   "removed_mean": 0.496,
+   "val_top1": 0.8416,
+   "val_top3": 0.9201
+  },
+  {
+   "rise": 0.35,
+   "speed": 1.5,
+   "removed_mean": 0.491,
+   "val_top1": 0.8278,
+   "val_top3": 0.9132
+  },
+  {
+   "rise": 0.5,
+   "speed": 0.3,
+   "removed_mean": 0.346,
+   "val_top1": 0.8636,
+   "val_top3": 0.9435
+  },
+  {
+   "rise": 0.5,
+   "speed": 0.6,
+   "removed_mean": 0.343,
+   "val_top1": 0.8636,
+   "val_top3": 0.9435
+  },
+  {
+   "rise": 0.5,
+   "speed": 1.0,
+   "removed_mean": 0.333,
+   "val_top1": 0.8581,
+   "val_top3": 0.9408
+  },
+  {
+   "rise": 0.5,
+   "speed": 1.5,
+   "removed_mean": 0.323,
+   "val_top1": 0.8581,
+   "val_top3": 0.9366
+  }
+ ],
+ "val_untrimmed": {
+  "top1": 0.8884297520661157,
+  "top3": 0.9517906336088154
+ },
+ "test": {
+  "n": 2376,
+  "signers": 11,
+  "untrimmed_top1": 0.8438552188552189,
+  "untrimmed_top3": 0.9297138047138047,
+  "trimmed_top1": 0.8345959595959596,
+  "trimmed_top3": 0.9170875420875421,
+  "removed_frac": {
+   "n": 2376,
+   "median": 0.53,
+   "p90": 0.69,
+   "max": 0.95
+  },
+  "seconds_before": {
+   "n": 2376,
+   "median": 2.47,
+   "p90": 3.48,
+   "max": 11.23
+  },
+  "seconds_after": {
+   "n": 2376,
+   "median": 1.1,
+   "p90": 1.74,
+   "max": 7.5
+  }
+ },
+ "contact_sheets": "results2/p1_contact/ (ASL Citizen frames; local only)"
+}

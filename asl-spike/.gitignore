@@ -1,0 +1,29 @@
+# secrets
+.env
+# datasets (never redistributed)
+data/
+# caches and large derived files
+cache/
+*.npz
+*.wav
+*.mp4
+__pycache__/
+.venv/
+listening/audio/
+avatar/model.vrm
+avatar/signs.json
+avatar/*.webm
+
+# round 2
+results2/p1_contact/
+results2/**/*.jpg
+results2/**/*.png
+cache/
+logs2/
+avatar/signs2.json
+avatar/capture2.mp4
+results2/v4_contact/
+results2/v2_sheets/
+
+# Hugging Face model cache (files exceed GitHub limits)
+wav2vec2_checkpoints/

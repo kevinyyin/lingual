@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avatar prototype</title>
+<style>
+  :root { --bg: #eef1f4; --fg: #15191e; --mut: #5a636e; --acc: #2457a6; --line: #cfd6de; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.45 system-ui, sans-serif; }
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 12px; padding: 12px; height: calc(100vh - 24px); }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; grid-template-rows: 60vh auto; height: auto; } }
+  #view { position: relative; background: #dfe5ec; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  canvas { display: block; width: 100%; height: 100%; }
+  #cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 14px; background: rgba(20,25,30,.72); color: #fff; font-size: 18px; min-height: 26px; }
+  aside { display: grid; gap: 10px; align-content: start; overflow: auto; }
+  textarea { width: 100%; min-height: 150px; font: 12px ui-monospace, monospace; box-sizing: border-box; }
+  button, select { font: 600 13px system-ui; padding: 7px 10px; border-radius: 6px; border: 1px solid var(--acc); background: #fff; color: var(--acc); cursor: pointer; }
+  .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  pre { margin: 0; white-space: pre-wrap; font: 12px ui-monospace, monospace; background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 8px; }
+  .mut { color: var(--mut); }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/",
+  "@pixiv/three-vrm": "https://cdn.jsdelivr.net/npm/@pixiv/three-vrm@3.1.0/lib/three-vrm.module.min.js",
+  "kalidokit": "https://cdn.jsdelivr.net/npm/kalidokit@1.1.5/dist/kalidokit.es.js"
+} }
+</script>
+</head>
+<body>
+<main>
+  <div id="view"><canvas id="c"></canvas><div id="cap"></div></div>
+  <aside>
+    <div class="mut">Pre-event research spike, not product code. Plays a gloss sequence (S5 JSON) with per-gloss poses from
+      ASL Citizen videos (local research use only), 200 ms blends, and brow/headshake facial grammar.</div>
+    <div class="row"><select id="preset"></select><button id="play">Play</button><button id="rec">Record</button></div>
+    <div class="row"><label><input type="checkbox" id="mirror"> mirror rig</label>
+      <label>blend ms <input id="blend" type="number" value="200" min="0" max="400" step="50" style="width:60px"></label></div>
+    <textarea id="json"></textarea>
+    <pre id="log"></pre>
+  </aside>
+</main>
+<script type="module">
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { VRMLoaderPlugin, VRMUtils } from "@pixiv/three-vrm";
+import * as Kalidokit from "kalidokit";
+
+const log = (...a) => { const el = document.getElementById("log"); el.textContent += a.join(" ") + "\n"; console.log(...a); };
+const canvas = document.getElementById("c");
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
+// low internal resolution: keeps software-rendered previews responsive; ?hq=1 for full resolution
+const HQ = new URLSearchParams(location.search).has("hq");
+renderer.setPixelRatio(HQ ? window.devicePixelRatio : 1);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xdfe5ec);
+const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 20);
+camera.position.set(0, 1.25, 2.6);
+camera.lookAt(0, 1.15, 0);
+if (new URLSearchParams(location.search).has("face")) { camera.position.set(0, 1.42, 0.55); camera.lookAt(0, 1.42, 0); }
+if (new URLSearchParams(location.search).has("zoom")) { camera.position.set(0, 1.2, 1.1); camera.lookAt(0, 1.15, 0); }
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8899aa, 1.6));
+const dl = new THREE.DirectionalLight(0xffffff, 1.4); dl.position.set(0.5, 2, 2); scene.add(dl);
+function resize() { const r = canvas.parentElement.getBoundingClientRect(); const k = HQ ? 1 : Math.min(1, 360 / Math.max(r.width, 1)); renderer.setSize(Math.round(r.width * k), Math.round(r.height * k), false); camera.aspect = r.width / r.height; camera.updateProjectionMatrix(); }
+window.addEventListener("resize", resize); resize();
+
+let vrm = null, faceMesh = null, BROW = {};
+const loader = new GLTFLoader();
+loader.register(p => new VRMLoaderPlugin(p));
+const tLoad0 = performance.now();
+const gltf = await loader.loadAsync("model.vrm");
+vrm = gltf.userData.vrm;
+VRMUtils.rotateVRM0(vrm);
+scene.add(vrm.scene);
+vrm.scene.traverse(o => { if (o.isMesh && o.morphTargetDictionary) {
+  for (const [k, i] of Object.entries(o.morphTargetDictionary)) {
+    if (k.endsWith("Fcl_BRW_Surprised")) { faceMesh = o; BROW.raise = i; }
+    if (k.endsWith("Fcl_BRW_Angry")) { BROW.lower = i; }
+  } } });
+log("model loaded", Math.round(performance.now() - tLoad0), "ms; brow morphs", JSON.stringify(BROW));
+
+// rest pose: arms down
+function bone(n) { return vrm.humanoid.getNormalizedBoneNode(n); }
+
+// ---------- lexicon ----------
+let LEX = null;
+async function loadLexicon() { if (!LEX) { const t = performance.now(); LEX = await (await fetch("signs.json")).json(); log("lexicon", Object.keys(LEX).length, "signs,", Math.round(performance.now() - t), "ms"); } return LEX; }
+
+const ARM_BONES = { UpperArm: "UpperArm", LowerArm: "LowerArm" };
+const FINGERS = ["Thumb", "Index", "Middle", "Ring", "Little"];
+const SEG_KALI = { Thumb: ["Proximal", "Intermediate", "Distal"], other: ["Proximal", "Intermediate", "Distal"] };
+const SEG_VRM = { Thumb: ["Metacarpal", "Proximal", "Distal"], other: ["Proximal", "Intermediate", "Distal"] };
+const q = new THREE.Quaternion(), e = new THREE.Euler();
+// kalidokit targets VRM 0.x orientation; VRM 1.0 normalized bones face the other way: flip x and z
+const FLIP = !new URLSearchParams(location.search).has("noflip");
+function eq(r, s = 1) { e.set((FLIP ? -r.x : r.x) * s, r.y * s, (FLIP ? -r.z : r.z) * s, "XYZ"); return new THREE.Quaternion().setFromEuler(e); }
+
+// arm retargeting by vector alignment (VRM 1.0 normalized bones: T-pose, identity rest, facing +Z).
+// MediaPipe world (x: subject's left, y: down, z: away from camera) -> avatar world (X, -Y, -Z).
+const V3 = (a) => new THREE.Vector3(a[0], -a[1], -a[2]);
+function alignArm(out, side, sh, el, wr, hand) {
+  const rest = new THREE.Vector3(side === "left" ? 1 : -1, 0, 0);
+  const d1 = V3(el).sub(V3(sh)).normalize(), d2 = V3(wr).sub(V3(el)).normalize();
+  const Wu = new THREE.Quaternion().setFromUnitVectors(rest, d1);
+  const Wl = new THREE.Quaternion().setFromUnitVectors(rest, d2);
+  out[side + "UpperArm"] = Wu;
+  out[side + "LowerArm"] = Wu.clone().invert().multiply(Wl);
+  if (hand) {  // wrist -> middle-finger knuckle direction (image coords; z roughly x-scaled)
+    const d3 = V3(hand[9]).sub(V3(hand[0])).normalize();
+    const Wh = new THREE.Quaternion().setFromUnitVectors(rest, d3);
+    out[side + "Hand"] = Wl.clone().invert().multiply(Wh);
+  }
+}
+const ARM_MODE = new URLSearchParams(location.search).get("arms") || "align";
+// solve one lexicon frame into target bone quaternions
+function solveFrame(fr, mirror) {
+  const out = {};
+  if (ARM_MODE === "align" && fr.pw) {
+    // subject's left (MP 11/13/15) drives the avatar's left unless mirrored
+    const L = [fr.pw[11], fr.pw[13], fr.pw[15], fr.lh], R = [fr.pw[12], fr.pw[14], fr.pw[16], fr.rh];
+    alignArm(out, "left", ...(mirror ? R : L));
+    alignArm(out, "right", ...(mirror ? L : R));
+  } else if (fr.pw && fr.p2) {
+    const vis = fr.p2.map(a => a[3] ?? 1);
+    const P = Kalidokit.Pose.solve(fr.pw.map(([x, y, z], i) => ({ x, y, z, visibility: vis[i] })),
+      fr.p2.map(([x, y, z], i) => ({ x, y, z, visibility: vis[i] })),
+      { runtime: "mediapipe", enableLegs: false, imageSize: { width: 1, height: 1 } });
+    if (P) {
+      for (const side of ["Right", "Left"]) {
+        const src = mirror ? side : (side === "Right" ? "Left" : "Right");
+        for (const b of ["UpperArm", "LowerArm"]) if (P[src + b]) out[side.toLowerCase() + b] = eq(P[src + b]);
+      }
+      if (P.Spine) out.spine = eq(P.Spine, 0.4);
+    }
+  }
+  for (const [key, side] of [["lh", "Left"], ["rh", "Right"]]) {
+    const lm = fr[key];
+    if (!lm) continue;
+    const tgt = mirror ? side : (side === "Right" ? "Left" : "Right");
+    const H = Kalidokit.Hand.solve(lm.map(([x, y, z]) => ({ x, y, z })), tgt);
+    if (!H) continue;
+    const t = tgt.toLowerCase();
+    if (ARM_MODE !== "align" && H[tgt + "Wrist"]) out[t + "Hand"] = eq(H[tgt + "Wrist"]);
+    for (const f of FINGERS) {
+      const ks = f === "Thumb" ? SEG_KALI.Thumb : SEG_KALI.other, vs = f === "Thumb" ? SEG_VRM.Thumb : SEG_VRM.other;
+      ks.forEach((k, i) => { const r = H[tgt + f + k]; if (r) out[t + f + vs[i]] = eq(r); });
+    }
+  }
+  return out;
+}
+
+// build a timeline: [{t, bones, gloss}] with blend frames between signs
+function buildTimeline(signs, lex, mirror, blendMs) {
+  const tl = []; let t = 0; const missing = [];
+  let prev = null;
+  for (const s of signs) {
+    const L = lex[s.gloss];
+    if (!L) { missing.push(s.gloss); continue; }
+    const dt = 1000 / (L.fps || 30);
+    const frames = L.frames.map(fr => solveFrame(fr, mirror));
+    if (prev && blendMs > 0) {
+      const steps = Math.max(1, Math.round(blendMs / dt));
+      for (let k = 1; k <= steps; k++) {
+        const a = k / (steps + 1), b = {};
+        for (const n of new Set([...Object.keys(prev), ...Object.keys(frames[0])])) {
+          const qa = prev[n] || frames[0][n], qb = frames[0][n] || prev[n];
+          b[n] = qa.clone().slerp(qb, a);
+        }
+        tl.push({ t, bones: b, gloss: null, nmm: s.nmm }); t += dt;
+      }
+    }
+    frames.forEach((b, i) => { tl.push({ t, bones: b, gloss: s.gloss, nmm: s.nmm, first: i === 0 }); t += dt; });
+    prev = frames[frames.length - 1];
+  }
+  return { tl, dur: t, missing };
+}
+
+let playing = null;
+window.playSentence = async function (sentence, opts = {}) {
+  const tRecv = performance.now();
+  const lex = await loadLexicon();
+  const tLex = performance.now();
+  const { tl, dur, missing } = buildTimeline(sentence.signs, lex, document.getElementById("mirror").checked,
+                                             +document.getElementById("blend").value);
+  const tBuilt = performance.now();
+  if (missing.length) log("missing from lexicon (skipped):", missing.join(" "));
+  return new Promise(res => { playing = { tl, dur, t0: null, tRecv, tLex, tBuilt, res, firstMotion: null }; });
+};
+
+// ---------- render loop ----------
+let last = performance.now(), lastPaint = 0;
+const cur = {};
+function apply(bones, a) {
+  for (const [n, qt] of Object.entries(bones)) { const b = bone(n); if (b) b.quaternion.slerp(qt, a); }
+}
+function setBrows(mode, w) {
+  if (!faceMesh) return;
+  faceMesh.morphTargetInfluences[BROW.raise] = mode === "raise" ? w : 0;
+  faceMesh.morphTargetInfluences[BROW.lower] = mode === "lower" ? w : 0;
+}
+// rAF, with a timer fallback (rAF stalls when the page is not painted, e.g. a hidden preview pane)
+const tick = fn => { let done = false; const go = () => { if (!done) { done = true; fn(performance.now()); } }; requestAnimationFrame(go); setTimeout(go, 34); };
+function frame(now) {
+  tick(frame);
+  const dt = (now - last) / 1000; last = now;
+  if (playing) {
+    if (playing.t0 === null) playing.t0 = now;
+    const t = now - playing.t0;
+    const i = Math.min(playing.tl.length - 1, playing.tl.findIndex(f => f.t > t) - 1 < 0 ? 0 : playing.tl.findIndex(f => f.t > t) - 1);
+    const f = playing.tl[i < 0 ? playing.tl.length - 1 : i];
+    if (f) {
+      apply(f.bones, 0.6);
+      if (playing.firstMotion === null) { playing.firstMotion = now; }
+      const nmm = f.nmm || {};
+      setBrows(nmm.brows, 0.9);
+      const head = bone("head");
+      if (head) head.rotation.y = nmm.headshake ? 0.22 * Math.sin(2 * Math.PI * 3 * t / 1000) : head.rotation.y * 0.8;
+      document.getElementById("cap").textContent = (f.gloss || "") + (nmm.brows && nmm.brows !== "neutral" ? `  [brows ${nmm.brows}]` : "") + (nmm.headshake ? "  [headshake]" : "");
+    }
+    if (t > playing.dur + 400) {
+      const p = playing; playing = null; setBrows(null, 0);
+      const m = { lexicon_ms: p.tLex - p.tRecv, build_ms: p.tBuilt - p.tLex, first_motion_ms: p.firstMotion - p.tRecv, duration_ms: p.dur };
+      log("timing", JSON.stringify(Object.fromEntries(Object.entries(m).map(([k, v]) => [k, Math.round(v)]))));
+      window.lastTiming = m; p.res(m);
+    }
+  }
+  vrm.update(dt);
+  // adaptive paint: if painting is slow (software WebGL), paint less often so pose updates keep their schedule
+  if (now - lastPaint >= Math.max(30, 4 * (window.renderMs || 0))) {
+    const tr = performance.now();
+    renderer.render(scene, camera);
+    window.renderMs = performance.now() - tr;
+    lastPaint = now;
+  }
+}
+// relax arms from T-pose
+for (const s of ["left", "right"]) { const b = bone(s + "UpperArm"); if (b) b.rotation.z = (s === "left" ? -1 : 1) * 1.2; }
+tick(frame);
+
+// ---------- presets from S5 outputs ----------
+const PRESETS = await (await fetch("sentences.json")).json();
+const sel = document.getElementById("preset");
+PRESETS.forEach((p, i) => { const o = document.createElement("option"); o.value = i; o.textContent = p.label; sel.appendChild(o); });
+const ta = document.getElementById("json");
+const show = () => { ta.value = JSON.stringify(PRESETS[sel.value].sentence, null, 1); };
+sel.onchange = show; show();
+document.getElementById("play").onclick = () => playSentence(JSON.parse(ta.value));
+
+// ---------- record a capture of all presets ----------
+document.getElementById("rec").onclick = async () => {
+  const stream = canvas.captureStream(30);
+  const rec = new MediaRecorder(stream, { mimeType: "video/webm;codecs=vp9" });
+  const chunks = []; rec.ondataavailable = ev => chunks.push(ev.data);
+  rec.start();
+  const timings = [];
+  for (const p of PRESETS) { timings.push({ label: p.label, ...(await playSentence(p.sentence)) }); await new Promise(r => setTimeout(r, 600)); }
+  rec.stop(); await new Promise(r => rec.onstop = r);
+  const blob = new Blob(chunks, { type: "video/webm" });
+  const r1 = await fetch("/upload?name=capture.webm", { method: "POST", body: blob });
+  const r2 = await fetch("/upload?name=timings.json", { method: "POST", body: JSON.stringify(timings, null, 1) });
+  log("saved capture", r1.status, r2.status);
+  window.recordDone = timings;
+};
+window.debugSolve = async (g, i, mirror) => { const lex = await loadLexicon(); const fr = lex[g].frames[i];
+  const vis = fr.p2.map(a => a[3] ?? 1);
+  const P = Kalidokit.Pose.solve(fr.pw.map(([x, y, z], i) => ({ x, y, z, visibility: vis[i] })), fr.p2.map(([x, y, z], i) => ({ x, y, z, visibility: vis[i] })), { runtime: "mediapipe", enableLegs: false, imageSize: { width: 1, height: 1 } });
+  return { P, out: Object.fromEntries(Object.entries(solveFrame(fr, mirror)).map(([k, v]) => [k, [v.x, v.y, v.z, v.w].map(n => +n.toFixed(3))])) }; };
+window.poseFrame = async (g, i, mirror) => { const lex = await loadLexicon(); const b = solveFrame(lex[g].frames[i], mirror); for (const [n, qt] of Object.entries(b)) { const bn = bone(n); if (bn) bn.quaternion.copy(qt); } vrm.update(0); return window.paintNow(); };
+window.browShot = (mode) => { setBrows(mode, 0.9); vrm.update(0); const d = window.paintNow(); setBrows(null, 0); return d; };
+window.paintNow = () => { renderer.render(scene, camera); return canvas.toDataURL("image/jpeg", 0.8); };
+window.ready = true;
+log("ready");
+</script>
+</body>
+</html>

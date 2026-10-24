@@ -1,0 +1,205 @@
+{
+ "signer": "P11",
+ "sources": {
+  "CAKE": "3377572875056527-CAKE.mp4",
+  "CHOCOLATE": "9541656322166965-CHOCOLATE.mp4",
+  "DAY": "33248134847065836-DAY.mp4",
+  "DELICIOUS": "31290843467826135-DELICIOUS.mp4",
+  "FINISH": "36755244520541575-FINISH.mp4",
+  "GOOD": "7988103105967095-GOOD.mp4",
+  "LARGE": "5984958993020424-BIG.mp4",
+  "MEDIUM": "0954513989388377-AVERAGE.mp4",
+  "MILK": "39795836654102024-MILK 2.mp4",
+  "NONE": "7123140171956899-NOTHING 2.mp4",
+  "OR": "928754171543865-OR.mp4",
+  "SMALL": "43505759423144474-SMALL.mp4",
+  "SORRY": "5865603235099206-SORRY.mp4",
+  "TASTE": "026471432961753694-TASTE.mp4",
+  "WHICH": "40059214149507016-WHICH.mp4",
+  "YOU": "5547769757240029-YOU.mp4"
+ },
+ "presets": [
+  {
+   "label": "wh: And what size: small, medium or large?",
+   "sentence": {
+    "signs": [
+     {
+      "gloss": "SMALL",
+      "nmm": {
+       "brows": "lower",
+       "headshake": false,
+       "mouth": null
+      },
+      "span": 1
+     },
+     {
+      "gloss": "OR",
+      "nmm": {
+       "brows": "lower",
+       "headshake": false,
+       "mouth": null
+      },
+      "span": 1
+     },
+     {
+      "gloss": "MEDIUM",
+      "nmm": {
+       "brows": "lower",
+       "headshake": false,
+       "mouth": null
+      },
+      "span": 1
+     },
+     {
+      "gloss": "OR",
+      "nmm": {
+       "brows": "lower",
+       "headshake": false,
+       "mouth": null
+      },
+      "span": 1
+     },
+     {
+      "gloss": "LARGE",
+      "nmm": {
+       "brows": "lower",
+       "headshake": false,
+       "mouth": null
+      },
+      "span": 1
+     },
+     {
+      "gloss": "WHICH",
+      "nmm": {
+       "brows": "lower",
+       "headshake": false,
+       "mouth": null
+      },
+      "span": 1
+     }
+    ]
+   },
+   "dropped_glosses": [
+    "SIZE"
+   ]
+  },
+  {
+   "label": "yn: Why don't you try the chocolate cake? It's really good.",
+   "sentence": {
+    "signs": [
+     {
+      "gloss": "CHOCOLATE",
+      "nmm": {
+       "brows": "neutral",
+       "headshake": false,
+       "mouth": null
+      },
+      "span": 0
+     },
+     {
+      "gloss": "CAKE",
+      "nmm": {
+       "brows": "neutral",
+       "headshake": false,
+       "mouth": null
+      },
+      "span": 0
+     },
+     {
+      "gloss": "TASTE",
+      "nmm": {
+       "brows": "raise",
+       "headshake": false,
+       "mouth": null
+      },
+      "span": 0
+     },
+     {
+      "gloss": "YOU",
+      "nmm": {
+       "brows": "raise",
+       "headshake": false,
+       "mouth": null
+      },
+      "span": 0
+     },
+     {
+      "gloss": "GOOD",
+      "nmm": {
+       "brows": "neutral",
+       "headshake": false,
+       "mouth": null
+      },
+      "span": 0
+     },
+     {
+      "gloss": "DELICIOUS",
+      "nmm": {
+       "brows": "neutral",
+       "headshake": false,
+       "mouth": null
+      },
+      "span": 0
+     }
+    ]
+   },
+   "dropped_glosses": []
+  },
+  {
+   "label": "neg: Sorry, we're out of oat milk today.",
+   "sentence": {
+    "signs": [
+     {
+      "gloss": "MILK",
+      "nmm": {
+       "brows": "neutral",
+       "headshake": false,
+       "mouth": null
+      },
+      "span": 1
+     },
+     {
+      "gloss": "DAY",
+      "nmm": {
+       "brows": "neutral",
+       "headshake": false,
+       "mouth": null
+      },
+      "span": 1
+     },
+     {
+      "gloss": "FINISH",
+      "nmm": {
+       "brows": "neutral",
+       "headshake": true,
+       "mouth": null
+      },
+      "span": 1
+     },
+     {
+      "gloss": "NONE",
+      "nmm": {
+       "brows": "neutral",
+       "headshake": true,
+       "mouth": null
+      },
+      "span": 1
+     },
+     {
+      "gloss": "SORRY",
+      "nmm": {
+       "brows": "neutral",
+       "headshake": false,
+       "mouth": null
+      },
+      "span": 0
+     }
+    ]
+   },
+   "dropped_glosses": [
+    "OAT"
+   ]
+  }
+ ],
+ "license": "ASL Citizen (Microsoft Research License Terms): research use only; no distribution of data or derived data"
+}

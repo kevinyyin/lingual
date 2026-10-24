@@ -1,0 +1,9 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "asl-server", "runtimeExecutable": "uv", "runtimeArgs": ["--directory", "app", "run", "asl-server"], "port": 8000 },
+    { "name": "asl-web", "runtimeExecutable": "npm", "runtimeArgs": ["--prefix", "app/web", "run", "dev", "--", "--port", "5173", "--strictPort"], "port": 5173 },
+    { "name": "asl-server-tunnel", "runtimeExecutable": "env", "runtimeArgs": ["ALLOWED_ORIGINS=https://ghz-faqs-punch-replied.trycloudflare.com", "uv", "--directory", "app", "run", "asl-server"], "port": 8000 },
+    { "name": "asl-web-tunnel", "runtimeExecutable": "npm", "runtimeArgs": ["--prefix", "app/web", "run", "dev:tunnel", "--", "--port", "5173", "--strictPort"], "port": 5173 }
+  ]
+}

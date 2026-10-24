@@ -1,0 +1,189 @@
+{
+ "browser": "Microsoft Edge via Playwright",
+ "headless": true,
+ "runs": [
+  {
+   "preset": "wh: And what size: small, medium or large?",
+   "rep": 0,
+   "cold_lexicon": true,
+   "lexicon_ms": 38.90000009536743,
+   "build_ms": 8.299999713897705,
+   "first_motion_ms": 47.299999713897705,
+   "duration_ms": 10241.53183288557,
+   "render_ms": 0.6999998092651367
+  },
+  {
+   "preset": "yn: Why don't you try the chocolate cake? It's really good.",
+   "rep": 0,
+   "cold_lexicon": false,
+   "lexicon_ms": 0,
+   "build_ms": 9.400000095367432,
+   "first_motion_ms": 9.700000286102295,
+   "duration_ms": 12871.445016470481,
+   "render_ms": 0.7000002861022949
+  },
+  {
+   "preset": "neg: Sorry, we're out of oat milk today.",
+   "rep": 0,
+   "cold_lexicon": false,
+   "lexicon_ms": 0.09999990463256836,
+   "build_ms": 4.699999809265137,
+   "first_motion_ms": 5.099999904632568,
+   "duration_ms": 7367.286769048558,
+   "render_ms": 0.7000002861022949
+  },
+  {
+   "preset": "wh: And what size: small, medium or large?",
+   "rep": 1,
+   "cold_lexicon": false,
+   "lexicon_ms": 0,
+   "build_ms": 7.299999713897705,
+   "first_motion_ms": 7.599999904632568,
+   "duration_ms": 10241.53183288557,
+   "render_ms": 0.8000001907348633
+  },
+  {
+   "preset": "yn: Why don't you try the chocolate cake? It's really good.",
+   "rep": 1,
+   "cold_lexicon": false,
+   "lexicon_ms": 0,
+   "build_ms": 6.899999618530273,
+   "first_motion_ms": 7.199999809265137,
+   "duration_ms": 12871.445016470481,
+   "render_ms": 0.9000000953674316
+  },
+  {
+   "preset": "neg: Sorry, we're out of oat milk today.",
+   "rep": 1,
+   "cold_lexicon": false,
+   "lexicon_ms": 0.09999990463256836,
+   "build_ms": 7,
+   "first_motion_ms": 7.300000190734863,
+   "duration_ms": 7367.286769048558,
+   "render_ms": 0.7000002861022949
+  },
+  {
+   "preset": "wh: And what size: small, medium or large?",
+   "rep": 2,
+   "cold_lexicon": false,
+   "lexicon_ms": 0,
+   "build_ms": 7.400000095367432,
+   "first_motion_ms": 7.599999904632568,
+   "duration_ms": 10241.53183288557,
+   "render_ms": 0.7999997138977051
+  },
+  {
+   "preset": "yn: Why don't you try the chocolate cake? It's really good.",
+   "rep": 2,
+   "cold_lexicon": false,
+   "lexicon_ms": 0,
+   "build_ms": 6.800000190734863,
+   "first_motion_ms": 7,
+   "duration_ms": 12871.445016470481,
+   "render_ms": 0.5
+  },
+  {
+   "preset": "neg: Sorry, we're out of oat milk today.",
+   "rep": 2,
+   "cold_lexicon": false,
+   "lexicon_ms": 0,
+   "build_ms": 5.199999809265137,
+   "first_motion_ms": 6.300000190734863,
+   "duration_ms": 7367.286769048558,
+   "render_ms": 0.5999999046325684
+  },
+  {
+   "preset": "wh: And what size: small, medium or large?",
+   "rep": 3,
+   "cold_lexicon": false,
+   "lexicon_ms": 0,
+   "build_ms": 6.200000286102295,
+   "first_motion_ms": 6.400000095367432,
+   "duration_ms": 10241.53183288557,
+   "render_ms": 0.6999998092651367
+  },
+  {
+   "preset": "yn: Why don't you try the chocolate cake? It's really good.",
+   "rep": 3,
+   "cold_lexicon": false,
+   "lexicon_ms": 0,
+   "build_ms": 8.299999713897705,
+   "first_motion_ms": 8.5,
+   "duration_ms": 12871.445016470481,
+   "render_ms": 0.5
+  },
+  {
+   "preset": "neg: Sorry, we're out of oat milk today.",
+   "rep": 3,
+   "cold_lexicon": false,
+   "lexicon_ms": 0,
+   "build_ms": 4.5,
+   "first_motion_ms": 11,
+   "duration_ms": 7367.286769048558,
+   "render_ms": 0.6999998092651367
+  },
+  {
+   "preset": "wh: And what size: small, medium or large?",
+   "rep": 4,
+   "cold_lexicon": false,
+   "lexicon_ms": 0,
+   "build_ms": 9.400000095367432,
+   "first_motion_ms": 9.700000286102295,
+   "duration_ms": 10241.53183288557,
+   "render_ms": 0.5
+  },
+  {
+   "preset": "yn: Why don't you try the chocolate cake? It's really good.",
+   "rep": 4,
+   "cold_lexicon": false,
+   "lexicon_ms": 0,
+   "build_ms": 6.800000190734863,
+   "first_motion_ms": 7.099999904632568,
+   "duration_ms": 12871.445016470481,
+   "render_ms": 0.8000001907348633
+  },
+  {
+   "preset": "neg: Sorry, we're out of oat milk today.",
+   "rep": 4,
+   "cold_lexicon": false,
+   "lexicon_ms": 0,
+   "build_ms": 4.800000190734863,
+   "first_motion_ms": 5.699999809265137,
+   "duration_ms": 7367.286769048558,
+   "render_ms": 0.5999999046325684
+  }
+ ],
+ "page_ready_s": 1.18,
+ "gpu_renderer": "ANGLE (Intel, Intel(R) Arc(TM) 140V GPU (16GB) (0x000064A0) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+ "console_tail": [
+  "lexicon 16 signs, 39 ms",
+  "timing {\"lexicon_ms\":39,\"build_ms\":8,\"first_motion_ms\":47,\"duration_ms\":10242}",
+  "timing {\"lexicon_ms\":0,\"build_ms\":9,\"first_motion_ms\":10,\"duration_ms\":12871}",
+  "timing {\"lexicon_ms\":0,\"build_ms\":5,\"first_motion_ms\":5,\"duration_ms\":7367}",
+  "timing {\"lexicon_ms\":0,\"build_ms\":7,\"first_motion_ms\":8,\"duration_ms\":10242}",
+  "timing {\"lexicon_ms\":0,\"build_ms\":7,\"first_motion_ms\":7,\"duration_ms\":12871}",
+  "timing {\"lexicon_ms\":0,\"build_ms\":7,\"first_motion_ms\":7,\"duration_ms\":7367}",
+  "timing {\"lexicon_ms\":0,\"build_ms\":7,\"first_motion_ms\":8,\"duration_ms\":10242}",
+  "timing {\"lexicon_ms\":0,\"build_ms\":7,\"first_motion_ms\":7,\"duration_ms\":12871}",
+  "timing {\"lexicon_ms\":0,\"build_ms\":5,\"first_motion_ms\":6,\"duration_ms\":7367}",
+  "timing {\"lexicon_ms\":0,\"build_ms\":6,\"first_motion_ms\":6,\"duration_ms\":10242}",
+  "timing {\"lexicon_ms\":0,\"build_ms\":8,\"first_motion_ms\":9,\"duration_ms\":12871}",
+  "timing {\"lexicon_ms\":0,\"build_ms\":5,\"first_motion_ms\":11,\"duration_ms\":7367}",
+  "timing {\"lexicon_ms\":0,\"build_ms\":9,\"first_motion_ms\":10,\"duration_ms\":10242}",
+  "timing {\"lexicon_ms\":0,\"build_ms\":7,\"first_motion_ms\":7,\"duration_ms\":12871}",
+  "timing {\"lexicon_ms\":0,\"build_ms\":5,\"first_motion_ms\":6,\"duration_ms\":7367}",
+  "timing {\"lexicon_ms\":10,\"build_ms\":64,\"first_motion_ms\":81,\"duration_ms\":10242}",
+  "timing {\"lexicon_ms\":0,\"build_ms\":30,\"first_motion_ms\":30,\"duration_ms\":12871}",
+  "timing {\"lexicon_ms\":0,\"build_ms\":17,\"first_motion_ms\":23,\"duration_ms\":7367}",
+  "saved capture 200 200"
+ ],
+ "first_motion_ms": {
+  "median": 7.3,
+  "p90": 9.7,
+  "max": 47.3,
+  "n": 15,
+  "warm_median": 7.2,
+  "cold_first_run": 47.3
+ },
+ "render_ms_median": 0.7
+}

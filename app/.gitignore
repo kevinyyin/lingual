@@ -1,0 +1,14 @@
+data/*
+!data/README.md
+models/
+logs/
+.venv/
+web/node_modules/
+web/dist/
+.env
+web/public/wasm/
+web/public/models/
+node_modules/
+web/public/signs/
+web/public/letters/
+vocab/vocab_extended.yaml

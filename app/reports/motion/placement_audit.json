@@ -1,0 +1,129 @@
+{
+ "clips_with_face_frames": 1976,
+ "over_limit": 134,
+ "limit_shoulder_widths": 0.3,
+ "share_over_limit": 0.06781376518218624,
+ "median_worst_error": 0.2216532004478005,
+ "worst_30": [
+  {
+   "gloss": "HIGHWAY",
+   "error": 0.449
+  },
+  {
+   "gloss": "REASON",
+   "error": 0.411
+  },
+  {
+   "gloss": "CALCULUS",
+   "error": 0.396
+  },
+  {
+   "gloss": "DEPARTMENT",
+   "error": 0.394
+  },
+  {
+   "gloss": "YES",
+   "error": 0.393
+  },
+  {
+   "gloss": "LOVE",
+   "error": 0.391
+  },
+  {
+   "gloss": "WALL",
+   "error": 0.39
+  },
+  {
+   "gloss": "RECEIVE",
+   "error": 0.386
+  },
+  {
+   "gloss": "VERB",
+   "error": 0.381
+  },
+  {
+   "gloss": "INSECT",
+   "error": 0.377
+  },
+  {
+   "gloss": "INTERNATIONAL",
+   "error": 0.376
+  },
+  {
+   "gloss": "BEDROOM",
+   "error": 0.372
+  },
+  {
+   "gloss": "CEREAL",
+   "error": 0.366
+  },
+  {
+   "gloss": "STRICT",
+   "error": 0.365
+  },
+  {
+   "gloss": "IDEA",
+   "error": 0.362
+  },
+  {
+   "gloss": "WILL",
+   "error": 0.358
+  },
+  {
+   "gloss": "TORNADO",
+   "error": 0.354
+  },
+  {
+   "gloss": "COUNTRY",
+   "error": 0.351
+  },
+  {
+   "gloss": "WHERE",
+   "error": 0.35
+  },
+  {
+   "gloss": "ALPHABET",
+   "error": 0.349
+  },
+  {
+   "gloss": "NOON",
+   "error": 0.349
+  },
+  {
+   "gloss": "KARATE",
+   "error": 0.348
+  },
+  {
+   "gloss": "STUCK",
+   "error": 0.348
+  },
+  {
+   "gloss": "TONGUE",
+   "error": 0.347
+  },
+  {
+   "gloss": "AIRPLANE",
+   "error": 0.346
+  },
+  {
+   "gloss": "FAULT",
+   "error": 0.345
+  },
+  {
+   "gloss": "RIDICULOUS",
+   "error": 0.345
+  },
+  {
+   "gloss": "RAT",
+   "error": 0.344
+  },
+  {
+   "gloss": "EXCUSE",
+   "error": 0.344
+  },
+  {
+   "gloss": "INSURANCE",
+   "error": 0.344
+  }
+ ]
+}

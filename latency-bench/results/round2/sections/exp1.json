@@ -1,0 +1,1738 @@
+{
+ "summary": {
+  "cascade[incremental]|short": {
+   "n_runs": 15,
+   "n_clips": 3,
+   "none": {
+    "median": 2821.437,
+    "ci95": [
+     2632.427,
+     2904.959
+    ],
+    "median_delta": 0.0,
+    "delta_ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "catchup@1.15x/300ms": {
+    "median": 2588.443,
+    "ci95": [
+     2451.601,
+     2680.764
+    ],
+    "median_delta": -194.3040000000001,
+    "delta_ci95": [
+     -257.47800000000007,
+     -187.77199999999993
+    ]
+   },
+   "catchup@1.15x/500ms": {
+    "median": 2609.312,
+    "ci95": [
+     2461.601,
+     2680.764
+    ],
+    "median_delta": -183.587,
+    "delta_ci95": [
+     -244.43499999999995,
+     -172.65200000000004
+    ]
+   },
+   "catchup@1.25x/300ms": {
+    "median": 2442.773,
+    "ci95": [
+     2355.16,
+     2577.132
+    ],
+    "median_delta": -297.933,
+    "delta_ci95": [
+     -394.8000000000002,
+     -287.9169999999999
+    ]
+   },
+   "catchup@1.25x/500ms": {
+    "median": 2474.773,
+    "ci95": [
+     2370.493,
+     2577.132
+    ],
+    "median_delta": -281.5,
+    "delta_ci95": [
+     -374.8000000000002,
+     -264.7329999999997
+    ]
+   },
+   "catchup@1.4x/300ms": {
+    "median": 2268.055,
+    "ci95": [
+     2236.331,
+     2449.443
+    ],
+    "median_delta": -425.61900000000014,
+    "delta_ci95": [
+     -564.0,
+     -411.3100000000002
+    ]
+   },
+   "catchup@1.4x/500ms": {
+    "median": 2309.002,
+    "ci95": [
+     2258.236,
+     2449.443
+    ],
+    "median_delta": -402.14300000000003,
+    "delta_ci95": [
+     -535.4290000000001,
+     -378.19000000000005
+    ]
+   },
+   "catchup_end@1.25x/500ms": {
+    "median": 2474.773,
+    "ci95": [
+     2370.493,
+     2577.132
+    ],
+    "median_delta": -281.5,
+    "delta_ci95": [
+     -374.8000000000002,
+     -264.7329999999997
+    ]
+   }
+  },
+  "cascade[incremental]|medium": {
+   "n_runs": 15,
+   "n_clips": 3,
+   "none": {
+    "median": 3771.15,
+    "ci95": [
+     3507.635,
+     3953.158
+    ],
+    "median_delta": 0.0,
+    "delta_ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "catchup@1.15x/300ms": {
+    "median": 3223.713,
+    "ci95": [
+     2926.733,
+     3347.422
+    ],
+    "median_delta": -549.7449999999999,
+    "delta_ci95": [
+     -720.4409999999998,
+     -450.56500000000005
+    ]
+   },
+   "catchup@1.15x/500ms": {
+    "median": 3239.332,
+    "ci95": [
+     2943.885,
+     3360.465
+    ],
+    "median_delta": -536.7019999999998,
+    "delta_ci95": [
+     -705.6090000000004,
+     -437.52199999999993
+    ]
+   },
+   "catchup@1.25x/300ms": {
+    "median": 2937.463,
+    "ci95": [
+     2708.667,
+     3060.925
+    ],
+    "median_delta": -816.319,
+    "delta_ci95": [
+     -1084.6749999999997,
+     -690.8670000000002
+    ]
+   },
+   "catchup@1.25x/500ms": {
+    "median": 2976.801,
+    "ci95": [
+     2718.973,
+     3068.616
+    ],
+    "median_delta": -804.875,
+    "delta_ci95": [
+     -1049.542,
+     -670.8670000000002
+    ]
+   },
+   "catchup@1.4x/300ms": {
+    "median": 2604.919,
+    "ci95": [
+     2347.852,
+     2701.009
+    ],
+    "median_delta": -1040.437,
+    "delta_ci95": [
+     -1407.3690000000001,
+     -960.9260000000004
+    ]
+   },
+   "catchup@1.4x/500ms": {
+    "median": 2634.639,
+    "ci95": [
+     2389.979,
+     2729.58
+    ],
+    "median_delta": -1040.437,
+    "delta_ci95": [
+     -1407.3690000000001,
+     -935.0480000000002
+    ]
+   },
+   "catchup_end@1.25x/500ms": {
+    "median": 3068.616,
+    "ci95": [
+     2809.485,
+     3185.425
+    ],
+    "median_delta": -698.1500000000001,
+    "delta_ci95": [
+     -767.7329999999997,
+     -640.5660000000003
+    ]
+   }
+  },
+  "cascade[incremental]|noisy": {
+   "n_runs": 15,
+   "n_clips": 3,
+   "none": {
+    "median": 3606.489,
+    "ci95": [
+     3486.72,
+     3906.927
+    ],
+    "median_delta": 0.0,
+    "delta_ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "catchup@1.15x/300ms": {
+    "median": 3152.449,
+    "ci95": [
+     2911.264,
+     3352.915
+    ],
+    "median_delta": -532.326,
+    "delta_ci95": [
+     -613.4779999999996,
+     -431.0659999999998
+    ]
+   },
+   "catchup@1.15x/500ms": {
+    "median": 3165.492,
+    "ci95": [
+     2924.307,
+     3381.394
+    ],
+    "median_delta": -506.8040000000001,
+    "delta_ci95": [
+     -605.9779999999996,
+     -419.04399999999987
+    ]
+   },
+   "catchup@1.25x/300ms": {
+    "median": 2852.028,
+    "ci95": [
+     2626.687,
+     2974.904
+    ],
+    "median_delta": -795.3240000000001,
+    "delta_ci95": [
+     -940.6669999999999,
+     -660.9670000000001
+    ]
+   },
+   "catchup@1.25x/500ms": {
+    "median": 2856.028,
+    "ci95": [
+     2642.687,
+     3006.571
+    ],
+    "median_delta": -755.366,
+    "delta_ci95": [
+     -929.1669999999999,
+     -642.5340000000001
+    ]
+   },
+   "catchup@1.4x/300ms": {
+    "median": 2514.985,
+    "ci95": [
+     2355.585,
+     2668.417
+    ],
+    "median_delta": -1017.2950000000001,
+    "delta_ci95": [
+     -1343.81,
+     -944.239
+    ]
+   },
+   "catchup@1.4x/500ms": {
+    "median": 2560.223,
+    "ci95": [
+     2360.943,
+     2689.443
+    ],
+    "median_delta": -984.2470000000003,
+    "delta_ci95": [
+     -1327.3809999999999,
+     -917.9050000000002
+    ]
+   },
+   "catchup_end@1.25x/500ms": {
+    "median": 2964.229,
+    "ci95": [
+     2791.754,
+     3206.537
+    ],
+    "median_delta": -656.9670000000001,
+    "delta_ci95": [
+     -726.3669999999997,
+     -641.1670000000004
+    ]
+   }
+  },
+  "cascade[incremental]|long": {
+   "n_runs": 5,
+   "n_clips": 1,
+   "none": {
+    "median": 11641.286,
+    "ci95": [
+     10545.98,
+     12521.112
+    ],
+    "median_delta": 0.0,
+    "delta_ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "catchup@1.15x/300ms": {
+    "median": 8209.59,
+    "ci95": [
+     7087.806,
+     8812.503
+    ],
+    "median_delta": -3512.065999999999,
+    "delta_ci95": [
+     -3708.6089999999986,
+     -3431.696
+    ]
+   },
+   "catchup@1.15x/500ms": {
+    "median": 8248.72,
+    "ci95": [
+     7102.675,
+     8825.546
+    ],
+    "median_delta": -3499.021999999999,
+    "delta_ci95": [
+     -3695.565999999999,
+     -3392.5660000000007
+    ]
+   },
+   "catchup@1.25x/300ms": {
+    "median": 6418.786,
+    "ci95": [
+     5243.447,
+     6834.579
+    ],
+    "median_delta": -5385.1669999999995,
+    "delta_ci95": [
+     -5686.532999999999,
+     -5222.5
+    ]
+   },
+   "catchup@1.25x/500ms": {
+    "median": 6458.786,
+    "ci95": [
+     5266.247,
+     6878.579
+    ],
+    "median_delta": -5341.1669999999995,
+    "delta_ci95": [
+     -5642.532999999999,
+     -5182.5
+    ]
+   },
+   "catchup@1.4x/300ms": {
+    "median": 4251.998,
+    "ci95": [
+     3239.801,
+     4802.95
+    ],
+    "median_delta": -7389.2880000000005,
+    "delta_ci95": [
+     -7992.856999999999,
+     -7170.183
+    ]
+   },
+   "catchup@1.4x/500ms": {
+    "median": 4317.714,
+    "ci95": [
+     3329.992,
+     4831.521
+    ],
+    "median_delta": -7323.572,
+    "delta_ci95": [
+     -7892.475999999999,
+     -7141.612
+    ]
+   },
+   "catchup_end@1.25x/500ms": {
+    "median": 9253.219,
+    "ci95": [
+     8374.247,
+     9960.512
+    ],
+    "median_delta": -2388.067000000001,
+    "delta_ci95": [
+     -2560.5999999999985,
+     -2171.733
+    ]
+   }
+  },
+  "cascade[incremental]|overlap": {
+   "n_runs": 5,
+   "n_clips": 1,
+   "none": {
+    "median": 9746.587,
+    "ci95": [
+     7674.117,
+     10391.869
+    ],
+    "median_delta": 0.0,
+    "delta_ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "catchup@1.15x/300ms": {
+    "median": 8035.804,
+    "ci95": [
+     6229.856,
+     8639.782
+    ],
+    "median_delta": -1717.5650000000005,
+    "delta_ci95": [
+     -1752.0870000000014,
+     -1444.2610000000004
+    ]
+   },
+   "catchup@1.15x/500ms": {
+    "median": 8059.282,
+    "ci95": [
+     6258.378,
+     8660.478
+    ],
+    "median_delta": -1679.7830000000013,
+    "delta_ci95": [
+     -1731.3910000000014,
+     -1415.7390000000005
+    ]
+   },
+   "catchup@1.25x/300ms": {
+    "median": 7140.19,
+    "ci95": [
+     5474.717,
+     7705.336
+    ],
+    "median_delta": -2593.7660000000005,
+    "delta_ci95": [
+     -2686.5330000000004,
+     -2199.4000000000005
+    ]
+   },
+   "catchup@1.25x/500ms": {
+    "median": 7176.19,
+    "ci95": [
+     5510.451,
+     7737.069
+    ],
+    "median_delta": -2557.7660000000005,
+    "delta_ci95": [
+     -2654.8,
+     -2163.666
+    ]
+   },
+   "catchup@1.4x/300ms": {
+    "median": 6069.312,
+    "ci95": [
+     4603.165,
+     6553.964
+    ],
+    "median_delta": -3664.6440000000002,
+    "delta_ci95": [
+     -3837.9050000000007,
+     -3070.952
+    ]
+   },
+   "catchup@1.4x/500ms": {
+    "median": 6154.873,
+    "ci95": [
+     4665.593,
+     6599.298
+    ],
+    "median_delta": -3591.714,
+    "delta_ci95": [
+     -3792.571000000001,
+     -3008.5240000000003
+    ]
+   },
+   "catchup_end@1.25x/500ms": {
+    "median": 7837.721,
+    "ci95": [
+     6170.117,
+     8347.869
+    ],
+    "median_delta": -1920.1660000000002,
+    "delta_ci95": [
+     -2044.0,
+     -1504.0
+    ]
+   }
+  },
+  "cascade[on_turn_end]|short": {
+   "n_runs": 15,
+   "n_clips": 3,
+   "none": {
+    "median": 2455.232,
+    "ci95": [
+     2217.544,
+     2819.034
+    ],
+    "median_delta": 0.0,
+    "delta_ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "catchup@1.15x/300ms": {
+    "median": 2250.493,
+    "ci95": [
+     2044.399,
+     2624.229
+    ],
+    "median_delta": -183.87000000000012,
+    "delta_ci95": [
+     -195.61900000000014,
+     -173.43499999999995
+    ]
+   },
+   "catchup@1.15x/500ms": {
+    "median": 2263.536,
+    "ci95": [
+     2047.609,
+     2639.881
+    ],
+    "median_delta": -179.15300000000025,
+    "delta_ci95": [
+     -189.69500000000016,
+     -168.60799999999995
+    ]
+   },
+   "catchup@1.25x/300ms": {
+    "median": 2141.298,
+    "ci95": [
+     1946.752,
+     2520.334
+    ],
+    "median_delta": -281.9330000000002,
+    "delta_ci95": [
+     -299.9500000000003,
+     -265.933
+    ]
+   },
+   "catchup@1.25x/500ms": {
+    "median": 2161.298,
+    "ci95": [
+     1956.977,
+     2544.334
+    ],
+    "median_delta": -274.7000000000003,
+    "delta_ci95": [
+     -290.866,
+     -258.5329999999999
+    ]
+   },
+   "catchup@1.4x/300ms": {
+    "median": 2006.756,
+    "ci95": [
+     1826.438,
+     2392.319
+    ],
+    "median_delta": -402.76200000000017,
+    "delta_ci95": [
+     -428.5,
+     -379.904
+    ]
+   },
+   "catchup@1.4x/500ms": {
+    "median": 2035.327,
+    "ci95": [
+     1845.306,
+     2426.605
+    ],
+    "median_delta": -392.4290000000001,
+    "delta_ci95": [
+     -415.5239999999999,
+     -369.33299999999986
+    ]
+   },
+   "catchup_end@1.25x/500ms": {
+    "median": 2161.298,
+    "ci95": [
+     1956.977,
+     2544.334
+    ],
+    "median_delta": -274.7000000000003,
+    "delta_ci95": [
+     -290.866,
+     -258.5329999999999
+    ]
+   }
+  },
+  "cascade[on_turn_end]|medium": {
+   "n_runs": 15,
+   "n_clips": 3,
+   "none": {
+    "median": 5084.217,
+    "ci95": [
+     4802.139,
+     5230.402
+    ],
+    "median_delta": 0.0,
+    "delta_ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "catchup@1.15x/300ms": {
+    "median": 4584.305,
+    "ci95": [
+     4363.443,
+     4723.359
+    ],
+    "median_delta": -482.21800000000076,
+    "delta_ci95": [
+     -504.9339999999993,
+     -438.6959999999999
+    ]
+   },
+   "catchup@1.15x/500ms": {
+    "median": 4596.783,
+    "ci95": [
+     4372.4,
+     4736.402
+    ],
+    "median_delta": -471.58699999999953,
+    "delta_ci95": [
+     -492.4559999999992,
+     -429.7390000000005
+    ]
+   },
+   "catchup@1.25x/300ms": {
+    "median": 4315.006,
+    "ci95": [
+     4129.472,
+     4452.936
+    ],
+    "median_delta": -739.4010000000007,
+    "delta_ci95": [
+     -774.2329999999993,
+     -672.6670000000004
+    ]
+   },
+   "catchup@1.25x/500ms": {
+    "median": 4334.139,
+    "ci95": [
+     4143.205,
+     4472.936
+    ],
+    "median_delta": -723.0999999999995,
+    "delta_ci95": [
+     -755.0999999999995,
+     -658.9340000000002
+    ]
+   },
+   "catchup@1.4x/300ms": {
+    "median": 3988.123,
+    "ci95": [
+     3841.186,
+     4119.736
+    ],
+    "median_delta": -1056.286,
+    "delta_ci95": [
+     -1106.0469999999996,
+     -960.953
+    ]
+   },
+   "catchup@1.4x/500ms": {
+    "median": 4012.373,
+    "ci95": [
+     3860.805,
+     4148.307
+    ],
+    "median_delta": -1033.0,
+    "delta_ci95": [
+     -1078.7139999999995,
+     -941.3340000000003
+    ]
+   },
+   "catchup_end@1.25x/500ms": {
+    "median": 4334.139,
+    "ci95": [
+     4143.205,
+     4472.936
+    ],
+    "median_delta": -723.0999999999995,
+    "delta_ci95": [
+     -755.0999999999995,
+     -658.9340000000002
+    ]
+   }
+  },
+  "cascade[on_turn_end]|noisy": {
+   "n_runs": 15,
+   "n_clips": 3,
+   "none": {
+    "median": 4821.807,
+    "ci95": [
+     4518.196,
+     4968.496
+    ],
+    "median_delta": 0.0,
+    "delta_ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "catchup@1.15x/300ms": {
+    "median": 4346.573,
+    "ci95": [
+     4092.239,
+     4484.257
+    ],
+    "median_delta": -484.2390000000005,
+    "delta_ci95": [
+     -502.77700000000004,
+     -437.174
+    ]
+   },
+   "catchup@1.15x/500ms": {
+    "median": 4358.828,
+    "ci95": [
+     4105.282,
+     4499.127
+    ],
+    "median_delta": -469.3689999999997,
+    "delta_ci95": [
+     -490.34799999999996,
+     -421.23900000000003
+    ]
+   },
+   "catchup@1.25x/300ms": {
+    "median": 4093.115,
+    "ci95": [
+     3865.062,
+     4220.056
+    ],
+    "median_delta": -742.5,
+    "delta_ci95": [
+     -770.9249999999997,
+     -670.3340000000003
+    ]
+   },
+   "catchup@1.25x/500ms": {
+    "median": 4111.907,
+    "ci95": [
+     3885.062,
+     4240.056
+    ],
+    "median_delta": -719.6999999999998,
+    "delta_ci95": [
+     -751.8670000000002,
+     -645.9000000000001
+    ]
+   },
+   "catchup@1.4x/300ms": {
+    "median": 3780.818,
+    "ci95": [
+     3585.148,
+     3880.256
+    ],
+    "median_delta": -1060.714,
+    "delta_ci95": [
+     -1101.321,
+     -957.6190000000001
+    ]
+   },
+   "catchup@1.4x/500ms": {
+    "median": 3807.664,
+    "ci95": [
+     3613.719,
+     3908.827
+    ],
+    "median_delta": -1028.143,
+    "delta_ci95": [
+     -1074.0950000000003,
+     -922.7139999999999
+    ]
+   },
+   "catchup_end@1.25x/500ms": {
+    "median": 4111.907,
+    "ci95": [
+     3885.062,
+     4240.056
+    ],
+    "median_delta": -719.6999999999998,
+    "delta_ci95": [
+     -751.8670000000002,
+     -645.9000000000001
+    ]
+   }
+  },
+  "cascade[on_turn_end]|long": {
+   "n_runs": 5,
+   "n_clips": 1,
+   "none": {
+    "median": 20533.412,
+    "ci95": [
+     20002.007,
+     20708.853
+    ],
+    "median_delta": 0.0,
+    "delta_ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "catchup@1.15x/300ms": {
+    "median": 18054.738,
+    "ci95": [
+     17584.659,
+     18283.505
+    ],
+    "median_delta": -2445.826000000001,
+    "delta_ci95": [
+     -2478.673999999999,
+     -2417.348000000002
+    ]
+   },
+   "catchup@1.15x/500ms": {
+    "median": 18067.782,
+    "ci95": [
+     17598.311,
+     18298.375
+    ],
+    "median_delta": -2432.7819999999992,
+    "delta_ci95": [
+     -2465.630000000001,
+     -2403.696
+    ]
+   },
+   "catchup@1.25x/300ms": {
+    "median": 16732.779,
+    "ci95": [
+     16295.407,
+     16989.987
+    ],
+    "median_delta": -3750.2659999999996,
+    "delta_ci95": [
+     -3800.6330000000016,
+     -3706.600000000002
+    ]
+   },
+   "catchup@1.25x/500ms": {
+    "median": 16752.779,
+    "ci95": [
+     16316.34,
+     17012.787
+    ],
+    "median_delta": -3730.2659999999996,
+    "delta_ci95": [
+     -3780.6330000000016,
+     -3685.6670000000013
+    ]
+   },
+   "catchup@1.4x/300ms": {
+    "median": 15103.936,
+    "ci95": [
+     14706.864,
+     15396.187
+    ],
+    "median_delta": -5357.523999999999,
+    "delta_ci95": [
+     -5429.476000000001,
+     -5295.143000000002
+    ]
+   },
+   "catchup@1.4x/500ms": {
+    "median": 15132.507,
+    "ci95": [
+     14736.769,
+     15428.758
+    ],
+    "median_delta": -5328.951999999999,
+    "delta_ci95": [
+     -5400.905000000001,
+     -5265.238000000001
+    ]
+   },
+   "catchup_end@1.25x/500ms": {
+    "median": 16752.779,
+    "ci95": [
+     16316.34,
+     17012.787
+    ],
+    "median_delta": -3730.2659999999996,
+    "delta_ci95": [
+     -3780.6330000000016,
+     -3685.6670000000013
+    ]
+   }
+  },
+  "cascade[on_turn_end]|overlap": {
+   "n_runs": 5,
+   "n_clips": 1,
+   "none": {
+    "median": 7560.75,
+    "ci95": [
+     5101.323,
+     7728.947
+    ],
+    "median_delta": 0.0,
+    "delta_ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "catchup@1.15x/300ms": {
+    "median": 6731.815,
+    "ci95": [
+     4596.312,
+     7206.994
+    ],
+    "median_delta": -530.1310000000003,
+    "delta_ci95": [
+     -828.9350000000004,
+     -505.0110000000004
+    ]
+   },
+   "catchup@1.15x/500ms": {
+    "median": 6744.859,
+    "ci95": [
+     4607.04,
+     7220.038
+    ],
+    "median_delta": -514.4780000000001,
+    "delta_ci95": [
+     -815.8909999999996,
+     -494.28300000000036
+    ]
+   },
+   "catchup@1.25x/300ms": {
+    "median": 6289.717,
+    "ci95": [
+     4326.973,
+     6931.006
+    ],
+    "median_delta": -812.8670000000002,
+    "delta_ci95": [
+     -1271.0330000000004,
+     -774.3500000000004
+    ]
+   },
+   "catchup@1.25x/500ms": {
+    "median": 6309.717,
+    "ci95": [
+     4343.423,
+     6951.006
+    ],
+    "median_delta": -788.8670000000002,
+    "delta_ci95": [
+     -1251.0330000000004,
+     -757.9000000000005
+    ]
+   },
+   "catchup@1.4x/300ms": {
+    "median": 5744.988,
+    "ci95": [
+     3995.108,
+     6590.949
+    ],
+    "median_delta": -1161.2380000000003,
+    "delta_ci95": [
+     -1815.7619999999997,
+     -1106.2150000000001
+    ]
+   },
+   "catchup@1.4x/500ms": {
+    "median": 5773.559,
+    "ci95": [
+     4018.608,
+     6619.52
+    ],
+    "median_delta": -1126.9530000000004,
+    "delta_ci95": [
+     -1787.1909999999998,
+     -1082.7150000000001
+    ]
+   },
+   "catchup_end@1.25x/500ms": {
+    "median": 6309.717,
+    "ci95": [
+     4343.423,
+     6951.006
+    ],
+    "median_delta": -788.8670000000002,
+    "delta_ci95": [
+     -1251.0330000000004,
+     -757.9000000000005
+    ]
+   }
+  },
+  "openai|short": {
+   "n_runs": 14,
+   "n_clips": 3,
+   "none": {
+    "median": 2267.9445,
+    "ci95": [
+     2064.723,
+     2619.016
+    ],
+    "median_delta": 0.0,
+    "delta_ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "catchup@1.15x/300ms": {
+    "median": 2038.0195,
+    "ci95": [
+     1880.383,
+     2528.034
+    ],
+    "median_delta": -173.59099999999967,
+    "delta_ci95": [
+     -224.47199999999998,
+     -142.6189999999997
+    ]
+   },
+   "catchup@1.15x/500ms": {
+    "median": 2128.2219999999998,
+    "ci95": [
+     1967.546,
+     2619.016
+    ],
+    "median_delta": -94.24099999999987,
+    "delta_ci95": [
+     -146.87499999999977,
+     -36.52200000000016
+    ]
+   },
+   "catchup@1.25x/300ms": {
+    "median": 2003.0625,
+    "ci95": [
+     1851.934,
+     2513.393
+    ],
+    "median_delta": -194.52300000000014,
+    "delta_ci95": [
+     -271.70199999999977,
+     -160.894
+    ]
+   },
+   "catchup@1.25x/500ms": {
+    "median": 2117.2434999999996,
+    "ci95": [
+     1967.546,
+     2619.016
+    ],
+    "median_delta": -106.58849999999995,
+    "delta_ci95": [
+     -170.817,
+     -56.0
+    ]
+   },
+   "catchup@1.4x/300ms": {
+    "median": 1971.8615,
+    "ci95": [
+     1819.38,
+     2418.2470999999714
+    ],
+    "median_delta": -220.57799999999997,
+    "delta_ci95": [
+     -308.09900000000016,
+     -173.94999999999982
+    ]
+   },
+   "catchup@1.4x/500ms": {
+    "median": 2109.151,
+    "ci95": [
+     1967.546,
+     2539.37702499997
+    ],
+    "median_delta": -96.13849999999991,
+    "delta_ci95": [
+     -188.57200000000012,
+     -72.18499999999995
+    ]
+   },
+   "catchup_end@1.25x/500ms": {
+    "median": 2115.3905,
+    "ci95": [
+     1936.723,
+     2619.016
+    ],
+    "median_delta": -111.54999999999995,
+    "delta_ci95": [
+     -170.817,
+     -56.0
+    ]
+   }
+  },
+  "openai|medium": {
+   "n_runs": 15,
+   "n_clips": 3,
+   "none": {
+    "median": 2738.075,
+    "ci95": [
+     2410.217,
+     3452.079
+    ],
+    "median_delta": 0.0,
+    "delta_ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "catchup@1.15x/300ms": {
+    "median": 2564.266,
+    "ci95": [
+     2292.447,
+     3149.181
+    ],
+    "median_delta": -202.70800000000008,
+    "delta_ci95": [
+     -253.7837999999998,
+     -160.92399999999998
+    ]
+   },
+   "catchup@1.15x/500ms": {
+    "median": 2677.415,
+    "ci95": [
+     2334.565,
+     3279.905
+    ],
+    "median_delta": -110.14799999999968,
+    "delta_ci95": [
+     -168.7070249999995,
+     -64.49099999999999
+    ]
+   },
+   "catchup@1.25x/300ms": {
+    "median": 2529.407,
+    "ci95": [
+     2288.859,
+     3123.136
+    ],
+    "median_delta": -218.25300000000016,
+    "delta_ci95": [
+     -312.3929999999996,
+     -164.08300000000008
+    ]
+   },
+   "catchup@1.25x/500ms": {
+    "median": 2657.937,
+    "ci95": [
+     2350.217,
+     3248.079
+    ],
+    "median_delta": -110.14799999999968,
+    "delta_ci95": [
+     -203.3399999999997,
+     -64.0
+    ]
+   },
+   "catchup@1.4x/300ms": {
+    "median": 2507.121,
+    "ci95": [
+     2284.437,
+     3100.85
+    ],
+    "median_delta": -237.40700000000015,
+    "delta_ci95": [
+     -329.71799999999985,
+     -175.23099999999977
+    ]
+   },
+   "catchup@1.4x/500ms": {
+    "median": 2633.937,
+    "ci95": [
+     2329.427,
+     3252.079
+    ],
+    "median_delta": -108.57200000000012,
+    "delta_ci95": [
+     -200.0,
+     -85.71499999999992
+    ]
+   },
+   "catchup_end@1.25x/500ms": {
+    "median": 2657.937,
+    "ci95": [
+     2350.217,
+     3240.079
+    ],
+    "median_delta": -84.0,
+    "delta_ci95": [
+     -176.0,
+     -60.0
+    ]
+   }
+  },
+  "openai|noisy": {
+   "n_runs": 15,
+   "n_clips": 3,
+   "none": {
+    "median": 2605.943,
+    "ci95": [
+     2045.449,
+     2807.525
+    ],
+    "median_delta": 0.0,
+    "delta_ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "catchup@1.15x/300ms": {
+    "median": 2428.073,
+    "ci95": [
+     1904.906,
+     2655.402
+    ],
+    "median_delta": -166.38799999999992,
+    "delta_ci95": [
+     -213.51500000000033,
+     -138.9770000000001
+    ]
+   },
+   "catchup@1.15x/500ms": {
+    "median": 2530.291,
+    "ci95": [
+     1976.454,
+     2704.793
+    ],
+    "median_delta": -75.65200000000004,
+    "delta_ci95": [
+     -137.50199999999995,
+     -61.57999999999993
+    ]
+   },
+   "catchup@1.25x/300ms": {
+    "median": 2426.418,
+    "ci95": [
+     1863.031,
+     2633.06
+    ],
+    "median_delta": -181.46000000000004,
+    "delta_ci95": [
+     -241.73300000000017,
+     -157.44800000000032
+    ]
+   },
+   "catchup@1.25x/500ms": {
+    "median": 2545.943,
+    "ci95": [
+     1998.422,
+     2704.793
+    ],
+    "median_delta": -92.95100000000002,
+    "delta_ci95": [
+     -144.8670000000002,
+     -60.0
+    ]
+   },
+   "catchup@1.4x/300ms": {
+    "median": 2424.379,
+    "ci95": [
+     1852.806,
+     2596.303
+    ],
+    "median_delta": -200.03200000000015,
+    "delta_ci95": [
+     -243.45800000000008,
+     -169.05100000000039
+    ]
+   },
+   "catchup@1.4x/500ms": {
+    "median": 2520.229,
+    "ci95": [
+     1998.422,
+     2679.789
+    ],
+    "median_delta": -91.42900000000009,
+    "delta_ci95": [
+     -149.35500000000002,
+     -80.0
+    ]
+   },
+   "catchup_end@1.25x/500ms": {
+    "median": 2545.943,
+    "ci95": [
+     1998.422,
+     2704.793
+    ],
+    "median_delta": -64.0,
+    "delta_ci95": [
+     -144.0,
+     -59.07500000000027
+    ]
+   }
+  },
+  "openai|long": {
+   "n_runs": 5,
+   "n_clips": 1,
+   "none": {
+    "median": 2752.999,
+    "ci95": [
+     2683.849,
+     2992.799
+    ],
+    "median_delta": 0.0,
+    "delta_ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "catchup@1.15x/300ms": {
+    "median": 2569.425,
+    "ci95": [
+     2447.209,
+     2800.496
+    ],
+    "median_delta": -197.80499999999984,
+    "delta_ci95": [
+     -305.78999999999996,
+     -71.58500000000004
+    ]
+   },
+   "catchup@1.15x/500ms": {
+    "median": 2672.17,
+    "ci95": [
+     2574.954,
+     2902.796
+    ],
+    "median_delta": -95.05999999999995,
+    "delta_ci95": [
+     -178.04499999999962,
+     0.0
+    ]
+   },
+   "catchup@1.25x/300ms": {
+    "median": 2568.878,
+    "ci95": [
+     2421.453,
+     2764.626
+    ],
+    "median_delta": -228.17299999999977,
+    "delta_ci95": [
+     -331.5459999999998,
+     -81.78200000000015
+    ]
+   },
+   "catchup@1.25x/500ms": {
+    "median": 2672.17,
+    "ci95": [
+     2574.954,
+     2881.927
+    ],
+    "median_delta": -103.8760000000002,
+    "delta_ci95": [
+     -178.04499999999962,
+     0.0
+    ]
+   },
+   "catchup@1.4x/300ms": {
+    "median": 2568.203,
+    "ci95": [
+     2405.449,
+     2728.101
+    ],
+    "median_delta": -255.39900000000034,
+    "delta_ci95": [
+     -347.5499999999997,
+     -94.346
+    ]
+   },
+   "catchup@1.4x/500ms": {
+    "median": 2672.17,
+    "ci95": [
+     2574.954,
+     2856.212
+    ],
+    "median_delta": -102.85699999999997,
+    "delta_ci95": [
+     -178.04499999999962,
+     0.0
+    ]
+   },
+   "catchup_end@1.25x/500ms": {
+    "median": 2672.17,
+    "ci95": [
+     2572.999,
+     2888.799
+    ],
+    "median_delta": -95.05999999999995,
+    "delta_ci95": [
+     -180.0,
+     0.0
+    ]
+   }
+  },
+  "openai|overlap": {
+   "n_runs": 5,
+   "n_clips": 1,
+   "none": {
+    "median": 721.773,
+    "ci95": [
+     318.988,
+     2049.46
+    ],
+    "median_delta": 0.0,
+    "delta_ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "catchup@1.15x/300ms": {
+    "median": 548.025,
+    "ci95": [
+     -6.151,
+     1800.587
+    ],
+    "median_delta": -177.20199999999994,
+    "delta_ci95": [
+     -331.587,
+     -33.91300000000001
+    ]
+   },
+   "catchup@1.15x/500ms": {
+    "median": 680.034,
+    "ci95": [
+     123.902,
+     1834.5
+    ],
+    "median_delta": -83.47799999999995,
+    "delta_ci95": [
+     -258.26,
+     0.0
+    ]
+   },
+   "catchup@1.25x/300ms": {
+    "median": 531.735,
+    "ci95": [
+     -23.733,
+     1782.5
+    ],
+    "median_delta": -196.66299999999995,
+    "delta_ci95": [
+     -391.17499999999995,
+     -52.0
+    ]
+   },
+   "catchup@1.25x/500ms": {
+    "median": 678.781,
+    "ci95": [
+     139.554,
+     1834.5
+    ],
+    "median_delta": -123.99999999999994,
+    "delta_ci95": [
+     -304.0,
+     0.0
+    ]
+   },
+   "catchup@1.4x/300ms": {
+    "median": 511.664,
+    "ci95": [
+     -45.398,
+     1760.215
+    ],
+    "median_delta": -210.10900000000004,
+    "delta_ci95": [
+     -411.932,
+     -74.28500000000008
+    ]
+   },
+   "catchup@1.4x/500ms": {
+    "median": 678.781,
+    "ci95": [
+     113.84,
+     1834.5
+    ],
+    "median_delta": -97.14299999999997,
+    "delta_ci95": [
+     -325.71399999999994,
+     0.0
+    ]
+   },
+   "catchup_end@1.25x/500ms": {
+    "median": 673.773,
+    "ci95": [
+     256.438,
+     1834.5
+    ],
+    "median_delta": -62.55000000000001,
+    "delta_ci95": [
+     -292.0,
+     0.0
+    ]
+   }
+  },
+  "openai|same_language": {
+   "n_runs": 2,
+   "n_clips": 1,
+   "none": {
+    "median": 4675.107,
+    "ci95": null,
+    "median_delta": 0.0,
+    "delta_ci95": null
+   },
+   "catchup@1.15x/300ms": {
+    "median": 4249.4655,
+    "ci95": null,
+    "median_delta": -425.6414999999997,
+    "delta_ci95": null
+   },
+   "catchup@1.15x/500ms": {
+    "median": 4322.6915,
+    "ci95": null,
+    "median_delta": -352.41550000000007,
+    "delta_ci95": null
+   },
+   "catchup@1.25x/300ms": {
+    "median": 4061.9219999999996,
+    "ci95": null,
+    "median_delta": -613.1850000000002,
+    "delta_ci95": null
+   },
+   "catchup@1.25x/500ms": {
+    "median": 4134.736,
+    "ci95": null,
+    "median_delta": -540.3710000000001,
+    "delta_ci95": null
+   },
+   "catchup@1.4x/300ms": {
+    "median": 3832.0915000000005,
+    "ci95": null,
+    "median_delta": -843.0154999999997,
+    "delta_ci95": null
+   },
+   "catchup@1.4x/500ms": {
+    "median": 3913.379,
+    "ci95": null,
+    "median_delta": -761.7279999999998,
+    "delta_ci95": null
+   },
+   "catchup_end@1.25x/500ms": {
+    "median": 4136.736,
+    "ci95": null,
+    "median_delta": -538.3710000000001,
+    "delta_ci95": null
+   }
+  }
+ },
+ "listening_check": [
+  {
+   "system": "cascade[incremental]",
+   "run_id": "20261013-211511_0048_cascade_es_en_medium_1_r0",
+   "policy": "catchup@1.25x/500ms",
+   "file": "20261013-211511_0048_cascade_es_en_medium_1_r0__catchup_1.25x_500ms.wav",
+   "sped_up_content_s": 5.35,
+   "chrf_vs_unstretched": 100.0,
+   "unstretched_asr": "Tomorrow morning, I have to take someone to my daughter to the doctor before going to work.",
+   "stretched_asr": "Tomorrow morning, I have to take someone to my daughter to the doctor before going to work."
+  },
+  {
+   "system": "cascade[incremental]",
+   "run_id": "20261013-211511_0048_cascade_es_en_medium_1_r0",
+   "policy": "catchup@1.4x/300ms",
+   "file": "20261013-211511_0048_cascade_es_en_medium_1_r0__catchup_1.4x_300ms.wav",
+   "sped_up_content_s": 5.36,
+   "chrf_vs_unstretched": 95.38,
+   "unstretched_asr": "Tomorrow morning, I have to take someone to my daughter to the doctor before going to work.",
+   "stretched_asr": "Tomorrow morning I have to take someone to my daughter to the doctor before going to work."
+  },
+  {
+   "system": "cascade[incremental]",
+   "run_id": "20261013-211511_0064_cascade_es_en_medium_2_r0",
+   "policy": "catchup@1.25x/500ms",
+   "file": "20261013-211511_0064_cascade_es_en_medium_2_r0__catchup_1.25x_500ms.wav",
+   "sped_up_content_s": 3.94,
+   "chrf_vs_unstretched": 100.0,
+   "unstretched_asr": "Could you tell me if there is an open pharmacy nearby at this hour?",
+   "stretched_asr": "Could you tell me if there is an open pharmacy nearby at this hour?"
+  },
+  {
+   "system": "cascade[incremental]",
+   "run_id": "20261013-211511_0064_cascade_es_en_medium_2_r0",
+   "policy": "catchup@1.4x/300ms",
+   "file": "20261013-211511_0064_cascade_es_en_medium_2_r0__catchup_1.4x_300ms.wav",
+   "sped_up_content_s": 4.14,
+   "chrf_vs_unstretched": 100.0,
+   "unstretched_asr": "Could you tell me if there is an open pharmacy nearby at this hour?",
+   "stretched_asr": "Could you tell me if there is an open pharmacy nearby at this hour?"
+  },
+  {
+   "system": "cascade[incremental]",
+   "run_id": "20261013-211511_0060_cascade_es_en_medium_3_r0",
+   "policy": "catchup@1.25x/500ms",
+   "file": "20261013-211511_0060_cascade_es_en_medium_3_r0__catchup_1.25x_500ms.wav",
+   "sped_up_content_s": 4.11,
+   "chrf_vs_unstretched": 100.0,
+   "unstretched_asr": "The restaurant that we recommended was full, so we had dinner at the hotel.",
+   "stretched_asr": "The restaurant that we recommended was full, so we had dinner at the hotel."
+  },
+  {
+   "system": "cascade[incremental]",
+   "run_id": "20261013-211511_0060_cascade_es_en_medium_3_r0",
+   "policy": "catchup@1.4x/300ms",
+   "file": "20261013-211511_0060_cascade_es_en_medium_3_r0__catchup_1.4x_300ms.wav",
+   "sped_up_content_s": 4.31,
+   "chrf_vs_unstretched": 100.0,
+   "unstretched_asr": "The restaurant that we recommended was full, so we had dinner at the hotel.",
+   "stretched_asr": "The restaurant that we recommended was full, so we had dinner at the hotel."
+  },
+  {
+   "system": "cascade[on_turn_end]",
+   "run_id": "20261013-201319_0072_cascade_es_en_medium_1_r0",
+   "policy": "catchup@1.25x/500ms",
+   "file": "20261013-201319_0072_cascade_es_en_medium_1_r0__catchup_1.25x_500ms.wav",
+   "sped_up_content_s": 3.79,
+   "chrf_vs_unstretched": 94.71,
+   "unstretched_asr": "Tomorrow morning, I have to take my daughter to the doctor before going to work.",
+   "stretched_asr": "Tomorrow morning I have to take my daughter to the doctor before going to work."
+  },
+  {
+   "system": "cascade[on_turn_end]",
+   "run_id": "20261013-201319_0072_cascade_es_en_medium_1_r0",
+   "policy": "catchup@1.4x/300ms",
+   "file": "20261013-201319_0072_cascade_es_en_medium_1_r0__catchup_1.4x_300ms.wav",
+   "sped_up_content_s": 3.89,
+   "chrf_vs_unstretched": 94.71,
+   "unstretched_asr": "Tomorrow morning, I have to take my daughter to the doctor before going to work.",
+   "stretched_asr": "Tomorrow morning I have to take my daughter to the doctor before going to work."
+  },
+  {
+   "system": "cascade[on_turn_end]",
+   "run_id": "20261013-201319_0069_cascade_es_en_medium_2_r0",
+   "policy": "catchup@1.25x/500ms",
+   "file": "20261013-201319_0069_cascade_es_en_medium_2_r0__catchup_1.25x_500ms.wav",
+   "sped_up_content_s": 3.04,
+   "chrf_vs_unstretched": 100.0,
+   "unstretched_asr": "Could you tell me if there is a pharmacy open nearby at this hour?",
+   "stretched_asr": "Could you tell me if there is a pharmacy open nearby at this hour?"
+  },
+  {
+   "system": "cascade[on_turn_end]",
+   "run_id": "20261013-201319_0069_cascade_es_en_medium_2_r0",
+   "policy": "catchup@1.4x/300ms",
+   "file": "20261013-201319_0069_cascade_es_en_medium_2_r0__catchup_1.4x_300ms.wav",
+   "sped_up_content_s": 3.14,
+   "chrf_vs_unstretched": 100.0,
+   "unstretched_asr": "Could you tell me if there is a pharmacy open nearby at this hour?",
+   "stretched_asr": "Could you tell me if there is a pharmacy open nearby at this hour?"
+  },
+  {
+   "system": "cascade[on_turn_end]",
+   "run_id": "20261013-201319_0109_cascade_es_en_medium_3_r0",
+   "policy": "catchup@1.25x/500ms",
+   "file": "20261013-201319_0109_cascade_es_en_medium_3_r0__catchup_1.25x_500ms.wav",
+   "sped_up_content_s": 3.63,
+   "chrf_vs_unstretched": 100.0,
+   "unstretched_asr": "The restaurant you recommended was full, so we had dinner at the hotel.",
+   "stretched_asr": "The restaurant you recommended was full, so we had dinner at the hotel."
+  },
+  {
+   "system": "cascade[on_turn_end]",
+   "run_id": "20261013-201319_0109_cascade_es_en_medium_3_r0",
+   "policy": "catchup@1.4x/300ms",
+   "file": "20261013-201319_0109_cascade_es_en_medium_3_r0__catchup_1.4x_300ms.wav",
+   "sped_up_content_s": 3.72,
+   "chrf_vs_unstretched": 100.0,
+   "unstretched_asr": "The restaurant you recommended was full, so we had dinner at the hotel.",
+   "stretched_asr": "The restaurant you recommended was full, so we had dinner at the hotel."
+  },
+  {
+   "system": "openai",
+   "run_id": "20261013-201319_0100_openai_es_en_medium_1_r0",
+   "policy": "catchup@1.25x/500ms",
+   "file": "20261013-201319_0100_openai_es_en_medium_1_r0__catchup_1.25x_500ms.wav",
+   "sped_up_content_s": 16.8,
+   "chrf_vs_unstretched": 93.82,
+   "unstretched_asr": "Tomorrow morning I have to take my dar to the doctor before going to work.",
+   "stretched_asr": "Tomorrow morning I have to take my car to the doctor before going to work."
+  },
+  {
+   "system": "openai",
+   "run_id": "20261013-201319_0100_openai_es_en_medium_1_r0",
+   "policy": "catchup@1.4x/300ms",
+   "file": "20261013-201319_0100_openai_es_en_medium_1_r0__catchup_1.4x_300ms.wav",
+   "sped_up_content_s": 23.7,
+   "chrf_vs_unstretched": 88.15,
+   "unstretched_asr": "Tomorrow morning I have to take my dar to the doctor before going to work.",
+   "stretched_asr": "Tomorrow morning, I have to take my doctor to the doctor before going to work."
+  },
+  {
+   "system": "openai",
+   "run_id": "20261013-201319_0037_openai_es_en_medium_2_r0",
+   "policy": "catchup@1.25x/500ms",
+   "file": "20261013-201319_0037_openai_es_en_medium_2_r0__catchup_1.25x_500ms.wav",
+   "sped_up_content_s": 21.58,
+   "chrf_vs_unstretched": 95.62,
+   "unstretched_asr": "Could you tell me if there's a pharmacy open near here at this hour? You",
+   "stretched_asr": "Could you tell me if there's a pharmacy open near here at this hour?"
+  },
+  {
+   "system": "openai",
+   "run_id": "20261013-201319_0037_openai_es_en_medium_2_r0",
+   "policy": "catchup@1.4x/300ms",
+   "file": "20261013-201319_0037_openai_es_en_medium_2_r0__catchup_1.4x_300ms.wav",
+   "sped_up_content_s": 26.64,
+   "chrf_vs_unstretched": 95.62,
+   "unstretched_asr": "Could you tell me if there's a pharmacy open near here at this hour? You",
+   "stretched_asr": "Could you tell me if there's a pharmacy open near here at this hour?"
+  },
+  {
+   "system": "openai",
+   "run_id": "20261013-201319_0022_openai_es_en_medium_3_r0",
+   "policy": "catchup@1.25x/500ms",
+   "file": "20261013-201319_0022_openai_es_en_medium_3_r0__catchup_1.25x_500ms.wav",
+   "sped_up_content_s": 17.96,
+   "chrf_vs_unstretched": 90.45,
+   "unstretched_asr": "The restaurant you recommended was full, so we had dinner at the hotel.",
+   "stretched_asr": "The restaurant you recommended was four, so we had dinner at the hotel."
+  },
+  {
+   "system": "openai",
+   "run_id": "20261013-201319_0022_openai_es_en_medium_3_r0",
+   "policy": "catchup@1.4x/300ms",
+   "file": "20261013-201319_0022_openai_es_en_medium_3_r0__catchup_1.4x_300ms.wav",
+   "sped_up_content_s": 25.14,
+   "chrf_vs_unstretched": 86.9,
+   "unstretched_asr": "The restaurant you recommended was full, so we had dinner at the hotel.",
+   "stretched_asr": "The restaurant you recommended was folk. So we had dinner at the hotel."
+  }
+ ]
+}

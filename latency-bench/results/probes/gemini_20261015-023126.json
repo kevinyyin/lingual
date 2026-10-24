@@ -1,0 +1,107 @@
+{
+ "": {
+  "count": 7,
+  "first_ms": 319.2,
+  "example": {
+   "setupComplete": {}
+  }
+ },
+ "serverContent.inputTranscription.languageCode | serverContent.inputTranscription.text": {
+  "count": 4,
+  "first_ms": 4095.0,
+  "example": {
+   "serverContent": {
+    "inputTranscription": {
+     "text": "Mañana por la mañana tengo que llevar a",
+     "languageCode": "es"
+    }
+   }
+  }
+ },
+ "usageMetadata.promptTokenCount | usageMetadata.promptTokensDetails[].modality | usageMetadata.promptTokensDetails[].tokenCount | usageMetadata.responseTokenCount | usageMetadata.responseTokensDetails[].modality | usageMetadata.responseTokensDetails[].tokenCount | usageMetadata.totalTokenCount": {
+  "count": 9,
+  "first_ms": 4284.3,
+  "example": {
+   "serverContent": {},
+   "usageMetadata": {
+    "promptTokenCount": 50,
+    "responseTokenCount": 50,
+    "totalTokenCount": 100,
+    "promptTokensDetails": [
+     {
+      "modality": "AUDIO",
+      "tokenCount": 50
+     }
+    ],
+    "responseTokensDetails": [
+     {
+      "modality": "AUDIO",
+      "tokenCount": 50
+     }
+    ]
+   }
+  }
+ },
+ "serverContent.outputTranscription.languageCode | serverContent.outputTranscription.text": {
+  "count": 4,
+  "first_ms": 4311.7,
+  "example": {
+   "serverContent": {
+    "outputTranscription": {
+     "text": "Tomorrow morning I have",
+     "languageCode": "en"
+    }
+   }
+  }
+ },
+ "serverContent.modelTurn.parts[].inlineData.data | serverContent.modelTurn.parts[].inlineData.mimeType": {
+  "count": 107,
+  "first_ms": 4318.1,
+  "example": {
+   "serverContent": {
+    "modelTurn": {
+     "parts": [
+      {
+       "inlineData": {
+        "mimeType": "audio/pcm;rate=24000",
+        "data": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA...(+15920 chars)"
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "sessionResumptionUpdate.newHandle | sessionResumptionUpdate.resumable": {
+  "count": 9,
+  "first_ms": 4497.2,
+  "example": {
+   "sessionResumptionUpdate": {
+    "newHandle": "a76bc7cb-ca2f-4650-953b-27a61f02773a",
+    "resumable": true
+   }
+  }
+ },
+ "serverContent.inputTranscription.languageCode": {
+  "count": 5,
+  "first_ms": 7669.5,
+  "example": {
+   "serverContent": {
+    "inputTranscription": {
+     "languageCode": "es"
+    }
+   }
+  }
+ },
+ "serverContent.outputTranscription.languageCode": {
+  "count": 5,
+  "first_ms": 7985.2,
+  "example": {
+   "serverContent": {
+    "outputTranscription": {
+     "languageCode": "en"
+    }
+   }
+  }
+ }
+}

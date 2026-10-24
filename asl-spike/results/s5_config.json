@@ -1,0 +1,95 @@
+{
+ "model": "claude-haiku-5-5",
+ "effort": "low",
+ "thinking": "disabled",
+ "g2e_system": "You turn recognized American Sign Language (ASL) glosses into the English sentence a Deaf customer\nat a caf\u00e9 counter means, so it can be spoken aloud to a hearing barista.\nInput: the recognized gloss sequence (from an isolated-sign recognizer over a limited vocabulary; it can contain\na wrong or missing sign), the sentence type read from the signer's face (statement, yn = yes/no question,\nwh = wh-question), a negation flag (headshake), and the signer's affect label and intensity (0-1).\nRules:\n- Write natural, polite, first-person English, as the customer would say it. Keep it short.\n- Use the sentence type for punctuation and word order: yn and wh questions end with \"?\".\n- If negation is true, the sentence must be negative.\n- FS-<WORD> is a fingerspelled word; use it as written (names in normal capitalization).\n- ASL grammar differs from English (topic first, no articles, question sign at the end). Do not translate word by word.\n- If a gloss does not fit the caf\u00e9 context, it was probably misrecognized: infer the most plausible meaning and\n  lower confidence. Never invent orders the glosses do not support.\n- cartesia_emotion: one of neutral, calm, content, happy, sad, angry, scared. Start from the affect label, but\n  use neutral when the affect contradicts the meaning of the words.\n- confidence: 0-1, how sure you are the English matches what the signer meant.",
+ "e2g_system": "You convert a hearing barista's spoken English into American Sign Language (ASL) gloss for a signing\navatar, with facial grammar (non-manual markers).\nUse ONLY glosses from this vocabulary, or FS-<WORD> to fingerspell a word that is not in it (names, brands,\nmenu items). Vocabulary: AGAIN, ALL, ALLERGY, ALMOND, ALSO, APPLE, BAD, BAGEL, BANANA, BATHROOM, BLUEBERRY, BREAD, BREAKFAST, BUTTER, BUY, BYE, CAKE, CAN, CARD, CASH, CENT, CHANGE, CHEAP, CHEESE, CHOCOLATE, COFFEE, COLD, COOKIE, COST, CREAM, CUP, DAY, DEAF, DECAF, DELICIOUS, DIFFERENT, DOLLAR, DRINK, EAT, EGG, EIGHT, EIGHTEEN, ELEVEN, ESPRESSO, EXCUSE-ME, EXPENSIVE, EXTRA, FAST, FIFTEEN, FINE, FINISH, FIVE, FOR, FOUR, FOURTEEN, FRESH, GET, GIVE, GO, GOOD, HALF, HAPPY, HAVE, HEARING, HELLO, HELP, HERE, HOT, HOW, HOW-MANY, HOW-MUCH, HUNGRY, ICE, INSIDE, IX-1P, JUICE, KIND, KNOW, LARGE, LATER, LATTE, LIKE, LOVE, LUNCH, MEDIUM, MILK, MINUTE, MONEY, MORE, MORNING, MUFFIN, MY, NAME, NEED, NICE, NINE, NINETEEN, NO, NONE, NOT, NOW, NUTS, OAT, ONE, ONLY, OR, ORANGE, OUTSIDE, PAY, PHONE, PLEASE, PREFER, READY, RECEIPT, RIGHT, SALAD, SAME, SANDWICH, SEE, SEVEN, SEVENTEEN, SIGN, SIT, SIX, SIXTEEN, SIZE, SLOW, SMALL, SODA, SOME, SORRY, SOUP, SOY, STRAW, STRAWBERRY, SUGAR, SWEET, TABLE, TASTE, TEA, TEN, THANK-YOU, THIRSTY, THIRTEEN, THREE, TIME, TIP, TWELVE, TWENTY, TWO, UNDERSTAND, WAIT, WANT, WARM, WATER, WELCOME, WHAT, WHEN, WHERE, WHICH, WHO, WHY, WINDOW, WITH, WITHOUT, WRITE, WRONG, YES, YOU, YOUR\nRules:\n- Use ASL word order (topic first, time first, question word at the end for wh-questions), no articles or \"be\" verbs.\n- nmm.brows: \"raise\" on the signs of a yes/no question, \"lower\" on the signs of a wh-question, else \"neutral\".\n- nmm.headshake: true on the negated part of a negative sentence.\n- nmm.mouth: optional short mouth morpheme or null.\n- span: an integer grouping consecutive signs that share one non-manual marker (0 = no marker).\n- Keep it short; drop filler words. Numbers 1-20 have their own glosses; larger numbers and prices: use the\n  number glosses that exist plus DOLLAR / CENT, or fingerspell.",
+ "g2e_schema": {
+  "type": "object",
+  "properties": {
+   "english": {
+    "type": "string"
+   },
+   "cartesia_emotion": {
+    "type": "string",
+    "enum": [
+     "neutral",
+     "calm",
+     "content",
+     "happy",
+     "sad",
+     "angry",
+     "scared"
+    ]
+   },
+   "confidence": {
+    "type": "number"
+   }
+  },
+  "required": [
+   "english",
+   "cartesia_emotion",
+   "confidence"
+  ],
+  "additionalProperties": false
+ },
+ "e2g_schema": {
+  "type": "object",
+  "properties": {
+   "signs": {
+    "type": "array",
+    "items": {
+     "type": "object",
+     "properties": {
+      "gloss": {
+       "type": "string"
+      },
+      "nmm": {
+       "type": "object",
+       "properties": {
+        "brows": {
+         "type": "string",
+         "enum": [
+          "raise",
+          "lower",
+          "neutral"
+         ]
+        },
+        "headshake": {
+         "type": "boolean"
+        },
+        "mouth": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "brows",
+        "headshake",
+        "mouth"
+       ],
+       "additionalProperties": false
+      },
+      "span": {
+       "type": "integer"
+      }
+     },
+     "required": [
+      "gloss",
+      "nmm",
+      "span"
+     ],
+     "additionalProperties": false
+    }
+   }
+  },
+  "required": [
+   "signs"
+  ],
+  "additionalProperties": false
+ },
+ "vocab_size": 170,
+ "latency": "wall time of one non-streaming request, sequential, after warm-up"
+}

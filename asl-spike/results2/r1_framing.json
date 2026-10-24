@@ -1,0 +1,50 @@
+{
+ "citizen": {
+  "face_w": {
+   "median": 0.192,
+   "p10": 0.163,
+   "p90": 0.22
+  },
+  "sw_over_face": {
+   "median": 2.1,
+   "p10": 1.938,
+   "p90": 2.266
+  },
+  "shoulders_out": {
+   "median": 0.0,
+   "p10": 0.0,
+   "p90": 0.0
+  },
+  "hand_over_face": {
+   "median": 0.806,
+   "p10": 0.607,
+   "p90": 1.026
+  },
+  "n": 2120,
+  "signers": 49
+ },
+ "popsign": {
+  "face_w": {
+   "median": 0.283,
+   "p10": 0.245,
+   "p90": 0.338
+  },
+  "sw_over_face": {
+   "median": 1.966,
+   "p10": 1.757,
+   "p90": 2.162
+  },
+  "shoulders_out": {
+   "median": 0.0,
+   "p10": 0.0,
+   "p90": 0.0
+  },
+  "hand_over_face": {
+   "median": 0.545,
+   "p10": 0.409,
+   "p90": 0.672
+  },
+  "n": 2000,
+  "signers": 21
+ }
+}

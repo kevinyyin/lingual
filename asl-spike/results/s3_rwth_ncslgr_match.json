@@ -1,0 +1,2978 @@
+{
+ "ncslgr_utterances": 2675,
+ "rows": [
+  {
+   "name": "001",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN WRITE HOMEWORK",
+   "translation": "John writes his homework.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10f#21",
+   "ncslgr_seq": "JOHN FINDFIND-OUTOUT TEST",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "003",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "IX-1P SEE JOHN YESTERDAY IX",
+   "translation": "I visited John there yesterday.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10t#3",
+   "ncslgr_seq": "IX-1P NEVER SEE JOHN CAR IX",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "004",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN IX-1P SEE IX YESTERDAY",
+   "translation": "I visited John there yesterday.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10r#6",
+   "ncslgr_seq": "JOHN SEE WHO YESTERDAY",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "005",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "LOVE MARY JOHN",
+   "translation": "Mary loves John.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10s#202",
+   "ncslgr_seq": "LOVE MARY",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "006",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "LOVE MARY JOHN IX",
+   "translation": "Mary loves John.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10m#43",
+   "ncslgr_seq": "JOHN MARY LOVE IX",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "008",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN CAN GO CAN",
+   "translation": "Sure, John can go there.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#64",
+   "ncslgr_seq": "JOHN CAN GO CAN",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "009",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN CAN GO CAN",
+   "translation": "Sure, John can go there.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#64",
+   "ncslgr_seq": "JOHN CAN GO CAN",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "010",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN CAN GO CAN",
+   "translation": "Sure, John can go there.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#64",
+   "ncslgr_seq": "JOHN CAN GO CAN",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "011",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN CAN GO CAN",
+   "translation": "Sure, John can go there.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#64",
+   "ncslgr_seq": "JOHN CAN GO CAN",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "013",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN CAN GO CAN",
+   "translation": "Sure, John can go there.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#64",
+   "ncslgr_seq": "JOHN CAN GO CAN",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "014",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN CAN GO CAN",
+   "translation": "Sure, John can go there.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#64",
+   "ncslgr_seq": "JOHN CAN GO CAN",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "015",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN FUTURE GO PARTY FUTURE",
+   "translation": "John will go to a party in the future.",
+   "match": "none",
+   "dist": 3,
+   "ncslgr": "ncslgr10a#18",
+   "ncslgr_seq": "JOHN FINDFIND-OUT FUTURE TEST FUTURE",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "016",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN FUTURE GO IX",
+   "translation": "John will go there in the future.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#41",
+   "ncslgr_seq": "JOHN FUTURE BUY HOUSE",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "017",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN FUTURE GO IX",
+   "translation": "John will go there in the future.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#41",
+   "ncslgr_seq": "JOHN FUTURE BUY HOUSE",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "018",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN IX HIT BLAME FRED IX",
+   "translation": "John blames Fred for being hit.",
+   "match": "none",
+   "dist": 3,
+   "ncslgr": "ncslgr10s#179",
+   "ncslgr_seq": "JOHN IX WHO LOVE IX",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "019",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN FISH WONT EAT BUT CAN EAT CHICKEN",
+   "translation": "John won't eat fish but eats chicken.",
+   "match": "none",
+   "dist": 6,
+   "ncslgr": "ncslgr10l#38",
+   "ncslgr_seq": "JOHN CAN BUY HOUSE",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "020",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN FISH WONT EAT BUT CAN EAT CHICKEN",
+   "translation": "John won't eat fish but eats chicken.",
+   "match": "none",
+   "dist": 6,
+   "ncslgr": "ncslgr10l#38",
+   "ncslgr_seq": "JOHN CAN BUY HOUSE",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "022",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "VEGETABLE CHINA IX PEOPLE PREFER BROCCOLI",
+   "translation": "For vegtables, the people in China prefer broccoli.",
+   "match": "none",
+   "dist": 4,
+   "ncslgr": "ncslgr10k#10",
+   "ncslgr_seq": "NS-CHINA VEGETABLE PEOPLE FAVORITEPREFER BROCCOLI",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "023",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "VEGETABLE CHINA IX PEOPLE PREFER BROCCOLI",
+   "translation": "For vegtables, the people in China prefer broccoli.",
+   "match": "none",
+   "dist": 4,
+   "ncslgr": "ncslgr10k#10",
+   "ncslgr_seq": "NS-CHINA VEGETABLE PEOPLE FAVORITEPREFER BROCCOLI",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "024",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN LIKE IX IX IX",
+   "translation": "John likes this and that.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10c#3",
+   "ncslgr_seq": "JOHN FUTURENOT LIKE IX MOVIE IX",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "026",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN LIKE IX IX IX",
+   "translation": "John likes this and that.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10c#3",
+   "ncslgr_seq": "JOHN FUTURENOT LIKE IX MOVIE IX",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "027",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN LIKE IX IX IX",
+   "translation": "John likes this and that.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10c#3",
+   "ncslgr_seq": "JOHN FUTURENOT LIKE IX MOVIE IX",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "029",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN LIKE IX IX IX",
+   "translation": "John likes this and that.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10c#3",
+   "ncslgr_seq": "JOHN FUTURENOT LIKE IX MOVIE IX",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "031",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN LEAVE IX",
+   "translation": "John leaves there.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "DSP Dead Dog Story#19",
+   "ncslgr_seq": "IX",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "032",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN LEAVE IX",
+   "translation": "John leaves there.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "DSP Dead Dog Story#19",
+   "ncslgr_seq": "IX",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "033",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN LEAVE IX",
+   "translation": "John leaves there.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "DSP Dead Dog Story#19",
+   "ncslgr_seq": "IX",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "034",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN SAY MARY IX-1P BUY HOUSE",
+   "translation": "John tells Mary that I buy a house.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#29",
+   "ncslgr_seq": "JOHN TELL MARY IX-1P BUY HOUSE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "035",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "MARY VEGETABLE KNOW IX LIKE CORN",
+   "translation": "Mary knows that, for vegtables, he likes corn.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#31",
+   "ncslgr_seq": "MARY VEGETABLE KNOW IX LIKE CORN",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "037",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "MARY VEGETABLE IX-1P KNOW IX LIKE CORN",
+   "translation": "I know that, for vegtables, Mary likes corn.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#32",
+   "ncslgr_seq": "MARY VEGETABLE IX-1P KNOW IX LIKE CORN",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "038",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "MARY VEGETABLE KNOW IX LIKE CORN",
+   "translation": "Mary knows that, for vegtables, he likes corn.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#31",
+   "ncslgr_seq": "MARY VEGETABLE KNOW IX LIKE CORN",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "039",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN IX THINK MARY LOVE",
+   "translation": "John thinks that Mary loves him.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#35",
+   "ncslgr_seq": "JOHN IX THINK MARY LOVE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "041",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN IX THINK MARY LOVE",
+   "translation": "John thinks that Mary loves him.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#35",
+   "ncslgr_seq": "JOHN IX THINK MARY LOVE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "042",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN CAN BUY HOUSE",
+   "translation": "John can buy a house.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#38",
+   "ncslgr_seq": "JOHN CAN BUY HOUSE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "044",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN FUTURE BUY HOUSE",
+   "translation": "John will buy a house in the future.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#41",
+   "ncslgr_seq": "JOHN FUTURE BUY HOUSE",
+   "nmm": [],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "045",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN FUTURE NOT BUY HOUSE",
+   "translation": "John won't buy a house in the future.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#52",
+   "ncslgr_seq": "JOHN FUTURE NOT BUY HOUSE",
+   "nmm": [
+    "brows",
+    "headshake",
+    "negative"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "046",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN PAST LIVE CHICAGO",
+   "translation": "John lived in Chicago.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#43",
+   "ncslgr_seq": "JOHN PAST LIVE NS-CHICAGO LIVE",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "047",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN BUY CAR FUTURE",
+   "translation": "John will buy a car in the future.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#44",
+   "ncslgr_seq": "JOHN BUY CAR FUTURE",
+   "nmm": [
+    "brows",
+    "rhq"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "048",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN BUY CAR FUTURE",
+   "translation": "John will buy a car in the future.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#44",
+   "ncslgr_seq": "JOHN BUY CAR FUTURE",
+   "nmm": [
+    "brows",
+    "rhq"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "049",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN BUY CAR SHOULD",
+   "translation": "John should buy a car.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#61",
+   "ncslgr_seq": "JOHN BUY CAR SHOULD",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "051",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN BUY CAR FUTURE NOT",
+   "translation": "John won't buy a car in the future.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#44",
+   "ncslgr_seq": "JOHN BUY CAR FUTURE",
+   "nmm": [],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "052",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN SHOULD NOT BUY HOUSE",
+   "translation": "John should not buy a house.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10b#43",
+   "ncslgr_seq": "JOHN SHOULD NOT BUY HOUSE",
+   "nmm": [
+    "brows",
+    "headshake",
+    "negative"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "053",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN SHOULD NOT BUY HOUSE",
+   "translation": "John should not buy a house.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10b#43",
+   "ncslgr_seq": "JOHN SHOULD NOT BUY HOUSE",
+   "nmm": [
+    "brows",
+    "headshake",
+    "negative"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "055",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN SHOULD BUY HOUSE",
+   "translation": "John should buy a house.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10b#43",
+   "ncslgr_seq": "JOHN SHOULD NOT BUY HOUSE",
+   "nmm": [
+    "brows",
+    "headshake",
+    "negative"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "056",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN DECIDE VISIT MARY",
+   "translation": "John decides to visit Mary.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#50",
+   "ncslgr_seq": "JOHN DECIDE VISIT MARY",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "058",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN DECIDE VISIT MARY",
+   "translation": "John decides to visit Mary.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#50",
+   "ncslgr_seq": "JOHN DECIDE VISIT MARY",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "059",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN FUTURE NOT BUY HOUSE",
+   "translation": "John won't buy a house in the future.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#52",
+   "ncslgr_seq": "JOHN FUTURE NOT BUY HOUSE",
+   "nmm": [
+    "brows",
+    "headshake",
+    "negative"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "060",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN PREFER GO MOVIE",
+   "translation": "John prefers to go to a movie.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#56",
+   "ncslgr_seq": "JOHN FAVORITEPREFER GO MOVIE TOMORROW",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "061",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN WANT SELL CAR",
+   "translation": "John wants to sell the car.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#53",
+   "ncslgr_seq": "JOHN WANT SELL CAR",
+   "nmm": [],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "062",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN WANT SELL CAR FUTURE",
+   "translation": "John wants to sell the car in the future.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#54",
+   "ncslgr_seq": "JOHN WANT SELL CAR FUTURE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "063",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "FUTURE JOHN GO FUTURE",
+   "translation": "In the future, John will go.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#55",
+   "ncslgr_seq": "FUTURE JOHN GO FUTURE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "064",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN PREFER GO MOVIE TOMORROW",
+   "translation": "John prefers not to go to a movie.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#56",
+   "ncslgr_seq": "JOHN FAVORITEPREFER GO MOVIE TOMORROW",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "065",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "NEXT-WEEK JOHN GO NEW-YORK",
+   "translation": "Next week, John visits to New York.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#57",
+   "ncslgr_seq": "NEXT-WEEK JOHN GO NS-NEW-YORK",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "066",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN FUTURE NOT BUY HOUSE",
+   "translation": "John won't buy a house in the future.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#52",
+   "ncslgr_seq": "JOHN FUTURE NOT BUY HOUSE",
+   "nmm": [
+    "brows",
+    "headshake",
+    "negative"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "068",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "LAST-WEEK JOHN GO NEW-YORK",
+   "translation": "Last week, John visited New York.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#65",
+   "ncslgr_seq": "LAST-WEEK JOHN GO NS-NEW-YORK",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "069",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN WILL VISIT MARY",
+   "translation": "John will visit Mary in the future.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#50",
+   "ncslgr_seq": "JOHN DECIDE VISIT MARY",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "070",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN WILL VISIT MARY",
+   "translation": "John will visit Mary in the future.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#50",
+   "ncslgr_seq": "JOHN DECIDE VISIT MARY",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "072",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN FINISH VISIT MARY",
+   "translation": "John's visit to Mary is over.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#72",
+   "ncslgr_seq": "JOHN FINISH VISIT MARY",
+   "nmm": [],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "073",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN NOT VISIT MARY",
+   "translation": "John doesn't visit Mary.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#70",
+   "ncslgr_seq": "JOHN NOT VISIT MARY",
+   "nmm": [
+    "brows",
+    "headshake",
+    "negative"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "075",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN FUTURE FINISH VISIT MARY",
+   "translation": "John's visit to Mary will be over in the future.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#49",
+   "ncslgr_seq": "JOHN FUTURE FINISH SEE MARY",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "076",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "ANN BLAME MARY",
+   "translation": "Ann blames Mary.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#73",
+   "ncslgr_seq": "ANN BLAME MARY",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "078",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN FUTURE FINISH SEE MARY",
+   "translation": "John's visit to Mary will be over in the future.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#49",
+   "ncslgr_seq": "JOHN FUTURE FINISH SEE MARY",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "079",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN SHOULD FINISH READ BOOK",
+   "translation": "John should finish reading the book.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#77",
+   "ncslgr_seq": "JOHN SHOULD FINISH READ BOOK",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "080",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN FUTURE FINISH READ BOOK",
+   "translation": "John will finish reading the book in the future.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#78",
+   "ncslgr_seq": "JOHN FUTURE FINISH READ BOOK",
+   "nmm": [],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "081",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN LIKE CHOCOLATE",
+   "translation": "John likes chocolate.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#79",
+   "ncslgr_seq": "JOHN LIKE CHOCOLATE",
+   "nmm": [],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "082",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN SHOULD NOT LIKE CHOCOLATE",
+   "translation": "John should not like chocolate.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#39",
+   "ncslgr_seq": "JOHN EX NOT LIKE CHOCOLATE",
+   "nmm": [
+    "brows",
+    "headshake",
+    "negative"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "083",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "IX-1P FIND SOMETHING-ONE POSS BOOK",
+   "translation": "I find somebody who owns the book.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10m#0",
+   "ncslgr_seq": "IX-1P FINDFIND-OUT SOMETHINGONE POSS BOOK",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "085",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN BROTHER ARRIVE",
+   "translation": "John's brother arrives.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#1",
+   "ncslgr_seq": "JOHN BROTHER ARRIVE",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "086",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "SOMETHING-ONE ARRIVE HERE",
+   "translation": "Somebody arrives here.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#2",
+   "ncslgr_seq": "SOMETHINGONE ARRIVE HERE",
+   "nmm": [],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "087",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN GIVE IX MAN IX NEW COAT",
+   "translation": "John gives the man a new coat.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#5",
+   "ncslgr_seq": "JOHN NEU1HGIFT IX MAN IX NEW COAT",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "088",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN GIVE IX MAN NEW COAT",
+   "translation": "John gives the man a new coat.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#3",
+   "ncslgr_seq": "JOHN I1HGIFT IX MAN NEW COAT",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "091",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN IX GIVE IX WOMAN IX BOOK",
+   "translation": "John gives the book to some woman.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10m#6",
+   "ncslgr_seq": "JOHN IX I1HGIFT IX MAN IX BOOK",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "093",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN GIVE IX SOMETHING-ONE WOMAN BOOK",
+   "translation": "John gives the book to some woman.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10m#7",
+   "ncslgr_seq": "JOHN NEUGIVE-INDEF IX SOMETHINGONE WOMAN BOOK",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "094",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN GIVE IX SOMETHING-ONE WOMAN BOOK",
+   "translation": "John gives the book to some woman.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10m#7",
+   "ncslgr_seq": "JOHN NEUGIVE-INDEF IX SOMETHINGONE WOMAN BOOK",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "095",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "IX WOMAN HAVE BOOK",
+   "translation": "The woman has the book.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#11",
+   "ncslgr_seq": "IX WOMAN HAVE BOOK",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "096",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "IX HAVE BOOK",
+   "translation": "He has a book.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#12",
+   "ncslgr_seq": "IX HAVE BOOK",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "097",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "FRANK POSS NEW CAR BREAK-DOWN",
+   "translation": "Frank's new car breaks down.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#13",
+   "ncslgr_seq": "FRANK POSS NEW CAR BREAK-DOWN",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "098",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "POSS FRANK NEW CAR BREAK-DOWN",
+   "translation": "Frank's new car breaks down.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#15",
+   "ncslgr_seq": "POSS NEW CAR BREAK-DOWN",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "099",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "FRANK POSS CAR BREAK-DOWN",
+   "translation": "Frank's car breaks down.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#14",
+   "ncslgr_seq": "FRANK POSS CAR BREAK-DOWN",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "101",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "POSS NEW CAR BREAK-DOWN",
+   "translation": "His new car breaks down.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#15",
+   "ncslgr_seq": "POSS NEW CAR BREAK-DOWN",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "102",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN SEARCH-FOR WHO POSS BOOK WHAT",
+   "translation": "John searches the owner of the book.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10m#17",
+   "ncslgr_seq": "FRANK SEARCH-FOR WHO POSS BOOK PART",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "103",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN POSS BROTHER ARRIVE",
+   "translation": "John's brother arrives.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#18",
+   "ncslgr_seq": "JOHN POSS BROTHER ARRIVE",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "104",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN POSS LEG",
+   "translation": "John's leg.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#19",
+   "ncslgr_seq": "JOHN POSS LEG HURT",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "106",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN POSS FRIEND POSS CANDY",
+   "translation": "John's friend has candy.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10m#21",
+   "ncslgr_seq": "JOHN POSS FRIEND HAVE CUTE",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "109",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "WOMAN ARRIVE HERE",
+   "translation": "The woman arrives here.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#25",
+   "ncslgr_seq": "WOMAN ARRIVE HERE",
+   "nmm": [
+    "brows",
+    "headshake"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "110",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "WHAT SOMETHING-ONE WHAT WOMAN ARRIVE",
+   "translation": "Which woman arrives here?",
+   "match": "none",
+   "dist": 3,
+   "ncslgr": "ncslgr10n#0",
+   "ncslgr_seq": "WOMAN ARRIVE",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "111",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "WHAT WOMAN WHAT ARRIVE HERE",
+   "translation": "Which woman arrives here?",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10m#25",
+   "ncslgr_seq": "WOMAN ARRIVE HERE",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "112",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "IX CAR BLUE SUE BUY",
+   "translation": "Sue buys the blue car.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#26",
+   "ncslgr_seq": "IX CAR BLUE SUE BUY",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "114",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "SOMETHING-ONE POSS CAR STOLEN",
+   "translation": "Someones car is stolen.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10m#14",
+   "ncslgr_seq": "FRANK POSS CAR BREAK-DOWN",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "115",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "SOMETHING-ONE CAR STOLEN",
+   "translation": "Someones car is stolen.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10m#28",
+   "ncslgr_seq": "SOMETHINGONE CAR STEAL",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "116",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN POSS OLD HOUSE SELL YESTERDAY",
+   "translation": "John's old house was sold yesterday.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#30",
+   "ncslgr_seq": "JOHN POSS OLD HOUSE SELL YESTERDAY",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "117",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "SUE BUY IX CAR BLUE",
+   "translation": "Sue buys the blue car.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#31",
+   "ncslgr_seq": "SUE BUY IX CAR BLUE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "118",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "SUE BUY IX CAR BLUE",
+   "translation": "Sue buys the blue car.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#31",
+   "ncslgr_seq": "SUE BUY IX CAR BLUE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "120",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "SUE BUY CAR BLUE",
+   "translation": "Sue buys the blue car.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#34",
+   "ncslgr_seq": "SUE BUY CAR BLUE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "121",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN READ BOOK",
+   "translation": "John reads the book.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#35",
+   "ncslgr_seq": "JOHN READ BOOK",
+   "nmm": [],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "123",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "SOMETHING-ONE STUDENT HAVE VIDEOTAPE",
+   "translation": "A student has the videotape.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10n#2",
+   "ncslgr_seq": "SOMETHINGONE LEARNAGENT HAVE VIDEOTAPE",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "124",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "SOMETHING-ONE STUDENT SOMETHING-ONE BORROW VIDEOTAPE",
+   "translation": "A student borrows someone the videotape.",
+   "match": "none",
+   "dist": 4,
+   "ncslgr": "ncslgr10m#37",
+   "ncslgr_seq": "ONE LEARNAGENT SOMETHINGONE BORROW VIDEOTAPE LEARNAGENT",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "125",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "STUDENT HAVE VIDEOTAPE",
+   "translation": "The student has the videotape.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10n#18",
+   "ncslgr_seq": "LEARNAGENT HAVE VIDEOTAPE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "126",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN MOTHER ARRIVE WHO MOTHER ARRIVE",
+   "translation": "John's mother arrives.",
+   "match": "none",
+   "dist": 3,
+   "ncslgr": "ncslgr10m#38",
+   "ncslgr_seq": "SOMEONEBORROWEDAVIDEOTAPE JOHN POSS MOTHER ARRIVE WHO MOTHERWG ARRIVE",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "127",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN SEE WHO WHAT",
+   "translation": "John visits whom?",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#60",
+   "ncslgr_seq": "JOHN SEE WHO WHAT",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "128",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "IX JOHN SEE WHO IX WHO",
+   "translation": "John visits whom?",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#42",
+   "ncslgr_seq": "IX JOHN SEE WHO IX WHO",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "129",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "WHAT MARY WONT EAT WHAT",
+   "translation": "What is it that Mary won't eat?",
+   "match": "none",
+   "dist": 3,
+   "ncslgr": "ncslgr10m#46",
+   "ncslgr_seq": "WHAT JOHN LOVE WHAT WHAT",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "130",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN MARY LOVE IX",
+   "translation": "John loves Mary.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#43",
+   "ncslgr_seq": "JOHN MARY LOVE IX",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "131",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN IX LIKE MARY",
+   "translation": "John likes Mary.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#44",
+   "ncslgr_seq": "JOHN IX LIKE MARY",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "132",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "WHO VEGETABLE PREFER POTATO WHAT",
+   "translation": "For vegtables, who prefers potatoes?",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10m#45",
+   "ncslgr_seq": "WHO VEGETABLE FAVORITEPREFER POTATO PART",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "133",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "WHAT JOHN LOVE WHAT",
+   "translation": "John loves what?",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#46",
+   "ncslgr_seq": "WHAT JOHN LOVE WHAT WHAT",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "134",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "WHAT JOHN LOVE WHAT",
+   "translation": "John loves what?",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#46",
+   "ncslgr_seq": "WHAT JOHN LOVE WHAT WHAT",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "135",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "WHAT JOHN LOVE WHAT",
+   "translation": "John loves what?",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#46",
+   "ncslgr_seq": "WHAT JOHN LOVE WHAT WHAT",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "136",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "WHO TELL BILL MARY",
+   "translation": "Mary is the one that tells Bill.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#49",
+   "ncslgr_seq": "WHO TELL BILL MARY",
+   "nmm": [
+    "brows",
+    "rhq"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "137",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN BUY WHAT YESTERDAY BOOK",
+   "translation": "The book is what John bought yesterday.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#40",
+   "ncslgr_seq": "JOHN BUY WHAT YESTERDAY BOOK WHAT",
+   "nmm": [
+    "brows",
+    "headshake",
+    "rhq"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "138",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN BUY WHAT YESTERDAY BOOK",
+   "translation": "The book is what John bought yesterday.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#40",
+   "ncslgr_seq": "JOHN BUY WHAT YESTERDAY BOOK WHAT",
+   "nmm": [
+    "brows",
+    "headshake",
+    "rhq"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "140",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN BUY YESTERDAY WHAT BOOK",
+   "translation": "The book is what John bought yesterday.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#51",
+   "ncslgr_seq": "JOHN BUY YESTERDAY WHAT BOOK",
+   "nmm": [
+    "brows",
+    "headshake",
+    "rhq"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "141",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN BUY WHAT BOOK",
+   "translation": "The book is what John buys.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#53",
+   "ncslgr_seq": "JOHN BUY WHAT BOOK",
+   "nmm": [
+    "brows",
+    "headshake",
+    "rhq"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "143",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "TELL BILL YESTERDAY WHO MARY",
+   "translation": "Mary is the one who told Bill yesterday.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#54",
+   "ncslgr_seq": "TELL BILL YESTERDAY WHO MARY",
+   "nmm": [
+    "brows",
+    "rhq"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "144",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "TELL BILL YESTERDAY WHO MARY",
+   "translation": "Mary is the one who told Bill yesterday.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#54",
+   "ncslgr_seq": "TELL BILL YESTERDAY WHO MARY",
+   "nmm": [
+    "brows",
+    "rhq"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "145",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "WHO TELL BILL WHAT MARY",
+   "translation": "Mary is the one who tells Bill.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#49",
+   "ncslgr_seq": "WHO TELL BILL MARY",
+   "nmm": [
+    "brows",
+    "rhq"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "146",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "WHO JOHN VISIT WHAT MARY",
+   "translation": "Mary is the one that visits Bill.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10n#7",
+   "ncslgr_seq": "WHO JOHN SEE PART MARY",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "147",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "TELL BILL YESTERDAY WHO MARY",
+   "translation": "Mary is the one who told Bill yesterday.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#54",
+   "ncslgr_seq": "TELL BILL YESTERDAY WHO MARY",
+   "nmm": [
+    "brows",
+    "rhq"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "148",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN BUY YESTERDAY WHAT BOOK",
+   "translation": "The book is what John bought yesterday.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#51",
+   "ncslgr_seq": "JOHN BUY YESTERDAY WHAT BOOK",
+   "nmm": [
+    "brows",
+    "headshake",
+    "rhq"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "149",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "WHO JOHN SEE WHAT MARY",
+   "translation": "Mary is the one who visits John.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10n#7",
+   "ncslgr_seq": "WHO JOHN SEE PART MARY",
+   "nmm": [
+    "brows",
+    "headshake",
+    "rhq"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "150",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN SEE THROW APPLE WHO MARY",
+   "translation": "Mary is the one who throws an apple on John's visit.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#56",
+   "ncslgr_seq": "JOHN SEE ITHROW APPLE WHO MARY",
+   "nmm": [
+    "brows",
+    "headshake",
+    "rhq"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "151",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN SEE THROW APPLE WHO MARY",
+   "translation": "Mary is the one who throws an apple on John's visit.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#56",
+   "ncslgr_seq": "JOHN SEE ITHROW APPLE WHO MARY",
+   "nmm": [
+    "brows",
+    "headshake",
+    "rhq"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "152",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN SEE THROW APPLE WHO MARY",
+   "translation": "Mary is the one who throws an apple on John's visit.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#56",
+   "ncslgr_seq": "JOHN SEE ITHROW APPLE WHO MARY",
+   "nmm": [
+    "brows",
+    "headshake",
+    "rhq"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "153",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "ARRIVE WHO",
+   "translation": "Who arrives?",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#57",
+   "ncslgr_seq": "ARRIVE WHO",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "154",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "ARRIVE WHO",
+   "translation": "Who arrives?",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#57",
+   "ncslgr_seq": "ARRIVE WHO",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "155",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN GO SHOULD SHOULD",
+   "translation": "John should really go.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10n#11",
+   "ncslgr_seq": "JOHN GO SHOULD",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "156",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN GO SHOULD",
+   "translation": "John should go.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10n#11",
+   "ncslgr_seq": "JOHN GO SHOULD",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "157",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN SHOULD GO SHOULD SHOULD",
+   "translation": "John should really go.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10n#13",
+   "ncslgr_seq": "JOHN SHOULD GO SHOULD",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "159",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "LOVE JOHN WHO",
+   "translation": "Who loves John?",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#58",
+   "ncslgr_seq": "LOVE JOHN WHO",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "160",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "LOVE JOHN WHO",
+   "translation": "Who loves John?",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#58",
+   "ncslgr_seq": "LOVE JOHN WHO",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "161",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "WHO JOHN LOVE WHO",
+   "translation": "Who loves John?",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#61",
+   "ncslgr_seq": "WHO JOHN LOVE WHO",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "162",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "WHAT JOHN LIKE",
+   "translation": "John likes what?",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#62",
+   "ncslgr_seq": "WHAT JOHN LIKE",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "163",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "WHO ARRIVE",
+   "translation": "Who arrives?",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#63",
+   "ncslgr_seq": "WHO ARRIVE",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "164",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "NAME",
+   "translation": "Name it.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#65",
+   "ncslgr_seq": "NAME",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "165",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "SHOOT FRANK",
+   "translation": "Frank is shot.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#1",
+   "ncslgr_seq": "SHOOT FRANK",
+   "nmm": [],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "166",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN IX SAY-1P LOVE MARY",
+   "translation": "John says he loves Mary.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#2",
+   "ncslgr_seq": "SHOOTSFRANK JOHN IX SAY LOVE MARY",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "168",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN BLAME",
+   "translation": "John blames.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#0",
+   "ncslgr_seq": "JOHN ARRIVE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "169",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "MARY BILL SAY JOHN LOVE",
+   "translation": "Mary says Bill she loves John.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#5",
+   "ncslgr_seq": "MARY BILL SAY JOHN LOVE",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "170",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN MARY BLAME",
+   "translation": "John blames Mary.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#6",
+   "ncslgr_seq": "JOHN MARY IBLAME",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "172",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "MARY SELF PREFER CORN",
+   "translation": "Mary prefers corn for herself.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#8",
+   "ncslgr_seq": "MARY SELF-3P FAVORITEPREFER CORN",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "173",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "MARY SELF PREFER CORN",
+   "translation": "Mary prefers corn for herself.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#8",
+   "ncslgr_seq": "MARY SELF-3P FAVORITEPREFER CORN",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "175",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "PEOPLE GROUP GIVE JANA TOY",
+   "translation": "The people give Jana toys.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#10",
+   "ncslgr_seq": "PEOPLE CLASS I2HALTGIFT JANA TOY",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "176",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "MANY PEOPLE GIVE JANA TOY",
+   "translation": "Many people give Jana toys.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#12",
+   "ncslgr_seq": "MANY PEOPLE ALTGIFT JANA PLAY",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "177",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN LOVE MARY",
+   "translation": "John loves Mary.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#13",
+   "ncslgr_seq": "JOHN LOVE MARY",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "178",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN ARRIVE",
+   "translation": "John arrives.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#0",
+   "ncslgr_seq": "JOHN ARRIVE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "179",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN ARRIVE",
+   "translation": "John arrives.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#0",
+   "ncslgr_seq": "JOHN ARRIVE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "180",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN ARRIVE",
+   "translation": "John arrives.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#0",
+   "ncslgr_seq": "JOHN ARRIVE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "182",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "ALL BOY GIVE TEACHER APPLE",
+   "translation": "All boys give the teacher an apple.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#18",
+   "ncslgr_seq": "ALL BOY ALTGIFT TEACHAGENT APPLE",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "183",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "ALL BOY GIVE TEACHER APPLE",
+   "translation": "All boys give the teacher an apple.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#18",
+   "ncslgr_seq": "ALL BOY ALTGIFT TEACHAGENT APPLE",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "185",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "IX GIRL GIVE JOHN BOX",
+   "translation": "The girl gives John the box.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#20",
+   "ncslgr_seq": "IX GIRL I1HGIFT JOHN BOXROOM",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "186",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "IX GIRL GIVE JOHN BOX",
+   "translation": "The girl gives John the box.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#20",
+   "ncslgr_seq": "IX GIRL I1HGIFT JOHN BOXROOM",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "187",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "TEACHER GIVE GIVE GIVE BOY BOOK",
+   "translation": "The teacher really gives the book to the boy.",
+   "match": "none",
+   "dist": 4,
+   "ncslgr": "ncslgr10l#21",
+   "ncslgr_seq": "TEACHAGENT I1HGIFT BOY BOOK",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "188",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "TEACHER GIVE BOY BOOK",
+   "translation": "The teacher gives the book to the boy.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#21",
+   "ncslgr_seq": "TEACHAGENT I1HGIFT BOY BOOK",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "190",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "IX GIRL GIVE JOHN BOX",
+   "translation": "The girl gives John the box.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#20",
+   "ncslgr_seq": "IX GIRL I1HGIFT JOHN BOXROOM",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "191",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN GIVE GIRL BOX",
+   "translation": "John gives the girl the box.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#23",
+   "ncslgr_seq": "JOHN NEU1HGIFT GIRL BOXROOM",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "192",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN GIVE GIRL BOX",
+   "translation": "John gives the girl the box.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#23",
+   "ncslgr_seq": "JOHN NEU1HGIFT GIRL BOXROOM",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "194",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN CAN GET CAN",
+   "translation": "John really can get it.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#64",
+   "ncslgr_seq": "JOHN CAN GO CAN",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "195",
+   "split": "train",
+   "speaker": "woman-2",
+   "orth": "JOHN NOT VISIT MARY VISIT MOTHER IX",
+   "translation": "John doesn't visit Mary, he visits his mother.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#69",
+   "ncslgr_seq": "JOHN NOT VISIT MARY VISIT MOTHERWG IX",
+   "nmm": [
+    "brows",
+    "headshake",
+    "negative"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "196",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "IX BOOK PUTASIDE",
+   "translation": "He puts the book aside.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "DSP Dead Dog Story#19",
+   "ncslgr_seq": "IX",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "197",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "JOHN ARRIVE NOT WHAT",
+   "translation": "John doesn't arrive?",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#0",
+   "ncslgr_seq": "JOHN ARRIVE",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "198",
+   "split": "train",
+   "speaker": "man-1",
+   "orth": "LIKE CHOCOLATE WHO",
+   "translation": "Who likes chocolate?",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10n#14",
+   "ncslgr_seq": "LIKE CHOCOLATE WHO",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "200",
+   "split": "train",
+   "speaker": "woman-1",
+   "orth": "JOHN VISIT WHO WHAT",
+   "translation": "Who visits John?",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#60",
+   "ncslgr_seq": "JOHN SEE WHO WHAT",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "002",
+   "split": "test",
+   "speaker": "woman-1",
+   "orth": "JOHN WRITE HOMEWORK",
+   "translation": "John writes his homework.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10f#21",
+   "ncslgr_seq": "JOHN FINDFIND-OUTOUT TEST",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "007",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "JOHN CAN GO CAN",
+   "translation": "Sure, John can go there.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#64",
+   "ncslgr_seq": "JOHN CAN GO CAN",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "012",
+   "split": "test",
+   "speaker": "woman-2",
+   "orth": "JOHN CAN GO CAN",
+   "translation": "Sure, John can go there.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#64",
+   "ncslgr_seq": "JOHN CAN GO CAN",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "021",
+   "split": "test",
+   "speaker": "woman-2",
+   "orth": "JOHN FISH WONT EAT BUT CAN EAT CHICKEN",
+   "translation": "John won't eat fish but eats chicken.",
+   "match": "none",
+   "dist": 6,
+   "ncslgr": "ncslgr10l#38",
+   "ncslgr_seq": "JOHN CAN BUY HOUSE",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "025",
+   "split": "test",
+   "speaker": "woman-2",
+   "orth": "JOHN LIKE IX IX IX",
+   "translation": "John likes this and that.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10c#3",
+   "ncslgr_seq": "JOHN FUTURENOT LIKE IX MOVIE IX",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "028",
+   "split": "test",
+   "speaker": "woman-2",
+   "orth": "JOHN LIKE IX IX IX",
+   "translation": "John likes this and that.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10c#3",
+   "ncslgr_seq": "JOHN FUTURENOT LIKE IX MOVIE IX",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "030",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "JOHN LIKE IX IX IX",
+   "translation": "John likes this and that.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10c#3",
+   "ncslgr_seq": "JOHN FUTURENOT LIKE IX MOVIE IX",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "036",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "MARY VEGETABLE KNOW IX LIKE CORN",
+   "translation": "Mary knows that, for vegtables, he likes corn.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#31",
+   "ncslgr_seq": "MARY VEGETABLE KNOW IX LIKE CORN",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "040",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "JOHN IX THINK MARY LOVE",
+   "translation": "John thinks that Mary loves him.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#35",
+   "ncslgr_seq": "JOHN IX THINK MARY LOVE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "043",
+   "split": "test",
+   "speaker": "woman-1",
+   "orth": "JOHN MUST BUY HOUSE",
+   "translation": "John should buy a house.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#40",
+   "ncslgr_seq": "JOHN MUST BUY HOUSE",
+   "nmm": [],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "050",
+   "split": "test",
+   "speaker": "woman-1",
+   "orth": "FUTURE JOHN BUY CAR SHOULD",
+   "translation": "In the future, John should buy a car.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#62",
+   "ncslgr_seq": "FUTURE JOHN BUY CAR SHOULD",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "054",
+   "split": "test",
+   "speaker": "woman-2",
+   "orth": "JOHN SHOULD NOT BUY HOUSE",
+   "translation": "John should not buy a house.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10b#43",
+   "ncslgr_seq": "JOHN SHOULD NOT BUY HOUSE",
+   "nmm": [
+    "brows",
+    "headshake",
+    "negative"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "057",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "JOHN DECIDE VISIT MARY",
+   "translation": "John decides to visit Mary.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#50",
+   "ncslgr_seq": "JOHN DECIDE VISIT MARY",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "067",
+   "split": "test",
+   "speaker": "woman-1",
+   "orth": "JOHN FUTURE NOT BUY HOUSE",
+   "translation": "John won't buy a house in the future.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#52",
+   "ncslgr_seq": "JOHN FUTURE NOT BUY HOUSE",
+   "nmm": [
+    "brows",
+    "headshake",
+    "negative"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "071",
+   "split": "test",
+   "speaker": "woman-2",
+   "orth": "JOHN WILL VISIT MARY",
+   "translation": "John will visit Mary in the future.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#50",
+   "ncslgr_seq": "JOHN DECIDE VISIT MARY",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "074",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "JOHN NOT VISIT MARY",
+   "translation": "John doesn't visit Mary.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#70",
+   "ncslgr_seq": "JOHN NOT VISIT MARY",
+   "nmm": [
+    "brows",
+    "headshake",
+    "negative"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "077",
+   "split": "test",
+   "speaker": "woman-2",
+   "orth": "ANN BLAME MARY",
+   "translation": "Ann blames Mary.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#73",
+   "ncslgr_seq": "ANN BLAME MARY",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "084",
+   "split": "test",
+   "speaker": "woman-1",
+   "orth": "IX-1P FIND SOMETHING-ONE BOOK",
+   "translation": "I find somebody who owns the book.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10m#16",
+   "ncslgr_seq": "IX-1P FINDFIND-OUT SOMETHINGONE BOOK",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "089",
+   "split": "test",
+   "speaker": "woman-2",
+   "orth": "JOHN IX GIVE MAN IX NEW COAT",
+   "translation": "John gives the man a new coat.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10m#4",
+   "ncslgr_seq": "JOHN IX I1HGIFT IX MAN IX NEW COAT",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "090",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "JOHN GIVE IX SOMETHING-ONE WOMAN BOOK",
+   "translation": "John gives the book to some woman.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10m#7",
+   "ncslgr_seq": "JOHN NEUGIVE-INDEF IX SOMETHINGONE WOMAN BOOK",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "092",
+   "split": "test",
+   "speaker": "woman-2",
+   "orth": "JOHN GIVE IX SOMETHING-ONE WOMAN BOOK",
+   "translation": "John gives the book to some woman.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10m#7",
+   "ncslgr_seq": "JOHN NEUGIVE-INDEF IX SOMETHINGONE WOMAN BOOK",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "100",
+   "split": "test",
+   "speaker": "woman-1",
+   "orth": "POSS NEW CAR BREAK-DOWN",
+   "translation": "His new car breaks down.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#15",
+   "ncslgr_seq": "POSS NEW CAR BREAK-DOWN",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "105",
+   "split": "test",
+   "speaker": "woman-1",
+   "orth": "JOHN LEG",
+   "translation": "John's leg.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#0",
+   "ncslgr_seq": "JOHN ARRIVE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "107",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "JOHN POSS FRIEND HAVE CANDY",
+   "translation": "John's friend has candy.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#21",
+   "ncslgr_seq": "JOHN POSS FRIEND HAVE CUTE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "108",
+   "split": "test",
+   "speaker": "woman-2",
+   "orth": "WOMAN ARRIVE",
+   "translation": "The woman arrives.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10n#0",
+   "ncslgr_seq": "WOMAN ARRIVE",
+   "nmm": [
+    "brows",
+    "headshake"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "113",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "IX CAR BLUE SUE BUY",
+   "translation": "Sue buys the blue car.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#26",
+   "ncslgr_seq": "IX CAR BLUE SUE BUY",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "119",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "SUE BUY IX CAR BLUE",
+   "translation": "Sue buys the blue car.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#31",
+   "ncslgr_seq": "SUE BUY IX CAR BLUE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "122",
+   "split": "test",
+   "speaker": "woman-2",
+   "orth": "JOHN READ BOOK",
+   "translation": "John reads the book.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#35",
+   "ncslgr_seq": "JOHN READ BOOK",
+   "nmm": [],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "139",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "JOHN BUY WHAT YESTERDAY BOOK",
+   "translation": "The book is what John bought yesterday.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10m#40",
+   "ncslgr_seq": "JOHN BUY WHAT YESTERDAY BOOK WHAT",
+   "nmm": [
+    "brows",
+    "headshake",
+    "rhq"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "142",
+   "split": "test",
+   "speaker": "woman-1",
+   "orth": "JOHN BUY YESTERDAY WHAT BOOK",
+   "translation": "The book is what John bought yesterday.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#51",
+   "ncslgr_seq": "JOHN BUY YESTERDAY WHAT BOOK",
+   "nmm": [
+    "brows",
+    "headshake",
+    "rhq"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "158",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "LOVE JOHN WHO",
+   "translation": "Who loves John?",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10m#58",
+   "ncslgr_seq": "LOVE JOHN WHO",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "167",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "JOHN IX SAY LOVE MARY",
+   "translation": "John says he loves Mary.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#2",
+   "ncslgr_seq": "SHOOTSFRANK JOHN IX SAY LOVE MARY",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "171",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "JOHN MARY BLAME",
+   "translation": "John blames Mary.",
+   "match": "near",
+   "dist": 1,
+   "ncslgr": "ncslgr10l#6",
+   "ncslgr_seq": "JOHN MARY IBLAME",
+   "nmm": [
+    "brows",
+    "topic"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "174",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "PEOPLE GROUP GIVE JANA TOY",
+   "translation": "The people give Jana toys.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#10",
+   "ncslgr_seq": "PEOPLE CLASS I2HALTGIFT JANA TOY",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "181",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "JOHN ARRIVE",
+   "translation": "John arrives.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#0",
+   "ncslgr_seq": "JOHN ARRIVE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": false
+  },
+  {
+   "name": "184",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "ALL BOY GIVE TEACHER APPLE",
+   "translation": "All boys give the teacher an apple.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#18",
+   "ncslgr_seq": "ALL BOY ALTGIFT TEACHAGENT APPLE",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "189",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "JOHN GIVE GIRL BOX",
+   "translation": "John gives the girl the box.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#23",
+   "ncslgr_seq": "JOHN NEU1HGIFT GIRL BOXROOM",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "193",
+   "split": "test",
+   "speaker": "man-1",
+   "orth": "JOHN GIVE GIRL BOX",
+   "translation": "John gives the girl the box.",
+   "match": "none",
+   "dist": 2,
+   "ncslgr": "ncslgr10l#23",
+   "ncslgr_seq": "JOHN NEU1HGIFT GIRL BOXROOM",
+   "nmm": null,
+   "ambiguous_exact": false
+  },
+  {
+   "name": "199",
+   "split": "test",
+   "speaker": "woman-1",
+   "orth": "LIKE CHOCOLATE WHO",
+   "translation": "Who likes chocolate?",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10n#14",
+   "ncslgr_seq": "LIKE CHOCOLATE WHO",
+   "nmm": [
+    "brows",
+    "headshake",
+    "wh"
+   ],
+   "ambiguous_exact": true
+  },
+  {
+   "name": "201",
+   "split": "test",
+   "speaker": "woman-2",
+   "orth": "JOHN TELL MARY IX-1P BUY HOUSE",
+   "translation": "John tells Mary that I buy the house.",
+   "match": "exact",
+   "dist": 0,
+   "ncslgr": "ncslgr10l#29",
+   "ncslgr_seq": "JOHN TELL MARY IX-1P BUY HOUSE",
+   "nmm": [
+    "brows"
+   ],
+   "ambiguous_exact": true
+  }
+ ]
+}

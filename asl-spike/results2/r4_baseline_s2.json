@@ -1,0 +1,242 @@
+{
+ "variant": "baseline",
+ "seed": 2,
+ "steps": 2700,
+ "train_n": 2856,
+ "train_s": 243,
+ "best_val_mean_top1": 0.6892021298408508,
+ "history": [
+  {
+   "step": 90,
+   "loss": 4.5562,
+   "val_citizen": 0.157,
+   "val_wlasl": 0.082,
+   "val_popsign": 0.0244
+  },
+  {
+   "step": 180,
+   "loss": 3.7006,
+   "val_citizen": 0.2769,
+   "val_wlasl": 0.1967,
+   "val_popsign": 0.0829
+  },
+  {
+   "step": 270,
+   "loss": 3.1215,
+   "val_citizen": 0.4394,
+   "val_wlasl": 0.3607,
+   "val_popsign": 0.1727
+  },
+  {
+   "step": 360,
+   "loss": 2.7992,
+   "val_citizen": 0.6061,
+   "val_wlasl": 0.5574,
+   "val_popsign": 0.3229
+  },
+  {
+   "step": 450,
+   "loss": 2.1422,
+   "val_citizen": 0.6639,
+   "val_wlasl": 0.5738,
+   "val_popsign": 0.3151
+  },
+  {
+   "step": 540,
+   "loss": 1.7328,
+   "val_citizen": 0.6915,
+   "val_wlasl": 0.5574,
+   "val_popsign": 0.3795
+  },
+  {
+   "step": 630,
+   "loss": 1.5406,
+   "val_citizen": 0.7548,
+   "val_wlasl": 0.5738,
+   "val_popsign": 0.3659
+  },
+  {
+   "step": 720,
+   "loss": 1.5008,
+   "val_citizen": 0.7176,
+   "val_wlasl": 0.6393,
+   "val_popsign": 0.2917
+  },
+  {
+   "step": 810,
+   "loss": 1.4372,
+   "val_citizen": 0.7686,
+   "val_wlasl": 0.5902,
+   "val_popsign": 0.361
+  },
+  {
+   "step": 900,
+   "loss": 1.3961,
+   "val_citizen": 0.7865,
+   "val_wlasl": 0.6066,
+   "val_popsign": 0.359
+  },
+  {
+   "step": 990,
+   "loss": 1.3189,
+   "val_citizen": 0.7837,
+   "val_wlasl": 0.6393,
+   "val_popsign": 0.3229
+  },
+  {
+   "step": 1080,
+   "loss": 1.2797,
+   "val_citizen": 0.7975,
+   "val_wlasl": 0.623,
+   "val_popsign": 0.3337
+  },
+  {
+   "step": 1170,
+   "loss": 1.3005,
+   "val_citizen": 0.8196,
+   "val_wlasl": 0.7049,
+   "val_popsign": 0.3785
+  },
+  {
+   "step": 1260,
+   "loss": 1.2006,
+   "val_citizen": 0.8457,
+   "val_wlasl": 0.6557,
+   "val_popsign": 0.4156
+  },
+  {
+   "step": 1350,
+   "loss": 1.099,
+   "val_citizen": 0.8457,
+   "val_wlasl": 0.7541,
+   "val_popsign": 0.4224
+  },
+  {
+   "step": 1440,
+   "loss": 1.1674,
+   "val_citizen": 0.8072,
+   "val_wlasl": 0.6721,
+   "val_popsign": 0.3366
+  },
+  {
+   "step": 1530,
+   "loss": 0.984,
+   "val_citizen": 0.8664,
+   "val_wlasl": 0.7541,
+   "val_popsign": 0.4049
+  },
+  {
+   "step": 1620,
+   "loss": 1.1083,
+   "val_citizen": 0.8678,
+   "val_wlasl": 0.6885,
+   "val_popsign": 0.4205
+  },
+  {
+   "step": 1710,
+   "loss": 1.0302,
+   "val_citizen": 0.8664,
+   "val_wlasl": 0.7213,
+   "val_popsign": 0.4059
+  },
+  {
+   "step": 1800,
+   "loss": 0.9578,
+   "val_citizen": 0.8636,
+   "val_wlasl": 0.6721,
+   "val_popsign": 0.361
+  },
+  {
+   "step": 1890,
+   "loss": 0.9848,
+   "val_citizen": 0.8678,
+   "val_wlasl": 0.7213,
+   "val_popsign": 0.4322
+  },
+  {
+   "step": 1980,
+   "loss": 0.9511,
+   "val_citizen": 0.8774,
+   "val_wlasl": 0.7541,
+   "val_popsign": 0.4361
+  },
+  {
+   "step": 2070,
+   "loss": 0.9411,
+   "val_citizen": 0.8774,
+   "val_wlasl": 0.7213,
+   "val_popsign": 0.4595
+  },
+  {
+   "step": 2160,
+   "loss": 0.9253,
+   "val_citizen": 0.8843,
+   "val_wlasl": 0.7049,
+   "val_popsign": 0.4332
+  },
+  {
+   "step": 2250,
+   "loss": 0.9182,
+   "val_citizen": 0.8843,
+   "val_wlasl": 0.6885,
+   "val_popsign": 0.4332
+  },
+  {
+   "step": 2340,
+   "loss": 0.9192,
+   "val_citizen": 0.8884,
+   "val_wlasl": 0.7213,
+   "val_popsign": 0.4312
+  },
+  {
+   "step": 2430,
+   "loss": 0.9042,
+   "val_citizen": 0.8857,
+   "val_wlasl": 0.7049,
+   "val_popsign": 0.4283
+  },
+  {
+   "step": 2520,
+   "loss": 0.9272,
+   "val_citizen": 0.8898,
+   "val_wlasl": 0.6885,
+   "val_popsign": 0.4351
+  },
+  {
+   "step": 2610,
+   "loss": 0.9331,
+   "val_citizen": 0.8898,
+   "val_wlasl": 0.6885,
+   "val_popsign": 0.44
+  },
+  {
+   "step": 2700,
+   "loss": 0.8993,
+   "val_citizen": 0.8912,
+   "val_wlasl": 0.7049,
+   "val_popsign": 0.4371
+  }
+ ],
+ "test": {
+  "citizen": {
+   "top1": 0.8371211886405945,
+   "top3": 0.9242424368858337,
+   "top5": 0.9490740895271301
+  },
+  "wlasl": {
+   "top1": 0.68660968542099,
+   "top3": 0.8233618140220642,
+   "top5": 0.8689458966255188
+  },
+  "popsign": {
+   "top1": 0.3499392569065094,
+   "top3": 0.49783024191856384,
+   "top5": 0.5589307546615601
+  }
+ },
+ "test_n": {
+  "citizen": 2376,
+  "wlasl": 351,
+  "popsign": 5761
+ }
+}

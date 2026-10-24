@@ -1,0 +1,82 @@
+{
+ "idle_s": 90.0,
+ "first_audible_s": 93.404,
+ "events": [
+  {
+   "t": 0.383,
+   "type": "session.created"
+  },
+  {
+   "t": 0.925,
+   "type": "session.updated"
+  },
+  {
+   "t": 93.009,
+   "type": "session.output_transcript.delta"
+  },
+  {
+   "t": 93.673,
+   "type": "session.output_transcript.delta"
+  },
+  {
+   "t": 94.778,
+   "type": "session.output_transcript.delta"
+  },
+  {
+   "t": 94.947,
+   "type": "session.output_transcript.delta"
+  },
+  {
+   "t": 95.173,
+   "type": "session.output_transcript.delta"
+  },
+  {
+   "t": 95.178,
+   "type": "session.output_transcript.delta"
+  },
+  {
+   "t": 95.382,
+   "type": "session.output_transcript.delta"
+  },
+  {
+   "t": 95.647,
+   "type": "session.output_transcript.delta"
+  },
+  {
+   "t": 95.986,
+   "type": "session.output_transcript.delta"
+  },
+  {
+   "t": 95.987,
+   "type": "session.output_transcript.delta"
+  },
+  {
+   "t": 96.162,
+   "type": "session.output_transcript.delta"
+  },
+  {
+   "t": 96.622,
+   "type": "session.output_transcript.delta"
+  },
+  {
+   "t": 96.745,
+   "type": "session.output_transcript.delta"
+  },
+  {
+   "t": 97.221,
+   "type": "session.output_transcript.delta"
+  },
+  {
+   "t": 97.226,
+   "type": "session.output_transcript.delta"
+  },
+  {
+   "t": 97.609,
+   "type": "session.output_transcript.delta"
+  },
+  {
+   "t": 108.636,
+   "type": "session.closed"
+  }
+ ]
+}

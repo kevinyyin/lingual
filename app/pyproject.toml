@@ -1,0 +1,39 @@
+[project]
+name = "asl-app"
+version = "0.1.0"
+description = "Two-Way ASL: sign to speech and speech to sign."
+requires-python = "==3.12.*"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "pydantic>=2.7",
+    "numpy>=1.26",
+    "torch>=2.4",
+    "mediapipe>=0.10.14",
+    "opencv-python>=4.10",
+    "anthropic>=0.40",
+    "websockets>=14.0",
+    "sounddevice>=0.5",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+    "cartesia[websockets]>=4.2.0",
+]
+
+[project.scripts]
+asl-server = "server.main:run"
+
+[dependency-groups]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.24"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["server", "training"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = ["live: needs real API keys"]
+addopts = "-m 'not live'"

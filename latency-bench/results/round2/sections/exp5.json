@@ -1,0 +1,1791 @@
+{
+ "5a": [
+  {
+   "system": "cascade/baseline",
+   "category": "hesitation",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 3276.433,
+   "start_lag_ci": [
+    3131.532,
+    3572.053
+   ],
+   "end_arrival_med": 1763.151,
+   "end_play_med": 3704.6065,
+   "end_play_ci": [
+    3491.031,
+    3949.6595
+   ],
+   "end_play_p90": 3854.4885,
+   "end_play_max": 3949.6595,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.011,
+   "chrf_med": 91.14
+  },
+  {
+   "system": "cascade/baseline",
+   "category": "long",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2537.583,
+   "start_lag_ci": [
+    2407.19,
+    2766.301
+   ],
+   "end_arrival_med": 1482.893,
+   "end_play_med": 11348.703,
+   "end_play_ci": [
+    10918.581,
+    11961.988
+   ],
+   "end_play_p90": 11805.3252,
+   "end_play_max": 11961.988,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.214,
+   "chrf_med": 80.24
+  },
+  {
+   "system": "cascade/baseline",
+   "category": "medium",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2606.733,
+   "start_lag_ci": [
+    2559.577,
+    3067.268
+   ],
+   "end_arrival_med": 972.843,
+   "end_play_med": 3743.166,
+   "end_play_ci": [
+    3337.728,
+    3898.78
+   ],
+   "end_play_p90": 4031.4694,
+   "end_play_max": 4090.899,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.019,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/baseline",
+   "category": "noisy",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2591.659,
+   "start_lag_ci": [
+    2475.14,
+    3074.041
+   ],
+   "end_arrival_med": 978.265,
+   "end_play_med": 3762.137,
+   "end_play_ci": [
+    3425.802,
+    3903.128
+   ],
+   "end_play_p90": 4062.307,
+   "end_play_max": 4244.337,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.055,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/baseline",
+   "category": "sentences",
+   "n_runs": 30,
+   "n_clips": 6,
+   "n_failed": 0,
+   "start_lag_med": 2600.7434999999996,
+   "start_lag_ci": [
+    2563.1887,
+    2846.3345
+   ],
+   "end_arrival_med": 974.9925000000001,
+   "end_play_med": 3752.6515,
+   "end_play_ci": [
+    3440.2005,
+    3857.3509999999997
+   ],
+   "end_play_p90": 4038.1295,
+   "end_play_max": 4244.337,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.11351339476145204
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.0415,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/baseline",
+   "category": "short",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2168.171,
+   "start_lag_ci": [
+    1856.607,
+    2590.531
+   ],
+   "end_arrival_med": 1211.723,
+   "end_play_med": 2810.025,
+   "end_play_ci": [
+    2232.775,
+    2888.799
+   ],
+   "end_play_p90": 2959.6994,
+   "end_play_max": 3075.034,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.146,
+   "chrf_med": 100.0
+  },
+  {
+   "system": "cascade/baseline",
+   "category": "three_turns",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 3629.219,
+   "start_lag_ci": [
+    3535.537,
+    3806.195
+   ],
+   "end_arrival_med": 1393.541,
+   "end_play_med": 4416.1605,
+   "end_play_ci": [
+    3917.4195,
+    4758.715
+   ],
+   "end_play_p90": 4645.3279999999995,
+   "end_play_max": 4758.715,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.743,
+   "chrf_med": 67.26
+  },
+  {
+   "system": "cascade/baseline",
+   "category": "two_utterances",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2180.223,
+   "start_lag_ci": [
+    2034.343,
+    2289.751
+   ],
+   "end_arrival_med": 997.131,
+   "end_play_med": 3117.495,
+   "end_play_ci": [
+    3045.4525000000003,
+    3179.701
+   ],
+   "end_play_p90": 3164.5856,
+   "end_play_max": 3179.701,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.846,
+   "chrf_med": 89.79
+  },
+  {
+   "system": "cascade/single-flush",
+   "category": "hesitation",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 3212.007,
+   "start_lag_ci": [
+    3142.568,
+    3216.462
+   ],
+   "end_arrival_med": 1888.433,
+   "end_play_med": 3458.877,
+   "end_play_ci": [
+    3385.1475,
+    3625.435
+   ],
+   "end_play_p90": 3572.034,
+   "end_play_max": 3625.435,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.942,
+   "chrf_med": 91.14
+  },
+  {
+   "system": "cascade/single-flush",
+   "category": "long",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2565.957,
+   "start_lag_ci": [
+    2439.839,
+    2654.349
+   ],
+   "end_arrival_med": 1416.272,
+   "end_play_med": 9644.421,
+   "end_play_ci": [
+    9226.251,
+    10783.162
+   ],
+   "end_play_p90": 10450.1664,
+   "end_play_max": 10783.162,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.089,
+   "chrf_med": 81.6
+  },
+  {
+   "system": "cascade/single-flush",
+   "category": "medium",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2650.099,
+   "start_lag_ci": [
+    2544.547,
+    3077.379
+   ],
+   "end_arrival_med": 1054.349,
+   "end_play_med": 3633.927,
+   "end_play_ci": [
+    3468.496,
+    4215.159
+   ],
+   "end_play_p90": 4269.3256,
+   "end_play_max": 4337.673,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.982,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/single-flush",
+   "category": "noisy",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2650.044,
+   "start_lag_ci": [
+    2540.931,
+    3086.02
+   ],
+   "end_arrival_med": 974.746,
+   "end_play_med": 3674.203,
+   "end_play_ci": [
+    3340.845,
+    4043.832
+   ],
+   "end_play_p90": 4803.344999999999,
+   "end_play_max": 5799.58,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.996,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/single-flush",
+   "category": "sentences",
+   "n_runs": 30,
+   "n_clips": 6,
+   "n_failed": 0,
+   "start_lag_med": 2650.0715,
+   "start_lag_ci": [
+    2594.575,
+    3009.0855
+   ],
+   "end_arrival_med": 1006.623,
+   "end_play_med": 3654.065,
+   "end_play_ci": [
+    3449.7655,
+    4022.4975
+   ],
+   "end_play_p90": 4279.4565,
+   "end_play_max": 5799.58,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.11351339476145204
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.989,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/single-flush",
+   "category": "short",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2124.574,
+   "start_lag_ci": [
+    1926.36,
+    2625.69
+   ],
+   "end_arrival_med": 1097.751,
+   "end_play_med": 2716.425,
+   "end_play_ci": [
+    2269.457,
+    2882.236
+   ],
+   "end_play_p90": 2923.4346,
+   "end_play_max": 3145.63,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.07,
+   "chrf_med": 100.0
+  },
+  {
+   "system": "cascade/single-flush",
+   "category": "three_turns",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 3613.682,
+   "start_lag_ci": [
+    3570.737,
+    3787.086
+   ],
+   "end_arrival_med": 1382.336,
+   "end_play_med": 4249.916499999999,
+   "end_play_ci": [
+    3526.1805000000004,
+    4460.8195
+   ],
+   "end_play_p90": 4393.8922999999995,
+   "end_play_max": 4460.8195,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.674,
+   "chrf_med": 66.63
+  },
+  {
+   "system": "cascade/single-flush",
+   "category": "two_utterances",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2165.665,
+   "start_lag_ci": [
+    2087.616,
+    2499.73
+   ],
+   "end_arrival_med": 942.523,
+   "end_play_med": 3238.1385,
+   "end_play_ci": [
+    2925.3695,
+    3609.0375
+   ],
+   "end_play_p90": 3480.3718999999996,
+   "end_play_max": 3609.0375,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.845,
+   "chrf_med": 89.79
+  },
+  {
+   "system": "cascade/single-mbd0",
+   "category": "hesitation",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 3200.356,
+   "start_lag_ci": [
+    3058.785,
+    3452.583
+   ],
+   "end_arrival_med": 2056.718,
+   "end_play_med": 7310.794,
+   "end_play_ci": [
+    7047.3715,
+    7788.152
+   ],
+   "end_play_p90": 7664.982599999999,
+   "end_play_max": 7788.152,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.743,
+   "chrf_med": 91.14
+  },
+  {
+   "system": "cascade/single-mbd0",
+   "category": "long",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2538.88,
+   "start_lag_ci": [
+    2390.525,
+    2546.293
+   ],
+   "end_arrival_med": 1612.35,
+   "end_play_med": 42203.409,
+   "end_play_ci": [
+    39423.361,
+    49706.126
+   ],
+   "end_play_p90": 47723.905999999995,
+   "end_play_max": 49706.126,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.939,
+   "chrf_med": 73.5
+  },
+  {
+   "system": "cascade/single-mbd0",
+   "category": "medium",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2628.981,
+   "start_lag_ci": [
+    2462.153,
+    3036.284
+   ],
+   "end_arrival_med": 1231.977,
+   "end_play_med": 10043.872,
+   "end_play_ci": [
+    9613.153,
+    11255.006
+   ],
+   "end_play_p90": 12434.934,
+   "end_play_max": 12596.386,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.741,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/single-mbd0",
+   "category": "noisy",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2678.082,
+   "start_lag_ci": [
+    2527.898,
+    2964.703
+   ],
+   "end_arrival_med": 1177.105,
+   "end_play_med": 9751.56,
+   "end_play_ci": [
+    9371.113,
+    11897.001
+   ],
+   "end_play_p90": 12101.751600000001,
+   "end_play_max": 12325.054,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.747,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/single-mbd0",
+   "category": "sentences",
+   "n_runs": 30,
+   "n_clips": 6,
+   "n_failed": 0,
+   "start_lag_med": 2632.2405,
+   "start_lag_ci": [
+    2537.4719999999998,
+    2958.7595
+   ],
+   "end_arrival_med": 1220.3065000000001,
+   "end_play_med": 9986.1075,
+   "end_play_ci": [
+    9517.799500000001,
+    11058.233499999998
+   ],
+   "end_play_p90": 12330.5466,
+   "end_play_max": 12596.386,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.11351339476145204
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.7440000000000002,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/single-mbd0",
+   "category": "short",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2084.427,
+   "start_lag_ci": [
+    1787.959,
+    2581.984
+   ],
+   "end_arrival_med": 1148.276,
+   "end_play_med": 4954.449,
+   "end_play_ci": [
+    4604.974,
+    5164.143
+   ],
+   "end_play_p90": 6673.187999999999,
+   "end_play_max": 6809.14,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 2.217,
+   "chrf_med": 100.0
+  },
+  {
+   "system": "cascade/single-mbd0",
+   "category": "three_turns",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 3587.466,
+   "start_lag_ci": [
+    3493.06,
+    3744.377
+   ],
+   "end_arrival_med": 1739.906,
+   "end_play_med": 8132.312,
+   "end_play_ci": [
+    7770.31,
+    9779.109499999999
+   ],
+   "end_play_p90": 9578.331699999999,
+   "end_play_max": 9779.109499999999,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.118,
+   "chrf_med": 49.17
+  },
+  {
+   "system": "cascade/single-mbd0",
+   "category": "two_utterances",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2132.887,
+   "start_lag_ci": [
+    2076.211,
+    2184.747
+   ],
+   "end_arrival_med": 1039.187,
+   "end_play_med": 11140.444,
+   "end_play_ci": [
+    10663.3215,
+    11757.9195
+   ],
+   "end_play_p90": 11592.8269,
+   "end_play_max": 11757.9195,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.739,
+   "chrf_med": 85.12
+  },
+  {
+   "system": "cascade/single-mbd200",
+   "category": "hesitation",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 3351.957,
+   "start_lag_ci": [
+    3324.657,
+    3458.321
+   ],
+   "end_arrival_med": 1932.971,
+   "end_play_med": 4158.5795,
+   "end_play_ci": [
+    3977.5209999999997,
+    4254.9169999999995
+   ],
+   "end_play_p90": 4243.2024,
+   "end_play_max": 4254.9169999999995,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.058,
+   "chrf_med": 91.14
+  },
+  {
+   "system": "cascade/single-mbd200",
+   "category": "long",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2726.14,
+   "start_lag_ci": [
+    2648.582,
+    4190.345
+   ],
+   "end_arrival_med": 1710.204,
+   "end_play_med": 10409.048,
+   "end_play_ci": [
+    9322.939,
+    11083.813
+   ],
+   "end_play_p90": 10929.359,
+   "end_play_max": 11083.813,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.131,
+   "chrf_med": 81.83
+  },
+  {
+   "system": "cascade/single-mbd200",
+   "category": "medium",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2848.669,
+   "start_lag_ci": [
+    2742.23,
+    3223.638
+   ],
+   "end_arrival_med": 1137.533,
+   "end_play_med": 4194.51,
+   "end_play_ci": [
+    3220.632,
+    4329.969
+   ],
+   "end_play_p90": 4481.000599999999,
+   "end_play_max": 4611.301,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.039,
+   "chrf_med": 74.02
+  },
+  {
+   "system": "cascade/single-mbd200",
+   "category": "noisy",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2780.269,
+   "start_lag_ci": [
+    2636.945,
+    3253.005
+   ],
+   "end_arrival_med": 1000.427,
+   "end_play_med": 4002.615,
+   "end_play_ci": [
+    3410.302,
+    4401.619
+   ],
+   "end_play_p90": 4494.1194,
+   "end_play_max": 9067.144,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.014,
+   "chrf_med": 74.02
+  },
+  {
+   "system": "cascade/single-mbd200",
+   "category": "sentences",
+   "n_runs": 30,
+   "n_clips": 6,
+   "n_failed": 0,
+   "start_lag_med": 2840.633,
+   "start_lag_ci": [
+    2723.197,
+    3047.0969999999998
+   ],
+   "end_arrival_med": 1037.58,
+   "end_play_med": 4145.773,
+   "end_play_ci": [
+    3644.5285000000003,
+    4272.879
+   ],
+   "end_play_p90": 4505.322999999999,
+   "end_play_max": 9067.144,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.11351339476145204
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.032,
+   "chrf_med": 74.02
+  },
+  {
+   "system": "cascade/single-mbd200",
+   "category": "short",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2223.626,
+   "start_lag_ci": [
+    1726.806,
+    2662.661
+   ],
+   "end_arrival_med": 1079.219,
+   "end_play_med": 2816.152,
+   "end_play_ci": [
+    2094.894,
+    2924.363
+   ],
+   "end_play_p90": 2959.7958,
+   "end_play_max": 2988.453,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.13,
+   "chrf_med": 100.0
+  },
+  {
+   "system": "cascade/single-mbd200",
+   "category": "three_turns",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 3629.277,
+   "start_lag_ci": [
+    3509.805,
+    3731.669
+   ],
+   "end_arrival_med": 1213.828,
+   "end_play_med": 3923.73,
+   "end_play_ci": [
+    3261.5204999999996,
+    3976.5805
+   ],
+   "end_play_p90": 3962.7003,
+   "end_play_max": 3976.5805,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.679,
+   "chrf_med": 64.32
+  },
+  {
+   "system": "cascade/single-mbd200",
+   "category": "two_utterances",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2203.0,
+   "start_lag_ci": [
+    2074.806,
+    2334.579
+   ],
+   "end_arrival_med": 1003.627,
+   "end_play_med": 3139.8639999999996,
+   "end_play_ci": [
+    2969.6405,
+    3166.194
+   ],
+   "end_play_p90": 3163.2626,
+   "end_play_max": 3166.194,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.827,
+   "chrf_med": 89.79
+  }
+ ],
+ "5a_paired": {
+  "cascade/baseline": {
+   "per_clip_ms": {
+    "es_en_long_1": -292.6,
+    "es_en_medium_1": 9.0,
+    "es_en_medium_2": -97.5,
+    "es_en_medium_3": -28.0,
+    "es_en_noisy_1": 61.0,
+    "es_en_noisy_2": -142.4,
+    "es_en_noisy_3": 155.6,
+    "es_en_short_1": 16.2,
+    "es_en_short_2": -192.0,
+    "es_en_short_3": -84.8
+   },
+   "median_ms": -56.4,
+   "n_clips": 10,
+   "n_faster": 6
+  },
+  "cascade/single-flush": {
+   "per_clip_ms": {
+    "es_en_long_1": -1996.9,
+    "es_en_medium_1": 241.7,
+    "es_en_medium_2": -15.8,
+    "es_en_medium_3": -137.2,
+    "es_en_noisy_1": 110.0,
+    "es_en_noisy_2": -309.1,
+    "es_en_noisy_3": 67.7,
+    "es_en_short_1": -145.1,
+    "es_en_short_2": -149.3,
+    "es_en_short_3": -20.3
+   },
+   "median_ms": -78.75,
+   "n_clips": 10,
+   "n_faster": 7
+  },
+  "cascade/single-mbd0": {
+   "per_clip_ms": {
+    "es_en_long_1": 30562.1,
+    "es_en_medium_1": 8357.8,
+    "es_en_medium_2": 5899.3,
+    "es_en_medium_3": 6272.7,
+    "es_en_noisy_1": 7947.5,
+    "es_en_noisy_2": 6004.7,
+    "es_en_noisy_3": 5764.6,
+    "es_en_short_1": 2184.0,
+    "es_en_short_2": 2378.6,
+    "es_en_short_3": 3578.5
+   },
+   "median_ms": 5952.0,
+   "n_clips": 10,
+   "n_faster": 0
+  },
+  "cascade/single-mbd200": {
+   "per_clip_ms": {
+    "es_en_long_1": -1232.2,
+    "es_en_medium_1": 427.8,
+    "es_en_medium_2": -213.7,
+    "es_en_medium_3": 492.1,
+    "es_en_noisy_1": 429.3,
+    "es_en_noisy_2": -227.7,
+    "es_en_noisy_3": 393.0,
+    "es_en_short_1": 66.6,
+    "es_en_short_2": -295.3,
+    "es_en_short_3": -39.5
+   },
+   "median_ms": 13.549999999999997,
+   "n_clips": 10,
+   "n_faster": 5
+  }
+ },
+ "5b": [
+  {
+   "system": "cascade/single-flush",
+   "category": "hesitation",
+   "n_runs": 4,
+   "n_clips": 1,
+   "n_failed": 1,
+   "start_lag_med": 3254.6835,
+   "start_lag_ci": [
+    3177.01,
+    3518.622
+   ],
+   "end_arrival_med": 1874.295,
+   "end_play_med": 3538.05975,
+   "end_play_ci": [
+    3427.523,
+    3772.1805
+   ],
+   "end_play_p90": 3702.7443,
+   "end_play_max": 3772.1805,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.4898908403969213
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.9564999999999999,
+   "chrf_med": 91.14
+  },
+  {
+   "system": "cascade/single-flush",
+   "category": "long",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2545.257,
+   "start_lag_ci": [
+    2521.482,
+    2678.894
+   ],
+   "end_arrival_med": 1454.931,
+   "end_play_med": 10222.295,
+   "end_play_ci": [
+    8872.217,
+    12316.499
+   ],
+   "end_play_p90": 11533.3318,
+   "end_play_max": 12316.499,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.129,
+   "chrf_med": 79.77
+  },
+  {
+   "system": "cascade/single-flush",
+   "category": "medium",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2632.878,
+   "start_lag_ci": [
+    2587.057,
+    3031.727
+   ],
+   "end_arrival_med": 1052.636,
+   "end_play_med": 3643.893,
+   "end_play_ci": [
+    3419.316,
+    4009.345
+   ],
+   "end_play_p90": 4054.4344,
+   "end_play_max": 4176.043,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.994,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/single-flush",
+   "category": "noisy",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2641.339,
+   "start_lag_ci": [
+    2574.811,
+    3168.371
+   ],
+   "end_arrival_med": 929.904,
+   "end_play_med": 3586.377,
+   "end_play_ci": [
+    3296.378,
+    3969.026
+   ],
+   "end_play_p90": 4020.3364,
+   "end_play_max": 4045.069,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.998,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/single-flush",
+   "category": "sentences",
+   "n_runs": 30,
+   "n_clips": 6,
+   "n_failed": 0,
+   "start_lag_med": 2640.4970000000003,
+   "start_lag_ci": [
+    2603.5640000000003,
+    2828.667
+   ],
+   "end_arrival_med": 1024.853,
+   "end_play_med": 3593.5885,
+   "end_play_ci": [
+    3422.0,
+    3739.951
+   ],
+   "end_play_p90": 4028.3713000000002,
+   "end_play_max": 4176.043,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.11351339476145204
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.996,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/single-flush",
+   "category": "short",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2145.095,
+   "start_lag_ci": [
+    1836.346,
+    2662.8
+   ],
+   "end_arrival_med": 1135.174,
+   "end_play_med": 2857.78,
+   "end_play_ci": [
+    2165.256,
+    2949.349
+   ],
+   "end_play_p90": 2984.9658,
+   "end_play_max": 3014.475,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.129,
+   "chrf_med": 100.0
+  },
+  {
+   "system": "cascade/single-flush",
+   "category": "three_turns",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 3697.996,
+   "start_lag_ci": [
+    3691.567,
+    3734.542
+   ],
+   "end_arrival_med": 1405.803,
+   "end_play_med": 4080.009,
+   "end_play_ci": [
+    4025.5945,
+    4434.0785
+   ],
+   "end_play_p90": 4350.860699999999,
+   "end_play_max": 4434.0785,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.69,
+   "chrf_med": 67.26
+  },
+  {
+   "system": "cascade/single-flush",
+   "category": "two_utterances",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2193.614,
+   "start_lag_ci": [
+    2103.474,
+    2707.059
+   ],
+   "end_arrival_med": 1028.417,
+   "end_play_med": 3093.3875,
+   "end_play_ci": [
+    2954.768,
+    3561.9094999999998
+   ],
+   "end_play_p90": 3385.5690999999997,
+   "end_play_max": 3561.9094999999998,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.829,
+   "chrf_med": 89.79
+  },
+  {
+   "system": "cascade/single-flush+concise",
+   "category": "hesitation",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 3384.029,
+   "start_lag_ci": [
+    3341.856,
+    3471.584
+   ],
+   "end_arrival_med": 1850.88,
+   "end_play_med": 3693.9285,
+   "end_play_ci": [
+    3460.3885,
+    4121.017
+   ],
+   "end_play_p90": 3967.2616,
+   "end_play_max": 4121.017,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.948,
+   "chrf_med": 85.51
+  },
+  {
+   "system": "cascade/single-flush+concise",
+   "category": "long",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2530.071,
+   "start_lag_ci": [
+    2487.181,
+    2584.003
+   ],
+   "end_arrival_med": 1465.645,
+   "end_play_med": 9120.169,
+   "end_play_ci": [
+    8349.187,
+    10457.719
+   ],
+   "end_play_p90": 10134.297799999998,
+   "end_play_max": 10457.719,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.059,
+   "chrf_med": 79.89
+  },
+  {
+   "system": "cascade/single-flush+concise",
+   "category": "medium",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2568.731,
+   "start_lag_ci": [
+    2481.378,
+    3096.987
+   ],
+   "end_arrival_med": 1020.96,
+   "end_play_med": 3391.309,
+   "end_play_ci": [
+    3183.009,
+    3624.041
+   ],
+   "end_play_p90": 3732.7095999999997,
+   "end_play_max": 4467.627,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.936,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/single-flush+concise",
+   "category": "noisy",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2584.342,
+   "start_lag_ci": [
+    2556.494,
+    3102.101
+   ],
+   "end_arrival_med": 1017.983,
+   "end_play_med": 3531.81,
+   "end_play_ci": [
+    3332.217,
+    3884.351
+   ],
+   "end_play_p90": 4676.5232,
+   "end_play_max": 4723.485,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.91,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/single-flush+concise",
+   "category": "sentences",
+   "n_runs": 30,
+   "n_clips": 6,
+   "n_failed": 0,
+   "start_lag_med": 2582.556,
+   "start_lag_ci": [
+    2520.947,
+    2908.1130000000003
+   ],
+   "end_arrival_med": 1019.4715,
+   "end_play_med": 3499.6620000000003,
+   "end_play_ci": [
+    3328.0744999999997,
+    3630.114
+   ],
+   "end_play_p90": 4483.4516,
+   "end_play_max": 4723.485,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.11351339476145204
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.9345000000000001,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/single-flush+concise",
+   "category": "short",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2180.639,
+   "start_lag_ci": [
+    1880.021,
+    2978.783
+   ],
+   "end_arrival_med": 1368.323,
+   "end_play_med": 2924.026,
+   "end_play_ci": [
+    2247.907,
+    3229.447
+   ],
+   "end_play_p90": 3250.7802,
+   "end_play_max": 3589.172,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.126,
+   "chrf_med": 100.0
+  },
+  {
+   "system": "cascade/single-flush+concise",
+   "category": "three_turns",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 3719.66,
+   "start_lag_ci": [
+    3638.647,
+    4042.66
+   ],
+   "end_arrival_med": 1444.235,
+   "end_play_med": 4613.880999999999,
+   "end_play_ci": [
+    4448.56,
+    4857.934
+   ],
+   "end_play_p90": 4830.9412,
+   "end_play_max": 4857.934,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.75,
+   "chrf_med": 63.99
+  },
+  {
+   "system": "cascade/single-flush+concise",
+   "category": "two_utterances",
+   "n_runs": 4,
+   "n_clips": 1,
+   "n_failed": 1,
+   "start_lag_med": 2066.3065,
+   "start_lag_ci": [
+    1955.488,
+    2115.32
+   ],
+   "end_arrival_med": 1067.251,
+   "end_play_med": 2898.70225,
+   "end_play_ci": [
+    2751.8595,
+    2938.294
+   ],
+   "end_play_p90": 2929.0393,
+   "end_play_max": 2938.294,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.4898908403969213
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.7985,
+   "chrf_med": 89.14
+  },
+  {
+   "system": "cascade/single-flush+concise+adaptive",
+   "category": "hesitation",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 3370.71,
+   "start_lag_ci": [
+    3361.291,
+    3444.983
+   ],
+   "end_arrival_med": 1834.565,
+   "end_play_med": 3633.8245,
+   "end_play_ci": [
+    3630.133,
+    3908.881
+   ],
+   "end_play_p90": 3859.845,
+   "end_play_max": 3908.881,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.964,
+   "chrf_med": 91.14
+  },
+  {
+   "system": "cascade/single-flush+concise+adaptive",
+   "category": "long",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2544.411,
+   "start_lag_ci": [
+    2409.037,
+    2811.896
+   ],
+   "end_arrival_med": 1499.503,
+   "end_play_med": 9546.158,
+   "end_play_ci": [
+    8394.843,
+    10928.752
+   ],
+   "end_play_p90": 10401.2484,
+   "end_play_max": 10928.752,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.088,
+   "chrf_med": 80.72
+  },
+  {
+   "system": "cascade/single-flush+concise+adaptive",
+   "category": "medium",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2511.887,
+   "start_lag_ci": [
+    2434.397,
+    3072.474
+   ],
+   "end_arrival_med": 1085.634,
+   "end_play_med": 3801.269,
+   "end_play_ci": [
+    3343.89,
+    4329.842
+   ],
+   "end_play_p90": 4463.406,
+   "end_play_max": 4773.222,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.006,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/single-flush+concise+adaptive",
+   "category": "noisy",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2637.042,
+   "start_lag_ci": [
+    2537.459,
+    2996.88
+   ],
+   "end_arrival_med": 921.228,
+   "end_play_med": 3453.898,
+   "end_play_ci": [
+    3256.286,
+    3637.385
+   ],
+   "end_play_p90": 4076.7064,
+   "end_play_max": 4581.532,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.944,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/single-flush+concise+adaptive",
+   "category": "sentences",
+   "n_runs": 30,
+   "n_clips": 6,
+   "n_failed": 0,
+   "start_lag_med": 2547.0029999999997,
+   "start_lag_ci": [
+    2515.463,
+    2883.31
+   ],
+   "end_arrival_med": 1013.015,
+   "end_play_med": 3551.8720000000003,
+   "end_play_ci": [
+    3332.466,
+    3736.0125
+   ],
+   "end_play_p90": 4439.336,
+   "end_play_max": 4773.222,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.11351339476145204
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.963,
+   "chrf_med": 80.52
+  },
+  {
+   "system": "cascade/single-flush+concise+adaptive",
+   "category": "short",
+   "n_runs": 15,
+   "n_clips": 3,
+   "n_failed": 0,
+   "start_lag_med": 2228.477,
+   "start_lag_ci": [
+    2043.601,
+    3008.006
+   ],
+   "end_arrival_med": 1315.719,
+   "end_play_med": 2882.231,
+   "end_play_ci": [
+    2439.846,
+    3195.065
+   ],
+   "end_play_p90": 3386.5676,
+   "end_play_max": 3525.115,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.20388330359648707
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 1.15,
+   "chrf_med": 100.0
+  },
+  {
+   "system": "cascade/single-flush+concise+adaptive",
+   "category": "three_turns",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 3840.467,
+   "start_lag_ci": [
+    3712.488,
+    4040.728
+   ],
+   "end_arrival_med": 1362.573,
+   "end_play_med": 4649.85,
+   "end_play_ci": [
+    3943.307,
+    4971.296
+   ],
+   "end_play_p90": 4944.3332,
+   "end_play_max": 4971.296,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.736,
+   "chrf_med": 66.18
+  },
+  {
+   "system": "cascade/single-flush+concise+adaptive",
+   "category": "two_utterances",
+   "n_runs": 5,
+   "n_clips": 1,
+   "n_failed": 0,
+   "start_lag_med": 2144.052,
+   "start_lag_ci": [
+    2028.888,
+    2474.876
+   ],
+   "end_arrival_med": 967.394,
+   "end_play_med": 3097.7870000000003,
+   "end_play_ci": [
+    2853.621,
+    3283.0555
+   ],
+   "end_play_p90": 3229.6073,
+   "end_play_max": 3283.0555,
+   "stalls": 0,
+   "stall_rate": 0.0,
+   "stall_ci": [
+    0.0,
+    0.43448246865939283
+   ],
+   "held_until_flush": 0,
+   "ratio_span_med": 0.796,
+   "chrf_med": 93.87
+  }
+ ],
+ "5b_paired": {
+  "cascade/single-flush": {
+   "per_clip_ms": {
+    "es_en_long_1": -1419.0,
+    "es_en_medium_1": 2.2,
+    "es_en_medium_2": -173.1,
+    "es_en_medium_3": -127.3,
+    "es_en_noisy_1": 38.8,
+    "es_en_noisy_2": -132.0,
+    "es_en_noisy_3": -20.1,
+    "es_en_short_1": -3.8,
+    "es_en_short_2": -297.6,
+    "es_en_short_3": 13.6
+   },
+   "median_ms": -73.7,
+   "n_clips": 10,
+   "n_faster": 7
+  },
+  "cascade/single-flush+concise": {
+   "per_clip_ms": {
+    "es_en_long_1": -2521.1,
+    "es_en_medium_1": -630.8,
+    "es_en_medium_2": -283.7,
+    "es_en_medium_3": -216.7,
+    "es_en_noisy_1": 653.6,
+    "es_en_noisy_2": -226.4,
+    "es_en_noisy_3": 62.3,
+    "es_en_short_1": -71.2,
+    "es_en_short_2": -173.4,
+    "es_en_short_3": 324.1
+   },
+   "median_ms": -195.05,
+   "n_clips": 10,
+   "n_faster": 7
+  },
+  "cascade/single-flush+concise+adaptive": {
+   "per_clip_ms": {
+    "es_en_long_1": -2095.1,
+    "es_en_medium_1": 412.4,
+    "es_en_medium_2": -161.0,
+    "es_en_medium_3": 129.7,
+    "es_en_noisy_1": -518.4,
+    "es_en_noisy_2": -138.0,
+    "es_en_noisy_3": -25.2,
+    "es_en_short_1": -50.4,
+    "es_en_short_2": -52.0,
+    "es_en_short_3": 327.9
+   },
+   "median_ms": -51.2,
+   "n_clips": 10,
+   "n_faster": 7
+  }
+ },
+ "long_pass": {
+  "cascade/baseline": {
+   "end": 11348.703,
+   "ratio": 1.214,
+   "chrf": 80.24,
+   "pass": false
+  },
+  "cascade/single-flush": {
+   "end": 9797.547,
+   "ratio": 1.0925,
+   "chrf": 81.0,
+   "pass": false
+  },
+  "cascade/single-flush+concise": {
+   "end": 9120.169,
+   "ratio": 1.059,
+   "chrf": 79.89,
+   "pass": false
+  },
+  "cascade/single-flush+concise+adaptive": {
+   "end": 9546.158,
+   "ratio": 1.088,
+   "chrf": 80.72,
+   "pass": false
+  },
+  "cascade/single-mbd0": {
+   "end": 42203.409,
+   "ratio": 1.939,
+   "chrf": 73.5,
+   "pass": false
+  },
+  "cascade/single-mbd200": {
+   "end": 10409.048,
+   "ratio": 1.131,
+   "chrf": 81.83,
+   "pass": false
+  }
+ }
+}

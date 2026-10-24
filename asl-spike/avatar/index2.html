@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avatar prototype round 2</title>
+<style>
+  :root { --bg: #eef1f4; --fg: #15191e; --mut: #5a636e; --acc: #2457a6; --line: #cfd6de; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); font: 14px/1.45 system-ui, sans-serif; }
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 12px; padding: 12px; height: calc(100vh - 24px); box-sizing: border-box; }
+  body.render main { display: block; padding: 0; height: 100%; }
+  body.render aside, body.render #cap { display: none; }
+  #view { position: relative; background: #e9edf1; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; height: 100%; }
+  body.render #view { border: 0; border-radius: 0; }
+  canvas { display: block; width: 100%; height: 100%; }
+  #cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 8px 12px; background: rgba(20,25,30,.72); color: #fff; font-size: 16px; min-height: 22px; }
+  aside { display: grid; gap: 8px; align-content: start; overflow: auto; }
+  textarea { width: 100%; min-height: 120px; font: 12px ui-monospace, monospace; box-sizing: border-box; }
+  pre { margin: 0; white-space: pre-wrap; font: 12px ui-monospace, monospace; background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 8px; }
+  label { display: block; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/",
+  "@pixiv/three-vrm": "https://cdn.jsdelivr.net/npm/@pixiv/three-vrm@3.1.0/lib/three-vrm.module.min.js",
+  "kalidokit": "https://cdn.jsdelivr.net/npm/kalidokit@1.1.5/dist/kalidokit.es.js"
+} }
+</script>
+</head>
+<body>
+<main>
+  <div id="view"><canvas id="c"></canvas><div id="cap"></div></div>
+  <aside>
+    <div style="color:var(--mut)">Pre-event research spike, round 2; not product code. Lexicon from ASL Citizen (local research use only).</div>
+    <label><input type="checkbox" id="trim" checked> trim + direct transitions (V1)</label>
+    <label><input type="checkbox" id="snap" checked> handshape snapping (V2)</label>
+    <label><input type="checkbox" id="wrist" checked> wrist rotation + smoothing (V2)</label>
+    <label>speed <input id="speed" type="number" value="1.3" min="0.5" max="2" step="0.1" style="width:60px"></label>
+    <textarea id="json">{"signs":[{"gloss":"MILK","nmm":{"brows":"raise","headshake":false}},{"gloss":"YOU","nmm":{"brows":"raise","headshake":false}},{"gloss":"WANT","nmm":{"brows":"raise","headshake":false}}]}</textarea>
+    <button id="play">Play</button>
+    <pre id="log"></pre>
+  </aside>
+</main>
+<script type="module">
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { VRMLoaderPlugin, VRMUtils } from "@pixiv/three-vrm";
+import * as Kalidokit from "kalidokit";
+
+const Q = new URLSearchParams(location.search);
+const RENDER = Q.has("render");
+if (RENDER) document.body.classList.add("render");
+const log = (...a) => { document.getElementById("log").textContent += a.join(" ") + "\n"; console.log(...a); };
+const canvas = document.getElementById("c");
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xe9edf1);
+const camera = new THREE.PerspectiveCamera(30, 16 / 9, 0.1, 20);
+// upper-body webcam framing (head to waist), similar to ASL Citizen
+camera.position.set(0, 1.18, 1.75);
+camera.lookAt(0, 1.18, 0);
+if (RENDER && !Q.has("face") && !Q.has("handcam")) { camera.position.set(0, 1.3, 1.45); camera.lookAt(0, 1.25, 0); }  // webcam-like framing: head to waist fills the frame
+if (Q.has("face")) { camera.position.set(0, 1.42, 0.55); camera.lookAt(0, 1.42, 0); }
+if (Q.has("handcam")) { camera.position.set(-0.12, 1.25, 0.75); camera.lookAt(-0.12, 1.25, 0); }
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8899aa, 1.6));
+const dl = new THREE.DirectionalLight(0xffffff, 1.3); dl.position.set(0.4, 2, 2); scene.add(dl);
+function resize() {
+  const r = canvas.parentElement.getBoundingClientRect();
+  renderer.setSize(Math.round(r.width), Math.round(r.height), false);
+  camera.aspect = r.width / r.height; camera.updateProjectionMatrix();
+}
+window.addEventListener("resize", resize); resize();
+
+const loader = new GLTFLoader();
+loader.register(p => new VRMLoaderPlugin(p));
+const MODEL = Q.get("model") || "model.vrm";
+const vrm = (await loader.loadAsync(MODEL)).userData.vrm;
+VRMUtils.rotateVRM0(vrm);
+scene.add(vrm.scene);
+const bone = n => vrm.humanoid.getNormalizedBoneNode(n);
+// face morphs (direct, VRoid naming) and hair mesh
+const MORPH = {};
+let faceMesh = null, hairMats = [];
+vrm.scene.traverse(o => {
+  if (o.isMesh && o.morphTargetDictionary) {
+    for (const [k, i] of Object.entries(o.morphTargetDictionary)) { const s = k.split(".").pop(); if (s.startsWith("Fcl_")) { faceMesh = o; MORPH[s] = i; } }
+  }
+});
+function setMorph(name, w) { if (faceMesh && name in MORPH) faceMesh.morphTargetInfluences[MORPH[name]] = w; }
+
+// ---------- V3: shorten the bangs - remove hair triangles in front of the forehead (bind pose), once at load
+const BANGS = !Q.has("nobangsfix");
+const BANG_EYE = +(Q.get("bangeye") || 0.58);   // remove down to this fraction of the face-box height (eye level)
+const BANG_Z = +(Q.get("bangz") || 0.07);       // triangles whose centroid is within this depth of the face front
+const BANG_X = +(Q.get("bangx") || 0.75);       // ... and within this fraction of the face half-width
+const BANG_TOP = +(Q.get("bangtop") || 0.72);  // keep hair above this fraction of the face-box height (short fringe)
+window.bangsRemoved = 0;
+function updateClip() {}
+{
+  vrm.scene.updateMatrixWorld(true);
+  const box = new THREE.Box3();
+  vrm.scene.traverse(o => { if (o.isMesh && (/^Face/.test(o.name) || /^Face/.test(o.parent?.name || ""))) box.expandByObject(o); });
+  window.faceBox = { y0: box.min.y, y1: box.max.y, z1: box.max.z, x0: box.min.x, x1: box.max.x };
+  const yLow = box.min.y + BANG_EYE * (box.max.y - box.min.y), zMin = box.max.z - BANG_Z;
+  const cx = (box.min.x + box.max.x) / 2, hw = (box.max.x - box.min.x) / 2 * BANG_X;
+  if (BANGS) vrm.scene.traverse(o => {
+    if (!(o.isMesh && /hair/i.test(o.name) && o.geometry?.index)) return;
+    const g = o.geometry, pos = g.attributes.position, idx = g.index.array, keep = [];
+    const v = new THREE.Vector3(), c = new THREE.Vector3();
+    for (let i = 0; i < idx.length; i += 3) {
+      c.set(0, 0, 0);
+      for (let k = 0; k < 3; k++) { v.fromBufferAttribute(pos, idx[i + k]).applyMatrix4(o.matrixWorld); c.add(v); }
+      c.multiplyScalar(1 / 3);
+      const inFront = c.z > zMin && c.y > yLow && c.y < box.min.y + BANG_TOP * (box.max.y - box.min.y) && Math.abs(c.x - cx) < hw;
+      if (inFront) window.bangsRemoved++; else keep.push(idx[i], idx[i + 1], idx[i + 2]);
+    }
+    g.setIndex(keep);
+  });
+  log("face box", JSON.stringify(window.faceBox), "bang triangles removed", window.bangsRemoved);
+}
+
+// ---------- data
+const DATA = await (await fetch("signs2.json")).json();
+const LEX = DATA.signs, META = DATA.meta;
+log("lexicon", Object.keys(LEX).length, "signs; handshapes", Object.keys(META.handshapes).length);
+
+// ---------- helpers
+const V3 = a => new THREE.Vector3(a[0], -a[1], -a[2]);
+const MIRROR_PAIRS = [[1, 4], [2, 5], [3, 6], [7, 8], [9, 10], [11, 12], [13, 14], [15, 16], [17, 18], [19, 20], [21, 22], [23, 24], [25, 26], [27, 28], [29, 30], [31, 32]];
+function mirrorFrame(fr) {
+  const m = a => a && a.map(p => [-p[0], ...p.slice(1)]);
+  const swap = a => { if (!a) return a; const b = a.map(p => p.slice()); for (const [i, j] of MIRROR_PAIRS) { b[i] = a[j]; b[j] = a[i]; } return b; };
+  return { pw: m(swap(fr.pw)), p2: m(swap(fr.p2)), lh: m(fr.rh), rh: m(fr.lh) };
+}
+class OneEuro {  // per-scalar One-Euro filter
+  constructor(fps, minCut = 1.2, beta = 0.4, dCut = 1.0) { this.fps = fps; this.minCut = minCut; this.beta = beta; this.dCut = dCut; this.x = null; this.dx = 0; }
+  a(c) { const te = 1 / this.fps; const tau = 1 / (2 * Math.PI * c); return 1 / (1 + tau / te); }
+  f(v) { if (this.x === null) { this.x = v; return v; } const d = (v - this.x) * this.fps; this.dx += this.a(this.dCut) * (d - this.dx);
+    const c = this.minCut + this.beta * Math.abs(this.dx); this.x += this.a(c) * (v - this.x); return this.x; }
+}
+function smoothFrames(frames, fps) {
+  const keys = { pw: [11, 12, 13, 14, 15, 16], lh: [...Array(21).keys()], rh: [...Array(21).keys()] };
+  const F = {};
+  return frames.map(fr => {
+    const o = { ...fr };
+    for (const [k, idx] of Object.entries(keys)) {
+      if (!fr[k]) continue;
+      o[k] = fr[k].map(p => p.slice());
+      for (const i of idx) for (let d = 0; d < 3; d++) {
+        const key = k + i + "_" + d; F[key] ??= new OneEuro(fps);
+        o[k][i][d] = F[key].f(fr[k][i][d]);
+      }
+    }
+    return o;
+  });
+}
+const Qn = () => new THREE.Quaternion();
+const e = new THREE.Euler();
+const FLIP = !Q.has("noflip");
+function eq(r, s = 1) { e.set((FLIP ? -r.x : r.x) * s, r.y * s, (FLIP ? -r.z : r.z) * s, "XYZ"); return Qn().setFromEuler(e); }
+
+// arms: direct vector alignment (round 1), optional palm-orientation wrist
+function alignArm(out, side, sh, el, wr, hand, wristMode) {
+  const rest = new THREE.Vector3(side === "left" ? 1 : -1, 0, 0);
+  const d1 = V3(el).sub(V3(sh)).normalize(), d2 = V3(wr).sub(V3(el)).normalize();
+  const Wu = Qn().setFromUnitVectors(rest, d1), Wl = Qn().setFromUnitVectors(rest, d2);
+  out[side + "UpperArm"] = Wu;
+  out[side + "LowerArm"] = Wu.clone().invert().multiply(Wl);
+  if (!hand) return;
+  let Wh;
+  if (wristMode) {
+    // palm orientation from wrist (0), index MCP (5), pinky MCP (17), middle MCP (9)
+    const f = V3(hand[9]).sub(V3(hand[0])).normalize();
+    let s = V3(hand[5]).sub(V3(hand[17]));
+    s.sub(f.clone().multiplyScalar(s.dot(f))).normalize();
+    const n = new THREE.Vector3().crossVectors(f, s);
+    const f0 = rest.clone(), s0 = new THREE.Vector3(0, 0, 1), n0 = new THREE.Vector3().crossVectors(f0, s0);
+    const Mt = new THREE.Matrix4().makeBasis(f, s, n), M0 = new THREE.Matrix4().makeBasis(f0, s0, n0);
+    Wh = Qn().setFromRotationMatrix(Mt.multiply(M0.transpose()));
+  } else {
+    const d3 = V3(hand[9]).sub(V3(hand[0])).normalize();
+    Wh = Qn().setFromUnitVectors(rest, d3);
+  }
+  out[side + "Hand"] = Wl.clone().invert().multiply(Wh);
+}
+
+// fingers from a canonical handshape (V2); angles in degrees, baseline-corrected so a flat hand is ~0
+const FINGERS = ["Index", "Middle", "Ring", "Little"], FK = { Index: "index", Middle: "middle", Ring: "ring", Little: "pinky" };
+const BASE = (() => {  // per-joint baseline: median over flat handshapes in the library
+  const flat = ["5", "open_b", "4", "closed_b"].map(h => META.handshapes[h]).filter(Boolean);
+  const out = {};
+  for (const k of Object.keys(flat[0])) { const v = flat.map(f => f[k]).sort((a, b) => a - b); out[k] = v[Math.floor(v.length / 2)]; }
+  return out;
+})();
+const RELAXED = Object.fromEntries(Object.keys(BASE).map(k => [k, BASE[k] + (k.includes("spread") ? 0 : 18)]));
+const TH = +(Q.get("thumbsign") || 1);
+const FLEX_GAIN = +(Q.get("flexgain") || 1.3);  // image landmarks underestimate flexion
+function fingerRots(out, side, A, hsName) {
+  const s = side === "right" ? 1 : -1, D = Math.PI / 180;
+  const flex = k => Math.min(115 * D, FLEX_GAIN * Math.max(0, (A[k] ?? 0) - (BASE[k] ?? 0)) * D);
+  const spr = k => Math.max(0, (A[k] ?? 0) - (BASE[k] ?? 0)) * D;
+  const spreadOf = { Index: spr("spread_im") * 0.5, Middle: 0, Ring: -spr("spread_mr") * 0.5, Little: -(spr("spread_mr") * 0.5 + spr("spread_rp")) };
+  for (const F of FINGERS) {
+    const f = FK[F];
+    out[side + F + "Proximal"] = Qn().setFromEuler(new THREE.Euler(0, s * spreadOf[F], s * flex(f + "_mcp"), "YZX"));
+    out[side + F + "Intermediate"] = Qn().setFromEuler(new THREE.Euler(0, 0, s * flex(f + "_pip")));
+    out[side + F + "Distal"] = Qn().setFromEuler(new THREE.Euler(0, 0, s * flex(f + "_dip")));
+  }
+  // thumb (axes found by a render sweep): metacarpal about -y folds it across the palm; proximal/distal about -y curl it.
+  // Fold amount from ASL-LEX ThumbPosition of the handshape (Closed -> folded), refined by the data's thumb flexion.
+  const closed = (META.thumb?.[hsName] || "Open") === "Closed";
+  const tf = Math.min(1, FLEX_GAIN * Math.max(0, (A.thumb_mcp ?? 0) + (A.thumb_ip ?? 0) - 20) / 60);
+  out[side + "ThumbMetacarpal"] = Qn().setFromEuler(new THREE.Euler(0, -s * (closed ? 0.85 : 0.15), 0));
+  out[side + "ThumbProximal"] = Qn().setFromEuler(new THREE.Euler(0, -s * (closed ? 0.45 + 0.3 * tf : 0.15 * tf), 0));
+  out[side + "ThumbDistal"] = Qn().setFromEuler(new THREE.Euler(0, -s * (closed ? 0.35 + 0.3 * tf : 0.2 * tf), 0));
+}
+function lerpAngles(a, b, t) { const o = {}; for (const k of Object.keys(a)) o[k] = a[k] + ((b[k] ?? a[k]) - a[k]) * t; return o; }
+
+// per-sign handshapes (ASL-LEX rules)
+function signHands(L, gloss) {
+  const H = META.handshapes;
+  const dom = H[L.hs_dom] || RELAXED;
+  const domName = L.hs_dom, ndName = L.sign_type === "AsymmetricalDifferentHandshape" ? L.hs_nd : (L.sign_type === "OneHanded" ? null : L.hs_dom);
+  const end = L.flex_change ? (META.end_shapes[gloss] || dom) : null;
+  let nd;
+  switch (L.sign_type) {
+    case "OneHanded": nd = RELAXED; break;
+    case "SymmetricalOrAlternating": case "AsymmetricalSameHandshape": nd = dom; break;
+    case "AsymmetricalDifferentHandshape": nd = H[L.hs_nd] || RELAXED; break;
+    default: nd = (L.hs_nd && H[L.hs_nd]) || RELAXED;
+  }
+  return { dom, end, nd, domName, ndName };
+}
+
+function solveFrame(fr, cfg, hands, t01) {
+  const out = {};
+  if (fr.pw) {
+    alignArm(out, "left", fr.pw[11], fr.pw[13], fr.pw[15], fr.lh, cfg.wrist);
+    alignArm(out, "right", fr.pw[12], fr.pw[14], fr.pw[16], fr.rh, cfg.wrist);
+  }
+  if (cfg.snap) {
+    const domA = hands.end ? lerpAngles(hands.dom, hands.end, t01) : hands.dom;
+    fingerRots(out, "right", domA, hands.domName);   // avatar right = dominant (data mirrored when needed)
+    fingerRots(out, "left", hands.nd, hands.ndName);
+  } else {
+    for (const [key, side] of [["lh", "Left"], ["rh", "Right"]]) {
+      const lm = fr[key]; if (!lm) continue;
+      const H = Kalidokit.Hand.solve(lm.map(([x, y, z]) => ({ x, y, z })), side);
+      if (!H) continue;
+      const t = side.toLowerCase();
+      for (const F of ["Thumb", "Index", "Middle", "Ring", "Little"]) {
+        const ks = ["Proximal", "Intermediate", "Distal"], vs = F === "Thumb" ? ["Metacarpal", "Proximal", "Distal"] : ks;
+        ks.forEach((k, i) => { const r = H[side + F + k]; if (r) out[t + F + vs[i]] = eq(r); });
+      }
+    }
+  }
+  return out;
+}
+
+const REST = (() => { const o = {}; o.leftUpperArm = Qn().setFromEuler(new THREE.Euler(0, 0, -1.2)); o.rightUpperArm = Qn().setFromEuler(new THREE.Euler(0, 0, 1.2)); return o; })();
+const minjerk = t => 10 * t ** 3 - 15 * t ** 4 + 6 * t ** 5;
+function blendBones(a, b, s) {
+  const o = {};
+  for (const n of new Set([...Object.keys(a), ...Object.keys(b)])) { const qa = a[n] || b[n], qb = b[n] || a[n]; o[n] = qa.clone().slerp(qb, s); }
+  return o;
+}
+
+// timeline: [{t (ms), bones, gloss, nmm}]
+function buildTimeline(signs, cfg) {
+  const tl = []; let t = 0, prev = null; const missing = [];
+  for (const sg of signs) {
+    const L = LEX[sg.gloss];
+    if (!L) { missing.push(sg.gloss); continue; }
+    const dt = 1000 / (L.fps || 30) / cfg.speed;
+    let frames = L.frames;
+    if (L.dom_side_data === "left") frames = frames.map(mirrorFrame);
+    const idx = cfg.trim ? L.keep : frames.map((_, i) => i);
+    let seq = idx.map(i => frames[i]).filter(f => f && f.pw);
+    if (cfg.wrist) seq = smoothFrames(seq, (L.fps || 30) * cfg.speed);
+    const hands = signHands(L, sg.gloss);
+    const bones = seq.map((fr, i) => solveFrame(fr, cfg, hands, seq.length > 1 ? i / (seq.length - 1) : 0));
+    if (!bones.length) { missing.push(sg.gloss); continue; }
+    if (prev) {
+      const trMs = cfg.trim ? 160 : 200;
+      const n = Math.max(1, Math.round(trMs / cfg.speed / dt));
+      for (let k = 1; k <= n; k++) {
+        const u = k / (n + 1);
+        tl.push({ t, bones: blendBones(prev, bones[0], cfg.trim ? minjerk(u) : u), gloss: null, nmm: sg.nmm }); t += dt;
+      }
+    }
+    bones.forEach((b, i) => { tl.push({ t, bones: b, gloss: sg.gloss, nmm: sg.nmm, first: i === 0 }); t += dt; });
+    prev = bones[bones.length - 1];
+  }
+  if (prev) {  // return to rest at the end only
+    const n = Math.round(300 / (1000 / 30));
+    const rest = { ...prev, ...REST };
+    for (const k of Object.keys(prev)) if (k.includes("LowerArm") || k.includes("Hand")) rest[k] = Qn();
+    for (let k = 1; k <= n; k++) { tl.push({ t, bones: blendBones(prev, rest, minjerk(k / n)), gloss: null, nmm: {} }); t += 1000 / 30; }
+  }
+  return { tl, dur: t, missing };
+}
+
+// ---------- pose application and non-manual markers (V3)
+const HS = META.headshake;  // measured on round-1 negations
+function applyBones(bones, a = 1) { for (const [n, q] of Object.entries(bones)) { const b = bone(n); if (b) b.quaternion.slerp(q, a); } }
+function applyNMM(nmm, tms) {
+  const br = nmm?.brows;
+  setMorph("Fcl_BRW_Surprised", br === "raise" ? 1.0 : 0);
+  setMorph("Fcl_EYE_Surprised", br === "raise" ? 0.55 : 0);
+  setMorph("Fcl_BRW_Angry", br === "lower" ? 1.0 : 0);
+  setMorph("Fcl_EYE_Angry", br === "lower" ? 0.35 : 0);
+  const h = bone("head"), n = bone("neck");
+  const pitch = br === "raise" ? 0.10 : br === "lower" ? 0.05 : 0;   // slight forward tilt
+  const roll = br === "lower" ? 0.07 : 0;                            // slight side tilt for wh
+  const yaw = nmm?.headshake ? (HS.peak_deg_estimate * Math.PI / 180) * Math.sin(2 * Math.PI * HS.freq_hz * tms / 1000) : 0;
+  h.rotation.set(pitch, yaw, roll);
+  if (n) n.rotation.set(pitch * 0.4, 0, 0);
+}
+function resetPose() { for (const b of Object.values(vrm.humanoid.normalizedHumanBones)) b.node.quaternion.identity(); applyBones(REST); applyNMM({}, 0); }
+resetPose();
+
+function renderNow() { vrm.update(0); updateClip(); renderer.render(scene, camera); }
+// deterministic stepping (used for rendering videos and screenshots)
+window.renderAt = (tl, tms) => {
+  let i = tl.tl.findIndex(f => f.t > tms) - 1; if (i < -1) i = tl.tl.length - 1; if (i < 0) i = 0;
+  const f = tl.tl[i];
+  resetPose(); applyBones(f.bones, 1); applyNMM(f.nmm, tms); renderNow();
+  document.getElementById("cap").textContent = (f.gloss || "") + (f.nmm?.brows && f.nmm.brows !== "neutral" ? `  [brows ${f.nmm.brows}]` : "") + (f.nmm?.headshake ? "  [headshake]" : "");
+};
+window.cfgFromUI = () => ({ trim: document.getElementById("trim").checked, snap: document.getElementById("snap").checked,
+  wrist: document.getElementById("wrist").checked, speed: +document.getElementById("speed").value });
+window.build = (signs, cfg) => { const t0 = performance.now(); const tl = buildTimeline(signs, cfg); tl.build_ms = performance.now() - t0; return tl; };
+// render a sequence to JPEG frames at 30 fps; returns data URLs
+window.renderFrames = (signs, cfg, fps = 30, quality = 0.85) => {
+  const tl = window.build(signs, cfg);
+  const out = [];
+  for (let t = 0; t <= tl.dur; t += 1000 / fps) { window.renderAt(tl, t); out.push(canvas.toDataURL("image/jpeg", quality)); }
+  return { frames: out, dur: tl.dur, missing: tl.missing, build_ms: tl.build_ms };
+};
+window.shot = (pose) => { resetPose(); if (pose) { applyBones(pose.bones || {}); applyNMM(pose.nmm || {}, pose.t || 0); } renderNow(); return canvas.toDataURL("image/jpeg", 0.9); };
+window.handshapePose = (name) => {  // right hand raised in front of the chest, palm toward the camera
+  const out = {};
+  const sh = [-0.18, -0.45, 0], el = [-0.24, -0.22, -0.04], wr = [-0.12, -0.36, -0.24];
+  const w = wr, hand = [...Array(21)].map(() => w.slice());
+  hand[9] = [w[0] + 0.0, w[1] - 0.09, w[2] - 0.01]; hand[5] = [w[0] + 0.03, w[1] - 0.085, w[2] - 0.01]; hand[17] = [w[0] - 0.035, w[1] - 0.075, w[2] - 0.01];
+  alignArm(out, "right", sh, el, wr, hand, true);
+  fingerRots(out, "right", META.handshapes[name] || RELAXED, name); fingerRots(out, "left", RELAXED, null);
+  out.leftUpperArm = REST.leftUpperArm;
+  return { bones: out };
+};
+window.thumbTest = (eul) => {  // eul: [[x,y,z] metacarpal, [x,y,z] proximal, [x,y,z] distal] in radians, on an 's' handshape
+  const p = window.handshapePose("s");
+  const names = ["rightThumbMetacarpal", "rightThumbProximal", "rightThumbDistal"];
+  names.forEach((n, i) => { p.bones[n] = Qn().setFromEuler(new THREE.Euler(...eul[i])); });
+  return window.shot(p);
+};
+window.META = META; window.LEX_KEYS = Object.keys(LEX); window.vrm = vrm;
+let playing = null;
+document.getElementById("play").onclick = () => {
+  const tl = window.build(JSON.parse(document.getElementById("json").value).signs, window.cfgFromUI());
+  const t0 = performance.now();
+  const step = () => { const t = performance.now() - t0; window.renderAt(tl, t); if (t < tl.dur) requestAnimationFrame(step); };
+  step();
+};
+renderNow();
+window.ready = true;
+log("ready");
+</script>
+</body>
+</html>

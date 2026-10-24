@@ -1,0 +1,5 @@
+Avatar built with MPFB (MakeHuman plugin for Blender) by scripts/build_avatar.py.
+
+MakeHuman base mesh, rig, skin, eyes, eyebrows, eyelashes, teeth, hair (short02), clothes (male_casualsuit04) and the
+faceunits01 ARKit face shapes: makehuman_system_assets / faceunits01 asset packs, CC0 1.0
+(https://static.makehumancommunity.org/assets/assetpacks.html). Models exported from MakeHuman/MPFB are CC0.

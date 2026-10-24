@@ -1,0 +1,480 @@
+{
+ "tag": "base",
+ "features": "cache/s2r2/kaggle_feats_aspect.npz",
+ "base_model": "cache/s2/model.pt",
+ "tuning": {
+  "val_signer": "55372",
+  "finetune": [
+   {
+    "epochs": 3,
+    "lr": 0.0001,
+    "val_top1": 0.5831
+   },
+   {
+    "epochs": 3,
+    "lr": 0.0003,
+    "val_top1": 0.6778
+   },
+   {
+    "epochs": 3,
+    "lr": 0.001,
+    "val_top1": 0.7552
+   },
+   {
+    "epochs": 6,
+    "lr": 0.0001,
+    "val_top1": 0.6536
+   },
+   {
+    "epochs": 6,
+    "lr": 0.0003,
+    "val_top1": 0.7309
+   },
+   {
+    "epochs": 6,
+    "lr": 0.001,
+    "val_top1": 0.821
+   },
+   {
+    "epochs": 10,
+    "lr": 0.0001,
+    "val_top1": 0.6952
+   },
+   {
+    "epochs": 10,
+    "lr": 0.0003,
+    "val_top1": 0.7806
+   },
+   {
+    "epochs": 10,
+    "lr": 0.001,
+    "val_top1": 0.8464
+   }
+  ],
+  "proto": [
+   {
+    "alpha": 0.0,
+    "val_top1": 0.4457
+   },
+   {
+    "alpha": 0.2,
+    "val_top1": 0.5658
+   },
+   {
+    "alpha": 0.4,
+    "val_top1": 0.6513
+   },
+   {
+    "alpha": 0.6,
+    "val_top1": 0.7263
+   },
+   {
+    "alpha": 0.8,
+    "val_top1": 0.7794
+   },
+   {
+    "alpha": 1.0,
+    "val_top1": 0.7945
+   }
+  ]
+ },
+ "chosen": {
+  "finetune": {
+   "epochs": 10,
+   "lr": 0.001,
+   "val_top1": 0.8464
+  },
+  "proto_alpha": 1.0,
+  "proto_temperature": 10.0
+ },
+ "test_signers": [
+  "2044",
+  "25571",
+  "26734",
+  "29302",
+  "30680",
+  "36257"
+ ],
+ "n_signs": 53,
+ "draws": 3,
+ "curve": {
+  "finetune": {
+   "0": {
+    "top1": {
+     "acc": 0.3538,
+     "ci": [
+      0.2595,
+      0.4363
+     ],
+     "n": 17283,
+     "signers": 6
+    },
+    "top3": {
+     "acc": 0.5105,
+     "ci": [
+      0.3876,
+      0.6057
+     ],
+     "n": 17283,
+     "signers": 6
+    },
+    "cpu_s": {
+     "median": 0.0,
+     "max": 0.0
+    },
+    "recording_min_estimate": 0.0
+   },
+   "1": {
+    "top1": {
+     "acc": 0.5524,
+     "ci": [
+      0.4507,
+      0.6406
+     ],
+     "n": 16332,
+     "signers": 6
+    },
+    "top3": {
+     "acc": 0.7081,
+     "ci": [
+      0.6049,
+      0.7913
+     ],
+     "n": 16332,
+     "signers": 6
+    },
+    "cpu_s": {
+     "median": 8.4,
+     "max": 9.36
+    },
+    "recording_min_estimate": 0.6
+   },
+   "2": {
+    "top1": {
+     "acc": 0.6195,
+     "ci": [
+      0.5204,
+      0.7048
+     ],
+     "n": 15381,
+     "signers": 6
+    },
+    "top3": {
+     "acc": 0.7796,
+     "ci": [
+      0.6887,
+      0.8522
+     ],
+     "n": 15381,
+     "signers": 6
+    },
+    "cpu_s": {
+     "median": 16.54,
+     "max": 18.0
+    },
+    "recording_min_estimate": 1.2
+   },
+   "3": {
+    "top1": {
+     "acc": 0.6727,
+     "ci": [
+      0.5738,
+      0.7566
+     ],
+     "n": 14430,
+     "signers": 6
+    },
+    "top3": {
+     "acc": 0.8155,
+     "ci": [
+      0.7241,
+      0.8861
+     ],
+     "n": 14430,
+     "signers": 6
+    },
+    "cpu_s": {
+     "median": 23.89,
+     "max": 24.86
+    },
+    "recording_min_estimate": 1.9
+   },
+   "5": {
+    "top1": {
+     "acc": 0.7117,
+     "ci": [
+      0.6171,
+      0.7892
+     ],
+     "n": 12534,
+     "signers": 6
+    },
+    "top3": {
+     "acc": 0.8472,
+     "ci": [
+      0.7676,
+      0.9084
+     ],
+     "n": 12534,
+     "signers": 6
+    },
+    "cpu_s": {
+     "median": 40.28,
+     "max": 42.42
+    },
+    "recording_min_estimate": 3.1
+   }
+  },
+  "proto": {
+   "0": {
+    "top1": {
+     "acc": 0.3538,
+     "ci": [
+      0.2595,
+      0.4363
+     ],
+     "n": 17283,
+     "signers": 6
+    },
+    "top3": {
+     "acc": 0.5105,
+     "ci": [
+      0.3876,
+      0.6057
+     ],
+     "n": 17283,
+     "signers": 6
+    },
+    "cpu_s": {
+     "median": 0.0,
+     "max": 0.02
+    },
+    "recording_min_estimate": 0.0
+   },
+   "1": {
+    "top1": {
+     "acc": 0.4614,
+     "ci": [
+      0.3212,
+      0.5827
+     ],
+     "n": 16332,
+     "signers": 6
+    },
+    "top3": {
+     "acc": 0.6097,
+     "ci": [
+      0.463,
+      0.7336
+     ],
+     "n": 16332,
+     "signers": 6
+    },
+    "cpu_s": {
+     "median": 0.0,
+     "max": 0.09
+    },
+    "recording_min_estimate": 0.6
+   },
+   "2": {
+    "top1": {
+     "acc": 0.5349,
+     "ci": [
+      0.402,
+      0.6505
+     ],
+     "n": 15381,
+     "signers": 6
+    },
+    "top3": {
+     "acc": 0.7044,
+     "ci": [
+      0.5655,
+      0.8144
+     ],
+     "n": 15381,
+     "signers": 6
+    },
+    "cpu_s": {
+     "median": 0.01,
+     "max": 0.11
+    },
+    "recording_min_estimate": 1.2
+   },
+   "3": {
+    "top1": {
+     "acc": 0.5787,
+     "ci": [
+      0.4451,
+      0.6888
+     ],
+     "n": 14430,
+     "signers": 6
+    },
+    "top3": {
+     "acc": 0.739,
+     "ci": [
+      0.6063,
+      0.8419
+     ],
+     "n": 14430,
+     "signers": 6
+    },
+    "cpu_s": {
+     "median": 0.0,
+     "max": 0.09
+    },
+    "recording_min_estimate": 1.9
+   },
+   "5": {
+    "top1": {
+     "acc": 0.6146,
+     "ci": [
+      0.4837,
+      0.7202
+     ],
+     "n": 12534,
+     "signers": 6
+    },
+    "top3": {
+     "acc": 0.7712,
+     "ci": [
+      0.6421,
+      0.8678
+     ],
+     "n": 12534,
+     "signers": 6
+    },
+    "cpu_s": {
+     "median": 0.01,
+     "max": 0.11
+    },
+    "recording_min_estimate": 3.1
+   }
+  }
+ },
+ "partial_vocab": {
+  "finetune": {
+   "10": {
+    "top1_uncalibrated_signs": {
+     "acc": 0.2343,
+     "ci": [
+      0.1573,
+      0.3044
+     ],
+     "n": 14038,
+     "signers": 6
+    },
+    "top3_uncalibrated_signs": {
+     "acc": 0.4252,
+     "ci": [
+      0.3217,
+      0.5157
+     ],
+     "n": 14038,
+     "signers": 6
+    },
+    "base_top1_same_items": {
+     "acc": 0.3535,
+     "ci": [
+      0.2557,
+      0.4364
+     ],
+     "n": 14038,
+     "signers": 6
+    }
+   },
+   "25": {
+    "top1_uncalibrated_signs": {
+     "acc": 0.2705,
+     "ci": [
+      0.1977,
+      0.3358
+     ],
+     "n": 9098,
+     "signers": 6
+    },
+    "top3_uncalibrated_signs": {
+     "acc": 0.4388,
+     "ci": [
+      0.3391,
+      0.5253
+     ],
+     "n": 9098,
+     "signers": 6
+    },
+    "base_top1_same_items": {
+     "acc": 0.3649,
+     "ci": [
+      0.2672,
+      0.4461
+     ],
+     "n": 9098,
+     "signers": 6
+    }
+   }
+  },
+  "proto": {
+   "10": {
+    "top1_uncalibrated_signs": {
+     "acc": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n": 14038,
+     "signers": 6
+    },
+    "top3_uncalibrated_signs": {
+     "acc": 0.0033,
+     "ci": [
+      0.0,
+      0.0072
+     ],
+     "n": 14038,
+     "signers": 6
+    },
+    "base_top1_same_items": {
+     "acc": 0.3535,
+     "ci": [
+      0.2557,
+      0.4364
+     ],
+     "n": 14038,
+     "signers": 6
+    }
+   },
+   "25": {
+    "top1_uncalibrated_signs": {
+     "acc": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n": 9098,
+     "signers": 6
+    },
+    "top3_uncalibrated_signs": {
+     "acc": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n": 9098,
+     "signers": 6
+    },
+    "base_top1_same_items": {
+     "acc": 0.3649,
+     "ci": [
+      0.2672,
+      0.4461
+     ],
+     "n": 9098,
+     "signers": 6
+    }
+   }
+  }
+ },
+ "popsign_median_clip_s": 0.7,
+ "note": "recording time = k x signs x median PopSign clip length (Kaggle frames / 30 fps); excludes setup and retakes"
+}

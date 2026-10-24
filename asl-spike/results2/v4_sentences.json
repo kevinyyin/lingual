@@ -1,0 +1,291 @@
+{
+ "sentences": [
+  {
+   "cfg": "c13",
+   "label": "wh: And what size: small, medium or large?",
+   "ref": [
+    "SMALL",
+    "OR",
+    "MEDIUM",
+    "OR",
+    "LARGE",
+    "WHICH"
+   ],
+   "hyp": [],
+   "seconds": 5.36,
+   "missing": [],
+   "vocab_recall": 0.0
+  },
+  {
+   "cfg": "c13",
+   "label": "yn: Why don't you try the chocolate cake? It's really good.",
+   "ref": [
+    "CHOCOLATE",
+    "CAKE",
+    "TASTE",
+    "YOU",
+    "GOOD",
+    "DELICIOUS"
+   ],
+   "hyp": [
+    "LOVE"
+   ],
+   "seconds": 6.61,
+   "missing": [],
+   "vocab_recall": 0.0
+  },
+  {
+   "cfg": "c13",
+   "label": "neg: Sorry, we're out of oat milk today.",
+   "ref": [
+    "MILK",
+    "DAY",
+    "FINISH",
+    "NONE",
+    "SORRY"
+   ],
+   "hyp": [
+    "WAIT",
+    "NONE",
+    "NONE"
+   ],
+   "seconds": 4.79,
+   "missing": [],
+   "vocab_recall": 0.2
+  },
+  {
+   "cfg": "c13",
+   "label": "s5: Hi there, welcome in! What can I get started for you?",
+   "ref": [
+    "HELLO",
+    "WELCOME",
+    "WHAT",
+    "YOU",
+    "WANT",
+    "GET"
+   ],
+   "hyp": [
+    "SOME"
+   ],
+   "seconds": 5.87,
+   "missing": [],
+   "vocab_recall": 0.0
+  },
+  {
+   "cfg": "c13",
+   "label": "s5: Sure thing. Hot or iced?",
+   "ref": [
+    "HOT",
+    "ICE",
+    "OR",
+    "COLD"
+   ],
+   "hyp": [
+    "<unk>"
+   ],
+   "seconds": 3.08,
+   "missing": [],
+   "vocab_recall": 0.0
+  },
+  {
+   "cfg": "c13",
+   "label": "s5: And what size: small, medium or large?",
+   "ref": [
+    "<unk>",
+    "SMALL",
+    "OR",
+    "MEDIUM",
+    "OR",
+    "LARGE",
+    "WHICH"
+   ],
+   "hyp": [],
+   "seconds": 5.36,
+   "missing": [
+    "SIZE"
+   ],
+   "vocab_recall": 0.0
+  },
+  {
+   "cfg": "c13",
+   "label": "s5: Do you want any milk in it?",
+   "ref": [
+    "MILK",
+    "YOU",
+    "WANT"
+   ],
+   "hyp": [
+    "<unk>"
+   ],
+   "seconds": 2.61,
+   "missing": [],
+   "vocab_recall": 0.0
+  },
+  {
+   "cfg": "c13",
+   "label": "s5: We do. We have oat, almond, soy, and regular.",
+   "ref": [
+    "YES",
+    "<unk>",
+    "<unk>",
+    "<unk>",
+    "<unk>",
+    "MILK"
+   ],
+   "hyp": [
+    "NONE"
+   ],
+   "seconds": 2.07,
+   "missing": [
+    "OAT",
+    "ALMOND",
+    "SOY",
+    "ALSO"
+   ],
+   "vocab_recall": 0.0
+  },
+  {
+   "cfg": "a",
+   "label": "wh: And what size: small, medium or large?",
+   "ref": [
+    "SMALL",
+    "OR",
+    "MEDIUM",
+    "OR",
+    "LARGE",
+    "WHICH"
+   ],
+   "hyp": [
+    "MONEY"
+   ],
+   "seconds": 11.29,
+   "missing": [],
+   "vocab_recall": 0.0
+  },
+  {
+   "cfg": "a",
+   "label": "yn: Why don't you try the chocolate cake? It's really good.",
+   "ref": [
+    "CHOCOLATE",
+    "CAKE",
+    "TASTE",
+    "YOU",
+    "GOOD",
+    "DELICIOUS"
+   ],
+   "hyp": [
+    "TABLE"
+   ],
+   "seconds": 13.91,
+   "missing": [],
+   "vocab_recall": 0.0
+  },
+  {
+   "cfg": "a",
+   "label": "neg: Sorry, we're out of oat milk today.",
+   "ref": [
+    "MILK",
+    "DAY",
+    "FINISH",
+    "NONE",
+    "SORRY"
+   ],
+   "hyp": [
+    "<unk>"
+   ],
+   "seconds": 9.58,
+   "missing": [],
+   "vocab_recall": 0.0
+  },
+  {
+   "cfg": "a",
+   "label": "s5: Hi there, welcome in! What can I get started for you?",
+   "ref": [
+    "HELLO",
+    "WELCOME",
+    "WHAT",
+    "YOU",
+    "WANT",
+    "GET"
+   ],
+   "hyp": [
+    "<unk>"
+   ],
+   "seconds": 12.19,
+   "missing": [],
+   "vocab_recall": 0.0
+  },
+  {
+   "cfg": "a",
+   "label": "s5: Sure thing. Hot or iced?",
+   "ref": [
+    "HOT",
+    "ICE",
+    "OR",
+    "COLD"
+   ],
+   "hyp": [
+    "<unk>"
+   ],
+   "seconds": 7.78,
+   "missing": [],
+   "vocab_recall": 0.0
+  },
+  {
+   "cfg": "a",
+   "label": "s5: And what size: small, medium or large?",
+   "ref": [
+    "<unk>",
+    "SMALL",
+    "OR",
+    "MEDIUM",
+    "OR",
+    "LARGE",
+    "WHICH"
+   ],
+   "hyp": [
+    "MONEY"
+   ],
+   "seconds": 11.29,
+   "missing": [
+    "SIZE"
+   ],
+   "vocab_recall": 0.0
+  },
+  {
+   "cfg": "a",
+   "label": "s5: Do you want any milk in it?",
+   "ref": [
+    "MILK",
+    "YOU",
+    "WANT"
+   ],
+   "hyp": [],
+   "seconds": 5.24,
+   "missing": [],
+   "vocab_recall": 0.0
+  },
+  {
+   "cfg": "a",
+   "label": "s5: We do. We have oat, almond, soy, and regular.",
+   "ref": [
+    "YES",
+    "<unk>",
+    "<unk>",
+    "<unk>",
+    "<unk>",
+    "MILK"
+   ],
+   "hyp": [],
+   "seconds": 3.54,
+   "missing": [
+    "OAT",
+    "ALMOND",
+    "SOY",
+    "ALSO"
+   ],
+   "vocab_recall": 0.0
+  }
+ ],
+ "capture": "avatar/capture2.mp4 (local, git-ignored)"
+}

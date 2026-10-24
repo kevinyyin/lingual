@@ -1,0 +1,161 @@
+# latency-bench configuration. Every value here is echoed into the report's
+# methodology section, so the report always describes the config it was run with.
+
+seed: 1234                    # randomizes (provider, clip, repetition) order
+concurrency: 1                # parallel runs; >1 contends for network and skews latency
+inter_run_delay_s: 1.0        # pause between runs (rate-limit courtesy)
+location: ""                  # free text; overridden by BENCH_LOCATION env var
+
+audio:
+  chunk_ms: 20                # source is streamed in chunks of this size at exactly 1x real time
+  prepared_sample_rate: 24000 # prepared clips are stored at this rate; resampled per provider
+  pad_pre_s: 1.0              # room tone before speech
+  pad_post_s: 6.0             # room tone after speech so providers can flush
+  room_tone_dbfs: -60.0       # RMS level of generated room tone (never digital zero)
+  noise_snr_db: 10.0          # SNR for the `noisy` category
+  overlap_s: [1.0, 2.0]       # overlap range for the `overlap` category
+  output_gate_dbfs: -45.0     # output audio quieter than this (peak) counts as silence
+
+vad:
+  threshold: 0.5
+  min_silence_ms: 300
+  speech_pad_ms: 0            # 0 = report onset/offset exactly where VAD fires
+
+pairs: [es-en, en-es, fr-en, de-en, ja-en, zh-en]
+
+categories: [short, medium, long, verb_final, noisy, overlap, same_language, silence]
+
+network_probe:
+  samples: 5                  # TCP connect + TLS handshake samples per host per batch
+
+providers:
+  mock:
+    delay_ms: 300
+    jitter_ms: 0
+    mode: echo                # echo | tone ; selftest forces tone
+    output_sample_rate: 24000
+    input_sample_rate: 16000
+
+  openai:
+    model: gpt-realtime-translate
+    url: wss://api.openai.com/v1/realtime/translations
+    input_sample_rate: 24000  # required by the API (PCM16 mono 24 kHz)
+    input_transcription_model: gpt-realtime-whisper   # set null to disable source transcript
+    noise_reduction: null     # null | near_field | far_field
+    safety_identifier: latency-bench
+    close_timeout_s: 30
+    # round 2 (defaults = round-1 behaviour)
+    append_chunk_ms: 20       # 20 (round 1) or 200 (docs: engine consumes 200 ms frames)
+    flush_policy: none        # none | on_pause | watchdog (session rotation, see openai_translate.py)
+    min_silence_ms: 600       # causal VAD silence before speech_end (on_pause / watchdog)
+    watchdog_ms: 1200         # watchdog: flush if no audible translation this long after speech_end
+    # pad_post_s / trailing_audio (room_tone_m60 | digital_silence | noise_bed_m50) are set per experiment
+
+  gemini:
+    model: gemini-3.5-live-translate-preview
+    url: wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent
+    input_sample_rate: 16000  # required by the API
+    echo_target_language: false   # docs default; true = repeat speech already in target language
+    drain_idle_s: 3.0         # after audioStreamEnd, stop when no output for this long
+    drain_max_s: 20.0
+    language_codes: {zh: zh-Hans}
+
+  cascade:
+    input_sample_rate: 16000
+    translate_mode: on_turn_end   # on_turn_end | incremental | anticipation (stub, not implemented)
+    use_eager_eot: true       # start the LLM on EagerEndOfTurn, release to TTS on EndOfTurn
+    stt:
+      model: flux-general-multi   # flux-general-en for English-only sources
+      url: wss://api.deepgram.com/v2/listen
+      eot_threshold: 0.7
+      eager_eot_threshold: 0.5
+      eot_timeout_ms: 5000
+      supported_languages: [en, es, fr, de, hi, ru, pt, ja, it, nl]
+    incremental:
+      stable_updates: 2       # a word is stable after surviving this many consecutive updates
+      holdback_words: 2       # never commit the newest N words
+      min_segment_words: 4    # translate once this many new stable words accumulate
+      stable_ms: 0            # >0: a word is stable once unchanged this long (replaces stable_updates)
+    llm: translate            # which entry under `llm:` to use
+    # round 2 (defaults = round-1 behaviour)
+    tts_context: per_fragment # per_fragment (round 1) | per_turn (one Cartesia context per turn)
+    tts_flush_each: false     # per_turn: send flush after each fragment (exact audio attribution)
+    prompt_variant: literal   # literal | concise (natural, ~10% fewer syllables, nothing dropped)
+    pipeline_fragments: false # start each fragment's LLM request at commit, not after the previous one
+    adaptive_speed: {enabled: false, up_ms: 500, up2_ms: 1000, down_ms: 250, speed: 1.2, cap: 1.3}
+    anticipation_enabled: false   # feature flag for translate_mode: anticipation (not run in round 2)
+    anticipation: {strategy: single_call, samples: 3, min_new_words: 3}   # single_call | sampled
+    tts:
+      url: wss://api.cartesia.ai/tts/websocket
+      cartesia_version: "2026-08-14"
+      model_id: sonic-3.6
+      sample_rate: 24000
+      max_buffer_delay_ms: 1000
+      default_voice_id: db6b0ed5-d5d3-463d-ae85-518a07d3c2b4
+      voices: {}              # per-target-language overrides, e.g. {es: <voice id>}
+    drain_max_s: 30.0
+
+  hibiki:
+    enabled: true             # still skipped automatically without CUDA / Apple Metal
+    pairs: [fr-en]
+
+# LLM roles. provider: openai (any OpenAI-compatible /chat/completions host) | anthropic
+llm:
+  translate:
+    provider: openai
+    base_url: https://api.openai.com/v1
+    model: gpt-4.1-mini
+    api_key_env: OPENAI_API_KEY
+    temperature: 0.0
+    max_tokens: 400
+    extra_body: {}
+  translate_groq:            # round 2, experiment 6; model id filled in from Groq's model list
+    provider: openai          # Groq exposes an OpenAI-compatible chat API
+    base_url: https://api.groq.com/openai/v1
+    model: ""
+    api_key_env: GROQ_API_KEY
+    temperature: 0.0
+    max_tokens: 400
+    extra_body: {}
+  aligner:
+    provider: openai
+    base_url: https://api.openai.com/v1
+    model: gpt-4.1-mini
+    api_key_env: OPENAI_API_KEY
+    temperature: 0.0
+    max_tokens: 2000
+    extra_body: {response_format: {type: json_object}}
+  judge:
+    provider: openai
+    base_url: https://api.openai.com/v1
+    model: gpt-4.1-mini
+    api_key_env: OPENAI_API_KEY
+    temperature: 0.0
+    max_tokens: 200
+    extra_body: {response_format: {type: json_object}}
+
+analysis:
+  playback_policy: {mode: none, threshold_ms: 500, speed: 1.25, max_speed: 1.5}   # none | catchup | catchup_end
+  whisper_model: small        # faster-whisper size: tiny | base | small | medium | large-v3
+  whisper_compute_type: int8
+  evs:
+    enabled: true
+    llm: aligner
+    prompt: |
+      You align words between a source utterance and its spoken translation.
+      Source language: {src_lang}. Target language: {tgt_lang}.
+      Source words (index:word): {src_words}
+      Target words (index:word): {tgt_words}
+      Return JSON {{"pairs": [[src_index, tgt_index], ...]}} linking each source CONTENT word
+      (nouns, verbs, adjectives, adverbs, numbers, names) to the single target word that
+      translates it. Skip function words and anything without a clear counterpart.
+  quality:
+    chrf: true
+    llm_judge: false          # optional 1-5 adequacy score
+    judge_llm: judge
+
+prepare:
+  tts: cartesia               # cartesia | openai | os (local OS voices, few languages)
+  cartesia_model: sonic-3.6
+  openai_tts_model: gpt-4o-mini-tts
+  openai_tts_voice: coral

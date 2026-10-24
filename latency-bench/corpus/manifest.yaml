@@ -1,0 +1,657 @@
+# latency-bench corpus manifest.
+#
+# clips:    base recordings. `file` defaults to audio/<id>.wav. If the file is missing and
+#           `text` is present, `bench prepare` synthesizes it with the configured TTS and the
+#           clip is flagged synthetic (recorded in audio/<id>.synth.json). To use a real human
+#           recording instead, drop a mono wav at audio/<id>.wav (and delete any
+#           audio/<id>.synth.json) - see audio/README.md.
+# derived:  built by `bench prepare` from base clips (round 2 adds concat and insert_pause;
+#           category `component` clips are building blocks and are never streamed on their own):
+#           noisy   = input + café/street noise (corpus/noise/*.wav, else 6-talker babble) at audio.noise_snr_db
+#           overlap = participant A (source lang) + participant B (target lang) with 1-2 s overlap
+#           alias   = same audio, different session (used for same_language)
+#           silence = 10 s of room tone
+# pair:     the session direction (source-target) the clip is streamed into.
+# reference: reference translation into the pair's target language (quality sanity check only).
+# References were drafted by an LLM; have a fluent speaker review them before relying on chrF.
+clips:
+- id: es_en_short_1
+  pair: es-en
+  category: short
+  source_lang: es
+  text: ¿Dónde está la estación de tren?
+  reference: Where is the train station?
+- id: es_en_short_2
+  pair: es-en
+  category: short
+  source_lang: es
+  text: ¿Cuánto cuesta esto?
+  reference: How much does this cost?
+- id: es_en_short_3
+  pair: es-en
+  category: short
+  source_lang: es
+  text: Muchas gracias por tu ayuda.
+  reference: Thank you very much for your help.
+- id: es_en_medium_1
+  pair: es-en
+  category: medium
+  source_lang: es
+  text: Mañana por la mañana tengo que llevar a mi hija al médico antes de ir al trabajo.
+  reference: Tomorrow morning I have to take my daughter to the doctor before going to work.
+- id: es_en_medium_2
+  pair: es-en
+  category: medium
+  source_lang: es
+  text: ¿Podrías decirme si hay una farmacia abierta cerca de aquí a esta hora?
+  reference: Could you tell me if there is a pharmacy open near here at this time?
+- id: es_en_medium_3
+  pair: es-en
+  category: medium
+  source_lang: es
+  text: El restaurante que nos recomendaste estaba lleno, así que cenamos en el hotel.
+  reference: The restaurant you recommended to us was full, so we had dinner at the hotel.
+- id: es_en_long_1
+  pair: es-en
+  category: long
+  source_lang: es
+  text: Bueno, te cuento lo que pasó el fin de semana. El sábado fuimos a la playa con unos amigos, pero empezó a llover justo
+    cuando llegamos, así que nos metimos en un bar pequeño del puerto. Al final fue un día genial, porque el dueño nos invitó
+    a probar un pescado que había preparado él mismo, y estuvimos charlando con él hasta casi las siete de la tarde.
+  reference: Well, let me tell you what happened at the weekend. On Saturday we went to the beach with some friends, but it
+    started to rain just as we arrived, so we went into a small bar at the harbor. In the end it was a great day, because
+    the owner invited us to try a fish he had prepared himself, and we were chatting with him until almost seven in the evening.
+- id: fr_en_short_1
+  pair: fr-en
+  category: short
+  source_lang: fr
+  text: Où se trouve la gare ?
+  reference: Where is the train station?
+- id: fr_en_short_2
+  pair: fr-en
+  category: short
+  source_lang: fr
+  text: Combien ça coûte ?
+  reference: How much does it cost?
+- id: fr_en_short_3
+  pair: fr-en
+  category: short
+  source_lang: fr
+  text: Merci beaucoup pour votre aide.
+  reference: Thank you very much for your help.
+- id: fr_en_medium_1
+  pair: fr-en
+  category: medium
+  source_lang: fr
+  text: Demain matin, je dois emmener ma fille chez le médecin avant d'aller au travail.
+  reference: Tomorrow morning I have to take my daughter to the doctor before going to work.
+- id: fr_en_medium_2
+  pair: fr-en
+  category: medium
+  source_lang: fr
+  text: Pourriez-vous me dire s'il y a une pharmacie ouverte près d'ici à cette heure-ci ?
+  reference: Could you tell me if there is a pharmacy open near here at this hour?
+- id: fr_en_medium_3
+  pair: fr-en
+  category: medium
+  source_lang: fr
+  text: Le restaurant que vous nous avez recommandé était complet, alors nous avons dîné à l'hôtel.
+  reference: The restaurant you recommended to us was full, so we had dinner at the hotel.
+- id: fr_en_long_1
+  pair: fr-en
+  category: long
+  source_lang: fr
+  text: Alors, je te raconte ce qui s'est passé ce week-end. Samedi, on est allés à la plage avec des amis, mais il a commencé
+    à pleuvoir juste au moment où on est arrivés, donc on s'est réfugiés dans un petit bar du port. Finalement, c'était une
+    super journée, parce que le patron nous a fait goûter un poisson qu'il avait préparé lui-même, et on a discuté avec lui
+    jusqu'à presque sept heures du soir.
+  reference: So, let me tell you what happened this weekend. On Saturday we went to the beach with some friends, but it started
+    raining just as we arrived, so we took shelter in a little bar at the harbor. In the end it was a great day, because the
+    owner had us taste a fish he had prepared himself, and we chatted with him until almost seven in the evening.
+- id: de_en_short_1
+  pair: de-en
+  category: short
+  source_lang: de
+  text: Wo ist der Bahnhof?
+  reference: Where is the train station?
+- id: de_en_short_2
+  pair: de-en
+  category: short
+  source_lang: de
+  text: Wie viel kostet das?
+  reference: How much does that cost?
+- id: de_en_short_3
+  pair: de-en
+  category: short
+  source_lang: de
+  text: Vielen Dank für Ihre Hilfe.
+  reference: Thank you very much for your help.
+- id: de_en_medium_1
+  pair: de-en
+  category: medium
+  source_lang: de
+  text: Morgen früh muss ich meine Tochter zum Arzt bringen, bevor ich zur Arbeit gehe.
+  reference: Tomorrow morning I have to take my daughter to the doctor before I go to work.
+- id: de_en_medium_2
+  pair: de-en
+  category: medium
+  source_lang: de
+  text: Können Sie mir sagen, ob es hier in der Nähe um diese Uhrzeit eine offene Apotheke gibt?
+  reference: Can you tell me whether there is an open pharmacy near here at this time?
+- id: de_en_medium_3
+  pair: de-en
+  category: medium
+  source_lang: de
+  text: Das Restaurant, das Sie uns empfohlen haben, war voll, also haben wir im Hotel gegessen.
+  reference: The restaurant you recommended to us was full, so we ate at the hotel.
+- id: de_en_long_1
+  pair: de-en
+  category: long
+  source_lang: de
+  text: Also, ich erzähl dir, was am Wochenende passiert ist. Am Samstag sind wir mit ein paar Freunden an den Strand gefahren,
+    aber genau als wir ankamen, fing es an zu regnen, deshalb sind wir in eine kleine Bar am Hafen gegangen. Am Ende war es
+    ein toller Tag, weil der Besitzer uns einen Fisch probieren ließ, den er selbst zubereitet hatte, und wir haben uns mit
+    ihm bis fast sieben Uhr abends unterhalten.
+  reference: So, let me tell you what happened at the weekend. On Saturday we drove to the beach with a few friends, but just
+    as we arrived it started to rain, so we went into a little bar at the harbor. In the end it was a great day, because the
+    owner let us try a fish he had prepared himself, and we talked with him until almost seven in the evening.
+- id: de_en_verb_final_1
+  pair: de-en
+  category: verb_final
+  source_lang: de
+  text: Ich weiß nicht, ob mein Bruder morgen mit dem Zug oder mit dem Auto zu unserer Feier kommen kann.
+  reference: I don't know whether my brother can come to our party tomorrow by train or by car.
+- id: de_en_verb_final_2
+  pair: de-en
+  category: verb_final
+  source_lang: de
+  text: Sie hat mir gesagt, dass sie den Vertrag erst nach dem Gespräch mit ihrem Anwalt unterschreiben wird.
+  reference: She told me that she will only sign the contract after the conversation with her lawyer.
+- id: ja_en_short_1
+  pair: ja-en
+  category: short
+  source_lang: ja
+  text: 駅はどこですか？
+  reference: Where is the station?
+- id: ja_en_short_2
+  pair: ja-en
+  category: short
+  source_lang: ja
+  text: これはいくらですか？
+  reference: How much is this?
+- id: ja_en_short_3
+  pair: ja-en
+  category: short
+  source_lang: ja
+  text: 手伝ってくれて本当にありがとう。
+  reference: Thank you so much for helping me.
+- id: ja_en_medium_1
+  pair: ja-en
+  category: medium
+  source_lang: ja
+  text: 明日の朝、仕事に行く前に娘を病院に連れて行かなければなりません。
+  reference: Tomorrow morning I have to take my daughter to the hospital before going to work.
+- id: ja_en_medium_2
+  pair: ja-en
+  category: medium
+  source_lang: ja
+  text: この時間に近くで開いている薬局があるかどうか教えてもらえますか？
+  reference: Could you tell me whether there is a pharmacy open nearby at this time?
+- id: ja_en_medium_3
+  pair: ja-en
+  category: medium
+  source_lang: ja
+  text: あなたが勧めてくれたレストランは満席だったので、ホテルで夕食を食べました。
+  reference: The restaurant you recommended was full, so we had dinner at the hotel.
+- id: ja_en_long_1
+  pair: ja-en
+  category: long
+  source_lang: ja
+  text: じゃあ、週末にあったことを話すね。土曜日に友達と海に行ったんだけど、着いたちょうどその時に雨が降り始めたから、港の小さなバーに入ったの。結局すごくいい一日になったよ。店のオーナーが自分で作った魚料理を食べさせてくれて、夕方の七時近くまでずっとおしゃべりしてたんだ。
+  reference: OK, let me tell you what happened at the weekend. On Saturday I went to the sea with friends, but it started
+    raining right when we arrived, so we went into a small bar at the harbor. In the end it turned into a really great day.
+    The owner let us eat a fish dish he made himself, and we kept chatting until almost seven in the evening.
+- id: ja_en_verb_final_1
+  pair: ja-en
+  category: verb_final
+  source_lang: ja
+  text: 私は昨日駅の近くの新しい本屋で友達に勧められた小説を買いました。
+  reference: Yesterday I bought, at the new bookstore near the station, a novel a friend had recommended to me.
+- id: ja_en_verb_final_2
+  pair: ja-en
+  category: verb_final
+  source_lang: ja
+  text: 会議の資料は来週の月曜日までに部長にメールで送らなければなりません。
+  reference: The meeting materials must be sent to the department head by email by next Monday.
+- id: zh_en_short_1
+  pair: zh-en
+  category: short
+  source_lang: zh
+  text: 火车站在哪里？
+  reference: Where is the train station?
+- id: zh_en_short_2
+  pair: zh-en
+  category: short
+  source_lang: zh
+  text: 这个多少钱？
+  reference: How much is this?
+- id: zh_en_short_3
+  pair: zh-en
+  category: short
+  source_lang: zh
+  text: 非常感谢你的帮助。
+  reference: Thank you very much for your help.
+- id: zh_en_medium_1
+  pair: zh-en
+  category: medium
+  source_lang: zh
+  text: 明天早上我得先带女儿去看医生，然后再去上班。
+  reference: Tomorrow morning I have to take my daughter to the doctor first, and then go to work.
+- id: zh_en_medium_2
+  pair: zh-en
+  category: medium
+  source_lang: zh
+  text: 你能告诉我这个时候附近有没有还开着的药店吗？
+  reference: Can you tell me whether there is a pharmacy still open nearby at this time?
+- id: zh_en_medium_3
+  pair: zh-en
+  category: medium
+  source_lang: zh
+  text: 你推荐的那家餐厅已经满了，所以我们在酒店吃了晚饭。
+  reference: The restaurant you recommended was already full, so we had dinner at the hotel.
+- id: zh_en_long_1
+  pair: zh-en
+  category: long
+  source_lang: zh
+  text: 好，我跟你说说周末发生的事。星期六我们和几个朋友去了海边，可是刚到那儿就开始下雨了，所以我们就躲进了港口的一家小酒吧。结果那天过得特别开心，因为老板请我们尝了他自己做的鱼，我们跟他一直聊到差不多晚上七点。
+  reference: OK, let me tell you what happened at the weekend. On Saturday we went to the seaside with a few friends, but
+    it started raining as soon as we got there, so we ducked into a small bar at the harbor. It turned out to be a really
+    fun day, because the owner had us try a fish he had cooked himself, and we chatted with him until almost seven in the
+    evening.
+- id: en_es_short_1
+  pair: en-es
+  category: short
+  source_lang: en
+  text: Where is the train station?
+  reference: ¿Dónde está la estación de tren?
+- id: en_es_short_2
+  pair: en-es
+  category: short
+  source_lang: en
+  text: How much does this cost?
+  reference: ¿Cuánto cuesta esto?
+- id: en_es_short_3
+  pair: en-es
+  category: short
+  source_lang: en
+  text: Thanks a lot for your help.
+  reference: Muchas gracias por tu ayuda.
+- id: en_es_medium_1
+  pair: en-es
+  category: medium
+  source_lang: en
+  text: Tomorrow morning I need to drop my son at school before my first meeting.
+  reference: Mañana por la mañana tengo que dejar a mi hijo en el colegio antes de mi primera reunión.
+- id: en_es_medium_2
+  pair: en-es
+  category: medium
+  source_lang: en
+  text: Could you tell me whether the museum is still open at this time of day?
+  reference: ¿Podrías decirme si el museo sigue abierto a esta hora del día?
+- id: en_es_medium_3
+  pair: en-es
+  category: medium
+  source_lang: en
+  text: We missed the last bus, so we had to take a taxi back to the hotel.
+  reference: Perdimos el último autobús, así que tuvimos que tomar un taxi de vuelta al hotel.
+- id: en_es_long_1
+  pair: en-es
+  category: long
+  source_lang: en
+  text: So here's what happened on our trip. We landed in the afternoon, but our bags didn't arrive, so we spent almost two
+    hours at the airport filling out forms. By the time we got to the city it was dark, and the only place still serving food
+    was a tiny family restaurant around the corner. Honestly, it was the best dinner of the whole week, and the bags showed
+    up the next morning.
+  reference: Te cuento lo que pasó en nuestro viaje. Aterrizamos por la tarde, pero nuestras maletas no llegaron, así que
+    pasamos casi dos horas en el aeropuerto rellenando formularios. Cuando llegamos a la ciudad ya era de noche, y el único
+    sitio que todavía servía comida era un pequeño restaurante familiar a la vuelta de la esquina. Sinceramente, fue la mejor
+    cena de toda la semana, y las maletas aparecieron a la mañana siguiente.
+- id: es_en_part_two_1
+  pair: es-en
+  category: component
+  source_lang: es
+  voice_group: two_utterances
+  text: ¿Sabes a qué hora abre el museo mañana?
+  reference: Do you know what time the museum opens tomorrow?
+- id: es_en_part_two_2
+  pair: es-en
+  category: component
+  source_lang: es
+  voice_group: two_utterances
+  text: Me gustaría ir temprano con mis padres.
+  reference: I would like to go early with my parents.
+- id: es_en_part_turns_1
+  pair: es-en
+  category: component
+  source_lang: es
+  voice_group: three_turns
+  text: Perdona, una pregunta.
+  reference: Excuse me, a question.
+- id: es_en_part_turns_2
+  pair: es-en
+  category: component
+  source_lang: es
+  voice_group: three_turns
+  text: ¿Dónde está la parada del autobús doce?
+  reference: Where is the stop for bus number twelve?
+- id: es_en_part_turns_3
+  pair: es-en
+  category: component
+  source_lang: es
+  voice_group: three_turns
+  text: Creo que me he perdido.
+  reference: I think I'm lost.
+- id: es_en_part_turns_4
+  pair: es-en
+  category: component
+  source_lang: es
+  voice_group: three_turns
+  text: Gracias, eres muy amable.
+  reference: Thank you, you are very kind.
+- id: es_en_part_hesitation_1
+  pair: es-en
+  category: component
+  source_lang: es
+  voice_group: hesitation
+  text: Mi hermano vive en Barcelona y trabaja en un hospital muy grande.
+  reference: My brother lives in Barcelona and works at a very large hospital.
+derived:
+- id: es_en_noisy_1
+  kind: noisy
+  pair: es-en
+  category: noisy
+  inputs:
+  - es_en_medium_1
+  noise: auto
+- id: es_en_noisy_2
+  kind: noisy
+  pair: es-en
+  category: noisy
+  inputs:
+  - es_en_medium_2
+  noise: auto
+- id: es_en_noisy_3
+  kind: noisy
+  pair: es-en
+  category: noisy
+  inputs:
+  - es_en_medium_3
+  noise: auto
+- id: es_en_overlap_1
+  kind: overlap
+  pair: es-en
+  category: overlap
+  inputs:
+  - es_en_medium_1
+  - en_es_medium_1
+- id: es_en_same_language_1
+  kind: alias
+  pair: es-en
+  category: same_language
+  inputs:
+  - en_es_short_1
+- id: es_en_same_language_2
+  kind: alias
+  pair: es-en
+  category: same_language
+  inputs:
+  - en_es_medium_2
+- id: es_en_silence_1
+  kind: silence
+  pair: es-en
+  category: silence
+  duration_s: 10.0
+- id: fr_en_noisy_1
+  kind: noisy
+  pair: fr-en
+  category: noisy
+  inputs:
+  - fr_en_medium_1
+  noise: auto
+- id: fr_en_noisy_2
+  kind: noisy
+  pair: fr-en
+  category: noisy
+  inputs:
+  - fr_en_medium_2
+  noise: auto
+- id: fr_en_noisy_3
+  kind: noisy
+  pair: fr-en
+  category: noisy
+  inputs:
+  - fr_en_medium_3
+  noise: auto
+- id: fr_en_overlap_1
+  kind: overlap
+  pair: fr-en
+  category: overlap
+  inputs:
+  - fr_en_medium_1
+  - en_es_medium_1
+- id: fr_en_same_language_1
+  kind: alias
+  pair: fr-en
+  category: same_language
+  inputs:
+  - en_es_short_1
+- id: fr_en_same_language_2
+  kind: alias
+  pair: fr-en
+  category: same_language
+  inputs:
+  - en_es_medium_2
+- id: fr_en_silence_1
+  kind: silence
+  pair: fr-en
+  category: silence
+  duration_s: 10.0
+- id: de_en_noisy_1
+  kind: noisy
+  pair: de-en
+  category: noisy
+  inputs:
+  - de_en_medium_1
+  noise: auto
+- id: de_en_noisy_2
+  kind: noisy
+  pair: de-en
+  category: noisy
+  inputs:
+  - de_en_medium_2
+  noise: auto
+- id: de_en_noisy_3
+  kind: noisy
+  pair: de-en
+  category: noisy
+  inputs:
+  - de_en_medium_3
+  noise: auto
+- id: de_en_overlap_1
+  kind: overlap
+  pair: de-en
+  category: overlap
+  inputs:
+  - de_en_medium_1
+  - en_es_medium_1
+- id: de_en_same_language_1
+  kind: alias
+  pair: de-en
+  category: same_language
+  inputs:
+  - en_es_short_1
+- id: de_en_same_language_2
+  kind: alias
+  pair: de-en
+  category: same_language
+  inputs:
+  - en_es_medium_2
+- id: de_en_silence_1
+  kind: silence
+  pair: de-en
+  category: silence
+  duration_s: 10.0
+- id: ja_en_noisy_1
+  kind: noisy
+  pair: ja-en
+  category: noisy
+  inputs:
+  - ja_en_medium_1
+  noise: auto
+- id: ja_en_noisy_2
+  kind: noisy
+  pair: ja-en
+  category: noisy
+  inputs:
+  - ja_en_medium_2
+  noise: auto
+- id: ja_en_noisy_3
+  kind: noisy
+  pair: ja-en
+  category: noisy
+  inputs:
+  - ja_en_medium_3
+  noise: auto
+- id: ja_en_overlap_1
+  kind: overlap
+  pair: ja-en
+  category: overlap
+  inputs:
+  - ja_en_medium_1
+  - en_es_medium_1
+- id: ja_en_same_language_1
+  kind: alias
+  pair: ja-en
+  category: same_language
+  inputs:
+  - en_es_short_1
+- id: ja_en_same_language_2
+  kind: alias
+  pair: ja-en
+  category: same_language
+  inputs:
+  - en_es_medium_2
+- id: ja_en_silence_1
+  kind: silence
+  pair: ja-en
+  category: silence
+  duration_s: 10.0
+- id: zh_en_noisy_1
+  kind: noisy
+  pair: zh-en
+  category: noisy
+  inputs:
+  - zh_en_medium_1
+  noise: auto
+- id: zh_en_noisy_2
+  kind: noisy
+  pair: zh-en
+  category: noisy
+  inputs:
+  - zh_en_medium_2
+  noise: auto
+- id: zh_en_noisy_3
+  kind: noisy
+  pair: zh-en
+  category: noisy
+  inputs:
+  - zh_en_medium_3
+  noise: auto
+- id: zh_en_overlap_1
+  kind: overlap
+  pair: zh-en
+  category: overlap
+  inputs:
+  - zh_en_medium_1
+  - en_es_medium_1
+- id: zh_en_same_language_1
+  kind: alias
+  pair: zh-en
+  category: same_language
+  inputs:
+  - en_es_short_1
+- id: zh_en_same_language_2
+  kind: alias
+  pair: zh-en
+  category: same_language
+  inputs:
+  - en_es_medium_2
+- id: zh_en_silence_1
+  kind: silence
+  pair: zh-en
+  category: silence
+  duration_s: 10.0
+- id: en_es_noisy_1
+  kind: noisy
+  pair: en-es
+  category: noisy
+  inputs:
+  - en_es_medium_1
+  noise: auto
+- id: en_es_noisy_2
+  kind: noisy
+  pair: en-es
+  category: noisy
+  inputs:
+  - en_es_medium_2
+  noise: auto
+- id: en_es_noisy_3
+  kind: noisy
+  pair: en-es
+  category: noisy
+  inputs:
+  - en_es_medium_3
+  noise: auto
+- id: en_es_overlap_1
+  kind: overlap
+  pair: en-es
+  category: overlap
+  inputs:
+  - en_es_medium_1
+  - es_en_medium_1
+- id: en_es_same_language_1
+  kind: alias
+  pair: en-es
+  category: same_language
+  inputs:
+  - es_en_short_1
+- id: en_es_same_language_2
+  kind: alias
+  pair: en-es
+  category: same_language
+  inputs:
+  - es_en_medium_2
+- id: en_es_silence_1
+  kind: silence
+  pair: en-es
+  category: silence
+  duration_s: 10.0
+- id: es_en_two_utterances_1
+  kind: concat
+  pair: es-en
+  category: two_utterances
+  inputs: [es_en_part_two_1, es_en_part_two_2]
+  gaps_s: [1.5]
+- id: es_en_three_turns_1
+  kind: concat
+  pair: es-en
+  category: three_turns
+  inputs: [es_en_part_turns_1, es_en_part_turns_2, es_en_part_turns_3, es_en_part_turns_4]
+  gaps_s: [0.8, 1.2, 2.0]
+- id: es_en_hesitation_1
+  kind: insert_pause
+  pair: es-en
+  category: hesitation
+  inputs: [es_en_part_hesitation_1]
+  pause_ms: 500
+  after_word: 4

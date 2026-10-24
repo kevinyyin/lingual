@@ -1,0 +1,60 @@
+import "./style.css";
+import { createStage } from "./avatar/stage";
+import { loadAvatar } from "./avatar";
+import { startCamera } from "./camera";
+import { rememberPhone } from "./phone";
+import { bindControls, highlight, renderMsg, setCameraOff } from "./ui";
+import { connect } from "./ws";
+
+const MAX_BUFFERED = 256 * 1024; // drop frames rather than queue stale ones
+const params = new URLSearchParams(location.search);
+rememberPhone();
+
+if (params.get("mode") === "record") {
+  import("./record").then((m) => m.startRecorder(params));
+} else if (params.get("mode") === "bench") {
+  import("./bench").then((m) => m.startBench());
+} else if (params.get("mode") === "review") {
+  import("./review").then((m) => m.startReview());
+} else {
+  converse();
+}
+
+function converse() {
+  const avatar = loadAvatar(document.getElementById("avatar") as HTMLCanvasElement);
+  const stage = avatar.then(createStage);
+  let playing = false; // camera detection pauses while the avatar signs (see startCamera)
+  if (params.get("dev")) Object.assign(window, { asl: { avatar, stage } }); // console access for avatar debugging
+  const sock = connect(async (m) => {
+    if (m.type !== "sign_plan") return renderMsg(m);
+    try {
+      renderMsg(m); // inside the try: a render error must not leave the session stuck in "avatar"
+      playing = true;
+      await (await stage).play(m, (gloss) => highlight(gloss));
+    } finally {
+      playing = false;
+      sock.send({ type: "avatar_done" }); // never leave the session waiting on the avatar
+    }
+  }, (e) => { // a dead page that looks alive is worse than a clear message
+    const badge = document.getElementById("state")!;
+    badge.textContent = e.code === 4001 ? "Open elsewhere" : "Connection lost";
+    badge.dataset.state = "error";
+    const reclaim = document.getElementById("reclaim")!; // reloading takes the session back (the server keeps one page)
+    reclaim.textContent = e.code === 4001 ? "Use it here" : "Reconnect";
+    reclaim.hidden = false;
+  }, { mic: true });
+  bindControls(sock);
+  if (params.get("camera") === "0") { // speech -> sign only: no signer turns from stray hand movement
+    setCameraOff();
+    document.querySelector(".cam-card figcaption")!.textContent = "Camera off · speech to sign only";
+    document.getElementById("cam")!.hidden = true;
+    return;
+  }
+  startCamera(document.getElementById("cam") as HTMLVideoElement, (f) => {
+    if (sock.buffered() < MAX_BUFFERED) sock.send({ type: "frame", ...f });
+  }, () => playing).catch((e) => {
+    const badge = document.getElementById("state")!;
+    badge.textContent = e.name === "NotAllowedError" ? "Camera blocked: allow it in Settings, speech still works" : "No camera: speech still works";
+    badge.dataset.state = "error";
+  });
+}

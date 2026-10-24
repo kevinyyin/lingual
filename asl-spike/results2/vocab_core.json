@@ -1,0 +1,2080 @@
+{
+ "method": "R5: core vocabulary proposal (~50 signs) - every proposal needs Deaf advisor review.\n\nRobustness score per class = min(ASL Citizen test top-1, WLASL top-1 (no retraining, R2), post-calibration top-1\nat k = 3 on the 6 PopSign stand-in signers (fine-tune, 1 draw each; only the 53 overlapping signs have this))\nminus a confusability penalty (0.15 x the share of the class's test errors that go to its single most-confused\npartner, from round-1 ASL Citizen + R2 WLASL confusions). Classes with too few WLASL instances (< 3) use\nASL Citizen + calibration only.\n\nCore set: (1) every sign the 14 customer lines need (flagged if weak, i.e. score < 0.6), (2) required dialogue\nfunctions (greeting, ordering, yes/no, a wh-question, negation, thank-you), then (3) the highest-scoring\nremaining caf\u00e9 signs up to ~50. Weak needed signs get a proposed rewording with stronger signs.\n",
+ "core": [
+  {
+   "gloss": "HELLO",
+   "citizen": 0.929,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.768,
+   "score": 0.618,
+   "most_confused_with": "KNOW",
+   "penalty": 0.15,
+   "wlasl_instances": 6,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "IX-1P",
+   "citizen": 0.846,
+   "wlasl": 0.625,
+   "score": 0.55,
+   "most_confused_with": "LUNCH",
+   "penalty": 0.075,
+   "wlasl_instances": 8,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "WANT",
+   "citizen": 0.792,
+   "wlasl": 0.2,
+   "score": 0.17,
+   "most_confused_with": "HERE",
+   "penalty": 0.03,
+   "wlasl_instances": 10,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "COFFEE",
+   "citizen": 0.909,
+   "wlasl": 0.889,
+   "score": 0.739,
+   "most_confused_with": "SODA",
+   "penalty": 0.15,
+   "wlasl_instances": 9,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "PLEASE",
+   "citizen": 0.846,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.615,
+   "score": 0.54,
+   "most_confused_with": "MY",
+   "penalty": 0.075,
+   "wlasl_instances": 8,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "HOT",
+   "citizen": 0.727,
+   "wlasl": 0.571,
+   "calibrated_k3": 0.719,
+   "score": 0.471,
+   "most_confused_with": "BAD",
+   "penalty": 0.1,
+   "wlasl_instances": 14,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "LARGE",
+   "citizen": 0.75,
+   "wlasl": 0.786,
+   "score": 0.6,
+   "most_confused_with": "SIGN",
+   "penalty": 0.15,
+   "wlasl_instances": 14,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "YES",
+   "citizen": 1.0,
+   "wlasl": 0.769,
+   "calibrated_k3": 0.489,
+   "score": 0.489,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 13,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "YOU",
+   "citizen": 0.75,
+   "wlasl": 0.364,
+   "score": 0.314,
+   "most_confused_with": "SAME",
+   "penalty": 0.05,
+   "wlasl_instances": 11,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "HAVE",
+   "citizen": 0.917,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.725,
+   "score": 0.575,
+   "most_confused_with": "PREFER",
+   "penalty": 0.15,
+   "wlasl_instances": 9,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "MILK",
+   "citizen": 0.913,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.848,
+   "score": 0.773,
+   "most_confused_with": "OUTSIDE",
+   "penalty": 0.075,
+   "wlasl_instances": 8,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "SWEET",
+   "citizen": 0.727,
+   "wlasl": 0.833,
+   "score": 0.677,
+   "most_confused_with": "YOUR",
+   "penalty": 0.05,
+   "wlasl_instances": 6,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "NONE",
+   "citizen": 0.914,
+   "wlasl": 0.909,
+   "score": 0.859,
+   "most_confused_with": "AGAIN",
+   "penalty": 0.05,
+   "wlasl_instances": 11,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "WHAT",
+   "citizen": 0.541,
+   "wlasl": 0.222,
+   "score": 0.178,
+   "most_confused_with": "COST",
+   "penalty": 0.044,
+   "wlasl_instances": 9,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "KIND",
+   "citizen": 0.957,
+   "wlasl": 1.0,
+   "score": 0.807,
+   "most_confused_with": "MONEY",
+   "penalty": 0.15,
+   "wlasl_instances": 3,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "BLUEBERRY",
+   "citizen": 0.833,
+   "wlasl": 0.333,
+   "score": 0.183,
+   "most_confused_with": "BANANA",
+   "penalty": 0.15,
+   "wlasl_instances": 3,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "ONE",
+   "citizen": 1.0,
+   "wlasl": 0.4,
+   "score": 0.4,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 5,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "WARM",
+   "citizen": 0.75,
+   "wlasl": 1.0,
+   "score": 0.7,
+   "most_confused_with": "DELICIOUS",
+   "penalty": 0.05,
+   "wlasl_instances": 5,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "CAN",
+   "citizen": 0.826,
+   "wlasl": 0.875,
+   "calibrated_k3": 0.402,
+   "score": 0.327,
+   "most_confused_with": "CHEAP",
+   "penalty": 0.075,
+   "wlasl_instances": 8,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "HERE",
+   "citizen": 0.857,
+   "wlasl": 0.75,
+   "score": 0.675,
+   "most_confused_with": "SALAD",
+   "penalty": 0.075,
+   "wlasl_instances": 8,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "MY",
+   "citizen": 0.846,
+   "wlasl": 0.7,
+   "calibrated_k3": 0.602,
+   "score": 0.527,
+   "most_confused_with": "PLEASE",
+   "penalty": 0.075,
+   "wlasl_instances": 10,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "NAME",
+   "citizen": 0.929,
+   "wlasl": 1.0,
+   "score": 0.779,
+   "most_confused_with": "COOKIE",
+   "penalty": 0.15,
+   "wlasl_instances": 9,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "SORRY",
+   "citizen": 1.0,
+   "wlasl": 0.857,
+   "score": 0.857,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 7,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "HOW-MUCH",
+   "citizen": 0.455,
+   "wlasl": 0.556,
+   "score": 0.405,
+   "most_confused_with": "WHAT",
+   "penalty": 0.05,
+   "wlasl_instances": 9,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "AGAIN",
+   "citizen": 0.583,
+   "wlasl": 0.714,
+   "score": 0.523,
+   "most_confused_with": "SLOW",
+   "penalty": 0.06,
+   "wlasl_instances": 14,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "CARD",
+   "citizen": 0.571,
+   "wlasl": 0.0,
+   "score": -0.05,
+   "most_confused_with": "HELP",
+   "penalty": 0.05,
+   "wlasl_instances": 3,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "PAY",
+   "citizen": 0.917,
+   "wlasl": 0.714,
+   "score": 0.564,
+   "most_confused_with": "CAKE",
+   "penalty": 0.15,
+   "wlasl_instances": 7,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "NOT",
+   "citizen": 0.833,
+   "wlasl": 0.444,
+   "calibrated_k3": 0.66,
+   "score": 0.369,
+   "most_confused_with": "CHANGE",
+   "penalty": 0.075,
+   "wlasl_instances": 9,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "NEED",
+   "citizen": 0.8,
+   "wlasl": 0.778,
+   "calibrated_k3": 0.526,
+   "score": 0.406,
+   "most_confused_with": "WHERE",
+   "penalty": 0.12,
+   "wlasl_instances": 18,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "THANK-YOU",
+   "citizen": 0.5,
+   "wlasl": 0.167,
+   "calibrated_k3": 0.545,
+   "score": 0.042,
+   "most_confused_with": "GOOD",
+   "penalty": 0.125,
+   "wlasl_instances": 6,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "WHERE",
+   "citizen": 0.846,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.656,
+   "score": 0.581,
+   "most_confused_with": "RIGHT",
+   "penalty": 0.075,
+   "wlasl_instances": 8,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "UNDERSTAND",
+   "citizen": 0.929,
+   "wlasl": 0.75,
+   "score": 0.6,
+   "most_confused_with": "CENT",
+   "penalty": 0.15,
+   "wlasl_instances": 8,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "FINE",
+   "citizen": 0.941,
+   "wlasl": 0.714,
+   "calibrated_k3": 0.759,
+   "score": 0.639,
+   "most_confused_with": "CHEESE",
+   "penalty": 0.075,
+   "wlasl_instances": 21,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "GOOD",
+   "citizen": 0.667,
+   "wlasl": 0.556,
+   "score": 0.444,
+   "most_confused_with": "THANK-YOU",
+   "penalty": 0.112,
+   "wlasl_instances": 9,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "DAY",
+   "citizen": 0.8,
+   "wlasl": 1.0,
+   "score": 0.725,
+   "most_confused_with": "TABLE",
+   "penalty": 0.075,
+   "wlasl_instances": 8,
+   "needed_by_script": true
+  },
+  {
+   "gloss": "NO",
+   "citizen": 1.0,
+   "wlasl": 0.75,
+   "calibrated_k3": 0.609,
+   "score": 0.609,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 12,
+   "needed_by_script": false
+  },
+  {
+   "gloss": "EIGHT",
+   "citizen": 1.0,
+   "wlasl": 1.0,
+   "score": 1.0,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 5,
+   "needed_by_script": false
+  },
+  {
+   "gloss": "NINE",
+   "citizen": 1.0,
+   "score": 1.0,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 2,
+   "needed_by_script": false
+  },
+  {
+   "gloss": "SEVEN",
+   "citizen": 1.0,
+   "wlasl": 1.0,
+   "score": 1.0,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 4,
+   "needed_by_script": false
+  },
+  {
+   "gloss": "THREE",
+   "citizen": 1.0,
+   "wlasl": 1.0,
+   "score": 1.0,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 3,
+   "needed_by_script": false
+  },
+  {
+   "gloss": "WITH",
+   "citizen": 1.0,
+   "wlasl": 1.0,
+   "score": 1.0,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 9,
+   "needed_by_script": false
+  },
+  {
+   "gloss": "DIFFERENT",
+   "citizen": 1.0,
+   "wlasl": 0.9,
+   "score": 0.9,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 10,
+   "needed_by_script": false
+  },
+  {
+   "gloss": "BREAD",
+   "citizen": 1.0,
+   "wlasl": 0.833,
+   "score": 0.833,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 6,
+   "needed_by_script": false
+  },
+  {
+   "gloss": "STRAWBERRY",
+   "citizen": 0.875,
+   "wlasl": 1.0,
+   "score": 0.825,
+   "most_confused_with": "LUNCH",
+   "penalty": 0.05,
+   "wlasl_instances": 3,
+   "needed_by_script": false
+  },
+  {
+   "gloss": "BANANA",
+   "citizen": 0.92,
+   "wlasl": 0.857,
+   "score": 0.82,
+   "most_confused_with": "CHANGE",
+   "penalty": 0.037,
+   "wlasl_instances": 7,
+   "needed_by_script": false
+  },
+  {
+   "gloss": "PHONE",
+   "citizen": 1.0,
+   "wlasl": 0.818,
+   "calibrated_k3": 0.835,
+   "score": 0.818,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 11,
+   "needed_by_script": false
+  },
+  {
+   "gloss": "JUICE",
+   "citizen": 0.958,
+   "score": 0.808,
+   "most_confused_with": "LUNCH",
+   "penalty": 0.15,
+   "wlasl_instances": 0,
+   "needed_by_script": false
+  },
+  {
+   "gloss": "BREAKFAST",
+   "citizen": 0.84,
+   "wlasl": 1.0,
+   "score": 0.802,
+   "most_confused_with": "FINE",
+   "penalty": 0.037,
+   "wlasl_instances": 3,
+   "needed_by_script": false
+  },
+  {
+   "gloss": "STRAW",
+   "citizen": 1.0,
+   "wlasl": 0.8,
+   "score": 0.8,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 5,
+   "needed_by_script": false
+  },
+  {
+   "gloss": "DRINK",
+   "citizen": 0.875,
+   "wlasl": 0.917,
+   "calibrated_k3": 0.846,
+   "score": 0.796,
+   "most_confused_with": "FINE",
+   "penalty": 0.05,
+   "wlasl_instances": 12,
+   "needed_by_script": false
+  }
+ ],
+ "n_core": 50,
+ "weak_needed_signs": {
+  "IX-1P": {
+   "citizen": 0.846,
+   "wlasl": 0.625,
+   "score": 0.55,
+   "most_confused_with": "LUNCH",
+   "penalty": 0.075,
+   "wlasl_instances": 8
+  },
+  "WANT": {
+   "citizen": 0.792,
+   "wlasl": 0.2,
+   "score": 0.17,
+   "most_confused_with": "HERE",
+   "penalty": 0.03,
+   "wlasl_instances": 10
+  },
+  "PLEASE": {
+   "citizen": 0.846,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.615,
+   "score": 0.54,
+   "most_confused_with": "MY",
+   "penalty": 0.075,
+   "wlasl_instances": 8
+  },
+  "HOT": {
+   "citizen": 0.727,
+   "wlasl": 0.571,
+   "calibrated_k3": 0.719,
+   "score": 0.471,
+   "most_confused_with": "BAD",
+   "penalty": 0.1,
+   "wlasl_instances": 14
+  },
+  "YES": {
+   "citizen": 1.0,
+   "wlasl": 0.769,
+   "calibrated_k3": 0.489,
+   "score": 0.489,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 13
+  },
+  "YOU": {
+   "citizen": 0.75,
+   "wlasl": 0.364,
+   "score": 0.314,
+   "most_confused_with": "SAME",
+   "penalty": 0.05,
+   "wlasl_instances": 11
+  },
+  "HAVE": {
+   "citizen": 0.917,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.725,
+   "score": 0.575,
+   "most_confused_with": "PREFER",
+   "penalty": 0.15,
+   "wlasl_instances": 9
+  },
+  "WHAT": {
+   "citizen": 0.541,
+   "wlasl": 0.222,
+   "score": 0.178,
+   "most_confused_with": "COST",
+   "penalty": 0.044,
+   "wlasl_instances": 9
+  },
+  "BLUEBERRY": {
+   "citizen": 0.833,
+   "wlasl": 0.333,
+   "score": 0.183,
+   "most_confused_with": "BANANA",
+   "penalty": 0.15,
+   "wlasl_instances": 3
+  },
+  "ONE": {
+   "citizen": 1.0,
+   "wlasl": 0.4,
+   "score": 0.4,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 5
+  },
+  "CAN": {
+   "citizen": 0.826,
+   "wlasl": 0.875,
+   "calibrated_k3": 0.402,
+   "score": 0.327,
+   "most_confused_with": "CHEAP",
+   "penalty": 0.075,
+   "wlasl_instances": 8
+  },
+  "MY": {
+   "citizen": 0.846,
+   "wlasl": 0.7,
+   "calibrated_k3": 0.602,
+   "score": 0.527,
+   "most_confused_with": "PLEASE",
+   "penalty": 0.075,
+   "wlasl_instances": 10
+  },
+  "HOW-MUCH": {
+   "citizen": 0.455,
+   "wlasl": 0.556,
+   "score": 0.405,
+   "most_confused_with": "WHAT",
+   "penalty": 0.05,
+   "wlasl_instances": 9
+  },
+  "AGAIN": {
+   "citizen": 0.583,
+   "wlasl": 0.714,
+   "score": 0.523,
+   "most_confused_with": "SLOW",
+   "penalty": 0.06,
+   "wlasl_instances": 14
+  },
+  "CARD": {
+   "citizen": 0.571,
+   "wlasl": 0.0,
+   "score": -0.05,
+   "most_confused_with": "HELP",
+   "penalty": 0.05,
+   "wlasl_instances": 3
+  },
+  "PAY": {
+   "citizen": 0.917,
+   "wlasl": 0.714,
+   "score": 0.564,
+   "most_confused_with": "CAKE",
+   "penalty": 0.15,
+   "wlasl_instances": 7
+  },
+  "NOT": {
+   "citizen": 0.833,
+   "wlasl": 0.444,
+   "calibrated_k3": 0.66,
+   "score": 0.369,
+   "most_confused_with": "CHANGE",
+   "penalty": 0.075,
+   "wlasl_instances": 9
+  },
+  "NEED": {
+   "citizen": 0.8,
+   "wlasl": 0.778,
+   "calibrated_k3": 0.526,
+   "score": 0.406,
+   "most_confused_with": "WHERE",
+   "penalty": 0.12,
+   "wlasl_instances": 18
+  },
+  "THANK-YOU": {
+   "citizen": 0.5,
+   "wlasl": 0.167,
+   "calibrated_k3": 0.545,
+   "score": 0.042,
+   "most_confused_with": "GOOD",
+   "penalty": 0.125,
+   "wlasl_instances": 6
+  },
+  "WHERE": {
+   "citizen": 0.846,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.656,
+   "score": 0.581,
+   "most_confused_with": "RIGHT",
+   "penalty": 0.075,
+   "wlasl_instances": 8
+  },
+  "GOOD": {
+   "citizen": 0.667,
+   "wlasl": 0.556,
+   "score": 0.444,
+   "most_confused_with": "THANK-YOU",
+   "penalty": 0.112,
+   "wlasl_instances": 9
+  }
+ },
+ "script_edits": [
+  {
+   "line": 0,
+   "glosses": [
+    "HELLO",
+    "IX-1P",
+    "WANT",
+    "COFFEE",
+    "PLEASE"
+   ],
+   "weak": {
+    "IX-1P": 0.55,
+    "WANT": 0.17,
+    "PLEASE": 0.54
+   },
+   "proposal": null,
+   "status": "needs Deaf advisor review"
+  },
+  {
+   "line": 1,
+   "glosses": [
+    "HOT"
+   ],
+   "weak": {
+    "HOT": 0.471
+   },
+   "proposal": null,
+   "status": "needs Deaf advisor review"
+  },
+  {
+   "line": 2,
+   "glosses": [
+    "LARGE",
+    "PLEASE"
+   ],
+   "weak": {
+    "PLEASE": 0.54
+   },
+   "proposal": null,
+   "status": "needs Deaf advisor review"
+  },
+  {
+   "line": 3,
+   "glosses": [
+    "YES",
+    "YOU",
+    "HAVE",
+    "<unk>",
+    "MILK"
+   ],
+   "weak": {
+    "YES": 0.489,
+    "YOU": 0.314,
+    "HAVE": 0.575
+   },
+   "proposal": null,
+   "status": "needs Deaf advisor review"
+  },
+  {
+   "line": 5,
+   "glosses": [
+    "<unk>",
+    "WHAT",
+    "KIND"
+   ],
+   "weak": {
+    "WHAT": 0.178
+   },
+   "proposal": null,
+   "status": "needs Deaf advisor review"
+  },
+  {
+   "line": 6,
+   "glosses": [
+    "BLUEBERRY",
+    "ONE",
+    "WARM",
+    "CAN"
+   ],
+   "weak": {
+    "BLUEBERRY": 0.183,
+    "ONE": 0.4,
+    "CAN": 0.327
+   },
+   "proposal": null,
+   "status": "needs Deaf advisor review"
+  },
+  {
+   "line": 8,
+   "glosses": [
+    "MY",
+    "NAME",
+    "<unk>"
+   ],
+   "weak": {
+    "MY": 0.527
+   },
+   "proposal": [
+    "IX-1P",
+    "NAME",
+    "<unk>"
+   ],
+   "status": "needs Deaf advisor review"
+  },
+  {
+   "line": 9,
+   "glosses": [
+    "SORRY",
+    "HOW-MUCH",
+    "AGAIN",
+    "PLEASE"
+   ],
+   "weak": {
+    "HOW-MUCH": 0.405,
+    "AGAIN": 0.523,
+    "PLEASE": 0.54
+   },
+   "proposal": [
+    "SORRY",
+    "HOW-MUCH",
+    "PLEASE",
+    "PLEASE"
+   ],
+   "status": "needs Deaf advisor review"
+  },
+  {
+   "line": 10,
+   "glosses": [
+    "CARD",
+    "PAY",
+    "CAN"
+   ],
+   "weak": {
+    "CARD": -0.05,
+    "PAY": 0.564,
+    "CAN": 0.327
+   },
+   "proposal": null,
+   "status": "needs Deaf advisor review"
+  },
+  {
+   "line": 11,
+   "glosses": [
+    "<unk>",
+    "NOT",
+    "NEED",
+    "THANK-YOU"
+   ],
+   "weak": {
+    "NOT": 0.369,
+    "NEED": 0.406,
+    "THANK-YOU": 0.042
+   },
+   "proposal": null,
+   "status": "needs Deaf advisor review"
+  },
+  {
+   "line": 12,
+   "glosses": [
+    "WHERE",
+    "IX-1P",
+    "UNDERSTAND",
+    "NOT"
+   ],
+   "weak": {
+    "WHERE": 0.581,
+    "IX-1P": 0.55,
+    "NOT": 0.369
+   },
+   "proposal": null,
+   "status": "needs Deaf advisor review"
+  },
+  {
+   "line": 13,
+   "glosses": [
+    "FINE",
+    "THANK-YOU",
+    "GOOD",
+    "DAY"
+   ],
+   "weak": {
+    "THANK-YOU": 0.042,
+    "GOOD": 0.444
+   },
+   "proposal": null,
+   "status": "needs Deaf advisor review"
+  }
+ ],
+ "all": {
+  "AGAIN": {
+   "citizen": 0.583,
+   "wlasl": 0.714,
+   "score": 0.523,
+   "most_confused_with": "SLOW",
+   "penalty": 0.06,
+   "wlasl_instances": 14
+  },
+  "ALL": {
+   "citizen": 0.92,
+   "wlasl": 0.7,
+   "calibrated_k3": 0.411,
+   "score": 0.336,
+   "most_confused_with": "FRESH",
+   "penalty": 0.075,
+   "wlasl_instances": 10
+  },
+  "APPLE": {
+   "citizen": 0.818,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.864,
+   "score": 0.743,
+   "most_confused_with": "HEARING",
+   "penalty": 0.075,
+   "wlasl_instances": 10
+  },
+  "BAD": {
+   "citizen": 0.769,
+   "wlasl": 0.778,
+   "calibrated_k3": 0.602,
+   "score": 0.552,
+   "most_confused_with": "GOOD",
+   "penalty": 0.05,
+   "wlasl_instances": 9
+  },
+  "BANANA": {
+   "citizen": 0.92,
+   "wlasl": 0.857,
+   "score": 0.82,
+   "most_confused_with": "CHANGE",
+   "penalty": 0.037,
+   "wlasl_instances": 7
+  },
+  "BATHROOM": {
+   "citizen": 0.962,
+   "wlasl": 0.706,
+   "calibrated_k3": 0.716,
+   "score": 0.556,
+   "most_confused_with": "YES",
+   "penalty": 0.15,
+   "wlasl_instances": 17
+  },
+  "BLUEBERRY": {
+   "citizen": 0.833,
+   "wlasl": 0.333,
+   "score": 0.183,
+   "most_confused_with": "BANANA",
+   "penalty": 0.15,
+   "wlasl_instances": 3
+  },
+  "BREAD": {
+   "citizen": 1.0,
+   "wlasl": 0.833,
+   "score": 0.833,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 6
+  },
+  "BREAKFAST": {
+   "citizen": 0.84,
+   "wlasl": 1.0,
+   "score": 0.802,
+   "most_confused_with": "FINE",
+   "penalty": 0.037,
+   "wlasl_instances": 3
+  },
+  "BUTTER": {
+   "citizen": 0.462,
+   "wlasl": 0.6,
+   "score": 0.419,
+   "most_confused_with": "COOKIE",
+   "penalty": 0.043,
+   "wlasl_instances": 5
+  },
+  "BUY": {
+   "citizen": 0.818,
+   "wlasl": 0.417,
+   "score": 0.342,
+   "most_confused_with": "MONEY",
+   "penalty": 0.075,
+   "wlasl_instances": 12
+  },
+  "BYE": {
+   "citizen": 1.0,
+   "wlasl": 0.667,
+   "calibrated_k3": 0.87,
+   "score": 0.667,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 3
+  },
+  "CAKE": {
+   "citizen": 0.917,
+   "wlasl": 0.4,
+   "score": 0.25,
+   "most_confused_with": "SODA",
+   "penalty": 0.15,
+   "wlasl_instances": 5
+  },
+  "CAN": {
+   "citizen": 0.826,
+   "wlasl": 0.875,
+   "calibrated_k3": 0.402,
+   "score": 0.327,
+   "most_confused_with": "CHEAP",
+   "penalty": 0.075,
+   "wlasl_instances": 8
+  },
+  "CARD": {
+   "citizen": 0.571,
+   "wlasl": 0.0,
+   "score": -0.05,
+   "most_confused_with": "HELP",
+   "penalty": 0.05,
+   "wlasl_instances": 3
+  },
+  "CENT": {
+   "citizen": 0.909,
+   "wlasl": 0.75,
+   "calibrated_k3": 0.606,
+   "score": 0.456,
+   "most_confused_with": "BREAD",
+   "penalty": 0.15,
+   "wlasl_instances": 4
+  },
+  "CHANGE": {
+   "citizen": 0.818,
+   "wlasl": 0.545,
+   "score": 0.395,
+   "most_confused_with": "MINUTE",
+   "penalty": 0.15,
+   "wlasl_instances": 11
+  },
+  "CHEAP": {
+   "citizen": 0.5,
+   "wlasl": 0.5,
+   "score": 0.425,
+   "most_confused_with": "SMALL",
+   "penalty": 0.075,
+   "wlasl_instances": 6
+  },
+  "CHEESE": {
+   "citizen": 0.917,
+   "wlasl": 0.857,
+   "score": 0.707,
+   "most_confused_with": "SLOW",
+   "penalty": 0.15,
+   "wlasl_instances": 7
+  },
+  "CHOCOLATE": {
+   "citizen": 0.867,
+   "wlasl": 0.833,
+   "calibrated_k3": 0.719,
+   "score": 0.644,
+   "most_confused_with": "CHEESE",
+   "penalty": 0.075,
+   "wlasl_instances": 6
+  },
+  "COFFEE": {
+   "citizen": 0.909,
+   "wlasl": 0.889,
+   "score": 0.739,
+   "most_confused_with": "SODA",
+   "penalty": 0.15,
+   "wlasl_instances": 9
+  },
+  "COLD": {
+   "citizen": 0.917,
+   "wlasl": 0.857,
+   "score": 0.707,
+   "most_confused_with": "BLUEBERRY",
+   "penalty": 0.15,
+   "wlasl_instances": 7
+  },
+  "COOKIE": {
+   "citizen": 0.571,
+   "wlasl": 0.625,
+   "score": 0.521,
+   "most_confused_with": "CUP",
+   "penalty": 0.05,
+   "wlasl_instances": 8
+  },
+  "COST": {
+   "citizen": 0.25,
+   "score": 0.2,
+   "most_confused_with": "WHAT",
+   "penalty": 0.05,
+   "wlasl_instances": 0
+  },
+  "CREAM": {
+   "citizen": 0.72,
+   "score": 0.656,
+   "most_confused_with": "CUP",
+   "penalty": 0.064,
+   "wlasl_instances": 0
+  },
+  "CUP": {
+   "citizen": 0.83,
+   "wlasl": 1.0,
+   "score": 0.755,
+   "most_confused_with": "CREAM",
+   "penalty": 0.075,
+   "wlasl_instances": 11
+  },
+  "DAY": {
+   "citizen": 0.8,
+   "wlasl": 1.0,
+   "score": 0.725,
+   "most_confused_with": "TABLE",
+   "penalty": 0.075,
+   "wlasl_instances": 8
+  },
+  "DEAF": {
+   "citizen": 0.84,
+   "wlasl": 0.692,
+   "score": 0.617,
+   "most_confused_with": "LUNCH",
+   "penalty": 0.075,
+   "wlasl_instances": 13
+  },
+  "DELICIOUS": {
+   "citizen": 0.846,
+   "wlasl": 0.714,
+   "score": 0.639,
+   "most_confused_with": "SANDWICH",
+   "penalty": 0.075,
+   "wlasl_instances": 7
+  },
+  "DIFFERENT": {
+   "citizen": 1.0,
+   "wlasl": 0.9,
+   "score": 0.9,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 10
+  },
+  "DOLLAR": {
+   "citizen": 0.846,
+   "wlasl": 0.833,
+   "score": 0.758,
+   "most_confused_with": "ONE",
+   "penalty": 0.075,
+   "wlasl_instances": 6
+  },
+  "DRINK": {
+   "citizen": 0.875,
+   "wlasl": 0.917,
+   "calibrated_k3": 0.846,
+   "score": 0.796,
+   "most_confused_with": "FINE",
+   "penalty": 0.05,
+   "wlasl_instances": 12
+  },
+  "EAT": {
+   "citizen": 0.923,
+   "wlasl": 0.933,
+   "calibrated_k3": 0.854,
+   "score": 0.779,
+   "most_confused_with": "FINE",
+   "penalty": 0.075,
+   "wlasl_instances": 15
+  },
+  "EGG": {
+   "citizen": 0.923,
+   "wlasl": 0.8,
+   "score": 0.65,
+   "most_confused_with": "NUTS",
+   "penalty": 0.15,
+   "wlasl_instances": 5
+  },
+  "EIGHT": {
+   "citizen": 1.0,
+   "wlasl": 1.0,
+   "score": 1.0,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 5
+  },
+  "ELEVEN": {
+   "citizen": 0.833,
+   "score": 0.683,
+   "most_confused_with": "WHAT",
+   "penalty": 0.15,
+   "wlasl_instances": 0
+  },
+  "EXCUSE-ME": {
+   "citizen": 0.727,
+   "wlasl": 1.0,
+   "score": 0.677,
+   "most_confused_with": "NICE",
+   "penalty": 0.05,
+   "wlasl_instances": 3
+  },
+  "EXPENSIVE": {
+   "citizen": 0.692,
+   "wlasl": 0.875,
+   "score": 0.654,
+   "most_confused_with": "NICE",
+   "penalty": 0.037,
+   "wlasl_instances": 8
+  },
+  "FAST": {
+   "citizen": 1.0,
+   "wlasl": 0.75,
+   "calibrated_k3": 0.54,
+   "score": 0.54,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 8
+  },
+  "FINE": {
+   "citizen": 0.941,
+   "wlasl": 0.714,
+   "calibrated_k3": 0.759,
+   "score": 0.639,
+   "most_confused_with": "CHEESE",
+   "penalty": 0.075,
+   "wlasl_instances": 21
+  },
+  "FINISH": {
+   "citizen": 0.857,
+   "wlasl": 0.643,
+   "calibrated_k3": 0.633,
+   "score": 0.558,
+   "most_confused_with": "LARGE",
+   "penalty": 0.075,
+   "wlasl_instances": 14
+  },
+  "FIVE-DOLLARS": {
+   "citizen": 0.833,
+   "score": 0.683,
+   "most_confused_with": "LUNCH",
+   "penalty": 0.15,
+   "wlasl_instances": 0
+  },
+  "FOR": {
+   "citizen": 0.833,
+   "wlasl": 0.5,
+   "calibrated_k3": 0.726,
+   "score": 0.425,
+   "most_confused_with": "YOU",
+   "penalty": 0.075,
+   "wlasl_instances": 6
+  },
+  "FOUR": {
+   "citizen": 0.857,
+   "wlasl": 0.75,
+   "score": 0.675,
+   "most_confused_with": "WARM",
+   "penalty": 0.075,
+   "wlasl_instances": 4
+  },
+  "FRESH": {
+   "citizen": 0.846,
+   "wlasl": 0.556,
+   "score": 0.481,
+   "most_confused_with": "SANDWICH",
+   "penalty": 0.075,
+   "wlasl_instances": 9
+  },
+  "GET": {
+   "citizen": 0.769,
+   "wlasl": 1.0,
+   "score": 0.669,
+   "most_confused_with": "COFFEE",
+   "penalty": 0.1,
+   "wlasl_instances": 12
+  },
+  "GIVE": {
+   "citizen": 0.727,
+   "wlasl": 0.1,
+   "calibrated_k3": 0.393,
+   "score": 0.0,
+   "most_confused_with": "BUY",
+   "penalty": 0.1,
+   "wlasl_instances": 10
+  },
+  "GO": {
+   "citizen": 0.846,
+   "wlasl": 0.778,
+   "calibrated_k3": 0.34,
+   "score": 0.19,
+   "most_confused_with": "FAST",
+   "penalty": 0.15,
+   "wlasl_instances": 9
+  },
+  "GOOD": {
+   "citizen": 0.667,
+   "wlasl": 0.556,
+   "score": 0.444,
+   "most_confused_with": "THANK-YOU",
+   "penalty": 0.112,
+   "wlasl_instances": 9
+  },
+  "HALF": {
+   "citizen": 1.0,
+   "wlasl": 0.667,
+   "score": 0.667,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 6
+  },
+  "HAPPY": {
+   "citizen": 0.75,
+   "wlasl": 0.625,
+   "calibrated_k3": 0.558,
+   "score": 0.508,
+   "most_confused_with": "SALAD",
+   "penalty": 0.05,
+   "wlasl_instances": 8
+  },
+  "HAVE": {
+   "citizen": 0.917,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.725,
+   "score": 0.575,
+   "most_confused_with": "PREFER",
+   "penalty": 0.15,
+   "wlasl_instances": 9
+  },
+  "HEARING": {
+   "citizen": 0.919,
+   "wlasl": 0.8,
+   "calibrated_k3": 0.844,
+   "score": 0.75,
+   "most_confused_with": "APPLE",
+   "penalty": 0.05,
+   "wlasl_instances": 20
+  },
+  "HELLO": {
+   "citizen": 0.929,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.768,
+   "score": 0.618,
+   "most_confused_with": "KNOW",
+   "penalty": 0.15,
+   "wlasl_instances": 6
+  },
+  "HELP": {
+   "citizen": 0.923,
+   "wlasl": 0.5,
+   "score": 0.35,
+   "most_confused_with": "CREAM",
+   "penalty": 0.15,
+   "wlasl_instances": 6
+  },
+  "HERE": {
+   "citizen": 0.857,
+   "wlasl": 0.75,
+   "score": 0.675,
+   "most_confused_with": "SALAD",
+   "penalty": 0.075,
+   "wlasl_instances": 8
+  },
+  "HOT": {
+   "citizen": 0.727,
+   "wlasl": 0.571,
+   "calibrated_k3": 0.719,
+   "score": 0.471,
+   "most_confused_with": "BAD",
+   "penalty": 0.1,
+   "wlasl_instances": 14
+  },
+  "HOW": {
+   "citizen": 1.0,
+   "wlasl": 0.778,
+   "score": 0.778,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 9
+  },
+  "HOW-MANY": {
+   "citizen": 0.75,
+   "wlasl": 0.455,
+   "calibrated_k3": 0.552,
+   "score": 0.405,
+   "most_confused_with": "SALAD",
+   "penalty": 0.05,
+   "wlasl_instances": 11
+  },
+  "HOW-MUCH": {
+   "citizen": 0.455,
+   "wlasl": 0.556,
+   "score": 0.405,
+   "most_confused_with": "WHAT",
+   "penalty": 0.05,
+   "wlasl_instances": 9
+  },
+  "HUNGRY": {
+   "citizen": 0.917,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.711,
+   "score": 0.561,
+   "most_confused_with": "MY",
+   "penalty": 0.15,
+   "wlasl_instances": 6
+  },
+  "ICE": {
+   "citizen": 0.917,
+   "score": 0.767,
+   "most_confused_with": "KIND",
+   "penalty": 0.15,
+   "wlasl_instances": 0
+  },
+  "INSIDE": {
+   "citizen": 0.913,
+   "wlasl": 0.846,
+   "score": 0.771,
+   "most_confused_with": "LIKE",
+   "penalty": 0.075,
+   "wlasl_instances": 13
+  },
+  "IX-1P": {
+   "citizen": 0.846,
+   "wlasl": 0.625,
+   "score": 0.55,
+   "most_confused_with": "LUNCH",
+   "penalty": 0.075,
+   "wlasl_instances": 8
+  },
+  "JUICE": {
+   "citizen": 0.958,
+   "score": 0.808,
+   "most_confused_with": "LUNCH",
+   "penalty": 0.15,
+   "wlasl_instances": 0
+  },
+  "KIND": {
+   "citizen": 0.957,
+   "wlasl": 1.0,
+   "score": 0.807,
+   "most_confused_with": "MONEY",
+   "penalty": 0.15,
+   "wlasl_instances": 3
+  },
+  "KNOW": {
+   "citizen": 1.0,
+   "wlasl": 0.7,
+   "score": 0.7,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 10
+  },
+  "LARGE": {
+   "citizen": 0.75,
+   "wlasl": 0.786,
+   "score": 0.6,
+   "most_confused_with": "SIGN",
+   "penalty": 0.15,
+   "wlasl_instances": 14
+  },
+  "LATER": {
+   "citizen": 0.917,
+   "wlasl": 0.4,
+   "calibrated_k3": 0.58,
+   "score": 0.25,
+   "most_confused_with": "NEED",
+   "penalty": 0.15,
+   "wlasl_instances": 10
+  },
+  "LIKE": {
+   "citizen": 0.917,
+   "wlasl": 0.857,
+   "calibrated_k3": 0.639,
+   "score": 0.489,
+   "most_confused_with": "MY",
+   "penalty": 0.15,
+   "wlasl_instances": 14
+  },
+  "LOVE": {
+   "citizen": 0.917,
+   "wlasl": 1.0,
+   "score": 0.767,
+   "most_confused_with": "BUTTER",
+   "penalty": 0.15,
+   "wlasl_instances": 5
+  },
+  "LUNCH": {
+   "citizen": 0.783,
+   "wlasl": 0.667,
+   "score": 0.607,
+   "most_confused_with": "WHO",
+   "penalty": 0.06,
+   "wlasl_instances": 6
+  },
+  "MEDIUM": {
+   "citizen": 0.792,
+   "wlasl": 0.333,
+   "score": 0.273,
+   "most_confused_with": "SOME",
+   "penalty": 0.06,
+   "wlasl_instances": 9
+  },
+  "MILK": {
+   "citizen": 0.913,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.848,
+   "score": 0.773,
+   "most_confused_with": "OUTSIDE",
+   "penalty": 0.075,
+   "wlasl_instances": 8
+  },
+  "MINUTE": {
+   "citizen": 0.667,
+   "wlasl": 0.4,
+   "score": 0.363,
+   "most_confused_with": "BANANA",
+   "penalty": 0.037,
+   "wlasl_instances": 5
+  },
+  "MONEY": {
+   "citizen": 0.72,
+   "wlasl": 0.333,
+   "score": 0.29,
+   "most_confused_with": "BUY",
+   "penalty": 0.043,
+   "wlasl_instances": 6
+  },
+  "MORE": {
+   "citizen": 0.833,
+   "wlasl": 1.0,
+   "score": 0.758,
+   "most_confused_with": "NONE",
+   "penalty": 0.075,
+   "wlasl_instances": 9
+  },
+  "MORNING": {
+   "citizen": 0.786,
+   "wlasl": 0.857,
+   "calibrated_k3": 0.759,
+   "score": 0.659,
+   "most_confused_with": "BREAKFAST",
+   "penalty": 0.1,
+   "wlasl_instances": 7
+  },
+  "MY": {
+   "citizen": 0.846,
+   "wlasl": 0.7,
+   "calibrated_k3": 0.602,
+   "score": 0.527,
+   "most_confused_with": "PLEASE",
+   "penalty": 0.075,
+   "wlasl_instances": 10
+  },
+  "NAME": {
+   "citizen": 0.929,
+   "wlasl": 1.0,
+   "score": 0.779,
+   "most_confused_with": "COOKIE",
+   "penalty": 0.15,
+   "wlasl_instances": 9
+  },
+  "NEED": {
+   "citizen": 0.8,
+   "wlasl": 0.778,
+   "calibrated_k3": 0.526,
+   "score": 0.406,
+   "most_confused_with": "WHERE",
+   "penalty": 0.12,
+   "wlasl_instances": 18
+  },
+  "NICE": {
+   "citizen": 0.667,
+   "wlasl": 0.769,
+   "calibrated_k3": 0.613,
+   "score": 0.576,
+   "most_confused_with": "CUP",
+   "penalty": 0.037,
+   "wlasl_instances": 13
+  },
+  "NINE": {
+   "citizen": 1.0,
+   "score": 1.0,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 2
+  },
+  "NO": {
+   "citizen": 1.0,
+   "wlasl": 0.75,
+   "calibrated_k3": 0.609,
+   "score": 0.609,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 12
+  },
+  "NONE": {
+   "citizen": 0.914,
+   "wlasl": 0.909,
+   "score": 0.859,
+   "most_confused_with": "AGAIN",
+   "penalty": 0.05,
+   "wlasl_instances": 11
+  },
+  "NOT": {
+   "citizen": 0.833,
+   "wlasl": 0.444,
+   "calibrated_k3": 0.66,
+   "score": 0.369,
+   "most_confused_with": "CHANGE",
+   "penalty": 0.075,
+   "wlasl_instances": 9
+  },
+  "NOW": {
+   "citizen": 1.0,
+   "wlasl": 0.667,
+   "calibrated_k3": 0.711,
+   "score": 0.667,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 12
+  },
+  "NUTS": {
+   "citizen": 0.8,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.833,
+   "score": 0.74,
+   "most_confused_with": "BLUEBERRY",
+   "penalty": 0.06,
+   "wlasl_instances": 3
+  },
+  "ONE": {
+   "citizen": 1.0,
+   "wlasl": 0.4,
+   "score": 0.4,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 5
+  },
+  "OR": {
+   "citizen": 0.833,
+   "wlasl": 0.4,
+   "score": 0.25,
+   "most_confused_with": "WHEN",
+   "penalty": 0.15,
+   "wlasl_instances": 10
+  },
+  "ORANGE": {
+   "citizen": 0.846,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.842,
+   "score": 0.767,
+   "most_confused_with": "DELICIOUS",
+   "penalty": 0.075,
+   "wlasl_instances": 13
+  },
+  "OUTSIDE": {
+   "citizen": 0.833,
+   "wlasl": 0.429,
+   "calibrated_k3": 0.663,
+   "score": 0.354,
+   "most_confused_with": "MORNING",
+   "penalty": 0.075,
+   "wlasl_instances": 7
+  },
+  "PAY": {
+   "citizen": 0.917,
+   "wlasl": 0.714,
+   "score": 0.564,
+   "most_confused_with": "CAKE",
+   "penalty": 0.15,
+   "wlasl_instances": 7
+  },
+  "PHONE": {
+   "citizen": 1.0,
+   "wlasl": 0.818,
+   "calibrated_k3": 0.835,
+   "score": 0.818,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 11
+  },
+  "PLEASE": {
+   "citizen": 0.846,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.615,
+   "score": 0.54,
+   "most_confused_with": "MY",
+   "penalty": 0.075,
+   "wlasl_instances": 8
+  },
+  "PREFER": {
+   "citizen": 0.833,
+   "wlasl": 0.0,
+   "score": -0.15,
+   "most_confused_with": "TASTE",
+   "penalty": 0.15,
+   "wlasl_instances": 6
+  },
+  "READY": {
+   "citizen": 0.917,
+   "wlasl": 0.857,
+   "score": 0.707,
+   "most_confused_with": "GO",
+   "penalty": 0.15,
+   "wlasl_instances": 7
+  },
+  "RIGHT": {
+   "citizen": 0.757,
+   "wlasl": 0.5,
+   "score": 0.45,
+   "most_confused_with": "FRESH",
+   "penalty": 0.05,
+   "wlasl_instances": 12
+  },
+  "SALAD": {
+   "citizen": 0.818,
+   "wlasl": 1.0,
+   "score": 0.743,
+   "most_confused_with": "HERE",
+   "penalty": 0.075,
+   "wlasl_instances": 5
+  },
+  "SAME": {
+   "citizen": 0.964,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.693,
+   "score": 0.543,
+   "most_confused_with": "WRONG",
+   "penalty": 0.15,
+   "wlasl_instances": 8
+  },
+  "SANDWICH": {
+   "citizen": 0.833,
+   "wlasl": 1.0,
+   "score": 0.795,
+   "most_confused_with": "SOME",
+   "penalty": 0.037,
+   "wlasl_instances": 6
+  },
+  "SEE": {
+   "citizen": 0.462,
+   "wlasl": 0.75,
+   "calibrated_k3": 0.604,
+   "score": 0.376,
+   "most_confused_with": "TWO",
+   "penalty": 0.086,
+   "wlasl_instances": 4
+  },
+  "SEVEN": {
+   "citizen": 1.0,
+   "wlasl": 1.0,
+   "score": 1.0,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 4
+  },
+  "SIGN": {
+   "citizen": 0.913,
+   "wlasl": 0.35,
+   "score": 0.275,
+   "most_confused_with": "SAME",
+   "penalty": 0.075,
+   "wlasl_instances": 20
+  },
+  "SIT": {
+   "citizen": 1.0,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.517,
+   "score": 0.517,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 16
+  },
+  "SIX": {
+   "citizen": 1.0,
+   "wlasl": 0.75,
+   "score": 0.75,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 4
+  },
+  "SLOW": {
+   "citizen": 0.786,
+   "wlasl": 0.857,
+   "score": 0.736,
+   "most_confused_with": "TIME",
+   "penalty": 0.05,
+   "wlasl_instances": 7
+  },
+  "SMALL": {
+   "citizen": 0.917,
+   "wlasl": 0.111,
+   "score": -0.039,
+   "most_confused_with": "CHEAP",
+   "penalty": 0.15,
+   "wlasl_instances": 9
+  },
+  "SODA": {
+   "citizen": 0.966,
+   "wlasl": 0.833,
+   "score": 0.758,
+   "most_confused_with": "FINISH",
+   "penalty": 0.075,
+   "wlasl_instances": 6
+  },
+  "SOME": {
+   "citizen": 0.643,
+   "wlasl": 0.5,
+   "score": 0.44,
+   "most_confused_with": "CREAM",
+   "penalty": 0.06,
+   "wlasl_instances": 8
+  },
+  "SORRY": {
+   "citizen": 1.0,
+   "wlasl": 0.857,
+   "score": 0.857,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 7
+  },
+  "SOUP": {
+   "citizen": 0.615,
+   "wlasl": 1.0,
+   "score": 0.555,
+   "most_confused_with": "BUY",
+   "penalty": 0.06,
+   "wlasl_instances": 5
+  },
+  "STRAW": {
+   "citizen": 1.0,
+   "wlasl": 0.8,
+   "score": 0.8,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 5
+  },
+  "STRAWBERRY": {
+   "citizen": 0.875,
+   "wlasl": 1.0,
+   "score": 0.825,
+   "most_confused_with": "LUNCH",
+   "penalty": 0.05,
+   "wlasl_instances": 3
+  },
+  "SWEET": {
+   "citizen": 0.727,
+   "wlasl": 0.833,
+   "score": 0.677,
+   "most_confused_with": "YOUR",
+   "penalty": 0.05,
+   "wlasl_instances": 6
+  },
+  "TABLE": {
+   "citizen": 1.0,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.627,
+   "score": 0.627,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 7
+  },
+  "TASTE": {
+   "citizen": 0.833,
+   "wlasl": 0.8,
+   "calibrated_k3": 0.774,
+   "score": 0.624,
+   "most_confused_with": "SANDWICH",
+   "penalty": 0.15,
+   "wlasl_instances": 5
+  },
+  "TEA": {
+   "citizen": 0.917,
+   "wlasl": 0.778,
+   "score": 0.628,
+   "most_confused_with": "CAN",
+   "penalty": 0.15,
+   "wlasl_instances": 9
+  },
+  "THANK-YOU": {
+   "citizen": 0.5,
+   "wlasl": 0.167,
+   "calibrated_k3": 0.545,
+   "score": 0.042,
+   "most_confused_with": "GOOD",
+   "penalty": 0.125,
+   "wlasl_instances": 6
+  },
+  "THIRSTY": {
+   "citizen": 0.833,
+   "wlasl": 0.667,
+   "calibrated_k3": 0.835,
+   "score": 0.517,
+   "most_confused_with": "IX-1P",
+   "penalty": 0.15,
+   "wlasl_instances": 6
+  },
+  "THREE": {
+   "citizen": 1.0,
+   "wlasl": 1.0,
+   "score": 1.0,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 3
+  },
+  "TIME": {
+   "citizen": 0.833,
+   "wlasl": 0.875,
+   "calibrated_k3": 0.526,
+   "score": 0.376,
+   "most_confused_with": "SLOW",
+   "penalty": 0.15,
+   "wlasl_instances": 8
+  },
+  "TWO": {
+   "citizen": 0.786,
+   "wlasl": 1.0,
+   "score": 0.736,
+   "most_confused_with": "BAD",
+   "penalty": 0.05,
+   "wlasl_instances": 3
+  },
+  "UNDERSTAND": {
+   "citizen": 0.929,
+   "wlasl": 0.75,
+   "score": 0.6,
+   "most_confused_with": "CENT",
+   "penalty": 0.15,
+   "wlasl_instances": 8
+  },
+  "WAIT": {
+   "citizen": 0.692,
+   "wlasl": 0.556,
+   "calibrated_k3": 0.753,
+   "score": 0.481,
+   "most_confused_with": "WANT",
+   "penalty": 0.075,
+   "wlasl_instances": 9
+  },
+  "WANT": {
+   "citizen": 0.792,
+   "wlasl": 0.2,
+   "score": 0.17,
+   "most_confused_with": "HERE",
+   "penalty": 0.03,
+   "wlasl_instances": 10
+  },
+  "WARM": {
+   "citizen": 0.75,
+   "wlasl": 1.0,
+   "score": 0.7,
+   "most_confused_with": "DELICIOUS",
+   "penalty": 0.05,
+   "wlasl_instances": 5
+  },
+  "WATER": {
+   "citizen": 0.917,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.84,
+   "score": 0.69,
+   "most_confused_with": "YOUR",
+   "penalty": 0.15,
+   "wlasl_instances": 9
+  },
+  "WELCOME": {
+   "citizen": 0.76,
+   "wlasl": 1.0,
+   "score": 0.71,
+   "most_confused_with": "FINE",
+   "penalty": 0.05,
+   "wlasl_instances": 4
+  },
+  "WHAT": {
+   "citizen": 0.541,
+   "wlasl": 0.222,
+   "score": 0.178,
+   "most_confused_with": "COST",
+   "penalty": 0.044,
+   "wlasl_instances": 9
+  },
+  "WHEN": {
+   "citizen": 0.769,
+   "wlasl": 0.714,
+   "score": 0.614,
+   "most_confused_with": "BANANA",
+   "penalty": 0.1,
+   "wlasl_instances": 7
+  },
+  "WHERE": {
+   "citizen": 0.846,
+   "wlasl": 1.0,
+   "calibrated_k3": 0.656,
+   "score": 0.581,
+   "most_confused_with": "RIGHT",
+   "penalty": 0.075,
+   "wlasl_instances": 8
+  },
+  "WHICH": {
+   "citizen": 0.929,
+   "score": 0.779,
+   "most_confused_with": "HAVE",
+   "penalty": 0.15,
+   "wlasl_instances": 0
+  },
+  "WHO": {
+   "citizen": 0.643,
+   "wlasl": 0.615,
+   "calibrated_k3": 0.897,
+   "score": 0.585,
+   "most_confused_with": "MINUTE",
+   "penalty": 0.03,
+   "wlasl_instances": 13
+  },
+  "WHY": {
+   "citizen": 0.929,
+   "wlasl": 0.75,
+   "calibrated_k3": 0.722,
+   "score": 0.572,
+   "most_confused_with": "LUNCH",
+   "penalty": 0.15,
+   "wlasl_instances": 8
+  },
+  "WINDOW": {
+   "citizen": 0.923,
+   "wlasl": 0.75,
+   "calibrated_k3": 0.575,
+   "score": 0.425,
+   "most_confused_with": "BREAD",
+   "penalty": 0.15,
+   "wlasl_instances": 8
+  },
+  "WITH": {
+   "citizen": 1.0,
+   "wlasl": 1.0,
+   "score": 1.0,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 9
+  },
+  "WITHOUT": {
+   "citizen": 0.917,
+   "wlasl": 1.0,
+   "score": 0.767,
+   "most_confused_with": "WITH",
+   "penalty": 0.15,
+   "wlasl_instances": 6
+  },
+  "WRITE": {
+   "citizen": 0.667,
+   "wlasl": 0.636,
+   "score": 0.599,
+   "most_confused_with": "DOLLAR",
+   "penalty": 0.037,
+   "wlasl_instances": 11
+  },
+  "WRONG": {
+   "citizen": 0.917,
+   "wlasl": 1.0,
+   "score": 0.767,
+   "most_confused_with": "SAME",
+   "penalty": 0.15,
+   "wlasl_instances": 16
+  },
+  "YES": {
+   "citizen": 1.0,
+   "wlasl": 0.769,
+   "calibrated_k3": 0.489,
+   "score": 0.489,
+   "most_confused_with": null,
+   "penalty": 0.0,
+   "wlasl_instances": 13
+  },
+  "YOU": {
+   "citizen": 0.75,
+   "wlasl": 0.364,
+   "score": 0.314,
+   "most_confused_with": "SAME",
+   "penalty": 0.05,
+   "wlasl_instances": 11
+  },
+  "YOUR": {
+   "citizen": 0.909,
+   "wlasl": 0.7,
+   "score": 0.55,
+   "most_confused_with": "CHEESE",
+   "penalty": 0.15,
+   "wlasl_instances": 10
+  }
+ },
+ "status": "every proposal needs Deaf advisor review"
+}

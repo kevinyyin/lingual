@@ -1,0 +1,182 @@
+[
+ {
+  "system": "cascade[incremental]",
+  "run_id": "20261013-211511_0048_cascade_es_en_medium_1_r0",
+  "policy": "catchup@1.25x/500ms",
+  "file": "20261013-211511_0048_cascade_es_en_medium_1_r0__catchup_1.25x_500ms.wav",
+  "sped_up_content_s": 5.35,
+  "chrf_vs_unstretched": 100.0,
+  "unstretched_asr": "Tomorrow morning, I have to take someone to my daughter to the doctor before going to work.",
+  "stretched_asr": "Tomorrow morning, I have to take someone to my daughter to the doctor before going to work."
+ },
+ {
+  "system": "cascade[incremental]",
+  "run_id": "20261013-211511_0048_cascade_es_en_medium_1_r0",
+  "policy": "catchup@1.4x/300ms",
+  "file": "20261013-211511_0048_cascade_es_en_medium_1_r0__catchup_1.4x_300ms.wav",
+  "sped_up_content_s": 5.36,
+  "chrf_vs_unstretched": 95.38,
+  "unstretched_asr": "Tomorrow morning, I have to take someone to my daughter to the doctor before going to work.",
+  "stretched_asr": "Tomorrow morning I have to take someone to my daughter to the doctor before going to work."
+ },
+ {
+  "system": "cascade[incremental]",
+  "run_id": "20261013-211511_0064_cascade_es_en_medium_2_r0",
+  "policy": "catchup@1.25x/500ms",
+  "file": "20261013-211511_0064_cascade_es_en_medium_2_r0__catchup_1.25x_500ms.wav",
+  "sped_up_content_s": 3.94,
+  "chrf_vs_unstretched": 100.0,
+  "unstretched_asr": "Could you tell me if there is an open pharmacy nearby at this hour?",
+  "stretched_asr": "Could you tell me if there is an open pharmacy nearby at this hour?"
+ },
+ {
+  "system": "cascade[incremental]",
+  "run_id": "20261013-211511_0064_cascade_es_en_medium_2_r0",
+  "policy": "catchup@1.4x/300ms",
+  "file": "20261013-211511_0064_cascade_es_en_medium_2_r0__catchup_1.4x_300ms.wav",
+  "sped_up_content_s": 4.14,
+  "chrf_vs_unstretched": 100.0,
+  "unstretched_asr": "Could you tell me if there is an open pharmacy nearby at this hour?",
+  "stretched_asr": "Could you tell me if there is an open pharmacy nearby at this hour?"
+ },
+ {
+  "system": "cascade[incremental]",
+  "run_id": "20261013-211511_0060_cascade_es_en_medium_3_r0",
+  "policy": "catchup@1.25x/500ms",
+  "file": "20261013-211511_0060_cascade_es_en_medium_3_r0__catchup_1.25x_500ms.wav",
+  "sped_up_content_s": 4.11,
+  "chrf_vs_unstretched": 100.0,
+  "unstretched_asr": "The restaurant that we recommended was full, so we had dinner at the hotel.",
+  "stretched_asr": "The restaurant that we recommended was full, so we had dinner at the hotel."
+ },
+ {
+  "system": "cascade[incremental]",
+  "run_id": "20261013-211511_0060_cascade_es_en_medium_3_r0",
+  "policy": "catchup@1.4x/300ms",
+  "file": "20261013-211511_0060_cascade_es_en_medium_3_r0__catchup_1.4x_300ms.wav",
+  "sped_up_content_s": 4.31,
+  "chrf_vs_unstretched": 100.0,
+  "unstretched_asr": "The restaurant that we recommended was full, so we had dinner at the hotel.",
+  "stretched_asr": "The restaurant that we recommended was full, so we had dinner at the hotel."
+ },
+ {
+  "system": "cascade[on_turn_end]",
+  "run_id": "20261013-201319_0072_cascade_es_en_medium_1_r0",
+  "policy": "catchup@1.25x/500ms",
+  "file": "20261013-201319_0072_cascade_es_en_medium_1_r0__catchup_1.25x_500ms.wav",
+  "sped_up_content_s": 3.79,
+  "chrf_vs_unstretched": 94.71,
+  "unstretched_asr": "Tomorrow morning, I have to take my daughter to the doctor before going to work.",
+  "stretched_asr": "Tomorrow morning I have to take my daughter to the doctor before going to work."
+ },
+ {
+  "system": "cascade[on_turn_end]",
+  "run_id": "20261013-201319_0072_cascade_es_en_medium_1_r0",
+  "policy": "catchup@1.4x/300ms",
+  "file": "20261013-201319_0072_cascade_es_en_medium_1_r0__catchup_1.4x_300ms.wav",
+  "sped_up_content_s": 3.89,
+  "chrf_vs_unstretched": 94.71,
+  "unstretched_asr": "Tomorrow morning, I have to take my daughter to the doctor before going to work.",
+  "stretched_asr": "Tomorrow morning I have to take my daughter to the doctor before going to work."
+ },
+ {
+  "system": "cascade[on_turn_end]",
+  "run_id": "20261013-201319_0069_cascade_es_en_medium_2_r0",
+  "policy": "catchup@1.25x/500ms",
+  "file": "20261013-201319_0069_cascade_es_en_medium_2_r0__catchup_1.25x_500ms.wav",
+  "sped_up_content_s": 3.04,
+  "chrf_vs_unstretched": 100.0,
+  "unstretched_asr": "Could you tell me if there is a pharmacy open nearby at this hour?",
+  "stretched_asr": "Could you tell me if there is a pharmacy open nearby at this hour?"
+ },
+ {
+  "system": "cascade[on_turn_end]",
+  "run_id": "20261013-201319_0069_cascade_es_en_medium_2_r0",
+  "policy": "catchup@1.4x/300ms",
+  "file": "20261013-201319_0069_cascade_es_en_medium_2_r0__catchup_1.4x_300ms.wav",
+  "sped_up_content_s": 3.14,
+  "chrf_vs_unstretched": 100.0,
+  "unstretched_asr": "Could you tell me if there is a pharmacy open nearby at this hour?",
+  "stretched_asr": "Could you tell me if there is a pharmacy open nearby at this hour?"
+ },
+ {
+  "system": "cascade[on_turn_end]",
+  "run_id": "20261013-201319_0109_cascade_es_en_medium_3_r0",
+  "policy": "catchup@1.25x/500ms",
+  "file": "20261013-201319_0109_cascade_es_en_medium_3_r0__catchup_1.25x_500ms.wav",
+  "sped_up_content_s": 3.63,
+  "chrf_vs_unstretched": 100.0,
+  "unstretched_asr": "The restaurant you recommended was full, so we had dinner at the hotel.",
+  "stretched_asr": "The restaurant you recommended was full, so we had dinner at the hotel."
+ },
+ {
+  "system": "cascade[on_turn_end]",
+  "run_id": "20261013-201319_0109_cascade_es_en_medium_3_r0",
+  "policy": "catchup@1.4x/300ms",
+  "file": "20261013-201319_0109_cascade_es_en_medium_3_r0__catchup_1.4x_300ms.wav",
+  "sped_up_content_s": 3.72,
+  "chrf_vs_unstretched": 100.0,
+  "unstretched_asr": "The restaurant you recommended was full, so we had dinner at the hotel.",
+  "stretched_asr": "The restaurant you recommended was full, so we had dinner at the hotel."
+ },
+ {
+  "system": "openai",
+  "run_id": "20261013-201319_0100_openai_es_en_medium_1_r0",
+  "policy": "catchup@1.25x/500ms",
+  "file": "20261013-201319_0100_openai_es_en_medium_1_r0__catchup_1.25x_500ms.wav",
+  "sped_up_content_s": 16.8,
+  "chrf_vs_unstretched": 93.82,
+  "unstretched_asr": "Tomorrow morning I have to take my dar to the doctor before going to work.",
+  "stretched_asr": "Tomorrow morning I have to take my car to the doctor before going to work."
+ },
+ {
+  "system": "openai",
+  "run_id": "20261013-201319_0100_openai_es_en_medium_1_r0",
+  "policy": "catchup@1.4x/300ms",
+  "file": "20261013-201319_0100_openai_es_en_medium_1_r0__catchup_1.4x_300ms.wav",
+  "sped_up_content_s": 23.7,
+  "chrf_vs_unstretched": 88.15,
+  "unstretched_asr": "Tomorrow morning I have to take my dar to the doctor before going to work.",
+  "stretched_asr": "Tomorrow morning, I have to take my doctor to the doctor before going to work."
+ },
+ {
+  "system": "openai",
+  "run_id": "20261013-201319_0037_openai_es_en_medium_2_r0",
+  "policy": "catchup@1.25x/500ms",
+  "file": "20261013-201319_0037_openai_es_en_medium_2_r0__catchup_1.25x_500ms.wav",
+  "sped_up_content_s": 21.58,
+  "chrf_vs_unstretched": 95.62,
+  "unstretched_asr": "Could you tell me if there's a pharmacy open near here at this hour? You",
+  "stretched_asr": "Could you tell me if there's a pharmacy open near here at this hour?"
+ },
+ {
+  "system": "openai",
+  "run_id": "20261013-201319_0037_openai_es_en_medium_2_r0",
+  "policy": "catchup@1.4x/300ms",
+  "file": "20261013-201319_0037_openai_es_en_medium_2_r0__catchup_1.4x_300ms.wav",
+  "sped_up_content_s": 26.64,
+  "chrf_vs_unstretched": 95.62,
+  "unstretched_asr": "Could you tell me if there's a pharmacy open near here at this hour? You",
+  "stretched_asr": "Could you tell me if there's a pharmacy open near here at this hour?"
+ },
+ {
+  "system": "openai",
+  "run_id": "20261013-201319_0022_openai_es_en_medium_3_r0",
+  "policy": "catchup@1.25x/500ms",
+  "file": "20261013-201319_0022_openai_es_en_medium_3_r0__catchup_1.25x_500ms.wav",
+  "sped_up_content_s": 17.96,
+  "chrf_vs_unstretched": 90.45,
+  "unstretched_asr": "The restaurant you recommended was full, so we had dinner at the hotel.",
+  "stretched_asr": "The restaurant you recommended was four, so we had dinner at the hotel."
+ },
+ {
+  "system": "openai",
+  "run_id": "20261013-201319_0022_openai_es_en_medium_3_r0",
+  "policy": "catchup@1.4x/300ms",
+  "file": "20261013-201319_0022_openai_es_en_medium_3_r0__catchup_1.4x_300ms.wav",
+  "sped_up_content_s": 25.14,
+  "chrf_vs_unstretched": 86.9,
+  "unstretched_asr": "The restaurant you recommended was full, so we had dinner at the hotel.",
+  "stretched_asr": "The restaurant you recommended was folk. So we had dinner at the hotel."
+ }
+]

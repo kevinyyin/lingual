@@ -1,0 +1,3812 @@
+[
+ {
+  "gloss": "HELLO",
+  "category": "social",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "HELLO"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [
+   "HELLO"
+  ],
+  "wlasl": [
+   "hello"
+  ],
+  "kaggle_asl_signs": [
+   "hello"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "HELLO"
+  ],
+  "recognized_as": "HELLO"
+ },
+ {
+  "gloss": "BYE",
+  "category": "social",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "BYE"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "BYE"
+  ],
+  "wlasl": [
+   "bye",
+   "goodbye"
+  ],
+  "kaggle_asl_signs": [
+   "bye"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "BYE"
+  ],
+  "recognized_as": "BYE"
+ },
+ {
+  "gloss": "THANK-YOU",
+  "category": "social",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "THANKYOU"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "THANKYOU"
+  ],
+  "wlasl": [
+   "thank you"
+  ],
+  "kaggle_asl_signs": [
+   "thankyou"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "THANKYOU"
+  ],
+  "recognized_as": "THANK-YOU"
+ },
+ {
+  "gloss": "PLEASE",
+  "category": "social",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "PLEASE"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "PLEASE"
+  ],
+  "wlasl": [
+   "please"
+  ],
+  "kaggle_asl_signs": [
+   "please"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "PLEASE"
+  ],
+  "recognized_as": "PLEASE"
+ },
+ {
+  "gloss": "SORRY",
+  "category": "social",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "SORRY"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "SORRY"
+  ],
+  "wlasl": [
+   "sorry"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "SORRY"
+  ],
+  "recognized_as": "SORRY"
+ },
+ {
+  "gloss": "EXCUSE-ME",
+  "category": "social",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "EXCUSE"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "EXCUSE"
+  ],
+  "wlasl": [
+   "excuse"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "EXCUSE"
+  ],
+  "recognized_as": "EXCUSE-ME"
+ },
+ {
+  "gloss": "WELCOME",
+  "category": "social",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "WELCOME2",
+   "WELCOME1"
+  ],
+  "asl_citizen_videos": 62,
+  "asl_citizen_exact": [
+   "WELCOME2",
+   "WELCOME1"
+  ],
+  "wlasl": [
+   "welcome"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "WELCOME2",
+   "WELCOME1"
+  ],
+  "recognized_as": "WELCOME"
+ },
+ {
+  "gloss": "NICE",
+  "category": "social",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "NICE",
+   "CLEAN"
+  ],
+  "asl_citizen_videos": 62,
+  "asl_citizen_exact": [
+   "NICE"
+  ],
+  "wlasl": [
+   "nice",
+   "clean"
+  ],
+  "kaggle_asl_signs": [
+   "clean"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "NICE",
+   "CLEAN"
+  ],
+  "recognized_as": "NICE"
+ },
+ {
+  "gloss": "GOOD",
+  "category": "social",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "GOOD"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "GOOD"
+  ],
+  "wlasl": [
+   "good"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "GOOD"
+  ],
+  "recognized_as": "GOOD"
+ },
+ {
+  "gloss": "BAD",
+  "category": "social",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "BAD"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "BAD"
+  ],
+  "wlasl": [
+   "bad"
+  ],
+  "kaggle_asl_signs": [
+   "bad"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "BAD"
+  ],
+  "recognized_as": "BAD"
+ },
+ {
+  "gloss": "FINE",
+  "category": "social",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "FINE1",
+   "FINE2",
+   "OK"
+  ],
+  "asl_citizen_videos": 93,
+  "asl_citizen_exact": [
+   "FINE1",
+   "FINE2"
+  ],
+  "wlasl": [
+   "fine",
+   "ok"
+  ],
+  "kaggle_asl_signs": [
+   "fine"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "FINE1",
+   "FINE2",
+   "OK"
+  ],
+  "recognized_as": "FINE"
+ },
+ {
+  "gloss": "DAY",
+  "category": "social",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "DAY"
+  ],
+  "asl_citizen_videos": 29,
+  "asl_citizen_exact": [
+   "DAY"
+  ],
+  "wlasl": [
+   "day"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "DAY"
+  ],
+  "recognized_as": "DAY"
+ },
+ {
+  "gloss": "MORNING",
+  "category": "social",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "MORNING"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [
+   "MORNING"
+  ],
+  "wlasl": [
+   "morning"
+  ],
+  "kaggle_asl_signs": [
+   "morning"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "MORNING"
+  ],
+  "recognized_as": "MORNING"
+ },
+ {
+  "gloss": "NAME",
+  "category": "social",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "NAME"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [
+   "NAME"
+  ],
+  "wlasl": [
+   "name"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "NAME"
+  ],
+  "recognized_as": "NAME"
+ },
+ {
+  "gloss": "YES",
+  "category": "function",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "YES"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "YES"
+  ],
+  "wlasl": [
+   "yes"
+  ],
+  "kaggle_asl_signs": [
+   "yes"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "YES"
+  ],
+  "recognized_as": "YES"
+ },
+ {
+  "gloss": "NO",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "NO"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "NO"
+  ],
+  "wlasl": [
+   "no"
+  ],
+  "kaggle_asl_signs": [
+   "no"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "NO"
+  ],
+  "recognized_as": "NO"
+ },
+ {
+  "gloss": "IX-1P",
+  "category": "function",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "ME"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "ME"
+  ],
+  "wlasl": [
+   "me",
+   "i"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "pointing/indexing sign; in continuous signing often a point, not a citation form",
+  "asl_citizen_class_videos": [
+   "ME"
+  ],
+  "recognized_as": "IX-1P"
+ },
+ {
+  "gloss": "YOU",
+  "category": "function",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "YOU"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "YOU"
+  ],
+  "wlasl": [
+   "you"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "pointing/indexing sign; in continuous signing often a point, not a citation form",
+  "asl_citizen_class_videos": [
+   "YOU"
+  ],
+  "recognized_as": "YOU"
+ },
+ {
+  "gloss": "MY",
+  "category": "function",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "MY",
+   "MINE"
+  ],
+  "asl_citizen_videos": 61,
+  "asl_citizen_exact": [
+   "MY"
+  ],
+  "wlasl": [
+   "my",
+   "mine"
+  ],
+  "kaggle_asl_signs": [
+   "minemy"
+  ],
+  "substitute": null,
+  "notes": "pointing/indexing sign; in continuous signing often a point, not a citation form",
+  "asl_citizen_class_videos": [
+   "MY",
+   "MINE"
+  ],
+  "recognized_as": "MY"
+ },
+ {
+  "gloss": "YOUR",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "YOUR"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "YOUR"
+  ],
+  "wlasl": [
+   "your"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "pointing/indexing sign; in continuous signing often a point, not a citation form",
+  "asl_citizen_class_videos": [
+   "YOUR"
+  ],
+  "recognized_as": "YOUR"
+ },
+ {
+  "gloss": "WANT",
+  "category": "function",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "WANT2",
+   "WANT1"
+  ],
+  "asl_citizen_videos": 62,
+  "asl_citizen_exact": [
+   "WANT2",
+   "WANT1"
+  ],
+  "wlasl": [
+   "want"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "WANT2",
+   "WANT1"
+  ],
+  "recognized_as": "WANT"
+ },
+ {
+  "gloss": "NEED",
+  "category": "function",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "NEED",
+   "MUST"
+  ],
+  "asl_citizen_videos": 61,
+  "asl_citizen_exact": [
+   "NEED"
+  ],
+  "wlasl": [
+   "need",
+   "must"
+  ],
+  "kaggle_asl_signs": [
+   "haveto"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "NEED",
+   "MUST"
+  ],
+  "recognized_as": "NEED"
+ },
+ {
+  "gloss": "HAVE",
+  "category": "function",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "HAVE"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "HAVE"
+  ],
+  "wlasl": [
+   "have"
+  ],
+  "kaggle_asl_signs": [
+   "have"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "HAVE"
+  ],
+  "recognized_as": "HAVE"
+ },
+ {
+  "gloss": "CAN",
+  "category": "function",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "CAN2",
+   "CAN1"
+  ],
+  "asl_citizen_videos": 61,
+  "asl_citizen_exact": [
+   "CAN2",
+   "CAN1"
+  ],
+  "wlasl": [
+   "can"
+  ],
+  "kaggle_asl_signs": [
+   "can"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "CAN2",
+   "CAN1"
+  ],
+  "recognized_as": "CAN"
+ },
+ {
+  "gloss": "NOT",
+  "category": "function",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "NOT"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "NOT"
+  ],
+  "wlasl": [
+   "not"
+  ],
+  "kaggle_asl_signs": [
+   "not"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "NOT"
+  ],
+  "recognized_as": "NOT"
+ },
+ {
+  "gloss": "NONE",
+  "category": "function",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "NONE",
+   "NOTHING2",
+   "NOTHING1"
+  ],
+  "asl_citizen_videos": 93,
+  "asl_citizen_exact": [
+   "NONE"
+  ],
+  "wlasl": [
+   "none",
+   "nothing"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "NONE",
+   "NOTHING2",
+   "NOTHING1"
+  ],
+  "recognized_as": "NONE"
+ },
+ {
+  "gloss": "FINISH",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "FINISH"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [
+   "FINISH"
+  ],
+  "wlasl": [
+   "finish",
+   "done"
+  ],
+  "kaggle_asl_signs": [
+   "finish"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "FINISH"
+  ],
+  "recognized_as": "FINISH"
+ },
+ {
+  "gloss": "AGAIN",
+  "category": "function",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "AGAIN"
+  ],
+  "asl_citizen_videos": 29,
+  "asl_citizen_exact": [
+   "AGAIN"
+  ],
+  "wlasl": [
+   "again",
+   "repeat"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "AGAIN"
+  ],
+  "recognized_as": "AGAIN"
+ },
+ {
+  "gloss": "MORE",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "MORE"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "MORE"
+  ],
+  "wlasl": [
+   "more"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "MORE"
+  ],
+  "recognized_as": "MORE"
+ },
+ {
+  "gloss": "WITH",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "WITH"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "WITH"
+  ],
+  "wlasl": [
+   "with"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "WITH"
+  ],
+  "recognized_as": "WITH"
+ },
+ {
+  "gloss": "WITHOUT",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "WITHOUT"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "WITHOUT"
+  ],
+  "wlasl": [
+   "without"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "WITHOUT"
+  ],
+  "recognized_as": "WITHOUT"
+ },
+ {
+  "gloss": "ALSO",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "SAME1",
+   "SAME2"
+  ],
+  "asl_citizen_videos": 62,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "also",
+   "same"
+  ],
+  "kaggle_asl_signs": [
+   "same"
+  ],
+  "substitute": "SAME",
+  "notes": "shares its ASL Citizen sign with SAME; recognized as that class",
+  "asl_citizen_class_videos": [],
+  "recognized_as": "SAME"
+ },
+ {
+  "gloss": "ONLY",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "only"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-ONLY",
+  "notes": "",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "WAIT",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "WAIT"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "WAIT"
+  ],
+  "wlasl": [
+   "wait"
+  ],
+  "kaggle_asl_signs": [
+   "wait"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "WAIT"
+  ],
+  "recognized_as": "WAIT"
+ },
+ {
+  "gloss": "HELP",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "HELP"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "HELP"
+  ],
+  "wlasl": [
+   "help"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "HELP"
+  ],
+  "recognized_as": "HELP"
+ },
+ {
+  "gloss": "UNDERSTAND",
+  "category": "function",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "UNDERSTAND"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [
+   "UNDERSTAND"
+  ],
+  "wlasl": [
+   "understand"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "UNDERSTAND"
+  ],
+  "recognized_as": "UNDERSTAND"
+ },
+ {
+  "gloss": "KNOW",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "KNOW"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "KNOW"
+  ],
+  "wlasl": [
+   "know"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "KNOW"
+  ],
+  "recognized_as": "KNOW"
+ },
+ {
+  "gloss": "LIKE",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "LIKE"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "LIKE"
+  ],
+  "wlasl": [
+   "like"
+  ],
+  "kaggle_asl_signs": [
+   "like"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "LIKE"
+  ],
+  "recognized_as": "LIKE"
+ },
+ {
+  "gloss": "PREFER",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "PREFER"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "PREFER"
+  ],
+  "wlasl": [
+   "prefer",
+   "rather"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "PREFER"
+  ],
+  "recognized_as": "PREFER"
+ },
+ {
+  "gloss": "CHANGE",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "CHANGE"
+  ],
+  "asl_citizen_videos": 29,
+  "asl_citizen_exact": [
+   "CHANGE"
+  ],
+  "wlasl": [
+   "change"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "CHANGE"
+  ],
+  "recognized_as": "CHANGE"
+ },
+ {
+  "gloss": "GIVE",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "GIVE"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "GIVE"
+  ],
+  "wlasl": [
+   "give"
+  ],
+  "kaggle_asl_signs": [
+   "give"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "GIVE"
+  ],
+  "recognized_as": "GIVE"
+ },
+ {
+  "gloss": "BUY",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "BUY"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "BUY"
+  ],
+  "wlasl": [
+   "buy",
+   "purchase"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "BUY"
+  ],
+  "recognized_as": "BUY"
+ },
+ {
+  "gloss": "EAT",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "EAT1",
+   "EAT2"
+  ],
+  "asl_citizen_videos": 63,
+  "asl_citizen_exact": [
+   "EAT1",
+   "EAT2"
+  ],
+  "wlasl": [
+   "eat",
+   "food"
+  ],
+  "kaggle_asl_signs": [
+   "food"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "EAT1",
+   "EAT2"
+  ],
+  "recognized_as": "EAT"
+ },
+ {
+  "gloss": "DRINK",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "DRINK2",
+   "DRINK1"
+  ],
+  "asl_citizen_videos": 61,
+  "asl_citizen_exact": [
+   "DRINK2",
+   "DRINK1"
+  ],
+  "wlasl": [
+   "drink"
+  ],
+  "kaggle_asl_signs": [
+   "drink"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "DRINK2",
+   "DRINK1"
+  ],
+  "recognized_as": "DRINK"
+ },
+ {
+  "gloss": "GET",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "GET"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "GET"
+  ],
+  "wlasl": [
+   "get",
+   "receive"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "GET"
+  ],
+  "recognized_as": "GET"
+ },
+ {
+  "gloss": "KIND",
+  "category": "function",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "TYPE1",
+   "TYPE2"
+  ],
+  "asl_citizen_videos": 60,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "type"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "matched through an alias (TYPE1, TYPE2); confirm it is the same sign",
+  "asl_citizen_class_videos": [
+   "TYPE1",
+   "TYPE2"
+  ],
+  "recognized_as": "KIND"
+ },
+ {
+  "gloss": "SAME",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "SAME1",
+   "SAME2"
+  ],
+  "asl_citizen_videos": 62,
+  "asl_citizen_exact": [
+   "SAME1",
+   "SAME2"
+  ],
+  "wlasl": [
+   "same"
+  ],
+  "kaggle_asl_signs": [
+   "same"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "SAME1",
+   "SAME2"
+  ],
+  "recognized_as": "SAME"
+ },
+ {
+  "gloss": "DIFFERENT",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "DIFFERENT"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "DIFFERENT"
+  ],
+  "wlasl": [
+   "different"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "DIFFERENT"
+  ],
+  "recognized_as": "DIFFERENT"
+ },
+ {
+  "gloss": "FOR",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "FOR"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "FOR"
+  ],
+  "wlasl": [
+   "for"
+  ],
+  "kaggle_asl_signs": [
+   "for"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "FOR"
+  ],
+  "recognized_as": "FOR"
+ },
+ {
+  "gloss": "OR",
+  "category": "function",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "OR",
+   "WHICH"
+  ],
+  "asl_citizen_videos": 63,
+  "asl_citizen_exact": [
+   "OR"
+  ],
+  "wlasl": [
+   "or",
+   "which"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "OR"
+  ],
+  "recognized_as": "OR"
+ },
+ {
+  "gloss": "WHAT",
+  "category": "question",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "W.H.A.T",
+   "WHAT1",
+   "WHAT2"
+  ],
+  "asl_citizen_videos": 93,
+  "asl_citizen_exact": [
+   "W.H.A.T",
+   "WHAT1",
+   "WHAT2"
+  ],
+  "wlasl": [
+   "what"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "W.H.A.T",
+   "WHAT1",
+   "WHAT2"
+  ],
+  "recognized_as": "WHAT"
+ },
+ {
+  "gloss": "WHERE",
+  "category": "question",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "WHERE"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "WHERE"
+  ],
+  "wlasl": [
+   "where"
+  ],
+  "kaggle_asl_signs": [
+   "where"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "WHERE"
+  ],
+  "recognized_as": "WHERE"
+ },
+ {
+  "gloss": "WHEN",
+  "category": "question",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "WHEN"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "WHEN"
+  ],
+  "wlasl": [
+   "when"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "WHEN"
+  ],
+  "recognized_as": "WHEN"
+ },
+ {
+  "gloss": "WHO",
+  "category": "question",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "WHO"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [
+   "WHO"
+  ],
+  "wlasl": [
+   "who"
+  ],
+  "kaggle_asl_signs": [
+   "who"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "WHO"
+  ],
+  "recognized_as": "WHO"
+ },
+ {
+  "gloss": "WHY",
+  "category": "question",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "WHY"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [
+   "WHY"
+  ],
+  "wlasl": [
+   "why"
+  ],
+  "kaggle_asl_signs": [
+   "why"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "WHY"
+  ],
+  "recognized_as": "WHY"
+ },
+ {
+  "gloss": "HOW",
+  "category": "question",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "HOW1",
+   "HOW2"
+  ],
+  "asl_citizen_videos": 62,
+  "asl_citizen_exact": [
+   "HOW1",
+   "HOW2"
+  ],
+  "wlasl": [
+   "how"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "HOW1",
+   "HOW2"
+  ],
+  "recognized_as": "HOW"
+ },
+ {
+  "gloss": "HOW-MUCH",
+  "category": "question",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "COST",
+   "PRICE"
+  ],
+  "asl_citizen_videos": 62,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "cost",
+   "price"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "matched through an alias (COST, PRICE); confirm it is the same sign",
+  "asl_citizen_class_videos": [
+   "PRICE"
+  ],
+  "recognized_as": "HOW-MUCH"
+ },
+ {
+  "gloss": "HOW-MANY",
+  "category": "question",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "MANY"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "many"
+  ],
+  "kaggle_asl_signs": [
+   "many"
+  ],
+  "substitute": null,
+  "notes": "matched through an alias (MANY); confirm it is the same sign",
+  "asl_citizen_class_videos": [
+   "MANY"
+  ],
+  "recognized_as": "HOW-MANY"
+ },
+ {
+  "gloss": "WHICH",
+  "category": "question",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "WHICH"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [
+   "WHICH"
+  ],
+  "wlasl": [
+   "which"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "WHICH"
+  ],
+  "recognized_as": "WHICH"
+ },
+ {
+  "gloss": "COFFEE",
+  "category": "drink",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "COFFEE"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "COFFEE"
+  ],
+  "wlasl": [
+   "coffee"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "COFFEE"
+  ],
+  "recognized_as": "COFFEE"
+ },
+ {
+  "gloss": "TEA",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "TEA"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "TEA"
+  ],
+  "wlasl": [
+   "tea"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "TEA"
+  ],
+  "recognized_as": "TEA"
+ },
+ {
+  "gloss": "HOT",
+  "category": "drink",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "HOT"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "HOT"
+  ],
+  "wlasl": [
+   "hot"
+  ],
+  "kaggle_asl_signs": [
+   "hot"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "HOT"
+  ],
+  "recognized_as": "HOT"
+ },
+ {
+  "gloss": "COLD",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "COLD"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "COLD"
+  ],
+  "wlasl": [
+   "cold"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "COLD"
+  ],
+  "recognized_as": "COLD"
+ },
+ {
+  "gloss": "ICE",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "ICE"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "ICE"
+  ],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "ICE"
+  ],
+  "recognized_as": "ICE"
+ },
+ {
+  "gloss": "WATER",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "WATER"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "WATER"
+  ],
+  "wlasl": [
+   "water"
+  ],
+  "kaggle_asl_signs": [
+   "water"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "WATER"
+  ],
+  "recognized_as": "WATER"
+ },
+ {
+  "gloss": "MILK",
+  "category": "drink",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "MILK2",
+   "MILK1"
+  ],
+  "asl_citizen_videos": 61,
+  "asl_citizen_exact": [
+   "MILK2",
+   "MILK1"
+  ],
+  "wlasl": [
+   "milk"
+  ],
+  "kaggle_asl_signs": [
+   "milk"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "MILK2",
+   "MILK1"
+  ],
+  "recognized_as": "MILK"
+ },
+ {
+  "gloss": "OAT",
+  "category": "drink",
+  "in_dialogue": true,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-OAT",
+  "notes": "",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "ALMOND",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-ALMOND",
+  "notes": "",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "SOY",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-SOY",
+  "notes": "",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "CREAM",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "CREAM1",
+   "CREAM2"
+  ],
+  "asl_citizen_videos": 61,
+  "asl_citizen_exact": [
+   "CREAM1",
+   "CREAM2"
+  ],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "CREAM1",
+   "CREAM2"
+  ],
+  "recognized_as": "CREAM"
+ },
+ {
+  "gloss": "SUGAR",
+  "category": "drink",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "SWEET"
+  ],
+  "asl_citizen_videos": 29,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "sugar",
+   "sweet"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": "SWEET",
+  "notes": "shares its ASL Citizen sign with SWEET; recognized as that class",
+  "asl_citizen_class_videos": [],
+  "recognized_as": "SWEET"
+ },
+ {
+  "gloss": "SWEET",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "SWEET"
+  ],
+  "asl_citizen_videos": 29,
+  "asl_citizen_exact": [
+   "SWEET"
+  ],
+  "wlasl": [
+   "sweet"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "SWEET"
+  ],
+  "recognized_as": "SWEET"
+ },
+ {
+  "gloss": "CHOCOLATE",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "CHOCOLATE"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [
+   "CHOCOLATE"
+  ],
+  "wlasl": [
+   "chocolate"
+  ],
+  "kaggle_asl_signs": [
+   "chocolate"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "CHOCOLATE"
+  ],
+  "recognized_as": "CHOCOLATE"
+ },
+ {
+  "gloss": "LATTE",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-LATTE",
+  "notes": "",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "ESPRESSO",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-ESPRESSO",
+  "notes": "",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "DECAF",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-DECAF",
+  "notes": "",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "JUICE",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "JUICE1",
+   "JUICE2"
+  ],
+  "asl_citizen_videos": 61,
+  "asl_citizen_exact": [
+   "JUICE1",
+   "JUICE2"
+  ],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "JUICE1",
+   "JUICE2"
+  ],
+  "recognized_as": "JUICE"
+ },
+ {
+  "gloss": "ORANGE",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "ORANGE"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "ORANGE"
+  ],
+  "wlasl": [
+   "orange"
+  ],
+  "kaggle_asl_signs": [
+   "orange"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "ORANGE"
+  ],
+  "recognized_as": "ORANGE"
+ },
+ {
+  "gloss": "APPLE",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "APPLE"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [
+   "APPLE"
+  ],
+  "wlasl": [
+   "apple"
+  ],
+  "kaggle_asl_signs": [
+   "apple"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "APPLE"
+  ],
+  "recognized_as": "APPLE"
+ },
+ {
+  "gloss": "SODA",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "SODA",
+   "POP1",
+   "POP2",
+   "POP3",
+   "POP4"
+  ],
+  "asl_citizen_videos": 150,
+  "asl_citizen_exact": [
+   "SODA"
+  ],
+  "wlasl": [
+   "soda"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "SODA",
+   "POP1",
+   "POP2",
+   "POP3",
+   "POP4"
+  ],
+  "recognized_as": "SODA"
+ },
+ {
+  "gloss": "CUP",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "CUP",
+   "GLASS1",
+   "GLASS2",
+   "GLASS3"
+  ],
+  "asl_citizen_videos": 122,
+  "asl_citizen_exact": [
+   "CUP"
+  ],
+  "wlasl": [
+   "cup",
+   "glass"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "CUP",
+   "GLASS1",
+   "GLASS2",
+   "GLASS3"
+  ],
+  "recognized_as": "CUP"
+ },
+ {
+  "gloss": "STRAW",
+  "category": "drink",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "STRAW"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "STRAW"
+  ],
+  "wlasl": [
+   "straw"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "STRAW"
+  ],
+  "recognized_as": "STRAW"
+ },
+ {
+  "gloss": "MUFFIN",
+  "category": "food",
+  "in_dialogue": true,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-MUFFIN",
+  "notes": "",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "COOKIE",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "COOKIE"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [
+   "COOKIE"
+  ],
+  "wlasl": [
+   "cookie"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "COOKIE"
+  ],
+  "recognized_as": "COOKIE"
+ },
+ {
+  "gloss": "CAKE",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "CAKE"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "CAKE"
+  ],
+  "wlasl": [
+   "cake"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "CAKE"
+  ],
+  "recognized_as": "CAKE"
+ },
+ {
+  "gloss": "BREAD",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "BREAD"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "BREAD"
+  ],
+  "wlasl": [
+   "bread"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "BREAD"
+  ],
+  "recognized_as": "BREAD"
+ },
+ {
+  "gloss": "SANDWICH",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "SANDWICH3",
+   "SANDWICH2",
+   "SANDWICH1",
+   "SANDWICH4"
+  ],
+  "asl_citizen_videos": 122,
+  "asl_citizen_exact": [
+   "SANDWICH3",
+   "SANDWICH2",
+   "SANDWICH1",
+   "SANDWICH4"
+  ],
+  "wlasl": [
+   "sandwich"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "SANDWICH3",
+   "SANDWICH2",
+   "SANDWICH1",
+   "SANDWICH4"
+  ],
+  "recognized_as": "SANDWICH"
+ },
+ {
+  "gloss": "BAGEL",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-BAGEL",
+  "notes": "",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "CHEESE",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "CHEESE"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "CHEESE"
+  ],
+  "wlasl": [
+   "cheese"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "CHEESE"
+  ],
+  "recognized_as": "CHEESE"
+ },
+ {
+  "gloss": "EGG",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "EGG"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "EGG"
+  ],
+  "wlasl": [
+   "egg"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "EGG"
+  ],
+  "recognized_as": "EGG"
+ },
+ {
+  "gloss": "BUTTER",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "BUTTER"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "BUTTER"
+  ],
+  "wlasl": [
+   "butter"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "BUTTER"
+  ],
+  "recognized_as": "BUTTER"
+ },
+ {
+  "gloss": "BLUEBERRY",
+  "category": "food",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "BERRY"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "berry"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "matched through an alias (BERRY); confirm it is the same sign",
+  "asl_citizen_class_videos": [
+   "BERRY"
+  ],
+  "recognized_as": "BLUEBERRY"
+ },
+ {
+  "gloss": "BANANA",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "BANANA2",
+   "BANANA3",
+   "BANANA4",
+   "BANANA1"
+  ],
+  "asl_citizen_videos": 122,
+  "asl_citizen_exact": [
+   "BANANA2",
+   "BANANA3",
+   "BANANA4",
+   "BANANA1"
+  ],
+  "wlasl": [
+   "banana"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "BANANA2",
+   "BANANA3",
+   "BANANA4",
+   "BANANA1"
+  ],
+  "recognized_as": "BANANA"
+ },
+ {
+  "gloss": "STRAWBERRY",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "STRAWBERRY4",
+   "STRAWBERRY2",
+   "STRAWBERRY3",
+   "STRAWBERRY1"
+  ],
+  "asl_citizen_videos": 122,
+  "asl_citizen_exact": [
+   "STRAWBERRY4",
+   "STRAWBERRY2",
+   "STRAWBERRY3",
+   "STRAWBERRY1"
+  ],
+  "wlasl": [
+   "strawberry"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "STRAWBERRY4",
+   "STRAWBERRY2",
+   "STRAWBERRY3",
+   "STRAWBERRY1"
+  ],
+  "recognized_as": "STRAWBERRY"
+ },
+ {
+  "gloss": "SALAD",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "SALAD"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "SALAD"
+  ],
+  "wlasl": [
+   "salad"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "SALAD"
+  ],
+  "recognized_as": "SALAD"
+ },
+ {
+  "gloss": "SOUP",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "SOUP"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "SOUP"
+  ],
+  "wlasl": [
+   "soup"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "SOUP"
+  ],
+  "recognized_as": "SOUP"
+ },
+ {
+  "gloss": "BREAKFAST",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "BREAKFAST1",
+   "BREAKFAST2"
+  ],
+  "asl_citizen_videos": 62,
+  "asl_citizen_exact": [
+   "BREAKFAST1",
+   "BREAKFAST2"
+  ],
+  "wlasl": [
+   "breakfast"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "BREAKFAST1",
+   "BREAKFAST2"
+  ],
+  "recognized_as": "BREAKFAST"
+ },
+ {
+  "gloss": "LUNCH",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "LUNCH1",
+   "LUNCH2"
+  ],
+  "asl_citizen_videos": 62,
+  "asl_citizen_exact": [
+   "LUNCH1",
+   "LUNCH2"
+  ],
+  "wlasl": [
+   "lunch"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "LUNCH1",
+   "LUNCH2"
+  ],
+  "recognized_as": "LUNCH"
+ },
+ {
+  "gloss": "HUNGRY",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "HUNGRY"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "HUNGRY"
+  ],
+  "wlasl": [
+   "hungry"
+  ],
+  "kaggle_asl_signs": [
+   "hungry"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "HUNGRY"
+  ],
+  "recognized_as": "HUNGRY"
+ },
+ {
+  "gloss": "THIRSTY",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "THIRSTY"
+  ],
+  "asl_citizen_videos": 29,
+  "asl_citizen_exact": [
+   "THIRSTY"
+  ],
+  "wlasl": [
+   "thirsty"
+  ],
+  "kaggle_asl_signs": [
+   "thirsty"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "THIRSTY"
+  ],
+  "recognized_as": "THIRSTY"
+ },
+ {
+  "gloss": "NUTS",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "NUT1",
+   "NUT2"
+  ],
+  "asl_citizen_videos": 61,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "nut"
+  ],
+  "kaggle_asl_signs": [
+   "nuts"
+  ],
+  "substitute": null,
+  "notes": "matched through an alias (NUT1, NUT2); confirm it is the same sign",
+  "asl_citizen_class_videos": [
+   "NUT1",
+   "NUT2"
+  ],
+  "recognized_as": "NUTS"
+ },
+ {
+  "gloss": "ALLERGY",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "allergy"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-ALLERGY",
+  "notes": "",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "WARM",
+  "category": "food",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "WARM"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "WARM"
+  ],
+  "wlasl": [
+   "warm"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "WARM"
+  ],
+  "recognized_as": "WARM"
+ },
+ {
+  "gloss": "FRESH",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "NEW"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "new"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "matched through an alias (NEW); confirm it is the same sign",
+  "asl_citizen_class_videos": [
+   "NEW"
+  ],
+  "recognized_as": "FRESH"
+ },
+ {
+  "gloss": "DELICIOUS",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "DELICIOUS"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "DELICIOUS"
+  ],
+  "wlasl": [
+   "delicious"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "DELICIOUS"
+  ],
+  "recognized_as": "DELICIOUS"
+ },
+ {
+  "gloss": "TASTE",
+  "category": "food",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "TASTE"
+  ],
+  "asl_citizen_videos": 29,
+  "asl_citizen_exact": [
+   "TASTE"
+  ],
+  "wlasl": [
+   "taste"
+  ],
+  "kaggle_asl_signs": [
+   "taste"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "TASTE"
+  ],
+  "recognized_as": "TASTE"
+ },
+ {
+  "gloss": "SIZE",
+  "category": "size",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "size"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-SIZE",
+  "notes": "",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "SMALL",
+  "category": "size",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "SMALL"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "SMALL"
+  ],
+  "wlasl": [
+   "small"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "SMALL"
+  ],
+  "recognized_as": "SMALL"
+ },
+ {
+  "gloss": "MEDIUM",
+  "category": "size",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "MIDDLE",
+   "AVERAGE"
+  ],
+  "asl_citizen_videos": 61,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "middle",
+   "average"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "matched through an alias (MIDDLE, AVERAGE); confirm it is the same sign",
+  "asl_citizen_class_videos": [
+   "MIDDLE",
+   "AVERAGE"
+  ],
+  "recognized_as": "MEDIUM"
+ },
+ {
+  "gloss": "LARGE",
+  "category": "size",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "BIG"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "large",
+   "big"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "matched through an alias (BIG); confirm it is the same sign",
+  "asl_citizen_class_videos": [
+   "BIG"
+  ],
+  "recognized_as": "LARGE"
+ },
+ {
+  "gloss": "EXTRA",
+  "category": "size",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "MORE"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "more"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": "MORE",
+  "notes": "shares its ASL Citizen sign with MORE; recognized as that class",
+  "asl_citizen_class_videos": [],
+  "recognized_as": "MORE"
+ },
+ {
+  "gloss": "HALF",
+  "category": "size",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "HALF"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "HALF"
+  ],
+  "wlasl": [
+   "half"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "HALF"
+  ],
+  "recognized_as": "HALF"
+ },
+ {
+  "gloss": "ALL",
+  "category": "size",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "ALL",
+   "WHOLE"
+  ],
+  "asl_citizen_videos": 62,
+  "asl_citizen_exact": [
+   "ALL"
+  ],
+  "wlasl": [
+   "all"
+  ],
+  "kaggle_asl_signs": [
+   "all"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "ALL",
+   "WHOLE"
+  ],
+  "recognized_as": "ALL"
+ },
+ {
+  "gloss": "SOME",
+  "category": "size",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "SOME"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "SOME"
+  ],
+  "wlasl": [
+   "some"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "SOME"
+  ],
+  "recognized_as": "SOME"
+ },
+ {
+  "gloss": "MONEY",
+  "category": "money",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "MONEY2",
+   "MONEY1"
+  ],
+  "asl_citizen_videos": 62,
+  "asl_citizen_exact": [
+   "MONEY2",
+   "MONEY1"
+  ],
+  "wlasl": [
+   "money"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "MONEY2",
+   "MONEY1"
+  ],
+  "recognized_as": "MONEY"
+ },
+ {
+  "gloss": "DOLLAR",
+  "category": "money",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "1DOLLAR"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "dollar"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "matched through an alias (1DOLLAR); confirm it is the same sign",
+  "asl_citizen_class_videos": [
+   "1DOLLAR"
+  ],
+  "recognized_as": "DOLLAR"
+ },
+ {
+  "gloss": "FIVE-DOLLARS",
+  "category": "money",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "5DOLLARS"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [
+   "5DOLLARS"
+  ],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "5DOLLARS"
+  ],
+  "recognized_as": "FIVE-DOLLARS"
+ },
+ {
+  "gloss": "CENT",
+  "category": "money",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "PENNY"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "cent",
+   "penny"
+  ],
+  "kaggle_asl_signs": [
+   "penny"
+  ],
+  "substitute": null,
+  "notes": "matched through an alias (PENNY); confirm it is the same sign",
+  "asl_citizen_class_videos": [
+   "PENNY"
+  ],
+  "recognized_as": "CENT"
+ },
+ {
+  "gloss": "CARD",
+  "category": "money",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "CREDITCARD"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "card"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "matched through an alias (CREDITCARD); confirm it is the same sign",
+  "asl_citizen_class_videos": [
+   "CREDITCARD"
+  ],
+  "recognized_as": "CARD"
+ },
+ {
+  "gloss": "CASH",
+  "category": "money",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "MONEY",
+  "notes": "",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "PAY",
+  "category": "money",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "PAY"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "PAY"
+  ],
+  "wlasl": [
+   "pay"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "PAY"
+  ],
+  "recognized_as": "PAY"
+ },
+ {
+  "gloss": "COST",
+  "category": "money",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "COST",
+   "PRICE"
+  ],
+  "asl_citizen_videos": 62,
+  "asl_citizen_exact": [
+   "COST"
+  ],
+  "wlasl": [
+   "cost",
+   "price"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "COST"
+  ],
+  "recognized_as": "COST"
+ },
+ {
+  "gloss": "RECEIPT",
+  "category": "money",
+  "in_dialogue": true,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-RECEIPT",
+  "notes": "",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "TIP",
+  "category": "money",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-TIP",
+  "notes": "",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "CHEAP",
+  "category": "money",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "CHEAP"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "CHEAP"
+  ],
+  "wlasl": [
+   "cheap"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "CHEAP"
+  ],
+  "recognized_as": "CHEAP"
+ },
+ {
+  "gloss": "EXPENSIVE",
+  "category": "money",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "EXPENSIVE"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "EXPENSIVE"
+  ],
+  "wlasl": [
+   "expensive"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "EXPENSIVE"
+  ],
+  "recognized_as": "EXPENSIVE"
+ },
+ {
+  "gloss": "HERE",
+  "category": "place",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "HERE"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "HERE"
+  ],
+  "wlasl": [
+   "here"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "HERE"
+  ],
+  "recognized_as": "HERE"
+ },
+ {
+  "gloss": "GO",
+  "category": "place",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "GO"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "GO"
+  ],
+  "wlasl": [
+   "go"
+  ],
+  "kaggle_asl_signs": [
+   "go"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "GO"
+  ],
+  "recognized_as": "GO"
+ },
+ {
+  "gloss": "TABLE",
+  "category": "place",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "TABLE"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "TABLE"
+  ],
+  "wlasl": [
+   "table"
+  ],
+  "kaggle_asl_signs": [
+   "table"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "TABLE"
+  ],
+  "recognized_as": "TABLE"
+ },
+ {
+  "gloss": "SIT",
+  "category": "place",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "SIT",
+   "CHAIR"
+  ],
+  "asl_citizen_videos": 61,
+  "asl_citizen_exact": [
+   "SIT"
+  ],
+  "wlasl": [
+   "sit",
+   "chair"
+  ],
+  "kaggle_asl_signs": [
+   "chair"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "SIT",
+   "CHAIR"
+  ],
+  "recognized_as": "SIT"
+ },
+ {
+  "gloss": "WINDOW",
+  "category": "place",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "WINDOW"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "WINDOW"
+  ],
+  "wlasl": [
+   "window"
+  ],
+  "kaggle_asl_signs": [
+   "glasswindow"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "WINDOW"
+  ],
+  "recognized_as": "WINDOW"
+ },
+ {
+  "gloss": "BATHROOM",
+  "category": "place",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "BATHROOM",
+   "TOILET"
+  ],
+  "asl_citizen_videos": 62,
+  "asl_citizen_exact": [
+   "BATHROOM"
+  ],
+  "wlasl": [
+   "bathroom",
+   "toilet",
+   "restroom"
+  ],
+  "kaggle_asl_signs": [
+   "potty"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "BATHROOM",
+   "TOILET"
+  ],
+  "recognized_as": "BATHROOM"
+ },
+ {
+  "gloss": "OUTSIDE",
+  "category": "place",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "OUTSIDE"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "OUTSIDE"
+  ],
+  "wlasl": [
+   "outside"
+  ],
+  "kaggle_asl_signs": [
+   "outside"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "OUTSIDE"
+  ],
+  "recognized_as": "OUTSIDE"
+ },
+ {
+  "gloss": "INSIDE",
+  "category": "place",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "INSIDE",
+   "IN"
+  ],
+  "asl_citizen_videos": 61,
+  "asl_citizen_exact": [
+   "INSIDE"
+  ],
+  "wlasl": [
+   "inside",
+   "in"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "INSIDE",
+   "IN"
+  ],
+  "recognized_as": "INSIDE"
+ },
+ {
+  "gloss": "READY",
+  "category": "place",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "READY"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "READY"
+  ],
+  "wlasl": [
+   "ready"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "READY"
+  ],
+  "recognized_as": "READY"
+ },
+ {
+  "gloss": "NOW",
+  "category": "place",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "NOW"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "NOW"
+  ],
+  "wlasl": [
+   "now"
+  ],
+  "kaggle_asl_signs": [
+   "now"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "NOW"
+  ],
+  "recognized_as": "NOW"
+ },
+ {
+  "gloss": "LATER",
+  "category": "place",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "LATER"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [
+   "LATER"
+  ],
+  "wlasl": [
+   "later"
+  ],
+  "kaggle_asl_signs": [
+   "later"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "LATER"
+  ],
+  "recognized_as": "LATER"
+ },
+ {
+  "gloss": "MINUTE",
+  "category": "place",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "MINUTE"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "MINUTE"
+  ],
+  "wlasl": [
+   "minute"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "MINUTE"
+  ],
+  "recognized_as": "MINUTE"
+ },
+ {
+  "gloss": "TIME",
+  "category": "place",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "TIME"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "TIME"
+  ],
+  "wlasl": [
+   "time"
+  ],
+  "kaggle_asl_signs": [
+   "time"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "TIME"
+  ],
+  "recognized_as": "TIME"
+ },
+ {
+  "gloss": "FAST",
+  "category": "place",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "FAST"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "FAST"
+  ],
+  "wlasl": [
+   "fast",
+   "quick"
+  ],
+  "kaggle_asl_signs": [
+   "fast"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "FAST"
+  ],
+  "recognized_as": "FAST"
+ },
+ {
+  "gloss": "SLOW",
+  "category": "place",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "SLOW"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [
+   "SLOW"
+  ],
+  "wlasl": [
+   "slow"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "SLOW"
+  ],
+  "recognized_as": "SLOW"
+ },
+ {
+  "gloss": "DEAF",
+  "category": "communication",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "DEAF1",
+   "DEAF2"
+  ],
+  "asl_citizen_videos": 62,
+  "asl_citizen_exact": [
+   "DEAF1",
+   "DEAF2"
+  ],
+  "wlasl": [
+   "deaf"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "DEAF1",
+   "DEAF2"
+  ],
+  "recognized_as": "DEAF"
+ },
+ {
+  "gloss": "HEARING",
+  "category": "communication",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "HEARING",
+   "HEAR1",
+   "HEAR2"
+  ],
+  "asl_citizen_videos": 92,
+  "asl_citizen_exact": [
+   "HEARING"
+  ],
+  "wlasl": [
+   "hearing",
+   "hear"
+  ],
+  "kaggle_asl_signs": [
+   "hear"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "HEARING",
+   "HEAR1",
+   "HEAR2"
+  ],
+  "recognized_as": "HEARING"
+ },
+ {
+  "gloss": "SIGN",
+  "category": "communication",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "SIGN",
+   "SIGNLANGUAGE"
+  ],
+  "asl_citizen_videos": 60,
+  "asl_citizen_exact": [
+   "SIGN"
+  ],
+  "wlasl": [
+   "sign",
+   "sign language",
+   "asl"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "SIGN",
+   "SIGNLANGUAGE"
+  ],
+  "recognized_as": "SIGN"
+ },
+ {
+  "gloss": "WRITE",
+  "category": "communication",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "WRITE"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "WRITE"
+  ],
+  "wlasl": [
+   "write"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "WRITE"
+  ],
+  "recognized_as": "WRITE"
+ },
+ {
+  "gloss": "PHONE",
+  "category": "communication",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "PHONE"
+  ],
+  "asl_citizen_videos": 29,
+  "asl_citizen_exact": [
+   "PHONE"
+  ],
+  "wlasl": [
+   "phone",
+   "telephone"
+  ],
+  "kaggle_asl_signs": [
+   "callonphone"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "PHONE"
+  ],
+  "recognized_as": "PHONE"
+ },
+ {
+  "gloss": "SEE",
+  "category": "communication",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "SEE"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "SEE"
+  ],
+  "wlasl": [
+   "see"
+  ],
+  "kaggle_asl_signs": [
+   "see",
+   "look"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "SEE"
+  ],
+  "recognized_as": "SEE"
+ },
+ {
+  "gloss": "HAPPY",
+  "category": "affect",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "HAPPY"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "HAPPY"
+  ],
+  "wlasl": [
+   "happy"
+  ],
+  "kaggle_asl_signs": [
+   "happy"
+  ],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "HAPPY"
+  ],
+  "recognized_as": "HAPPY"
+ },
+ {
+  "gloss": "LOVE",
+  "category": "affect",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "LOVE"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "LOVE"
+  ],
+  "wlasl": [
+   "love"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "LOVE"
+  ],
+  "recognized_as": "LOVE"
+ },
+ {
+  "gloss": "WRONG",
+  "category": "affect",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "WRONG"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "WRONG"
+  ],
+  "wlasl": [
+   "wrong",
+   "mistake"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "WRONG"
+  ],
+  "recognized_as": "WRONG"
+ },
+ {
+  "gloss": "RIGHT",
+  "category": "affect",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "RIGHT3",
+   "RIGHT1",
+   "RIGHT2"
+  ],
+  "asl_citizen_videos": 94,
+  "asl_citizen_exact": [
+   "RIGHT3",
+   "RIGHT1",
+   "RIGHT2"
+  ],
+  "wlasl": [
+   "right",
+   "correct"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "",
+  "asl_citizen_class_videos": [
+   "RIGHT3",
+   "RIGHT1",
+   "RIGHT2"
+  ],
+  "recognized_as": "RIGHT"
+ },
+ {
+  "gloss": "ONE",
+  "category": "number",
+  "in_dialogue": true,
+  "asl_citizen": [
+   "ONE"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "ONE"
+  ],
+  "wlasl": [
+   "one"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [
+   "ONE"
+  ],
+  "recognized_as": "ONE"
+ },
+ {
+  "gloss": "TWO",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "TWO"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [
+   "TWO"
+  ],
+  "wlasl": [
+   "two"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [
+   "TWO"
+  ],
+  "recognized_as": "TWO"
+ },
+ {
+  "gloss": "THREE",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "THREE"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "THREE"
+  ],
+  "wlasl": [
+   "three"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [
+   "THREE"
+  ],
+  "recognized_as": "THREE"
+ },
+ {
+  "gloss": "FOUR",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "FOUR"
+  ],
+  "asl_citizen_videos": 32,
+  "asl_citizen_exact": [
+   "FOUR"
+  ],
+  "wlasl": [
+   "four"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [
+   "FOUR"
+  ],
+  "recognized_as": "FOUR"
+ },
+ {
+  "gloss": "FIVE",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "five"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-FIVE",
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "SIX",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "SIX"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "SIX"
+  ],
+  "wlasl": [
+   "six"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [
+   "SIX"
+  ],
+  "recognized_as": "SIX"
+ },
+ {
+  "gloss": "SEVEN",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "SEVEN"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "SEVEN"
+  ],
+  "wlasl": [
+   "seven"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [
+   "SEVEN"
+  ],
+  "recognized_as": "SEVEN"
+ },
+ {
+  "gloss": "EIGHT",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "EIGHT"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "EIGHT"
+  ],
+  "wlasl": [
+   "eight"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [
+   "EIGHT"
+  ],
+  "recognized_as": "EIGHT"
+ },
+ {
+  "gloss": "NINE",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "NINE"
+  ],
+  "asl_citizen_videos": 31,
+  "asl_citizen_exact": [
+   "NINE"
+  ],
+  "wlasl": [
+   "nine"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [
+   "NINE"
+  ],
+  "recognized_as": "NINE"
+ },
+ {
+  "gloss": "TEN",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "ten"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-TEN",
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "ELEVEN",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [
+   "ELEVEN"
+  ],
+  "asl_citizen_videos": 30,
+  "asl_citizen_exact": [
+   "ELEVEN"
+  ],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": null,
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [
+   "ELEVEN"
+  ],
+  "recognized_as": "ELEVEN"
+ },
+ {
+  "gloss": "TWELVE",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-TWELVE",
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "THIRTEEN",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-THIRTEEN",
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "FOURTEEN",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-FOURTEEN",
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "FIFTEEN",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-FIFTEEN",
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "SIXTEEN",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "sixteen"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-SIXTEEN",
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "SEVENTEEN",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-SEVENTEEN",
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "EIGHTEEN",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "eighteen"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-EIGHTEEN",
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "NINETEEN",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [
+   "nineteen"
+  ],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-NINETEEN",
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ },
+ {
+  "gloss": "TWENTY",
+  "category": "number",
+  "in_dialogue": false,
+  "asl_citizen": [],
+  "asl_citizen_videos": 0,
+  "asl_citizen_exact": [],
+  "wlasl": [],
+  "kaggle_asl_signs": [],
+  "substitute": "FS-TWENTY",
+  "notes": "number handshapes vary (e.g. 6-9, 16-19 use twisting movements); check citation form",
+  "asl_citizen_class_videos": [],
+  "recognized_as": null
+ }
+]

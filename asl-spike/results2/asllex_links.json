@@ -1,0 +1,5790 @@
+{
+ "summary": {
+  "n_classes": 143,
+  "linked": 143,
+  "sign_type_counts": {
+   "AsymmetricalSameHandshape": 11,
+   "OneHanded": 71,
+   "AsymmetricalDifferentHandshape": 25,
+   "SymmetricalOrAlternating": 32,
+   "SymmetryViolation": 1,
+   "DominanceViolation": 3
+  },
+  "handshapes_needed_dominant": 36,
+  "flexion_change_signs": 23,
+  "path_movement_none": 20,
+  "ambiguous_sign_type": [
+   {
+    "class": "ALL",
+    "variants": [
+     [
+      "all",
+      "AsymmetricalSameHandshape",
+      31
+     ],
+     [
+      "whole",
+      "SymmetricalOrAlternating",
+      31
+     ]
+    ]
+   },
+   {
+    "class": "BANANA",
+    "variants": [
+     [
+      "banana_3",
+      "AsymmetricalSameHandshape",
+      31
+     ],
+     [
+      "banana",
+      "AsymmetricalDifferentHandshape",
+      31
+     ],
+     [
+      "banana_2",
+      "AsymmetricalDifferentHandshape",
+      30
+     ],
+     [
+      "banana_4",
+      "AsymmetricalDifferentHandshape",
+      30
+     ]
+    ]
+   },
+   {
+    "class": "CAN",
+    "variants": [
+     [
+      "can",
+      "SymmetricalOrAlternating",
+      31
+     ],
+     [
+      "can_2",
+      "AsymmetricalDifferentHandshape",
+      30
+     ]
+    ]
+   },
+   {
+    "class": "CUP",
+    "variants": [
+     [
+      "glass_3",
+      "OneHanded",
+      31
+     ],
+     [
+      "glass_2",
+      "OneHanded",
+      31
+     ],
+     [
+      "glass_1",
+      "AsymmetricalDifferentHandshape",
+      30
+     ],
+     [
+      "cup",
+      "AsymmetricalDifferentHandshape",
+      30
+     ]
+    ]
+   },
+   {
+    "class": "HOW",
+    "variants": [
+     [
+      "how",
+      "SymmetricalOrAlternating",
+      31
+     ],
+     [
+      "how_2",
+      "AsymmetricalSameHandshape",
+      31
+     ]
+    ]
+   },
+   {
+    "class": "INSIDE",
+    "variants": [
+     [
+      "in",
+      "AsymmetricalDifferentHandshape",
+      31
+     ],
+     [
+      "inside",
+      "AsymmetricalSameHandshape",
+      30
+     ]
+    ]
+   },
+   {
+    "class": "MEDIUM",
+    "variants": [
+     [
+      "middle",
+      "AsymmetricalDifferentHandshape",
+      31
+     ],
+     [
+      "average",
+      "AsymmetricalSameHandshape",
+      30
+     ]
+    ]
+   },
+   {
+    "class": "MILK",
+    "variants": [
+     [
+      "milk_2",
+      "SymmetricalOrAlternating",
+      31
+     ],
+     [
+      "milk",
+      "OneHanded",
+      30
+     ]
+    ]
+   },
+   {
+    "class": "MONEY",
+    "variants": [
+     [
+      "money_2",
+      "OneHanded",
+      31
+     ],
+     [
+      "money",
+      "AsymmetricalDifferentHandshape",
+      31
+     ]
+    ]
+   },
+   {
+    "class": "MY",
+    "variants": [
+     [
+      "mine",
+      "AsymmetricalDifferentHandshape",
+      31
+     ],
+     [
+      "my",
+      "OneHanded",
+      30
+     ]
+    ]
+   },
+   {
+    "class": "NONE",
+    "variants": [
+     [
+      "nothing_2",
+      "SymmetricalOrAlternating",
+      31
+     ],
+     [
+      "none",
+      "AsymmetricalDifferentHandshape",
+      31
+     ],
+     [
+      "nothing",
+      "SymmetricalOrAlternating",
+      31
+     ]
+    ]
+   },
+   {
+    "class": "NUTS",
+    "variants": [
+     [
+      "nut",
+      "OneHanded",
+      31
+     ],
+     [
+      "nut_2",
+      "AsymmetricalDifferentHandshape",
+      30
+     ]
+    ]
+   },
+   {
+    "class": "RIGHT",
+    "variants": [
+     [
+      "right_2",
+      "OneHanded",
+      32
+     ],
+     [
+      "right_3",
+      "AsymmetricalSameHandshape",
+      31
+     ],
+     [
+      "right_1",
+      "SymmetricalOrAlternating",
+      31
+     ]
+    ]
+   },
+   {
+    "class": "SAME",
+    "variants": [
+     [
+      "same_2",
+      "SymmetricalOrAlternating",
+      32
+     ],
+     [
+      "same_1",
+      "OneHanded",
+      30
+     ]
+    ]
+   },
+   {
+    "class": "SANDWICH",
+    "variants": [
+     [
+      "sandwich_4",
+      "SymmetricalOrAlternating",
+      32
+     ],
+     [
+      "sandwich_3",
+      "SymmetricalOrAlternating",
+      30
+     ],
+     [
+      "sandwich",
+      "AsymmetricalDifferentHandshape",
+      30
+     ],
+     [
+      "sandwich_2",
+      "SymmetricalOrAlternating",
+      30
+     ]
+    ]
+   },
+   {
+    "class": "SIT",
+    "variants": [
+     [
+      "sit",
+      "AsymmetricalDifferentHandshape",
+      31
+     ],
+     [
+      "chair",
+      "DominanceViolation",
+      30
+     ]
+    ]
+   },
+   {
+    "class": "SODA",
+    "variants": [
+     [
+      "pop_2",
+      "SymmetricalOrAlternating",
+      31
+     ],
+     [
+      "pop_3",
+      "SymmetricalOrAlternating",
+      31
+     ],
+     [
+      "soda",
+      "AsymmetricalDifferentHandshape",
+      30
+     ],
+     [
+      "pop_4",
+      "SymmetricalOrAlternating",
+      29
+     ],
+     [
+      "pop",
+      "AsymmetricalDifferentHandshape",
+      29
+     ]
+    ]
+   },
+   {
+    "class": "WHAT",
+    "variants": [
+     [
+      "what_2",
+      "AsymmetricalDifferentHandshape",
+      32
+     ],
+     [
+      "what_1",
+      "SymmetricalOrAlternating",
+      31
+     ],
+     [
+      "W.H.A.T",
+      "OneHanded",
+      30
+     ]
+    ]
+   }
+  ],
+  "codes_missing_in_asllex": [
+   {
+    "class": "WELCOME",
+    "citizen_gloss": "WELCOME1",
+    "reason": "no code and no EntryID match"
+   }
+  ],
+  "source": "asl-lex.org/visualization/data/sign_props.json (ASL-LEX 2.0, CC BY-NC 4.0); OSF was down"
+ },
+ "classes": {
+  "AGAIN": {
+   "primary": {
+    "code": "J_02_013",
+    "entry_id": "again",
+    "citizen_glosses": [
+     "AGAIN"
+    ],
+    "videos": 29,
+    "sign_type": "AsymmetricalSameHandshape",
+    "handshape": "flat_b",
+    "nondominant_handshape": "flat_b",
+    "flexion": "Flat",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "HandAway",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 367,
+    "sign_offset_ms": 1168,
+    "sign_duration_ms": 801,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "ALL": {
+   "primary": {
+    "code": "C_03_088",
+    "entry_id": "all",
+    "citizen_glosses": [
+     "ALL"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalSameHandshape",
+    "handshape": "open_b",
+    "nondominant_handshape": "open_b",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "HandAway",
+    "path_movement": "Circular",
+    "repeated_movement": 0,
+    "sign_onset_ms": 367,
+    "sign_offset_ms": 1335,
+    "sign_duration_ms": 968,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "J_02_049",
+     "entry_id": "whole",
+     "citizen_glosses": [
+      "WHOLE"
+     ],
+     "videos": 31,
+     "sign_type": "SymmetricalOrAlternating",
+     "handshape": "curved_5",
+     "nondominant_handshape": "curved_5",
+     "flexion": "Curved",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 1.0,
+     "thumb_position": "Open",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "Curved",
+     "repeated_movement": 0,
+     "sign_onset_ms": 601,
+     "sign_offset_ms": 1602,
+     "sign_duration_ms": 1001,
+     "lexical_class": "Adverb",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "APPLE": {
+   "primary": {
+    "code": "A_03_054",
+    "entry_id": "apple",
+    "citizen_glosses": [
+     "APPLE"
+    ],
+    "videos": 32,
+    "sign_type": "OneHanded",
+    "handshape": "bent_1",
+    "nondominant_handshape": null,
+    "flexion": "Bent",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Head",
+    "minor_location": "CheekNose",
+    "path_movement": "None",
+    "repeated_movement": 1,
+    "sign_onset_ms": 400,
+    "sign_offset_ms": 968,
+    "sign_duration_ms": 567,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "BAD": {
+   "primary": {
+    "code": "B_02_082",
+    "entry_id": "bad",
+    "citizen_glosses": [
+     "BAD"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "open_b",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Chin",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 434,
+    "sign_offset_ms": 801,
+    "sign_duration_ms": 367,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "BANANA": {
+   "primary": {
+    "code": "K_03_014",
+    "entry_id": "banana_3",
+    "citizen_glosses": [
+     "BANANA3"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalSameHandshape",
+    "handshape": "1",
+    "nondominant_handshape": "1",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Hand",
+    "minor_location": "FingerRadial",
+    "path_movement": "BackAndForth",
+    "repeated_movement": 0,
+    "sign_onset_ms": 601,
+    "sign_offset_ms": 1768,
+    "sign_duration_ms": 1168,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "A_03_002",
+     "entry_id": "banana",
+     "citizen_glosses": [
+      "BANANA1"
+     ],
+     "videos": 31,
+     "sign_type": "AsymmetricalDifferentHandshape",
+     "handshape": "flat_o",
+     "nondominant_handshape": "1",
+     "flexion": "Flat",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "FingerRadial",
+     "path_movement": "Z-shaped",
+     "repeated_movement": 0,
+     "sign_onset_ms": 334,
+     "sign_offset_ms": 968,
+     "sign_duration_ms": 634,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    },
+    {
+     "code": "K_02_097",
+     "entry_id": "banana_2",
+     "citizen_glosses": [
+      "BANANA2"
+     ],
+     "videos": 30,
+     "sign_type": "AsymmetricalDifferentHandshape",
+     "handshape": "baby_o",
+     "nondominant_handshape": "1",
+     "flexion": "Bent",
+     "flexion_change": 0.0,
+     "selected_fingers": "i",
+     "spread": null,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "FingerBack",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 601,
+     "sign_offset_ms": 2236,
+     "sign_duration_ms": 1635,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    },
+    {
+     "code": "K_01_061",
+     "entry_id": "banana_4",
+     "citizen_glosses": [
+      "BANANA4"
+     ],
+     "videos": 30,
+     "sign_type": "AsymmetricalDifferentHandshape",
+     "handshape": "g",
+     "nondominant_handshape": "1",
+     "flexion": "Flat",
+     "flexion_change": 0.0,
+     "selected_fingers": "i",
+     "spread": null,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "FingerRadial",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 701,
+     "sign_offset_ms": 2369,
+     "sign_duration_ms": 1668,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "BATHROOM": {
+   "primary": {
+    "code": "A_02_038",
+    "entry_id": "toilet",
+    "citizen_glosses": [
+     "TOILET"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "baby_o",
+    "nondominant_handshape": null,
+    "flexion": "Bent",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1335,
+    "sign_duration_ms": 868,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "A_02_051",
+     "entry_id": "bathroom",
+     "citizen_glosses": [
+      "BATHROOM"
+     ],
+     "videos": 31,
+     "sign_type": "OneHanded",
+     "handshape": "t",
+     "nondominant_handshape": null,
+     "flexion": "Curved",
+     "flexion_change": 0.0,
+     "selected_fingers": "i",
+     "spread": null,
+     "thumb_position": "Open",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "None",
+     "repeated_movement": 1,
+     "sign_onset_ms": 400,
+     "sign_offset_ms": 734,
+     "sign_duration_ms": 334,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": false
+  },
+  "BLUEBERRY": {
+   "primary": {
+    "code": "E_01_095",
+    "entry_id": "berry",
+    "citizen_glosses": [
+     "BERRY"
+    ],
+    "videos": 30,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "o",
+    "nondominant_handshape": "1",
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "FingerTip",
+    "path_movement": "None",
+    "repeated_movement": 1,
+    "sign_onset_ms": 434,
+    "sign_offset_ms": 1702,
+    "sign_duration_ms": 1268,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "BREAD": {
+   "primary": {
+    "code": "A_02_058",
+    "entry_id": "bread",
+    "citizen_glosses": [
+     "BREAD"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "open_e",
+    "nondominant_handshape": "B",
+    "flexion": "Bent",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "PalmBack",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 400,
+    "sign_offset_ms": 1001,
+    "sign_duration_ms": 601,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "BREAKFAST": {
+   "primary": {
+    "code": "J_01_053",
+    "entry_id": "breakfast_2",
+    "citizen_glosses": [
+     "BREAKFAST1"
+    ],
+    "videos": 39,
+    "sign_type": "OneHanded",
+    "handshape": "closed_b",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Closed",
+    "major_location": "Head",
+    "minor_location": "Chin",
+    "path_movement": "Circular",
+    "repeated_movement": 1,
+    "sign_onset_ms": 667,
+    "sign_offset_ms": 1668,
+    "sign_duration_ms": 1001,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "F_01_073",
+     "entry_id": "breakfast_1",
+     "citizen_glosses": [
+      "BREAKFAST2"
+     ],
+     "videos": 23,
+     "sign_type": "OneHanded",
+     "handshape": "o",
+     "nondominant_handshape": null,
+     "flexion": "Curved",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Head",
+     "minor_location": "Mouth",
+     "path_movement": "Straight",
+     "repeated_movement": 0,
+     "sign_onset_ms": 601,
+     "sign_offset_ms": 1668,
+     "sign_duration_ms": 1068,
+     "lexical_class": "Noun",
+     "handshape_m2": "open_b"
+    }
+   ],
+   "sign_type_ambiguous": false
+  },
+  "BUTTER": {
+   "primary": {
+    "code": "A_01_034",
+    "entry_id": "butter",
+    "citizen_glosses": [
+     "BUTTER"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "flat_h",
+    "nondominant_handshape": "B",
+    "flexion": "Flat",
+    "flexion_change": 1.0,
+    "selected_fingers": "im",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 334,
+    "sign_offset_ms": 834,
+    "sign_duration_ms": 501,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "BUY": {
+   "primary": {
+    "code": "D_03_074",
+    "entry_id": "buy",
+    "citizen_glosses": [
+     "BUY"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "flat_o",
+    "nondominant_handshape": "B",
+    "flexion": "Flat",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 567,
+    "sign_offset_ms": 1602,
+    "sign_duration_ms": 1034,
+    "lexical_class": "Verb",
+    "handshape_m2": "flat_o"
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "BYE": {
+   "primary": {
+    "code": "E_01_058",
+    "entry_id": "bye",
+    "citizen_glosses": [
+     "BYE"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "5",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 1.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "None",
+    "repeated_movement": 1,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1268,
+    "sign_duration_ms": 801,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "CAKE": {
+   "primary": {
+    "code": "D_01_033",
+    "entry_id": "cake",
+    "citizen_glosses": [
+     "CAKE"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "curved_5",
+    "nondominant_handshape": "B",
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 667,
+    "sign_offset_ms": 1502,
+    "sign_duration_ms": 834,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "CAN": {
+   "primary": {
+    "code": "D_03_027",
+    "entry_id": "can",
+    "citizen_glosses": [
+     "CAN1"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "s",
+    "nondominant_handshape": "s",
+    "flexion": "FullyClosed",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 567,
+    "sign_offset_ms": 1435,
+    "sign_duration_ms": 868,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "K_02_027",
+     "entry_id": "can_2",
+     "citizen_glosses": [
+      "CAN2"
+     ],
+     "videos": 30,
+     "sign_type": "AsymmetricalDifferentHandshape",
+     "handshape": "spread_open_e",
+     "nondominant_handshape": "S",
+     "flexion": "Bent",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 1.0,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "FingerRadial",
+     "path_movement": "Curved",
+     "repeated_movement": 1,
+     "sign_onset_ms": 601,
+     "sign_offset_ms": 1702,
+     "sign_duration_ms": 1101,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "CARD": {
+   "primary": {
+    "code": "B_02_057",
+    "entry_id": "credit_card",
+    "citizen_glosses": [
+     "CREDITCARD"
+    ],
+    "videos": 32,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "s",
+    "nondominant_handshape": "B",
+    "flexion": "FullyClosed",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 601,
+    "sign_offset_ms": 1101,
+    "sign_duration_ms": 501,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "CENT": {
+   "primary": {
+    "code": "D_01_049",
+    "entry_id": "penny",
+    "citizen_glosses": [
+     "PENNY"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "flat_1",
+    "nondominant_handshape": null,
+    "flexion": "Flat",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Head",
+    "minor_location": "Forehead",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 667,
+    "sign_offset_ms": 934,
+    "sign_duration_ms": 267,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "CHANGE": {
+   "primary": {
+    "code": "E_01_031",
+    "entry_id": "change",
+    "citizen_glosses": [
+     "CHANGE"
+    ],
+    "videos": 29,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "bent_1",
+    "nondominant_handshape": "bent_1",
+    "flexion": "Bent",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 1401,
+    "sign_duration_ms": 901,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "CHEAP": {
+   "primary": {
+    "code": "F_02_056",
+    "entry_id": "cheap",
+    "citizen_glosses": [
+     "CHEAP"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalSameHandshape",
+    "handshape": "closed_b",
+    "nondominant_handshape": "closed_b",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Closed",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 367,
+    "sign_offset_ms": 1201,
+    "sign_duration_ms": 834,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "CHEESE": {
+   "primary": {
+    "code": "A_02_021",
+    "entry_id": "cheese",
+    "citizen_glosses": [
+     "CHEESE"
+    ],
+    "videos": 30,
+    "sign_type": "AsymmetricalSameHandshape",
+    "handshape": "5",
+    "nondominant_handshape": "5",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "Heel",
+    "path_movement": "None",
+    "repeated_movement": 1,
+    "sign_onset_ms": 334,
+    "sign_offset_ms": 1068,
+    "sign_duration_ms": 734,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "CHOCOLATE": {
+   "primary": {
+    "code": "B_01_002",
+    "entry_id": "chocolate",
+    "citizen_glosses": [
+     "CHOCOLATE"
+    ],
+    "videos": 32,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "c",
+    "nondominant_handshape": "B",
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "PalmBack",
+    "path_movement": "Circular",
+    "repeated_movement": 1,
+    "sign_onset_ms": 400,
+    "sign_offset_ms": 1301,
+    "sign_duration_ms": 901,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "COFFEE": {
+   "primary": {
+    "code": "A_01_032",
+    "entry_id": "coffee",
+    "citizen_glosses": [
+     "COFFEE"
+    ],
+    "videos": 30,
+    "sign_type": "AsymmetricalSameHandshape",
+    "handshape": "s",
+    "nondominant_handshape": "s",
+    "flexion": "FullyClosed",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Hand",
+    "minor_location": "FingerRadial",
+    "path_movement": "Circular",
+    "repeated_movement": 1,
+    "sign_onset_ms": 400,
+    "sign_offset_ms": 1335,
+    "sign_duration_ms": 934,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "COLD": {
+   "primary": {
+    "code": "C_02_068",
+    "entry_id": "cold",
+    "citizen_glosses": [
+     "COLD"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "s",
+    "nondominant_handshape": "s",
+    "flexion": "FullyClosed",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Body",
+    "minor_location": "BodyAway",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 534,
+    "sign_offset_ms": 1034,
+    "sign_duration_ms": 501,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "COOKIE": {
+   "primary": {
+    "code": "B_03_008",
+    "entry_id": "cookie",
+    "citizen_glosses": [
+     "COOKIE"
+    ],
+    "videos": 32,
+    "sign_type": "SymmetryViolation",
+    "handshape": "curved_5",
+    "nondominant_handshape": "B",
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "None",
+    "repeated_movement": 1,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1001,
+    "sign_duration_ms": 534,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "COST": {
+   "primary": {
+    "code": "E_03_020",
+    "entry_id": "cost",
+    "citizen_glosses": [
+     "COST"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "bent_1",
+    "nondominant_handshape": "B",
+    "flexion": "Bent",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1168,
+    "sign_duration_ms": 701,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "CREAM": {
+   "primary": {
+    "code": "F_02_010",
+    "entry_id": "cream",
+    "citizen_glosses": [
+     "CREAM1"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "c",
+    "nondominant_handshape": "B",
+    "flexion": "Curved",
+    "flexion_change": 1.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "FingerFront",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 300,
+    "sign_offset_ms": 1235,
+    "sign_duration_ms": 934,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "K_01_046",
+     "entry_id": "cream_2",
+     "citizen_glosses": [
+      "CREAM2"
+     ],
+     "videos": 30,
+     "sign_type": "AsymmetricalDifferentHandshape",
+     "handshape": "c",
+     "nondominant_handshape": "Lax",
+     "flexion": "Curved",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "FingerFront",
+     "path_movement": "Straight",
+     "repeated_movement": 0,
+     "sign_onset_ms": 534,
+     "sign_offset_ms": 1735,
+     "sign_duration_ms": 1201,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": false
+  },
+  "CUP": {
+   "primary": {
+    "code": "K_02_059",
+    "entry_id": "glass_3",
+    "citizen_glosses": [
+     "GLASS1"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "curved_1",
+    "nondominant_handshape": null,
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Head",
+    "minor_location": "Mouth",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 634,
+    "sign_offset_ms": 1401,
+    "sign_duration_ms": 767,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "K_01_115",
+     "entry_id": "glass_2",
+     "citizen_glosses": [
+      "GLASS3"
+     ],
+     "videos": 31,
+     "sign_type": "OneHanded",
+     "handshape": "1",
+     "nondominant_handshape": null,
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "i",
+     "spread": null,
+     "thumb_position": "Closed",
+     "major_location": "Head",
+     "minor_location": "Mouth",
+     "path_movement": "None",
+     "repeated_movement": 0,
+     "sign_onset_ms": 501,
+     "sign_offset_ms": 1568,
+     "sign_duration_ms": 1068,
+     "lexical_class": "Noun",
+     "handshape_m2": "c"
+    },
+    {
+     "code": "E_01_090",
+     "entry_id": "glass_1",
+     "citizen_glosses": [
+      "GLASS2"
+     ],
+     "videos": 30,
+     "sign_type": "AsymmetricalDifferentHandshape",
+     "handshape": "c",
+     "nondominant_handshape": "B",
+     "flexion": "Curved",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "Palm",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 567,
+     "sign_offset_ms": 1268,
+     "sign_duration_ms": 701,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    },
+    {
+     "code": "A_01_010",
+     "entry_id": "cup",
+     "citizen_glosses": [
+      "CUP"
+     ],
+     "videos": 30,
+     "sign_type": "AsymmetricalDifferentHandshape",
+     "handshape": "c",
+     "nondominant_handshape": "B",
+     "flexion": "Curved",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "Palm",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 367,
+     "sign_offset_ms": 834,
+     "sign_duration_ms": 467,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "DAY": {
+   "primary": {
+    "code": "C_01_044",
+    "entry_id": "day",
+    "citizen_glosses": [
+     "DAY"
+    ],
+    "videos": 29,
+    "sign_type": "OneHanded",
+    "handshape": "1",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 901,
+    "sign_duration_ms": 400,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "DEAF": {
+   "primary": {
+    "code": "F_03_038",
+    "entry_id": "deaf_1",
+    "citizen_glosses": [
+     "DEAF1"
+    ],
+    "videos": 39,
+    "sign_type": "OneHanded",
+    "handshape": "1",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Head",
+    "minor_location": "Other",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1268,
+    "sign_duration_ms": 801,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "E_03_098",
+     "entry_id": "deaf_2",
+     "citizen_glosses": [
+      "DEAF2"
+     ],
+     "videos": 23,
+     "sign_type": "OneHanded",
+     "handshape": "1",
+     "nondominant_handshape": null,
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "i",
+     "spread": null,
+     "thumb_position": "Closed",
+     "major_location": "Head",
+     "minor_location": "Other",
+     "path_movement": "Straight",
+     "repeated_movement": 0,
+     "sign_onset_ms": 467,
+     "sign_offset_ms": 1335,
+     "sign_duration_ms": 868,
+     "lexical_class": "Adjective",
+     "handshape_m2": "closed_b"
+    }
+   ],
+   "sign_type_ambiguous": false
+  },
+  "DELICIOUS": {
+   "primary": {
+    "code": "B_01_082",
+    "entry_id": "delicious",
+    "citizen_glosses": [
+     "DELICIOUS"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "8",
+    "nondominant_handshape": null,
+    "flexion": "Flat",
+    "flexion_change": 1.0,
+    "selected_fingers": "m",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Mouth",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 634,
+    "sign_offset_ms": 1001,
+    "sign_duration_ms": 367,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "DIFFERENT": {
+   "primary": {
+    "code": "E_03_095",
+    "entry_id": "different",
+    "citizen_glosses": [
+     "DIFFERENT"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "1",
+    "nondominant_handshape": "1",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 567,
+    "sign_offset_ms": 1101,
+    "sign_duration_ms": 534,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "DOLLAR": {
+   "primary": {
+    "code": "C_02_025",
+    "entry_id": "1_dollar",
+    "citizen_glosses": [
+     "1DOLLAR"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "c",
+    "nondominant_handshape": "B",
+    "flexion": "Curved",
+    "flexion_change": 1.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "FingerBack",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1101,
+    "sign_duration_ms": 634,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "DRINK": {
+   "primary": {
+    "code": "B_02_012",
+    "entry_id": "drink",
+    "citizen_glosses": [
+     "DRINK1"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "c",
+    "nondominant_handshape": null,
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "HeadAway",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 434,
+    "sign_offset_ms": 734,
+    "sign_duration_ms": 300,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "K_03_092",
+     "entry_id": "drink_2",
+     "citizen_glosses": [
+      "DRINK2"
+     ],
+     "videos": 30,
+     "sign_type": "OneHanded",
+     "handshape": "y",
+     "nondominant_handshape": null,
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "p",
+     "spread": null,
+     "thumb_position": "Open",
+     "major_location": "Head",
+     "minor_location": "Mouth",
+     "path_movement": "Curved",
+     "repeated_movement": 0,
+     "sign_onset_ms": 534,
+     "sign_offset_ms": 1134,
+     "sign_duration_ms": 601,
+     "lexical_class": "Verb",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": false
+  },
+  "EAT": {
+   "primary": {
+    "code": "B_02_002",
+    "entry_id": "eat_1",
+    "citizen_glosses": [
+     "EAT1"
+    ],
+    "videos": 39,
+    "sign_type": "OneHanded",
+    "handshape": "o",
+    "nondominant_handshape": null,
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Mouth",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 868,
+    "sign_duration_ms": 400,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "B_03_082",
+     "entry_id": "eat_2",
+     "citizen_glosses": [
+      "EAT2"
+     ],
+     "videos": 24,
+     "sign_type": "OneHanded",
+     "handshape": "o",
+     "nondominant_handshape": null,
+     "flexion": "Curved",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Head",
+     "minor_location": "Mouth",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 334,
+     "sign_offset_ms": 734,
+     "sign_duration_ms": 400,
+     "lexical_class": "Verb",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": false
+  },
+  "EGG": {
+   "primary": {
+    "code": "A_03_011",
+    "entry_id": "egg",
+    "citizen_glosses": [
+     "EGG"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "h",
+    "nondominant_handshape": "h",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "im",
+    "spread": 0.0,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Curved",
+    "repeated_movement": 1,
+    "sign_onset_ms": 334,
+    "sign_offset_ms": 868,
+    "sign_duration_ms": 534,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "EIGHT": {
+   "primary": {
+    "code": "J_02_099",
+    "entry_id": "eight",
+    "citizen_glosses": [
+     "EIGHT"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "1",
+    "nondominant_handshape": null,
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "m",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "None",
+    "repeated_movement": 1,
+    "sign_onset_ms": 434,
+    "sign_offset_ms": 1168,
+    "sign_duration_ms": 734,
+    "lexical_class": "Number",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "ELEVEN": {
+   "primary": {
+    "code": "E_01_052",
+    "entry_id": "eleven",
+    "citizen_glosses": [
+     "ELEVEN"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "s",
+    "nondominant_handshape": null,
+    "flexion": "FullyClosed",
+    "flexion_change": 1.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "None",
+    "repeated_movement": 1,
+    "sign_onset_ms": 601,
+    "sign_offset_ms": 1335,
+    "sign_duration_ms": 734,
+    "lexical_class": "Number",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "EXCUSE-ME": {
+   "primary": {
+    "code": "D_03_052",
+    "entry_id": "excuse",
+    "citizen_glosses": [
+     "EXCUSE"
+    ],
+    "videos": 30,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "flat_b",
+    "nondominant_handshape": "B",
+    "flexion": "Flat",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 567,
+    "sign_offset_ms": 1268,
+    "sign_duration_ms": 701,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "EXPENSIVE": {
+   "primary": {
+    "code": "C_01_064",
+    "entry_id": "expensive",
+    "citizen_glosses": [
+     "EXPENSIVE"
+    ],
+    "videos": 30,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "flat_o",
+    "nondominant_handshape": "B",
+    "flexion": "Flat",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "BackAndForth",
+    "repeated_movement": 0,
+    "sign_onset_ms": 400,
+    "sign_offset_ms": 1034,
+    "sign_duration_ms": 634,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "FAST": {
+   "primary": {
+    "code": "C_03_016",
+    "entry_id": "fast",
+    "citizen_glosses": [
+     "FAST"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "l",
+    "nondominant_handshape": "l",
+    "flexion": "FullyOpen",
+    "flexion_change": 1.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 300,
+    "sign_offset_ms": 667,
+    "sign_duration_ms": 367,
+    "lexical_class": "Adverb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "FINE": {
+   "primary": {
+    "code": "C_01_043",
+    "entry_id": "fine_1",
+    "citizen_glosses": [
+     "FINE1"
+    ],
+    "videos": 39,
+    "sign_type": "OneHanded",
+    "handshape": "5",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Body",
+    "minor_location": "TorsoTop",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 434,
+    "sign_offset_ms": 834,
+    "sign_duration_ms": 400,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "F_03_080",
+     "entry_id": "ok",
+     "citizen_glosses": [
+      "OK"
+     ],
+     "videos": 31,
+     "sign_type": "OneHanded",
+     "handshape": "o",
+     "nondominant_handshape": null,
+     "flexion": "Curved",
+     "flexion_change": null,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "Straight",
+     "repeated_movement": 0,
+     "sign_onset_ms": 701,
+     "sign_offset_ms": 1235,
+     "sign_duration_ms": 534,
+     "lexical_class": "Minor",
+     "handshape_m2": "p"
+    },
+    {
+     "code": "D_02_067",
+     "entry_id": "fine_2",
+     "citizen_glosses": [
+      "FINE2"
+     ],
+     "videos": 23,
+     "sign_type": "OneHanded",
+     "handshape": "5",
+     "nondominant_handshape": null,
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 1.0,
+     "thumb_position": "Open",
+     "major_location": "Body",
+     "minor_location": "TorsoTop",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 434,
+     "sign_offset_ms": 1468,
+     "sign_duration_ms": 1034,
+     "lexical_class": "Adjective",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": false
+  },
+  "FINISH": {
+   "primary": {
+    "code": "B_03_025",
+    "entry_id": "finish",
+    "citizen_glosses": [
+     "FINISH"
+    ],
+    "videos": 32,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "5",
+    "nondominant_handshape": "5",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "None",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 868,
+    "sign_duration_ms": 367,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "FIVE-DOLLARS": {
+   "primary": {
+    "code": "B_01_062",
+    "entry_id": "5_dollars",
+    "citizen_glosses": [
+     "5DOLLARS"
+    ],
+    "videos": 32,
+    "sign_type": "OneHanded",
+    "handshape": "5",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "None",
+    "repeated_movement": 0,
+    "sign_onset_ms": 434,
+    "sign_offset_ms": 767,
+    "sign_duration_ms": 334,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "FOR": {
+   "primary": {
+    "code": "B_03_049",
+    "entry_id": "for",
+    "citizen_glosses": [
+     "FOR"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "1",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Head",
+    "minor_location": "Forehead",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 567,
+    "sign_offset_ms": 934,
+    "sign_duration_ms": 367,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "FOUR": {
+   "primary": {
+    "code": "C_01_029",
+    "entry_id": "four",
+    "citizen_glosses": [
+     "FOUR"
+    ],
+    "videos": 32,
+    "sign_type": "OneHanded",
+    "handshape": "4",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 701,
+    "sign_duration_ms": 200,
+    "lexical_class": "Number",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "FRESH": {
+   "primary": {
+    "code": "B_02_070",
+    "entry_id": "new",
+    "citizen_glosses": [
+     "NEW"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "c",
+    "nondominant_handshape": "B",
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 400,
+    "sign_offset_ms": 834,
+    "sign_duration_ms": 434,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "GET": {
+   "primary": {
+    "code": "B_03_007",
+    "entry_id": "get",
+    "citizen_glosses": [
+     "GET"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "o",
+    "nondominant_handshape": "o",
+    "flexion": "Curved",
+    "flexion_change": 1.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 400,
+    "sign_offset_ms": 868,
+    "sign_duration_ms": 467,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "GIVE": {
+   "primary": {
+    "code": "F_01_023",
+    "entry_id": "give",
+    "citizen_glosses": [
+     "GIVE"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "flat_o",
+    "nondominant_handshape": null,
+    "flexion": "Flat",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 334,
+    "sign_offset_ms": 1201,
+    "sign_duration_ms": 868,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "GO": {
+   "primary": {
+    "code": "C_03_056",
+    "entry_id": "go",
+    "citizen_glosses": [
+     "GO"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "1",
+    "nondominant_handshape": "1",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 334,
+    "sign_offset_ms": 767,
+    "sign_duration_ms": 434,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "GOOD": {
+   "primary": {
+    "code": "B_01_052",
+    "entry_id": "good",
+    "citizen_glosses": [
+     "GOOD"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "open_b",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Chin",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 834,
+    "sign_duration_ms": 367,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "HALF": {
+   "primary": {
+    "code": "F_03_040",
+    "entry_id": "half",
+    "citizen_glosses": [
+     "HALF"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "1",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": null,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 1502,
+    "sign_duration_ms": 1001,
+    "lexical_class": "Noun",
+    "handshape_m2": "v"
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "HAPPY": {
+   "primary": {
+    "code": "C_03_078",
+    "entry_id": "happy",
+    "citizen_glosses": [
+     "HAPPY"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "open_b",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Body",
+    "minor_location": "TorsoTop",
+    "path_movement": "Curved",
+    "repeated_movement": 1,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 968,
+    "sign_duration_ms": 501,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "HAVE": {
+   "primary": {
+    "code": "B_03_057",
+    "entry_id": "have",
+    "citizen_glosses": [
+     "HAVE"
+    ],
+    "videos": 30,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "flat_b",
+    "nondominant_handshape": "flat_b",
+    "flexion": "Flat",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Body",
+    "minor_location": "TorsoTop",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 834,
+    "sign_duration_ms": 334,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "HEARING": {
+   "primary": {
+    "code": "C_02_023",
+    "entry_id": "hearing",
+    "citizen_glosses": [
+     "HEARING"
+    ],
+    "videos": 32,
+    "sign_type": "OneHanded",
+    "handshape": "1",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Head",
+    "minor_location": "HeadAway",
+    "path_movement": "Circular",
+    "repeated_movement": 1,
+    "sign_onset_ms": 601,
+    "sign_offset_ms": 834,
+    "sign_duration_ms": 234,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "J_02_006",
+     "entry_id": "hear_2",
+     "citizen_glosses": [
+      "HEAR2"
+     ],
+     "videos": 31,
+     "sign_type": "OneHanded",
+     "handshape": "c",
+     "nondominant_handshape": null,
+     "flexion": "Curved",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Head",
+     "minor_location": "Other",
+     "path_movement": "Straight",
+     "repeated_movement": 0,
+     "sign_onset_ms": 501,
+     "sign_offset_ms": 1068,
+     "sign_duration_ms": 567,
+     "lexical_class": "Verb",
+     "handshape_m2": null
+    },
+    {
+     "code": "E_01_097",
+     "entry_id": "hear_1",
+     "citizen_glosses": [
+      "HEAR1"
+     ],
+     "videos": 29,
+     "sign_type": "OneHanded",
+     "handshape": "1",
+     "nondominant_handshape": null,
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "i",
+     "spread": null,
+     "thumb_position": "Closed",
+     "major_location": "Head",
+     "minor_location": "Other",
+     "path_movement": "None",
+     "repeated_movement": 0,
+     "sign_onset_ms": 467,
+     "sign_offset_ms": 1301,
+     "sign_duration_ms": 834,
+     "lexical_class": "Verb",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": false
+  },
+  "HELLO": {
+   "primary": {
+    "code": "D_02_055",
+    "entry_id": "hello",
+    "citizen_glosses": [
+     "HELLO"
+    ],
+    "videos": 32,
+    "sign_type": "OneHanded",
+    "handshape": "closed_b",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Closed",
+    "major_location": "Head",
+    "minor_location": "Forehead",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 634,
+    "sign_offset_ms": 1235,
+    "sign_duration_ms": 601,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "HELP": {
+   "primary": {
+    "code": "D_01_042",
+    "entry_id": "help",
+    "citizen_glosses": [
+     "HELP"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "a",
+    "nondominant_handshape": "B",
+    "flexion": null,
+    "flexion_change": null,
+    "selected_fingers": "t",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 1368,
+    "sign_duration_ms": 868,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "HERE": {
+   "primary": {
+    "code": "D_01_089",
+    "entry_id": "here",
+    "citizen_glosses": [
+     "HERE"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "open_b",
+    "nondominant_handshape": "open_b",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Circular",
+    "repeated_movement": 1,
+    "sign_onset_ms": 667,
+    "sign_offset_ms": 1568,
+    "sign_duration_ms": 901,
+    "lexical_class": "Adverb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "HOT": {
+   "primary": {
+    "code": "F_02_093",
+    "entry_id": "hot",
+    "citizen_glosses": [
+     "HOT"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "flatspread_5",
+    "nondominant_handshape": null,
+    "flexion": "Flat",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "HeadAway",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 1168,
+    "sign_duration_ms": 667,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "HOW": {
+   "primary": {
+    "code": "D_02_082",
+    "entry_id": "how",
+    "citizen_glosses": [
+     "HOW1"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "c",
+    "nondominant_handshape": "c",
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 567,
+    "sign_offset_ms": 1401,
+    "sign_duration_ms": 834,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "F_02_086",
+     "entry_id": "how_2",
+     "citizen_glosses": [
+      "HOW2"
+     ],
+     "videos": 31,
+     "sign_type": "AsymmetricalSameHandshape",
+     "handshape": "c",
+     "nondominant_handshape": "c",
+     "flexion": "Curved",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "FingerBack",
+     "path_movement": "Curved",
+     "repeated_movement": 0,
+     "sign_onset_ms": 367,
+     "sign_offset_ms": 1101,
+     "sign_duration_ms": 734,
+     "lexical_class": "Adverb",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "HOW-MANY": {
+   "primary": {
+    "code": "D_03_065",
+    "entry_id": "many",
+    "citizen_glosses": [
+     "MANY"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "s",
+    "nondominant_handshape": "s",
+    "flexion": "FullyClosed",
+    "flexion_change": 1.0,
+    "selected_fingers": "imrp",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "None",
+    "repeated_movement": 1,
+    "sign_onset_ms": 767,
+    "sign_offset_ms": 1535,
+    "sign_duration_ms": 767,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "HOW-MUCH": {
+   "primary": {
+    "code": "C_02_004",
+    "entry_id": "price",
+    "citizen_glosses": [
+     "PRICE"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "bent_1",
+    "nondominant_handshape": "B",
+    "flexion": "Bent",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 801,
+    "sign_duration_ms": 300,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "HUNGRY": {
+   "primary": {
+    "code": "C_01_010",
+    "entry_id": "hungry",
+    "citizen_glosses": [
+     "HUNGRY"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "c",
+    "nondominant_handshape": null,
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Body",
+    "minor_location": "TorsoTop",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 901,
+    "sign_duration_ms": 400,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "ICE": {
+   "primary": {
+    "code": "G_03_020",
+    "entry_id": "ice",
+    "citizen_glosses": [
+     "ICE"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "i",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": null,
+    "selected_fingers": "p",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "None",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 1268,
+    "sign_duration_ms": 767,
+    "lexical_class": "Noun",
+    "handshape_m2": "c"
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "INSIDE": {
+   "primary": {
+    "code": "E_03_062",
+    "entry_id": "in",
+    "citizen_glosses": [
+     "IN"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "flatspread_5",
+    "nondominant_handshape": "C",
+    "flexion": "Flat",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 434,
+    "sign_offset_ms": 1168,
+    "sign_duration_ms": 734,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "H_01_047",
+     "entry_id": "inside",
+     "citizen_glosses": [
+      "INSIDE"
+     ],
+     "videos": 30,
+     "sign_type": "AsymmetricalSameHandshape",
+     "handshape": "o",
+     "nondominant_handshape": "o",
+     "flexion": "Curved",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "Other",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 434,
+     "sign_offset_ms": 1235,
+     "sign_duration_ms": 801,
+     "lexical_class": "Adjective",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "IX-1P": {
+   "primary": {
+    "code": "B_01_068",
+    "entry_id": "me",
+    "citizen_glosses": [
+     "ME"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "1",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Body",
+    "minor_location": "TorsoTop",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 334,
+    "sign_offset_ms": 667,
+    "sign_duration_ms": 334,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "JUICE": {
+   "primary": {
+    "code": "G_03_035",
+    "entry_id": "juice_2",
+    "citizen_glosses": [
+     "JUICE1"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "i",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "p",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Head",
+    "minor_location": "Mouth",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 601,
+    "sign_offset_ms": 1101,
+    "sign_duration_ms": 501,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "G_03_022",
+     "entry_id": "juice_1",
+     "citizen_glosses": [
+      "JUICE2"
+     ],
+     "videos": 30,
+     "sign_type": "OneHanded",
+     "handshape": "i",
+     "nondominant_handshape": null,
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "p",
+     "spread": null,
+     "thumb_position": "Closed",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "Curved",
+     "repeated_movement": 1,
+     "sign_onset_ms": 467,
+     "sign_offset_ms": 1235,
+     "sign_duration_ms": 767,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": false
+  },
+  "KIND": {
+   "primary": {
+    "code": "F_03_059",
+    "entry_id": "type",
+    "citizen_glosses": [
+     "TYPE1"
+    ],
+    "videos": 38,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "curved_5",
+    "nondominant_handshape": "curved_5",
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 367,
+    "sign_offset_ms": 1401,
+    "sign_duration_ms": 1034,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "B_01_056",
+     "entry_id": "type",
+     "citizen_glosses": [
+      "TYPE2"
+     ],
+     "videos": 22,
+     "sign_type": "SymmetricalOrAlternating",
+     "handshape": "p",
+     "nondominant_handshape": "p",
+     "flexion": "Stacked",
+     "flexion_change": 0.0,
+     "selected_fingers": "im",
+     "spread": null,
+     "thumb_position": "Open",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "Circular",
+     "repeated_movement": 0,
+     "sign_onset_ms": 400,
+     "sign_offset_ms": 1134,
+     "sign_duration_ms": 734,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": false
+  },
+  "KNOW": {
+   "primary": {
+    "code": "C_01_048",
+    "entry_id": "know",
+    "citizen_glosses": [
+     "KNOW"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "open_b",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Forehead",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 868,
+    "sign_duration_ms": 400,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "LARGE": {
+   "primary": {
+    "code": "F_02_054",
+    "entry_id": "big",
+    "citizen_glosses": [
+     "BIG"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "bent_l",
+    "nondominant_handshape": "bent_l",
+    "flexion": "Bent",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1335,
+    "sign_duration_ms": 868,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "LATER": {
+   "primary": {
+    "code": "D_01_077",
+    "entry_id": "later",
+    "citizen_glosses": [
+     "LATER"
+    ],
+    "videos": 32,
+    "sign_type": "OneHanded",
+    "handshape": "l",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 534,
+    "sign_offset_ms": 1268,
+    "sign_duration_ms": 734,
+    "lexical_class": "Adverb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "LIKE": {
+   "primary": {
+    "code": "F_03_063",
+    "entry_id": "like",
+    "citizen_glosses": [
+     "LIKE"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "8",
+    "nondominant_handshape": null,
+    "flexion": "Flat",
+    "flexion_change": 1.0,
+    "selected_fingers": "m",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Body",
+    "minor_location": "TorsoTop",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 1001,
+    "sign_duration_ms": 501,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "LOVE": {
+   "primary": {
+    "code": "G_01_068",
+    "entry_id": "love",
+    "citizen_glosses": [
+     "LOVE"
+    ],
+    "videos": 30,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "a",
+    "nondominant_handshape": "a",
+    "flexion": null,
+    "flexion_change": null,
+    "selected_fingers": "t",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Body",
+    "minor_location": "TorsoTop",
+    "path_movement": "None",
+    "repeated_movement": 0,
+    "sign_onset_ms": 534,
+    "sign_offset_ms": 1268,
+    "sign_duration_ms": 734,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "LUNCH": {
+   "primary": {
+    "code": "G_02_081",
+    "entry_id": "lunch_2",
+    "citizen_glosses": [
+     "LUNCH1"
+    ],
+    "videos": 38,
+    "sign_type": "OneHanded",
+    "handshape": "o",
+    "nondominant_handshape": null,
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Mouth",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 534,
+    "sign_offset_ms": 1235,
+    "sign_duration_ms": 701,
+    "lexical_class": "Noun",
+    "handshape_m2": "open_b"
+   },
+   "variants": [
+    {
+     "code": "F_01_076",
+     "entry_id": "lunch_1",
+     "citizen_glosses": [
+      "LUNCH2"
+     ],
+     "videos": 24,
+     "sign_type": "OneHanded",
+     "handshape": "l",
+     "nondominant_handshape": null,
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "i",
+     "spread": null,
+     "thumb_position": "Open",
+     "major_location": "Head",
+     "minor_location": "Chin",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 534,
+     "sign_offset_ms": 1201,
+     "sign_duration_ms": 667,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": false
+  },
+  "MEDIUM": {
+   "primary": {
+    "code": "H_01_039",
+    "entry_id": "middle",
+    "citizen_glosses": [
+     "MIDDLE"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "open_8",
+    "nondominant_handshape": "B",
+    "flexion": "Flat",
+    "flexion_change": 0.0,
+    "selected_fingers": "m",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "HandAway",
+    "path_movement": "Circular",
+    "repeated_movement": 0,
+    "sign_onset_ms": 434,
+    "sign_offset_ms": 1368,
+    "sign_duration_ms": 934,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "G_03_050",
+     "entry_id": "average",
+     "citizen_glosses": [
+      "AVERAGE"
+     ],
+     "videos": 30,
+     "sign_type": "AsymmetricalSameHandshape",
+     "handshape": "open_b",
+     "nondominant_handshape": "open_b",
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "FingerRadial",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 467,
+     "sign_offset_ms": 1235,
+     "sign_duration_ms": 767,
+     "lexical_class": "Adjective",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "MILK": {
+   "primary": {
+    "code": "K_03_070",
+    "entry_id": "milk_2",
+    "citizen_glosses": [
+     "MILK2"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "curved_5",
+    "nondominant_handshape": "curved_5",
+    "flexion": "Curved",
+    "flexion_change": 1.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1635,
+    "sign_duration_ms": 1168,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "A_01_051",
+     "entry_id": "milk",
+     "citizen_glosses": [
+      "MILK1"
+     ],
+     "videos": 30,
+     "sign_type": "OneHanded",
+     "handshape": "s",
+     "nondominant_handshape": null,
+     "flexion": "FullyClosed",
+     "flexion_change": 1.0,
+     "selected_fingers": "imrp",
+     "spread": null,
+     "thumb_position": "Open",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "None",
+     "repeated_movement": 1,
+     "sign_onset_ms": 334,
+     "sign_offset_ms": 868,
+     "sign_duration_ms": 534,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "MINUTE": {
+   "primary": {
+    "code": "B_01_074",
+    "entry_id": "minute",
+    "citizen_glosses": [
+     "MINUTE"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "1",
+    "nondominant_handshape": "B",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 567,
+    "sign_offset_ms": 868,
+    "sign_duration_ms": 300,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "MONEY": {
+   "primary": {
+    "code": "K_01_104",
+    "entry_id": "money_2",
+    "citizen_glosses": [
+     "MONEY2"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "stacked_5",
+    "nondominant_handshape": null,
+    "flexion": "Stacked",
+    "flexion_change": 1.0,
+    "selected_fingers": "imrp",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "None",
+    "repeated_movement": 1,
+    "sign_onset_ms": 634,
+    "sign_offset_ms": 1502,
+    "sign_duration_ms": 868,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "C_01_042",
+     "entry_id": "money",
+     "citizen_glosses": [
+      "MONEY1"
+     ],
+     "videos": 31,
+     "sign_type": "AsymmetricalDifferentHandshape",
+     "handshape": "flat_o",
+     "nondominant_handshape": "B",
+     "flexion": "Flat",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "Palm",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 400,
+     "sign_offset_ms": 801,
+     "sign_duration_ms": 400,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "MORE": {
+   "primary": {
+    "code": "B_03_032",
+    "entry_id": "more",
+    "citizen_glosses": [
+     "MORE"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "o",
+    "nondominant_handshape": "o",
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 934,
+    "sign_duration_ms": 434,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "MORNING": {
+   "primary": {
+    "code": "C_02_012",
+    "entry_id": "morning",
+    "citizen_glosses": [
+     "MORNING"
+    ],
+    "videos": 32,
+    "sign_type": "OneHanded",
+    "handshape": "open_b",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 801,
+    "sign_duration_ms": 334,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "MY": {
+   "primary": {
+    "code": "K_01_030",
+    "entry_id": "mine",
+    "citizen_glosses": [
+     "MINE"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "bent_1",
+    "nondominant_handshape": "B",
+    "flexion": "Bent",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Curved",
+    "repeated_movement": 1,
+    "sign_onset_ms": 601,
+    "sign_offset_ms": 1602,
+    "sign_duration_ms": 1001,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "C_01_060",
+     "entry_id": "my",
+     "citizen_glosses": [
+      "MY"
+     ],
+     "videos": 30,
+     "sign_type": "OneHanded",
+     "handshape": "open_b",
+     "nondominant_handshape": null,
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Body",
+     "minor_location": "TorsoTop",
+     "path_movement": "Straight",
+     "repeated_movement": 0,
+     "sign_onset_ms": 467,
+     "sign_offset_ms": 667,
+     "sign_duration_ms": 200,
+     "lexical_class": "Minor",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "NAME": {
+   "primary": {
+    "code": "D_01_021",
+    "entry_id": "name",
+    "citizen_glosses": [
+     "NAME"
+    ],
+    "videos": 32,
+    "sign_type": "DominanceViolation",
+    "handshape": "h",
+    "nondominant_handshape": "DominanceConditionViolation",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "im",
+    "spread": 0.0,
+    "thumb_position": "Closed",
+    "major_location": "Hand",
+    "minor_location": "FingerRadial",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 1401,
+    "sign_duration_ms": 901,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "NEED": {
+   "primary": {
+    "code": "F_02_004",
+    "entry_id": "must",
+    "citizen_glosses": [
+     "MUST"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "bent_1",
+    "nondominant_handshape": null,
+    "flexion": "Bent",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1034,
+    "sign_duration_ms": 567,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "C_02_034",
+     "entry_id": "need",
+     "citizen_glosses": [
+      "NEED"
+     ],
+     "videos": 30,
+     "sign_type": "OneHanded",
+     "handshape": "bent_1",
+     "nondominant_handshape": null,
+     "flexion": "Bent",
+     "flexion_change": 0.0,
+     "selected_fingers": "i",
+     "spread": null,
+     "thumb_position": "Closed",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "Curved",
+     "repeated_movement": 1,
+     "sign_onset_ms": 567,
+     "sign_offset_ms": 1101,
+     "sign_duration_ms": 534,
+     "lexical_class": "Verb",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": false
+  },
+  "NICE": {
+   "primary": {
+    "code": "G_03_059",
+    "entry_id": "nice",
+    "citizen_glosses": [
+     "NICE"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalSameHandshape",
+    "handshape": "open_b",
+    "nondominant_handshape": "open_b",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 534,
+    "sign_offset_ms": 1268,
+    "sign_duration_ms": 734,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "E_03_082",
+     "entry_id": "clean",
+     "citizen_glosses": [
+      "CLEAN"
+     ],
+     "videos": 31,
+     "sign_type": "AsymmetricalSameHandshape",
+     "handshape": "open_b",
+     "nondominant_handshape": "open_b",
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "Palm",
+     "path_movement": "Curved",
+     "repeated_movement": 1,
+     "sign_onset_ms": 567,
+     "sign_offset_ms": 1368,
+     "sign_duration_ms": 801,
+     "lexical_class": "Verb",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": false
+  },
+  "NINE": {
+   "primary": {
+    "code": "E_03_008",
+    "entry_id": "nine",
+    "citizen_glosses": [
+     "NINE"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "f",
+    "nondominant_handshape": null,
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "None",
+    "repeated_movement": 1,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 1401,
+    "sign_duration_ms": 901,
+    "lexical_class": "Number",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "NO": {
+   "primary": {
+    "code": "C_03_041",
+    "entry_id": "no",
+    "citizen_glosses": [
+     "NO"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "flat_h",
+    "nondominant_handshape": null,
+    "flexion": "Flat",
+    "flexion_change": null,
+    "selected_fingers": "im",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "None",
+    "repeated_movement": 1,
+    "sign_onset_ms": 434,
+    "sign_offset_ms": 868,
+    "sign_duration_ms": 434,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "NONE": {
+   "primary": {
+    "code": "E_02_065",
+    "entry_id": "nothing_2",
+    "citizen_glosses": [
+     "NOTHING2"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "f",
+    "nondominant_handshape": "f",
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 1268,
+    "sign_duration_ms": 767,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "J_02_046",
+     "entry_id": "none",
+     "citizen_glosses": [
+      "NONE"
+     ],
+     "videos": 31,
+     "sign_type": "AsymmetricalDifferentHandshape",
+     "handshape": "o",
+     "nondominant_handshape": "B",
+     "flexion": "Curved",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "Palm",
+     "path_movement": "Straight",
+     "repeated_movement": 0,
+     "sign_onset_ms": 467,
+     "sign_offset_ms": 1401,
+     "sign_duration_ms": 934,
+     "lexical_class": "Minor",
+     "handshape_m2": null
+    },
+    {
+     "code": "B_01_079",
+     "entry_id": "nothing",
+     "citizen_glosses": [
+      "NOTHING1"
+     ],
+     "videos": 31,
+     "sign_type": "SymmetricalOrAlternating",
+     "handshape": "o",
+     "nondominant_handshape": "o",
+     "flexion": "Curved",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 601,
+     "sign_offset_ms": 1034,
+     "sign_duration_ms": 434,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "NOT": {
+   "primary": {
+    "code": "E_01_100",
+    "entry_id": "not",
+    "citizen_glosses": [
+     "NOT"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "a",
+    "nondominant_handshape": null,
+    "flexion": null,
+    "flexion_change": null,
+    "selected_fingers": "t",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "UnderChin",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 1001,
+    "sign_duration_ms": 501,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "NOW": {
+   "primary": {
+    "code": "C_03_062",
+    "entry_id": "now",
+    "citizen_glosses": [
+     "NOW"
+    ],
+    "videos": 30,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "y",
+    "nondominant_handshape": "y",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "p",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 934,
+    "sign_duration_ms": 434,
+    "lexical_class": "Adverb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "NUTS": {
+   "primary": {
+    "code": "D_02_073",
+    "entry_id": "nut",
+    "citizen_glosses": [
+     "NUT1"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "a",
+    "nondominant_handshape": null,
+    "flexion": null,
+    "flexion_change": null,
+    "selected_fingers": "t",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Mouth",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 667,
+    "sign_offset_ms": 1401,
+    "sign_duration_ms": 734,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "K_02_066",
+     "entry_id": "nut_2",
+     "citizen_glosses": [
+      "NUT2"
+     ],
+     "videos": 30,
+     "sign_type": "AsymmetricalDifferentHandshape",
+     "handshape": "curved_v",
+     "nondominant_handshape": "1",
+     "flexion": "Curved",
+     "flexion_change": 0.0,
+     "selected_fingers": "im",
+     "spread": 1.0,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "HandAway",
+     "path_movement": "None",
+     "repeated_movement": 1,
+     "sign_onset_ms": 734,
+     "sign_offset_ms": 1702,
+     "sign_duration_ms": 968,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "ONE": {
+   "primary": {
+    "code": "F_03_012",
+    "entry_id": "one",
+    "citizen_glosses": [
+     "ONE"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "1",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 434,
+    "sign_offset_ms": 1034,
+    "sign_duration_ms": 601,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "OR": {
+   "primary": {
+    "code": "F_03_081",
+    "entry_id": "or",
+    "citizen_glosses": [
+     "OR"
+    ],
+    "videos": 31,
+    "sign_type": "DominanceViolation",
+    "handshape": "1",
+    "nondominant_handshape": "DominanceConditionViolation",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Hand",
+    "minor_location": "FingerTip",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 400,
+    "sign_offset_ms": 868,
+    "sign_duration_ms": 467,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "ORANGE": {
+   "primary": {
+    "code": "A_02_020",
+    "entry_id": "orange",
+    "citizen_glosses": [
+     "ORANGE"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "o",
+    "nondominant_handshape": null,
+    "flexion": "Curved",
+    "flexion_change": 1.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Mouth",
+    "path_movement": "None",
+    "repeated_movement": 1,
+    "sign_onset_ms": 334,
+    "sign_offset_ms": 868,
+    "sign_duration_ms": 534,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "OUTSIDE": {
+   "primary": {
+    "code": "E_03_071",
+    "entry_id": "outside",
+    "citizen_glosses": [
+     "OUTSIDE"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "flatspread_5",
+    "nondominant_handshape": null,
+    "flexion": "Flat",
+    "flexion_change": 1.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1335,
+    "sign_duration_ms": 868,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "PAY": {
+   "primary": {
+    "code": "F_01_082",
+    "entry_id": "pay",
+    "citizen_glosses": [
+     "PAY"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "1",
+    "nondominant_handshape": "B",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 567,
+    "sign_offset_ms": 1168,
+    "sign_duration_ms": 601,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "PHONE": {
+   "primary": {
+    "code": "A_02_040",
+    "entry_id": "telephone",
+    "citizen_glosses": [
+     "PHONE"
+    ],
+    "videos": 29,
+    "sign_type": "OneHanded",
+    "handshape": "y",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "p",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "CheekNose",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 400,
+    "sign_offset_ms": 868,
+    "sign_duration_ms": 467,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "PLEASE": {
+   "primary": {
+    "code": "B_02_007",
+    "entry_id": "please",
+    "citizen_glosses": [
+     "PLEASE"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "open_b",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Body",
+    "minor_location": "TorsoTop",
+    "path_movement": "Circular",
+    "repeated_movement": 1,
+    "sign_onset_ms": 567,
+    "sign_offset_ms": 1101,
+    "sign_duration_ms": 534,
+    "lexical_class": "Adverb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "PREFER": {
+   "primary": {
+    "code": "B_01_078",
+    "entry_id": "prefer",
+    "citizen_glosses": [
+     "PREFER"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "flat_b",
+    "nondominant_handshape": null,
+    "flexion": "Flat",
+    "flexion_change": 1.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Body",
+    "minor_location": "Clavicle",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 434,
+    "sign_offset_ms": 834,
+    "sign_duration_ms": 400,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "READY": {
+   "primary": {
+    "code": "F_03_042",
+    "entry_id": "ready",
+    "citizen_glosses": [
+     "READY"
+    ],
+    "videos": 30,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "r",
+    "nondominant_handshape": "r",
+    "flexion": "Crossed",
+    "flexion_change": 0.0,
+    "selected_fingers": "im",
+    "spread": 0.0,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 434,
+    "sign_offset_ms": 1034,
+    "sign_duration_ms": 601,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "RIGHT": {
+   "primary": {
+    "code": "C_01_070",
+    "entry_id": "right_2",
+    "citizen_glosses": [
+     "RIGHT2"
+    ],
+    "videos": 32,
+    "sign_type": "OneHanded",
+    "handshape": "r",
+    "nondominant_handshape": null,
+    "flexion": "Crossed",
+    "flexion_change": 0.0,
+    "selected_fingers": "im",
+    "spread": 0.0,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 634,
+    "sign_offset_ms": 1168,
+    "sign_duration_ms": 534,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "J_03_095",
+     "entry_id": "right_3",
+     "citizen_glosses": [
+      "RIGHT3"
+     ],
+     "videos": 31,
+     "sign_type": "AsymmetricalSameHandshape",
+     "handshape": "open_b",
+     "nondominant_handshape": "open_b",
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "Palm",
+     "path_movement": "Curved",
+     "repeated_movement": 0,
+     "sign_onset_ms": 701,
+     "sign_offset_ms": 1368,
+     "sign_duration_ms": 667,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    },
+    {
+     "code": "C_01_065",
+     "entry_id": "right_1",
+     "citizen_glosses": [
+      "RIGHT1"
+     ],
+     "videos": 31,
+     "sign_type": "SymmetricalOrAlternating",
+     "handshape": "1",
+     "nondominant_handshape": "1",
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "i",
+     "spread": null,
+     "thumb_position": "Closed",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "Straight",
+     "repeated_movement": 0,
+     "sign_onset_ms": 567,
+     "sign_offset_ms": 1168,
+     "sign_duration_ms": 601,
+     "lexical_class": "Adjective",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "SALAD": {
+   "primary": {
+    "code": "A_02_061",
+    "entry_id": "salad",
+    "citizen_glosses": [
+     "SALAD"
+    ],
+    "videos": 30,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "curved_5",
+    "nondominant_handshape": "curved_5",
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Curved",
+    "repeated_movement": 1,
+    "sign_onset_ms": 267,
+    "sign_offset_ms": 1368,
+    "sign_duration_ms": 1101,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "SAME": {
+   "primary": {
+    "code": "B_02_013",
+    "entry_id": "same_2",
+    "citizen_glosses": [
+     "SAME2"
+    ],
+    "videos": 32,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "1",
+    "nondominant_handshape": "1",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 400,
+    "sign_offset_ms": 901,
+    "sign_duration_ms": 501,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "B_02_009",
+     "entry_id": "same_1",
+     "citizen_glosses": [
+      "SAME1"
+     ],
+     "videos": 30,
+     "sign_type": "OneHanded",
+     "handshape": "y",
+     "nondominant_handshape": null,
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "p",
+     "spread": null,
+     "thumb_position": "Open",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 1168,
+     "sign_offset_ms": 1635,
+     "sign_duration_ms": 467,
+     "lexical_class": "Minor",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "SANDWICH": {
+   "primary": {
+    "code": "K_01_015",
+    "entry_id": "sandwich_4",
+    "citizen_glosses": [
+     "SANDWICH2"
+    ],
+    "videos": 32,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "open_b",
+    "nondominant_handshape": "open_b",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 1502,
+    "sign_duration_ms": 1001,
+    "lexical_class": "Noun",
+    "handshape_m2": "flat_b"
+   },
+   "variants": [
+    {
+     "code": "K_03_072",
+     "entry_id": "sandwich_3",
+     "citizen_glosses": [
+      "SANDWICH3"
+     ],
+     "videos": 30,
+     "sign_type": "SymmetricalOrAlternating",
+     "handshape": "flat_b",
+     "nondominant_handshape": "flat_b",
+     "flexion": "Flat",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Head",
+     "minor_location": "Mouth",
+     "path_movement": "Straight",
+     "repeated_movement": 0,
+     "sign_onset_ms": 567,
+     "sign_offset_ms": 1101,
+     "sign_duration_ms": 534,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    },
+    {
+     "code": "A_01_015",
+     "entry_id": "sandwich",
+     "citizen_glosses": [
+      "SANDWICH1"
+     ],
+     "videos": 30,
+     "sign_type": "AsymmetricalDifferentHandshape",
+     "handshape": "flat_b",
+     "nondominant_handshape": "B",
+     "flexion": "Flat",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Head",
+     "minor_location": "HeadAway",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 367,
+     "sign_offset_ms": 1068,
+     "sign_duration_ms": 701,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    },
+    {
+     "code": "K_02_086",
+     "entry_id": "sandwich_2",
+     "citizen_glosses": [
+      "SANDWICH4"
+     ],
+     "videos": 30,
+     "sign_type": "SymmetricalOrAlternating",
+     "handshape": "open_b",
+     "nondominant_handshape": "open_b",
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 567,
+     "sign_offset_ms": 1568,
+     "sign_duration_ms": 1001,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "SEE": {
+   "primary": {
+    "code": "C_02_030",
+    "entry_id": "see",
+    "citizen_glosses": [
+     "SEE"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "p",
+    "nondominant_handshape": null,
+    "flexion": "Stacked",
+    "flexion_change": 0.0,
+    "selected_fingers": "im",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Eye",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 300,
+    "sign_offset_ms": 1001,
+    "sign_duration_ms": 701,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "SEVEN": {
+   "primary": {
+    "code": "F_03_087",
+    "entry_id": "seven",
+    "citizen_glosses": [
+     "SEVEN"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "7",
+    "nondominant_handshape": null,
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "r",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 434,
+    "sign_offset_ms": 1268,
+    "sign_duration_ms": 834,
+    "lexical_class": "Number",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "SIGN": {
+   "primary": {
+    "code": "E_03_050",
+    "entry_id": "sign",
+    "citizen_glosses": [
+     "SIGN"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "1",
+    "nondominant_handshape": "1",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Circular",
+    "repeated_movement": 1,
+    "sign_onset_ms": 334,
+    "sign_offset_ms": 1768,
+    "sign_duration_ms": 1435,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "D_02_031",
+     "entry_id": "sign_language",
+     "citizen_glosses": [
+      "SIGNLANGUAGE"
+     ],
+     "videos": 29,
+     "sign_type": "SymmetricalOrAlternating",
+     "handshape": "1",
+     "nondominant_handshape": "1",
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "i",
+     "spread": null,
+     "thumb_position": "Closed",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "Circular",
+     "repeated_movement": 0,
+     "sign_onset_ms": 434,
+     "sign_offset_ms": 1468,
+     "sign_duration_ms": 1034,
+     "lexical_class": "Noun",
+     "handshape_m2": "l"
+    }
+   ],
+   "sign_type_ambiguous": false
+  },
+  "SIT": {
+   "primary": {
+    "code": "D_03_034",
+    "entry_id": "sit",
+    "citizen_glosses": [
+     "SIT"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "curved_h",
+    "nondominant_handshape": "DominanceConditionViolation",
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "im",
+    "spread": 0.0,
+    "thumb_position": "Closed",
+    "major_location": "Hand",
+    "minor_location": "FingerBack",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 567,
+    "sign_offset_ms": 1201,
+    "sign_duration_ms": 634,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "A_01_017",
+     "entry_id": "chair",
+     "citizen_glosses": [
+      "CHAIR"
+     ],
+     "videos": 30,
+     "sign_type": "DominanceViolation",
+     "handshape": "h",
+     "nondominant_handshape": "DominanceConditionViolation",
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "im",
+     "spread": 0.0,
+     "thumb_position": "Closed",
+     "major_location": "Hand",
+     "minor_location": "FingerBack",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 200,
+     "sign_offset_ms": 834,
+     "sign_duration_ms": 634,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "SIX": {
+   "primary": {
+    "code": "G_03_034",
+    "entry_id": "six",
+    "citizen_glosses": [
+     "SIX"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "w",
+    "nondominant_handshape": null,
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "p",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1268,
+    "sign_duration_ms": 801,
+    "lexical_class": "Number",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "SLOW": {
+   "primary": {
+    "code": "B_02_041",
+    "entry_id": "slow",
+    "citizen_glosses": [
+     "SLOW"
+    ],
+    "videos": 32,
+    "sign_type": "AsymmetricalSameHandshape",
+    "handshape": "5",
+    "nondominant_handshape": "5",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "FingerBack",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 434,
+    "sign_offset_ms": 968,
+    "sign_duration_ms": 534,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "SMALL": {
+   "primary": {
+    "code": "D_01_030",
+    "entry_id": "small",
+    "citizen_glosses": [
+     "SMALL"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "c",
+    "nondominant_handshape": "c",
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 534,
+    "sign_offset_ms": 1468,
+    "sign_duration_ms": 934,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "SODA": {
+   "primary": {
+    "code": "K_01_049",
+    "entry_id": "pop_2",
+    "citizen_glosses": [
+     "POP3"
+    ],
+    "videos": 31,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "s",
+    "nondominant_handshape": "s",
+    "flexion": "FullyClosed",
+    "flexion_change": 1.0,
+    "selected_fingers": "imrp",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "BackAndForth",
+    "repeated_movement": 0,
+    "sign_onset_ms": 634,
+    "sign_offset_ms": 1835,
+    "sign_duration_ms": 1201,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "K_02_115",
+     "entry_id": "pop_3",
+     "citizen_glosses": [
+      "POP4"
+     ],
+     "videos": 31,
+     "sign_type": "SymmetricalOrAlternating",
+     "handshape": "o",
+     "nondominant_handshape": "o",
+     "flexion": "Curved",
+     "flexion_change": 1.0,
+     "selected_fingers": "imrp",
+     "spread": 0.0,
+     "thumb_position": "Open",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "BackAndForth",
+     "repeated_movement": 1,
+     "sign_onset_ms": 701,
+     "sign_offset_ms": 1702,
+     "sign_duration_ms": 1001,
+     "lexical_class": "Verb",
+     "handshape_m2": null
+    },
+    {
+     "code": "C_03_030",
+     "entry_id": "soda",
+     "citizen_glosses": [
+      "SODA"
+     ],
+     "videos": 30,
+     "sign_type": "AsymmetricalDifferentHandshape",
+     "handshape": "open_8",
+     "nondominant_handshape": "S",
+     "flexion": "Flat",
+     "flexion_change": 1.0,
+     "selected_fingers": "m",
+     "spread": null,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "FingerRadial",
+     "path_movement": "BackAndForth",
+     "repeated_movement": 0,
+     "sign_onset_ms": 667,
+     "sign_offset_ms": 1602,
+     "sign_duration_ms": 934,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    },
+    {
+     "code": "K_03_031",
+     "entry_id": "pop_4",
+     "citizen_glosses": [
+      "POP1"
+     ],
+     "videos": 29,
+     "sign_type": "SymmetricalOrAlternating",
+     "handshape": "s",
+     "nondominant_handshape": "s",
+     "flexion": "FullyClosed",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": null,
+     "thumb_position": "Closed",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "BackAndForth",
+     "repeated_movement": 0,
+     "sign_onset_ms": 534,
+     "sign_offset_ms": 1235,
+     "sign_duration_ms": 701,
+     "lexical_class": "Verb",
+     "handshape_m2": null
+    },
+    {
+     "code": "D_03_023",
+     "entry_id": "pop",
+     "citizen_glosses": [
+      "POP2"
+     ],
+     "videos": 29,
+     "sign_type": "AsymmetricalDifferentHandshape",
+     "handshape": "baby_o",
+     "nondominant_handshape": "C",
+     "flexion": "Bent",
+     "flexion_change": 0.0,
+     "selected_fingers": "i",
+     "spread": null,
+     "thumb_position": "Open",
+     "major_location": "Hand",
+     "minor_location": "HandAway",
+     "path_movement": "BackAndForth",
+     "repeated_movement": 0,
+     "sign_onset_ms": 601,
+     "sign_offset_ms": 968,
+     "sign_duration_ms": 367,
+     "lexical_class": "Verb",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "SOME": {
+   "primary": {
+    "code": "B_01_020",
+    "entry_id": "some",
+    "citizen_glosses": [
+     "SOME"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalSameHandshape",
+    "handshape": "open_b",
+    "nondominant_handshape": "open_b",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 868,
+    "sign_duration_ms": 400,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "SORRY": {
+   "primary": {
+    "code": "C_01_020",
+    "entry_id": "sorry",
+    "citizen_glosses": [
+     "SORRY"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "a",
+    "nondominant_handshape": null,
+    "flexion": null,
+    "flexion_change": null,
+    "selected_fingers": "t",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Body",
+    "minor_location": "TorsoTop",
+    "path_movement": "Circular",
+    "repeated_movement": 1,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1435,
+    "sign_duration_ms": 968,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "SOUP": {
+   "primary": {
+    "code": "A_01_039",
+    "entry_id": "soup",
+    "citizen_glosses": [
+     "SOUP"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "curved_h",
+    "nondominant_handshape": "B",
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "im",
+    "spread": 0.0,
+    "thumb_position": "Closed",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Curved",
+    "repeated_movement": 1,
+    "sign_onset_ms": 267,
+    "sign_offset_ms": 1168,
+    "sign_duration_ms": 901,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "STRAW": {
+   "primary": {
+    "code": "G_01_092",
+    "entry_id": "straw",
+    "citizen_glosses": [
+     "STRAW"
+    ],
+    "videos": 30,
+    "sign_type": "DominanceViolation",
+    "handshape": "f",
+    "nondominant_handshape": "DominanceConditionViolation",
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Mouth",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1201,
+    "sign_duration_ms": 734,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "STRAWBERRY": {
+   "primary": {
+    "code": "K_03_100",
+    "entry_id": "strawberry_3",
+    "citizen_glosses": [
+     "STRAWBERRY2"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "curved_v",
+    "nondominant_handshape": null,
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "im",
+    "spread": 1.0,
+    "thumb_position": "Closed",
+    "major_location": "Head",
+    "minor_location": "CheekNose",
+    "path_movement": "Circular",
+    "repeated_movement": 1,
+    "sign_onset_ms": 601,
+    "sign_offset_ms": 1869,
+    "sign_duration_ms": 1268,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "A_01_068",
+     "entry_id": "strawberry",
+     "citizen_glosses": [
+      "STRAWBERRY1"
+     ],
+     "videos": 31,
+     "sign_type": "OneHanded",
+     "handshape": "f",
+     "nondominant_handshape": null,
+     "flexion": "Curved",
+     "flexion_change": 0.0,
+     "selected_fingers": "i",
+     "spread": null,
+     "thumb_position": "Open",
+     "major_location": "Head",
+     "minor_location": "Mouth",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 801,
+     "sign_offset_ms": 1568,
+     "sign_duration_ms": 767,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    },
+    {
+     "code": "K_02_017",
+     "entry_id": "strawberry_2",
+     "citizen_glosses": [
+      "STRAWBERRY4"
+     ],
+     "videos": 30,
+     "sign_type": "OneHanded",
+     "handshape": "f",
+     "nondominant_handshape": null,
+     "flexion": "Curved",
+     "flexion_change": 0.0,
+     "selected_fingers": "i",
+     "spread": null,
+     "thumb_position": "Open",
+     "major_location": "Head",
+     "minor_location": "Mouth",
+     "path_movement": "Curved",
+     "repeated_movement": 1,
+     "sign_onset_ms": 601,
+     "sign_offset_ms": 1502,
+     "sign_duration_ms": 901,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    },
+    {
+     "code": "K_01_009",
+     "entry_id": "strawberry_4",
+     "citizen_glosses": [
+      "STRAWBERRY3"
+     ],
+     "videos": 30,
+     "sign_type": "OneHanded",
+     "handshape": "curved_5",
+     "nondominant_handshape": null,
+     "flexion": "Curved",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 1.0,
+     "thumb_position": "Open",
+     "major_location": "Head",
+     "minor_location": "HeadAway",
+     "path_movement": "None",
+     "repeated_movement": 1,
+     "sign_onset_ms": 601,
+     "sign_offset_ms": 1335,
+     "sign_duration_ms": 734,
+     "lexical_class": "Noun",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": false
+  },
+  "SWEET": {
+   "primary": {
+    "code": "J_03_029",
+    "entry_id": "sweet",
+    "citizen_glosses": [
+     "SWEET"
+    ],
+    "videos": 29,
+    "sign_type": "OneHanded",
+    "handshape": "open_b",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 1.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Chin",
+    "path_movement": "None",
+    "repeated_movement": 1,
+    "sign_onset_ms": 667,
+    "sign_offset_ms": 1201,
+    "sign_duration_ms": 534,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "TABLE": {
+   "primary": {
+    "code": "A_03_025",
+    "entry_id": "table",
+    "citizen_glosses": [
+     "TABLE"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "open_b",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Arm",
+    "minor_location": "ForearmBack",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 400,
+    "sign_offset_ms": 1034,
+    "sign_duration_ms": 634,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "TASTE": {
+   "primary": {
+    "code": "J_01_081",
+    "entry_id": "taste",
+    "citizen_glosses": [
+     "TASTE"
+    ],
+    "videos": 29,
+    "sign_type": "OneHanded",
+    "handshape": "open_8",
+    "nondominant_handshape": null,
+    "flexion": "Flat",
+    "flexion_change": 0.0,
+    "selected_fingers": "m",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Chin",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 667,
+    "sign_offset_ms": 1435,
+    "sign_duration_ms": 767,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "TEA": {
+   "primary": {
+    "code": "A_02_052",
+    "entry_id": "tea",
+    "citizen_glosses": [
+     "TEA"
+    ],
+    "videos": 30,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "f",
+    "nondominant_handshape": "C",
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "FingerRadial",
+    "path_movement": "Circular",
+    "repeated_movement": 1,
+    "sign_onset_ms": 367,
+    "sign_offset_ms": 1001,
+    "sign_duration_ms": 634,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "THANK-YOU": {
+   "primary": {
+    "code": "H_02_053",
+    "entry_id": "thank_you",
+    "citizen_glosses": [
+     "THANKYOU"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "open_b",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Mouth",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 534,
+    "sign_offset_ms": 1201,
+    "sign_duration_ms": 667,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "THIRSTY": {
+   "primary": {
+    "code": "C_03_071",
+    "entry_id": "thirsty",
+    "citizen_glosses": [
+     "THIRSTY"
+    ],
+    "videos": 29,
+    "sign_type": "OneHanded",
+    "handshape": "flat_1",
+    "nondominant_handshape": null,
+    "flexion": "Flat",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Body",
+    "minor_location": "Neck",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 601,
+    "sign_offset_ms": 1235,
+    "sign_duration_ms": 634,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "THREE": {
+   "primary": {
+    "code": "B_01_044",
+    "entry_id": "three",
+    "citizen_glosses": [
+     "THREE"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "3",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "im",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 400,
+    "sign_offset_ms": 834,
+    "sign_duration_ms": 434,
+    "lexical_class": "Number",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "TIME": {
+   "primary": {
+    "code": "B_02_080",
+    "entry_id": "time",
+    "citizen_glosses": [
+     "TIME"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "bent_1",
+    "nondominant_handshape": null,
+    "flexion": "Bent",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Arm",
+    "minor_location": "WristBack",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 300,
+    "sign_offset_ms": 634,
+    "sign_duration_ms": 334,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "TWO": {
+   "primary": {
+    "code": "C_02_005",
+    "entry_id": "two",
+    "citizen_glosses": [
+     "TWO"
+    ],
+    "videos": 32,
+    "sign_type": "OneHanded",
+    "handshape": "v",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "im",
+    "spread": 1.0,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 334,
+    "sign_offset_ms": 934,
+    "sign_duration_ms": 601,
+    "lexical_class": "Number",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "UNDERSTAND": {
+   "primary": {
+    "code": "C_01_006",
+    "entry_id": "understand",
+    "citizen_glosses": [
+     "UNDERSTAND"
+    ],
+    "videos": 32,
+    "sign_type": "OneHanded",
+    "handshape": "baby_o",
+    "nondominant_handshape": null,
+    "flexion": "Bent",
+    "flexion_change": 1.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "HeadAway",
+    "path_movement": "None",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 834,
+    "sign_duration_ms": 334,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "WAIT": {
+   "primary": {
+    "code": "B_02_016",
+    "entry_id": "wait",
+    "citizen_glosses": [
+     "WAIT"
+    ],
+    "videos": 30,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "5",
+    "nondominant_handshape": "5",
+    "flexion": "FullyOpen",
+    "flexion_change": 1.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "None",
+    "repeated_movement": 1,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 968,
+    "sign_duration_ms": 501,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "WANT": {
+   "primary": {
+    "code": "E_01_025",
+    "entry_id": "want_2",
+    "citizen_glosses": [
+     "WANT1"
+    ],
+    "videos": 32,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "5",
+    "nondominant_handshape": "5",
+    "flexion": "FullyOpen",
+    "flexion_change": 1.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1068,
+    "sign_duration_ms": 601,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "C_03_013",
+     "entry_id": "want",
+     "citizen_glosses": [
+      "WANT2"
+     ],
+     "videos": 30,
+     "sign_type": "SymmetricalOrAlternating",
+     "handshape": "5",
+     "nondominant_handshape": "5",
+     "flexion": "FullyOpen",
+     "flexion_change": 1.0,
+     "selected_fingers": "imrp",
+     "spread": 1.0,
+     "thumb_position": "Open",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "Straight",
+     "repeated_movement": 0,
+     "sign_onset_ms": 734,
+     "sign_offset_ms": 1702,
+     "sign_duration_ms": 968,
+     "lexical_class": "Verb",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": false
+  },
+  "WARM": {
+   "primary": {
+    "code": "B_02_047",
+    "entry_id": "warm",
+    "citizen_glosses": [
+     "WARM"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "s",
+    "nondominant_handshape": null,
+    "flexion": "FullyClosed",
+    "flexion_change": 1.0,
+    "selected_fingers": "imrp",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Mouth",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 400,
+    "sign_offset_ms": 701,
+    "sign_duration_ms": 300,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "WATER": {
+   "primary": {
+    "code": "A_02_031",
+    "entry_id": "water",
+    "citizen_glosses": [
+     "WATER"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "w",
+    "nondominant_handshape": null,
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "p",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Chin",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 367,
+    "sign_offset_ms": 734,
+    "sign_duration_ms": 367,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "WELCOME": {
+   "primary": {
+    "code": "J_02_054",
+    "entry_id": "welcome_1",
+    "citizen_glosses": [
+     "WELCOME2"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "c",
+    "nondominant_handshape": null,
+    "flexion": "Curved",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Body",
+    "minor_location": "BodyAway",
+    "path_movement": "Curved",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 1401,
+    "sign_duration_ms": 901,
+    "lexical_class": "Adverb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "WHAT": {
+   "primary": {
+    "code": "D_02_094",
+    "entry_id": "what_2",
+    "citizen_glosses": [
+     "WHAT1"
+    ],
+    "videos": 32,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "1",
+    "nondominant_handshape": "B",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 567,
+    "sign_offset_ms": 1435,
+    "sign_duration_ms": 868,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [
+    {
+     "code": "D_02_084",
+     "entry_id": "what_1",
+     "citizen_glosses": [
+      "WHAT2"
+     ],
+     "videos": 31,
+     "sign_type": "SymmetricalOrAlternating",
+     "handshape": "5",
+     "nondominant_handshape": "5",
+     "flexion": "FullyOpen",
+     "flexion_change": 0.0,
+     "selected_fingers": "imrp",
+     "spread": 1.0,
+     "thumb_position": "Open",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "Straight",
+     "repeated_movement": 1,
+     "sign_onset_ms": 367,
+     "sign_offset_ms": 1368,
+     "sign_duration_ms": 1001,
+     "lexical_class": "Minor",
+     "handshape_m2": null
+    },
+    {
+     "code": "G_02_089",
+     "entry_id": "W.H.A.T",
+     "citizen_glosses": [
+      "W.H.A.T"
+     ],
+     "videos": 30,
+     "sign_type": "OneHanded",
+     "handshape": "w",
+     "nondominant_handshape": null,
+     "flexion": "Curved",
+     "flexion_change": null,
+     "selected_fingers": "p",
+     "spread": null,
+     "thumb_position": "Open",
+     "major_location": "Neutral",
+     "minor_location": "Neutral",
+     "path_movement": "None",
+     "repeated_movement": 0,
+     "sign_onset_ms": 334,
+     "sign_offset_ms": 934,
+     "sign_duration_ms": 601,
+     "lexical_class": "Minor",
+     "handshape_m2": null
+    }
+   ],
+   "sign_type_ambiguous": true
+  },
+  "WHEN": {
+   "primary": {
+    "code": "C_03_086",
+    "entry_id": "when",
+    "citizen_glosses": [
+     "WHEN"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalSameHandshape",
+    "handshape": "1",
+    "nondominant_handshape": "1",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Hand",
+    "minor_location": "HandAway",
+    "path_movement": "Circular",
+    "repeated_movement": 0,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1668,
+    "sign_duration_ms": 1201,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "WHERE": {
+   "primary": {
+    "code": "B_02_035",
+    "entry_id": "where",
+    "citizen_glosses": [
+     "WHERE"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "1",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 901,
+    "sign_duration_ms": 400,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "WHICH": {
+   "primary": {
+    "code": "B_01_088",
+    "entry_id": "which",
+    "citizen_glosses": [
+     "WHICH"
+    ],
+    "videos": 32,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "a",
+    "nondominant_handshape": "a",
+    "flexion": null,
+    "flexion_change": null,
+    "selected_fingers": "t",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 334,
+    "sign_offset_ms": 868,
+    "sign_duration_ms": 534,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "WHO": {
+   "primary": {
+    "code": "C_01_041",
+    "entry_id": "who",
+    "citizen_glosses": [
+     "WHO"
+    ],
+    "videos": 32,
+    "sign_type": "OneHanded",
+    "handshape": "l",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 1.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Chin",
+    "path_movement": "None",
+    "repeated_movement": 1,
+    "sign_onset_ms": 400,
+    "sign_offset_ms": 1235,
+    "sign_duration_ms": 834,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "WHY": {
+   "primary": {
+    "code": "D_01_067",
+    "entry_id": "why",
+    "citizen_glosses": [
+     "WHY"
+    ],
+    "videos": 32,
+    "sign_type": "OneHanded",
+    "handshape": "y",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 1.0,
+    "selected_fingers": "imr",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Forehead",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 567,
+    "sign_offset_ms": 1034,
+    "sign_duration_ms": 467,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "WINDOW": {
+   "primary": {
+    "code": "A_03_042",
+    "entry_id": "window",
+    "citizen_glosses": [
+     "WINDOW"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalSameHandshape",
+    "handshape": "open_b",
+    "nondominant_handshape": "open_b",
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 0.0,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "FingerRadial",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 400,
+    "sign_offset_ms": 1001,
+    "sign_duration_ms": 601,
+    "lexical_class": "Noun",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "WITH": {
+   "primary": {
+    "code": "C_02_074",
+    "entry_id": "with",
+    "citizen_glosses": [
+     "WITH"
+    ],
+    "videos": 30,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "a",
+    "nondominant_handshape": "a",
+    "flexion": "FullyClosed",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 434,
+    "sign_offset_ms": 1502,
+    "sign_duration_ms": 1068,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "WITHOUT": {
+   "primary": {
+    "code": "H_03_021",
+    "entry_id": "without",
+    "citizen_glosses": [
+     "WITHOUT"
+    ],
+    "videos": 30,
+    "sign_type": "SymmetricalOrAlternating",
+    "handshape": "a",
+    "nondominant_handshape": "a",
+    "flexion": null,
+    "flexion_change": null,
+    "selected_fingers": "t",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1368,
+    "sign_duration_ms": 901,
+    "lexical_class": "Minor",
+    "handshape_m2": "5"
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "WRITE": {
+   "primary": {
+    "code": "D_01_051",
+    "entry_id": "write",
+    "citizen_glosses": [
+     "WRITE"
+    ],
+    "videos": 31,
+    "sign_type": "AsymmetricalDifferentHandshape",
+    "handshape": "baby_o",
+    "nondominant_handshape": "B",
+    "flexion": "Bent",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Hand",
+    "minor_location": "Palm",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 534,
+    "sign_offset_ms": 1301,
+    "sign_duration_ms": 767,
+    "lexical_class": "Verb",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "WRONG": {
+   "primary": {
+    "code": "B_01_055",
+    "entry_id": "wrong_1",
+    "citizen_glosses": [
+     "WRONG"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "y",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "p",
+    "spread": null,
+    "thumb_position": "Open",
+    "major_location": "Head",
+    "minor_location": "Chin",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 601,
+    "sign_offset_ms": 834,
+    "sign_duration_ms": 234,
+    "lexical_class": "Adjective",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "YES": {
+   "primary": {
+    "code": "G_03_074",
+    "entry_id": "yes",
+    "citizen_glosses": [
+     "YES"
+    ],
+    "videos": 30,
+    "sign_type": "OneHanded",
+    "handshape": "s",
+    "nondominant_handshape": null,
+    "flexion": "FullyClosed",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 1,
+    "sign_onset_ms": 467,
+    "sign_offset_ms": 1235,
+    "sign_duration_ms": 767,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "YOU": {
+   "primary": {
+    "code": "D_02_065",
+    "entry_id": "you",
+    "citizen_glosses": [
+     "YOU"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "1",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "i",
+    "spread": null,
+    "thumb_position": "Closed",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 334,
+    "sign_offset_ms": 901,
+    "sign_duration_ms": 567,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  },
+  "YOUR": {
+   "primary": {
+    "code": "F_01_052",
+    "entry_id": "your",
+    "citizen_glosses": [
+     "YOUR"
+    ],
+    "videos": 31,
+    "sign_type": "OneHanded",
+    "handshape": "5",
+    "nondominant_handshape": null,
+    "flexion": "FullyOpen",
+    "flexion_change": 0.0,
+    "selected_fingers": "imrp",
+    "spread": 1.0,
+    "thumb_position": "Open",
+    "major_location": "Neutral",
+    "minor_location": "Neutral",
+    "path_movement": "Straight",
+    "repeated_movement": 0,
+    "sign_onset_ms": 501,
+    "sign_offset_ms": 1268,
+    "sign_duration_ms": 767,
+    "lexical_class": "Minor",
+    "handshape_m2": null
+   },
+   "variants": [],
+   "sign_type_ambiguous": false
+  }
+ }
+}
