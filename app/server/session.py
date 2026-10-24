@@ -11,9 +11,10 @@ from typing import Any, AsyncIterator, Awaitable, Callable, Literal, Protocol, T
 
 import numpy as np
 
+from . import plush
 from .protocol import (
-    AvatarDoneMsg, CalibrateMsg, CaptionMsg, FrameMsg, ModeMsg, PickMsg, PickOption, PickRequestMsg, PracticeMsg, SayMsg,
-    RecognizedMsg, SignPlanMsg, SignToken, StateMsg, YouSaidMsg, Frame,
+    AvatarDoneMsg, CalibrateMsg, CaptionMsg, CheerMsg, FrameMsg, ModeMsg, PickMsg, PickOption, PickRequestMsg, PracticeMsg, RedoMsg,
+    SayMsg, RecognizedMsg, SignPlanMsg, SignToken, StateMsg, YouSaidMsg, Frame,
 )
 from .vocab import Vocab
 
@@ -154,7 +155,6 @@ class Session:
         self.mode: str | None = None  # the translator's switch (ModeMsg): "voice" or "signing"; None runs both
         self._say_lock = asyncio.Lock()
         self._says: set[asyncio.Task] = set()  # asyncio keeps only weak refs to tasks
-        self._say_waiting: asyncio.Task | None = None  # the one line queued behind the playing one
 
     # --- plumbing ---
 
@@ -211,9 +211,7 @@ class Session:
 
     async def _say(self, text: str) -> None:
         """Lines never overlap and never change the session state; a failed line is only logged."""
-        async with self._say_lock:
-            if self._say_waiting is asyncio.current_task():
-                self._say_waiting = None
+        async with self._say_lock:  # a cut-off line is still silencing its speaker: the next starts after that
             try:
                 async for _ in self.voice.speak(text, SAY_EMOTION):
                     pass
@@ -231,18 +229,28 @@ class Session:
             await self._on_frame(msg)
         elif isinstance(msg, ModeMsg):
             self.mode = msg.mode
-            if msg.mode == "voice" and self.state in ("signing", "picking"):
+            if msg.mode == "voice" and self.state in ("signing", "reading", "picking"):
                 await self._yield_to_speech()  # a sign turn in flight is dropped
             elif msg.mode == "signing" and self.state == "listening":
                 await self._idle()
+        elif isinstance(msg, RedoMsg) and self.practice:
+            if self._busy():  # the attempt still being read is dropped unread
+                self._task.cancel()
+                await asyncio.gather(self._task, return_exceptions=True)
+            # mid-turn, or a read cancelled before it began (its finally, which says "ready", never ran): start over
+            if self.state in ("signing", "reading") and self.baseline is not None:
+                self.segmenter = self.make_segmenter(self.baseline)
+                await self._set("ready")
         elif isinstance(msg, PracticeMsg):
             self.practice, self.practice_signs = msg.on, set(msg.signs)
         elif isinstance(msg, SayMsg) and self.practice:  # translator speech is the session's own; never page-chosen
-            if self._say_waiting:  # a newer line makes the waiting one stale: never more than one in line
-                self._say_waiting.cancel()
-            t = self._say_waiting = asyncio.create_task(self._say(msg.text))
+            for t in self._says:  # the lesson moved on: a line still playing or waiting is stale, so the newest cuts it off
+                t.cancel()
+            t = asyncio.create_task(self._say(msg.text))
             self._says.add(t)
             t.add_done_callback(self._says.discard)
+        elif isinstance(msg, CheerMsg) and self.practice:
+            plush.cheer()
         elif isinstance(msg, PickMsg):
             offered = self._offered and msg.segment == self._offered[0] and msg.gloss in self._offered[1]
             if offered and self._pick and not self._pick.done():
@@ -271,6 +279,7 @@ class Session:
             await self._set("signing")
             self._watch = asyncio.create_task(self._watchdog())  # kept referenced so it is not garbage-collected
         elif isinstance(ev, TurnEnd) and self.state == "signing":
+            await self._set("reading")  # the page freezes its camera: what comes now is not part of this sign
             self._spawn(self._sign_turn(ev))
 
     async def _yield_to_speech(self) -> None:
@@ -286,7 +295,7 @@ class Session:
     async def on_transcript(self, text: str, final: bool) -> None:
         if self.practice or self.mode == "signing":
             return  # lessons and signing mode are sign -> page only; the mic would start speech turns mid-sign
-        if final and text.strip() and self.state in ("signing", "picking"):
+        if final and text.strip() and self.state in ("signing", "reading", "picking"):
             await self._yield_to_speech()  # never while voice or avatar output plays (those states drop speech)
         # Calibration is only for the signer's camera; speech -> sign doesn't need it.
         if self.state not in ("ready", "listening", "calibrating") or self._busy():

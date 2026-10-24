@@ -17,6 +17,7 @@ dependencies = [
     "pyyaml>=6.0",
     "python-dotenv>=1.0",
     "cartesia[websockets]>=4.2.0",
+    "pyserial>=3.5",
 ]
 
 [project.scripts]

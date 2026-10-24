@@ -82,6 +82,13 @@ test("every camera card plays the camera again: a video taken out of the page pa
   expect(document.querySelector("video")!.isConnected).toBe(true);
 });
 
+test("a right answer makes the plushie flap its arms", async () => {
+  await vi.waitFor(() => expect(getByRole(document.body, "heading", { name: "Sign “hello”" })).toBeTruthy());
+  sock.toPage({ type: "recognized", segments: [[{ gloss: "HELLO", english: "hello", p: 0.9 }]] });
+  getByRole(document.body, "button", { name: /Continue/ });
+  expect(sock.sent.filter((m) => m.type === "cheer")).toHaveLength(1);
+});
+
 test("the avatar names its speed while it plays, and the replay buttons say which is which", async () => {
   const { runLesson } = await import("./lessonView");
   runLesson(document.body, [{ kind: "intro", gloss: "HELLO" }], host);
@@ -98,4 +105,33 @@ test("the emotion line says what the face shows, and for a feeling sign whether 
   expect(faceLine("happy", "HAPPY", "happy")).toBe("Your face: happy. Just right for “happy”!");
   expect(faceLine("happy", "SAD", "sad")).toBe("Your face: happy. “sad” needs a sad face!");
   expect(faceLine("neutral", "ANGRY", "angry")).toBe("Your face: neutral. “angry” needs an angry face!");
+});
+
+test("while a sign is read the camera freezes and says so, and it moves again after", async () => {
+  await vi.waitFor(() => expect(cam.onFrame).not.toBeNull()); // the camera is up
+  const video = document.querySelector("video")!;
+  const pause = vi.spyOn(video, "pause").mockImplementation(() => {});
+  sock.toPage({ type: "state", state: "signing" });
+  expect(document.querySelector(".cam-status")!.textContent).toMatch(/hands down/i); // how a sign ends
+  play.mockClear();
+  sock.toPage({ type: "state", state: "reading" });
+  expect(pause).toHaveBeenCalled();
+  expect(document.querySelector(".cam-status")!.textContent).toMatch(/^Reading your sign…/);
+  sock.toPage({ type: "state", state: "ready" });
+  expect(play).toHaveBeenCalled();
+});
+
+test("tapping the frozen camera while a sign is read signs it again, and that attempt's result is ignored", async () => {
+  await vi.waitFor(() => expect(cam.onFrame).not.toBeNull());
+  expect(document.querySelector<HTMLButtonElement>(".cam-redo")!.hidden).toBe(true); // only while a sign is read
+  sock.toPage({ type: "state", state: "reading" });
+  expect(document.querySelector(".cam-status")!.textContent).toMatch(/tap to redo/i);
+  getByRole(document.body, "button", { name: "Redo the sign" }).click();
+  expect(sock.sent).toContainEqual({ type: "redo" });
+  sock.toPage({ type: "recognized", segments: [[{ gloss: "HELLO", english: "hello", p: 0.9 }]] }); // already on its way
+  sock.toPage({ type: "state", state: "ready" });
+  expect(document.querySelector(".verdict")).toBeNull(); // not graded: they sign again
+  sock.toPage({ type: "state", state: "signing" });
+  sock.toPage({ type: "recognized", segments: [[{ gloss: "HELLO", english: "hello", p: 0.9 }]] }); // the new attempt
+  expect(document.querySelector(".verdict")).not.toBeNull();
 });

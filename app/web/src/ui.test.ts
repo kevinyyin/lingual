@@ -153,3 +153,11 @@ describe("gibberish", () => {
     expect(document.getElementById("you-said")!.textContent).toMatch(/didn't make a sentence/);
   });
 });
+
+test("the translator says when the signer's turn is being read", () => {
+  renderMsg({ type: "state", state: "signing" });
+  expect(document.getElementById("state")!.textContent).toBe("Watching your signs…");
+  renderMsg({ type: "state", state: "reading" });
+  expect(document.getElementById("state")!.textContent).toBe("Reading signs…");
+  expect(document.getElementById("state")!.dataset.state).toBe("reading");
+});

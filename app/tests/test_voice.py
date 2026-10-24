@@ -102,6 +102,44 @@ async def test_speak_streams_audio_with_controls():
     assert ctx.kw["generation_config"]["emotion"] in ("happy", "excited")
 
 
+async def test_a_line_cut_off_stops_generating_and_playing_at_once():
+    """A newer lesson line cancels this one: Cartesia stops the reply, the speaker drops what it still had buffered, and
+    the kept socket stays open for the next line."""
+    import asyncio
+
+    class LongCtx(FakeCtx):
+        cancelled = False
+
+        async def receive(self):
+            yield chunk(b"\x01\x00")
+            await asyncio.sleep(10)  # the rest of a long line
+
+        async def cancel(self):
+            self.cancelled = True
+
+    class AbortPlayer(FakePlayer):
+        aborted = False
+
+        def abort(self):
+            self.aborted = True
+
+    ctx, player = LongCtx([]), AbortPlayer()
+    client = client_of(lambda: ctx)
+    v = Voice(client=client, voice_id="v1", player_factory=lambda: player)
+
+    async def say():
+        async for _ in v.speak("Your turn! Sign hello.", {"label": "happy", "intensity": 0.4}):
+            pass
+
+    t = asyncio.create_task(say())
+    await asyncio.sleep(0.05)  # the first chunk is playing; the rest is still coming
+    t.cancel()
+    with pytest.raises(asyncio.CancelledError):
+        await t
+    assert ctx.cancelled and player.aborted and not player.closed
+    assert not client.conns[0].closed
+
+
 async def test_socket_drop_raises_after_first_audio():
     client, _ = fake_client([chunk(b"\x01\x00"), ConnectionError("closed")])
     player = FakePlayer()

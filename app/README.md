@@ -90,6 +90,14 @@ and restart the server with the new `ALLOWED_ORIGINS`. Installs from a free Appl
 learns the tunnel URL can use the app while it runs: stop the tunnel after the demo. (`npm --prefix web run dev:tunnel`
 with the tunnel on :5173 instead gives live edits, but loads much slower on the phone.)
 
+## Plushie arms (optional)
+
+Two 9g servos on an Arduino Uno R4 WiFi (signal pins 6 and 9) flap the plushie's arms each time the child gets a
+teaching-mode answer right. Upload `arduino/plush_arms/` once (Arduino IDE, or
+`arduino-cli compile --upload -p <port> --fqbn arduino:renesas_uno:unor4wifi arduino/plush_arms`) and leave the board
+plugged into the laptop that runs `asl-server`: the server finds it by itself (`server/plush.py`) and skips the arms when
+it isn't there. Tune `DOWN`, `UP` and `STEP_MS` at the top of the sketch on the real plush.
+
 ## Fingerspelling
 
 ```bash
