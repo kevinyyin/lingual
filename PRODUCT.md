@@ -31,9 +31,9 @@ keeps at home.
 
 ## Operating Context
 
-- Teaching mode: a course of short units (Greetings, People, Questions, Food & drink, Feelings); lessons with watch,
-  pick-the-sign, match, order and perform-on-camera exercises; practice; daily challenges; profile and settings. The
-  plushie speaks short lines in lessons (Cartesia voice).
+- Teaching mode: a course of short units (Greetings, People, Questions, Food & drink, Feelings); lessons that show each
+  sign, have you sign it on camera, then ask what each means (pick-the-sign, match and order are off for now); practice;
+  daily challenges; profile and settings. The plushie speaks short lines in lessons (Cartesia voice).
 - Translator: live turns with visible states (calibrating, ready, reading signs, picking, speaking, listening, signing),
   a top-3 picker the signer answers fast (keys 1-3, Esc), captions and a row of sign chips.
 - Runs in a laptop browser and in a Capacitor iOS app (an iPhone 17 Pro in the plush) that loads the page from the

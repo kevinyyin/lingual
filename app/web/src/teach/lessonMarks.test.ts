@@ -8,23 +8,25 @@ vi.mock("../avatar/stage", () => ({ createStage: vi.fn() }));
 import { runLesson, type LessonHost } from "./lessonView";
 
 const host: LessonHost = { english: (g) => g.toLowerCase(), sound: () => false, say() {},
-  cameraOn: () => false, disableCamera() {}, quit() {}, finish: () => { throw new Error("not reached"); } };
+  cameraOn: () => false, disableCamera() {}, quit() {}, save() {}, finish: () => { throw new Error("not reached"); } };
 const opt = (word: string) => getByRole(document.body, "button", { name: new RegExp(`^\\d${word}$`) });
 const answer = (word: string) => { opt(word).click(); getByRole(document.body, "button", { name: "Check" }).click(); };
 
 beforeEach(() => runLesson(document.body, [{ kind: "watch", gloss: "HELLO", options: ["MEET", "GOODBYE", "NICE", "HELLO"] }], host));
 
-test("a right answer is circled and nothing is struck", () => {
+test("a right answer gets a check and nothing is crossed", () => {
   answer("hello");
-  expect(opt("hello").querySelector(".mark.loop")).not.toBeNull();
-  expect(document.querySelector(".mark.strike")).toBeNull();
+  expect(opt("hello").classList.contains("right")).toBe(true);
+  expect(opt("hello").querySelector(".tile-mark")).not.toBeNull();
+  expect(document.querySelector(".opt.wrong")).toBeNull();
   expect(document.querySelector(".verdict h3")!.textContent).toMatch(/^(Spot on\.|That's it!|Nailed it\.|Exactly right\.|Got it\.)$/);
 });
 
-test("a wrong answer strikes the choice and circles the right one", () => {
+test("a wrong answer crosses the choice and checks the right one", () => {
   answer("meet");
-  expect(opt("meet").querySelector(".mark.strike")).not.toBeNull();
-  expect(opt("hello").querySelector(".mark.loop")).not.toBeNull();
+  expect(opt("meet").classList.contains("wrong")).toBe(true);
+  expect(opt("meet").querySelector(".tile-mark")).not.toBeNull();
+  expect(opt("hello").classList.contains("right")).toBe(true);
   expect(document.querySelector(".verdict")!.textContent).toContain("Not quite.");
   expect(document.querySelector(".verdict")!.textContent).toContain("Answer: hello");
 });

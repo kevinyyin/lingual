@@ -53,8 +53,9 @@ position, calibrating or picking, **red** an error.
 ### Teaching mode (`/teach.html`)
 
 - **Course:** five units (Greetings, People, Questions, Food & drink, Feelings), each a path of short lessons ending in a
-  review. Exercises: meet a new sign, watch and pick its meaning, pick the sign for a word, match pairs, put signs in
-  order, and **"Your turn"**: sign it to the camera.
+  review. Each lesson shows every sign, has you sign it to the camera (**"Your turn"**), then asks what each sign means
+  (pick-the-sign, match and order are off for now). Redo any answer, go back a step, and a lesson you leave picks up
+  where you were.
 - **"Your turn" grading:** the camera points go to the recognizer; you pass when the target sign is in its top three
   guesses (it picks exactly the right sign about half the time, so top-1 alone would fail good signing). A miss gets a
   second try with "That looked like *X*". It tells you which sign it saw, not what to fix in your handshape.

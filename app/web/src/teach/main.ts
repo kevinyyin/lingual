@@ -13,7 +13,7 @@ import { lookupSign } from "./showMe";
 import { fetchVocab, type VocabSign } from "../avatar/stage";
 import { rememberPhone } from "../phone";
 import { loadTrackers } from "../camera";
-import { load, loadSettings, save, saveSettings, type Settings } from "./store";
+import { load, loadRun, loadSettings, save, saveRun, saveSettings, type Settings } from "./store";
 
 rememberPhone();
 const root = document.getElementById("teach")!;
@@ -65,6 +65,7 @@ function play(id: string, exercises: Exercise[]) {
     cameraOn: camera,
     disableCamera: () => { cameraThisSession = false; },
     quit: () => { home(); window.scrollTo(0, 0); },
+    save: (run) => saveRun(id, run),
     finish: (run) => {
       const now = new Date();
       const { progress: p, earned } = finishLesson(progress, {
@@ -73,16 +74,15 @@ function play(id: string, exercises: Exercise[]) {
       setProgress(p);
       return { earned, streak: progress.streak, week: weekDone(progress, now) };
     },
-  });
+  }, loadRun(id) ?? undefined);
 }
 
 function startLesson(id: string) {
   const lesson = ALL_LESSONS.find((l) => l.id === id);
   if (!lesson) return;
-  const now = new Date();
   play(id, buildLesson({
     signs: lesson.signs, known: signsTaughtThrough(id), vocab, review: id.endsWith("review"),
-    perform: camera(), progress, today: dayKey(now), rng: Math.random,
+    perform: camera(), rng: Math.random,
   }));
 }
 
@@ -93,7 +93,7 @@ function startPractice(kind: "weak" | "signing") {
   if (!signs.length) return;
   const exercises: Exercise[] = kind === "signing"
     ? signs.map((g) => ({ kind: "perform", gloss: g }))
-    : buildLesson({ signs, known: Object.keys(progress.signs), vocab, review: true, perform: false, progress, today: dayKey(now), rng: Math.random });
+    : buildLesson({ signs, known: Object.keys(progress.signs), vocab, review: true, perform: false, rng: Math.random });
   play(`practice-${kind}`, exercises);
 }
 

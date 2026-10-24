@@ -1,12 +1,11 @@
 import { describe, expect, test } from "vitest";
 import { buildLesson, LessonRun, signScore, type Exercise } from "./lesson";
-import { fresh } from "./progress";
 
 const seeded = (s = 1) => () => ((s = (s * 16807) % 2147483647) / 2147483647);
 const VOCAB = ["HELLO", "GOODBYE", "NICE", "MEET", "THANK-YOU", "PLEASE", "SORRY", "WELCOME", "YES", "NO"];
 const opts = (over = {}) => ({
   signs: ["HELLO", "GOODBYE", "NICE", "MEET"], known: ["HELLO", "GOODBYE", "NICE", "MEET"], vocab: VOCAB,
-  review: false, perform: true, progress: fresh(), today: "2026-10-21", rng: seeded(), ...over,
+  review: false, perform: true, rng: seeded(), ...over,
 });
 
 describe("buildLesson", () => {
@@ -38,15 +37,11 @@ describe("buildLesson", () => {
     }
   });
 
-  test("camera exercises only when allowed, and review lessons have no intros", () => {
-    expect(buildLesson(opts({ perform: false })).some((e) => e.kind === "perform")).toBe(false);
-    expect(buildLesson(opts()).filter((e) => e.kind === "perform")).toHaveLength(4); // one per new sign
-    expect(buildLesson(opts({ review: true })).some((e) => e.kind === "intro")).toBe(false);
-  });
-
-  test("signs already learned are not introduced again", () => {
-    const progress = { ...fresh(), signs: { HELLO: { correct: 3, wrong: 0, strength: 3, lastSeen: "2026-10-21" } } };
-    expect(buildLesson(opts({ progress })).some((e) => e.kind === "intro" && e.gloss === "HELLO")).toBe(false);
+  test("the whole lesson: each sign shown then signed, then each recognized, and nothing more", () => {
+    const kinds = (o = {}) => buildLesson(opts(o)).map((e) => e.kind).join(" ");
+    expect(kinds()).toBe("intro perform ".repeat(4) + "watch watch watch watch");
+    expect(kinds({ perform: false })).toBe("intro ".repeat(4) + "watch watch watch watch");
+    expect(kinds({ review: true, signs: VOCAB })).toBe("intro perform ".repeat(8) + Array(8).fill("watch").join(" ")); // 8 of a review's signs
   });
 });
 
@@ -73,6 +68,28 @@ describe("LessonRun", () => {
     expect(run.combo).toBe(0);
     expect(run.mistakes).toBe(1);
     expect(run.current!.ex).toEqual(watch("C"));
+  });
+
+  test("back undoes the last answer, and any skips after it", () => {
+    const run = new LessonRun([watch("A"), { kind: "perform", gloss: "B" }, watch("C")]);
+    expect(run.canGoBack).toBe(false);
+    run.answer(false); // A goes to the back of the queue
+    run.skip();
+    expect(run.current!.ex).toEqual(watch("C"));
+    expect(run.back()).toBe(true);
+    expect(run.current).toEqual({ ex: watch("A"), retry: false });
+    expect([run.done, run.mistakes, run.answers.length, run.canGoBack]).toEqual([0, 0, 0, false]);
+    expect(run.back()).toBe(false);
+  });
+
+  test("a saved run picks up where it was, history and all", () => {
+    const run = new LessonRun([watch("A"), watch("B"), watch("C")]);
+    run.answer(true);
+    run.answer(false);
+    const again = new LessonRun([watch("X")], JSON.parse(JSON.stringify(run.save()))); // through storage, as store.ts does
+    expect([again.current!.ex, again.done, again.total, again.mistakes]).toEqual([watch("C"), 1, 3, 1]);
+    again.back();
+    expect(again.current!.ex).toEqual(watch("B"));
   });
 });
 
