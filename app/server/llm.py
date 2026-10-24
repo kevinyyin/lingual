@@ -31,9 +31,18 @@ async def ask_json(client, system: str | list, user: str, schema: dict | None, m
         raise LLMError("refusal")
     text = "".join(b.text for b in r.content if b.type == "text")
     try:
-        out = json.loads(text)
-    except json.JSONDecodeError as e:
-        raise LLMError(f"bad JSON: {text[:80]!r}") from e
+        out = parse_object(text)
+    except json.JSONDecodeError as e:  # a cut-off reply (stop max_tokens) is never worth repairing: the plan is partial
+        raise LLMError(f"bad JSON (stop {r.stop_reason}): {text[:80]!r}") from e
     if not isinstance(out, dict):
         raise LLMError("JSON is not an object")
     return out
+
+
+def parse_object(text: str) -> Any:
+    """The first JSON value in the reply: schema-free replies sometimes wrap it in a ```json fence or follow it with a
+    remark, which json.loads rejects although the object itself is whole."""
+    start = text.find("{")
+    if start < 0:
+        raise json.JSONDecodeError("no JSON object", text, 0)
+    return json.JSONDecoder().raw_decode(text, start)[0]

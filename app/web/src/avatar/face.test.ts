@@ -26,7 +26,7 @@ describe("faceTrack", () => {
   });
 
   test("tone never sets brow values", () => {
-    for (const tone of ["warm", "apologetic", "urgent", "neutral"] as const) {
+    for (const tone of ["warm", "apologetic", "sad", "angry", "urgent", "neutral"] as const) {
       const f = faceTrack("statement", tone, 1500);
       for (let t = 0; t <= 1500; t += 50) {
         expect(f(t).browUp).toBe(0);
@@ -48,12 +48,20 @@ describe("faceTrack", () => {
     expect(faceTrack("statement", "apologetic", 1500)(750).headPitchDeg).toBeGreaterThan(0);
     expect(faceTrack("statement", "warm", 1500)(750).expressions.MTH_Joy).toBeGreaterThan(0.3);
   });
+
+  test("sad tone looks down further than apologetic; angry keeps the head level", () => {
+    const pitch = (tone: Tone) => faceTrack("statement", tone, 1500)(750).headPitchDeg;
+    expect(pitch("sad")).toBeGreaterThan(pitch("apologetic"));
+    expect(pitch("angry")).toBe(0);
+  });
 });
 
 test("tone shows at full strength mid-sentence, on the mouth and eyes only", () => {
   const at = (tone: Tone) => faceTrack("statement", tone, 1500)(750).expressions;
   expect(at("warm")).toEqual({ MTH_Joy: 1, EYE_Joy: 0.7 });
   expect(at("apologetic")).toEqual({ MTH_Sorrow: 0.9, EYE_Sorrow: 0.6 });
+  expect(at("sad")).toEqual({ MTH_Sorrow: 1, EYE_Sorrow: 1 });
+  expect(at("angry")).toEqual({ MTH_Angry: 1, EYE_Angry: 1 });
   expect(at("urgent")).toEqual({ MTH_Surprised: 0.6, EYE_Surprised: 0.8 });
   expect(at("neutral")).toEqual({});
 });

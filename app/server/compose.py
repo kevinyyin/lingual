@@ -15,11 +15,14 @@ Rules:
 - Keep the ASL meaning, not the ASL word order. Add only the small words English needs (articles, "to", "do").
 - question "yn": a yes/no question ending in "?". question "wh": a wh-question ending in "?". Otherwise a statement.
 - negation true: the sentence is negated, even if no NOT sign appears.
-- Fingerspelled words are names or terms: use them verbatim.
+- Fingerspelled words are names or terms: keep their letters, written as a word ("NATHAN" -> "Nathan", "HI" -> "Hi", "SUSHI" -> "sushi"). \
+A fingerspelled word alone is a whole turn: say just that word.
 - Never add facts that were not signed. Emotion may color word choice slightly but must not change the meaning.
 - The signs come from a camera that sometimes misreads one: if they don't fit together in the order read, write the \
 most natural sentence they make together.
-- If no sensible sentence can be made from them at all, never invent one: reply {"text": "", "unclear": true}.
+- If no sensible sentence can be made from them at all, never invent one: reply {"text": "", "unclear": true}. A \
+sentence that needs a link the signs don't give is invented: BABY CHEESE HOSPITAL is unclear (not "The baby cheese is \
+at the hospital"); DOCTOR FATHER is "My father is a doctor."; HELLO NAME, cut off before the name, is "Hello, my name".
 Reply as JSON: {"text": "<sentence>"}"""
 
 
