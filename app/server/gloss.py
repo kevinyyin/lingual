@@ -152,7 +152,8 @@ class Gloss:
     async def _ask(self, english: str, attempt: int, schema: dict | None) -> dict | None:
         try:
             # as data, not a bare message: a bare question invited the model to answer it ("why are you sad?" -> I NOT SAD)
-            return await ask_json(self.client, self.system, json.dumps({"say": english}), schema)
+            # a 50-word turn needs ~450 output tokens: at 400 both attempts cut off mid-JSON and every word got spelled
+            return await ask_json(self.client, self.system, json.dumps({"say": english}), schema, max_tokens=1024)
         except LLMError as e:
             log.warning("gloss attempt %d failed: %s", attempt, e)
             return None

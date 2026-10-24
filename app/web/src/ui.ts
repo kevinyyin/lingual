@@ -48,6 +48,7 @@ const el = <K extends keyof HTMLElementTagNameMap>(tag: K, className: string, te
 let socket: Socket | null = null;
 let pending: { segment: number; options: PickOption[] } | null = null;
 
+let signing = -1; // the plan tile the avatar is on (or was on last, during a blend)
 /** i = option index, or -1 for "none of these" (the turn is dropped and nothing is spoken). */
 function choose(i: number): void {
   if (!pending || (i >= 0 && !pending.options[i])) return;
@@ -110,6 +111,7 @@ export function renderMsg(m: ServerMsg): void {
         return parts.map((g, i) => {
           const end = i === parts.length - 1 ? " word-end" : "";
           const span = el("span", t.kind === "sign" ? "sign" : `letter${end}`, g);
+      signing = -1;
           span.dataset.g = g; // dataset is getter-only: Object.assign({ dataset }) throws in browsers
           return span;
         });
@@ -121,7 +123,13 @@ export function renderMsg(m: ServerMsg): void {
 /** Shows which sign or letter the avatar is on; caption-only signs are how out-of-avatar signs still get across. */
 export function highlight(gloss: string | null): void {
   $("plan").dataset.current = gloss ?? "";
-  $("plan").querySelectorAll("span").forEach((s) => s.classList.toggle("on", s.dataset.g === gloss));
+  const spans = [...$("plan").querySelectorAll("span")];
+  if (gloss !== null) { // the next tile with this gloss: a letter or sign can appear many times in one plan
+    const after = (k: number) => spans.findIndex((s, j) => j > k && s.dataset.g === gloss);
+    const j = after(signing) >= 0 ? after(signing) : after(-1); // from the start again on a replay
+    if (j >= 0) signing = j;
+  }
+  spans.forEach((s, i) => s.classList.toggle("on", gloss !== null && i === signing));
 }
 
 /** Shows `m` on the switch and the page, tells the server and remembers it for next time. */

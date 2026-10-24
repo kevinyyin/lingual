@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { beforeEach, describe, expect, test } from "vitest";
 import { getAllByRole, getByRole } from "@testing-library/dom";
-import { bindControls, renderMsg } from "./ui";
+import { bindControls, highlight, renderMsg } from "./ui";
 import type { ClientMsg } from "./ws";
 
 let sent: ClientMsg[];
@@ -97,6 +97,16 @@ test("sign_plan renders caption and one span per sign or letter", () => {
   expect(document.getElementById("caption")!.textContent).toBe("Coffee, Ana?");
   const spans = [...document.querySelectorAll<HTMLElement>("#plan span")];
   expect(spans.map((s) => s.dataset.g)).toEqual(["COFFEE", "A", "N", "A"]);
+});
+
+test("highlight lights only the tile being signed, in plan order", () => {
+  renderMsg({ type: "sign_plan", tokens: [{ kind: "spell", word: "ANA" }, { kind: "sign", gloss: "A" }], grammar: "statement", tone: "neutral", english: "Ana" });
+  const lit = () => [...document.querySelectorAll("#plan span")].map((s) => (s.classList.contains("on") ? 1 : 0)).join("");
+  // the avatar reports each item, with null for the blends between them
+  const seen = ["A", null, "N", null, "A", null, "A", null].map((g) => (highlight(g), lit()));
+  expect(seen).toEqual(["1000", "0000", "0100", "0000", "0010", "0000", "0001", "0000"]);
+  highlight("A"); // a replay of the same plan starts over
+  expect(lit()).toBe("1000");
 });
 
 describe("voice / signing switch", () => {
