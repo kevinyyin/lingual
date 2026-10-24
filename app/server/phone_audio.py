@@ -60,6 +60,9 @@ class WsPlayer:
         if lead > self.ahead_s:
             self.sleep(lead - self.ahead_s)
 
+    def abort(self) -> None:
+        """Cut off by a newer line: no wait (the phone plays out at most ahead_s of what was already sent)."""
+
     def close(self) -> None:
         """Blocks (Voice calls it in a worker thread) until the phone has played everything plus TAIL_S, so the
         session stays "speaking" (mic gated) while the plushie's own voice can still reach speech-to-text."""

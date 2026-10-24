@@ -2,6 +2,7 @@
 
 import asyncio
 import logging
+import threading
 from typing import AsyncIterator, Callable
 
 log = logging.getLogger("asl.voice")
@@ -43,20 +44,33 @@ class VoiceError(Exception):
 
 
 class _Speaker:
-    """Blocking PCM16 mono writer on the default output device."""
+    """Blocking PCM16 mono writer on the default output device. Voice writes from a worker thread: the lock keeps a
+    cut-off line's abort from racing a chunk still being written (PortAudio is not safe for that)."""
 
     def __init__(self):
         import sounddevice as sd
 
         self.stream = sd.RawOutputStream(samplerate=SAMPLE_RATE, channels=1, dtype="int16")
         self.stream.start()
+        self.lock, self.ended = threading.Lock(), False
 
     def write(self, b: bytes) -> None:
-        self.stream.write(b)
+        with self.lock:
+            if not self.ended:
+                self.stream.write(b)
 
     def close(self) -> None:
-        self.stream.stop()
-        self.stream.close()
+        self._end(self.stream.stop)  # plays out what is buffered
+
+    def abort(self) -> None:
+        self._end(self.stream.abort)  # cut off: drops it
+
+    def _end(self, how: Callable[[], None]) -> None:
+        with self.lock:
+            if not self.ended:
+                self.ended = True
+                how()
+                self.stream.close()
 
 
 class Voice:
@@ -94,6 +108,7 @@ class Voice:
 
     async def speak(self, text: str, emotion) -> AsyncIterator[str]:
         player = self.player_factory()
+        stop, ctx = player.close, None
         try:
             while True:
                 reused, heard = self._conn is not None, False
@@ -127,6 +142,14 @@ class Voice:
                     if isinstance(e, VoiceError):
                         raise
                     raise VoiceError(f"{type(e).__name__}: {e}") from e
+        except asyncio.CancelledError:  # a newer line cut this one off: stop generating it and stop its sound now
+            stop = getattr(player, "abort", player.close)
+            if ctx is not None:
+                try:
+                    await ctx.cancel()  # Cartesia drops the rest of the reply; the kept socket serves the next line
+                except Exception:
+                    await self._drop()
+            raise
         finally:
-            await asyncio.to_thread(player.close)  # the phone's player waits out the playback tail
+            await asyncio.to_thread(stop)  # close: the phone's player waits out the playback tail
         yield "done"

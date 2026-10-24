@@ -21,12 +21,15 @@ export type ClientMsg =
   | { type: "avatar_done" }
   | { type: "practice"; on: boolean; signs?: string[] }
   | { type: "mode"; mode: Mode }
+  | { type: "redo" }
   | { type: "say"; text: string }
+  | { type: "cheer" }
   | { type: "record"; signer: string; gloss: string; frames: Frame[] };
 
 /** The translator's switch: voice (speech -> avatar; the camera is ignored) or signing (camera -> speech; speech ignored). */
 export type Mode = "voice" | "signing";
-export type State = "calibrating" | "ready" | "signing" | "picking" | "speaking" | "listening" | "avatar";
+/** reading: the signer's hands came down and the turn is being read (protocol.py). */
+export type State = "calibrating" | "ready" | "signing" | "reading" | "picking" | "speaking" | "listening" | "avatar";
 export type Grammar = "yn" | "wh" | "neg" | "statement";
 export type Tone = "warm" | "apologetic" | "urgent" | "neutral";
 export interface SignToken { kind: "sign" | "spell"; gloss?: string | null; word?: string | null }

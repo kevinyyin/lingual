@@ -90,7 +90,7 @@ export function faceLabel(s: FaceScores): Feeling {
   return v >= EMO_T ? k : "neutral";
 }
 
-export type CamStatus = "off" | "starting" | "position" | "calibrating" | "ready" | "signing" | "error";
+export type CamStatus = "off" | "starting" | "position" | "calibrating" | "ready" | "signing" | "reading" | "error";
 type Listener = { status(s: CamStatus, detail?: string): void; recognized(segments: PickOption[][]): void; face?(seen: Feeling): void };
 
 /** Webcam + backend in practice mode. Detection runs only while a perform exercise is on screen. */
@@ -109,6 +109,7 @@ class Practice {
   private faces: FaceScores = { happy: 0, sad: 0, angry: 0 };
   private watch = new PositionWatch();
   private hint: string | null = null; // position.ts's direction, shown instead of the status while there is one
+  private redoing = false; // a redo was asked for: the dropped attempt's result may still arrive, and is ignored
   /** What the learner's face reads as now (smoothed); the listener hears when it changes. */
   seen: Feeling = "neutral";
 
@@ -130,7 +131,7 @@ class Practice {
     if (!this.sock) {
       this.sock = connect((m) => {
         if (m.type === "state") this.onState(m.state);
-        else if (m.type === "recognized") this.listener?.recognized(m.segments);
+        else if (m.type === "recognized" && !this.redoing) this.listener?.recognized(m.segments);
       }, (e) => {
         this.sock = null; // the next line said or camera exercise reconnects
         this.set("error", e.code === 4001 ? "Opened in another tab" : "Backend disconnected");
@@ -142,6 +143,9 @@ class Practice {
   }
 
   say(text: string) { this.socket().send({ type: "say", text }); }
+
+  /** The plushie flaps its arms (an Arduino on the backend's USB; nothing happens without one). */
+  cheer() { this.socket().send({ type: "cheer" }); }
 
   private async open(): Promise<void> {
     this.set("starting");
@@ -168,13 +172,23 @@ class Practice {
   }
 
   private onState(s: State) {
-    if (s === "calibrating" || s === "ready" || s === "signing") {
+    if (s === "calibrating" || s === "ready" || s === "signing" || s === "reading") {
       this.hint = null; // the next frame shows it again if it still applies
+      if (s === "signing") this.redoing = false; // a new attempt: its result counts
       this.set((this.server = s));
+      // the sign is being read: the feed freezes where it ended (nothing signed now counts), and moves again after
+      if (s === "reading") this.video.pause();
+      else if (this.active && this.started) this.video.play().catch(() => {});
     }
   }
 
   recalibrate() { this.sock?.send({ type: "calibrate" }); }
+
+  /** The learner tapped the frozen camera: drop the attempt being read, unread, and sign again. */
+  redo() {
+    this.redoing = true;
+    this.sock?.send({ type: "redo" });
+  }
 
   private readFace(f: Frame) {
     const now = faceScores(f.blend);

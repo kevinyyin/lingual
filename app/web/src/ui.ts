@@ -6,7 +6,8 @@ const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as 
 const STATE_LABEL: Record<State, string> = {
   calibrating: "Calibrating: rest your hands, neutral face",
   ready: "Ready: sign or speak",
-  signing: "Reading signs…",
+  signing: "Watching your signs…",
+  reading: "Reading signs…",
   picking: "Pick the sign you meant",
   speaking: "Speaking aloud…",
   listening: "Listening…",
@@ -47,8 +48,8 @@ const el = <K extends keyof HTMLElementTagNameMap>(tag: K, className: string, te
   Object.assign(document.createElement(tag), { className, textContent: text });
 let socket: Socket | null = null;
 let pending: { segment: number; options: PickOption[] } | null = null;
-
 let signing = -1; // the plan tile the avatar is on (or was on last, during a blend)
+
 /** i = option index, or -1 for "none of these" (the turn is dropped and nothing is spoken). */
 function choose(i: number): void {
   if (!pending || (i >= 0 && !pending.options[i])) return;
@@ -75,8 +76,11 @@ function showPicker(segment: number, options: PickOption[]): void {
 /** Renders server messages into the page. Returns nothing; sign plans are handled by the avatar. */
 export function renderMsg(m: ServerMsg): void {
   switch (m.type) {
-    case "state":
+    case "state": {
       shown = m.state;
+      const cam = document.getElementById("cam") as HTMLVideoElement | null; // frozen while the turn is read
+      if (m.state === "reading") cam?.pause();
+      else if (cam?.srcObject && cam.paused) void cam.play().catch(() => {});
       hinted = null; // a new state shows; the next camera frame hints again if it still applies
       if (cameraOff && m.state === "calibrating") {
         $("state").textContent = "Ready: speak or type";
@@ -90,6 +94,7 @@ export function renderMsg(m: ServerMsg): void {
       }
       if (m.state !== "picking" && pending) { pending = null; $("picker").hidden = true; }
       break;
+    }
     case "caption":
       $("caption").textContent = m.text;
       break;
@@ -106,12 +111,12 @@ export function renderMsg(m: ServerMsg): void {
         $("plan").replaceChildren(el("span", "unclear", "That didn't make sense to me. Try saying it again."));
         break;
       }
+      signing = -1;
       $("plan").replaceChildren(...m.tokens.flatMap((t) => {
         const parts = t.kind === "sign" ? [t.gloss ?? ""] : [...(t.word ?? "")];
         return parts.map((g, i) => {
           const end = i === parts.length - 1 ? " word-end" : "";
           const span = el("span", t.kind === "sign" ? "sign" : `letter${end}`, g);
-      signing = -1;
           span.dataset.g = g; // dataset is getter-only: Object.assign({ dataset }) throws in browsers
           return span;
         });

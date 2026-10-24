@@ -142,7 +142,9 @@ def test_hands_resting_at_different_heights_do_not_start_a_turn():
 
 def test_the_lower_resting_hand_counts_as_raised_against_its_own_rest():
     seg = Segmenter(compute_baseline([uneven(i, right_y=0.88) for i in range(60)]))
-    assert isinstance(seg.push(uneven(60, left_y=0.87, right_y=0.88)), TurnStart)  # 0.08 above where it rested
+    up = uneven(60, left_y=0.87, right_y=0.88)
+    up.left = make_frame().left  # a hand raised into view is in the hand tracker's sight
+    assert isinstance(seg.push(up), TurnStart)  # 0.08 above where it rested
 
 
 def test_a_hand_moving_during_calibration_does_not_lift_the_rest_line():
@@ -189,3 +191,29 @@ def test_a_spelled_word_ending_the_turn_is_kept_even_if_the_wrist_drifts_down():
     spell = [frame(22 + i, (0.4, 0.5 + 0.002 * i), spread=0.01 + 0.05 * (i % 2)) for i in range(10)]
     fs = rest(0, 3) + moving(3, 12) + still(15, PAUSE_FRAMES + 3) + spell + rest(32, REST_FRAMES + 2)
     assert [s.kind for s in run(fs)[-1].segments] == ["sign", "spell"]
+
+
+def offscreen(t0, n):
+    """Hands below a laptop's picture: the hand tracker sees none, while the pose model keeps guessing the wrists, and
+    its guesses wander (y 1.05-1.15 in the 2026-10-24 log, against a rest line learned from guesses at 1.24-1.38)."""
+    out = []
+    for i in range(n):
+        f = frame(t0 + i, (0.4, 1.05 + 0.01 * ((i * 7) % 10)), hands=())
+        f.pose[15] = [0.6, 1.1, 0.0, 0.05]
+        out.append(f)
+    return out
+
+
+def test_hands_out_of_the_picture_end_the_turn_though_the_pose_model_guesses_them_up():
+    seg = Segmenter(Baseline(rest_y=(1.38, 1.235), brow={}, motion_floor=0.0))
+    evs = [e for e in (seg.push(f) for f in offscreen(0, 20) + moving(20, 14) + offscreen(34, REST_FRAMES + 2)) if e]
+    assert [type(e) for e in evs] == [TurnStart, TurnEnd]  # resting off-screen starts nothing, and ends the sign's turn
+    assert len(evs[-1].segments) == 1
+
+
+def test_a_hand_lost_for_a_moment_mid_sign_is_a_pause_not_hands_down():
+    fs = moving(3, 20)
+    for f in fs[6:9]:
+        f.right = None  # the tracker loses the hand for ~100 ms
+    end = run(rest(0, 3) + fs + rest(23, REST_FRAMES + 2))[-1]
+    assert isinstance(end, TurnEnd) and len(end.segments) == 1

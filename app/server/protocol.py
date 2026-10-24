@@ -52,10 +52,20 @@ class ModeMsg(BaseModel):
     mode: Literal["voice", "signing"]
 
 
+class RedoMsg(BaseModel):
+    """Teaching mode: the learner tapped the frozen camera to sign again: the attempt still being read is dropped."""
+    type: Literal["redo"] = "redo"
+
+
 class SayMsg(BaseModel):
     """Teaching mode: a short line for the plushie to say (greeting, praise, "your turn"). Capped: it goes to TTS."""
     type: Literal["say"] = "say"
     text: str = Field(min_length=1, max_length=200)
+
+
+class CheerMsg(BaseModel):
+    """Teaching mode: the child got one right, so the plushie flaps its arms (server/plush.py)."""
+    type: Literal["cheer"] = "cheer"
 
 
 class RecordMsg(BaseModel):
@@ -66,7 +76,7 @@ class RecordMsg(BaseModel):
 
 
 ClientMsg = Annotated[
-    Union[FrameMsg, CalibrateMsg, PickMsg, AvatarDoneMsg, PracticeMsg, ModeMsg, SayMsg, RecordMsg],
+    Union[FrameMsg, CalibrateMsg, PickMsg, AvatarDoneMsg, PracticeMsg, ModeMsg, SayMsg, CheerMsg, RedoMsg, RecordMsg],
     Field(discriminator="type"),
 ]
 _client = TypeAdapter(ClientMsg)
@@ -81,7 +91,8 @@ def parse_client(raw: str | bytes) -> ClientMsg:
 
 # --- backend -> browser ---
 
-State = Literal["calibrating", "ready", "signing", "picking", "speaking", "listening", "avatar"]
+# reading: the signer's hands came down and the turn is being read (frames are ignored until it is done)
+State = Literal["calibrating", "ready", "signing", "reading", "picking", "speaking", "listening", "avatar"]
 
 
 class StateMsg(BaseModel):

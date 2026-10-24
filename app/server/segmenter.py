@@ -76,8 +76,12 @@ class Segmenter:
 
     def push(self, f: Frame) -> SegEvent | None:
         raised = self._raised(f)
+        # No hand in the tracker's sight: they are down (below a laptop's picture), whatever the pose model guesses for
+        # the wrists. Its guesses wander off-screen (y 1.05-1.15 against a rest line learned from guesses at 1.24-1.38,
+        # 2026-10-24), which kept turns from ever ending. Mid-sign, a hand the tracker loses for a moment is a pause.
+        unseen = f.left is None and f.right is None
         if self.turn is None:
-            if not raised:
+            if not raised or unseen:
                 self.before.append(f)
                 return None
             self.turn, self.segments, self.cur, self.low, self.energy, self.prev = [f], [], None, 0, 0.0, f
@@ -94,13 +98,15 @@ class Segmenter:
         self.energy = 0.5 * self.energy + 0.5 * float(raw)
         self.prev = f
 
-        if not raised:
+        if not raised or unseen:
             if self.still_t is None:
                 self.still_t = f.t
-            if self.cur is not None:
+            if not raised and self.cur is not None:
                 self._close()  # hands down ends the sign in progress
             if f.t - self.still_t >= REST_MS:
                 return self._end()
+            if raised:
+                self._idle_frame(f)
             return None
         self.still_t = None
         if self.energy >= self.thresh:

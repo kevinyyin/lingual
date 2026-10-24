@@ -142,6 +142,7 @@ export function runLesson(root: HTMLElement, exercises: Exercise[], host: Lesson
     lastCorrect = correct;
     const comboBefore = run.combo;
     if (host.sound()) chime(correct ? "right" : "wrong");
+    if (correct) practice.cheer();
     const praise = pickOne(PRAISE);
     host.say(correct ? praise : LINES.wrong);
     body.querySelectorAll<HTMLButtonElement>("button.opt, button.chip").forEach((b) => (b.disabled = true));
@@ -396,7 +397,8 @@ const CAM_TEXT: Record<CamStatus, string> = {
   position: "Get into position",
   calibrating: "Rest your hands in your lap, neutral face…",
   ready: "Go! Sign it now, then rest your hands",
-  signing: "Reading your sign…",
+  signing: "Signing… hands down when you're done",
+  reading: "Reading your sign… tap to redo",
   error: "Camera unavailable",
 };
 
@@ -420,7 +422,9 @@ export function faceLine(seen: Feeling, gloss: string, english: string): string 
 
 function mountPerform(gloss: string, host: LessonHost, grade: Grade, skip: () => void): Mounted {
   const status = h("div", { class: "cam-status", role: "status" }, CAM_TEXT[practice.status]);
-  const cam = h("div", { class: "cam-slot", "data-status": practice.status }, practice.video, practice.trailCanvas, status);
+  // while a sign is read the frozen feed is one big button: tap it to drop that attempt and sign again
+  const redo = h("button", { class: "cam-redo", type: "button", "aria-label": "Redo the sign", hidden: "", onclick: () => practice.redo() });
+  const cam = h("div", { class: "cam-slot", "data-status": practice.status }, practice.video, practice.trailCanvas, status, redo);
   const heard = h("p", { class: "heard", "aria-live": "polite" });
   const face = (seen: Feeling) => faceLine(seen, gloss, host.english(gloss));
   const faceEl = h("p", { class: "face-line" }, face(practice.seen));
@@ -429,6 +433,7 @@ function mountPerform(gloss: string, host: LessonHost, grade: Grade, skip: () =>
   const stop = () => { practice.active = false; practice.listener = null; }; // graded or left: later segments must not say "try again"
   const setStatus = (s: CamStatus, detail?: string) => {
     cam.dataset.status = s;
+    redo.hidden = s !== "reading";
     status.textContent = detail ? `${CAM_TEXT[s]}: ${detail}` : CAM_TEXT[s];
     // only once calibrated: signing while it measures the resting hands puts the rest line at signing height
     if (s === "ready" && !asked) {

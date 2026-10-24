@@ -3,7 +3,10 @@ import json
 import pytest
 
 from frames import make_frame
-from server.protocol import AvatarDoneMsg, CalibrateMsg, FrameMsg, ModeMsg, PickMsg, PracticeMsg, SayMsg, SignPlanMsg, SignToken
+from server import plush
+from server.protocol import (
+    AvatarDoneMsg, CalibrateMsg, CheerMsg, FrameMsg, ModeMsg, PickMsg, PracticeMsg, RedoMsg, SayMsg, SignPlanMsg, SignToken,
+)
 from server.session import Baseline, Segment, Session, TurnEnd, TurnStart, compute_baseline
 from server.vocab import load_vocab
 
@@ -127,7 +130,7 @@ async def test_sign_turn_speaks_and_logs(tmp_path):
     await push_frames(s, 2)
     said = [m for m in sent if m.type == "you_said"]
     assert said and said[0].text == "Do you have coffee?" and said[0].emotion == "happy"
-    assert states(sent)[-3:] == ["signing", "speaking", "ready"]
+    assert states(sent)[-4:] == ["signing", "reading", "speaking", "ready"]  # "reading": hands down, the turn is read
     (line,) = log_lines(tmp_path)
     assert line["direction"] == "sign2speech"
     assert {"hands_rest", "recognized", "picked", "composed", "first_audio"} <= set(line["stamps"])
@@ -470,7 +473,7 @@ async def test_practice_reads_the_whole_turn_as_one_sign_among_the_course_signs(
     assert guesses[0].english == "goodbye" and abs(sum(o.p for o in guesses) - 1) < 1e-6
     assert rec.asked == [whole, [f for f in whole if f.t >= whole[-1].t - 1500]]
     assert not composer.calls and not [m for m in sent if m.type in ("pick_request", "you_said")]
-    assert states(sent)[-2:] == ["signing", "ready"]
+    assert states(sent)[-3:] == ["signing", "reading", "ready"]
 
 
 async def test_practice_without_a_course_list_reads_among_every_sign(tmp_path):
@@ -499,6 +502,27 @@ async def test_practice_reads_a_corrected_sign_on_its_own_too(tmp_path):
     await push_frames(s, 2)
     (rec,) = [m for m in sent if m.type == "recognized"]
     assert [[o.gloss for o in seg_] for seg_ in rec.segments] == [["DARK", "NICE"], ["HELLO", "NICE"]]
+
+
+async def test_redo_drops_the_attempt_being_read(tmp_path):
+    """The learner tapped the frozen camera: the attempt still being read is dropped unread, and they sign again."""
+    import time
+
+    class Slow:
+        def topk(self, frames, k=3):
+            time.sleep(0.2)  # reading the attempt
+            return [("HELLO", 0.9)]
+
+    events = [TurnStart(), TurnEnd(segments=[seg()], frames=[make_frame()] * 20, rest_ms=0)]
+    s, sent = make_session(tmp_path, events, recognizer=Slow())
+    await s.on_client(PracticeMsg(on=True))
+    await calibrate(s)
+    for i in range(2):
+        await s.on_client(FrameMsg(**make_frame(t=10_000 + i * 33).model_dump()))
+    assert s.state == "reading"
+    await s.on_client(RedoMsg())
+    await asyncio.sleep(0.4)
+    assert s.state == "ready" and not [m for m in sent if m.type == "recognized"]
 
 
 async def test_practice_mode_ignores_speech(tmp_path):
@@ -530,6 +554,16 @@ async def test_say_speaks_in_practice(tmp_path):
     assert s.state == before
 
 
+async def test_cheer_flaps_the_plushie_in_practice_only(tmp_path, monkeypatch):
+    cheers = []
+    monkeypatch.setattr(plush, "cheer", lambda: cheers.append(1))
+    s, _ = make_session(tmp_path)
+    await s.on_client(CheerMsg())
+    await s.on_client(PracticeMsg(on=True))
+    await s.on_client(CheerMsg())
+    assert cheers == [1]
+
+
 async def test_say_rejected_outside_practice(tmp_path):
     voice = RecordingVoice()
     s, _ = make_session(tmp_path, voice=voice)
@@ -549,18 +583,17 @@ class GateVoice:
         yield "done"
 
 
-async def test_say_lines_never_pile_up(tmp_path):
-    """One line plays; only the newest waiting line follows it (older ones are stale by then)."""
-    voice = GateVoice()
+async def test_a_newer_line_cuts_off_the_one_still_playing(tmp_path):
+    """The lesson moved on, so a line still playing (or waiting) is stale: the newest starts now, not after it."""
+    voice = GateVoice()  # each line plays until released: "one" never is
     s, _ = make_session(tmp_path, voice=voice)
     await s.on_client(PracticeMsg(on=True))
     await s.on_client(SayMsg(text="one"))
     await asyncio.sleep(0.01)  # "one" is playing
     for t in ("two", "three"):
         await s.on_client(SayMsg(text=t))
-    voice.release.set()
     await asyncio.sleep(0.05)
-    assert voice.said == ["one", "three"]
+    assert voice.said == ["one", "three"]  # "two" was stale before it began; "three" did not wait for "one"
 
 
 class SlowVoice:
