@@ -9,7 +9,7 @@ pipeline and one backend:
 - **Teaching mode.** A Duolingo-style ASL course: units of short lessons, an avatar that shows each sign, exercises that
   check your own signing through the camera, spoken encouragement, and a "show me a sign" box for any word.
 
-It runs on a **laptop** in the browser, and on an **iPhone inside a plush toy** (the plushie): the phone's screen shows
+It runs on a **laptop** in the browser, and on an **iPad inside a plush toy** (the plushie): the phone's screen shows
 the avatar, its front camera watches the kid, and its speaker gives the plushie a voice.
 
 > **Status: a working MVP for a pitch and demo video.** It has not been reviewed by a fluent Deaf signer, which is
