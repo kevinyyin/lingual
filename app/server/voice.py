@@ -9,6 +9,11 @@ log = logging.getLogger("asl.voice")
 
 MODEL = "sonic-3.6"
 DEFAULT_VOICE_ID = "0834f3df-e650-4766-a20c-5a93a43aa6e3"  # "Leo", listed by Cartesia among the most emotive voices
+# The signing buddies (web/src/buddies.ts), each named after its Cartesia voice; Leo is the default
+BUDDY_VOICES = {
+    "leo": DEFAULT_VOICE_ID, "benji": "2d5b8c3a-116c-4741-acaf-ba4fa289eba2", "zeke": "e00d0e4c-a5c8-443f-a8a3-473eb9a62355",
+    "lexi": "56b87df1-594d-4135-992c-1112bb504c59", "avery": "cccc21e8-5bcf-4ff0-bc7f-be4e40afc544", "daisy": "32b3f3c5-7171-46aa-abe7-b598964aa793",
+}
 SAMPLE_RATE = 24000
 STALL_S = 5.0  # no TTS event this long = a half-open socket; give up so the session can recover
 # Race IPv4 against IPv6 (RFC 8305) like browsers and curl: on a network with broken IPv6, asyncio otherwise tries each

@@ -1,5 +1,6 @@
 // Mirrors app/server/protocol.py.
 import { isPhone, playPcm, startMic, unlockAudio } from "./phone";
+import type { Buddy } from "./buddies";
 
 export type P3 = [number, number, number];
 
@@ -12,6 +13,8 @@ export interface Frame {
   head: [number, number, number] | null;
   /** 6 face-mesh points [x, y] (FACE_POINTS in camera.ts) for the sign classifier. */
   face?: [number, number][] | null;
+  /** The 468 face-mesh points while a hand is up, for the fingerspelling reader (server/fingerspell_coreml.py). */
+  mesh?: P3[] | null;
 }
 
 export type ClientMsg =
@@ -25,6 +28,7 @@ export type ClientMsg =
   | { type: "redo" }
   | { type: "say"; text: string }
   | { type: "cheer" }
+  | { type: "buddy"; buddy: Buddy["id"] }
   | { type: "record"; signer: string; gloss: string; frames: Frame[] };
 
 /** The translator's switch: voice (speech -> avatar; the camera is ignored) or signing (camera -> speech; speech ignored). */
@@ -41,7 +45,7 @@ export interface PickOption { gloss: string; english: string; p: number }
 export type ServerMsg =
   | { type: "state"; state: State }
   | { type: "pick_request"; segment: number; options: PickOption[] }
-  | { type: "you_said"; text: string; emotion: string; unclear?: boolean } // unclear: the signs made no sentence
+  | { type: "you_said"; text: string; emotion: string; unclear?: boolean; read?: SignToken[] } // unclear: the signs made no sentence; read: the signs, in order
   | { type: "caption"; text: string; final: boolean }
   | SignPlan
   | { type: "recognized"; segments: PickOption[][] }

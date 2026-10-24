@@ -263,7 +263,8 @@ on reload without a build. It loads much more slowly on the phone, so use the bu
 ## The avatar
 
 The default body is a stylized "toon" character built by `scripts/build_toon_avatar.py` (rounded shapes, flat colours,
-big eyes, 20 ARKit face shapes on the MPFB rig; no Blender needed). Motion comes from real signers:
+big eyes, 20 ARKit face shapes on the MPFB rig; no Blender needed), as one of six signing buddies picked on the Profile
+tab (Leo, Benji, Zeke, Lexi, Avery, Daisy): same body, own hair, skin, clothes and Cartesia voice. Motion comes from real signers:
 
 - **Clips:** each sign is extracted with MediaPipe from WLASL dictionary videos (the most typical of up to four takes),
   and fingerspelled letters from the Kaggle fingerspelling data. Wrists go where the signer's were relative to their

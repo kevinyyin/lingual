@@ -18,6 +18,7 @@ dependencies = [
     "python-dotenv>=1.0",
     "cartesia[websockets]>=4.2.0",
     "pyserial>=3.5",
+    "coremltools>=8.0 ; sys_platform == 'darwin'",
 ]
 
 [project.scripts]

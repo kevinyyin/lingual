@@ -6,6 +6,8 @@ import { rememberPhone } from "./phone";
 import { PositionWatch } from "./position";
 import { bindControls, currentMode, currentState, highlight, renderMsg, setCameraOff, showHint } from "./ui";
 import { connect } from "./ws";
+import { savedBuddy } from "./buddies";
+import { showMini } from "./avatar/mini";
 
 const MAX_BUFFERED = 256 * 1024; // drop frames rather than queue stale ones
 const params = new URLSearchParams(location.search);
@@ -27,6 +29,9 @@ function converse() {
   let playing = false; // camera detection pauses while the avatar signs (see startCamera)
   if (params.get("dev")) Object.assign(window, { asl: { avatar, stage } }); // console access for avatar debugging
   const sock = connect(async (m) => {
+    if (m.type === "you_said" && m.read?.length) { // the buddy signs back what the camera read
+      showMini(document.querySelector<HTMLElement>(".said-card")!, m.read, `I saw: ${m.read.map((t) => t.gloss ?? t.word).join(" ")}`);
+    }
     if (m.type !== "sign_plan") return renderMsg(m);
     try {
       renderMsg(m); // inside the try: a render error must not leave the session stuck in "avatar"
@@ -44,6 +49,7 @@ function converse() {
     reclaim.textContent = e.code === 4001 ? "Use it here" : "Reconnect";
     reclaim.hidden = false;
   }, { mic: true });
+  sock.send({ type: "buddy", buddy: savedBuddy().id }); // the signer's sentences are said in the buddy's voice
   if (params.get("camera") === "0") { // speech -> sign only: no signer turns from stray hand movement
     document.getElementById("mode")!.hidden = true; // nothing to switch to
     bindControls(sock);

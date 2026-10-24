@@ -5,10 +5,11 @@ import pytest
 from frames import make_frame
 from server import plush
 from server.protocol import (
-    AvatarDoneMsg, CalibrateMsg, CheerMsg, FrameMsg, ModeMsg, PickMsg, PracticeMsg, RedoMsg, SayMsg, SignPlanMsg, SignToken, TalkMsg,
+    AvatarDoneMsg, BuddyMsg, CalibrateMsg, CheerMsg, FrameMsg, ModeMsg, PickMsg, PracticeMsg, RedoMsg, SayMsg, SignPlanMsg, SignToken, TalkMsg,
 )
 from server.session import Baseline, Segment, Session, TurnEnd, TurnStart, compute_baseline
 from server.vocab import load_vocab
+from server.voice import BUDDY_VOICES
 
 
 class FakeSegmenter:
@@ -325,16 +326,24 @@ class EmptySpell:
         return []
 
 
-async def test_unreadable_spell_segment_is_dropped(tmp_path):
-    spell = Segment(frames=[make_frame()] * 8, kind="spell")
-    events = [TurnStart(), TurnEnd(segments=[seg(), spell], frames=[make_frame()] * 20, rest_ms=0)]
-    composer = FakeComposer()
-    s, sent = make_session(tmp_path, events, [[("NAME", 0.99)]], composer=composer)
-    s.spell_reader = EmptySpell()
-    await calibrate(s)
-    await push_frames(s, 2)
-    assert composer.calls[0][:2] == (["NAME"], [])
-    assert not [m for m in sent if m.type == "pick_request"] and s.state == "ready"
+class WeakSpell:
+    def recognize(self, seg):
+        return [("W", 0.41)]  # a sign that looked like spelling: the letter reader finds one unsure letter
+
+
+async def test_a_spell_segment_the_letter_reader_cannot_read_is_read_as_a_sign(tmp_path):
+    # one-handed signs with busy fingers pass for spelling (3.5% of WLASL sign pieces); the reader gives them no letters
+    # or one unsure letter (2% read 2+ letters at 0.5+: BUS, JULY, often spelled anyway), real spelled words always did
+    for reader in (EmptySpell(), WeakSpell()):
+        spell = Segment(frames=[make_frame()] * 8, kind="spell")
+        events = [TurnStart(), TurnEnd(segments=[seg(), spell], frames=[make_frame()] * 20, rest_ms=0)]
+        composer = FakeComposer()
+        s, sent = make_session(tmp_path, events, [[("NAME", 0.99)], [("WATER", 0.99)]], composer=composer)
+        s.spell_reader = reader
+        await calibrate(s)
+        await push_frames(s, 2)
+        assert composer.calls[0][:2] == (["NAME", "WATER"], [])
+        assert not [m for m in sent if m.type == "pick_request"] and s.state == "ready"
 
 
 async def test_a_sign_read_only_90_percent_sure_asks_the_signer(tmp_path):
@@ -578,6 +587,12 @@ async def test_cheer_flaps_the_plushie_in_practice_only(tmp_path, monkeypatch):
     assert cheers == [1]
 
 
+async def test_buddy_switches_the_voice_for_the_next_line(tmp_path):
+    s, _ = make_session(tmp_path)
+    await s.on_client(BuddyMsg(buddy="daisy"))
+    assert s.voice.voice_id == BUDDY_VOICES["daisy"]
+
+
 async def test_say_rejected_outside_practice(tmp_path):
     voice = RecordingVoice()
     s, _ = make_session(tmp_path, voice=voice)
@@ -637,3 +652,33 @@ async def test_close_cancels_the_turn_in_flight(tmp_path):
     s._task = asyncio.create_task(asyncio.sleep(10))  # a turn still composing or speaking when the page goes away
     await s.close()
     assert s._task.cancelled()
+
+
+async def test_two_signs_flowing_together_in_one_piece_are_read_as_two(tmp_path):
+    from test_recut import Majority, dip, signing
+
+    class Model(Majority):
+        pick_threshold = 0.0  # the model in use sets when to ask; never here
+
+        def recognize(self, seg):
+            return self.topk(seg.context or seg.frames)
+
+    run = signing(0, 16, 0.1) + dip(16, 2, 0.1) + signing(18, 16, 0.2)
+    events = [TurnStart(), TurnEnd(segments=[Segment(frames=run, kind="sign", context=run)], frames=run, rest_ms=0)]
+    composer = FakeComposer()
+    s, sent = make_session(tmp_path, events, composer=composer, recognizer=Model())
+    await calibrate(s)
+    await push_frames(s, 2)
+    assert composer.calls[0][0] == ["S0.1", "S0.2"]
+    assert not [m for m in sent if m.type == "pick_request"]
+
+
+async def test_the_page_is_told_which_signs_were_read_for_the_mini_avatar(tmp_path):
+    spell = Segment(frames=[make_frame()] * 8, kind="spell")
+    events = [TurnStart(), TurnEnd(segments=[seg(), spell], frames=[make_frame()] * 20, rest_ms=0)]
+    s, sent = make_session(tmp_path, events, [[("NAME", 0.99)]])
+    s.spell_reader = FakeSpell()
+    await calibrate(s)
+    await push_frames(s, 2)
+    said = [m for m in sent if m.type == "you_said"]
+    assert said and said[0].read == [SignToken(kind="sign", gloss="NAME"), SignToken(kind="spell", word="ANA")]

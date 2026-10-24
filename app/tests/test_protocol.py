@@ -1,8 +1,13 @@
 import json
+import re
+from pathlib import Path
 
 import pytest
 
-from server.protocol import FrameMsg, SignPlanMsg, SignToken, parse_client
+from typing import get_args
+
+from server.protocol import Buddy, FrameMsg, SignPlanMsg, SignToken, parse_client
+from server.voice import BUDDY_VOICES
 
 
 def _frame(**over):
@@ -47,3 +52,17 @@ def test_say_text_capped():
         parse_client(json.dumps({"type": "say", "text": "a" * 201}))
     with pytest.raises(ValueError):
         parse_client(json.dumps({"type": "say", "text": ""}))
+
+
+def test_buddy_is_one_of_the_six_with_a_voice():
+    assert set(get_args(Buddy)) == set(BUDDY_VOICES) and len(BUDDY_VOICES) == 6
+    assert parse_client(json.dumps({"type": "buddy", "buddy": "lexi"})).buddy == "lexi"
+    with pytest.raises(ValueError):  # the page names a buddy, never a voice id
+        parse_client(json.dumps({"type": "buddy", "buddy": "0834f3df-e650-4766-a20c-5a93a43aa6e3"}))
+
+
+def test_every_buddy_on_the_page_has_a_voice_and_an_avatar_file():
+    web = Path(__file__).resolve().parent.parent / "web"
+    ids = re.findall(r'id: "(\w+)"', (web / "src" / "buddies.ts").read_text())
+    assert ids == list(BUDDY_VOICES)
+    assert all((web / "public" / "avatar" / "toon" / f"{b}.glb").exists() for b in ids)

@@ -37,6 +37,7 @@ async function createTrackers() {
 
 /** 5 decimals: far finer than the trackers' noise, and a frame half the size on the wire (7.3 -> 3.6 KB). */
 const r5 = (v: number) => Math.round(v * 1e5) / 1e5;
+const r3 = (v: number) => Math.round(v * 1e3) / 1e3; // the face mesh: 9.5 KB a frame instead of 12.3, letters read the same
 
 /** `paused()`: skip detection (the avatar is playing). The three models run on the main thread and starved the
  *  avatar's animation to ~1 frame/s; the backend ignores frames during avatar output anyway. */
@@ -71,6 +72,8 @@ export async function startCamera(video: HTMLVideoElement, onFrame: (f: Frame) =
         }
         if (fc.facialTransformationMatrixes?.length) frame.head = matToYPR(fc.facialTransformationMatrixes[0].data);
         if (fc.faceLandmarks?.length) frame.face = FACE_POINTS.map((i) => [r5(fc.faceLandmarks[0][i].x), r5(fc.faceLandmarks[0][i].y)]);
+        // the fingerspelling reader standardises over the whole face (without it, Kaggle letters: 37% wrong vs 17%)
+        if (fc.faceLandmarks?.length && (frame.left || frame.right)) frame.mesh = fc.faceLandmarks[0].slice(0, 468).map((l) => [r3(l.x), r3(l.y), r3(l.z)] as P3);
         onFrame(frame);
       }
     }

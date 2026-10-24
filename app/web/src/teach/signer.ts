@@ -7,10 +7,15 @@ import { startCamera } from "../camera";
 import { PositionWatch } from "../position";
 import { connect, type Frame, type P3, type PickOption, type SignToken, type Socket, type State } from "../ws";
 import { ALL_LESSONS, faceFor } from "./curriculum";
+import { savedBuddy, type Buddy } from "../buddies";
 
+function newCanvas(): HTMLCanvasElement {
+  const c = Object.assign(document.createElement("canvas"), { className: "avatar-canvas" });
+  c.setAttribute("aria-label", "Signing avatar");
+  return c;
+}
 /** One canvas for the whole page (the avatar is slow to load): each exercise moves it into its own slot. */
-export const avatarCanvas = Object.assign(document.createElement("canvas"), { className: "avatar-canvas" });
-avatarCanvas.setAttribute("aria-label", "Signing avatar");
+export let avatarCanvas = newCanvas();
 /** The hand trail's canvas, laid over the avatar's; it travels with it. */
 export const trailCanvas = Object.assign(document.createElement("canvas"), { className: "trail-canvas" });
 trailCanvas.setAttribute("aria-hidden", "true");
@@ -26,6 +31,15 @@ export const loadStage = () => (stage ??= loadAvatar(avatarCanvas).then((avatar)
   trail = attachTrail(trailCanvas, () => avatar.palmScreen?.(), { still: matchMedia("(prefers-reduced-motion: reduce)").matches });
   return createStage(avatar, { onFrame: (f) => trail!.frame(f) });
 }));
+/** A new signing buddy was picked: the next loadStage loads it on a fresh canvas, put where the old one was. */
+export function reloadSigner(): void {
+  if (!stage) return;
+  stage = null;
+  const old = avatarCanvas;
+  avatarCanvas = newCanvas();
+  old.replaceWith(avatarCanvas);
+  old.getContext("webgl2")?.getExtension("WEBGL_lose_context")?.loseContext(); // frees the old one's GPU memory now
+}
 
 let playing: Promise<void> = Promise.resolve();
 let busy = false;
@@ -141,11 +155,14 @@ class Practice {
       });
       // the backend reads each attempt as one of the course's signs, not one of all ~2,900
       this.sock.send({ type: "practice", on: true, signs: [...new Set(ALL_LESSONS.flatMap((l) => l.signs))] });
+      this.sock.send({ type: "buddy", buddy: savedBuddy().id }); // lines are said in the buddy's voice
     }
     return this.sock;
   }
 
   say(text: string) { this.socket().send({ type: "say", text }); }
+
+  buddy(id: Buddy["id"]) { this.socket().send({ type: "buddy", buddy: id }); }
 
   /** The plushie flaps its arms (an Arduino on the backend's USB; nothing happens without one). */
   cheer() { this.socket().send({ type: "cheer" }); }

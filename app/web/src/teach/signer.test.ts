@@ -2,7 +2,7 @@
 import { expect, test, vi } from "vitest";
 vi.mock("../ws", () => ({ connect: () => ({ send() {}, buffered: () => 0 }) }));
 vi.mock("../camera", () => ({ startCamera: () => new Promise(() => {}) }));
-vi.mock("../avatar", () => ({ loadAvatar: () => new Promise(() => {}) }));
+vi.mock("../avatar", () => ({ loadAvatar: vi.fn(() => new Promise(() => {})) }));
 vi.mock("../avatar/stage", () => ({ createStage: vi.fn() }));
 
 test("mountSigner moves both canvases into the new slot", async () => {
@@ -12,6 +12,21 @@ test("mountSigner moves both canvases into the new slot", async () => {
   mountSigner(b);
   expect([...b.children].slice(0, 2)).toEqual([avatarCanvas, trailCanvas]);
   expect(a.children).toHaveLength(0);
+});
+
+test("a new buddy loads on a fresh canvas in the old one's place", async () => {
+  HTMLCanvasElement.prototype.getContext = (() => null) as never; // jsdom has no WebGL
+  const { loadAvatar } = await import("../avatar");
+  const signer = await import("./signer");
+  const slot = document.createElement("div");
+  signer.mountSigner(slot);
+  void signer.loadStage();
+  const old = signer.avatarCanvas;
+  signer.reloadSigner();
+  expect(signer.avatarCanvas).not.toBe(old);
+  expect(slot.firstChild).toBe(signer.avatarCanvas);
+  void signer.loadStage();
+  expect(loadAvatar).toHaveBeenLastCalledWith(signer.avatarCanvas);
 });
 
 test("the learner's palm lands where the mirrored, cropped preview shows it, and a hand in the lap draws nothing", async () => {

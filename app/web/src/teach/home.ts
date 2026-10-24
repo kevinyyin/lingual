@@ -1,5 +1,6 @@
 // Home: a top header (tabs + streak), the course (a hero card, then each unit's lessons as stops on a
 // winding path), side cards (streak, daily challenges), and the Practice, Challenges and Profile tabs.
+import { BUDDIES, savedBuddy, type Buddy } from "../buddies";
 import { COURSE, type Lesson, type Unit } from "./curriculum";
 import { h, svg } from "./dom";
 import { ICON } from "./icons";
@@ -20,6 +21,8 @@ export interface HomeCtx {
   words: string[];
   showMe(word: string): void;
   reset(): void;
+  /** A signing buddy was tapped on the Profile tab. */
+  pickBuddy(id: Buddy["id"]): void;
 }
 
 export type Tab = "learn" | "practice" | "quests" | "profile";
@@ -283,6 +286,9 @@ function profile(ctx: HomeCtx, now: Date): HTMLElement[] {
     })),
     h("h2", { class: "section-title" }, "Settings"),
     h("section", { class: "card" },
+      h("div", { class: "settings-row" }, h("span", null, "Signing buddy"), h("div", { class: "buddies" }, ...BUDDIES.map((b) =>
+        h("button", { "aria-label": b.name, title: b.name, "aria-pressed": String(b.id === savedBuddy().id), onclick: () => ctx.pickBuddy(b.id) },
+          h("img", { src: `/avatar/toon/${b.id}.png`, alt: "" }))))),
       h("div", { class: "settings-row" }, h("span", null, "Daily goal"), h("div", { class: "seg" }, ...[[10, "Light"], [20, "Steady"], [30, "Focused"], [50, "All in"]].map(([xp, name]) =>
         h("button", { "aria-pressed": String(p.dailyGoal === xp), onclick: () => ctx.update({ ...ctx.p, dailyGoal: xp as number }) }, `${name} · ${xp} XP`)))),
       h("div", { class: "settings-row" }, h("span", null, "Sound effects"),

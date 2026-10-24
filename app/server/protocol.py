@@ -16,6 +16,7 @@ class Frame(BaseModel):
     blend: dict[str, float] | None = None  # 52 ARKit-named face blendshapes
     head: tuple[float, float, float] | None = None  # yaw, pitch, roll (degrees)
     face: list[list[float]] | None = None  # 6 face-mesh points [x, y]: nose tip, lips, brows, chin (spike_classifier.py)
+    mesh: list[Point3] | None = None  # the 468 face-mesh points, while a hand is up: the fingerspelling reader's
 
 
 # --- browser -> backend ---
@@ -75,6 +76,15 @@ class CheerMsg(BaseModel):
     type: Literal["cheer"] = "cheer"
 
 
+Buddy = Literal["leo", "benji", "zeke", "lexi", "avery", "daisy"]
+
+
+class BuddyMsg(BaseModel):
+    """The signing buddy picked on the Profile tab: its voice (server/voice.py BUDDY_VOICES) says every later line."""
+    type: Literal["buddy"] = "buddy"
+    buddy: Buddy
+
+
 class RecordMsg(BaseModel):
     type: Literal["record"] = "record"
     signer: str
@@ -83,7 +93,8 @@ class RecordMsg(BaseModel):
 
 
 ClientMsg = Annotated[
-    Union[FrameMsg, CalibrateMsg, PickMsg, AvatarDoneMsg, PracticeMsg, ModeMsg, TalkMsg, SayMsg, CheerMsg, RedoMsg, RecordMsg],
+    Union[FrameMsg, CalibrateMsg, PickMsg, AvatarDoneMsg, PracticeMsg, ModeMsg, TalkMsg, SayMsg, CheerMsg, RedoMsg, BuddyMsg,
+          RecordMsg],
     Field(discriminator="type"),
 ]
 _client = TypeAdapter(ClientMsg)
@@ -124,6 +135,7 @@ class YouSaidMsg(BaseModel):
     text: str
     emotion: str
     unclear: bool = False  # the signs made no sentence: nothing was said aloud (text is empty)
+    read: list["SignToken"] = []  # what the camera read, in order: the mini avatar signs it back
 
 
 class CaptionMsg(BaseModel):

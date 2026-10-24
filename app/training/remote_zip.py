@@ -10,8 +10,10 @@ Run: uv run python -m training.remote_zip --list
 
 import argparse
 import io
+import struct
 import urllib.request
 import zipfile
+import zlib
 from pathlib import Path
 
 ASL_CITIZEN_ZIP = "https://download.microsoft.com/download/b/8/8/b88c0bae-e6c1-43e1-8726-98cf5af36ca4/ASL_Citizen.zip"
@@ -63,6 +65,27 @@ class HttpRangeFile(io.RawIOBase):
         data = self.read(len(buf))
         buf[:len(data)] = data
         return len(data)
+
+
+def http_fetch(url: str):
+    """fetch(lo, hi) -> bytes lo..hi inclusive of url, one HTTP range request each."""
+    def fetch(lo: int, hi: int) -> bytes:
+        with urllib.request.urlopen(urllib.request.Request(url, headers={"Range": f"bytes={lo}-{hi}"}), timeout=120) as r:
+            return r.read()
+    return fetch
+
+
+def member_bytes(fetch, info: zipfile.ZipInfo) -> bytes:
+    """One member's contents with two range requests (its local header, then its data), nothing cached: HttpRangeFile
+    keeps every block it reads, fine for the CSVs but not for thousands of videos."""
+    name_len, extra_len = struct.unpack("<HH", fetch(info.header_offset + 26, info.header_offset + 29))
+    start = info.header_offset + 30 + name_len + extra_len
+    data = fetch(start, start + info.compress_size - 1) if info.compress_size else b""
+    if info.compress_type == zipfile.ZIP_STORED:
+        return data
+    if info.compress_type == zipfile.ZIP_DEFLATED:
+        return zlib.decompressobj(-15).decompress(data)
+    raise ValueError(f"{info.filename}: compression {info.compress_type}")
 
 
 def main() -> None:

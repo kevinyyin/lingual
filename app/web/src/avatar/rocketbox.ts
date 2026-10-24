@@ -8,6 +8,7 @@ import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { armFilters, armRig, DEFAULT_LIMITS, easeHand, settlePose, solveArmPose, stepArm, type ArmFilters, type ArmPose, type ArmRig, type ArmTarget, type HandEase } from "./armSolver";
 import { Body } from "./body";
+import { savedBuddy } from "../buddies";
 import { elbowFlexion } from "./metrics";
 import { DEFAULT_REST } from "./rest";
 import { wristFrom2d } from "./placement";
@@ -72,7 +73,8 @@ export interface HandReport {
 
 // Rocketbox characters in public/avatar/rocketbox/ (model -> texture prefix): ?model=Male_Adult_07 (blazer) or
 // ?model=Male_Adult_11 (plain shirt). ?model=mpfb: the MPFB character. Anything else: the stylized toon character
-// (scripts/build_toon_avatar.py), built on MPFB's rig, so everything below that says MPFB applies to it too.
+// (scripts/build_toon_avatar.py) as the signing buddy picked on the Profile tab, built on MPFB's rig, so everything below
+// that says MPFB applies to it too.
 const ROCKETBOX: Record<string, string> = { Male_Adult_07: "m013", Male_Adult_11: "m001" };
 const PICK = new URLSearchParams(location.search).get("model");
 const CHARACTER = PICK === "mpfb" ? "mpfb" : PICK && PICK in ROCKETBOX ? PICK : "toon";
@@ -242,9 +244,9 @@ export async function loadRocketbox(canvas: HTMLCanvasElement): Promise<Avatar> 
   const morphMeshes: THREE.Mesh[] = []; // meshes carrying the ARKit face shapes (MPFB: body, brows and lashes)
   const collideMeshes: THREE.SkinnedMesh[] = []; // the body's surface for the hands: skin, and clothes worn over it
   if (IS_TOON) {
-    obj = (await new GLTFLoader().loadAsync(BASE + "avatar.glb")).scene;
+    obj = (await new GLTFLoader().loadAsync(`${BASE}${savedBuddy().id}.glb`)).scene;
     // flat vertex colours, cel-shaded in three steps; toon_body is the skin and shirt the hands collide with, toon_face
-    // the painted-on features carrying the face shapes
+    // the painted-on features carrying the face shapes, toon_hair (some buddies) hair the hands pass
     const ramp = new THREE.DataTexture(new Uint8Array([120, 200, 255]), 3, 1, THREE.RedFormat);
     ramp.minFilter = ramp.magFilter = THREE.NearestFilter;
     ramp.needsUpdate = true;

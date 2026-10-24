@@ -15,7 +15,7 @@ const ctx = (done: string[] = []): HomeCtx => {
   const p = fresh();
   for (const id of done) p.done[id] = 1;
   return { p, settings: { sound: true, camera: true }, english: (g) => g.toLowerCase(), update() {}, updateSettings() {},
-    start: vi.fn(), startPractice() {}, words: [], showMe() {}, reset() {} };
+    start: vi.fn(), startPractice() {}, words: [], showMe() {}, reset() {}, pickBuddy: vi.fn() };
 };
 
 test("the course line leads in from the top of the unit", () => {
@@ -73,6 +73,17 @@ test("the XP chart is drawn at its own width, so its 15px labels stay 15px on a 
 test("the profile shows the mark", () => {
   renderHome(document.body, "profile", ctx());
   expect(document.querySelector(".big-av svg")).not.toBeNull();
+});
+
+test("the profile picks a signing buddy: six headshots, the saved one pressed", () => {
+  localStorage.setItem("lingual.buddy", "lexi");
+  const c = ctx();
+  renderHome(document.body, "profile", c);
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>(".buddies button")];
+  expect(buttons.map((b) => b.getAttribute("aria-label"))).toEqual(["Leo", "Benji", "Zeke", "Lexi", "Avery", "Daisy"]);
+  expect(buttons.filter((b) => b.getAttribute("aria-pressed") === "true").map((b) => b.getAttribute("aria-label"))).toEqual(["Lexi"]);
+  buttons[5].click();
+  expect(c.pickBuddy).toHaveBeenCalledWith("daisy");
 });
 
 test("a unit's notes put the heading first, the unit line under it", () => {

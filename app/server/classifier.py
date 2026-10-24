@@ -33,6 +33,10 @@ def save_checkpoint(model: SignNet, labels: list[str], path: Path | str) -> None
 
 
 class SignPredictor:
+    # Its scores run lower than the ST-GCN's (label smoothing). One-sign replays, 559 WLASL takes: at 0.5 a wrong word is
+    # spoken in 10% of turns, the right one in 56%, the picker shown in 34% (ST-GCN at 0.95: 14%, 44%, 41%).
+    pick_threshold = 0.5
+
     def __init__(self, model_path: Path | str = DEFAULT_MODEL):
         ck = torch.load(model_path, map_location="cpu", weights_only=True)
         self.labels: list[str] = ck["labels"]
@@ -49,4 +53,4 @@ class SignPredictor:
         return [(self.labels[i], float(p[i])) for i in idx]
 
     def recognize(self, seg) -> list[tuple[str, float]]:
-        return self.topk(seg.frames, 3)
+        return self.topk(seg.context or seg.frames, 3)  # as trained: the sign with up to 0.5 s either side
