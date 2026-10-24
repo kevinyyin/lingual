@@ -91,7 +91,8 @@ export function faceLabel(s: FaceScores): Feeling {
 }
 
 export type CamStatus = "off" | "starting" | "position" | "calibrating" | "ready" | "signing" | "reading" | "error";
-type Listener = { status(s: CamStatus, detail?: string): void; recognized(segments: PickOption[][]): void; face?(seen: Feeling): void };
+type Listener = { status(s: CamStatus, detail?: string): void; recognized(segments: PickOption[][]): void; face?(seen: Feeling): void;
+  hands?(inFrame: boolean): void };
 
 /** Webcam + backend in practice mode. Detection runs only while a perform exercise is on screen. */
 class Practice {
@@ -112,6 +113,8 @@ class Practice {
   private redoing = false; // a redo was asked for: the dropped attempt's result may still arrive, and is ignored
   /** What the learner's face reads as now (smoothed); the listener hears when it changes. */
   seen: Feeling = "neutral";
+  /** A hand in the hand tracker's sight: the segmenter's "raised" (server/segmenter.py), the camera card's green edge. */
+  hands = false;
 
   private set(s: CamStatus, detail?: string) {
     this.status = s;
@@ -154,7 +157,9 @@ class Practice {
         const { hint, send, recalibrate } = this.watch.check(f, this.server, performance.now());
         if (hint !== this.hint) this.set(hint ? "position" : this.server, (this.hint = hint) ?? undefined);
         if (recalibrate) this.recalibrate(); // they moved since the last calibration
-        if (send && this.active && this.sock && this.sock.buffered() < 256 * 1024) this.sock.send({ type: "frame", ...f });
+        // nothing while a sign is read: the backend ignores those frames anyway, and the feed shows frozen
+        if (send && this.active && this.server !== "reading" && this.sock && this.sock.buffered() < 256 * 1024) this.sock.send({ type: "frame", ...f });
+        if (!!(f.left || f.right) !== this.hands) this.listener?.hands?.((this.hands = !this.hands));
         this.drawHands(f);
         this.readFace(f);
       }, () => !this.active || busy);

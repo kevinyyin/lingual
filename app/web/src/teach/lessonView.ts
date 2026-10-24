@@ -3,8 +3,7 @@
 import type { PickOption } from "../ws";
 import { chime, h, svg } from "./dom";
 import { ICON } from "./icons";
-import { markSvg } from "./marks";
-import { LessonRun, shuffle, signScore, type Exercise } from "./lesson";
+import { LessonRun, shuffle, signScore, type Exercise, type SavedRun } from "./lesson";
 import { loadStage, mountSigner, playSigns, practice, type CamStatus, type Feeling } from "./signer";
 import { FEELING_FACE } from "./curriculum";
 import type { Earned } from "./progress";
@@ -18,6 +17,8 @@ export interface LessonHost {
   cameraOn(): boolean;
   disableCamera(): void;
   quit(): void;
+  /** Keeps the run after every step, so a lesson left part way picks up there; null once it's over. */
+  save(run: SavedRun | null): void;
   finish(run: LessonRun): { earned: Earned; streak: number; week: boolean[] };
 }
 
@@ -45,8 +46,8 @@ interface Mounted {
   left?: { label: string; run: () => void };
 }
 
-export function runLesson(root: HTMLElement, exercises: Exercise[], host: LessonHost): void {
-  const run = new LessonRun(exercises);
+export function runLesson(root: HTMLElement, exercises: Exercise[], host: LessonHost, saved?: SavedRun): void {
+  const run = new LessonRun(exercises, saved);
   if (new URLSearchParams(location.search).get("dev")) Object.assign(window, { teach: { run } }); // console/test access, like translator's window.asl
   const bar = h("i", { style: "width: 0%" });
   const count = h("span", { class: "step-count" });
@@ -54,8 +55,9 @@ export function runLesson(root: HTMLElement, exercises: Exercise[], host: Lesson
   const footInner = h("div", { class: "inner" });
   const foot = h("footer", { class: "lesson-foot" }, footInner);
   const close = h("button", { class: "close", "aria-label": "Leave lesson", onclick: () => confirmQuit() }, svg(ICON.cross));
+  const back = h("button", { class: "close back", "aria-label": "Previous exercise", onclick: () => { if (run.back()) next(); } }, svg(ICON.arrow));
   root.replaceChildren(h("div", { class: "lesson" },
-    h("header", { class: "lesson-top" }, close,
+    h("header", { class: "lesson-top" }, close, back,
       h("div", { class: "progress", role: "progressbar", "aria-label": "Lesson progress" }, bar), count),
     body, foot));
   void loadStage(); // start loading the avatar while the first card renders
@@ -69,7 +71,7 @@ export function runLesson(root: HTMLElement, exercises: Exercise[], host: Lesson
     const back = h("div", { class: "modal-back" });
     back.append(h("div", { class: "modal", role: "dialog", "aria-modal": "true" },
       h("h2", null, "Leave this lesson?"),
-      h("p", null, "Your answers in this lesson won't be saved."),
+      h("p", null, "You'll pick up right here next time."),
       h("div", { class: "modal-actions" },
         h("button", { class: "btn ghost", onclick: () => { back.remove(); leave(); host.quit(); } }, "Leave"),
         h("button", { class: "btn", onclick: () => back.remove() }, "Stay"))));
@@ -84,6 +86,8 @@ export function runLesson(root: HTMLElement, exercises: Exercise[], host: Lesson
 
   function next() {
     current?.onLeave?.();
+    host.save(run.finished ? null : run.save());
+    back.disabled = !run.canGoBack;
     bar.style.width = `${Math.round(run.fraction * 100)}%`;
     count.textContent = `${run.done}/${run.total}`;
     if (run.finished) {
@@ -152,8 +156,10 @@ export function runLesson(root: HTMLElement, exercises: Exercise[], host: Lesson
         h("div", { class: "badge" }, svg(correct ? ICON.check : ICON.cross)),
         h("div", null, h("h3", null, correct ? praise : "Not quite."), correct ? null : h("p", null, "Answer: ", h("b", null, solution)),
           score === undefined ? null : scoreBar(score))),
+      // right or wrong, the same exercise again from the start, the answer not counted
+      h("button", { class: "btn ghost redo", onclick: () => next() }, svg(ICON.retry), "Redo"),
       h("button", { class: "btn", onclick: () => { run.answer(lastCorrect); next(); } }, "Continue", svg(ICON.arrow)));
-    footInner.querySelector<HTMLButtonElement>(".btn")!.focus();
+    footInner.querySelector<HTMLButtonElement>(".btn:not(.ghost)")!.focus();
     if (correct && [5, 10, 15].includes(comboBefore + 1)) toast(`${comboBefore + 1} right in a row`);
   }
 
@@ -239,14 +245,14 @@ function confetti() {
 
 const changed = (el: HTMLElement) => el.dispatchEvent(new Event("answer-change", { bubbles: true }));
 
-/** A teacher's marks on the answer tiles: the right one circled, a wrong choice struck through. */
+/** Marks the answer tiles: the right one green with a check, a wrong choice red with a cross. */
 function markAnswer(chosen: HTMLElement, right: HTMLElement): void {
   if (chosen !== right) {
     chosen.classList.add("wrong");
-    chosen.append(markSvg("strike"));
+    chosen.append(svg(ICON.cross, "icon tile-mark"));
   }
   right.classList.add("right");
-  right.append(markSvg("loop"));
+  right.append(svg(ICON.check, "icon tile-mark"));
 }
 
 /** The avatar's slot with replay and slow-replay buttons; `signs()` is what replay plays. */
@@ -424,7 +430,8 @@ function mountPerform(gloss: string, host: LessonHost, grade: Grade, skip: () =>
   const status = h("div", { class: "cam-status", role: "status" }, CAM_TEXT[practice.status]);
   // while a sign is read the frozen feed is one big button: tap it to drop that attempt and sign again
   const redo = h("button", { class: "cam-redo", type: "button", "aria-label": "Redo the sign", hidden: "", onclick: () => practice.redo() });
-  const cam = h("div", { class: "cam-slot", "data-status": practice.status }, practice.video, practice.trailCanvas, status, redo);
+  const cam = h("div", { class: "cam-slot", "data-status": practice.status, "data-hands": practice.hands ? "in" : "out" },
+    practice.video, practice.trailCanvas, status, redo);
   const heard = h("p", { class: "heard", "aria-live": "polite" });
   const face = (seen: Feeling) => faceLine(seen, gloss, host.english(gloss));
   const faceEl = h("p", { class: "face-line" }, face(practice.seen));
@@ -434,6 +441,7 @@ function mountPerform(gloss: string, host: LessonHost, grade: Grade, skip: () =>
   const setStatus = (s: CamStatus, detail?: string) => {
     cam.dataset.status = s;
     redo.hidden = s !== "reading";
+    if (s === "signing") heard.replaceChildren(); // a new attempt: the last one's "that looked like..." is stale
     status.textContent = detail ? `${CAM_TEXT[s]}: ${detail}` : CAM_TEXT[s];
     // only once calibrated: signing while it measures the resting hands puts the rest line at signing height
     if (s === "ready" && !asked) {
@@ -446,7 +454,8 @@ function mountPerform(gloss: string, host: LessonHost, grade: Grade, skip: () =>
     const hit = rank !== null && rank <= PERFORM_TOP_K;
     // one guess, the surest: a list of every piece's guess read as nonsense ("dark, yawn, dark, let know")
     const best = segments.filter((seg) => seg.length).sort((x, y) => y[0].p - x[0].p)[0]?.[0]?.english ?? "";
-    if (hit) { stop(); return grade(true, host.english(gloss), score); }
+    // a pass shows no match bar: the top-3 rule passes a sign scored well below the top guess ("Match 1%")
+    if (hit) { stop(); return grade(true, host.english(gloss)); }
     if (++tries < 2) {
       heard.replaceChildren(scoreBar(score), `That looked like “${best || "nothing I know"}”. Watch again and try once more.`);
       host.say(LINES.retry);
@@ -463,7 +472,8 @@ function mountPerform(gloss: string, host: LessonHost, grade: Grade, skip: () =>
       faceEl,
       heard),
     onShow: () => {
-      practice.listener = { status: setStatus, recognized: onRecognized, face: (seen) => (faceEl.textContent = face(seen)) };
+      practice.listener = { status: setStatus, recognized: onRecognized, face: (seen) => (faceEl.textContent = face(seen)),
+        hands: (on) => (cam.dataset.hands = on ? "in" : "out") };
       practice.active = true;
       setStatus(practice.status);
       practice.start().catch(() => {});

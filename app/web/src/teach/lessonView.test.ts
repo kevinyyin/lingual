@@ -21,7 +21,7 @@ vi.mock("../avatar/stage", () => ({ createStage: vi.fn() }));
 const said: string[] = [];
 const host: LessonHost = {
   english: (g) => g.toLowerCase(), sound: () => true, say: (t) => said.push(t),
-  cameraOn: () => true, disableCamera() {}, quit() {}, finish: () => { throw new Error("no lesson ends here"); },
+  cameraOn: () => true, disableCamera() {}, quit() {}, save() {}, finish: () => { throw new Error("no lesson ends here"); },
 };
 
 beforeEach(async () => {
@@ -134,4 +134,65 @@ test("tapping the frozen camera while a sign is read signs it again, and that at
   sock.toPage({ type: "state", state: "signing" });
   sock.toPage({ type: "recognized", segments: [[{ gloss: "HELLO", english: "hello", p: 0.9 }]] }); // the new attempt
   expect(document.querySelector(".verdict")).not.toBeNull();
+});
+
+const miss = { type: "recognized" as const, segments: [[{ gloss: "NICE", english: "nice", p: 0.9 }]] };
+
+test("Redo after a verdict, right or wrong, shows the same exercise again with nothing counted", async () => {
+  await vi.waitFor(() => expect(cam.onFrame).not.toBeNull());
+  for (const result of [miss, miss]) sock.toPage(result); // two misses grade it wrong
+  expect(document.querySelector(".verdict")!.textContent).toContain("Not quite.");
+  getByRole(document.body, "button", { name: /Redo/ }).click();
+  expect(document.querySelector(".verdict")).toBeNull();
+  getByRole(document.body, "heading", { name: "Sign “hello”" });
+  sock.toPage({ type: "recognized", segments: [[{ gloss: "HELLO", english: "hello", p: 0.9 }]] }); // a fresh first try
+  expect(document.querySelector(".verdict")!.textContent).not.toContain("Not quite.");
+  getByRole(document.body, "button", { name: /Redo/ }); // after a right answer too
+});
+
+test("a pass shows no match bar; a miss still shows how close it came", async () => {
+  await vi.waitFor(() => expect(cam.onFrame).not.toBeNull());
+  sock.toPage(miss);
+  expect(document.querySelector(".heard .score")).not.toBeNull();
+  sock.toPage({ type: "recognized", segments: [[{ gloss: "NICE", english: "nice", p: 0.9 }, { gloss: "MEET", english: "meet", p: 0.05 },
+    { gloss: "HELLO", english: "hello", p: 0.009 }]] }); // third guess at 1% of the top one: a pass by the top-3 rule
+  expect(document.querySelector(".verdict .score")).toBeNull();
+});
+
+test("starting a new attempt clears the last one's \"that looked like...\"", async () => {
+  await vi.waitFor(() => expect(cam.onFrame).not.toBeNull());
+  sock.toPage(miss);
+  expect(document.querySelector(".heard")!.textContent).toMatch(/looked like “nice”/);
+  sock.toPage({ type: "state", state: "signing" });
+  expect(document.querySelector(".heard")!.textContent).toBe("");
+});
+
+test("the camera's edge is green while a hand is in the picture, red without one or while a sign is read; no frames go then", async () => {
+  await vi.waitFor(() => expect(cam.onFrame).not.toBeNull());
+  sock.toPage({ type: "state", state: "ready" });
+  const slot = document.querySelector<HTMLElement>(".cam-slot")!;
+  const hand = Array.from({ length: 21 }, () => [0.5, 0.5, 0] as [number, number, number]);
+  cam.onFrame!({ ...sitter(), right: hand });
+  expect(slot.dataset.hands).toBe("in");
+  cam.onFrame!(sitter());
+  expect(slot.dataset.hands).toBe("out");
+  sock.toPage({ type: "state", state: "reading" });
+  const frames = () => sock.sent.filter((m) => m.type === "frame").length;
+  const before = frames();
+  cam.onFrame!(sitter());
+  expect(frames()).toBe(before);
+});
+
+test("Back returns to the exercise before, and each step is saved for picking up later", async () => {
+  const saves: unknown[] = [];
+  const { runLesson } = await import("./lessonView");
+  runLesson(document.body, [{ kind: "intro", gloss: "NICE" }, { kind: "intro", gloss: "MEET" }], { ...host, save: (r) => saves.push(r) });
+  const back = getByRole(document.body, "button", { name: "Previous exercise" }) as HTMLButtonElement;
+  expect(back.disabled).toBe(true);
+  getByRole(document.body, "button", { name: /Next/ }).click();
+  expect(document.querySelector(".intro-word small")!.textContent).toBe("MEET");
+  back.click();
+  expect(document.querySelector(".intro-word small")!.textContent).toBe("NICE");
+  expect(saves).toHaveLength(3);
+  expect(saves.at(-1)).toMatchObject({ done: 0, queue: [{ ex: { gloss: "NICE" } }, { ex: { gloss: "MEET" } }] });
 });

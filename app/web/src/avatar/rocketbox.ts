@@ -122,6 +122,7 @@ const TORSO_SHARE = 0.7, TORSO_MAX = 0.14, TORSO_EASE = 0.12; // share of the si
 const PROTRACT_MAX = (8 * Math.PI) / 180, PROTRACT_REACH = 0.4; // collarbone forward turn, and the wrist-in-front-of-shoulder distance (m) that gives all of it
 const HEAD_KEEP = 0.5; // share of the torso's turn the head undoes, so the avatar keeps facing the viewer
 const PLACE_SLACK = { head: 0.03, body: 0.06 }; // metres a contact may land from the coded place: signers vary
+const MEET_SIGMA = 0.02; // metres across and up within which the two hands' points count toward their contact depth
 const DISAGREE = { min: 0.15, max: 0.35 }; // world vs image wrist offset (shoulder widths): none / fully from the image
 const FACE_NEAR = 0.6, FACE_FAR = 1.3; // wrist-to-nose distance (shoulder widths): fully / not at all face-relative
 // MediaPipe hand chains -> Rocketbox (3ds Max Biped) fingers: Finger0 = thumb ... Finger4 = little, 3 bones each
@@ -641,12 +642,16 @@ export async function loadRocketbox(canvas: HTMLCanvasElement): Promise<Avatar> 
       return gap === null ? 0 : touch * (gap - MARGIN);
     }
     if (meet > 0.01 && other) {
+      // every pair's depth gap, weighted by how close across and up: the single closest pair switched from frame to
+      // frame as one hand slid over the other, and the depth jumped with it (NICE's arm wobbled)
       const theirs = handProbes(other);
-      let best = Infinity;
+      let w = 0, sum = 0;
       for (const p of handProbes(arm)) for (const q of theirs) {
-        const d = Math.hypot(p.x - q.x, p.y - q.y);
-        if (d < best) [best, gap] = [d, p.z - q.z];
+        const k = Math.exp(-((p.x - q.x) ** 2 + (p.y - q.y) ** 2) / (2 * MEET_SIGMA ** 2));
+        w += k;
+        sum += k * (p.z - q.z);
       }
+      if (w > 0) gap = sum / w;
     }
     return gap === null ? 0 : meet * gap;
   };
