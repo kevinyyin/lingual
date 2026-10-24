@@ -58,6 +58,13 @@ async def test_malformed_json_falls_back_to_spelling_words():
     assert plan.grammar == "statement" and plan.tone == "neutral"
 
 
+def test_sad_and_angry_tones_kept_unknown_tone_neutral():
+    plan = lambda tone: validate_plan({"tokens": [{"kind": "sign", "value": "I"}, {"kind": "sign", "value": "SAD"}],
+                                       "grammar": "statement", "tone": tone}, V, "I'm sad", lenient=False)
+    assert plan("sad").tone == "sad" and plan("angry").tone == "angry"
+    assert plan("furious").tone == "neutral"
+
+
 def test_spell_sanitized():
     plan = validate_plan({"tokens": [{"kind": "spell", "value": "Ana-Marie!"}, {"kind": "spell", "value": "!!"}],
                           "grammar": "statement", "tone": "neutral"}, V, "Ana-Marie", lenient=False)

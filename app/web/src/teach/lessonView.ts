@@ -35,6 +35,10 @@ const LINES = {
 const pickOne = <T>(xs: T[]) => xs[Math.floor(Math.random() * xs.length)];
 /** Top-k guesses that count as signing it right: the recognizer is ~47% top-1, so top-1 alone would fail good signing. */
 const PERFORM_TOP_K = 3;
+/** Below the top guess, the target must score at least this share of it (signScore, %): top-3 alone passed HELLO for
+ *  GOODBYE at 1%. Course signs from test signers (ASL Citizen + WLASL, 201 videos, through the lesson read): right sign
+ *  passes 96.0% -> 92.5%, another sign of the same lesson 3.4% -> 0.8% (10%: 93.0/1.0, 50%: 91.5/0.5, top-1: 86.1/0.5). */
+const PERFORM_MIN_SCORE = 20;
 
 interface Mounted {
   el: HTMLElement;
@@ -422,7 +426,7 @@ function scoreBar(score: number): HTMLElement {
 export function faceLine(seen: Feeling, gloss: string, english: string): string {
   const face = FEELING_FACE[gloss];
   if (!face) return `Your face: ${seen}`;
-  const want = face === "warm" ? "happy" : gloss === "ANGRY" ? "angry" : "sad";
+  const want = face === "warm" ? "happy" : face === "angry" ? "angry" : "sad";
   if (seen === want) return `Your face: ${seen}. Just right for “${english}”!`;
   return `Your face: ${seen}. “${english}” needs ${want === "angry" ? "an" : "a"} ${want} face!`;
 }
@@ -452,12 +456,12 @@ function mountPerform(gloss: string, host: LessonHost, grade: Grade, skip: () =>
   };
   const onRecognized = (segments: PickOption[][]) => {
     const { score, rank } = signScore(segments, gloss);
-    const hit = rank !== null && rank <= PERFORM_TOP_K;
+    const hit = rank === 1 || (rank !== null && rank <= PERFORM_TOP_K && score >= PERFORM_MIN_SCORE);
     // one guess, the surest: a list of every piece's guess read as nonsense ("dark, yawn, dark, let know")
     const top = segments.filter((seg) => seg.length).sort((x, y) => y[0].p - x[0].p)[0]?.[0];
     const best = top?.english ?? "";
     if (top) showMini(cam, [{ kind: "sign", gloss: top.gloss }], `I saw: ${best}`); // the buddy signs back what it read
-    // a pass shows no match bar: the top-3 rule passes a sign scored well below the top guess ("Match 1%")
+    // a pass shows no match bar: a pass can score well below the top guess ("Match 20%")
     if (hit) { stop(); return grade(true, host.english(gloss)); }
     if (++tries < 2) {
       heard.replaceChildren(scoreBar(score), `That looked like “${best || "nothing I know"}”. Watch again and try once more.`);

@@ -5,6 +5,8 @@ describe("faceFor", () => {
   test("a feeling sign brings its face", () => {
     expect(faceFor(["HAPPY"])).toBe("warm");
     expect(faceFor(["SORRY"])).toBe("apologetic");
+    expect(faceFor(["SAD"])).toBe("sad");
+    expect(faceFor(["ANGRY"])).toBe("angry");
   });
   test("other signs, a spelled word and mixed feelings stay neutral", () => {
     expect(faceFor(["HELLO"])).toBe("neutral");
@@ -13,6 +15,6 @@ describe("faceFor", () => {
   });
   test("agreeing feeling signs share their face, and other signs don't count", () => {
     expect(faceFor(["HAPPY", "GOOD", "HELLO"])).toBe("warm");
-    expect(faceFor(["TIRED", "TIRED"])).toBe("apologetic");
+    expect(faceFor(["TIRED", "SICK"])).toBe("sad");
   });
 });
