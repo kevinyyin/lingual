@@ -13,8 +13,6 @@ const SHAKE_HZ = 2.5;
 const TONE: Record<Tone, { expressions: Record<string, number>; pitch: number }> = {
   warm: { expressions: { MTH_Joy: 1, EYE_Joy: 0.7 }, pitch: 0 },
   apologetic: { expressions: { MTH_Sorrow: 0.9, EYE_Sorrow: 0.6 }, pitch: 6 }, // slightly lowered gaze
-  sad: { expressions: { MTH_Sorrow: 1, EYE_Sorrow: 1 }, pitch: 10 }, // a full frown, eyes and head down
-  angry: { expressions: { MTH_Angry: 1, EYE_Angry: 1 }, pitch: 0 }, // a tight frown and narrowed eyes, head level
   urgent: { expressions: { MTH_Surprised: 0.6, EYE_Surprised: 0.8 }, pitch: 0 },
   neutral: { expressions: {}, pitch: 0 },
 };

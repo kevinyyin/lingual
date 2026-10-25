@@ -50,8 +50,7 @@ the speaker repeated the word.
 - Several sentences: sign them in order.
 - grammar (one value for the whole utterance, first that applies): "wh" for a wh-question, "yn" for a yes/no \
 question or request, "neg" for a negated statement, else "statement".
-- tone: how the speaker sounds from their words: "warm", "apologetic" (sorry), "sad", "angry" (annoyed, frustrated), \
-"urgent", or "neutral".
+- tone: how the speaker sounds from their words: "warm", "apologetic", "urgent", or "neutral".
 
 Examples (signs in order, grammar):
 - "I need to sleep now." -> NOW I NEED SLEEP (statement)
@@ -73,7 +72,7 @@ SCHEMA = {
             "properties": {"kind": {"type": "string", "enum": ["sign", "spell"]}, "value": {"type": "string"}},
             "required": ["kind", "value"], "additionalProperties": False}},
         "grammar": {"type": "string", "enum": ["yn", "wh", "neg", "statement"]},
-        "tone": {"type": "string", "enum": ["warm", "apologetic", "sad", "angry", "urgent", "neutral"]},
+        "tone": {"type": "string", "enum": ["warm", "apologetic", "urgent", "neutral"]},
         "meant": {"type": "string"},
         "unclear": {"type": "boolean"},
     },
@@ -113,7 +112,7 @@ def validate_plan(raw: dict, vocab: Vocab, english: str, lenient: bool) -> SignP
         if word := _letters(value):
             tokens.append(SignToken(kind="spell", word=word))
     grammar = raw.get("grammar") if raw.get("grammar") in ("yn", "wh", "neg", "statement") else "statement"
-    tone = raw.get("tone") if raw.get("tone") in ("warm", "apologetic", "sad", "angry", "urgent", "neutral") else "neutral"
+    tone = raw.get("tone") if raw.get("tone") in ("warm", "apologetic", "urgent", "neutral") else "neutral"
     meant = str(raw.get("meant") or "").strip()  # the caption: what they meant, without the ums
     return SignPlanMsg(tokens=tokens, grammar=grammar, tone=tone, english=meant or english)
 

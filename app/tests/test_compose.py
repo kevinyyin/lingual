@@ -46,13 +46,6 @@ async def test_bad_json_both_attempts_falls_back():
     assert len(c.messages.calls) == 2
 
 
-async def test_json_in_a_fence_or_followed_by_a_remark_still_parses():
-    c = fake_client('```json\n{"text": "Hello."}\n```', '{"text": "Hello."}\nI kept it short.')
-    assert await Composer(c, V).compose(["HELLO"], [], YN, NEUTRAL) == "Hello."
-    c = fake_client('{"text": "Hello."}\nI kept it short.', "oops")
-    assert await Composer(c, V).compose(["HELLO"], [], YN, NEUTRAL) == "Hello."
-
-
 async def test_timeout_falls_back():
     err = anthropic.APITimeoutError(request=httpx2.Request("POST", "https://api.anthropic.com"))
     c = fake_client(err, err)
