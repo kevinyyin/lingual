@@ -47,6 +47,15 @@ input { caret-color: var(--go); }
   font: 700 1rem var(--text); cursor: pointer; transition: background-color 160ms var(--ease), color 160ms var(--ease); }
 .mode-switch button[aria-pressed="true"] { background: var(--go-ink); color: #fff; }
 body[data-mode="voice"] .cam-card { display: none; } /* the camera is ignored in voice mode */
+/* capture.ts's camera tip over the preview; gone the moment the badge leaves "ready" (a hint, a turn, calibration) */
+.cam-card { position: relative; }
+.cam-tip { position: absolute; left: 50%; bottom: 52px; transform: translateX(-50%); max-width: calc(100% - 24px);
+  margin: 0; padding: 8px 14px; border-radius: 999px; background: var(--wait-bg); color: var(--wait-fg);
+  font-weight: 700; text-align: center; pointer-events: none; animation: tip-in 0.25s ease-out; }
+.cam-tip .short { display: none; }
+body:not(:has(#state[data-state="ready"])) .cam-tip { display: none; }
+@keyframes tip-in { from { opacity: 0; transform: translate(-50%, 6px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@media (prefers-reduced-motion: reduce) { .cam-tip { animation: none; } }
 .btn.icon-btn { display: none; } /* the phone's "More" button */
 
 .badge {
@@ -202,6 +211,10 @@ body:has(#state[data-state="reading"]) #cam { filter: brightness(.55) saturate(.
   /* the signer sees themselves in the stage's corner, like a video call */
   .cam-card { position: absolute; z-index: 3; top: 10px; right: 20px; width: 30%; border-radius: var(--r-tile); box-shadow: var(--shadow); }
   .cam-card figcaption { display: none; }
+  /* the corner camera is small: a word or two at its foot, not a pill over the face */
+  .cam-tip { bottom: 6px; max-width: calc(100% - 12px); padding: 3px 8px; font-size: 12px; white-space: nowrap; }
+  .cam-tip .long { display: none; }
+  .cam-tip .short { display: inline; }
   .cam-card:has(#cam[hidden]) { display: none; }
   .said-card { flex: none; padding: 14px 16px; }
   .said-card:has(#you-said:empty) { display: none; }

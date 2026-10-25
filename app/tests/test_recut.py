@@ -46,3 +46,34 @@ def test_a_sign_that_slows_midway_stays_one_sign():
 def test_too_short_to_cut_is_left_to_the_segmenter():
     run = signing(0, 3, 0.1)
     assert recut(run, run, Majority()) is None
+
+
+def whole(run):
+    return [(run[0].t, run[-1].t)]
+
+
+def test_touching_pieces_read_as_one_sign_inside_one_segment_are_one_sign():
+    run = signing(0, 16, 0.1) + dip(16, 2, 0.1) + signing(18, 16, 0.1)  # 2.2 s: longer than one piece can be
+    assert len(recut(run, run, Majority())) == 2  # no segment to merge inside
+    (piece,) = recut(run, run, Majority(), whole(run))
+    assert piece[1][0][0] == "S0.1" and piece[0].frames == run
+    assert piece[0].context[0].t == run[0].t and piece[0].context[-1].t == run[-1].t
+
+
+def test_same_sign_pieces_are_not_merged_past_2500_ms():
+    run = signing(0, 19, 0.1) + dip(19, 2, 0.1) + signing(21, 19, 0.1)  # 2.6 s
+    assert [top[0][0] for _, top in recut(run, run, Majority(), whole(run))] == ["S0.1", "S0.1"]
+
+
+def test_one_sign_twice_with_a_pause_between_through_read_turn_stays_two(tmp_path):
+    from test_session import make_session
+
+    from server.session import Segment, TurnEnd
+
+    a, pause, b = signing(0, 14, 0.1), dip(14, 6, 0.1), signing(20, 14, 0.1)  # a still 400 ms between
+    ev = TurnEnd(segments=[Segment(frames=a, kind="sign", context=a), Segment(frames=b, kind="sign", context=b)],
+                 frames=a + pause + b, rest_ms=0)
+    s, _ = make_session(tmp_path, recognizer=Majority())
+    assert [top[0][0] for _, top in s._read_turn(ev)] == ["S0.1", "S0.1"]
+    assert recut(a + pause + b, a + pause + b, Majority(), whole(a + pause + b)) is not None  # one segment: merged
+    assert len(recut(a + pause + b, a + pause + b, Majority(), whole(a + pause + b))) == 1

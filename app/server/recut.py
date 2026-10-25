@@ -16,6 +16,10 @@ from .session import Segment
 PIECE_COST = 1.0  # log-probability each piece must earn: two sure pieces only beat one when the one is unsure
 MIN_MS, MAX_MS = 250.0, 1800.0  # a piece's length
 CONTEXT_MS = 250.0  # read with this much either side (sentence replays: 250 ms 50%, 500 ms 48%, none 41%)
+# Neighbouring pieces the model reads as the same sign are one sign (a sign's repeated taps, a hold cut in two): teaching
+# clips 866 -> 881 of 995 right, none broke. Only inside one of the segmenter's segments, so a sign repeated after a real
+# pause (NO, rest, NO) stays two words, and never longer than this.
+SAME_MAX_MS = 2500.0
 
 
 def _speed(frames: list[Frame]) -> np.ndarray:
@@ -24,9 +28,11 @@ def _speed(frames: list[Frame]) -> np.ndarray:
     return np.convolve(v, np.ones(3) / 3, mode="same")
 
 
-def recut(run: list[Frame], around: list[Frame], model) -> list[tuple[Segment, list[tuple[str, float]]]] | None:
-    """run: the frames of consecutive signed pieces; around: the turn's frames, for each piece's context. -> pieces and
-    their top 3, or None when there is no cut to make (shorter than a sign, or no candidate cut within MAX_MS)."""
+def recut(run: list[Frame], around: list[Frame], model, spans: list[tuple[float, float]] = ()
+          ) -> list[tuple[Segment, list[tuple[str, float]]]] | None:
+    """run: the frames of consecutive signed pieces; around: the turn's frames, for each piece's context; spans: the
+    segmenter's segments' (first, last) frame times, where same-sign pieces may merge. -> pieces and their top 3, or None
+    when there is no cut to make (shorter than a sign, or no candidate cut within MAX_MS)."""
     if len(run) < 3 or run[-1].t - run[0].t < MIN_MS:
         return None
     v = _speed(run)
@@ -45,4 +51,26 @@ def recut(run: list[Frame], around: list[Frame], model) -> list[tuple[Segment, l
                 best[j] = (score, best[i][1] + [(i, j)])
     if len(run) not in best:
         return None
-    return [(Segment(frames=run[i:j], kind="sign", context=read[(i, j)][0]), read[(i, j)][1]) for i, j in best[len(run)][1]]
+    pieces = [(Segment(frames=run[i:j], kind="sign", context=read[(i, j)][0]), read[(i, j)][1])
+              for i, j in best[len(run)][1]]
+    return _same_sign_once(pieces, spans)
+
+
+def _same_sign_once(pieces, spans):
+    """Neighbouring pieces read as the same sign merged when the cut between them is inside a segment and together they
+    reach no other segment (a piece can run on over a pause: never one word across it)."""
+    out = []
+    for s, top in pieces:
+        if out:
+            p, ptop = out[-1]
+            cut = s.frames[0].t
+            start, end = p.frames[0].t, s.frames[-1].t
+            within = [(lo, hi) for lo, hi in spans if lo <= end and hi >= start]  # the segments the two pieces reach
+            if (top and ptop and top[0][0] == ptop[0][0] and len(within) == 1 and within[0][0] < cut < within[0][1]
+                    and end - start <= SAME_MAX_MS):
+                ctx = sorted({f.t: f for f in [*(p.context or []), *(s.context or [])]}.values(), key=lambda f: f.t)
+                out[-1] = (Segment(frames=p.frames + s.frames, kind="sign", context=ctx),
+                           ptop if ptop[0][1] >= top[0][1] else top)
+                continue
+        out.append((s, top))
+    return out

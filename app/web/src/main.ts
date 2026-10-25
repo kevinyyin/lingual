@@ -4,7 +4,8 @@ import { loadAvatar } from "./avatar";
 import { startCamera } from "./camera";
 import { rememberPhone } from "./phone";
 import { PositionWatch } from "./position";
-import { bindControls, currentMode, currentState, highlight, renderMsg, setCameraOff, showHint } from "./ui";
+import { bindControls, currentMode, currentState, highlight, renderMsg, setCameraOff, showHint, showTip } from "./ui";
+import { CaptureCoach, lumaSampler } from "./capture";
 import { connect } from "./ws";
 import { savedBuddy } from "./buddies";
 import { showMini } from "./avatar/mini";
@@ -62,11 +63,16 @@ function converse() {
   // mode and not while the avatar signs
   let camera: Promise<void> | null = null;
   const watch = new PositionWatch(); // directs the signer into position; calibrates again when they move (position.ts)
-  const openCamera = () => (camera ??= startCamera(document.getElementById("cam") as HTMLVideoElement, (f) => {
+  const coach = new CaptureCoach(); // soft camera tips (too far / too dark); never changes what is sent
+  const video = document.getElementById("cam") as HTMLVideoElement;
+  const luma = lumaSampler(video);
+  const openCamera = () => (camera ??= startCamera(video, (f) => {
     const { hint, send, recalibrate } = watch.check(f, currentState(), performance.now());
     showHint(hint);
     if (recalibrate) sock.send({ type: "calibrate" });
     if (send && sock.buffered() < MAX_BUFFERED) sock.send({ type: "frame", ...f });
+    const tip = coach.feed(f, performance.now(), video.videoWidth, luma, currentState() !== "ready" || hint !== null);
+    if (tip !== undefined) showTip(tip);
   }, () => playing || currentMode() !== "signing").catch((e) => {
     camera = null; // switching to signing again retries
     const badge = document.getElementById("state")!;

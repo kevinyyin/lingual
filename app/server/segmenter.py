@@ -21,6 +21,10 @@ PAUSE_MS = 300.0
 PAUSE_K = 1.5  # pause threshold = max(motion_floor * PAUSE_K, MIN_ENERGY)
 MIN_ENERGY = 0.02  # shoulder widths per 30 fps frame
 MIN_SEG_MS = 160.0  # shorter segments are noise (6 frames at 30 fps)
+# ...unless the turn has no other: then its longest shorter piece of LONE_MIN_FRAMES frames over LONE_MIN_MS is its one
+# segment (a quick sign at 15 fps never reaches 160 ms). 3 frames lost BABY in the teaching clips (lessons 317 -> 315,
+# 2 more turns with no sign); 2 frames and 60 ms means 2 frames at 15 fps (67 ms) but 3 at 30 fps, never a lone frame.
+LONE_MIN_FRAMES, LONE_MIN_MS = 2, 60.0
 # Fingerspelling: one hand, the wrist staying put, the fingers busier than it. Real spelling (Kaggle, 185 phrases) vs
 # WLASL sign pieces (1,444): box 0.6, ratio 2.0 and never a second hand caught 32% of spelling (0.7% of signs); these
 # catch 95% (3.5%, which the letter reader then hands back to the sign model: session._read_segment).
@@ -79,6 +83,7 @@ class Segmenter:
         self.before: deque[Frame] = deque(maxlen=PRE_ROLL)  # frames outside a turn
         self.pre: list[Frame] = []  # the pre-roll of the current turn
         self.still: set[float] = set()  # times of the turn's frames with too little energy to be signing
+        self.short: list[Frame] | None = None  # the turn's longest piece under MIN_SEG_MS (LONE_MIN_MS)
 
     def _raised(self, f: Frame) -> bool:
         return bool((_wrists(f)[:, 1] < self.b.rest_y).any())
@@ -97,6 +102,7 @@ class Segmenter:
             self.low_t = self.still_t = None
             self.pre = list(self.before)
             self.still = set()
+            self.short = None
             self.before.clear()
             return TurnStart()
 
@@ -145,9 +151,14 @@ class Segmenter:
         self.cur, self.low, self.low_t = None, 0, None
         if frames and frames[-1].t - frames[0].t >= MIN_SEG_MS:
             self.segments.append(Segment(frames=frames, kind=_kind(frames)))
+        elif len(frames) >= LONE_MIN_FRAMES and frames[-1].t - frames[0].t >= LONE_MIN_MS and (self.short is None or len(frames) > len(self.short)):
+            self.short = frames
 
     def _end(self) -> TurnEnd:
         self._close()
+        if not self.segments and self.short:
+            self.segments.append(Segment(frames=self.short, kind=_kind(self.short)))
+        self.short = None
         turn, self.turn = self.turn, None
         rest_ms = turn[-1].t - self.still_t
         frames = self.pre + turn

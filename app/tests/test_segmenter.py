@@ -256,3 +256,18 @@ def test_a_hand_lost_for_a_moment_mid_sign_is_a_pause_not_hands_down():
         f.right = None  # the tracker loses the hand for ~100 ms
     end = run(rest(0, 3) + fs + rest(23, REST_FRAMES + 2))[-1]
     assert isinstance(end, TurnEnd) and len(end.segments) == 1
+
+
+def jump(d):
+    """The hands raised and still, one step of `d` to the side, still again, and down: energy above the pause threshold
+    for a few frames after the step (d 0.01: 1 frame, 0.05: 3)."""
+    return rest(0, 5) + still(5, 5) + still(10, PAUSE_FRAMES + 3, x=0.4 + d) + rest(20 + PAUSE_FRAMES, REST_FRAMES + 2)
+
+
+def test_a_turns_only_motion_shorter_than_a_segment_is_kept_from_3_frames():
+    (s,) = run(jump(0.05))[-1].segments
+    assert len(s.frames) == 3 and s.context
+
+
+def test_a_turns_only_motion_of_1_frame_is_no_segment():
+    assert run(jump(0.01))[-1].segments == []
