@@ -152,6 +152,18 @@ body:has(#state[data-state="reading"]) #cam { filter: brightness(.55) saturate(.
 #you-said .emo { display: inline-block; margin-left: 8px; padding: 3px 12px; border-radius: 999px; font: 600 15px var(--text);
   background: var(--out-bg); color: var(--out-fg); vertical-align: middle; text-transform: capitalize; }
 
+/* sign by sign (?bysign=1): the words read so far as chips, Undo and Say it */
+#words-card .words-help { font: 400 .85rem var(--text); color: var(--ink-2); margin-left: 6px; }
+#words { justify-content: flex-start; margin: 6px 0 10px; }
+#words:empty::before { content: "Sign a word, then lower your hands."; color: var(--ink-2); font: 400 1rem var(--text); }
+.words-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.words-actions kbd { padding: 1px 6px; border-radius: 6px; background: rgb(0 0 0 / .08); font: 700 .75rem var(--text); }
+@media (pointer: coarse) { .words-actions kbd { display: none; } }
+#words span.spelled { font-style: italic; } /* fingerspelled, not a sign */
+#bysign-toggle[aria-pressed="true"] { background: var(--ink); color: #fff; }
+#bysign-toggle { white-space: nowrap; }
+body.by-sign #you-said:empty::before { content: "When the signer signs, the spoken sentence shows here."; }
+
 /* picker: the signer must answer it fast, so big targets with their key shown */
 #picker { display: grid; gap: 10px; border: 2px solid var(--wait-edge); background: var(--surface); }
 #picker .card-title { color: var(--wait-fg); }
@@ -224,6 +236,13 @@ body:has(#state[data-state="reading"]) #cam { filter: brightness(.55) saturate(.
   #picker { position: fixed; z-index: 30; left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom)); box-shadow: 0 -8px 40px rgb(35 42 99 / .2); }
   #dev { flex: none; padding: 12px; }
   #dev .card-title { display: none; }
+  /* sign by sign: one compact row under the stage (the corner camera is in the stage; the fixed picker covers this) */
+  #words-card { flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px; }
+  #words-card .card-title { display: none; }
+  #words { flex: 1 1 60%; min-width: 0; margin: 0; max-height: 84px; overflow-y: auto; }
+  #words:empty::before { font-size: .95rem; }
+  .words-actions { flex: none; margin-left: auto; }
+  .words-actions .btn { min-height: 44px; padding: 0 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

@@ -23,6 +23,7 @@
       <div id="actions" class="actions">
         <a class="btn ghost" href="/?mode=mirror">Mirror</a>
         <a class="btn ghost" href="/teach.html">Teaching mode</a>
+        <button id="bysign-toggle" type="button" class="btn ghost" aria-pressed="false" title="Sign one word at a time, then Say it">Sign by sign</button>
       </div>
     </header>
     <main id="app">
@@ -42,6 +43,14 @@
           <figcaption>Your camera · only hand and face points leave this device</figcaption>
         </figure>
         <div id="picker" class="card" role="group" aria-label="Which sign did you mean?" hidden></div>
+        <section id="words-card" class="card" aria-label="Signs read so far" hidden>
+          <h2 class="card-title">Sign by sign <span class="words-help">lower your hands after each sign</span></h2>
+          <p id="words" class="plan" aria-live="polite" aria-label="Words read so far"></p>
+          <div class="words-actions">
+            <button id="words-undo" type="button" class="btn ghost" aria-label="Undo last word" aria-keyshortcuts="Backspace">Undo <kbd aria-hidden="true">⌫</kbd></button>
+            <button id="words-done" type="button" class="btn" aria-label="Say it" aria-keyshortcuts="Enter">Say it <kbd aria-hidden="true">Enter</kbd></button>
+          </div>
+        </section>
         <section class="card said-card" aria-label="What the hearing person hears">
           <h2 class="card-title">Said aloud for the signer</h2>
           <p id="you-said" aria-live="polite"></p>
