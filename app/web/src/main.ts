@@ -35,7 +35,7 @@ function converse() {
   if (params.get("dev")) Object.assign(window, { asl: { avatar, stage } }); // console access for avatar debugging
   const sock = connect(async (m) => {
     if (m.type === "you_said" && m.read?.length) { // the buddy signs back what the camera read
-      showMini(document.querySelector<HTMLElement>(".said-card")!, m.read, `I saw: ${m.read.map((t) => t.gloss ?? t.word).join(" ")}`);
+      showMini(document.querySelector<HTMLElement>(".said-card")!, m.read, `I saw: ${m.read.map((t) => t.gloss ?? t.word).join(" ")}`, m.face);
     }
     if (m.type !== "sign_plan") return renderMsg(m);
     try {

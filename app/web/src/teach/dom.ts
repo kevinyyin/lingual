@@ -37,7 +37,8 @@ export function chime(kind: "right" | "wrong" | "done"): void {
   try {
     setAudioSession("playback"); // not muted by the iPad's ringer switch
     const audio = speakerOut();
-    const notes = kind === "right" ? [660, 880] : kind === "wrong" ? [300, 220] : [523, 659, 784, 1047];
+    // right: a bright rising G-C-E, the last note ringing (two quiet blips went unheard under the buddy's voice)
+    const notes = kind === "right" ? [784, 1047, 1319] : kind === "wrong" ? [300, 220] : [523, 659, 784, 1047];
     notes.forEach((f, i) => {
       const o = audio.createOscillator();
       const g = audio.createGain();
@@ -45,11 +46,12 @@ export function chime(kind: "right" | "wrong" | "done"): void {
       o.type = kind === "wrong" ? "square" : "sine";
       o.frequency.value = f;
       g.gain.setValueAtTime(0.0001, t);
-      g.gain.exponentialRampToValueAtTime(kind === "wrong" ? 0.05 : 0.12, t + 0.01);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
+      const end = t + (kind === "right" && i === notes.length - 1 ? 0.45 : 0.16);
+      g.gain.exponentialRampToValueAtTime(kind === "wrong" ? 0.05 : kind === "right" ? 0.22 : 0.12, t + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, end);
       o.connect(g).connect(audio.destination);
       o.start(t);
-      o.stop(t + 0.18);
+      o.stop(end + 0.02);
     });
   } catch { /* no audio */ }
 }

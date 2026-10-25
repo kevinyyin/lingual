@@ -14,7 +14,7 @@ const TONE: Record<Tone, { expressions: Record<string, number>; pitch: number }>
   warm: { expressions: { MTH_Joy: 1, EYE_Joy: 0.7 }, pitch: 0 },
   apologetic: { expressions: { MTH_Sorrow: 0.9, EYE_Sorrow: 0.6 }, pitch: 6 }, // slightly lowered gaze
   urgent: { expressions: { MTH_Surprised: 0.6, EYE_Surprised: 0.8 }, pitch: 0 },
-  neutral: { expressions: {}, pitch: 0 },
+  neutral: { expressions: { MTH_Neutral: 1 }, pitch: 0 }, // a straight mouth, not the toon's resting smile
 };
 
 /** Returns the face pose at time t (ms) for a sentence lasting durationMs. */

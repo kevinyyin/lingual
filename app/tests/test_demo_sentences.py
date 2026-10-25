@@ -105,6 +105,7 @@ async def test_a_demo_sentence_shows_the_emotion_its_voice_speaks_with(tmp_path)
     sent, _ = await run_turn(tmp_path, demo=True, face={"label": "happy", "intensity": 0.9})
     (said,) = [m for m in sent if m.type == "you_said"]
     assert said.emotion == "excited"  # voice.voice_controls: a strong happy face, not the bare label
+    assert said.face == "happy"  # the mini avatar signs it back smiling
 
 
 async def test_without_demo_mode_the_turn_is_translated_as_before(tmp_path):
