@@ -148,7 +148,7 @@ body:has(#state[data-state="reading"]) #cam { filter: brightness(.55) saturate(.
 .cam-card figcaption { padding: 10px 14px; font-size: 15px; color: var(--ink-2); }
 
 #you-said { margin: 0; font: 700 1.4rem/1.35 var(--text); color: var(--ink); }
-#you-said:empty::before { content: "When the signer signs, the spoken sentence shows here."; color: var(--ink-2); font-weight: 400; font-size: 1rem; }
+#you-said:empty::before { content: "When the signer signs, the spoken sentence shows here. Signing a sentence? Keep your hands up and pause briefly between signs."; color: var(--ink-2); font-weight: 400; font-size: 1rem; }
 #you-said .emo { display: inline-block; margin-left: 8px; padding: 3px 12px; border-radius: 999px; font: 600 15px var(--text);
   background: var(--out-bg); color: var(--out-fg); vertical-align: middle; text-transform: capitalize; }
 
