@@ -348,7 +348,7 @@ p { margin: 0; }
 .cam-slot[data-status="reading"] .cam-video { filter: brightness(.55) saturate(.6) blur(8px); } /* frozen (signer.ts) while it's read */
 .cam-video { width: 100%; height: 100%; object-fit: cover; display: block; transition: filter 200ms var(--ease); }
 /* working on it while the camera starts or a sign is read: the dark box never looks stuck */
-.cam-slot:is([data-status="starting"], [data-status="reading"]) .cam-status::before { content: ""; display: inline-block; width: 14px; height: 14px;
+.cam-slot:is([data-status="starting"], [data-status="reading"]):not([data-result]) .cam-status::before { content: ""; display: inline-block; width: 14px; height: 14px;
   margin-right: 10px; vertical-align: -2px; border: 2.5px solid rgb(255 255 255 / .35); border-top-color: #fff; border-radius: 50%; animation: spin 800ms linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .cam-redo { position: absolute; inset: 0; z-index: 2; border: 0; border-radius: inherit; background: transparent; cursor: pointer; } /* the frozen feed, tappable (lessonView) */

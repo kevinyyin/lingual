@@ -407,6 +407,7 @@ const CAM_TEXT: Record<CamStatus, string> = {
   reading: "Reading your sign… tap to redo",
   error: "Camera unavailable",
 };
+const CAM_RESULT = { right: "You got it!", wrong: "Not quite this time" };
 
 /** A camera attempt's match score as a labelled bar. */
 function scoreBar(score: number): HTMLElement {
@@ -455,17 +456,22 @@ function mountPerform(gloss: string, host: LessonHost, grade: Grade, skip: () =>
     // one guess, the surest: a list of every piece's guess read as nonsense ("dark, yawn, dark, let know")
     const best = segments.filter((seg) => seg.length).sort((x, y) => y[0].p - x[0].p)[0]?.[0]?.english ?? "";
     // a pass shows no match bar: the top-3 rule passes a sign scored well below the top guess ("Match 1%")
-    // the box keeps the result's colour: graded, it hears no more status, and stayed the reading red after a right one
-    if (hit) { stop(); cam.dataset.result = "right"; return grade(true, host.english(gloss)); }
+    if (hit) { finish("right"); return grade(true, host.english(gloss)); }
     if (++tries < 2) {
       heard.replaceChildren(scoreBar(score), `That looked like “${best || "nothing I know"}”. Watch again and try once more.`);
       host.say(LINES.retry);
       practice.answered("retry");
       return;
     }
-    stop();
-    cam.dataset.result = "wrong";
+    finish("wrong");
     grade(false, `${host.english(gloss)} (we saw “${best || "?"}”)`, score);
+  };
+  // graded, the box hears no more status: it keeps the result's colour and says the result, not "Reading your sign…"
+  const finish = (result: "right" | "wrong") => {
+    stop();
+    cam.dataset.result = result;
+    redo.hidden = true;
+    status.textContent = CAM_RESULT[result];
   };
   return {
     el: h("div", { style: "display: contents" },
