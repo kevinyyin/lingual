@@ -47,4 +47,10 @@ test("the face reader tells a smile and a frown from a resting face, as the serv
   expect(faceLabel(faceScores({ noseSneerLeft: 0.6, noseSneerRight: 0.6, mouthPressLeft: 0.4, mouthPressRight: 0.4 }))).toBe("angry");
   expect(faceLabel(faceScores({ mouthSmileLeft: 0.05, browInnerUp: 0.9 }))).toBe("neutral"); // brows are grammar, not feeling
   expect(faceLabel(faceScores(null))).toBe("neutral");
+  // MediaPipe barely moves frown and sneer: slight ones count
+  expect(faceLabel(faceScores({ mouthFrownLeft: 0.1, mouthFrownRight: 0.1 }))).toBe("sad");
+  expect(faceLabel(faceScores({ noseSneerLeft: 0.12, noseSneerRight: 0.12 }))).toBe("angry");
+  // a resting face (pucker and squint rest high) and the mouth morpheme MM (lips pressed) are no feeling
+  expect(faceLabel(faceScores({ mouthPucker: 0.67, eyeSquintLeft: 0.23, eyeSquintRight: 0.23 }))).toBe("neutral");
+  expect(faceLabel(faceScores({ mouthPressLeft: 0.5, mouthPressRight: 0.5 }))).toBe("neutral");
 });

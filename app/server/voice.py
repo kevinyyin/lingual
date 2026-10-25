@@ -20,7 +20,20 @@ STALL_S = 5.0  # no TTS event this long = a half-open socket; give up so the ses
 # of Cartesia's 8 IPv6 addresses in turn and every handshake hits websockets' 10 s open timeout.
 WS_OPTIONS = {"happy_eyeballs_delay": 0.25}
 
-# label -> (mild emotion, strong emotion, speed delta at full intensity, volume delta at full intensity)
+# Every emotion Sonic's generation_config takes (docs.cartesia.ai, "Volume, speed and emotion"). neutral, calm, angry,
+# content, sad and scared had the most training data and sound the surest.
+EMOTIONS = (
+    "neutral", "happy", "excited", "enthusiastic", "elated", "euphoric", "triumphant", "amazed", "surprised",
+    "flirtatious", "curious", "content", "peaceful", "serene", "calm", "grateful", "affectionate", "trust",
+    "sympathetic", "anticipation", "mysterious", "angry", "mad", "outraged", "frustrated", "agitated", "threatened",
+    "disgusted", "contempt", "envious", "sarcastic", "ironic", "sad", "dejected", "melancholic", "disappointed", "hurt",
+    "guilty", "bored", "tired", "rejected", "nostalgic", "wistful", "apologetic", "hesitant", "insecure", "confused",
+    "resigned", "anxious", "panicked", "alarmed", "scared", "proud", "confident", "distant", "skeptical",
+    "contemplative", "determined",
+)
+
+# label -> (mild emotion, strong emotion, speed delta at full intensity, volume delta at full intensity). The emotions
+# are the fallback when compose picked none; speed and volume always follow the face.
 # Starting values; tuned by the listening test (plan Task 18).
 MAPPING = {
     "happy": ("happy", "excited", +0.15, +0.30),
@@ -31,17 +44,20 @@ STRONG = 0.6
 
 
 def voice_controls(e) -> dict:
-    """Sonic generation_config for an Emotion; neutral leaves the voice alone."""
-    m = MAPPING.get(e["label"])
-    if not m:
-        return {"speed": 1.0, "volume": 1.0}
-    i = min(max(float(e["intensity"]), 0.0), 1.0)
-    mild, strong, ds, dv = m
-    return {
-        "emotion": strong if i >= STRONG else mild,
-        "speed": round(min(max(1.0 + ds * i, 0.6), 1.5), 3),
-        "volume": round(min(max(1.0 + dv * i, 0.5), 2.0), 3),
-    }
+    """Sonic generation_config for an Emotion: the emotion compose picked for the sentence (e["voice"]), else the face
+    label's own; neutral with no pick leaves the voice alone."""
+    out = {"speed": 1.0, "volume": 1.0}
+    if m := MAPPING.get(e["label"]):
+        i = min(max(float(e["intensity"]), 0.0), 1.0)
+        mild, strong, ds, dv = m
+        out = {
+            "emotion": strong if i >= STRONG else mild,
+            "speed": round(min(max(1.0 + ds * i, 0.6), 1.5), 3),
+            "volume": round(min(max(1.0 + dv * i, 0.5), 2.0), 3),
+        }
+    if e.get("voice") in EMOTIONS and e["voice"] != "neutral":
+        out["emotion"] = e["voice"]
+    return out
 
 
 class VoiceError(Exception):

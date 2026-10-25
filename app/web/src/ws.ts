@@ -23,7 +23,7 @@ export type ClientMsg =
   | { type: "pick"; segment: number; gloss: string }
   | { type: "avatar_done" }
   | { type: "practice"; on: boolean; signs?: string[] }
-  | { type: "mode"; mode: Mode }
+  | { type: "mode"; mode: Mode; demo?: boolean } // demo: ?demo=1, turns snap to the demo sentences (server/demo_sentences.py)
   | { type: "talk"; on: boolean }
   | { type: "redo" }
   | { type: "say"; text: string }
