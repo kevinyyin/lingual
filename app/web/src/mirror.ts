@@ -298,6 +298,13 @@ export async function startMirror(): Promise<void> {
 
   const sock = connect((m) => {
     if (m.type === "state") return setState(m.state);
+    if (m.type === "you_said") { // the English sentence the turn's signs make (Claude, session.py), after their words
+      const row = turns.firstElementChild;
+      if (!row) return;
+      row.appendChild(el("p", "mirror-sentence", m.text || "No sentence in these signs"));
+      if (m.text) now.textContent = m.text;
+      return;
+    }
     if (m.type !== "recognized" || !m.spans || !m.segments.length) return; // spans: the mirror's per-sign reads, not a lesson's
     const labels = m.segments.map(signLabel);
     now.textContent = labels.map((l) => l.word).join(" · ");

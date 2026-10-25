@@ -21,6 +21,8 @@ body[data-page="mirror"] :is(#mode, #talk, #picker, .said-card, #caption, #plan,
 .mirror-turns { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; max-height: 30vh; overflow-y: auto; }
 .mirror-turns:empty::before { content: "Sign, then rest your hands: each sign gets the word it was read as."; color: var(--ink-2); }
 .mirror-turn { display: flex; flex-wrap: wrap; gap: 8px; }
+.mirror-sentence { flex-basis: 100%; margin: 0; color: var(--ink); font: 700 1.15rem/1.3 var(--text); }
+.mirror-turn:not(:first-child) .mirror-sentence { font-weight: 400; color: var(--ink-2); }
 .mirror-turn:not(:first-child) { opacity: .6; }
 .sign-chip {
   display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 6px; padding: 6px 12px; border-radius: var(--r-tile);
