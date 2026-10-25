@@ -27,7 +27,7 @@ export type ClientMsg =
   | { type: "talk"; on: boolean }
   | { type: "redo" }
   | { type: "say"; text: string }
-  | { type: "cheer" }
+  | { type: "answer"; result: "right" | "wrong" | "retry" }
   | { type: "buddy"; buddy: Buddy["id"] }
   | { type: "record"; signer: string; gloss: string; frames: Frame[] };
 

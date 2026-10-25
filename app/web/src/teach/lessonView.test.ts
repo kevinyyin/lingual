@@ -82,11 +82,17 @@ test("every camera card plays the camera again: a video taken out of the page pa
   expect(document.querySelector("video")!.isConnected).toBe(true);
 });
 
-test("a right answer makes the plushie flap its arms", async () => {
+test("a right answer tells the plushie (check and flapping arms)", async () => {
   await vi.waitFor(() => expect(getByRole(document.body, "heading", { name: "Sign “hello”" })).toBeTruthy());
   sock.toPage({ type: "recognized", segments: [[{ gloss: "HELLO", english: "hello", p: 0.9 }]] });
   getByRole(document.body, "button", { name: /Continue/ });
-  expect(sock.sent.filter((m) => m.type === "cheer")).toHaveLength(1);
+  expect(sock.sent.filter((m) => m.type === "answer")).toEqual([{ type: "answer", result: "right" }]);
+});
+
+test("a first missed sign makes the plushie say “try again”, not wrong", async () => {
+  await vi.waitFor(() => expect(getByRole(document.body, "heading", { name: "Sign “hello”" })).toBeTruthy());
+  sock.toPage({ type: "recognized", segments: [[{ gloss: "NICE", english: "nice", p: 0.9 }]] });
+  expect(sock.sent.filter((m) => m.type === "answer")).toEqual([{ type: "answer", result: "retry" }]);
 });
 
 test("the avatar names its speed while it plays, and the replay buttons say which is which", async () => {

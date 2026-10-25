@@ -164,8 +164,9 @@ class Practice {
 
   buddy(id: Buddy["id"]) { this.socket().send({ type: "buddy", buddy: id }); }
 
-  /** The plushie flaps its arms (an Arduino on the backend's USB; nothing happens without one). */
-  cheer() { this.socket().send({ type: "cheer" }); }
+  /** The plushie shows a check and flaps its arms, an X, or a ! for "try again" (an Arduino on the backend's USB; nothing
+   * happens without one). */
+  answered(result: "right" | "wrong" | "retry") { this.socket().send({ type: "answer", result }); }
 
   private async open(): Promise<void> {
     this.set("starting");
