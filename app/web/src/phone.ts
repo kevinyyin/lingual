@@ -40,19 +40,25 @@ let speaker: AudioContext | null = null;
 let micCtx: AudioContext | null = null;
 let next = 0;
 
+/** The page's one sound output, for the voice and the lesson chimes. iOS plays only from an AudioContext a tap started
+ *  (unlockAudio): the chimes' own, first made for a camera-graded answer with no tap, stayed suspended and silent. */
+export function speakerOut(): AudioContext {
+  return (speaker ??= new AudioContext());
+}
+
 /** Plays the plushie's voice: 24 kHz PCM16 chunks from the server, each right after the one before. */
 export function playPcm(buf: ArrayBuffer): void {
   setAudioSession("playback");
-  speaker ??= new AudioContext();
+  const out = speakerOut();
   const pcm = new Int16Array(buf);
   if (!pcm.length) return;
-  const b = speaker.createBuffer(1, pcm.length, VOICE_RATE);
+  const b = out.createBuffer(1, pcm.length, VOICE_RATE);
   const ch = b.getChannelData(0);
   for (let i = 0; i < pcm.length; i++) ch[i] = pcm[i] / 32768;
-  const src = speaker.createBufferSource();
+  const src = out.createBufferSource();
   src.buffer = b;
-  src.connect(speaker.destination);
-  next = Math.max(speaker.currentTime, next);
+  src.connect(out.destination);
+  next = Math.max(out.currentTime, next);
   src.start(next);
   next += b.duration;
 }
@@ -72,7 +78,6 @@ export async function startMic(send: (b: ArrayBuffer) => void): Promise<void> {
 
 /** iOS keeps audio silent until a touch: resume both contexts on the first one. */
 export function unlockAudio(): void {
-  speaker ??= new AudioContext();
-  void speaker.resume();
+  void speakerOut().resume();
   void micCtx?.resume();
 }

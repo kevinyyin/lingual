@@ -12,11 +12,12 @@ import { isPlaying, playTokens, practice, reloadSigner } from "./signer";
 import { BUDDIES, saveBuddy } from "../buddies";
 import { lookupSign } from "./showMe";
 import { fetchVocab, type VocabSign } from "../avatar/stage";
-import { rememberPhone } from "../phone";
+import { rememberPhone, unlockAudio } from "../phone";
 import { loadTrackers } from "../camera";
 import { load, loadRun, loadSettings, save, saveRun, saveSettings, type Settings } from "./store";
 
 rememberPhone();
+document.addEventListener("pointerdown", unlockAudio); // iOS plays the chimes and voice only from a tap-started output
 const root = document.getElementById("teach")!;
 let progress: Progress = load();
 let settings: Settings = loadSettings();
