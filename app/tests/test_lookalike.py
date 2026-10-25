@@ -25,6 +25,19 @@ def test_my_and_please_are_settled_by_the_palms_circling():
     assert settle(circling(), [("MY", 0.7), ("PLEASE", 0.2)]) == [("PLEASE", 0.7), ("MY", 0.2)]
 
 
+def test_a_flat_hand_held_on_the_chest_is_my_whatever_the_model_guessed():
+    on_chest = [make_frame(t=i * 66.0) for i in range(12)]  # make_frame: hands just above the shoulders' line
+    for f in on_chest:  # a flat right hand, palm centre at the chest's middle, a third of a shoulder width down
+        f.right = [[0.5 + 0.004 * (i % 5) - 0.008, 0.66 - 0.012 * (i // 5), 0.0] for i in range(21)]
+        f.right[9] = [0.5, 0.66, 0.0]
+        for k, c in enumerate((5, 9, 13, 17)):  # each finger straight up from its knuckle
+            for j in range(4):
+                f.right[c + j] = [0.49 + 0.007 * k, 0.66 - 0.012 * j, 0.0]
+        f.right[0] = [0.5, 0.71, 0.0]
+    assert settle(on_chest, [("LIKE", 0.96), ("PLEASE", 0.02)]) == [("MY", 0.96), ("LIKE", 0.96), ("PLEASE", 0.02)]
+    assert settle(circling(), [("LIKE", 0.96), ("PLEASE", 0.02)]) == [("LIKE", 0.96), ("PLEASE", 0.02)]  # moving: not MY
+
+
 def test_other_guesses_are_left_alone():
     top = [("NAME", 0.9), ("MY", 0.05), ("PLEASE", 0.01)]  # MY and PLEASE in the top 3, but not first
     assert settle(held(), top) == top

@@ -24,13 +24,17 @@ def _speed(frames: list[Frame]) -> np.ndarray:
     return np.convolve(v, np.ones(3) / 3, mode="same")
 
 
-def recut(run: list[Frame], around: list[Frame], model) -> list[tuple[Segment, list[tuple[str, float]]]] | None:
+def recut(run: list[Frame], around: list[Frame], model, fill_gaps: bool = False) -> list[tuple[Segment, list[tuple[str, float]]]] | None:
     """run: the frames of consecutive signed pieces; around: the turn's frames, for each piece's context. -> pieces and
-    their top 3, or None when there is no cut to make (shorter than a sign, or no candidate cut within MAX_MS)."""
+    their top 3, or None when there is no cut to make (shorter than a sign, or no candidate cut within MAX_MS).
+    fill_gaps: where speed dips are further apart than MAX_MS, any frame between may be a cut. At a webcam's ~7 frames a
+    second dips are few (MY NAME: dips at 0.9 and 3.0 s of 3.3, so no cut at all, and the turn read as one sign)."""
     if len(run) < 3 or run[-1].t - run[0].t < MIN_MS:
         return None
     v = _speed(run)
     cand = [0] + [i for i in range(1, len(run) - 1) if v[i] <= v[i - 1] and v[i] <= v[i + 1]] + [len(run)]
+    if fill_gaps:  # every other frame: every one made that turn's read take 3 s (each cut pair is a model call)
+        cand = sorted({*cand, *(k for a, b in zip(cand, cand[1:]) if run[b - 1].t - run[a].t > MAX_MS for k in range(a + 2, b, 2))})
     read: dict[tuple[int, int], tuple[list[Frame], list[tuple[str, float]]]] = {}
     best: dict[int, tuple[float, list[tuple[int, int]]]] = {0: (0.0, [])}
     for j in cand[1:]:
