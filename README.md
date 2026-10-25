@@ -18,10 +18,80 @@ arms when the kid gets a sign right. Kids pick their **signing buddy**: six avat
 > fingerspelling, not fluent continuous ASL, and a sentence still often comes out with one sign wrong. It is meant to
 > complement interpreters and teachers, never to replace them.
 
+
+### Setup (about 5 minutes)
+
+You need [uv](https://docs.astral.sh/uv/) (Python 3.12), Node 20+, a webcam, and keys for
+[Cartesia](https://play.cartesia.ai) and [Anthropic](https://console.anthropic.com).
+
+```bash
+git clone https://github.com/kevinyyin/lingual.git && cd lingual/app
+uv sync                                   # backend dependencies
+cp .env.example .env                      # then put your CARTESIA_API_KEY and ANTHROPIC_API_KEY in .env
+npm --prefix web install                  # page dependencies (also fetches the MediaPipe models)
+```
+
+Run the backend and the page in two terminals, both from `app/`:
+
+```bash
+uv run asl-server                         # backend on :8000
+```
+
+```bash
+npm --prefix web run dev                  # page on :5173
+```
+
+Open <http://localhost:5173> (the translator) or <http://localhost:5173/teach.html> (teaching mode) in Chrome or Edge,
+and allow the camera and mic. Keep **one** tab open: the backend serves one page at a time.
+
+- **Signing to speech:** switch to **Signing**, sit head-to-waist in frame, hold still for 2 s while it calibrates,
+  sign, then lower your hands.
+- **Speech to signing:** switch to **Voice** and hold **Space** while you talk.
+- **No mic:** add `?dev=1` to type what the hearing person says instead.
+
+On Windows, if Application Control blocks the `asl-server.exe` launcher, run
+`uv run python -c "from server.main import run; run()"` instead. The iPad / plushie setup is under
+[Run it on an iPhone](#run-it-on-an-iphone-the-plushie).
+
+**Secrets:** the repo has no API keys. Keys live only in `app/.env`, which is git-ignored; `.env.example` lists the
+names with empty values.
+
+### Cartesia features used
+
+| Feature | Where | What it does here |
+|---|---|---|
+| **Sonic 3.6 TTS, streaming over one kept-open WebSocket** | `server/voice.py` | Says the signer's sentence out loud. It starts speaking as audio arrives (raw PCM, 24 kHz) and reuses one socket across turns, so there is no handshake per line. |
+| **`generation_config`: emotion, speed, volume** | `server/voice.py` `voice_controls` | The signer's face and signing energy drive the voice. Happy → `happy`/`excited`, sad → `sad`/`disappointed`, angry → `frustrated`/`angry`. Speed and volume scale with intensity, so a Deaf signer's tone is heard, not just their words. |
+| **Six voices** | `server/voice.py` `BUDDY_VOICES` | Each signing buddy (Leo, Benji, Zeke, Lexi, Avery, Daisy) speaks in its own Sonic voice, chosen from the page. |
+| **Context cancel** | `server/voice.py` | Cuts a line off when the conversation moves on (in teaching mode, the newest line replaces a stale one), keeping the socket for the next line. |
+| **Ink 2 STT with auto-finalize** | `server/stt.py` | The hearing person's push-to-talk speech becomes text with Cartesia's turn detection, then Claude plans it as ASL for the avatar. |
+| **Audio over the page's socket** | `server/phone_audio.py` | On the iPad, the phone's mic feeds Ink 2 and Sonic's audio plays on the phone's speaker: the plushie's voice. |
+
+### Known limitations
+
+- **Not reviewed by a Deaf signer** yet. That is required before real use.
+- **Vocabulary:** the camera reads 155 everyday signs plus fingerspelling. It does not read fluent continuous ASL.
+- **Measured accuracy** ([`app/reports/teaching_videos.md`](app/reports/teaching_videos.md)):
+  - **Single signs:** right 89% of the time on 995 held-out teaching videos (signers the model never saw), counting
+    the "which sign did you mean?" picker; 83% on an outside dictionary (ASL Signbank).
+  - **Short sentences:** 2–4 signs come out exactly right about 53% of the time, 59% with a brief pause between signs.
+    The main error is two signs read as one.
+  - **Live webcams** do worse than these videos: dim light, a signer far from the camera, or a learner's slower
+    signing all lower confidence, and the picker then appears more often.
+- **Fingerspelling** uses a Core ML model, so it reads letters only on a Mac. Elsewhere spelled words go to the
+  sign model.
+- **The iPad needs the backend running on a laptop**, reached through a Cloudflare tunnel; it does not run on its own yet.
+- **One page per backend:** opening a second tab takes the session away from the first.
+- **Licences:** the sign model and sign data come from research datasets (ASL Citizen, WLASL, ASL-LEX) that allow
+  non-commercial research use only. See [Data and licenses](#data-and-licenses).
+- **An experimental "sign by sign" mode** is on the `plan-E` branch. You lower your hands after each sign and the words
+  build up on screen. It reached about 92% of replayed sentences exactly right, but it is not merged or tested live.
+
 ---
 
 ## Contents
 
+0. [For the judges: setup, Cartesia features, limitations](#for-the-judges-cal-hacks-cartesia-track)
 1. [What you can do with it](#what-you-can-do-with-it)
 2. [How it works](#how-it-works)
 3. [Setup](#setup)
