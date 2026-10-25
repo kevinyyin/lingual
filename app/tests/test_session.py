@@ -5,7 +5,7 @@ import pytest
 from frames import make_frame
 from server import plush
 from server.protocol import (
-    AvatarDoneMsg, BuddyMsg, CalibrateMsg, CheerMsg, FrameMsg, ModeMsg, PickMsg, PracticeMsg, RedoMsg, SayMsg, SignPlanMsg, SignToken, TalkMsg,
+    AnswerMsg, AvatarDoneMsg, BuddyMsg, CalibrateMsg, FrameMsg, ModeMsg, PickMsg, PracticeMsg, RedoMsg, SayMsg, SignPlanMsg, SignToken, TalkMsg,
 )
 from server.session import Baseline, Segment, Session, TurnEnd, TurnStart, compute_baseline
 from server.vocab import load_vocab
@@ -577,14 +577,15 @@ async def test_say_speaks_in_practice(tmp_path):
     assert s.state == before
 
 
-async def test_cheer_flaps_the_plushie_in_practice_only(tmp_path, monkeypatch):
-    cheers = []
-    monkeypatch.setattr(plush, "cheer", lambda: cheers.append(1))
+async def test_answers_reach_the_plushie_in_practice_only(tmp_path, monkeypatch):
+    answers = []
+    monkeypatch.setattr(plush, "react", answers.append)
     s, _ = make_session(tmp_path)
-    await s.on_client(CheerMsg())
+    await s.on_client(AnswerMsg(result="right"))
     await s.on_client(PracticeMsg(on=True))
-    await s.on_client(CheerMsg())
-    assert cheers == [1]
+    for r in ("right", "wrong", "retry"):
+        await s.on_client(AnswerMsg(result=r))
+    assert answers == ["right", "wrong", "retry"]
 
 
 async def test_buddy_switches_the_voice_for_the_next_line(tmp_path):

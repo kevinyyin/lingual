@@ -13,7 +13,7 @@ import numpy as np
 
 from . import plush
 from .protocol import (
-    AvatarDoneMsg, BuddyMsg, CalibrateMsg, CaptionMsg, CheerMsg, FrameMsg, ModeMsg, PickMsg, PickOption, PickRequestMsg, PracticeMsg, RedoMsg,
+    AnswerMsg, AvatarDoneMsg, BuddyMsg, CalibrateMsg, CaptionMsg, FrameMsg, ModeMsg, PickMsg, PickOption, PickRequestMsg, PracticeMsg, RedoMsg,
     SayMsg, RecognizedMsg, SignPlanMsg, SignToken, StateMsg, TalkMsg, YouSaidMsg, Frame,
 )
 from .vocab import Vocab
@@ -266,8 +266,8 @@ class Session:
             t = asyncio.create_task(self._say(msg.text))
             self._says.add(t)
             t.add_done_callback(self._says.discard)
-        elif isinstance(msg, CheerMsg) and self.practice:
-            plush.cheer()
+        elif isinstance(msg, AnswerMsg) and self.practice:
+            plush.react(msg.result)
         elif isinstance(msg, PickMsg):
             offered = self._offered and msg.segment == self._offered[0] and msg.gloss in self._offered[1]
             if offered and self._pick and not self._pick.done():

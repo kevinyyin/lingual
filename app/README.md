@@ -99,13 +99,15 @@ and restart the server with the new `ALLOWED_ORIGINS`. Installs from a free Appl
 learns the tunnel URL can use the app while it runs: stop the tunnel after the demo. (`npm --prefix web run dev:tunnel`
 with the tunnel on :5173 instead gives live edits, but loads much slower on the phone.)
 
-## Plushie arms (optional)
+## Plushie arms and neck display (optional)
 
-Two 9g servos on an Arduino Uno R4 WiFi (signal pins 6 and 9) flap the plushie's arms each time the child gets a
-teaching-mode answer right. Upload `arduino/plush_arms/` once (Arduino IDE, or
+An Arduino Uno R4 WiFi in the plushie reacts to each teaching-mode answer: right shows a check on the MAX7219 8x8 dot
+matrix on its neck, lights the right LED and flaps both arms; wrong shows an X and lights the wrong LED; a first missed sign (a second try follows) shows a !. Wiring: servo
+signals on pins 6 and 9, LEDs on pins 2 (right) and 3 (wrong) through 220 ohm resistors, matrix DIN 11, CS 10, CLK 13;
+everything's 5V and GND on the breadboard rails. Upload `arduino/plush_arms/` once (Arduino IDE, or
 `arduino-cli compile --upload -p <port> --fqbn arduino:renesas_uno:unor4wifi arduino/plush_arms`) and leave the board
-plugged into the laptop that runs `asl-server`: the server finds it by itself (`server/plush.py`) and skips the arms when
-it isn't there. Tune `DOWN`, `UP` and `STEP_MS` at the top of the sketch on the real plush.
+plugged into the laptop that runs `asl-server`: the server finds it by itself (`server/plush.py`) and skips it when it
+isn't there. Tune the arm angles, `BRIGHTNESS` and `MIRROR` at the top of the sketch on the real plush.
 
 ## Fingerspelling
 
