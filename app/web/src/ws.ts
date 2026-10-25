@@ -23,7 +23,8 @@ export type ClientMsg =
   | { type: "pick"; segment: number; gloss: string }
   | { type: "avatar_done" }
   | { type: "practice"; on: boolean; signs?: string[] }
-  | { type: "mode"; mode: Mode }
+  | { type: "mode"; mode: Mode; by_sign?: boolean }
+  | { type: "words"; action: "undo" | "done" | "clear" }
   | { type: "talk"; on: boolean }
   | { type: "redo" }
   | { type: "say"; text: string }
@@ -49,7 +50,8 @@ export type ServerMsg =
   | { type: "caption"; text: string; final: boolean }
   | SignPlan
   | { type: "recognized"; segments: PickOption[][] }
-  | { type: "recorded"; ok: boolean; detail: string };
+  | { type: "recorded"; ok: boolean; detail: string }
+  | { type: "words_update"; words: SignToken[] }; // sign by sign: the words read so far
 
 export interface Socket {
   send(m: ClientMsg): void;
