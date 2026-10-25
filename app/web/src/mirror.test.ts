@@ -96,6 +96,19 @@ describe("liveFrame wrist anchoring", () => {
   });
 });
 
+describe("liveFrame hips", () => {
+  it("puts unseen hips straight below the shoulders, and leaves seen ones", () => {
+    const f = frame(null, null), w = { pose: worldPose(), left: null, right: null };
+    w.pose[11] = [0.15, -0.5, -0.1]; w.pose[12] = [-0.15, -0.5, -0.1]; w.pose[23] = [0.1, 0, 0.3]; w.pose[24] = [-0.1, 0, 0.3];
+    f.pose[23][3] = f.pose[24][3] = 0.02; // out of the picture: a guess, leaning the body axis
+    const out = liveFrame(f, w, 1)!;
+    expect(out.pose[23]).toEqual([0.15, 0, -0.1]);
+    expect(out.pose[24]).toEqual([-0.15, 0, -0.1]);
+    f.pose[23][3] = f.pose[24][3] = 0.9; // seen: kept
+    expect(liveFrame(f, w, 1)!.pose[23]).toEqual([0.1, 0, 0.3]);
+  });
+});
+
 describe("reach", () => {
   it("is how far forward the wrist can go given how far across and up it already is, the elbow kept bent", () => {
     const p = worldPose();

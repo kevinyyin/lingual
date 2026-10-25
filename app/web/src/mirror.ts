@@ -34,6 +34,8 @@ const BODY_POINTS = [0, 7, 8, 11, 12]; // nose, ears, shoulders: a near-rigid sp
 const FRONT_MIN = -0.2, FRONT_MAX = 0.6; // metres in front of the shoulders: beyond is a misfit, not a reach
 const MEET_NEAR = 0.08, MEET_FAR = 0.25; // hands' nearest points apart in the picture, shoulder widths: they touch / don't
 const REACH_USE = 0.85; // share of the arm's forward reach a signer uses: the elbow stays bent
+const HIP_SEEN = 0.5; // pose visibility below which the hips are a guess
+const TORSO_M = 0.5; // shoulders to hips, metres (only the direction matters)
 /** Pose points moved with each wrist when its depth is set (wrist, pinky, index, thumb), and its elbow (half as far). */
 const HAND_POSE = { left: { hand: [15, 17, 19, 21], elbow: 13 }, right: { hand: [16, 18, 20, 22], elbow: 14 } };
 
@@ -91,6 +93,14 @@ export function liveFrame(f: Frame, w: World, aspect = ASPECT, ease?: (side: Sid
   }
   const body = distanceBySize(BODY_POINTS.map((i) => f.pose[i]), BODY_POINTS.map((i) => w.pose![i]), aspect);
   const shoulders = (out.pose[11][2] + out.pose[12][2]) / 2;
+  // hips out of the picture (a webcam at a desk: seen 2%): their guess leaned the avatar's body axis 7-14 deg toward the
+  // camera, which lifted forward hands 0.1-0.3 shoulder widths (hands together at the chest signed at the chin). An
+  // upright torso instead: hips straight below the shoulders.
+  if (Math.min(f.pose[23][3] ?? 1, f.pose[24][3] ?? 1) < HIP_SEEN) {
+    const sy = (out.pose[11][1] + out.pose[12][1]) / 2;
+    out.pose[23] = [out.pose[11][0], sy + TORSO_M, shoulders];
+    out.pose[24] = [out.pose[12][0], sy + TORSO_M, shoulders];
+  }
   const sw = Math.hypot((f.pose[11][0] - f.pose[12][0]) * aspect, f.pose[11][1] - f.pose[12][1]) || 1; // image heights
   // each wrist where the hand tracker sees it: the pose model's wrist strays when hands overlap (webcam recording: 0.2-0.38
   // shoulder widths off with hands together, 0.10 apart), and the avatar's hands stopped at different heights
