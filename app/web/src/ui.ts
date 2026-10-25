@@ -1,3 +1,4 @@
+import { TIPS, TIP_MS, type TipKind } from "./capture";
 import type { Mode, PickOption, ServerMsg, Socket, State } from "./ws";
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -36,6 +37,20 @@ export function showHint(hint: string | null): void {
   }
   $("state").textContent = hint;
   $("state").dataset.state = "calibrating"; // the waiting colours: nothing reads signs until they're in position
+}
+
+let tipTimer: ReturnType<typeof setTimeout> | undefined;
+/** capture.ts's camera tip over the video ("Too dark: ..."); null hides it. Separate from the badge: never blocks. It
+ *  hides itself on a timer (detection, and so the coach, stops while the avatar signs), and style.css hides it as soon
+ *  as the badge leaves "ready". */
+export function showTip(kind: TipKind | null): void {
+  const el = document.getElementById("tip");
+  if (!el) return;
+  clearTimeout(tipTimer);
+  el.querySelector(".long")!.textContent = kind ? TIPS[kind].text : "";
+  el.querySelector(".short")!.textContent = kind ? TIPS[kind].short : "";
+  el.hidden = !kind;
+  if (kind) tipTimer = setTimeout(() => { el.hidden = true; }, TIP_MS);
 }
 
 let cameraOff = false;

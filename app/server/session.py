@@ -28,6 +28,14 @@ PICK_THRESHOLD = 0.95
 # often spelled anyway); Kaggle letter-only phrases always read 2+ letters at 0.5+.
 SPELL_MIN_LETTERS, SPELL_MIN_P = 2, 0.5
 SPELL_PICK_THRESHOLD = 0.6  # the letter reader's score (mean letter confidence) has its own scale: not re-tuned
+# Look-alikes: two signs ASL-LEX gives the same handshape and major location (GOOD/THANK-YOU, MINUTE/HOUR), which differ
+# only in movement or orientation, the parameters the sign model reads least surely. A top-1 that would be spoken goes
+# to the picker when a look-alike of it in the top 3 has p >= LOOKALIKE_RATIO x p1 (and p1 < LOOKALIKE_CAP); a picker
+# that offers none has its 3rd option swapped for the best look-alike if p >= LOOKALIKE_SWAP_FLOOR x p3 (and >= 0.01).
+# One-sign replays (teach_eval quick_eval, 995 clips): 3 more right, none broken, ~4 right ones now picked, not spoken.
+LOOKALIKES = Path(__file__).resolve().parent.parent / "vocab" / "lookalikes.json"  # training.build_lookalikes
+LOOKALIKE_RATIO, LOOKALIKE_CAP = 0.25, 0.9
+LOOKALIKE_SWAP_FLOOR, LOOKALIKE_MIN_P = 0.5, 0.01
 SAY_EMOTION = {"label": "happy", "intensity": 0.4}  # the plushie's lesson lines: warm, not excited
 PRACTICE_TOP_K = 5  # guesses per turn sent to teaching mode, which grades on its own
 CALIBRATION_MS = 2000.0  # by time: the browser sends 8-15 frames/s, so 60 frames took 4-8 s
@@ -125,6 +133,15 @@ def compute_baseline(frames: list[Frame]) -> Baseline:
     return Baseline(rest_y=(float(left), float(right)), brow=brow, motion_floor=float(speed))
 
 
+def load_lookalikes(path: Path | str | None = None) -> dict[str, tuple[str, str]]:
+    """Gloss -> (handshape, major location); empty (no look-alike guard) when the file is missing or unreadable."""
+    try:
+        return {g: tuple(k) for g, k in json.loads(Path(path or LOOKALIKES).read_text(encoding="utf-8")).items()}
+    except (OSError, ValueError) as e:
+        logging.getLogger(__name__).warning("no look-alike table (%s): look-alike guard off", e)
+        return {}
+
+
 def now_ms() -> float:
     return time.monotonic() * 1000
 
@@ -145,6 +162,8 @@ class Session:
         self.make_segmenter, self.recognizer, self.readers = make_segmenter, recognizer, readers
         self.composer, self.voice, self.gloss = composer, voice, gloss
         self.pick_threshold = getattr(recognizer, "pick_threshold", PICK_THRESHOLD)
+        labels = set(getattr(recognizer, "labels", None) or [])
+        self._alike = {g: k for g, k in load_lookalikes().items() if g in labels} if labels else {}
         self.spell_reader = spell_reader
         self.log_path = Path(log_path)
         self.state = "calibrating"
@@ -365,10 +384,12 @@ class Session:
             turn.stamps["recognized"] = now_ms()
             turn.result = {"top3": [[[g, round(p, 3)] for g, p in t[:3]] for t in tops]}  # logged even if cancelled
             choice = [t[0][0] for t in tops]
-            picks = 0
-            for i, t in enumerate(tops):
-                spelled = segments[i].kind == "spell" and self.spell_reader is not None  # read by the letter reader
-                if t[0][1] < (SPELL_PICK_THRESHOLD if spelled else self.pick_threshold):
+            picks, offered = 0, []
+            asks = await asyncio.to_thread(lambda: [self._needs_pick(t, s) for s, t in zip(segments, tops)])
+            for i, (reason, t) in enumerate(asks):
+                if reason:
+                    offered.append({"segment": i, "reason": reason, "lookalike": reason != "unsure", "options": [[g, round(p, 3)] for g, p in t[:3]]})
+                    turn.result["offered"] = offered
                     await self._set("picking")
                     self._pick = asyncio.get_running_loop().create_future()
                     await self.send(PickRequestMsg(segment=i, options=[
@@ -387,7 +408,7 @@ class Session:
             text = await self.composer.compose(signs, spelled, grammar, emotion)
             turn.stamps["composed"] = now_ms()
             turn.result = {"signs": signs, "spelled": spelled, "grammar": grammar, "emotion": emotion, "text": text, "picks": picks,
-                           "top3": turn.result["top3"]}
+                           "top3": turn.result["top3"], "offered": offered}
             read = [SignToken(kind="sign", gloss=c) if s.kind == "sign" else SignToken(kind="spell", word=c)
                     for c, s in zip(choice, segments)]
             if not text:  # the signs make no sentence: say so on screen, speak nothing
@@ -408,6 +429,28 @@ class Session:
                 self._log(turn)
             await self._set("ready")
 
+    def _needs_pick(self, t: list[tuple[str, float]], s: Segment) -> tuple[str | None, list[tuple[str, float]]]:
+        """Whether a read goes to the picker, and the options to offer. Reason: None (spoken), "unsure" (below the pick
+        threshold), "lookalike" (sure enough, but a look-alike is close behind); "+swap" when a look-alike took the 3rd
+        place. Blocking (may run the sign model once more): call it off the event loop."""
+        if s.kind == "spell" and self.spell_reader is not None:  # read by the letter reader
+            return ("unsure" if t[0][1] < SPELL_PICK_THRESHOLD else None), t
+        g1, p1 = t[0]
+        if p1 >= self.pick_threshold:
+            close = p1 < LOOKALIKE_CAP and any(self._alike_pair(g1, g) and p >= LOOKALIKE_RATIO * p1 for g, p in t[1:3])
+            return ("lookalike" if close else None), t
+        if len(t) < 3 or not self._alike or any(self._alike_pair(g1, g) for g, _ in t[1:3]):
+            return "unsure", t
+        shown = {g for g, _ in t[:3]}
+        floor = max(LOOKALIKE_MIN_P, LOOKALIKE_SWAP_FLOOR * t[2][1])
+        for g, p in self.recognizer.topk(s.context or s.frames, 50):
+            if g not in shown and self._alike_pair(g1, g) and p >= floor:
+                return "unsure+swap", [*t[:2], (g, p)]
+        return "unsure", t
+
+    def _alike_pair(self, a: str, b: str) -> bool:
+        return a != b and a in self._alike and self._alike.get(a) == self._alike.get(b)
+
     def _read_turn(self, ev: TurnEnd) -> list[tuple[Segment, list[tuple[str, float]]]]:
         """Each piece and its guesses, in order: spelled ones by the letter reader; each run of signed ones cut again
         where the sign model is surest (recut.py), or as the segmenter cut them when that finds no cut."""
@@ -420,7 +463,8 @@ class Session:
         def flush():
             if run:
                 frames = [f for f in around if run[0].frames[0].t <= f.t <= run[-1].frames[-1].t]
-                out.extend(recut(frames, around, self.recognizer) or [(s, self._read_segment(s)) for s in run])
+                spans = [(s.frames[0].t, s.frames[-1].t) for s in run]
+                out.extend(recut(frames, around, self.recognizer, spans) or [(s, self._read_segment(s)) for s in run])
                 run.clear()
 
         for s in ev.segments:
