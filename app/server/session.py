@@ -320,6 +320,16 @@ class Session:
             await self._idle()
 
     async def _on_frame(self, f: Frame) -> None:
+        if os.environ.get("ASL_DEBUG_FRAMES"):  # TEMP debug: once a second, what the camera stream looks like here
+            self._dbg = getattr(self, "_dbg", 0) + 1
+            if time.monotonic() - getattr(self, "_dbg_t", 0.0) >= 1.0:
+                self._dbg_t = time.monotonic()
+                seg = self.segmenter
+                raised = seg._raised(f) if seg is not None and hasattr(seg, "_raised") else None
+                logging.getLogger("asl.session").warning(
+                    "frames=%d state=%s mode=%s by_sign=%s busy=%s hands L/R=%s/%s raised=%s wristY=%.2f/%.2f rest_y=%s",
+                    self._dbg, self.state, self.mode, self.by_sign, self._busy(), f.left is not None, f.right is not None,
+                    raised, f.pose[15][1], f.pose[16][1], getattr(self.baseline, "rest_y", None))
         if self.mode == "voice":
             return  # the camera is off in voice mode (the page stops sending too)
         if self.state == "calibrating":
