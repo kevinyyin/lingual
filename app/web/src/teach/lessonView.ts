@@ -1,7 +1,6 @@
 // The lesson screen: progress bar, one exercise at a time, a Check / Continue bar whose feedback card says right
 // or wrong, then the results and streak screens.
 import type { PickOption } from "../ws";
-import { showMini } from "../avatar/mini";
 import { chime, h, svg } from "./dom";
 import { ICON } from "./icons";
 import { LessonRun, shuffle, signScore, type Exercise, type SavedRun } from "./lesson";
@@ -454,9 +453,7 @@ function mountPerform(gloss: string, host: LessonHost, grade: Grade, skip: () =>
     const { score, rank } = signScore(segments, gloss);
     const hit = rank !== null && rank <= PERFORM_TOP_K;
     // one guess, the surest: a list of every piece's guess read as nonsense ("dark, yawn, dark, let know")
-    const top = segments.filter((seg) => seg.length).sort((x, y) => y[0].p - x[0].p)[0]?.[0];
-    const best = top?.english ?? "";
-    if (top) showMini(cam, [{ kind: "sign", gloss: top.gloss }], `I saw: ${best}`); // the buddy signs back what it read
+    const best = segments.filter((seg) => seg.length).sort((x, y) => y[0].p - x[0].p)[0]?.[0]?.english ?? "";
     // a pass shows no match bar: the top-3 rule passes a sign scored well below the top guess ("Match 1%")
     if (hit) { stop(); return grade(true, host.english(gloss)); }
     if (++tries < 2) {
