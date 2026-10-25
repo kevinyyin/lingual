@@ -8,12 +8,11 @@ import { renderHome, TAB_IDS, weekDone, type HomeCtx, type Tab } from "./home";
 import { buildLesson, practiceSigns, type Exercise } from "./lesson";
 import { runLesson } from "./lessonView";
 import { dayKey, finishLesson, fresh, type Progress } from "./progress";
-import { isPlaying, playTokens, practice, reloadSigner } from "./signer";
+import { isPlaying, loadLessonTrackers, playTokens, practice, reloadSigner } from "./signer";
 import { BUDDIES, saveBuddy } from "../buddies";
 import { lookupSign } from "./showMe";
 import { fetchVocab, type VocabSign } from "../avatar/stage";
 import { rememberPhone, unlockAudio } from "../phone";
-import { loadTrackers } from "../camera";
 import { load, loadRun, loadSettings, save, saveRun, saveSettings, type Settings } from "./store";
 
 rememberPhone();
@@ -124,7 +123,7 @@ async function boot() {
   window.addEventListener("hashchange", () => { if (!root.querySelector(".lesson, .done-screen")) home(); });
   home();
   // the first camera exercise would otherwise wait for ~30 MB of trackers; start once the home screen is up
-  if (camera()) setTimeout(() => void loadTrackers().catch(() => {}), 1500);
+  if (camera()) setTimeout(() => void loadLessonTrackers().catch(() => {}), 1500);
 }
 
 void boot();

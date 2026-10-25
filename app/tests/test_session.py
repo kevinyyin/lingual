@@ -5,7 +5,8 @@ import pytest
 from frames import make_frame
 from server import plush
 from server.protocol import (
-    AnswerMsg, AvatarDoneMsg, BuddyMsg, CalibrateMsg, FrameMsg, ModeMsg, PickMsg, PracticeMsg, RedoMsg, SayMsg, SignPlanMsg, SignToken, TalkMsg,
+    AnswerMsg, AvatarDoneMsg, BuddyMsg, CalibrateMsg, FrameMsg, MirrorMsg, ModeMsg, PickMsg, PracticeMsg, RedoMsg, SayMsg, SignPlanMsg,
+    SignToken, TalkMsg,
 )
 from server.session import Baseline, Segment, Session, TurnEnd, TurnStart, compute_baseline
 from server.vocab import load_vocab
@@ -41,7 +42,7 @@ class FakeComposer:
 
     async def compose(self, signs, spelled, grammar, emotion):
         self.calls.append((signs, spelled, grammar, emotion))
-        return "Do you have coffee?"
+        return "Do you have coffee?", emotion
 
 
 class FakeVoice:
@@ -219,7 +220,7 @@ async def test_voice_mode_ignores_the_camera_and_drops_a_sign_turn_in_flight(tmp
 async def test_signs_that_make_no_sentence_are_shown_as_unclear_and_not_spoken(tmp_path):
     class NoSentence(FakeComposer):
         async def compose(self, signs, spelled, grammar, emotion):
-            return ""
+            return "", emotion
 
     events = [TurnStart(), TurnEnd(segments=[seg()], frames=[make_frame()] * 20, rest_ms=0)]
     voice = RecordingVoice()
@@ -527,6 +528,30 @@ async def test_practice_reads_a_corrected_sign_on_its_own_too(tmp_path):
     assert [[o.gloss for o in seg_] for seg_ in rec.segments] == [["DARK", "NICE"], ["HELLO", "NICE"]]
 
 
+async def test_practice_drops_a_turn_with_no_signed_piece(tmp_path):
+    """The translator now reads such a turn whole (the mirror's way); a lesson never grades it, as before."""
+    rec = WholeTurnRecognizer([("HELLO", 0.9)])
+    events = [TurnStart(), TurnEnd(segments=[], frames=[make_frame()] * 20, rest_ms=0)]
+    s, sent = make_session(tmp_path, events, recognizer=rec)
+    await s.on_client(PracticeMsg(on=True))
+    await calibrate(s)
+    await push_frames(s, 2)
+    assert not rec.asked and not [m for m in sent if m.type == "recognized"] and s.state == "ready"
+
+
+async def test_practice_grades_with_the_sign_model_not_the_lookalike_settling(tmp_path):
+    from server.lookalike import LookalikeRecognizer
+
+    inner = WholeTurnRecognizer([("PLEASE", 0.6), ("MY", 0.3)])
+    events = [TurnStart(), TurnEnd(segments=[seg()], frames=[make_frame()] * 20, rest_ms=0)]  # a still hand: settle says MY
+    s, sent = make_session(tmp_path, events, recognizer=LookalikeRecognizer(inner))
+    await s.on_client(PracticeMsg(on=True))
+    await calibrate(s)
+    await push_frames(s, 2)
+    (msg,) = [m for m in sent if m.type == "recognized"]
+    assert [o.gloss for o in msg.segments[0]] == ["PLEASE", "MY"]
+
+
 async def test_redo_drops_the_attempt_being_read(tmp_path):
     """The learner tapped the frozen camera: the attempt still being read is dropped unread, and they sign again."""
     import time
@@ -546,6 +571,58 @@ async def test_redo_drops_the_attempt_being_read(tmp_path):
     await s.on_client(RedoMsg())
     await asyncio.sleep(0.4)
     assert s.state == "ready" and not [m for m in sent if m.type == "recognized"]
+
+
+class ByTime:
+    """Reads frames mostly before 2 s as COFFEE and after as HELLO; a stretch across both as neither (re-cut there)."""
+
+    def topk(self, frames, k=3):
+        early = sum(f.t < 2000 for f in frames) / len(frames)
+        if early > 0.7:
+            return [("COFFEE", 0.4), ("TEA", 0.3)]
+        if early < 0.3:
+            return [("HELLO", 0.9), ("HI", 0.05)]
+        return [("TEA", 0.01), ("COFFEE", 0.01)]
+
+
+async def test_mirror_labels_each_sign_with_its_time_and_never_picks_composes_or_speaks(tmp_path):
+    frames = [make_frame(t=1000 + i * 66) for i in range(31)]  # hands up 1.0-3.0 s: COFFEE, then HELLO from 2 s
+    events = [TurnStart(), TurnEnd(segments=[Segment(frames=frames[5:25], kind="sign")], frames=frames, rest_ms=0)]
+    composer = FakeComposer()
+    s, sent = make_session(tmp_path, events, recognizer=ByTime(), composer=composer)
+    await s.on_client(MirrorMsg(on=True))
+    await s.on_client(ModeMsg(mode="signing"))
+    await calibrate(s)
+    await push_frames(s, 2)
+    (msg,) = [m for m in sent if m.type == "recognized"]
+    # one segmenter piece, but the whole time the hands were up is re-cut where the model is surest: two signs
+    assert [[o.gloss for o in sign] for sign in msg.segments] == [["COFFEE", "TEA"], ["HELLO", "HI"]]
+    assert msg.segments[0][0].english == "coffee"
+    (first, second) = msg.spans
+    assert first[0] == 1000 and first[1] < second[0] and second[1] == 2980  # cut near 2 s (the reads have context)
+    # then the sentence the signs make (Claude), shown but never said; no picker though COFFEE's 0.4 would ask for one
+    assert composer.calls[0][:2] == (["COFFEE", "HELLO"], [])
+    (said,) = [m for m in sent if m.type == "you_said"]
+    assert said.text == "Do you have coffee?" and [t.gloss for t in said.read] == ["COFFEE", "HELLO"]
+    assert not [m for m in sent if m.type == "pick_request"]
+    assert states(sent)[-3:] == ["signing", "reading", "ready"]  # never "speaking"
+    await s.on_transcript("hello there", True)
+    await s.idle()
+    assert not [m for m in sent if m.type in ("sign_plan", "caption")]
+
+
+async def test_mirror_reads_a_held_sign_the_segmenter_found_no_motion_in(tmp_path):
+    """MY: a hand held on the chest. The segmenter cuts by motion and found no piece; the mirror still reads it."""
+    frames = [make_frame(t=1000 + i * 66) for i in range(10)]
+    events = [TurnStart(), TurnEnd(segments=[], frames=frames, rest_ms=0)]
+    s, sent = make_session(tmp_path, events, recognizer=ByTime())
+    await s.on_client(MirrorMsg(on=True))
+    await s.on_client(ModeMsg(mode="signing"))
+    await calibrate(s)
+    await push_frames(s, 2)
+    (msg,) = [m for m in sent if m.type == "recognized"]
+    assert [[o.gloss for o in sign] for sign in msg.segments] == [["COFFEE", "TEA"]]
+    assert msg.spans == [(1000, 1594)]
 
 
 async def test_practice_mode_ignores_speech(tmp_path):

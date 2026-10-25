@@ -13,7 +13,7 @@ vi.mock("../ws", () => ({
   },
 }));
 const cam = vi.hoisted(() => ({ onFrame: null as ((f: Frame) => void) | null }));
-vi.mock("../camera", () => ({ startCamera: async (_video: unknown, onFrame: (f: Frame) => void) => { cam.onFrame = onFrame; } }));
+vi.mock("../camera", () => ({ loadTrackers: async () => {}, startCamera: async (_video: unknown, onFrame: (f: Frame) => void) => { cam.onFrame = onFrame; } }));
 const play = vi.spyOn(HTMLMediaElement.prototype, "play").mockResolvedValue(undefined); // jsdom has no media playback
 vi.mock("../avatar", () => ({ loadAvatar: () => new Promise(() => {}) }));
 vi.mock("../avatar/stage", () => ({ createStage: vi.fn() }));

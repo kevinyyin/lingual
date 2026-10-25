@@ -63,6 +63,17 @@ def test_hands_rest_ends_turn():
     raise AssertionError("no TurnEnd")
 
 
+def test_a_longer_rest_keeps_a_sentence_with_a_dip_between_signs_one_turn():
+    """The mirror (session.MIRROR_REST_MS): a hand dipping out of the picture for 1 s between signs stays in the turn."""
+    dip = math.ceil(1000 / 33)
+    frames = moving(0, 20) + rest(20, dip) + moving(20 + dip, 20) + rest(40 + dip, 60)
+    assert sum(isinstance(e, TurnEnd) for e in run(frames)) == 2  # the translator's 450 ms: two turns
+    seg = Segmenter(BASE)
+    seg.rest_ms = 1500.0
+    events = [e for e in (seg.push(f) for f in frames) if e is not None]
+    assert [type(e) for e in events] == [TurnStart, TurnEnd]
+
+
 def test_turn_end_reports_rest_time():
     end = run(rest(0, 3) + moving(3, 12) + rest(15, REST_FRAMES + 2))[-1]
     assert end.rest_ms > 0

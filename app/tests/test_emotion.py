@@ -48,6 +48,33 @@ def test_plain_face_is_neutral():
     assert read_emotion(turn({"mouthSmileLeft": 0.05}), base())["label"] == "neutral"
 
 
+def test_a_slight_frown_is_sad():
+    """MediaPipe's frown barely moves: a turn averaging 0.1 is a clear frown, not noise."""
+    assert read_emotion(turn({"mouthFrownLeft": 0.1, "mouthFrownRight": 0.1}, amp=0.05), base())["label"] == "sad"
+
+
+def test_a_slight_sneer_is_angry():
+    assert read_emotion(turn({"noseSneerLeft": 0.12, "noseSneerRight": 0.12}), base())["label"] == "angry"
+
+
+def test_resting_pucker_and_squint_are_neutral():
+    """The median logged face: pucker 0.67, eyes squinted 0.23; both once made half of sad and angry."""
+    face = {"mouthPucker": 0.67, "eyeSquintLeft": 0.23, "eyeSquintRight": 0.23, "mouthPressLeft": 0.01}
+    assert read_emotion(turn(face), base())["label"] == "neutral"
+
+
+def test_pressed_lips_alone_are_neutral():
+    """The mouth morpheme MM presses the lips with no feeling."""
+    assert read_emotion(turn({"mouthPressLeft": 0.5, "mouthPressRight": 0.5}), base())["label"] == "neutral"
+
+
+def test_the_face_is_read_above_the_resting_face():
+    b = base()
+    b.face = {"mouthFrownLeft": 0.2, "mouthFrownRight": 0.2}  # this signer's mouth corners rest low
+    assert read_emotion(turn({"mouthFrownLeft": 0.2, "mouthFrownRight": 0.2}), b)["label"] == "neutral"
+    assert read_emotion(turn({"mouthFrownLeft": 0.35, "mouthFrownRight": 0.35}), b)["label"] == "sad"
+
+
 def test_brows_ignored():
     face = {"mouthSmileLeft": 0.4, "mouthSmileRight": 0.4}
     brows = {k: 1.0 for k in ("browInnerUp", "browOuterUpLeft", "browOuterUpRight", "browDownLeft", "browDownRight")}
