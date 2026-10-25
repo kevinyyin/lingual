@@ -33,6 +33,7 @@ const HFOV_DEG = 65;
 const BODY_POINTS = [0, 7, 8, 11, 12]; // nose, ears, shoulders: a near-rigid spread to size the body by
 const FRONT_MIN = -0.2, FRONT_MAX = 0.6; // metres in front of the shoulders: beyond is a misfit, not a reach
 const MEET_NEAR = 0.08, MEET_FAR = 0.25; // hands' nearest points apart in the picture, shoulder widths: they touch / don't
+const REACH_USE = 0.85; // share of the arm's forward reach a signer uses: the elbow stays bent
 /** Pose points moved with each wrist when its depth is set (wrist, pinky, index, thumb), and its elbow (half as far). */
 const HAND_POSE = { left: { hand: [15, 17, 19, 21], elbow: 13 }, right: { hand: [16, 18, 20, 22], elbow: 14 } };
 
@@ -76,7 +77,8 @@ export function distanceByPalm(img: number[][], aspect: number): number | null {
  *  size, relative to the head and shoulders'): the pose model's wrist depth barely moves (30-34 cm in front of the
  *  shoulders for a hand beside the shoulder and one reaching out alike, WLASL AWAY and BRING), where this reads 0 and
  *  15-40. `ease(side, metres)` smooths it over frames. Null without a body in the picture. */
-export function liveFrame(f: Frame, w: World, aspect = ASPECT, ease?: (side: Side, front: number) => number): ClipFrame | null {
+export function liveFrame(f: Frame, w: World, aspect = ASPECT, ease?: (side: Side, front: number) => number,
+  avatarHand?: number): ClipFrame | null {
   if (!w.pose) return null;
   const out: ClipFrame = { pose: w.pose.map((p) => [...p]), pose2d: f.pose.map((p) => [p[0], p[1]]), left: null, right: null, leftW: null, rightW: null, aspect };
   for (const label of SIDES) {
@@ -90,24 +92,41 @@ export function liveFrame(f: Frame, w: World, aspect = ASPECT, ease?: (side: Sid
   const body = distanceBySize(BODY_POINTS.map((i) => f.pose[i]), BODY_POINTS.map((i) => w.pose![i]), aspect);
   const shoulders = (out.pose[11][2] + out.pose[12][2]) / 2;
   const sw = Math.hypot((f.pose[11][0] - f.pose[12][0]) * aspect, f.pose[11][1] - f.pose[12][1]) || 1; // image heights
+  // each wrist where the hand tracker sees it: the pose model's wrist strays when hands overlap (webcam recording: 0.2-0.38
+  // shoulder widths off with hands together, 0.10 apart), and the avatar's hands stopped at different heights
+  const perMetre = body === null ? null : focal(aspect) / body; // image heights per metre at the body's distance
+  if (perMetre !== null) {
+    for (const side of SIDES) {
+      const img = out[side] as number[][] | null;
+      if (!img) continue;
+      const wi = HAND_POSE[side].hand[0];
+      const dx = ((img[0][0] - f.pose[wi][0]) * aspect) / perMetre, dy = (img[0][1] - f.pose[wi][1]) / perMetre;
+      for (const k of HAND_POSE[side].hand) { out.pose[k][0] += dx; out.pose[k][1] += dy; }
+      out.pose2d[wi] = [img[0][0], img[0][1]];
+    }
+  }
   const fronts: Partial<Record<Side, number>> = {};
   for (const side of SIDES) {
     const img = out[side] as number[][] | null, wld = out[side === "left" ? "leftW" : "rightW"] as number[][] | null;
     if (!img || body === null) continue;
     const front = handFront(img, wld, body, aspect);
     if (front === null) continue; // unsized: the pose model's depth stays
-    fronts[side] = ease ? ease(side, front) : front;
+    const capped = Math.min(front, reach(out.pose, side)); // the wrist as anchored above; depths not yet set
+    fronts[side] = ease ? ease(side, capped) : capped;
   }
   // hands together (CLAP, NICE, prayer): they meet on the avatar, at one depth
   if (out.left && out.right) {
     const meet = clamp01((MEET_FAR - handGap(out.left as number[][], out.right as number[][], aspect) / sw) / (MEET_FAR - MEET_NEAR));
     if (meet > 0) {
       out.meetL = out.meetR = meet;
-      if (fronts.left !== undefined && fronts.right !== undefined) {
+      if (meet > 0.5 && (fronts.left === undefined) !== (fronts.right === undefined)) { // one unsized: it is where the other is
+        fronts.left = fronts.right = fronts.left ?? fronts.right;
+      } else if (fronts.left !== undefined && fronts.right !== undefined) {
         const mid = (fronts.left + fronts.right) / 2;
         fronts.left += (mid - fronts.left) * meet;
         fronts.right += (mid - fronts.right) * meet;
       }
+      if (avatarHand && perMetre !== null) towardContact(out, w, meet, avatarHand, perMetre, aspect);
     }
   }
   for (const side of SIDES) {
@@ -136,6 +155,48 @@ function handFront(img: number[][], wld: number[][] | null, body: number, aspect
   const front = byPalm === null ? null : body - byPalm;
   // palms pressed together are seen edge-on and read far behind the body (-69 cm): no reading beats that
   return front !== null && front >= FRONT_MIN && front <= FRONT_MAX ? front : null;
+}
+
+/** Hands that meet, sized for the avatar: its hands are smaller for its body than a signer's, so placed by the wrists its
+ *  fingers stopped short (a webcam recording: the signer's hands touching, the avatar's 0.28-0.47 shoulder widths
+ *  apart). The signer's wrists are some number of their own hand lengths apart (both hands at one distance from the
+ *  camera, so the picture measures it); the avatar's are set that many of its hand lengths apart, both wrists scaled
+ *  about where the hands touch in the picture. `avatarHand`: its wrist to middle fingertip over its shoulder width. */
+function towardContact(out: ClipFrame, w: World, meet: number, avatarHand: number, perMetre: number, aspect: number): void {
+  const img = { left: out.left as number[][], right: out.right as number[][] };
+  const d2 = (p: number[], q: number[]) => Math.hypot((p[0] - q[0]) * aspect, p[1] - q[1]);
+  // wrist to middle fingertip, or from the palm (53% of it) where interlaced fingers hide the tips
+  const handLen = (h: number[][]) => Math.max(d2(h[0], h[12]), d2(h[0], h[9]) / 0.53);
+  const signerGap = d2(img.left[0], img.right[0]) / ((handLen(img.left) + handLen(img.right)) / 2); // in hand lengths
+  const shoulders = Math.hypot(...[0, 1, 2].map((k) => w.pose![11][k] - w.pose![12][k]));
+  const now = Math.hypot(out.pose[15][0] - out.pose[16][0], out.pose[15][1] - out.pose[16][1]); // metres
+  if (!(now > 1e-3) || !(shoulders > 1e-3)) return;
+  // the avatar maps by shoulder width: a gap of g signer metres is g / shoulders of its shoulder widths
+  const want = signerGap * avatarHand * shoulders;
+  const k = 1 + (Math.max(0.2, Math.min(1, want / now)) - 1) * meet; // 1: wrists stay; below: toward the contact
+  let best = Infinity, at = [0, 0];
+  for (const p of img.left) for (const q of img.right) {
+    const d = Math.hypot((p[0] - q[0]) * aspect, p[1] - q[1]);
+    if (d < best) [best, at] = [d, [(p[0] + q[0]) / 2, (p[1] + q[1]) / 2]];
+  }
+  for (const side of SIDES) {
+    const wrist = img[side][0], move = 1 - k;
+    const dx = (((at[0] - wrist[0]) * aspect) / perMetre) * move, dy = ((at[1] - wrist[1]) / perMetre) * move;
+    for (const i of HAND_POSE[side].hand) { out.pose[i][0] += dx; out.pose[i][1] += dy; }
+    const wi = HAND_POSE[side].hand[0];
+    out.pose2d[wi] = [out.pose2d[wi][0] + (at[0] - wrist[0]) * move, out.pose2d[wi][1] + (at[1] - wrist[1]) * move];
+  }
+}
+
+/** Farthest a wrist can be in front of its shoulder, metres (pose world): the arm's length (shoulder, elbow, wrist)
+ *  against how far across and up from the shoulder the wrist already is, the elbow never quite straight (REACH_USE).
+ *  Hands together before the stomach read 50-90 cm in front by size (a second webcam recording, the signer 1.1-1.4 m
+ *  from the camera): out of the avatar's reach, so its hands stopped ~20 cm apart. */
+export function reach(pose: number[][], side: Side): number {
+  const [s, e, wr] = side === "left" ? [11, 13, 15] : [12, 14, 16];
+  const len = (a: number, b: number) => Math.hypot(...[0, 1, 2].map((k) => pose[a][k] - pose[b][k]));
+  const arm = len(s, e) + len(e, wr), across = Math.hypot(pose[wr][0] - pose[s][0], pose[wr][1] - pose[s][1]);
+  return REACH_USE * Math.sqrt(Math.max(0, arm * arm - across * across));
 }
 
 /** Nearest two points of two hands in the picture, image heights. */
@@ -252,6 +313,10 @@ export async function startMirror(): Promise<void> {
   const [avatar, rest] = await Promise.all([
     loadAvatar(document.getElementById("avatar") as HTMLCanvasElement, { maxPixelRatio: 1, maxFps: 30 }), loadRest()]);
   avatar.applyFrame(rest); // the first frame snaps every filter and spring: the avatar starts at rest
+  // its hand for its body (wrist to middle fingertip over shoulder width): hands that meet are sized to it (towardContact)
+  const fp = avatar.framePoints?.(true);
+  const avatarHand = fp && fp.pts.length >= 7 && fp.shoulderHalf > 0
+    ? Math.hypot(...[0, 1, 2].map((k) => fp.pts[0][k] - fp.pts[3][k])) / (2 * fp.shoulderHalf) : undefined;
 
   // ?record=N: N seconds kept for diagnosis (mirrorRecord.ts), from when the camera is up
   const recordS = Number(new URLSearchParams(location.search).get("record")) || 0;
@@ -300,7 +365,7 @@ export async function startMirror(): Promise<void> {
       if (recalibrate) sock.send({ type: "calibrate" });
       if (send && sock.buffered() < MAX_BUFFERED) sock.send({ type: "frame", ...f });
       // the camera may not give the 640x480 asked for (many laptops send 16:9): the real shape, for placement and depth
-      const live = liveFrame(f, w, cam.videoWidth && cam.videoHeight ? cam.videoWidth / cam.videoHeight : ASPECT, ease);
+      const live = liveFrame(f, w, cam.videoWidth && cam.videoHeight ? cam.videoWidth / cam.videoHeight : ASPECT, ease, avatarHand);
       for (const s of SIDES) if (!live?.[s]) fronts[s] = null; // a hand that comes back starts from its own depth
       if (live) toward(live);
       rec?.frame(f, w, live);
