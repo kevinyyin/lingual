@@ -28,6 +28,7 @@ export type ClientMsg =
   | { type: "redo" }
   | { type: "say"; text: string }
   | { type: "cheer" }
+  | { type: "mirror"; on: boolean }
   | { type: "buddy"; buddy: Buddy["id"] }
   | { type: "record"; signer: string; gloss: string; frames: Frame[] };
 
@@ -48,7 +49,7 @@ export type ServerMsg =
   | { type: "you_said"; text: string; emotion: string; unclear?: boolean; read?: SignToken[] } // unclear: the signs made no sentence; read: the signs, in order
   | { type: "caption"; text: string; final: boolean }
   | SignPlan
-  | { type: "recognized"; segments: PickOption[][] }
+  | { type: "recognized"; segments: PickOption[][]; spans?: [number, number][] } // spans: each sign's first and last Frame.t (mirror)
   | { type: "recorded"; ok: boolean; detail: string };
 
 export interface Socket {

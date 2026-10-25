@@ -1,5 +1,5 @@
 // Webcam -> MediaPipe Tasks landmarks -> Frame. Only landmarks leave the page, never video.
-import { createTrackers, detect, PARTS, toFrame, type Part, type Parts, type TrackerMs } from "./landmarks";
+import { createTrackers, detect, mergeParts, PARTS, toFrame, toWorld, type Part, type Parts, type TrackerMs, type World } from "./landmarks";
 import type { FromWorker, ToWorker } from "./trackerWorker";
 import type { Frame } from "./ws";
 
@@ -66,7 +66,7 @@ async function workerTracker(groups: Group[]): Promise<Tracker> {
           fallback = pageTracker();
         }
       }
-      return { parts: Object.assign({}, ...replies.map((r) => r.parts)), ms: Object.assign({}, ...replies.map((r) => r.ms)) };
+      return { parts: mergeParts(replies.map((r) => r.parts)), ms: Object.assign({}, ...replies.map((r) => r.ms)) };
     },
   };
 }
@@ -97,7 +97,8 @@ export let trackerTimes: Record<Part, number[]> | null = null;
 export const measureTrackers = () => (trackerTimes = { hands: [], pose: [], face: [] });
 
 /** `paused()`: skip detection (the avatar is playing); the backend ignores frames during avatar output anyway. */
-export async function startCamera(video: HTMLVideoElement, onFrame: (f: Frame) => void, paused: () => boolean = () => false): Promise<void> {
+/** `onFrame` also gets the frame's metric landmarks (World), which stay on the page: the avatar mirror reads them. */
+export async function startCamera(video: HTMLVideoElement, onFrame: (f: Frame, world: World) => void, paused: () => boolean = () => false): Promise<void> {
   const tracker = await loadTrackers();
 
   // Feed MediaPipe the unmirrored stream; the preview is mirrored with CSS only.
@@ -117,7 +118,7 @@ export async function startCamera(video: HTMLVideoElement, onFrame: (f: Frame) =
     tracker.detect(video, t).then(({ parts, ms }) => {
       if (trackerTimes) PARTS.forEach((k) => ms[k] !== undefined && trackerTimes![k].push(ms[k]!));
       const frame = toFrame(parts, t);
-      if (frame && video.srcObject === stream) onFrame(frame);
+      if (frame && video.srcObject === stream) onFrame(frame, toWorld(parts));
     }, (e) => console.warn("tracker:", e)).finally(() => { busy = false; });
   };
   requestAnimationFrame(tick);

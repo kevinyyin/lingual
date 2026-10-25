@@ -39,7 +39,7 @@ let vocabReq: Promise<VocabSign[]> | null = null;
 export const fetchVocab = (): Promise<VocabSign[]> => (vocabReq ??= fetch("/vocab")
   .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`/vocab ${r.status}`))))
   .catch((e) => { vocabReq = null; throw e; }));
-const loadRest = async (): Promise<ClipFrame> => (await fetchClip("/signs/_REST.json"))?.frames[0] ?? DEFAULT_REST;
+export const loadRest = async (): Promise<ClipFrame> => (await fetchClip("/signs/_REST.json"))?.frames[0] ?? DEFAULT_REST;
 
 /** Everything a plan needs to be played: its clips fetched, the timeline built, the face track and the rest pose. */
 export async function prepare(plan: SignPlan, knownVocab?: VocabSign[], knownRest?: ClipFrame) {

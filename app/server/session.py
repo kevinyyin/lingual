@@ -13,7 +13,7 @@ import numpy as np
 
 from . import plush
 from .protocol import (
-    AvatarDoneMsg, BuddyMsg, CalibrateMsg, CaptionMsg, CheerMsg, FrameMsg, ModeMsg, PickMsg, PickOption, PickRequestMsg, PracticeMsg, RedoMsg,
+    AvatarDoneMsg, BuddyMsg, CalibrateMsg, CaptionMsg, CheerMsg, FrameMsg, MirrorMsg, ModeMsg, PickMsg, PickOption, PickRequestMsg, PracticeMsg, RedoMsg,
     SayMsg, RecognizedMsg, SignPlanMsg, SignToken, StateMsg, TalkMsg, YouSaidMsg, Frame,
 )
 from .vocab import Vocab
@@ -159,6 +159,7 @@ class Session:
         self._turn_ids = 0
         self.practice = False
         self.practice_signs: set[str] = set()
+        self.mirror = False  # the avatar mirror page (MirrorMsg): sign turns are labelled on the page, sign by sign
         self.mode: str | None = None  # the translator's switch (ModeMsg): "voice" or "signing"; None runs both
         self.talking = False  # push to talk held (TalkMsg)
         self._say_lock = asyncio.Lock()
@@ -260,6 +261,8 @@ class Session:
                 await self._set("ready")
         elif isinstance(msg, PracticeMsg):
             self.practice, self.practice_signs = msg.on, set(msg.signs)
+        elif isinstance(msg, MirrorMsg):
+            self.mirror = msg.on
         elif isinstance(msg, SayMsg) and self.practice:  # translator speech is the session's own; never page-chosen
             for t in self._says:  # the lesson moved on: a line still playing or waiting is stale, so the newest cuts it off
                 t.cancel()
@@ -310,8 +313,8 @@ class Session:
         await self._set("ready")
 
     async def on_transcript(self, text: str, final: bool) -> None:
-        if self.practice or self.mode == "signing":
-            return  # lessons and signing mode are sign -> page only; the mic would start speech turns mid-sign
+        if self.practice or self.mirror or self.mode == "signing":
+            return  # lessons, the mirror and signing mode are sign -> page only; the mic would start speech turns mid-sign
         if final and text.strip() and self.state in ("signing", "reading", "picking"):
             await self._yield_to_speech()  # never while voice or avatar output plays (those states drop speech)
         # Calibration is only for the signer's camera; speech -> sign doesn't need it.
@@ -360,6 +363,13 @@ class Session:
                 return
             read = await asyncio.to_thread(self._read_turn, ev)
             read = [(s, t) for s, t in read if t]  # unreadable segments (e.g. no confident letters) are dropped
+            if self.mirror:  # each sign labelled on the page as read; nothing composed, said or picked
+                turn.stamps["recognized"] = now_ms()
+                turn.result = {"top3": [[[g, round(p, 3)] for g, p in t[:3]] for _, t in read]}
+                await self.send(RecognizedMsg(
+                    segments=[[PickOption(gloss=g, english=self._english(g, s), p=p) for g, p in t[:3]] for s, t in read],
+                    spans=[(s.frames[0].t, s.frames[-1].t) for s, _ in read]))
+                return
             segments, tops = [s for s, _ in read], [t for _, t in read]
             grammar, emotion = await asyncio.to_thread(self.readers.read, ev.frames, self.baseline)
             turn.stamps["recognized"] = now_ms()

@@ -5,7 +5,8 @@ import pytest
 from frames import make_frame
 from server import plush
 from server.protocol import (
-    AvatarDoneMsg, BuddyMsg, CalibrateMsg, CheerMsg, FrameMsg, ModeMsg, PickMsg, PracticeMsg, RedoMsg, SayMsg, SignPlanMsg, SignToken, TalkMsg,
+    AvatarDoneMsg, BuddyMsg, CalibrateMsg, CheerMsg, FrameMsg, MirrorMsg, ModeMsg, PickMsg, PracticeMsg, RedoMsg, SayMsg, SignPlanMsg,
+    SignToken, TalkMsg,
 )
 from server.session import Baseline, Segment, Session, TurnEnd, TurnStart, compute_baseline
 from server.vocab import load_vocab
@@ -546,6 +547,27 @@ async def test_redo_drops_the_attempt_being_read(tmp_path):
     await s.on_client(RedoMsg())
     await asyncio.sleep(0.4)
     assert s.state == "ready" and not [m for m in sent if m.type == "recognized"]
+
+
+async def test_mirror_labels_each_sign_with_its_time_and_never_picks_composes_or_speaks(tmp_path):
+    a = Segment(frames=[make_frame(t=1000 + i * 20) for i in range(4)], kind="sign")  # 60 ms each: too short to re-cut
+    b = Segment(frames=[make_frame(t=1120 + i * 20) for i in range(4)], kind="sign")
+    events = [TurnStart(), TurnEnd(segments=[a, b], frames=a.frames + b.frames, rest_ms=0)]
+    composer = FakeComposer()
+    s, sent = make_session(tmp_path, events, [[("COFFEE", 0.4), ("TEA", 0.3)], [("HELLO", 0.9), ("HI", 0.05)]], composer=composer)
+    await s.on_client(MirrorMsg(on=True))
+    await s.on_client(ModeMsg(mode="signing"))
+    await calibrate(s)
+    await push_frames(s, 2)
+    (msg,) = [m for m in sent if m.type == "recognized"]
+    assert [[o.gloss for o in sign] for sign in msg.segments] == [["COFFEE", "TEA"], ["HELLO", "HI"]]
+    assert msg.segments[0][0].english == "coffee"
+    assert msg.spans == [(1000, 1060), (1120, 1180)]
+    assert not composer.calls and not [m for m in sent if m.type in ("pick_request", "you_said")]  # 0.4 would ask for a pick
+    assert states(sent)[-3:] == ["signing", "reading", "ready"]
+    await s.on_transcript("hello there", True)
+    await s.idle()
+    assert not [m for m in sent if m.type in ("sign_plan", "caption")]
 
 
 async def test_practice_mode_ignores_speech(tmp_path):

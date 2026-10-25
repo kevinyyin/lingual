@@ -17,6 +17,8 @@ if (params.get("mode") === "record") {
   import("./record").then((m) => m.startRecorder(params));
 } else if (params.get("mode") === "bench") {
   import("./bench").then((m) => m.startBench());
+} else if (params.get("mode") === "mirror") {
+  import("./mirror").then((m) => m.startMirror());
 } else if (params.get("mode") === "camperf") {
   import("./camperf").then((m) => m.startCamPerf());
 } else if (params.get("mode") === "review") {

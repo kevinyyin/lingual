@@ -20,8 +20,19 @@ export type Part = "hands" | "pose" | "face";
 export const PARTS: Part[] = ["hands", "pose", "face"];
 export interface Trackers { hands?: HandLandmarker; pose?: PoseLandmarker; face?: FaceLandmarker }
 export type TrackerMs = Partial<Record<Part, number>>;
-/** What some of the trackers saw in one picture; `mesh` is kept only when a hand is up (toFrame). */
-export type Parts = Partial<Omit<Frame, "t">>;
+/** Metric landmarks for the avatar mirror (mirror.ts), never sent to the backend: pose world points (metres, hip-centred,
+ *  with depth) and each hand's world points (metres, around the hand's centre), keyed like Frame.left/right. */
+export interface World { pose: number[][] | null; left: number[][] | null; right: number[][] | null }
+/** What some of the trackers saw in one picture; `mesh` is kept only when a hand is up, `world` never (toFrame). */
+export type Parts = Partial<Omit<Frame, "t">> & { world?: Partial<World> };
+
+/** Parts from trackers that ran apart (in different workers): later ones win, `world` merged key by key. */
+export function mergeParts(list: Parts[]): Parts {
+  const world = Object.assign({}, ...list.map((p) => p.world ?? {}));
+  return Object.assign({}, ...list, { world });
+}
+
+export const toWorld = (parts: Parts): World => ({ pose: parts.world?.pose ?? null, left: parts.world?.left ?? null, right: parts.world?.right ?? null });
 
 /** `useModule`: the wasm as an ES module, which a module worker can load (a classic <script> can't be added there). */
 /** `cpu`: trackers run on the CPU (XNNPACK) instead of the GPU, which a laptop's integrated GPU runs one at a time. */
@@ -52,15 +63,19 @@ export function detect(trackers: Trackers, image: HTMLVideoElement | ImageBitmap
   if (trackers.hands) {
     const h = timed("hands", () => trackers.hands!.detectForVideo(image, t));
     out.left = out.right = null;
+    const world: Partial<World> = (out.world ??= {});
+    world.left = world.right = null;
     h.landmarks.forEach((lm, i) => {
       const pts = lm.map((l) => [r5(l.x), r5(l.y), r5(l.z)] as P3);
-      if (h.handedness[i][0].categoryName === "Left") out.left = pts;
-      else out.right = pts;
+      const w = h.worldLandmarks?.[i]?.map((l) => [r5(l.x), r5(l.y), r5(l.z)]) ?? null;
+      if (h.handedness[i][0].categoryName === "Left") [out.left, world.left] = [pts, w];
+      else [out.right, world.right] = [pts, w];
     });
   }
   if (trackers.pose) {
     const p = timed("pose", () => trackers.pose!.detectForVideo(image, t));
     if (p.landmarks.length) out.pose = p.landmarks[0].map((l) => [r5(l.x), r5(l.y), r5(l.z), r5(l.visibility ?? 0)]);
+    (out.world ??= {}).pose = p.worldLandmarks?.[0]?.map((l) => [r5(l.x), r5(l.y), r5(l.z)]) ?? null;
   }
   if (trackers.face) {
     const fc = timed("face", () => trackers.face!.detectForVideo(image, t));
@@ -81,7 +96,7 @@ export function detect(trackers: Trackers, image: HTMLVideoElement | ImageBitmap
 /** All trackers' parts -> the Frame sent to the backend; null without a body in the picture. */
 export function toFrame(parts: Parts, t: number): Frame | null {
   if (!parts.pose) return null;
-  const { mesh, ...rest } = parts;
+  const { mesh, world: _world, ...rest } = parts; // world points stay on the page (the mirror): frames don't grow
   const frame: Frame = { t, left: null, right: null, blend: null, head: null, ...rest, pose: parts.pose };
   // the fingerspelling reader standardises over the whole face (without it, Kaggle letters: 37% wrong vs 17%)
   if (mesh && (frame.left || frame.right)) frame.mesh = mesh;
