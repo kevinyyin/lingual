@@ -215,10 +215,16 @@ test("a right answer turns the camera box green (it stayed the reading red)", as
   sock.toPage({ type: "state", state: "reading" });
   sock.toPage({ type: "recognized", segments: [[{ gloss: "HELLO", english: "hello", p: 0.9 }]] });
   expect(document.querySelector<HTMLElement>(".cam-slot")!.dataset.result).toBe("right");
+  // it said "Reading your sign… tap to redo" with a spinner: graded, it hears no more status
+  expect(document.querySelector(".cam-status")!.textContent).toBe("You got it!");
+  expect(document.querySelector<HTMLButtonElement>(".cam-redo")!.hidden).toBe(true);
 });
 
 test("two misses mark the camera box wrong", async () => {
   await vi.waitFor(() => expect(cam.onFrame).not.toBeNull());
+  sock.toPage({ type: "state", state: "reading" });
   for (const m of [miss, miss]) sock.toPage(m);
   expect(document.querySelector<HTMLElement>(".cam-slot")!.dataset.result).toBe("wrong");
+  expect(document.querySelector(".cam-status")!.textContent).toBe("Not quite this time");
+  expect(document.querySelector<HTMLButtonElement>(".cam-redo")!.hidden).toBe(true);
 });
