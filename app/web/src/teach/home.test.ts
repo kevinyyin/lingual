@@ -54,7 +54,7 @@ test("the course has no greeting and no emoji, and units have no banners", () =>
   expect(document.body.textContent).not.toMatch(/Good (morning|afternoon|evening)/);
   expect(document.body.textContent).not.toMatch(EMOJI);
   expect(document.querySelector(".unit-banner")).toBeNull();
-  expect(document.querySelector(".unit-head p")!.textContent).toBe("Unit 1 · 0/4 done · Say hello, thank someone, introduce yourself");
+  expect(document.querySelector(".unit-head p")!.textContent).toBe("Unit 1 · 0/1 done · Say hello and goodbye when you meet someone");
 });
 
 test.each(TAB_IDS)("no emoji on the %s tab", (tab) => {
@@ -97,4 +97,18 @@ test("a unit's notes put the heading first, the unit line under it", () => {
 test("the hero sizes the next lesson's title by its longest word", () => {
   renderHome(document.body, "learn", ctx(["u1-1", "u1-2", "u1-3", "u1-review", "u2-1", "u2-2"]));
   expect(document.querySelector<HTMLElement>(".hero h1 span")!.style.getPropertyValue("--chars")).toBe("9");
+});
+
+test("a reset button at the top left wipes progress, after asking", () => {
+  const c = ctx();
+  c.reset = vi.fn();
+  renderHome(document.body, "learn", c);
+  const btn = document.querySelector(".topbar")!.firstElementChild as HTMLButtonElement;
+  expect(btn.textContent).toBe("Reset progress");
+  const ask = vi.spyOn(window, "confirm").mockReturnValueOnce(false).mockReturnValueOnce(true);
+  btn.click();
+  expect(c.reset).not.toHaveBeenCalled();
+  btn.click();
+  expect(c.reset).toHaveBeenCalledOnce();
+  ask.mockRestore();
 });

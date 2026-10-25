@@ -45,7 +45,7 @@ test("a camera exercise asks for the sign only once calibration is done", () => 
 test("the backend is told the course's signs", () => {
   const msg = sock.sent.find((m) => m.type === "practice");
   expect(msg).toMatchObject({ type: "practice", on: true });
-  expect(msg && "signs" in msg && msg.signs).toEqual(expect.arrayContaining(["HELLO", "GOODBYE", "THANK-YOU", "I"]));
+  expect(msg && "signs" in msg && msg.signs).toEqual(expect.arrayContaining(["HELLO", "GOODBYE", "MEET", "I"]));
 });
 
 /** A seated learner seen by the pose tracker: shoulders `width` apart, hands resting below the picture. */
