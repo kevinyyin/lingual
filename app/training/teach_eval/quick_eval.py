@@ -5,7 +5,7 @@ the saved baseline (eval/results.jsonl) clip by clip.
   uv run python -m training.teach_eval.quick_eval --patch path/to/patch.py [--all] [--workers 4]
 
 Default subset: every failure among the trusted clips + 250 passing ones (seeded), so a run takes ~2 minutes. --all
-replays all 995 trusted clips. Prints: translator right / lesson pass / single-sign top-1 before and after, the
+replays all 995 trusted clips; --stretch 1.5 replays them 1.5x slower (a learner's pace). Prints: translator right / lesson pass / single-sign top-1 before and after, the
 clips it fixes and the clips it breaks (regressions), and replay time per clip (efficiency).
 """
 import argparse
@@ -22,7 +22,8 @@ RIGHT = ("right_direct", "right_picked")
 _R = {}
 
 
-def _init(patch: str | None):
+def _init(patch: str | None, stretch: float = 1.0):
+    _R["stretch"] = stretch
     if patch:
         exec(compile(open(patch, encoding="utf-8").read(), patch, "exec"), {"__name__": "teach_patch"})
     from server.classifier import SignPredictor
@@ -33,6 +34,8 @@ def _init(patch: str | None):
 def _one(c) -> dict:
     rec, session = _R["rec"], _R["session"]
     browser = load_npz(c.frames_path("15fps"))
+    if _R["stretch"] != 1.0:  # signed this much slower (a learner): same frames, spread over more time
+        browser = [f.model_copy(update={"t": f.t * _R["stretch"]}) for f in browser]
     t0 = time.perf_counter()
     tr = replay.translator(browser, c.gloss, session)
     les = replay.lesson(browser, c.gloss, session)
@@ -46,6 +49,7 @@ def main() -> None:
     ap.add_argument("--patch", default=None)
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--stretch", type=float, default=1.0, help="replay every clip this many times slower")
     a = ap.parse_args()
     labels = {json.loads(l)["id"]: json.loads(l)["status"] for l in (DATA / "verify" / "labels.jsonl").read_text().splitlines()}
     base = {r["id"]: r for r in (json.loads(l) for l in (DATA / "eval" / "results.jsonl").read_text().splitlines() if l.strip())
@@ -54,7 +58,7 @@ def main() -> None:
     passes = sorted(i for i in base if i not in fails)
     ids = set(base) if a.all else set(fails) | set(random.Random(0).sample(passes, 250))
     clips = [c for c in load_clips() if c.id in ids]
-    with Pool(a.workers, initializer=_init, initargs=(a.patch,)) as pool:
+    with Pool(a.workers, initializer=_init, initargs=(a.patch, a.stretch)) as pool:
         rows = {r["id"]: r for r in pool.imap_unordered(_one, clips, chunksize=4)}
     course = replay.course_signs()
     b_right = sum(base[i]["translator"]["outcome"] in RIGHT for i in rows)

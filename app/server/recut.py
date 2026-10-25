@@ -20,6 +20,11 @@ CONTEXT_MS = 250.0  # read with this much either side (sentence replays: 250 ms 
 # clips 866 -> 881 of 995 right, none broke. Only inside one of the segmenter's segments, so a sign repeated after a real
 # pause (NO, rest, NO) stays two words, and never longer than this.
 SAME_MAX_MS = 2500.0
+# A run longer than one sign is a sentence: its pieces cost less, so two signs flowing on without a pause are cut in two
+# rather than read as the surer one. The cost falls from PIECE_COST at LONG_FROM_MS to LONG_PIECE_COST at LONG_TO_MS
+# (a ramp, not a step: slow learners' single signs run long).
+LONG_FROM_MS, LONG_TO_MS = 1400.0, 2200.0
+LONG_PIECE_COST = 0.4
 
 
 def _speed(frames: list[Frame]) -> np.ndarray:
@@ -35,6 +40,7 @@ def recut(run: list[Frame], around: list[Frame], model, spans: list[tuple[float,
     when there is no cut to make (shorter than a sign, or no candidate cut within MAX_MS)."""
     if len(run) < 3 or run[-1].t - run[0].t < MIN_MS:
         return None
+    cost = float(np.interp(run[-1].t - run[0].t, [LONG_FROM_MS, LONG_TO_MS], [PIECE_COST, LONG_PIECE_COST]))
     v = _speed(run)
     cand = [0] + [i for i in range(1, len(run) - 1) if v[i] <= v[i - 1] and v[i] <= v[i + 1]] + [len(run)]
     read: dict[tuple[int, int], tuple[list[Frame], list[tuple[str, float]]]] = {}
@@ -46,7 +52,7 @@ def recut(run: list[Frame], around: list[Frame], model, spans: list[tuple[float,
             if (i, j) not in read:
                 ctx = [f for f in around if run[i].t - CONTEXT_MS <= f.t <= run[j - 1].t + CONTEXT_MS]
                 read[(i, j)] = (ctx, model.topk(ctx, 3))
-            score = best[i][0] + math.log(read[(i, j)][1][0][1] + 1e-6) - PIECE_COST
+            score = best[i][0] + math.log(read[(i, j)][1][0][1] + 1e-6) - cost
             if j not in best or score > best[j][0]:
                 best[j] = (score, best[i][1] + [(i, j)])
     if len(run) not in best:
