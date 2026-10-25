@@ -43,6 +43,18 @@ def test_a_sign_that_slows_midway_stays_one_sign():
     assert [top[0][0] for _, top in recut(run, run, Majority())] == ["S0.1"]
 
 
+def test_where_the_hands_never_slow_any_frame_may_be_a_cut_if_asked():
+    """A webcam at ~7 frames a second: 3.4 s of two signs with the wrist speeding up throughout, no dip to cut at."""
+    run = []
+    for i in range(24):
+        f = make_frame(t=i * 143.0)
+        f.pose[16] = [0.4 + 0.001 * i * i, 0.5, 0.0, 1.0]
+        f.pose[0][0] = 0.1 if i < 12 else 0.2
+        run.append(f)
+    assert recut(run, run, Majority()) is None  # one piece would be longer than a sign can be
+    assert [top[0][0] for _, top in recut(run, run, Majority(), fill_gaps=True)] == ["S0.1", "S0.2"]
+
+
 def test_too_short_to_cut_is_left_to_the_segmenter():
     run = signing(0, 3, 0.1)
     assert recut(run, run, Majority()) is None

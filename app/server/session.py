@@ -468,7 +468,7 @@ class Session:
         if len(up) < 3:
             return self._read_turn(ev)
         run = [f for f in around if up[0].t <= f.t <= up[-1].t]
-        pieces = recut(run, around, self.recognizer) or [(Segment(frames=run, kind="sign", context=run),
+        pieces = recut(run, around, self.recognizer, fill_gaps=True) or [(Segment(frames=run, kind="sign", context=run),
                                                           self.recognizer.topk(run, 3))]
         merged: list[tuple[Segment, list[tuple[str, float]]]] = []
         for s, t in pieces:
