@@ -1,48 +1,104 @@
 // Webcam -> MediaPipe Tasks landmarks -> Frame. Only landmarks leave the page, never video.
-import { FaceLandmarker, FilesetResolver, HandLandmarker, PoseLandmarker } from "@mediapipe/tasks-vision";
-import type { Frame, P3 } from "./ws";
+import { createTrackers, detect, PARTS, toFrame, type Part, type Parts, type TrackerMs } from "./landmarks";
+import type { FromWorker, ToWorker } from "./trackerWorker";
+import type { Frame } from "./ws";
 
-/** Face-mesh points the sign classifier reads (nose tip, upper/lower lip, brows, chin); order matters. */
-export const FACE_POINTS = [1, 13, 14, 105, 334, 152];
+export { FACE_POINTS, matToYPR } from "./landmarks";
 
-/** Row-major rotation from MediaPipe's column-major 4x4 -> [yaw, pitch, roll] degrees. Same formula as training/landmarks.py. */
-export function matToYPR(m: ArrayLike<number>): [number, number, number] {
-  const r = (row: number, col: number) => m[col * 4 + row];
-  const deg = 180 / Math.PI;
-  return [
-    Math.atan2(r(0, 2), r(2, 2)) * deg,
-    Math.asin(Math.max(-1, Math.min(1, -r(1, 2)))) * deg,
-    Math.atan2(r(1, 0), r(1, 1)) * deg,
-  ];
+/** One camera picture through the trackers. */
+interface Tracker { detect(video: HTMLVideoElement, t: number): Promise<{ parts: Parts; ms: TrackerMs }> }
+
+/** Some trackers in one worker; `cpu`: those of them on the CPU. */
+export interface Group { parts: Part[]; cpu?: Part[] }
+/** Hands and pose on the GPU, the face on the CPU beside them: a laptop's integrated GPU runs trackers one at a time
+ *  (side by side each took twice as long). Intel laptop, frames read a second: one worker 9.5, the page's thread 10.4,
+ *  this 12.7 (all on the CPU 3.6; the face a frame behind instead of waited for, 12.8). */
+export const WORKER_GROUPS: Group[] = [{ parts: ["hands", "pose"] }, { parts: ["face"], cpu: ["face"] }];
+
+type Reply = Extract<FromWorker, { type: "frame" }>;
+
+/** A worker with some of the trackers (trackerWorker.ts), once they are loaded. */
+function spawn({ parts, cpu = [] }: Group): Promise<{ ask(t: number, image: ImageBitmap): Promise<Reply>; worker: Worker }> {
+  const w = new Worker(new URL("./trackerWorker.ts", import.meta.url), { type: "module" });
+  let pending: ((r: Reply) => void) | null = null;
+  const settle = (r: Reply) => { const p = pending; pending = null; p?.(r); };
+  return new Promise((resolve, reject) => {
+    w.onerror = (e) => { e.preventDefault(); w.terminate(); reject(new Error(e.message || "tracker worker failed to load")); };
+    w.onmessage = (e: MessageEvent<FromWorker>) => {
+      const m = e.data;
+      if (m.type === "error") { w.terminate(); reject(new Error(m.message)); }
+      else if (m.type === "frame") settle(m);
+      else {
+        // a worker that dies later must not leave the camera loop waiting on it forever
+        w.onerror = (ev) => { ev.preventDefault(); settle({ type: "frame", t: 0, parts: {}, ms: {}, error: ev.message || "tracker worker died" }); };
+        resolve({
+          worker: w,
+          ask: (t, image) => new Promise((done) => {
+            pending = done;
+            w.postMessage({ type: "frame", t, image } satisfies ToWorker, [image]);
+          }),
+        });
+      }
+    };
+    w.postMessage({ type: "init", parts, cpu } satisfies ToWorker);
+  });
 }
 
-let trackers: ReturnType<typeof createTrackers> | null = null;
+/** The trackers in workers: on the page's thread they took ~75 ms a frame (Intel laptop GPU) and the page, its camera
+ *  preview and the avatar painted ~14 times a second. A worker that fails later hands over to the page's thread. */
+async function workerTracker(groups: Group[]): Promise<Tracker> {
+  const started = groups.map(spawn);
+  const workers = await Promise.all(started).catch(async (e) => {
+    (await Promise.allSettled(started)).forEach((s) => s.status === "fulfilled" && s.value.worker.terminate());
+    throw e;
+  });
+  let fallback: Promise<Tracker> | null = null;
+  return {
+    async detect(video, t) {
+      if (fallback) return (await fallback).detect(video, t);
+      const images = await Promise.all(workers.map(() => createImageBitmap(video)));
+      const replies = await Promise.all(workers.map((w, i) => w.ask(t, images[i])));
+      const failed = replies.find((r) => r.error);
+      if (failed) {
+        console.warn("tracker:", failed.error);
+        if (/died/.test(failed.error!)) {
+          workers.forEach((w) => w.worker.terminate());
+          fallback = pageTracker();
+        }
+      }
+      return { parts: Object.assign({}, ...replies.map((r) => r.parts)), ms: Object.assign({}, ...replies.map((r) => r.ms)) };
+    },
+  };
+}
+
+/** The fallback where workers can't run them (no WebGL2 or module workers there): the page's own thread. */
+async function pageTracker(): Promise<Tracker> {
+  const trackers = await createTrackers(false, PARTS);
+  return {
+    async detect(video, t) {
+      const ms: TrackerMs = {};
+      return { parts: detect(trackers, video, t, ms), ms };
+    },
+  };
+}
+
+let trackers: Promise<Tracker> | null = null;
 /** The three MediaPipe trackers (~30 MB of wasm and models), created once. Teaching mode calls this early so the
- *  first camera exercise does not wait for the download; a failed load is retried on the next call. */
-export const loadTrackers = () => (trackers ??= createTrackers().catch((e) => { trackers = null; throw e; }));
+ *  first camera exercise does not wait for the download; a failed load is retried on the next call. `groups`: how
+ *  they are split over workers, [] for the page's own thread (camperf.ts compares them). */
+export const loadTrackers = (groups: Group[] = WORKER_GROUPS) => (trackers ??= (
+  groups.length
+    ? workerTracker(groups).catch((e) => { console.warn("trackers on the page's thread:", e); return pageTracker(); })
+    : pageTracker()
+).catch((e) => { trackers = null; throw e; }));
 
-async function createTrackers() {
-  const fileset = await FilesetResolver.forVisionTasks("/wasm");
-  const opts = (path: string) => ({ baseOptions: { modelAssetPath: path, delegate: "GPU" as const }, runningMode: "VIDEO" as const });
-  return Promise.all([
-    HandLandmarker.createFromOptions(fileset, { ...opts("/models/hand_landmarker.task"), numHands: 2 }),
-    PoseLandmarker.createFromOptions(fileset, opts("/models/pose_landmarker_lite.task")),
-    FaceLandmarker.createFromOptions(fileset, {
-      ...opts("/models/face_landmarker.task"),
-      outputFaceBlendshapes: true,
-      outputFacialTransformationMatrixes: true,
-    }),
-  ]);
-}
+/** Per-tracker milliseconds for ?mode=camperf (camperf.ts); null when nobody is measuring. */
+export let trackerTimes: Record<Part, number[]> | null = null;
+export const measureTrackers = () => (trackerTimes = { hands: [], pose: [], face: [] });
 
-/** 5 decimals: far finer than the trackers' noise, and a frame half the size on the wire (7.3 -> 3.6 KB). */
-const r5 = (v: number) => Math.round(v * 1e5) / 1e5;
-const r3 = (v: number) => Math.round(v * 1e3) / 1e3; // the face mesh: 9.5 KB a frame instead of 12.3, letters read the same
-
-/** `paused()`: skip detection (the avatar is playing). The three models run on the main thread and starved the
- *  avatar's animation to ~1 frame/s; the backend ignores frames during avatar output anyway. */
+/** `paused()`: skip detection (the avatar is playing); the backend ignores frames during avatar output anyway. */
 export async function startCamera(video: HTMLVideoElement, onFrame: (f: Frame) => void, paused: () => boolean = () => false): Promise<void> {
-  const [hands, pose, face] = await loadTrackers();
+  const tracker = await loadTrackers();
 
   // Feed MediaPipe the unmirrored stream; the preview is mirrored with CSS only.
   const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480, frameRate: 30 }, audio: false });
@@ -50,33 +106,19 @@ export async function startCamera(video: HTMLVideoElement, onFrame: (f: Frame) =
   video.style.transform = "scaleX(-1)";
   await video.play();
 
-  let last = -1;
+  let last = -1, busy = false; // one picture at a time: a busy tracker skips pictures instead of queueing stale ones
   const tick = () => {
     if (video.srcObject !== stream) return; // a fresh feed (startCamera again on this video) has its own loop
     requestAnimationFrame(tick); // first: a detector that throws on one frame must not end tracking for good
+    if (busy || paused() || video.currentTime === last) return;
+    last = video.currentTime;
+    busy = true;
     const t = performance.now();
-    if (!paused() && video.currentTime !== last) {
-      last = video.currentTime;
-      const h = hands.detectForVideo(video, t);
-      const p = pose.detectForVideo(video, t);
-      const fc = face.detectForVideo(video, t);
-      if (p.landmarks.length) {
-        const frame: Frame = { t, left: null, right: null, pose: p.landmarks[0].map((l) => [r5(l.x), r5(l.y), r5(l.z), r5(l.visibility ?? 0)]), blend: null, head: null };
-        h.landmarks.forEach((lm, i) => {
-          const pts = lm.map((l) => [r5(l.x), r5(l.y), r5(l.z)] as P3);
-          if (h.handedness[i][0].categoryName === "Left") frame.left = pts;
-          else frame.right = pts;
-        });
-        if (fc.faceBlendshapes?.length) {
-          frame.blend = Object.fromEntries(fc.faceBlendshapes[0].categories.map((c) => [c.categoryName, r5(c.score)]));
-        }
-        if (fc.facialTransformationMatrixes?.length) frame.head = matToYPR(fc.facialTransformationMatrixes[0].data);
-        if (fc.faceLandmarks?.length) frame.face = FACE_POINTS.map((i) => [r5(fc.faceLandmarks[0][i].x), r5(fc.faceLandmarks[0][i].y)]);
-        // the fingerspelling reader standardises over the whole face (without it, Kaggle letters: 37% wrong vs 17%)
-        if (fc.faceLandmarks?.length && (frame.left || frame.right)) frame.mesh = fc.faceLandmarks[0].slice(0, 468).map((l) => [r3(l.x), r3(l.y), r3(l.z)] as P3);
-        onFrame(frame);
-      }
-    }
+    tracker.detect(video, t).then(({ parts, ms }) => {
+      if (trackerTimes) PARTS.forEach((k) => ms[k] !== undefined && trackerTimes![k].push(ms[k]!));
+      const frame = toFrame(parts, t);
+      if (frame && video.srcObject === stream) onFrame(frame);
+    }, (e) => console.warn("tracker:", e)).finally(() => { busy = false; });
   };
   requestAnimationFrame(tick);
 }
