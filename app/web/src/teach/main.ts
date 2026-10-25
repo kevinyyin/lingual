@@ -47,7 +47,7 @@ const ctx = (): HomeCtx => ({
     if (t.kind === "spell" && settings.sound) practice.say("Here's how to spell it.");
     void playTokens([t]);
   },
-  reset: () => { setProgress(fresh()); home(); },
+  reset: () => { setProgress(fresh()); ALL_LESSONS.forEach((l) => saveRun(l.id, null)); home(); }, // half-done lessons too
   pickBuddy: (id) => {
     saveBuddy(id);
     reloadSigner();
@@ -89,6 +89,7 @@ function play(id: string, exercises: Exercise[]) {
 function startLesson(id: string) {
   const lesson = ALL_LESSONS.find((l) => l.id === id);
   if (!lesson) return;
+  cameraThisSession = true; // "Camera off for now" was for that lesson: later ones lost their camera steps (12 -> 8)
   play(id, buildLesson({
     signs: lesson.signs, known: signsTaughtThrough(id), vocab, review: id.endsWith("review"),
     perform: camera(), rng: Math.random,

@@ -17,21 +17,20 @@ export interface Lesson { id: string; title: string; signs: string[] }
 /** `tip`: the guidebook's note for the unit (facial grammar, culture). */
 export interface Unit { id: string; title: string; blurb: string; tip: string; lessons: Lesson[] }
 
-/** Every unit ends with a review lesson over all its signs (the path's trophy node). */
+/** Every unit of two or more lessons ends with a review over all its signs (the path's trophy node); a one-lesson unit's
+ *  review would only repeat it. */
 const unit = (id: string, title: string, blurb: string, tip: string, groups: [string, string[]][]): Unit => ({
   id, title, blurb, tip,
   lessons: [
     ...groups.map(([t, signs], i) => ({ id: `${id}-${i + 1}`, title: t, signs })),
-    { id: `${id}-review`, title: "Unit review", signs: groups.flatMap(([, s]) => s) },
+    ...(groups.length > 1 ? [{ id: `${id}-review`, title: "Unit review", signs: groups.flatMap(([, s]) => s) }] : []),
   ],
 });
 
 export const COURSE: Unit[] = [
-  unit("u1", "Greetings", "Say hello, thank someone, introduce yourself",
+  unit("u1", "Greetings", "Say hello and goodbye when you meet someone",
     "Keep eye contact while you sign. In ASL your face and eyes are part of the conversation.", [
-    ["Hello", ["HELLO", "GOODBYE", "NICE", "MEET"]],
-    ["Manners", ["THANK-YOU", "PLEASE", "SORRY", "WELCOME"]],
-    ["Yes and no", ["YES", "NO", "OK", "NAME"]],
+    ["Hello", ["HELLO", "GOODBYE", "MEET"]],
   ]),
   unit("u2", "People", "Talk about yourself, family and friends",
     "Pronouns point: I, YOU, HE-SHE and THEY are signed by pointing at the person, or at a spot you set up for them.", [

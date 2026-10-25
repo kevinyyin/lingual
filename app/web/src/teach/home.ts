@@ -37,6 +37,8 @@ const TABS: { id: Tab; label: string; icon: string }[] = [
 export function renderHome(root: HTMLElement, tab: Tab, ctx: HomeCtx): void {
   const now = new Date();
   const header = h("header", { class: "topbar" },
+    h("button", { class: "btn ghost small reset-top", type: "button",
+      onclick: () => { if (confirm("Reset all your XP, streak and lessons?")) ctx.reset(); } }, "Reset progress"),
     h("a", { class: "logo", href: "#/learn" }, h("span", { class: "mark" }, svg(ICON.mark)), h("span", { class: "word" }, "ASL Dragon")),
     h("nav", { class: "tabs", "aria-label": "Main" },
       ...TABS.map((t) => h("a", { class: "tab", href: `#/${t.id}`, "aria-current": t.id === tab ? "page" : null }, svg(t.icon), h("span", { class: "label" }, t.label)))),
