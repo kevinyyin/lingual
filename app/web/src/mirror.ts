@@ -323,7 +323,7 @@ export async function startMirror(): Promise<void> {
   });
   sock.send({ type: "buddy", buddy: savedBuddy().id });
   sock.send({ type: "mirror", on: true });
-  sock.send({ type: "mode", mode: "signing" });
+  sock.send({ type: "mode", mode: "signing", ...(new URLSearchParams(location.search).get("demo") === "1" ? { demo: true } : {}) });
 
   // drawn lighter: the trackers share the GPU with it (laptop, fake camera: camera frames read 5.5-7.5/s at pixel
   // ratio 2, 7.5-10.5 at 1), and it gets ~12 new poses a second, so 30 drawn a second lose nothing

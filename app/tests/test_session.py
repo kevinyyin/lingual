@@ -42,7 +42,7 @@ class FakeComposer:
 
     async def compose(self, signs, spelled, grammar, emotion):
         self.calls.append((signs, spelled, grammar, emotion))
-        return "Do you have coffee?"
+        return "Do you have coffee?", emotion
 
 
 class FakeVoice:
@@ -220,7 +220,7 @@ async def test_voice_mode_ignores_the_camera_and_drops_a_sign_turn_in_flight(tmp
 async def test_signs_that_make_no_sentence_are_shown_as_unclear_and_not_spoken(tmp_path):
     class NoSentence(FakeComposer):
         async def compose(self, signs, spelled, grammar, emotion):
-            return ""
+            return "", emotion
 
     events = [TurnStart(), TurnEnd(segments=[seg()], frames=[make_frame()] * 20, rest_ms=0)]
     voice = RecordingVoice()

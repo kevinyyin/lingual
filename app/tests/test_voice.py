@@ -19,6 +19,18 @@ def test_intensity_monotonic():
     assert hi["emotion"] in ("sad", "disappointed", "dejected")
 
 
+def test_the_composed_pick_is_spoken_and_the_face_sets_speed_and_volume():
+    face = voice_controls({"label": "angry", "intensity": 0.9})
+    c = voice_controls({"label": "angry", "intensity": 0.9, "voice": "outraged"})
+    assert c == {**face, "emotion": "outraged"}
+    assert voice_controls({"label": "neutral", "intensity": 0.0, "voice": "grateful"}) == {"emotion": "grateful", "speed": 1.0, "volume": 1.0}
+
+
+def test_a_pick_outside_cartesias_list_falls_back_to_the_face():
+    assert voice_controls({"label": "sad", "intensity": 0.3, "voice": "ecstatic"})["emotion"] == "sad"
+    assert voice_controls({"label": "neutral", "intensity": 0.0, "voice": "neutral"}) == {"speed": 1.0, "volume": 1.0}
+
+
 def test_controls_within_api_bounds():
     for label in LABELS:
         for i in (0.0, 0.5, 1.0):

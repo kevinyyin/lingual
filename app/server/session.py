@@ -7,11 +7,11 @@ import os
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, AsyncIterator, Awaitable, Callable, Literal, Protocol, TypedDict
+from typing import Any, AsyncIterator, Awaitable, Callable, Literal, NotRequired, Protocol, TypedDict
 
 import numpy as np
 
-from . import plush
+from . import demo_sentences, plush
 from .protocol import (
     AvatarDoneMsg, BuddyMsg, CalibrateMsg, CaptionMsg, CheerMsg, FrameMsg, MirrorMsg, ModeMsg, PickMsg, PickOption, PickRequestMsg, PracticeMsg, RedoMsg,
     SayMsg, RecognizedMsg, SignPlanMsg, SignToken, StateMsg, TalkMsg, YouSaidMsg, Frame,
@@ -50,8 +50,9 @@ class Grammar(TypedDict):
 
 
 class Emotion(TypedDict):
-    label: Literal["happy", "sad", "angry", "neutral"]
+    label: Literal["happy", "sad", "angry", "neutral"]  # what the face read (emotion.py)
     intensity: float
+    voice: NotRequired[str]  # the Cartesia emotion compose picked for the sentence (voice.EMOTIONS)
 
 
 @dataclass
@@ -61,6 +62,7 @@ class Baseline:
     motion_floor: float  # mean wrist speed at rest, per frame
     speed: float | None = None  # mean signing wrist speed, set from the first turn (emotion.py)
     size: float | None = None  # mean signing wrist box area, set from the first turn (emotion.py)
+    face: dict[str, float] = field(default_factory=dict)  # resting non-brow blendshapes, emotion's zero (emotion.py)
 
 
 @dataclass
@@ -103,7 +105,7 @@ class Readers(Protocol):
 
 
 class Composer(Protocol):
-    async def compose(self, signs: list[str], spelled: list[str], grammar: Grammar, emotion: Emotion) -> str: ...
+    async def compose(self, signs: list[str], spelled: list[str], grammar: Grammar, emotion: Emotion) -> tuple[str, Emotion]: ...
 
 
 class Voice(Protocol):
@@ -122,11 +124,12 @@ def compute_baseline(frames: list[Frame]) -> Baseline:
     w = np.stack([_wrists(f) for f in frames])
     speed = np.linalg.norm(np.diff(w, axis=0), axis=-1).mean() if len(w) > 1 else 0.0
     faces = [f.blend for f in frames if f.blend]
-    keys = {k for b in faces for k in b if k.startswith("brow")}
-    brow = {k: float(np.mean([b.get(k, 0.0) for b in faces])) for k in keys}
+    rest = {k: float(np.mean([b.get(k, 0.0) for b in faces])) for k in {k for b in faces for k in b}}
+    brow = {k: v for k, v in rest.items() if k.startswith("brow")}
+    face = {k: v for k, v in rest.items() if not k.startswith("brow")}
     # each wrist's own resting height (hands may rest at different heights); the median ignores a hand moved briefly
     left, right = np.median(w[:, :, 1], axis=0) - REST_MARGIN
-    return Baseline(rest_y=(float(left), float(right)), brow=brow, motion_floor=float(speed))
+    return Baseline(rest_y=(float(left), float(right)), brow=brow, motion_floor=float(speed), face=face)
 
 
 def now_ms() -> float:
@@ -164,6 +167,9 @@ class Session:
         self.practice = False
         self.practice_signs: set[str] = set()
         self.mirror = False  # the avatar mirror page (MirrorMsg): sign turns are labelled on the page, sign by sign
+        # demo mode (LINGUAL_DEMO_SENTENCES=1 or ?demo=1): a turn matching a scripted sentence is said as its English
+        self.demo = os.environ.get("LINGUAL_DEMO_SENTENCES") == "1"
+        self.demo_sentences = demo_sentences.load()
         self.mode: str | None = None  # the translator's switch (ModeMsg): "voice" or "signing"; None runs both
         self.talking = False  # push to talk held (TalkMsg)
         self._say_lock = asyncio.Lock()
@@ -256,6 +262,7 @@ class Session:
             await self._on_frame(msg)
         elif isinstance(msg, ModeMsg):
             self.mode = msg.mode
+            self.demo = self.demo or msg.demo
             if msg.mode == "voice" and self.state in ("signing", "reading", "picking"):
                 await self._yield_to_speech()  # a sign turn in flight is dropped
             elif msg.mode == "signing" and self.state == "listening":
@@ -364,8 +371,9 @@ class Session:
         if os.environ.get("ASL_DUMP_TURNS"):
             self._dump(ev)
         try:
-            if not ev.segments and not self.mirror:  # the mirror reads held signs the segmenter finds no motion in
-                return
+            # A turn whose motion the segmenter found no piece in is read whole, not dropped (the mirror's way): a webcam
+            # signer's demo sentences came in as 7 turns in a row with no piece, and nothing showed (_read_mirror reads
+            # nothing for a turn with too few hand frames, which then ends below as before).
             if self.practice:  # one sign per exercise: the hands going down, or a slow sign cut in two, is not a second sign
                 whole = ev.whole or ev.frames  # read whole, and its last PRACTICE_LATEST_MS alone; the page takes either
                 latest = [f for f in whole if f.t >= whole[-1].t - PRACTICE_LATEST_MS]
@@ -376,7 +384,7 @@ class Session:
                 await self.send(RecognizedMsg(segments=[
                     [PickOption(gloss=g, english=self._english(g, r), p=p) for g, p in t] for r, t in zip(reads, tops)]))
                 return
-            read = await asyncio.to_thread(self._read_mirror if self.mirror else self._read_turn, ev)
+            read = await asyncio.to_thread(self._read_mirror if self.mirror or not ev.segments else self._read_turn, ev)
             read = [(s, t) for s, t in read if t]  # unreadable segments (e.g. no confident letters) are dropped
             if self.mirror:  # each sign labelled on the page as read, then the English sentence they make; never said or picked
                 turn.stamps["recognized"] = now_ms()
@@ -394,6 +402,8 @@ class Session:
             grammar, emotion = await asyncio.to_thread(self.readers.read, ev.frames, self.baseline)
             turn.stamps["recognized"] = now_ms()
             turn.result = {"top3": [[[g, round(p, 3)] for g, p in t[:3]] for t in tops]}  # logged even if cancelled
+            if self.demo and (snapped := await asyncio.to_thread(self._snap_demo, segments)):
+                return await self._say_demo(turn, snapped, emotion)  # no picker, no Claude: the scripted English
             choice = [t[0][0] for t in tops]
             picks = 0
             for i, t in enumerate(tops):
@@ -414,7 +424,7 @@ class Session:
                 return
             signs = [c for c, s in zip(choice, segments) if s.kind == "sign"]
             spelled = [c for c, s in zip(choice, segments) if s.kind == "spell"]
-            text = await self.composer.compose(signs, spelled, grammar, emotion)
+            text, emotion = await self.composer.compose(signs, spelled, grammar, emotion)  # adds the voice's emotion
             turn.stamps["composed"] = now_ms()
             turn.result = {"signs": signs, "spelled": spelled, "grammar": grammar, "emotion": emotion, "text": text, "picks": picks,
                            "top3": turn.result["top3"]}
@@ -423,7 +433,7 @@ class Session:
             if not text:  # the signs make no sentence: say so on screen, speak nothing
                 await self.send(YouSaidMsg(text="", emotion=emotion["label"], unclear=True, read=read))
                 return
-            await self.send(YouSaidMsg(text=text, emotion=emotion["label"], read=read))
+            await self.send(YouSaidMsg(text=text, emotion=emotion.get("voice", emotion["label"]), read=read))
             await self._set("speaking")
             async for e in self.voice.speak(text, emotion):
                 if e == "first_audio":
@@ -434,9 +444,31 @@ class Session:
             turn.error = f"{type(e).__name__}: {e}"
         finally:
             self._pick, self._offered = None, None
-            if ev.segments and not self.mirror:  # the mirror's turn is logged with its sentence (_mirror_sentence)
+            if (ev.segments or turn.result) and not self.mirror:  # the mirror's is logged with its sentence (_mirror_sentence)
                 self._log(turn)
             await self._set("ready")
+
+    def _snap_demo(self, segments: list[Segment]):
+        """Demo mode: (the scripted sentence these pieces match, its score, the runner-up's), else None. Each signed
+        piece is read again for its top TOP_K guesses: the match tolerates the right sign a few places down."""
+        tops = [self.recognizer.topk(s.context or s.frames, demo_sentences.TOP_K) if s.kind == "sign" else []
+                for s in segments]
+        sentence, score, runner = demo_sentences.snap(tops, self.demo_sentences)
+        return (sentence, score, runner) if sentence else None
+
+    async def _say_demo(self, turn: _Turn, snapped, emotion: Emotion, speak: bool = True) -> None:
+        """Show (and, in the translator, say) a snapped demo sentence's exact English with its signs."""
+        sentence, score, runner = snapped
+        turn.stamps["composed"] = now_ms()
+        turn.result |= {"text": sentence.english, "demo_sentence": {
+            "signs": list(sentence.signs), "english": sentence.english, "score": round(score, 3), "margin": round(score - runner, 3)}}
+        await self.send(YouSaidMsg(text=sentence.english, emotion=emotion["label"],
+                                   read=[SignToken(kind="sign", gloss=g) for g in sentence.signs]))
+        if speak:
+            await self._set("speaking")
+            async for e in self.voice.speak(sentence.english, emotion):
+                if e == "first_audio":
+                    turn.stamps["first_audio"] = now_ms()
 
     async def _mirror_sentence(self, read, ev: TurnEnd, turn: _Turn) -> None:
         """The English sentence a mirror turn's signs make (Claude), shown under their labels; never said."""
@@ -445,10 +477,12 @@ class Session:
                 signs = [t[0][0] for s, t in read if s.kind == "sign"]
                 spelled = [t[0][0] for s, t in read if s.kind == "spell"]
                 grammar, emotion = await asyncio.to_thread(self.readers.read, ev.frames, self.baseline)
-                text = await self.composer.compose(signs, spelled, grammar, emotion)  # ASL gloss -> English
+                if self.demo and (snapped := await asyncio.to_thread(self._snap_demo, [s for s, _ in read])):
+                    return await self._say_demo(turn, snapped, emotion, speak=False)
+                text, emotion = await self.composer.compose(signs, spelled, grammar, emotion)  # ASL gloss -> English
                 turn.stamps["composed"] = now_ms()
                 turn.result |= {"signs": signs, "spelled": spelled, "grammar": grammar, "text": text}
-                await self.send(YouSaidMsg(text=text, emotion=emotion["label"], unclear=not text, read=[
+                await self.send(YouSaidMsg(text=text, emotion=emotion.get("voice", emotion["label"]), unclear=not text, read=[
                     SignToken(kind="sign", gloss=t[0][0]) if s.kind == "sign" else SignToken(kind="spell", word=t[0][0])
                     for s, t in read]))
         except Exception as e:  # a failed sentence leaves the labels shown
@@ -634,8 +668,8 @@ class StubReaders:
 
 
 class StubComposer:
-    async def compose(self, signs, spelled, grammar, emotion) -> str:
-        return " ".join(signs + spelled).lower()
+    async def compose(self, signs, spelled, grammar, emotion) -> tuple[str, Emotion]:
+        return " ".join(signs + spelled).lower(), emotion
 
 
 class StubVoice:

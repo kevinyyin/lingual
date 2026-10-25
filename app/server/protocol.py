@@ -51,6 +51,7 @@ class ModeMsg(BaseModel):
     camera reads signs and they are said aloud; speech is ignored). Until a page sends one, both directions run."""
     type: Literal["mode"] = "mode"
     mode: Literal["voice", "signing"]
+    demo: bool = False  # the page was opened with ?demo=1: signed turns snap to the demo sentences (demo_sentences.py)
 
 
 class TalkMsg(BaseModel):

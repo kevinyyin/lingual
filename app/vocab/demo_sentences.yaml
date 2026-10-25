@@ -1,0 +1,34 @@
+# Demo mode (LINGUAL_DEMO_SENTENCES=1, or the translator opened with ?demo=1): a signed turn that reads close to one of
+# these is said as its exact English, without Claude or the picker (server/demo_sentences.py). Outside them the app
+# translates as usual.
+# Rules: only signs the model reads well (eval: right >= 83% unless noted), 2-4 signs, and every two sentences differ in
+# at least 2 signs (tests/test_demo_sentences.py checks). Avoid GOOD, MY, WHAT, YOU, WATER, HUNGRY, MINUTE, HOUR.
+# Rehearse each exactly as the demo signer will sign it.
+- signs: [HELLO, NICE, MEET]
+  english: "Hello, nice to meet you!"
+- signs: [YOUR, NAME, HOW]
+  english: "How do you spell your name?"
+- signs: [WANT, COFFEE, PLEASE]
+  english: "I'd like a coffee, please."
+- signs: [NEED, BATHROOM, WHERE]
+  english: "Where is the bathroom? I need it."
+- signs: [THANK-YOU, HELP]
+  english: "Thank you for your help."
+- signs: [FEEL, HURT, NEED, HOSPITAL]
+  english: "I'm hurt. I need a hospital."
+- signs: [TOMORROW, GO, RESTAURANT]
+  english: "Tomorrow I'm going to a restaurant."
+- signs: [YESTERDAY, LEARN, SIGN]
+  english: "Yesterday I learned to sign."
+- signs: [FAVORITE, JUICE]
+  english: "Juice is my favorite."
+- signs: [FAMILY, HOME, LATER]
+  english: "My family will be home later."
+- signs: [SORRY, REMEMBER]
+  english: "Sorry, I don't remember."
+- signs: [WELCOME, HOME]
+  english: "Welcome home!"
+- signs: [BUS, NOW, GO]
+  english: "The bus is leaving now."
+- signs: [EXCITED, MEET, FAMILY]
+  english: "I'm excited to meet your family."
