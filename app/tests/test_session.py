@@ -549,25 +549,56 @@ async def test_redo_drops_the_attempt_being_read(tmp_path):
     assert s.state == "ready" and not [m for m in sent if m.type == "recognized"]
 
 
+class ByTime:
+    """Reads frames mostly before 2 s as COFFEE and after as HELLO; a stretch across both as neither (re-cut there)."""
+
+    def topk(self, frames, k=3):
+        early = sum(f.t < 2000 for f in frames) / len(frames)
+        if early > 0.7:
+            return [("COFFEE", 0.4), ("TEA", 0.3)]
+        if early < 0.3:
+            return [("HELLO", 0.9), ("HI", 0.05)]
+        return [("TEA", 0.01), ("COFFEE", 0.01)]
+
+
 async def test_mirror_labels_each_sign_with_its_time_and_never_picks_composes_or_speaks(tmp_path):
-    a = Segment(frames=[make_frame(t=1000 + i * 20) for i in range(4)], kind="sign")  # 60 ms each: too short to re-cut
-    b = Segment(frames=[make_frame(t=1120 + i * 20) for i in range(4)], kind="sign")
-    events = [TurnStart(), TurnEnd(segments=[a, b], frames=a.frames + b.frames, rest_ms=0)]
+    frames = [make_frame(t=1000 + i * 66) for i in range(31)]  # hands up 1.0-3.0 s: COFFEE, then HELLO from 2 s
+    events = [TurnStart(), TurnEnd(segments=[Segment(frames=frames[5:25], kind="sign")], frames=frames, rest_ms=0)]
     composer = FakeComposer()
-    s, sent = make_session(tmp_path, events, [[("COFFEE", 0.4), ("TEA", 0.3)], [("HELLO", 0.9), ("HI", 0.05)]], composer=composer)
+    s, sent = make_session(tmp_path, events, recognizer=ByTime(), composer=composer)
     await s.on_client(MirrorMsg(on=True))
     await s.on_client(ModeMsg(mode="signing"))
     await calibrate(s)
     await push_frames(s, 2)
     (msg,) = [m for m in sent if m.type == "recognized"]
+    # one segmenter piece, but the whole time the hands were up is re-cut where the model is surest: two signs
     assert [[o.gloss for o in sign] for sign in msg.segments] == [["COFFEE", "TEA"], ["HELLO", "HI"]]
     assert msg.segments[0][0].english == "coffee"
-    assert msg.spans == [(1000, 1060), (1120, 1180)]
-    assert not composer.calls and not [m for m in sent if m.type in ("pick_request", "you_said")]  # 0.4 would ask for a pick
-    assert states(sent)[-3:] == ["signing", "reading", "ready"]
+    (first, second) = msg.spans
+    assert first[0] == 1000 and first[1] < second[0] and second[1] == 2980  # cut near 2 s (the reads have context)
+    # then the sentence the signs make (Claude), shown but never said; no picker though COFFEE's 0.4 would ask for one
+    assert composer.calls[0][:2] == (["COFFEE", "HELLO"], [])
+    (said,) = [m for m in sent if m.type == "you_said"]
+    assert said.text == "Do you have coffee?" and [t.gloss for t in said.read] == ["COFFEE", "HELLO"]
+    assert not [m for m in sent if m.type == "pick_request"]
+    assert states(sent)[-3:] == ["signing", "reading", "ready"]  # never "speaking"
     await s.on_transcript("hello there", True)
     await s.idle()
     assert not [m for m in sent if m.type in ("sign_plan", "caption")]
+
+
+async def test_mirror_reads_a_held_sign_the_segmenter_found_no_motion_in(tmp_path):
+    """MY: a hand held on the chest. The segmenter cuts by motion and found no piece; the mirror still reads it."""
+    frames = [make_frame(t=1000 + i * 66) for i in range(10)]
+    events = [TurnStart(), TurnEnd(segments=[], frames=frames, rest_ms=0)]
+    s, sent = make_session(tmp_path, events, recognizer=ByTime())
+    await s.on_client(MirrorMsg(on=True))
+    await s.on_client(ModeMsg(mode="signing"))
+    await calibrate(s)
+    await push_frames(s, 2)
+    (msg,) = [m for m in sent if m.type == "recognized"]
+    assert [[o.gloss for o in sign] for sign in msg.segments] == [["COFFEE", "TEA"]]
+    assert msg.spans == [(1000, 1594)]
 
 
 async def test_practice_mode_ignores_speech(tmp_path):

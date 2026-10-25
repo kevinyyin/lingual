@@ -349,7 +349,7 @@ class Session:
         if os.environ.get("ASL_DUMP_TURNS"):
             self._dump(ev)
         try:
-            if not ev.segments:
+            if not ev.segments and not self.mirror:  # the mirror reads held signs the segmenter finds no motion in
                 return
             if self.practice:  # one sign per exercise: the hands going down, or a slow sign cut in two, is not a second sign
                 whole = ev.whole or ev.frames  # read whole, and its last PRACTICE_LATEST_MS alone; the page takes either
@@ -361,14 +361,25 @@ class Session:
                 await self.send(RecognizedMsg(segments=[
                     [PickOption(gloss=g, english=self._english(g, r), p=p) for g, p in t] for r, t in zip(reads, tops)]))
                 return
-            read = await asyncio.to_thread(self._read_turn, ev)
+            read = await asyncio.to_thread(self._read_mirror if self.mirror else self._read_turn, ev)
             read = [(s, t) for s, t in read if t]  # unreadable segments (e.g. no confident letters) are dropped
-            if self.mirror:  # each sign labelled on the page as read; nothing composed, said or picked
+            if self.mirror:  # each sign labelled on the page as read, then the English sentence they make; never said or picked
                 turn.stamps["recognized"] = now_ms()
                 turn.result = {"top3": [[[g, round(p, 3)] for g, p in t[:3]] for _, t in read]}
                 await self.send(RecognizedMsg(
                     segments=[[PickOption(gloss=g, english=self._english(g, s), p=p) for g, p in t[:3]] for s, t in read],
                     spans=[(s.frames[0].t, s.frames[-1].t) for s, _ in read]))
+                if not read:
+                    return
+                signs = [t[0][0] for s, t in read if s.kind == "sign"]
+                spelled = [t[0][0] for s, t in read if s.kind == "spell"]
+                grammar, emotion = await asyncio.to_thread(self.readers.read, ev.frames, self.baseline)
+                text = await self.composer.compose(signs, spelled, grammar, emotion)  # ASL gloss -> English (Claude)
+                turn.stamps["composed"] = now_ms()
+                turn.result |= {"signs": signs, "spelled": spelled, "grammar": grammar, "text": text}
+                await self.send(YouSaidMsg(text=text, emotion=emotion["label"], unclear=not text, read=[
+                    SignToken(kind="sign", gloss=t[0][0]) if s.kind == "sign" else SignToken(kind="spell", word=t[0][0])
+                    for s, t in read]))
                 return
             segments, tops = [s for s, _ in read], [t for _, t in read]
             grammar, emotion = await asyncio.to_thread(self.readers.read, ev.frames, self.baseline)
@@ -441,6 +452,34 @@ class Session:
                 out.append((s, self._read_segment(s)))
         flush()
         return out
+
+    def _read_mirror(self, ev: TurnEnd) -> list[tuple[Segment, list[tuple[str, float]]]]:
+        """The mirror's signs: the whole time a hand was up, cut where the sign model is surest (recut.py), so a sign
+        held in place is read too. The segmenter cuts by motion only: a webcam signer's MY NAME (MY: a hand held on the
+        chest) read as NAME alone, and MY alone as nothing, in 9 of 10 turns. Neighbouring pieces read as one sign are
+        one (a held sign was cut in two). A spelled word keeps the translator's reading (the letter reader)."""
+        from .recut import recut
+
+        if any(s.kind == "spell" for s in ev.segments):
+            return self._read_turn(ev)
+        around = sorted({f.t: f for f in [*ev.frames, *(f for s in ev.segments for f in s.context or [])]}.values(),
+                        key=lambda f: f.t)
+        up = [f for f in around if f.left is not None or f.right is not None]
+        if len(up) < 3:
+            return self._read_turn(ev)
+        run = [f for f in around if up[0].t <= f.t <= up[-1].t]
+        pieces = recut(run, around, self.recognizer) or [(Segment(frames=run, kind="sign", context=run),
+                                                          self.recognizer.topk(run, 3))]
+        merged: list[tuple[Segment, list[tuple[str, float]]]] = []
+        for s, t in pieces:
+            if merged and t and merged[-1][1] and t[0][0] == merged[-1][1][0][0]:
+                prev, top = merged[-1]
+                frames = prev.frames + s.frames
+                merged[-1] = (Segment(frames=frames, kind="sign", context=(prev.context or []) + (s.context or [])),
+                              top if top[0][1] >= t[0][1] else t)
+            else:
+                merged.append((s, t))
+        return merged
 
     def _read_segment(self, s: Segment) -> list[tuple[str, float]]:
         if s.kind == "spell" and self.spell_reader is not None:

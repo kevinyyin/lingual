@@ -25,6 +25,7 @@ from . import session as S
 from .classifier import DEFAULT_MODEL, SignPredictor
 from .citizen_classifier import DEFAULT_MODEL as CITIZEN_MODEL, TRAIN_CSV as CITIZEN_CSV, CitizenSignPredictor
 from .ensemble import EnsembleRecognizer
+from .lookalike import LookalikeRecognizer
 from .prior import PriorRecognizer
 from .spike_classifier import DEFAULT_MODEL as SPIKE_MODEL, SpikeSignPredictor
 from .compose import Composer
@@ -90,7 +91,7 @@ def _recognizer():
     return S.DemoRecognizer()
 
 
-RECOGNIZER = _recognizer()
+RECOGNIZER = LookalikeRecognizer(_recognizer())  # MY vs PLEASE settled by the palm's circling (lookalike.py)
 
 
 def _speller():
