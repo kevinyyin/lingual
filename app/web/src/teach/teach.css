@@ -339,6 +339,12 @@ p { margin: 0; }
 .cam-slot:is([data-status="ready"], [data-status="signing"]) { --edge: var(--rose); }
 .cam-slot:is([data-status="ready"], [data-status="signing"])[data-hands="in"] { --edge: var(--go); }
 .cam-slot[data-status="reading"] { --edge: var(--rose); }
+/* graded: green for right (with a flash), red for wrong, whatever the camera was doing */
+.cam-slot[data-result="right"] { --edge: var(--go); }
+.cam-slot[data-result="right"]::after { animation: cam-right 450ms var(--ease) 2; }
+.cam-slot[data-result="wrong"] { --edge: var(--rose); }
+@keyframes cam-right { 50% { box-shadow: inset 0 0 0 12px var(--go); } }
+@media (prefers-reduced-motion: reduce) { .cam-slot[data-result="right"]::after { animation: none; } }
 .cam-slot[data-status="reading"] .cam-video { filter: brightness(.55) saturate(.6) blur(8px); } /* frozen (signer.ts) while it's read */
 .cam-video { width: 100%; height: 100%; object-fit: cover; display: block; transition: filter 200ms var(--ease); }
 /* working on it while the camera starts or a sign is read: the dark box never looks stuck */
