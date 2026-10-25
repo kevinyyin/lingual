@@ -71,9 +71,11 @@ class SayMsg(BaseModel):
     text: str = Field(min_length=1, max_length=200)
 
 
-class CheerMsg(BaseModel):
-    """Teaching mode: the child got one right, so the plushie flaps its arms (server/plush.py)."""
-    type: Literal["cheer"] = "cheer"
+class AnswerMsg(BaseModel):
+    """Teaching mode: the child answered, so the plushie shows a check (and flaps), an X, or a ! for "try again"
+    (server/plush.py)."""
+    type: Literal["answer"] = "answer"
+    result: Literal["right", "wrong", "retry"]
 
 
 Buddy = Literal["leo", "benji", "zeke", "lexi", "avery", "daisy"]
@@ -93,7 +95,7 @@ class RecordMsg(BaseModel):
 
 
 ClientMsg = Annotated[
-    Union[FrameMsg, CalibrateMsg, PickMsg, AvatarDoneMsg, PracticeMsg, ModeMsg, TalkMsg, SayMsg, CheerMsg, RedoMsg, BuddyMsg,
+    Union[FrameMsg, CalibrateMsg, PickMsg, AvatarDoneMsg, PracticeMsg, ModeMsg, TalkMsg, SayMsg, AnswerMsg, RedoMsg, BuddyMsg,
           RecordMsg],
     Field(discriminator="type"),
 ]
