@@ -1,11 +1,10 @@
 // The course: units of short lessons, each teaching a few signs from the app's vocabulary (vocab.yaml, avatar_ok).
 import type { Tone } from "../ws";
 
-/** Feeling signs carry their face in ASL (the Feelings unit's tip): a smile, a frown or a glare, given to the avatar as a
- *  tone. */
+/** Feeling signs carry their face in ASL (the Feelings unit's tip): a smile or a frown, given to the avatar as a tone. */
 export const FEELING_FACE: Record<string, Tone> = {
   HAPPY: "warm", EXCITED: "warm", GOOD: "warm", FINE: "warm",
-  SAD: "sad", TIRED: "sad", SICK: "sad", ANGRY: "angry", SORRY: "apologetic",
+  SAD: "apologetic", ANGRY: "apologetic", TIRED: "apologetic", SICK: "apologetic", SORRY: "apologetic",
 };
 
 /** The face for playing `glosses`: their feeling signs' shared face, neutral when there are none or they disagree. */
@@ -30,7 +29,7 @@ const unit = (id: string, title: string, blurb: string, tip: string, groups: [st
 export const COURSE: Unit[] = [
   unit("u1", "Greetings", "Say hello, thank someone, introduce yourself",
     "Keep eye contact while you sign. In ASL your face and eyes are part of the conversation.", [
-    ["Hello", ["HELLO", "GOODBYE", "MORNING", "MEET"]],
+    ["Hello", ["HELLO", "GOODBYE", "NICE", "MEET"]],
     ["Manners", ["THANK-YOU", "PLEASE", "SORRY", "WELCOME"]],
     ["Yes and no", ["YES", "NO", "OK", "NAME"]],
   ]),

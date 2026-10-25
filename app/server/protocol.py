@@ -154,7 +154,7 @@ class SignPlanMsg(BaseModel):
     type: Literal["sign_plan"] = "sign_plan"
     tokens: list[SignToken]
     grammar: Literal["yn", "wh", "neg", "statement"]
-    tone: Literal["warm", "apologetic", "sad", "angry", "urgent", "neutral"]
+    tone: Literal["warm", "apologetic", "urgent", "neutral"]
     english: str
     unclear: bool = False  # the words made no sense: nothing is signed, and english is what was heard
 

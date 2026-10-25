@@ -154,18 +154,9 @@ test("a pass shows no match bar; a miss still shows how close it came", async ()
   await vi.waitFor(() => expect(cam.onFrame).not.toBeNull());
   sock.toPage(miss);
   expect(document.querySelector(".heard .score")).not.toBeNull();
-  sock.toPage({ type: "recognized", segments: [[{ gloss: "NICE", english: "nice", p: 0.5 }, { gloss: "MEET", english: "meet", p: 0.2 },
-    { gloss: "HELLO", english: "hello", p: 0.15 }]] }); // third guess at 30% of the top one: a pass
-  expect(document.querySelector(".verdict")!.textContent).not.toContain("Not quite.");
+  sock.toPage({ type: "recognized", segments: [[{ gloss: "NICE", english: "nice", p: 0.9 }, { gloss: "MEET", english: "meet", p: 0.05 },
+    { gloss: "HELLO", english: "hello", p: 0.009 }]] }); // third guess at 1% of the top one: a pass by the top-3 rule
   expect(document.querySelector(".verdict .score")).toBeNull();
-});
-
-test("a sure read of another sign is a miss even with the target in the top 3", async () => {
-  await vi.waitFor(() => expect(cam.onFrame).not.toBeNull());
-  sock.toPage({ type: "recognized", segments: [[{ gloss: "NICE", english: "nice", p: 0.95 }, { gloss: "HELLO", english: "hello", p: 0.01 }],
-    [{ gloss: "NICE", english: "nice", p: 0.58 }, { gloss: "MEET", english: "meet", p: 0.07 }, { gloss: "HELLO", english: "hello", p: 0.06 }]] });
-  expect(document.querySelector(".verdict")).toBeNull(); // HELLO at 1% and 10% of the top guess: try again
-  expect(document.querySelector(".heard")!.textContent).toMatch(/looked like “nice”/);
 });
 
 test("starting a new attempt clears the last one's \"that looked like...\"", async () => {

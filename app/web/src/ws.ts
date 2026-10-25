@@ -36,7 +36,7 @@ export type Mode = "voice" | "signing";
 /** reading: the signer's hands came down and the turn is being read (protocol.py). */
 export type State = "calibrating" | "ready" | "signing" | "reading" | "picking" | "speaking" | "listening" | "avatar";
 export type Grammar = "yn" | "wh" | "neg" | "statement";
-export type Tone = "warm" | "apologetic" | "sad" | "angry" | "urgent" | "neutral";
+export type Tone = "warm" | "apologetic" | "urgent" | "neutral";
 export interface SignToken { kind: "sign" | "spell"; gloss?: string | null; word?: string | null }
 /** `unclear`: the words made no sense, so nothing is signed and `english` is what was heard. */
 export interface SignPlan { type: "sign_plan"; tokens: SignToken[]; grammar: Grammar; tone: Tone; english: string; unclear?: boolean }

@@ -145,9 +145,6 @@ const TONE: Record<string, [string, number][]> = {
   EYE_Sorrow: [["AK_11_EyeLookDownLeft", 0.5], ["AK_12_EyeLookDownRight", 0.5]],
   MTH_Surprised: [["AK_25_JawOpen", 0.5]],
   EYE_Surprised: [["AK_21_EyeWideLeft", 1], ["AK_22_EyeWideRight", 1]],
-  // the toon has no sneer or lip press, and brows are grammar's: a flatter frown and a squint read as a glare
-  MTH_Angry: [["AK_30_MouthFrownLeft", 0.6], ["AK_31_MouthFrownRight", 0.6]],
-  EYE_Angry: [["AK_19_EyeSquintLeft", 0.9], ["AK_20_EyeSquintRight", 0.9]],
 };
 
 interface Arm {
