@@ -210,11 +210,14 @@ function isDescendant(o: THREE.Object3D, ancestor: THREE.Object3D): boolean {
   return false;
 }
 
-export async function loadRocketbox(canvas: HTMLCanvasElement): Promise<Avatar> {
+/** `maxPixelRatio`, `maxFps`: a lighter draw where the camera's trackers share the GPU with the avatar (mirror.ts). */
+export interface AvatarOptions { maxPixelRatio?: number; maxFps?: number }
+
+export async function loadRocketbox(canvas: HTMLCanvasElement, opts: AvatarOptions = {}): Promise<Avatar> {
   // bench mode reads frames back with toDataURL, which needs the drawing buffer kept after presenting
   const bench = new URLSearchParams(location.search).get("mode") === "bench";
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, preserveDrawingBuffer: bench });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // an iPhone's 3x drew 2.25x the pixels for no visible gain
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, opts.maxPixelRatio ?? 2)); // an iPhone's 3x drew 2.25x the pixels for no visible gain
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = IS_TOON ? THREE.NoToneMapping : THREE.ACESFilmicToneMapping; // filmic tone mapping greys flat colours
   const scene = new THREE.Scene();
@@ -918,8 +921,11 @@ export async function loadRocketbox(canvas: HTMLCanvasElement): Promise<Avatar> 
   };
   new ResizeObserver(fitCamera).observe(canvas);
   fitCamera();
+  let drawnAt = -Infinity;
   renderer.setAnimationLoop((now) => {
     if (!canvas.isConnected) return; // teaching mode moves its one canvas between screens: nothing to draw while it is on none
+    if (opts.maxFps && now - drawnAt < 1000 / opts.maxFps - 4) return; // the 4 ms: a 60 Hz frame landing early isn't skipped
+    drawnAt = now;
     breath = 0.006 * Math.sin((2 * Math.PI * now) / 4300);
     setChest();
     if (now > nextBlink) {

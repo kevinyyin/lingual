@@ -51,7 +51,8 @@ describe("distanceBySize", () => {
 
 describe("liveFrame depth", () => {
   it("puts a seen hand in front of the shoulders by perspective, its elbow half as far, and leaves an unseen one", () => {
-    // body (nose, ears, shoulders) seen at 0.5 image heights per metre; the hand at 0.6: 1.2x nearer
+    // body (nose, ears, shoulders) seen at 0.5 image heights per metre; the hand at 0.6: 1.2x nearer. Its metric palm
+    // (wrist to middle knuckle, points 0 and 9 of the ring) must be a hand's size to be believed: radius 0.03 / 0.6 * ~2
     const BODY: Record<number, [number, number]> = { 0: [0.5, 0.3], 7: [0.45, 0.3], 8: [0.55, 0.3], 11: [0.4, 0.45], 12: [0.6, 0.45] };
     const f = frame(null, null);
     const w = { pose: worldPose(), left: null as number[][] | null, right: null };
@@ -72,6 +73,31 @@ describe("liveFrame depth", () => {
     let eased = 0;
     liveFrame(f, w, 1, (_, v) => (eased = v) / 2);
     expect(eased).toBeCloseTo(front, 3);
+  });
+});
+
+describe("liveFrame hands together", () => {
+  it("marks hands whose nearest points touch in the picture as meeting, and gives them one depth", () => {
+    const BODY: Record<number, [number, number]> = { 0: [0.5, 0.3], 7: [0.45, 0.3], 8: [0.55, 0.3], 11: [0.4, 0.45], 12: [0.6, 0.45] };
+    const f = frame(null, null);
+    const w = { pose: worldPose(), left: null as number[][] | null, right: null as number[][] | null };
+    for (const [i, [x, y]] of Object.entries(BODY)) {
+      f.pose[+i] = [x, y, 0, 1];
+      w.pose[+i] = [(x - 0.5) / 0.5, (y - 0.5) / 0.5, 0];
+    }
+    // two rings almost touching at x 0.5, sized as a little nearer (left) and nearer still (right) than the body
+    const ring = (cx: number, r: number) => Array.from({ length: 21 }, (_, k) => [cx + r * Math.cos(k), 0.5 + r * Math.sin(k), 0] as [number, number, number]);
+    f.left = ring(0.535, 0.03);
+    f.right = ring(0.465, 0.033);
+    w.left = f.left.map(([x, y]) => [(x - 0.535) / 0.6, (y - 0.5) / 0.6, 0]);
+    w.right = f.right.map(([x, y]) => [(x - 0.465) / 0.6, (y - 0.5) / 0.6, 0]);
+    const out = liveFrame(f, w, 1)!;
+    expect(out.meetL).toBe(1);
+    expect(out.meetR).toBe(1);
+    expect(out.pose[15][2]).toBeCloseTo(out.pose[16][2], 6);
+    f.left = ring(0.9, 0.03); // far apart: no meeting
+    w.left = f.left.map(([x, y]) => [(x - 0.9) / 0.6, (y - 0.5) / 0.6, 0]);
+    expect(liveFrame(f, w, 1)!.meetL).toBeUndefined();
   });
 });
 

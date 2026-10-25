@@ -8,6 +8,10 @@ body[data-page="mirror"] :is(#mode, #talk, #picker, .said-card, #caption, #plan,
   color: var(--ink); font: 700 clamp(1.3rem, 3vw, 2.2rem)/1.15 var(--text); text-wrap: balance; pointer-events: none;
 }
 .mirror-now:empty { display: none; }
+.mirror-rec {
+  position: absolute; z-index: 3; top: 12px; right: 12px; margin: 0; padding: 6px 14px; border-radius: var(--r-tile);
+  background: #c62828; color: #fff; font: 700 1rem var(--text); pointer-events: none;
+}
 .mirror-hint {
   position: absolute; z-index: 3; bottom: 12px; left: 0; right: 0; margin: 0 auto; width: fit-content; max-width: calc(100% - 32px);
   padding: 6px 14px; border-radius: var(--r-tile); background: var(--wait-bg); color: var(--wait-fg); font: 700 1rem var(--text);
