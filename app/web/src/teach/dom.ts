@@ -1,5 +1,7 @@
 // Tiny DOM helpers for teaching mode (the app has no UI framework).
 
+import { setAudioSession, speakerOut } from "../phone";
+
 type Child = Node | string | number | null | undefined | false;
 type Attrs = Record<string, string | number | boolean | null | undefined | ((e: any) => void)>;
 
@@ -31,21 +33,21 @@ export function svg(markup: string, cls = "icon"): SVGSVGElement {
 }
 
 /** Plays a short tone pair: up for right, down for wrong (sound is optional; everything is also shown). */
-let audio: AudioContext | null = null;
 export function chime(kind: "right" | "wrong" | "done"): void {
   try {
-    audio ??= new AudioContext();
+    setAudioSession("playback"); // not muted by the iPad's ringer switch
+    const audio = speakerOut();
     const notes = kind === "right" ? [660, 880] : kind === "wrong" ? [300, 220] : [523, 659, 784, 1047];
     notes.forEach((f, i) => {
-      const o = audio!.createOscillator();
-      const g = audio!.createGain();
-      const t = audio!.currentTime + i * 0.09;
+      const o = audio.createOscillator();
+      const g = audio.createGain();
+      const t = audio.currentTime + i * 0.09;
       o.type = kind === "wrong" ? "square" : "sine";
       o.frequency.value = f;
       g.gain.setValueAtTime(0.0001, t);
       g.gain.exponentialRampToValueAtTime(kind === "wrong" ? 0.05 : 0.12, t + 0.01);
       g.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
-      o.connect(g).connect(audio!.destination);
+      o.connect(g).connect(audio.destination);
       o.start(t);
       o.stop(t + 0.18);
     });
