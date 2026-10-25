@@ -252,6 +252,8 @@ export function bindControls(sock: Socket, onMode?: (m: Mode) => void): void {
     more?.setAttribute("aria-expanded", String(open));
   };
   if (more) more.onclick = () => setMenu(more.getAttribute("aria-expanded") !== "true");
+  const calibrate = document.getElementById("calibrate");
+  if (calibrate) calibrate.onclick = () => { sock.send({ type: "calibrate" }); setMenu(false); };
   // ?dev=1: type what the hearing person says (no mic or Cartesia key needed).
   $<HTMLFormElement>("dev").hidden = !new URLSearchParams(location.search).get("dev");
   $<HTMLFormElement>("dev").onsubmit = async (e) => {
