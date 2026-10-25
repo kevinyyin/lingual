@@ -55,5 +55,5 @@ test("tone shows at full strength mid-sentence, on the mouth and eyes only", () 
   expect(at("warm")).toEqual({ MTH_Joy: 1, EYE_Joy: 0.7 });
   expect(at("apologetic")).toEqual({ MTH_Sorrow: 0.9, EYE_Sorrow: 0.6 });
   expect(at("urgent")).toEqual({ MTH_Surprised: 0.6, EYE_Surprised: 0.8 });
-  expect(at("neutral")).toEqual({});
+  expect(at("neutral")).toEqual({ MTH_Neutral: 1 }); // a straight mouth, not the toon's resting smile
 });

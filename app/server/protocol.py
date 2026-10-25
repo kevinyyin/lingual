@@ -151,6 +151,7 @@ class YouSaidMsg(BaseModel):
     type: Literal["you_said"] = "you_said"
     text: str
     emotion: str
+    face: Literal["happy", "sad", "angry", "neutral"] = "neutral"  # what the signer's face read: the mini avatar's face
     unclear: bool = False  # the signs made no sentence: nothing was said aloud (text is empty)
     read: list["SignToken"] = []  # what the camera read, in order: the mini avatar signs it back
 

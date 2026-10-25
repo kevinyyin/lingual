@@ -44,3 +44,13 @@ test("after a new buddy is picked, the mini one is the new buddy", async () => {
   expect(vi.mocked(loadAvatar).mock.calls.length).toBe(before + 1);
   localStorage.removeItem("lingual.buddy");
 });
+
+test("signs back with the signer's face: a smile, a straight mouth or a frown", async () => {
+  const { showMini } = await import("./mini");
+  const host = document.createElement("div");
+  for (const face of ["happy", "neutral", "sad", "angry"] as const) {
+    showMini(host, [{ kind: "sign", gloss: "COFFEE" }], "I saw: coffee", face);
+    await flush();
+  }
+  expect(play.mock.calls.map(([plan]) => (plan as { tone: string }).tone)).toEqual(["warm", "neutral", "apologetic", "apologetic"]);
+});

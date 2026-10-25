@@ -39,6 +39,8 @@ export type Mode = "voice" | "signing";
 export type State = "calibrating" | "ready" | "signing" | "reading" | "picking" | "speaking" | "listening" | "avatar";
 export type Grammar = "yn" | "wh" | "neg" | "statement";
 export type Tone = "warm" | "apologetic" | "urgent" | "neutral";
+/** What the signer's face read (server/emotion.py). */
+export type Feeling = "happy" | "sad" | "angry" | "neutral";
 export interface SignToken { kind: "sign" | "spell"; gloss?: string | null; word?: string | null }
 /** `unclear`: the words made no sense, so nothing is signed and `english` is what was heard. */
 export interface SignPlan { type: "sign_plan"; tokens: SignToken[]; grammar: Grammar; tone: Tone; english: string; unclear?: boolean }
@@ -47,7 +49,7 @@ export interface PickOption { gloss: string; english: string; p: number }
 export type ServerMsg =
   | { type: "state"; state: State }
   | { type: "pick_request"; segment: number; options: PickOption[] }
-  | { type: "you_said"; text: string; emotion: string; unclear?: boolean; read?: SignToken[] } // unclear: the signs made no sentence; read: the signs, in order
+  | { type: "you_said"; text: string; emotion: string; face?: Feeling; unclear?: boolean; read?: SignToken[] } // unclear: the signs made no sentence; read: the signs, in order; face: what the signer's face read
   | { type: "caption"; text: string; final: boolean }
   | SignPlan
   | { type: "recognized"; segments: PickOption[][]; spans?: [number, number][] } // spans: each sign's first and last Frame.t (mirror)

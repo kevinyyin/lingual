@@ -24,5 +24,5 @@ test("a right answer's chime plays through the output a tap unlocked, even when 
   chime("right"); // later, from a camera-graded answer: no tap to start an output of its own
   expect(FakeContext.made).toHaveLength(1); // one output, the unlocked one (a chime's own stayed suspended: silent)
   expect(FakeContext.made[0].state).toBe("running");
-  expect(FakeContext.made[0].played).toBe(2); // both notes
+  expect(FakeContext.made[0].played).toBe(3); // all three notes
 });

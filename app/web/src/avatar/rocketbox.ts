@@ -142,6 +142,8 @@ const TONE: Record<string, [string, number][]> = {
   MTH_Joy: [["AK_44_MouthSmileLeft", 1], ["AK_45_MouthSmileRight", 1]],
   EYE_Joy: [["AK_07_CheekSquintLeft", 0.8], ["AK_08_CheekSquintRight", 0.8]],
   MTH_Sorrow: [["AK_30_MouthFrownLeft", 1], ["AK_31_MouthFrownRight", 1]],
+  // the toon's mouth is modelled smiling: 0.3 of its frown draws it straight (0.5 already turns down); others rest straight
+  MTH_Neutral: IS_TOON ? [["AK_30_MouthFrownLeft", 0.3], ["AK_31_MouthFrownRight", 0.3]] : [],
   EYE_Sorrow: [["AK_11_EyeLookDownLeft", 0.5], ["AK_12_EyeLookDownRight", 0.5]],
   MTH_Surprised: [["AK_25_JawOpen", 0.5]],
   EYE_Surprised: [["AK_21_EyeWideLeft", 1], ["AK_22_EyeWideRight", 1]],

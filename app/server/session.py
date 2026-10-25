@@ -488,9 +488,9 @@ class Session:
             read = [SignToken(kind="sign", gloss=c) if s.kind == "sign" else SignToken(kind="spell", word=c)
                     for c, s in zip(choice, segments)]
             if not text:  # the signs make no sentence: say so on screen, speak nothing
-                await self.send(YouSaidMsg(text="", emotion=emotion["label"], unclear=True, read=read))
+                await self.send(YouSaidMsg(face=emotion["label"], text="", emotion=emotion["label"], unclear=True, read=read))
                 return
-            await self.send(YouSaidMsg(text=text, emotion=emotion.get("voice", emotion["label"]), read=read))
+            await self.send(YouSaidMsg(face=emotion["label"], text=text, emotion=emotion.get("voice", emotion["label"]), read=read))
             await self._set("speaking")
             async for e in self.voice.speak(text, emotion):
                 if e == "first_audio":
@@ -590,9 +590,9 @@ class Session:
                            "text": text}
             read = [w for w, _ in words]
             if not text:  # the signs make no sentence: say so on screen, speak nothing
-                await self.send(YouSaidMsg(text="", emotion=emotion["label"], unclear=True, read=read))
+                await self.send(YouSaidMsg(face=emotion["label"], text="", emotion=emotion["label"], unclear=True, read=read))
                 return
-            await self.send(YouSaidMsg(text=text, emotion=emotion.get("voice", emotion["label"]), read=read))
+            await self.send(YouSaidMsg(face=emotion["label"], text=text, emotion=emotion.get("voice", emotion["label"]), read=read))
             await self._set("speaking")
             async for e in self.voice.speak(text, emotion):
                 if e == "first_audio":
@@ -708,7 +708,7 @@ class Session:
         turn.result |= {"text": sentence.english, "demo_sentence": {
             "signs": list(sentence.signs), "english": sentence.english, "score": round(score, 3), "margin": round(score - runner, 3)}}
         # no compose here, so no voice pick: show the emotion the voice speaks it with (voice.voice_controls)
-        await self.send(YouSaidMsg(text=sentence.english, emotion=voice_controls(emotion).get("emotion", emotion["label"]),
+        await self.send(YouSaidMsg(face=emotion["label"], text=sentence.english, emotion=voice_controls(emotion).get("emotion", emotion["label"]),
                                    read=[SignToken(kind="sign", gloss=g) for g in sentence.signs]))
         if speak:
             await self._set("speaking")
@@ -728,7 +728,7 @@ class Session:
                 text, emotion = await self.composer.compose(signs, spelled, grammar, emotion)  # ASL gloss -> English
                 turn.stamps["composed"] = now_ms()
                 turn.result |= {"signs": signs, "spelled": spelled, "grammar": grammar, "text": text}
-                await self.send(YouSaidMsg(text=text, emotion=emotion.get("voice", emotion["label"]), unclear=not text, read=[
+                await self.send(YouSaidMsg(face=emotion["label"], text=text, emotion=emotion.get("voice", emotion["label"]), unclear=not text, read=[
                     SignToken(kind="sign", gloss=t[0][0]) if s.kind == "sign" else SignToken(kind="spell", word=t[0][0])
                     for s, t in read]))
         except Exception as e:  # a failed sentence leaves the labels shown
