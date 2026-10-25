@@ -2,7 +2,7 @@
 import { beforeEach, expect, test, vi } from "vitest";
 import { getByRole } from "@testing-library/dom";
 vi.mock("../ws", () => ({ connect: () => ({ send() {}, buffered: () => 0 }) }));
-vi.mock("../camera", () => ({ startCamera: () => new Promise(() => {}) }));
+vi.mock("../camera", () => ({ loadTrackers: async () => {}, startCamera: () => new Promise(() => {}) }));
 vi.mock("../avatar", () => ({ loadAvatar: () => new Promise(() => {}) }));
 vi.mock("../avatar/stage", () => ({ createStage: vi.fn() }));
 import { runLesson, type LessonHost } from "./lessonView";

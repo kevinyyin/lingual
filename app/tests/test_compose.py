@@ -7,6 +7,7 @@ import httpx2
 import pytest
 
 from server.compose import Composer
+from server.voice import EMOTIONS
 from server.vocab import load_vocab
 
 V = load_vocab(extended=None)  # curated only: tests must not depend on the generated extension
@@ -32,7 +33,7 @@ def fake_client(*replies):
 
 async def test_yn_question_passes_grammar_to_prompt():
     c = fake_client(json.dumps({"text": "Do you want coffee?"}))
-    text = await Composer(c, V).compose(["COFFEE", "WANT"], [], YN, NEUTRAL)
+    text, _ = await Composer(c, V).compose(["COFFEE", "WANT"], [], YN, NEUTRAL)
     assert text == "Do you want coffee?"
     user = c.messages.calls[0]["messages"][0]["content"]
     assert '"question": "yn"' in user and "COFFEE" in user
@@ -42,24 +43,24 @@ async def test_yn_question_passes_grammar_to_prompt():
 
 async def test_bad_json_both_attempts_falls_back():
     c = fake_client("oops", "still not json")
-    assert await Composer(c, V).compose(["COFFEE", "WANT"], [], YN, NEUTRAL) == "coffee want"
+    assert (await Composer(c, V).compose(["COFFEE", "WANT"], [], YN, NEUTRAL))[0] == "coffee want"
     assert len(c.messages.calls) == 2
 
 
 async def test_timeout_falls_back():
     err = anthropic.APITimeoutError(request=httpx2.Request("POST", "https://api.anthropic.com"))
     c = fake_client(err, err)
-    assert await Composer(c, V).compose(["COFFEE"], ["ANA"], YN, NEUTRAL) == "coffee ANA"
+    assert (await Composer(c, V).compose(["COFFEE"], ["ANA"], YN, NEUTRAL))[0] == "coffee ANA"
 
 
 async def test_empty_text_falls_back():
     c = fake_client(json.dumps({"text": "  "}), json.dumps({"text": ""}))
-    assert await Composer(c, V).compose(["HELLO"], [], YN, NEUTRAL) == "hello"
+    assert (await Composer(c, V).compose(["HELLO"], [], YN, NEUTRAL))[0] == "hello"
 
 
 async def test_signs_that_make_no_sentence_come_back_empty():
     c = fake_client(json.dumps({"text": "", "unclear": True}))
-    assert await Composer(c, V).compose(["PIZZA", "WHO", "SICK"], [], YN, NEUTRAL) == ""
+    assert (await Composer(c, V).compose(["PIZZA", "WHO", "SICK"], [], YN, NEUTRAL))[0] == ""
 
 
 def test_the_prompt_asks_to_flag_signs_that_make_no_sentence():
@@ -70,13 +71,13 @@ def test_the_prompt_asks_to_flag_signs_that_make_no_sentence():
 @pytest.mark.live
 @pytest.mark.skipif(not os.environ.get("ANTHROPIC_API_KEY"), reason="needs ANTHROPIC_API_KEY")
 async def test_live_compose():
-    text = await Composer(anthropic.AsyncAnthropic(max_retries=0), V).compose(["COFFEE", "WANT"], [], YN, NEUTRAL)
-    assert text.endswith("?") and "coffee" in text.lower()
+    text, emotion = await Composer(anthropic.AsyncAnthropic(max_retries=0), V).compose(["COFFEE", "WANT"], [], YN, NEUTRAL)
+    assert text.endswith("?") and "coffee" in text.lower() and emotion.get("voice") in EMOTIONS
 
 
 async def test_missing_credentials_falls_back():
     c = fake_client(TypeError("Could not resolve authentication method"), TypeError("again"))
-    assert await Composer(c, V).compose(["HELLO"], [], YN, NEUTRAL) == "hello"
+    assert (await Composer(c, V).compose(["HELLO"], [], YN, NEUTRAL))[0] == "hello"
 
 
 async def test_two_requests_race_and_the_fast_one_wins():
@@ -94,16 +95,28 @@ async def test_two_requests_race_and_the_fast_one_wins():
             return SimpleNamespace(stop_reason="end_turn", content=[SimpleNamespace(type="text", text=json.dumps({"text": "Hi."}))])
 
     async with asyncio.timeout(0.5):
-        assert await Composer(SimpleNamespace(messages=Racing()), V).compose(["HELLO"], [], YN, NEUTRAL) == "Hi."
+        assert (await Composer(SimpleNamespace(messages=Racing()), V).compose(["HELLO"], [], YN, NEUTRAL))[0] == "Hi."
     assert Racing.calls == 2
 
 
 async def test_bad_reply_waits_for_the_other():
     c = fake_client("oops", json.dumps({"text": "Hello."}))
-    assert await Composer(c, V).compose(["HELLO"], [], YN, NEUTRAL) == "Hello."
+    assert (await Composer(c, V).compose(["HELLO"], [], YN, NEUTRAL))[0] == "Hello."
 
 
 async def test_warm_is_one_tiny_call_and_never_raises():
     c = fake_client(TypeError("no credentials"))
     await Composer(c, V).warm()
     assert len(c.messages.calls) == 1 and c.messages.calls[0]["max_tokens"] == 1
+
+
+async def test_the_voice_emotion_comes_from_cartesias_list():
+    sad = {"label": "sad", "intensity": 0.5}
+    c = fake_client(json.dumps({"text": "I miss her.", "voice": "melancholic"}))
+    assert await Composer(c, V).compose(["MISS", "SHE"], [], YN, sad) == ("I miss her.", {**sad, "voice": "melancholic"})
+    assert "outraged" in c.messages.calls[0]["system"]  # the whole list is offered, not only the face's labels
+
+
+async def test_a_voice_emotion_not_in_the_list_is_dropped():
+    c = fake_client(json.dumps({"text": "Hello.", "voice": "ecstatic"}))
+    assert await Composer(c, V).compose(["HELLO"], [], YN, NEUTRAL) == ("Hello.", NEUTRAL)

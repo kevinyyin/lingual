@@ -3,7 +3,7 @@
 import { loadAvatar } from "../avatar";
 import { createStage, type Stage } from "../avatar/stage";
 import { attachTrail, type Pt } from "../avatar/trail";
-import { startCamera } from "../camera";
+import { loadTrackers, startCamera } from "../camera";
 import { PositionWatch } from "../position";
 import { connect, type Frame, type P3, type PickOption, type SignToken, type Socket, type State } from "../ws";
 import { ALL_LESSONS, faceFor } from "./curriculum";
@@ -25,6 +25,9 @@ export function mountSigner(slot: HTMLElement): void {
   trail?.clear();
   slot.prepend(avatarCanvas, trailCanvas);
 }
+/** Lessons keep the trackers on the page's thread, not in workers (camera.ts): the frames a lesson grades stay as
+ *  they were. */
+export const loadLessonTrackers = () => loadTrackers([]);
 let stage: Promise<Stage> | null = null;
 export const loadStage = () => (stage ??= loadAvatar(avatarCanvas).then((avatar) => {
   // reduced motion: the trail shows each sign's whole path, still, once it ends
@@ -79,22 +82,25 @@ export function cameraPalm(hand: P3[] | null, pose: number[][], W: number, H: nu
   return [W - ((W - dw) / 2 + hand[9][0] * dw), (H - dh) / 2 + hand[9][1] * dh];
 }
 
-/** Face scores from MediaPipe's blendshapes, as server/emotion.py reads a turn (FACE_KEYS): the weighted mean per
- *  feeling. Brows are left out there too: they carry grammar. */
+/** Face scores from MediaPipe's blendshapes, as server/emotion.py reads a turn (FACE_KEYS, FULL): each feeling's
+ *  weighted mean as a share of a full expression. Brows are left out there too: they carry grammar. Unlike the server
+ *  this has no resting face to read above, so it keeps to shapes that rest near 0 (no pucker or eye squint). */
 const FACE_KEYS = {
   happy: { mouthSmileLeft: 1, mouthSmileRight: 1, cheekSquintLeft: 0.5, cheekSquintRight: 0.5 },
-  sad: { mouthFrownLeft: 1, mouthFrownRight: 1, mouthPucker: 0.3 },
-  angry: { noseSneerLeft: 1, noseSneerRight: 1, mouthPressLeft: 0.5, mouthPressRight: 0.5, eyeSquintLeft: 0.3, eyeSquintRight: 0.3 },
+  sad: { mouthFrownLeft: 1, mouthFrownRight: 1 },
+  angry: { noseSneerLeft: 1, noseSneerRight: 1, mouthPressLeft: 0.15, mouthPressRight: 0.15 },
 };
 type FaceScores = Record<keyof typeof FACE_KEYS, number>;
+// a smile reaches 0.9 in MediaPipe; a frown or sneer rarely passes 0.3
+const FULL: FaceScores = { happy: 0.5, sad: 0.25, angry: 0.25 };
 export type Feeling = keyof typeof FACE_KEYS | "neutral";
-const EMO_T = 0.15; // server/emotion.py: the least score that is a feeling, not a resting face
+const EMO_T = 0.3; // server/emotion.py: the least share of a full expression that is a feeling, not a resting face
 
 export function faceScores(blend: Record<string, number> | null): FaceScores {
   const out: FaceScores = { happy: 0, sad: 0, angry: 0 };
   for (const [k, w] of Object.entries(FACE_KEYS) as [keyof FaceScores, Record<string, number>][]) {
     const total = Object.values(w).reduce((a, b) => a + b, 0);
-    out[k] = blend ? Object.entries(w).reduce((s, [b, x]) => s + (blend[b] ?? 0) * x, 0) / total : 0;
+    out[k] = blend ? Object.entries(w).reduce((s, [b, x]) => s + (blend[b] ?? 0) * x, 0) / total / FULL[k] : 0;
   }
   return out;
 }
@@ -171,6 +177,7 @@ class Practice {
   private async open(): Promise<void> {
     this.set("starting");
     try {
+      await loadLessonTrackers(); // before startCamera, which takes the trackers already loaded
       await startCamera(this.video, (f) => {
         const { hint, send, recalibrate } = this.watch.check(f, this.server, performance.now());
         if (hint !== this.hint) this.set(hint ? "position" : this.server, (this.hint = hint) ?? undefined);

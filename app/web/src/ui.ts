@@ -18,6 +18,7 @@ const STATE_LABEL: Record<State, string> = {
 /** What "ready" asks for in each mode. */
 const READY: Record<Mode, string> = { voice: "Ready: hold to talk", signing: "Ready: sign" };
 const MODE_KEY = "lingual.mode";
+const DEMO = new URLSearchParams(location.search).get("demo") === "1"; // signed turns snap to the scripted demo sentences
 let mode: Mode = "voice";
 let shown: State | null = null; // the last state, re-labelled when the mode changes
 /** The translator's current mode (main.ts runs the camera only in signing mode). */
@@ -158,7 +159,7 @@ function setMode(m: Mode, sock: Socket, onMode?: (m: Mode) => void): void {
   setTalk(false);
   document.body.dataset.mode = m; // style.css hides the camera preview in voice mode
   document.querySelectorAll<HTMLButtonElement>("#mode button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.mode === m)));
-  sock.send({ type: "mode", mode: m });
+  sock.send({ type: "mode", mode: m, ...(DEMO ? { demo: true } : {}) });
   try { localStorage.setItem(MODE_KEY, m); } catch { /* private mode: the switch just isn't remembered */ }
   if (shown) renderMsg({ type: "state", state: shown });
   onMode?.(m);

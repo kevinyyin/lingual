@@ -71,6 +71,7 @@ def _finger_motion(a: Frame, b: Frame) -> float:
 class Segmenter:
     def __init__(self, baseline: Baseline):
         self.b = baseline
+        self.rest_ms = REST_MS  # the avatar mirror waits longer (session.MIRROR_REST_MS)
         self.thresh = max(baseline.motion_floor * PAUSE_K, MIN_ENERGY)
         self.turn: list[Frame] | None = None
         self.segments: list[Segment] = []
@@ -121,7 +122,7 @@ class Segmenter:
                 self.still_t = f.t
             if not raised and self.cur is not None:
                 self._close()  # hands down ends the sign in progress
-            if f.t - self.still_t >= REST_MS:
+            if f.t - self.still_t >= self.rest_ms:
                 return self._end()
             if raised:
                 self._idle_frame(f)

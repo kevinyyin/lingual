@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 import csv
 import json
 import os
+import re
 import sys
 
 import anthropic
@@ -24,6 +25,7 @@ from . import session as S
 from .classifier import DEFAULT_MODEL, SignPredictor
 from .citizen_classifier import DEFAULT_MODEL as CITIZEN_MODEL, TRAIN_CSV as CITIZEN_CSV, CitizenSignPredictor
 from .ensemble import EnsembleRecognizer
+from .lookalike import LookalikeRecognizer
 from .prior import PriorRecognizer
 from .spike_classifier import DEFAULT_MODEL as SPIKE_MODEL, SpikeSignPredictor
 from .compose import Composer
@@ -89,7 +91,7 @@ def _recognizer():
     return S.DemoRecognizer()
 
 
-RECOGNIZER = _recognizer()
+RECOGNIZER = LookalikeRecognizer(_recognizer())  # MY vs PLEASE settled by the palm's circling (lookalike.py)
 
 
 def _speller():
@@ -256,6 +258,21 @@ async def dev_transcript(request: Request, text: str = Body(..., embed=True)):
     if _current:
         await _current.on_transcript(text, True)
     return {"ok": _current is not None}
+
+
+MIRROR_REC_FILES = ("camera.webm", "avatar.webm", "log.json")
+
+
+@app.post("/dev/mirror_rec/{rec}/{name}")
+async def mirror_rec(rec: str, name: str, request: Request):
+    """The mirror's diagnostic recording (?mode=mirror&record=N, web/src/mirrorRecord.ts), one file per request:
+    logs/mirror_rec/<rec>/."""
+    if not origin_ok(request.headers.get("origin")) or not re.fullmatch(r"[\w-]{1,40}", rec) or name not in MIRROR_REC_FILES:
+        raise HTTPException(403)
+    out = ROOT / "logs" / "mirror_rec" / rec
+    out.mkdir(parents=True, exist_ok=True)
+    (out / name).write_bytes(await request.body())
+    return {"ok": True}
 
 
 class _Hashed(StaticFiles):

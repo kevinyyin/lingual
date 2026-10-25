@@ -1,0 +1,51 @@
+/* ?mode=mirror (mirror.ts): the translator's page with its translator-only parts hidden */
+body[data-page="mirror"] :is(#mode, #talk, #picker, .said-card, #caption, #plan, #dev) { display: none !important; }
+
+.mirror-now {
+  /* a corner pill: centred at the top it covered the avatar's face, which is part of the signing */
+  position: absolute; z-index: 3; top: 12px; left: 12px; max-width: 45%; margin: 0; padding: 6px 14px;
+  border-radius: var(--r-tile); background: var(--surface, #fff); box-shadow: 0 2px 8px rgb(0 0 0 / 0.12);
+  color: var(--ink); font: 700 clamp(1.3rem, 3vw, 2.2rem)/1.15 var(--text); text-wrap: balance; pointer-events: none;
+}
+.mirror-now:empty { display: none; }
+.mirror-rec {
+  position: absolute; z-index: 3; top: 12px; right: 12px; margin: 0; padding: 6px 14px; border-radius: var(--r-tile);
+  background: #c62828; color: #fff; font: 700 1rem var(--text); pointer-events: none;
+}
+.mirror-hint {
+  position: absolute; z-index: 3; bottom: 12px; left: 0; right: 0; margin: 0 auto; width: fit-content; max-width: calc(100% - 32px);
+  padding: 6px 14px; border-radius: var(--r-tile); background: var(--wait-bg); color: var(--wait-fg); font: 700 1rem var(--text);
+}
+.mirror-hint:empty { display: none; }
+
+.mirror-turns { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; max-height: 30vh; overflow-y: auto; }
+.mirror-turns:empty::before { content: "Sign, then rest your hands: each sign gets the word it was read as."; color: var(--ink-2); }
+.mirror-turn { display: flex; flex-wrap: wrap; gap: 8px; }
+.mirror-sentence { flex-basis: 100%; margin: 0; color: var(--ink); font: 700 1.15rem/1.3 var(--text); }
+.mirror-turn:not(:first-child) .mirror-sentence { font-weight: 400; color: var(--ink-2); }
+.mirror-turn:not(:first-child) { opacity: .6; }
+.sign-chip {
+  display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 6px; padding: 6px 12px; border-radius: var(--r-tile);
+  background: var(--in-bg); color: var(--in-fg); box-shadow: inset 0 0 0 1.5px var(--in-edge);
+}
+.sign-chip b { font: 700 1.25rem var(--text); }
+.sign-chip .pct { font-weight: 700; }
+.sign-chip .alts { font-size: .9rem; opacity: .8; }
+
+.mirror-hud { display: flex; flex-direction: column; gap: 10px; }
+.hand-row { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; opacity: .45; }
+.hand-row.seen { opacity: 1; }
+.hand-name { font-weight: 700; color: var(--ink); }
+.hand-depth { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.fingers { display: flex; gap: 4px; }
+.finger { position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; width: 16px; height: 40px;
+  border-radius: 4px; background: var(--hairline); overflow: hidden; }
+.finger i { display: block; width: 100%; background: var(--go); transition: height 80ms linear; }
+.finger b { position: absolute; bottom: 1px; font: 700 10px var(--text); color: var(--ink); }
+
+@media (max-width: 600px) {
+  body[data-page="mirror"] .mirror-hud { position: absolute; z-index: 3; left: 20px; top: 70px; padding: 8px 10px; }
+  .mirror-hud .card-title { display: none; }
+  .hand-row { grid-template-columns: auto auto; }
+  .hand-depth { display: none; }
+}

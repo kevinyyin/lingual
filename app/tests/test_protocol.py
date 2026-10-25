@@ -6,7 +6,7 @@ import pytest
 
 from typing import get_args
 
-from server.protocol import Buddy, FrameMsg, SignPlanMsg, SignToken, parse_client
+from server.protocol import Buddy, FrameMsg, RecognizedMsg, SignPlanMsg, SignToken, parse_client
 from server.voice import BUDDY_VOICES
 
 

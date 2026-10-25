@@ -23,11 +23,12 @@ export type ClientMsg =
   | { type: "pick"; segment: number; gloss: string }
   | { type: "avatar_done" }
   | { type: "practice"; on: boolean; signs?: string[] }
-  | { type: "mode"; mode: Mode }
+  | { type: "mode"; mode: Mode; demo?: boolean } // demo: ?demo=1, turns snap to the demo sentences (server/demo_sentences.py)
   | { type: "talk"; on: boolean }
   | { type: "redo" }
   | { type: "say"; text: string }
   | { type: "answer"; result: "right" | "wrong" | "retry" }
+  | { type: "mirror"; on: boolean }
   | { type: "buddy"; buddy: Buddy["id"] }
   | { type: "record"; signer: string; gloss: string; frames: Frame[] };
 
@@ -48,7 +49,7 @@ export type ServerMsg =
   | { type: "you_said"; text: string; emotion: string; unclear?: boolean; read?: SignToken[] } // unclear: the signs made no sentence; read: the signs, in order
   | { type: "caption"; text: string; final: boolean }
   | SignPlan
-  | { type: "recognized"; segments: PickOption[][] }
+  | { type: "recognized"; segments: PickOption[][]; spans?: [number, number][] } // spans: each sign's first and last Frame.t (mirror)
   | { type: "recorded"; ok: boolean; detail: string };
 
 export interface Socket {

@@ -15,5 +15,6 @@ export default defineConfig({
       "/dev": api,
     },
   },
+  worker: { format: "es" }, // the tracker worker loads MediaPipe's wasm as an ES module (camera.ts)
   test: { environment: "jsdom" },
 } as any);
