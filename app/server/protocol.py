@@ -85,6 +85,13 @@ class BuddyMsg(BaseModel):
     buddy: Buddy
 
 
+class MirrorMsg(BaseModel):
+    """The avatar mirror (?mode=mirror): each sign of a turn is read and labelled on the page (RecognizedMsg with
+    spans); nothing is composed, said or picked, and speech is ignored."""
+    type: Literal["mirror"] = "mirror"
+    on: bool
+
+
 class RecordMsg(BaseModel):
     type: Literal["record"] = "record"
     signer: str
@@ -94,7 +101,7 @@ class RecordMsg(BaseModel):
 
 ClientMsg = Annotated[
     Union[FrameMsg, CalibrateMsg, PickMsg, AvatarDoneMsg, PracticeMsg, ModeMsg, TalkMsg, SayMsg, CheerMsg, RedoMsg, BuddyMsg,
-          RecordMsg],
+          MirrorMsg, RecordMsg],
     Field(discriminator="type"),
 ]
 _client = TypeAdapter(ClientMsg)
@@ -161,9 +168,11 @@ class SignPlanMsg(BaseModel):
 
 class RecognizedMsg(BaseModel):
     """Practice-mode result: the top guesses for each read of the turn (the whole turn, then its last moments alone; the
-    page counts the sign in either), best first."""
+    page counts the sign in either), best first. Mirror mode: one entry per sign in signing order, and `spans` holds
+    each sign's first and last frame time (the page's Frame.t)."""
     type: Literal["recognized"] = "recognized"
     segments: list[list[PickOption]]
+    spans: list[tuple[float, float]] = []
 
 
 class RecordedMsg(BaseModel):
