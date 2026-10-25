@@ -147,7 +147,7 @@ export function runLesson(root: HTMLElement, exercises: Exercise[], host: Lesson
     lastCorrect = correct;
     const comboBefore = run.combo;
     if (host.sound()) chime(correct ? "right" : "wrong");
-    if (correct) practice.cheer();
+    practice.answered(correct ? "right" : "wrong");
     const praise = pickOne(PRAISE);
     host.say(correct ? praise : LINES.wrong);
     body.querySelectorAll<HTMLButtonElement>("button.opt, button.chip").forEach((b) => (b.disabled = true));
@@ -462,6 +462,7 @@ function mountPerform(gloss: string, host: LessonHost, grade: Grade, skip: () =>
     if (++tries < 2) {
       heard.replaceChildren(scoreBar(score), `That looked like “${best || "nothing I know"}”. Watch again and try once more.`);
       host.say(LINES.retry);
+      practice.answered("retry");
       return;
     }
     stop();
