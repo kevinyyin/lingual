@@ -15,7 +15,7 @@ from . import demo_sentences, plush
 from .protocol import (
     AnswerMsg, AvatarDoneMsg, BuddyMsg, CalibrateMsg, CaptionMsg, FrameMsg, MirrorMsg, ModeMsg, PickMsg, PickOption, PickRequestMsg, PracticeMsg,
     RedoMsg,
-    SayMsg, RecognizedMsg, SignPlanMsg, SignToken, StateMsg, TalkMsg, YouSaidMsg, Frame,
+    SayMsg, RecognizedMsg, SignPlanMsg, SignToken, StateMsg, TalkMsg, WordsMsg, WordsUpdateMsg, YouSaidMsg, Frame,
 )
 from .vocab import Vocab
 from .voice import BUDDY_VOICES, voice_controls
@@ -51,6 +51,11 @@ FRAME_TIMEOUT_S = 3.0  # no frames this long mid-turn (signer left the frame) en
 # 44%); a correct single sign 86% (81%); a wrong one 3.6% (1.5%). Cutting at the segmenter's pauses instead did as well
 # only after a long (600 ms+) pause.
 PRACTICE_LATEST_MS = 1500.0
+# Sign by sign: the words are said this long after the last one is read, unless another sign starts (0: only on Done).
+WORDS_DONE_MS = 3000.0
+# Sign by sign: the same word again this soon after the last one ended is one sign split in two turns (the replay's
+# commonest error: "SEE SEE"); a real repeat needs a clear pause.
+REPEAT_GAP_MS = 1200.0
 
 
 class Grammar(TypedDict):
@@ -192,6 +197,12 @@ class Session:
         self.demo_sentences = demo_sentences.load()
         self.mode: str | None = None  # the translator's switch (ModeMsg): "voice" or "signing"; None runs both
         self.talking = False  # push to talk held (TalkMsg)
+        self.by_sign = False  # sign by sign (ModeMsg.by_sign): one word per turn, said together on Done
+        self._words: list[tuple[SignToken, list[Frame]]] = []  # the words read so far, with their turns' frames
+        self._done_timer: asyncio.Task | None = None
+        self._done_pending = False  # Done pressed while a word was being signed or read: say them once it lands
+        self._saying = False  # the words are being composed and said (_say_words)
+        self._closed = False
         self._say_lock = asyncio.Lock()
         self._says: set[asyncio.Task] = set()  # asyncio keeps only weak refs to tasks
         self._sentences: set[asyncio.Task] = set()  # the mirror's sentences being written (_mirror_sentence)
@@ -234,6 +245,7 @@ class Session:
             if self.state == "signing" and not self._busy() and time.monotonic() - self._last_frame > FRAME_TIMEOUT_S:
                 self.segmenter = self._new_segmenter()  # drop the half-finished turn
                 await self._set("ready")
+                self._after_word()  # sign by sign: the words before it are still said (now, if Done came mid-turn)
 
     async def idle(self) -> None:
         """Wait for the turn in flight (tests and shutdown)."""
@@ -257,6 +269,8 @@ class Session:
 
     async def close(self) -> None:
         """The page went away: its turn and the lines it queued must not keep using the voice (or the dead socket)."""
+        self._closed = True
+        self._disarm_done()  # first: a timer firing during the gather below would start a new turn on the dead socket
         tasks = [*self._says, *self._sentences, *([self._task] if self._busy() else [])]
         for t in tasks:
             t.cancel()
@@ -277,12 +291,16 @@ class Session:
                 self._task.cancel()
                 await asyncio.gather(self._task, return_exceptions=True)
             self._calib = []
+            await self._clear_words()
             await self._set("calibrating")
         elif isinstance(msg, FrameMsg):
             await self._on_frame(msg)
         elif isinstance(msg, ModeMsg):
             self.mode = msg.mode
             self.demo = self.demo or msg.demo
+            self.by_sign = msg.by_sign and msg.mode == "signing"
+            if not self.by_sign:
+                await self._clear_words()
             if msg.mode == "voice" and self.state in ("signing", "reading", "picking"):
                 await self._yield_to_speech()  # a sign turn in flight is dropped
             elif msg.mode == "signing" and self.state == "listening":
@@ -299,8 +317,12 @@ class Session:
             if self.state in ("signing", "reading") and self.baseline is not None:
                 self.segmenter = self._new_segmenter()
                 await self._set("ready")
+        elif isinstance(msg, WordsMsg) and self.by_sign and not self.practice:
+            await self._on_words(msg.action)
         elif isinstance(msg, PracticeMsg):
             self.practice, self.practice_signs = msg.on, set(msg.signs)
+            if msg.on:
+                await self._clear_words()  # a lesson must not say translator words on a timer
         elif isinstance(msg, MirrorMsg):
             self.mirror = msg.on
             if self.segmenter is not None and hasattr(self.segmenter, "rest_ms"):
@@ -324,6 +346,16 @@ class Session:
             await self._idle()
 
     async def _on_frame(self, f: Frame) -> None:
+        if os.environ.get("ASL_DEBUG_FRAMES"):  # TEMP debug: once a second, what the camera stream looks like here
+            self._dbg = getattr(self, "_dbg", 0) + 1
+            if time.monotonic() - getattr(self, "_dbg_t", 0.0) >= 1.0:
+                self._dbg_t = time.monotonic()
+                seg = self.segmenter
+                raised = seg._raised(f) if seg is not None and hasattr(seg, "_raised") else None
+                logging.getLogger("asl.session").warning(
+                    "frames=%d state=%s mode=%s by_sign=%s busy=%s hands L/R=%s/%s raised=%s wristY=%.2f/%.2f rest_y=%s",
+                    self._dbg, self.state, self.mode, self.by_sign, self._busy(), f.left is not None, f.right is not None,
+                    raised, f.pose[15][1], f.pose[16][1], getattr(self.baseline, "rest_y", None))
         if self.mode == "voice":
             return  # the camera is off in voice mode (the page stops sending too)
         if self.state == "calibrating":
@@ -338,11 +370,12 @@ class Session:
         self._last_frame = time.monotonic()
         ev = self.segmenter.push(f)
         if isinstance(ev, TurnStart) and self.state == "ready":
+            self._disarm_done()  # another word is coming
             await self._set("signing")
             self._watch = asyncio.create_task(self._watchdog())  # kept referenced so it is not garbage-collected
         elif isinstance(ev, TurnEnd) and self.state == "signing":
             await self._set("reading")  # the page freezes its camera: what comes now is not part of this sign
-            self._spawn(self._sign_turn(ev))
+            self._spawn(self._word_turn(ev) if self.by_sign and not self.practice else self._sign_turn(ev))
 
     async def _yield_to_speech(self) -> None:
         """Finished words win over a sign turn still being read or picked: on one laptop that turn is often the hearing
@@ -471,6 +504,172 @@ class Session:
             if (ev.segments or turn.result) and not self.mirror:  # the mirror's is logged with its sentence (_mirror_sentence)
                 self._log(turn)
             await self._set("ready")
+
+    # --- sign by sign ---
+
+    def _read_word(self, ev: TurnEnd) -> tuple[Segment, list[tuple[str, float]]]:
+        """The turn as one word: a spelled word by the letter reader, otherwise the whole turn read as one sign. No
+        cutting: in this mode the hands going down between words is the cut (teaching clips, one sign per turn: whole
+        turn 90.9% right with the picker, cut pieces 88.8%)."""
+        if len(ev.segments) == 1 and ev.segments[0].kind == "spell":
+            s = ev.segments[0]
+            return s, self._read_segment(s)
+        s = Segment(frames=ev.whole or ev.frames, kind="sign")
+        return s, self.recognizer.recognize(s)
+
+    async def _word_turn(self, ev: TurnEnd) -> None:
+        """Sign by sign: one word, checked like any sign (the picker when unsure, where "None of these" drops only this
+        word), then added to the words on screen."""
+        turn = _Turn("sign2speech")
+        turn.stamps["hands_rest"] = now_ms() - ev.rest_ms
+        try:
+            if not ev.segments:
+                return
+            seg, t = await asyncio.to_thread(self._read_word, ev)
+            turn.stamps["recognized"] = now_ms()
+            turn.result = {"by_sign": True, "top3": [[g, round(p, 3)] for g, p in t[:3]]}
+            if not t:
+                return
+            reason, t = await asyncio.to_thread(self._needs_pick, t, seg)
+            word = t[0][0]
+            if reason:
+                i = len(self._words)
+                await self._set("picking")
+                self._pick = asyncio.get_running_loop().create_future()
+                await self.send(PickRequestMsg(segment=i, options=[
+                    PickOption(gloss=g, english=self._english(g, seg), p=p) for g, p in t[:3]]))
+                self._offered = (i, {g for g, _ in t[:3]} | {""})
+                _, word = await self._pick
+                turn.result["picked"] = word
+                if not word:
+                    turn.error = "dropped by signer"
+                    return
+            if not self.by_sign:  # sign by sign was switched off while this word was read
+                turn.error = "by_sign off"
+                return
+            token = SignToken(kind="spell", word=word) if seg.kind == "spell" else SignToken(kind="sign", gloss=word)
+            if self._words and self._words[-1][0] == token and self._words[-1][1] and ev.frames                     and ev.frames[0].t - self._words[-1][1][-1].t < REPEAT_GAP_MS:
+                turn.result["repeat_dropped"] = True  # one sign split into two turns, not a word said twice
+                return
+            self._words.append((token, ev.frames))
+            turn.result["word"] = word
+            await self.send(WordsUpdateMsg(words=[w for w, _ in self._words]))
+        except asyncio.CancelledError:
+            turn.error = "cancelled"
+        except Exception as e:  # never leave the session stuck mid-turn
+            turn.error = f"{type(e).__name__}: {e}"
+        finally:
+            self._pick, self._offered = None, None
+            if ev.segments:
+                self._log(turn)
+            # a word or not (a fidget, "None of these"), the words so far are said after the pause, or now if Done
+            # came mid-turn; not when the turn was cancelled (Undo, the page closing: those decide themselves)
+            if turn.error != "cancelled" and self._done_pending and self._words and self.by_sign:
+                self._done_pending = False
+                await self._say_words()  # in this task: no gap where a new sign could start under the sentence
+            else:
+                await self._set("ready")
+                if turn.error != "cancelled":
+                    self._arm_done()
+
+    async def _say_words(self) -> None:
+        """Sign by sign: the words so far, composed into a sentence and said, as a whole turn's would be."""
+        turn = _Turn("sign2speech")
+        words, self._words = self._words, []
+        self._saying, self._done_pending = True, False
+        await self._set("reading")  # composing: no new sign until it is said
+        await self.send(WordsUpdateMsg(words=[]))
+        try:
+            signs = [w.gloss for w, _ in words if w.kind == "sign"]
+            spelled = [w.word for w, _ in words if w.kind == "spell"]
+            frames = [f for _, fs in words for f in fs]
+            grammar, emotion = await asyncio.to_thread(self.readers.read, frames, self.baseline)
+            text, emotion = await self.composer.compose(signs, spelled, grammar, emotion)  # adds the voice's emotion
+            turn.stamps["composed"] = now_ms()
+            turn.result = {"by_sign": True, "signs": signs, "spelled": spelled, "grammar": grammar, "emotion": emotion,
+                           "text": text}
+            read = [w for w, _ in words]
+            if not text:  # the signs make no sentence: say so on screen, speak nothing
+                await self.send(YouSaidMsg(text="", emotion=emotion["label"], unclear=True, read=read))
+                return
+            await self.send(YouSaidMsg(text=text, emotion=emotion.get("voice", emotion["label"]), read=read))
+            await self._set("speaking")
+            async for e in self.voice.speak(text, emotion):
+                if e == "first_audio":
+                    turn.stamps["first_audio"] = now_ms()
+        except asyncio.CancelledError:
+            turn.error = "cancelled"
+        except Exception as e:  # never leave the session stuck mid-turn
+            turn.error = f"{type(e).__name__}: {e}"
+        finally:
+            self._saying, self._done_pending = False, False  # Done pressed while it was said is already answered
+            self._log(turn)
+            await self._set("ready")
+
+    def _start_saying(self) -> None:
+        self.state = "reading"  # now, not when the task first runs: a TurnStart in between would start a sign under it
+        self._spawn(self._say_words())
+
+    def _after_word(self) -> None:
+        """A turn ended without a word reading still in flight: say the words now if Done came mid-turn, else after the
+        pause."""
+        if self._done_pending and self._words and self.state == "ready" and not self._busy():
+            self._done_pending = False
+            self._start_saying()
+        else:
+            self._arm_done()
+
+    async def _on_words(self, action: str) -> None:
+        if self._saying:
+            return  # the words are already being said: Undo/Done/Clear have nothing left to act on
+        self._disarm_done()
+        self._done_pending = False
+        if action == "done":
+            if self.state in ("signing", "reading", "picking") or self._busy():  # e.g. the hand reaching for the key
+                self._done_pending = True  # started a turn; or a word turn is still finishing
+            elif self._words and self.state == "ready":
+                self._start_saying()
+        elif action == "clear":
+            await self._clear_words()
+        elif self.state in ("signing", "reading", "picking"):  # undo the word being signed or read: dropped unread
+            if self._busy():
+                self._task.cancel()
+                await asyncio.gather(self._task, return_exceptions=True)
+            if self.baseline is not None:
+                self.segmenter = self._new_segmenter()
+            await self._set("ready")
+            self._after_word()
+        elif self._words:
+            self._words.pop()
+            await self.send(WordsUpdateMsg(words=[w for w, _ in self._words]))
+            self._arm_done()
+
+    async def _clear_words(self) -> None:
+        self._disarm_done()
+        self._done_pending = False
+        if self._words:
+            self._words = []
+            await self.send(WordsUpdateMsg(words=[]))
+
+    def _arm_done(self) -> None:
+        self._disarm_done()
+        if WORDS_DONE_MS > 0 and self._words and self.by_sign and not self._closed:
+            self._done_timer = asyncio.create_task(self._done_after())
+
+    def _disarm_done(self) -> None:
+        if self._done_timer and not self._done_timer.done() and self._done_timer is not asyncio.current_task():
+            self._done_timer.cancel()
+        self._done_timer = None
+
+    async def _done_after(self) -> None:
+        await asyncio.sleep(WORDS_DONE_MS / 1000)
+        while self._busy() or self.state != "ready":  # a word still being read or picked lands first
+            if self.state in ("signing", "calibrating", "listening"):
+                return  # another sign started (its word re-arms the timer) or the turn was abandoned
+            await asyncio.sleep(0.1)
+        self._done_timer = None
+        if self._words and self.by_sign and not self.practice:
+            self._start_saying()
 
     def _needs_pick(self, t: list[tuple[str, float]], s: Segment) -> tuple[str | None, list[tuple[str, float]]]:
         """Whether a read goes to the picker, and the options to offer. Reason: None (spoken), "unsure" (below the pick

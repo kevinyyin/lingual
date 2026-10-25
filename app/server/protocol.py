@@ -52,6 +52,7 @@ class ModeMsg(BaseModel):
     type: Literal["mode"] = "mode"
     mode: Literal["voice", "signing"]
     demo: bool = False  # the page was opened with ?demo=1: signed turns snap to the demo sentences (demo_sentences.py)
+    by_sign: bool = False  # sign by sign: each turn is one word, shown as it is read; the sentence is said on Done
 
 
 class TalkMsg(BaseModel):
@@ -59,6 +60,12 @@ class TalkMsg(BaseModel):
     word said near the mic)."""
     type: Literal["talk"] = "talk"
     on: bool
+
+
+class WordsMsg(BaseModel):
+    """Sign by sign: undo drops the last word read, done says the words as a sentence, clear starts over."""
+    type: Literal["words"] = "words"
+    action: Literal["undo", "done", "clear"]
 
 
 class RedoMsg(BaseModel):
@@ -104,7 +111,7 @@ class RecordMsg(BaseModel):
 
 ClientMsg = Annotated[
     Union[FrameMsg, CalibrateMsg, PickMsg, AvatarDoneMsg, PracticeMsg, ModeMsg, TalkMsg, SayMsg, AnswerMsg, RedoMsg, BuddyMsg,
-          MirrorMsg, RecordMsg],
+          MirrorMsg, RecordMsg, WordsMsg],
     Field(discriminator="type"),
 ]
 _client = TypeAdapter(ClientMsg)
@@ -178,10 +185,16 @@ class RecognizedMsg(BaseModel):
     spans: list[tuple[float, float]] = []
 
 
+class WordsUpdateMsg(BaseModel):
+    """Sign by sign: the words read so far, in order (the page shows them as chips)."""
+    type: Literal["words_update"] = "words_update"
+    words: list[SignToken]
+
+
 class RecordedMsg(BaseModel):
     type: Literal["recorded"] = "recorded"
     ok: bool
     detail: str  # saved path or error
 
 
-ServerMsg = Union[StateMsg, PickRequestMsg, YouSaidMsg, CaptionMsg, SignPlanMsg, RecognizedMsg, RecordedMsg]
+ServerMsg = Union[StateMsg, PickRequestMsg, YouSaidMsg, CaptionMsg, SignPlanMsg, RecognizedMsg, RecordedMsg, WordsUpdateMsg]
