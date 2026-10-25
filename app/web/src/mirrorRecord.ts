@@ -25,6 +25,7 @@ function record(stream: MediaStream) {
 }
 
 const v3 = (v: { x: number; y: number; z: number }) => [v.x, v.y, v.z].map((x) => Math.round(x * 1e4) / 1e4);
+const v3a = (v: number[]) => v.map((x) => Math.round(x * 1e4) / 1e4);
 
 export function recordMirror(seconds: number, cam: HTMLVideoElement, canvas: HTMLCanvasElement, avatar: Avatar,
   status: (text: string) => void): Recorder {
@@ -67,6 +68,8 @@ export function recordMirror(seconds: number, cam: HTMLVideoElement, canvas: HTM
           wrist: v3(arms[k].wrist), elbow: v3(arms[k].elbow), elbowDeg: Math.round(arms[k].elbowDeg), twistDeg: Math.round(arms[k].twistDeg),
         }])),
         palms: avatar.palmScreen?.(), bends: avatar.fingerBends?.(), hand: avatar.handReport?.(),
+        // per arm: wrist, five fingertips, elbow (avatar metres), and its shoulder half-width
+        points: (({ pts, shoulderHalf }) => ({ pts: pts.map(v3a), shoulderHalf }))(avatar.framePoints?.(true) ?? { pts: [], shoulderHalf: 0 }),
       });
     },
     done,

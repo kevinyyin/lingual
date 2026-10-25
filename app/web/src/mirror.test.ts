@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { distanceBySize, fingerCurls, liveFrame, signLabel, wristDepthCm } from "./mirror";
+import { distanceBySize, fingerCurls, liveFrame, reach, signLabel, wristDepthCm } from "./mirror";
 import type { Frame } from "./ws";
 
 /** Image pose with the signer's left wrist (15) on the image's right (x 0.7) and right wrist (16) on its left (x 0.3). */
@@ -60,6 +60,8 @@ describe("liveFrame depth", () => {
       f.pose[+i] = [x, y, 0, 1];
       w.pose[+i] = [(x - 0.5) / 0.5, (y - 0.5) / 0.5, 0];
     }
+    w.pose[13] = [-0.25, 0.2, 0]; // a left arm hanging, then bent up: 0.51 m long, reaching 0.43 m forward at most
+    w.pose[15] = [-0.2, 0, 0];
     const ring = Array.from({ length: 21 }, (_, k) => [0.69 + 0.03 * Math.cos(k), 0.5 + 0.03 * Math.sin(k), 0] as [number, number, number]);
     f.left = ring; // labelled left and on the signer's left wrist (x 0.7)
     w.left = ring.map(([x, y]) => [(x - 0.69) / 0.6, (y - 0.5) / 0.6, 0]);
@@ -73,6 +75,36 @@ describe("liveFrame depth", () => {
     let eased = 0;
     liveFrame(f, w, 1, (_, v) => (eased = v) / 2);
     expect(eased).toBeCloseTo(front, 3);
+  });
+});
+
+describe("liveFrame wrist anchoring", () => {
+  it("puts the wrist where the hand tracker sees it, in the picture and (by the body's scale) in the world", () => {
+    const BODY: Record<number, [number, number]> = { 0: [0.5, 0.3], 7: [0.45, 0.3], 8: [0.55, 0.3], 11: [0.4, 0.45], 12: [0.6, 0.45] };
+    const f = frame(null, null);
+    const w = { pose: worldPose(), left: null as number[][] | null, right: null };
+    for (const [i, [x, y]] of Object.entries(BODY)) {
+      f.pose[+i] = [x, y, 0, 1];
+      w.pose[+i] = [(x - 0.5) / 0.5, (y - 0.5) / 0.5, 0]; // 0.5 image heights per metre
+    }
+    f.left = handAt(0.66); // the pose model's left wrist is at x 0.7; the hand tracker's 0.04 to its left
+    const out = liveFrame(f, w, 1)!;
+    expect(out.pose2d[15]).toEqual([0.66, 0.5]);
+    expect(out.pose[15][0]).toBeCloseTo(-0.04 / 0.5, 6); // 0.04 image heights at 0.5 per metre: 8 cm
+    expect(out.pose[19][0]).toBeCloseTo(-0.08, 6); // the hand's pose points come along
+    expect(w.pose[15][0]).toBe(0);
+  });
+});
+
+describe("reach", () => {
+  it("is how far forward the wrist can go given how far across and up it already is, the elbow kept bent", () => {
+    const p = worldPose();
+    p[11] = [0, 0, 0]; p[13] = [0, 0.3, 0]; p[15] = [0, 0.3, 0]; // a 0.3 m arm whose wrist hangs 0.3 m below: no reach left
+    expect(reach(p, "left")).toBeCloseTo(0, 6);
+    p[15] = [0, 0.6, 0]; // 0.6 m arm hanging straight down: no forward reach
+    expect(reach(p, "left")).toBeCloseTo(0, 6);
+    p[13] = [0, 0.15, 0.26]; p[15] = [0, 0.3, 0]; // 0.6 m arm (0.3 + 0.3), wrist 0.3 m below: sqrt(0.36 - 0.09) forward
+    expect(reach(p, "left")).toBeCloseTo(0.85 * Math.sqrt(0.27), 2);
   });
 });
 
