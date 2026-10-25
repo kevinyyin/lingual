@@ -209,3 +209,16 @@ test("lessons show no mini buddy after an attempt (it read as odd there; the tra
   sock.toPage({ type: "recognized", segments: [[{ gloss: "HELLO", english: "hello", p: 0.9 }]] });
   expect(document.querySelector(".mini-buddy")).toBeNull();
 });
+
+test("a right answer turns the camera box green (it stayed the reading red)", async () => {
+  await vi.waitFor(() => expect(cam.onFrame).not.toBeNull());
+  sock.toPage({ type: "state", state: "reading" });
+  sock.toPage({ type: "recognized", segments: [[{ gloss: "HELLO", english: "hello", p: 0.9 }]] });
+  expect(document.querySelector<HTMLElement>(".cam-slot")!.dataset.result).toBe("right");
+});
+
+test("two misses mark the camera box wrong", async () => {
+  await vi.waitFor(() => expect(cam.onFrame).not.toBeNull());
+  for (const m of [miss, miss]) sock.toPage(m);
+  expect(document.querySelector<HTMLElement>(".cam-slot")!.dataset.result).toBe("wrong");
+});

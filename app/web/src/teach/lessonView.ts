@@ -455,7 +455,8 @@ function mountPerform(gloss: string, host: LessonHost, grade: Grade, skip: () =>
     // one guess, the surest: a list of every piece's guess read as nonsense ("dark, yawn, dark, let know")
     const best = segments.filter((seg) => seg.length).sort((x, y) => y[0].p - x[0].p)[0]?.[0]?.english ?? "";
     // a pass shows no match bar: the top-3 rule passes a sign scored well below the top guess ("Match 1%")
-    if (hit) { stop(); return grade(true, host.english(gloss)); }
+    // the box keeps the result's colour: graded, it hears no more status, and stayed the reading red after a right one
+    if (hit) { stop(); cam.dataset.result = "right"; return grade(true, host.english(gloss)); }
     if (++tries < 2) {
       heard.replaceChildren(scoreBar(score), `That looked like “${best || "nothing I know"}”. Watch again and try once more.`);
       host.say(LINES.retry);
@@ -463,6 +464,7 @@ function mountPerform(gloss: string, host: LessonHost, grade: Grade, skip: () =>
       return;
     }
     stop();
+    cam.dataset.result = "wrong";
     grade(false, `${host.english(gloss)} (we saw “${best || "?"}”)`, score);
   };
   return {
