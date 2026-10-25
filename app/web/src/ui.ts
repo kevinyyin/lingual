@@ -64,6 +64,19 @@ const el = <K extends keyof HTMLElementTagNameMap>(tag: K, className: string, te
 let socket: Socket | null = null;
 let pending: { segment: number; options: PickOption[] } | null = null;
 let signing = -1; // the plan tile the avatar is on (or was on last, during a blend)
+/** Sign by sign: each turn is one word, shown as a chip; the words are said on Say it (or after a pause).
+ *  ?bysign=1 turns it on and ?bysign=0 off, remembered per origin like ?phone=1 (the iOS app opens teach.html, so the
+ *  translator page never sees its URL); the More menu toggles it too. Read in bindControls, not at import. */
+const BYSIGN_KEY = "lingual.bysign";
+let bySign = false;
+function readBySign(): boolean {
+  const p = new URLSearchParams(location.search).get("bysign");
+  try {
+    if (p === "1") localStorage.setItem(BYSIGN_KEY, "1");
+    else if (p === "0") localStorage.removeItem(BYSIGN_KEY);
+    return localStorage.getItem(BYSIGN_KEY) === "1";
+  } catch { return p === "1"; } // storage blocked: the URL alone
+}
 
 /** i = option index, or -1 for "none of these" (the turn is dropped and nothing is spoken). */
 function choose(i: number): void {
@@ -113,6 +126,14 @@ export function renderMsg(m: ServerMsg): void {
     case "caption":
       $("caption").textContent = m.text;
       break;
+    case "words_update":
+      $("words").replaceChildren(...m.words.map((w) => {
+        if (w.kind === "sign") return el("span", "sign", w.gloss ?? w.word ?? "");
+        const chip = el("span", "letter word-end spelled", w.word ?? w.gloss ?? "");
+        chip.title = "Fingerspelled";
+        return chip;
+      }));
+      break;
     case "pick_request":
       showPicker(m.segment, m.options);
       break;
@@ -158,7 +179,11 @@ function setMode(m: Mode, sock: Socket, onMode?: (m: Mode) => void): void {
   setTalk(false);
   document.body.dataset.mode = m; // style.css hides the camera preview in voice mode
   document.querySelectorAll<HTMLButtonElement>("#mode button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.mode === m)));
-  sock.send({ type: "mode", mode: m });
+  sock.send(bySign ? { type: "mode", mode: m, by_sign: true } : { type: "mode", mode: m });
+  const words = document.getElementById("words-card");
+  if (words) words.hidden = !(bySign && m === "signing");
+  document.getElementById("bysign-toggle")?.setAttribute("aria-pressed", String(bySign));
+  document.body.classList.toggle("by-sign", bySign); // style.css: the hints say to lower the hands between signs
   try { localStorage.setItem(MODE_KEY, m); } catch { /* private mode: the switch just isn't remembered */ }
   if (shown) renderMsg({ type: "state", state: shown });
   onMode?.(m);
@@ -174,16 +199,29 @@ function setTalk(on: boolean): void {
   socket?.send({ type: "talk", on });
 }
 
+/** Typing somewhere, or answering the picker: the sign-by-sign keys stay out of it. */
+const typing = (t: EventTarget | null) => t instanceof HTMLElement && !!t.closest("input, textarea, select, [contenteditable], #picker");
+
 /** `onMode`: called with the mode it starts in and on every switch (main.ts opens the camera for signing). */
 export function bindControls(sock: Socket, onMode?: (m: Mode) => void): void {
   socket = sock;
+  bySign = readBySign();
   let saved: string | null = null;
   try { saved = localStorage.getItem(MODE_KEY); } catch { /* storage blocked: start in voice mode */ }
-  document.querySelectorAll<HTMLButtonElement>("#mode button").forEach((b) => (b.onclick = () => setMode(b.dataset.mode as Mode, sock, onMode)));
+  document.querySelectorAll<HTMLButtonElement>("#mode button").forEach((b) => (b.onclick = () => {
+    setMode(b.dataset.mode as Mode, sock, onMode);
+    // focus off the switch, so Enter means Say it rather than pressing Signing again
+    if (!document.getElementById("words-card")?.hidden) document.getElementById("words-done")?.focus();
+  }));
   setMode(saved === "signing" ? "signing" : "voice", sock, onMode);
   document.addEventListener("keydown", (e) => {
     if (pending && ["1", "2", "3"].includes(e.key)) choose(Number(e.key) - 1);
     else if (pending && e.key === "Escape") choose(-1);
+    else if (bySign && mode === "signing" && !pending && (e.key === "Backspace" || e.key === "Enter") && !typing(e.target)
+      && !(e.key === "Enter" && e.target instanceof HTMLElement && e.target.closest("button, a[href]"))) { // a focused button keeps Enter (Undo, Say it click themselves)
+      e.preventDefault();
+      if (!e.repeat) sock.send({ type: "words", action: e.key === "Enter" ? "done" : "undo" }); // a held key drops one word, not all
+    }
     else if (e.code === "Space" && mode === "voice" && !(e.target instanceof HTMLInputElement)) { // a typed space stays a space
       e.preventDefault(); // not a click on the focused button, not a page scroll
       if (!e.repeat) setTalk(true);
@@ -191,6 +229,15 @@ export function bindControls(sock: Socket, onMode?: (m: Mode) => void): void {
   });
   document.addEventListener("keyup", (e) => { if (e.code === "Space") setTalk(false); });
   window.addEventListener("blur", () => setTalk(false)); // let go while another window had the keyboard
+  const undo = document.getElementById("words-undo"), done = document.getElementById("words-done");
+  if (undo) undo.onclick = () => sock.send({ type: "words", action: "undo" });
+  if (done) done.onclick = () => sock.send({ type: "words", action: "done" });
+  const toggle = document.getElementById("bysign-toggle");
+  if (toggle) toggle.onclick = () => {
+    bySign = !bySign;
+    try { if (bySign) localStorage.setItem(BYSIGN_KEY, "1"); else localStorage.removeItem(BYSIGN_KEY); } catch { /* not remembered */ }
+    setMode(mode, sock, onMode); // tells the server, shows or hides the card
+  };
   const talk = $<HTMLButtonElement>("talk");
   talk.onpointerdown = (e) => {
     talk.setPointerCapture?.(e.pointerId); // a finger sliding off the button still ends on release

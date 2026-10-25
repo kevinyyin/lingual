@@ -51,6 +51,7 @@ class ModeMsg(BaseModel):
     camera reads signs and they are said aloud; speech is ignored). Until a page sends one, both directions run."""
     type: Literal["mode"] = "mode"
     mode: Literal["voice", "signing"]
+    by_sign: bool = False  # sign by sign: each turn is one word, shown as it is read; the sentence is said on Done
 
 
 class TalkMsg(BaseModel):
@@ -58,6 +59,12 @@ class TalkMsg(BaseModel):
     word said near the mic)."""
     type: Literal["talk"] = "talk"
     on: bool
+
+
+class WordsMsg(BaseModel):
+    """Sign by sign: undo drops the last word read, done says the words as a sentence, clear starts over."""
+    type: Literal["words"] = "words"
+    action: Literal["undo", "done", "clear"]
 
 
 class RedoMsg(BaseModel):
@@ -96,7 +103,7 @@ class RecordMsg(BaseModel):
 
 ClientMsg = Annotated[
     Union[FrameMsg, CalibrateMsg, PickMsg, AvatarDoneMsg, PracticeMsg, ModeMsg, TalkMsg, SayMsg, AnswerMsg, RedoMsg, BuddyMsg,
-          RecordMsg],
+          RecordMsg, WordsMsg],
     Field(discriminator="type"),
 ]
 _client = TypeAdapter(ClientMsg)
@@ -168,10 +175,16 @@ class RecognizedMsg(BaseModel):
     segments: list[list[PickOption]]
 
 
+class WordsUpdateMsg(BaseModel):
+    """Sign by sign: the words read so far, in order (the page shows them as chips)."""
+    type: Literal["words_update"] = "words_update"
+    words: list[SignToken]
+
+
 class RecordedMsg(BaseModel):
     type: Literal["recorded"] = "recorded"
     ok: bool
     detail: str  # saved path or error
 
 
-ServerMsg = Union[StateMsg, PickRequestMsg, YouSaidMsg, CaptionMsg, SignPlanMsg, RecognizedMsg, RecordedMsg]
+ServerMsg = Union[StateMsg, PickRequestMsg, YouSaidMsg, CaptionMsg, SignPlanMsg, RecognizedMsg, RecordedMsg, WordsUpdateMsg]

@@ -2,7 +2,7 @@
 (each middle sign cut to its active span, an optional hold between), replayed as ONE translator turn. Only clips the
 app reads right on their own are used, so every error here comes from signing them in a row.
 
-  uv run python -m training.teach_eval.sentence_eval [--n 300] [--hold 0] [--patch p.py] [--out name]
+  uv run python -m training.teach_eval.sentence_eval [--n 300] [--hold 0] [--gap still|lowered] [--patch p.py] [--out name]
 
 Scripted signer: at a picker it picks the sentence's sign for that position if offered, else any sentence sign
 offered, else "None of these" (the turn is dropped). Metrics: exact sentence, word error rate (edit distance / words),
@@ -14,7 +14,7 @@ import random
 from collections import Counter, defaultdict
 from multiprocessing import Pool
 
-from training.eval_live import run_turn
+from training.eval_live import lowered, run_turn
 from training.landmarks import load_npz
 from training.teach_eval import replay
 from training.teach_eval.clips import DATA, load_clips
@@ -31,7 +31,7 @@ def _init(patch):
     _R["session"] = replay.make_session(SignPredictor())
 
 
-def splice(parts: list[tuple[list, float, float]], hold_ms: float) -> list:
+def splice(parts: list[tuple[list, float, float]], hold_ms: float, gap: str = "still") -> list:
     """parts: (frames, t0, t1) per sign. First sign keeps its lead-in, last its ending; middles are cut to their span."""
     out, t = [], 0.0
     for i, (fs, t0, t1) in enumerate(parts):
@@ -43,7 +43,7 @@ def splice(parts: list[tuple[list, float, float]], hold_ms: float) -> list:
             held = next((f for f in reversed(out) if f.left or f.right), out[-1])  # and a held lost hand ends a turn)
             for _ in range(int(hold_ms / dt)):
                 t += dt
-                out.append(held.model_copy(update={"t": t}))
+                out.append(held.model_copy(update={"t": t}) if gap == "still" else lowered(held, t))
         base = seg[0].t
         for f in seg:
             out.append(f.model_copy(update={"t": t + (f.t - base) + (dt if out else 0.0)}))
@@ -61,9 +61,9 @@ def _edit(a: list, b: list) -> int:
 
 
 def _one(job) -> dict:
-    sid, glosses, parts, hold = job
+    sid, glosses, parts, hold, gap = job
     session = _R["session"]
-    frames = splice([(load_npz(p), t0, t1) for p, t0, t1 in parts], hold)
+    frames = splice([(load_npz(p), t0, t1) for p, t0, t1 in parts], hold, gap)
     ev = run_turn(frames)
     row = {"id": sid, "truth": glosses, "hold": hold}
     if ev is None or not ev.segments:
@@ -85,7 +85,7 @@ def _one(job) -> dict:
             "wer": _edit(said, glosses) / len(glosses), "reads": replay._reads(read)}
 
 
-def jobs(n: int, hold: float, seed: int = 0) -> list:
+def jobs(n: int, hold: float, seed: int = 0, gap: str = "still") -> list:
     labels = {json.loads(l)["id"]: json.loads(l)["status"] for l in (DATA / "verify" / "labels.jsonl").read_text().splitlines()}
     auto = {json.loads(l)["id"]: json.loads(l)["features"] for l in (DATA / "verify" / "auto.jsonl").read_text().splitlines()}
     ok = {json.loads(l)["id"] for l in (DATA / "eval" / "results.jsonl").read_text().splitlines()
@@ -106,7 +106,7 @@ def jobs(n: int, hold: float, seed: int = 0) -> list:
                 seen.add(g)
             if len(picked) == 2 + k % 3:
                 break
-        out.append((f"s{k:04d}", [g for g, *_ in picked], [(p, t0, t1) for _, p, t0, t1 in picked], hold))
+        out.append((f"s{k:04d}", [g for g, *_ in picked], [(p, t0, t1) for _, p, t0, t1 in picked], hold, gap))
     return out
 
 
@@ -114,12 +114,13 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--n", type=int, default=300)
     ap.add_argument("--hold", type=float, default=0.0, help="ms the hands hold still between signs")
+    ap.add_argument("--gap", default="still", choices=["still", "lowered"], help="between signs: hold still, or drop the hands")
     ap.add_argument("--patch", default=None)
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--out", default="base")
     a = ap.parse_args()
     with Pool(a.workers, initializer=_init, initargs=(a.patch,)) as pool:
-        rows = list(pool.imap_unordered(_one, jobs(a.n, a.hold), chunksize=4))
+        rows = list(pool.imap_unordered(_one, jobs(a.n, a.hold, gap=a.gap), chunksize=4))
     (DATA / "eval" / f"sentences_{a.out}.jsonl").write_text("\n".join(json.dumps(r) for r in rows) + "\n", encoding="utf-8")
     words = sum(len(r["truth"]) for r in rows)
     by_len = defaultdict(list)
