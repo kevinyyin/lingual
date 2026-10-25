@@ -3,9 +3,10 @@
 A Deaf ASL signer and a hearing person talk face to face on one laptop. Signing becomes spoken English in a voice
 that carries the signer's emotion; speech becomes a 3D avatar signing with facial grammar and the speaker's tone,
 
-**Limits:** not yet reviewed by a fluent Deaf signer (required before anyone outside the team uses it); isolated
-signs plus fingerspelling, not continuous ASL; needs steady front lighting. Models and clips derived from ASL Citizen,
-WLASL, ASL-LEX and the Kaggle competitions are for **non-commercial research only** and must not be redistributed.
+**Limits:** not yet reviewed by a fluent Deaf signer (required before anyone outside the team uses it); single signs,
+short sentences of everyday signs and fingerspelling, not fluent continuous ASL; needs steady front lighting. Models
+and clips derived from ASL Citizen, WLASL, ASL-LEX and the Kaggle competitions are for **non-commercial research
+only**; `models/signs.pt` (trained on ASL Citizen) is published in the repo at its owner's decision.
 
 ## Models (all published or trained on public data)
 
@@ -22,15 +23,15 @@ WLASL, ASL-LEX and the Kaggle competitions are for **non-commercial research onl
 
 The vocabulary is the 160 hand-checked signs in `vocab/vocab.yaml` plus every ASL Citizen and WLASL sign
 (~2,900) in the generated `vocab/vocab_extended.yaml`, with English meanings from ASL-LEX 2.0. The camera reads only
-the 160 hand-checked signs (a lesson only its course's signs); the avatar shows any sign it has a clip for.
+the hand-checked signs (a lesson only its course's signs): 155 of the 160, since HOW-MANY, FIVE, TEN, FOOD and FORGET
+have no ASL Citizen videos. The avatar shows any sign it has a clip for.
 
-Measured (details in the execution record): sign recognition on signers no model trained on, choosing among all
-~2,900 signs, top-1 0.60 / top-3 0.81, holding up under 240p, blur, low light and half frame rate; on WLASL's mixed
-online videos top-1 ~0.25 / top-3 ~0.49 (the top-3 picker covers the gap). Through the live path (WLASL videos
-replayed at 15 fps, one sign per turn): 61% of everyday signs come out right in the translator (18% after the
-picker) and 14% as a wrong word, and 87% of correct signing passes a lesson's camera check. Which signs read best:
-`reports/sign_reliability.md`. English -> sign plans: 182/182 checks
-passed. Fingerspelling: 0.36 letter error rate on held-out Deaf signers.
+Measured: `models/signs.pt` reads 85% of unseen ASL Citizen signers' signs (84% inside made-up sentences). On other
+people's WLASL videos replayed through the live path at 15 fps: 69% of single signs right (the ST-GCN it replaced:
+58%), 53% of signs inside sentences (48%); whole replayed sentences, with `server/recut.py` cutting them, 60% of signs
+wrong (75%); 94% of correct signing passes a lesson's camera check. Which signs read best (measured with the ST-GCN):
+`reports/sign_reliability.md`. English -> sign plans: 182/182 checks passed. Fingerspelling (the Core ML reader):
+17% of letters wrong on Kaggle names fed the way the app sends frames.
 
 ## Setup
 
