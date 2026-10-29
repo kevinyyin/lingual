@@ -69,8 +69,7 @@ scripted sentences, not open translation.
 
 - Vocabulary: the camera reads 155 everyday signs plus fingerspelling.
 - Sign by sign (in the translator's More menu, or `?bysign=1`) avoids the cutting problem: you lower your hands after
-  each sign, the words build up on screen, and Say it (or a 3 s pause) speaks them. It reached about 92% of replayed
-  sentences exactly right but has not been measured live.
+  each sign, the words build up on screen, and Say it (or a 3 s pause) speaks them. It has not been measured live.
 - Fingerspelling uses a Core ML model, so it reads letters only on a Mac. Elsewhere spelled words go to the sign model.
 - The phone needs the backend running on a laptop, reached through a Cloudflare tunnel; it does not run on its own yet.
 - One page per backend: opening a second tab takes the session away from the first.
