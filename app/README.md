@@ -2,6 +2,7 @@
 
 A Deaf ASL signer and a hearing person talk face to face on one laptop. Signing becomes spoken English in a voice
 that carries the signer's emotion; speech becomes a 3D avatar signing with facial grammar and the speaker's tone,
+beside captions. The overview, accuracy figures and limitations are in the [top-level README](../README.md).
 
 **Limits:** not yet reviewed by a fluent Deaf signer (required before anyone outside the team uses it); single signs,
 short sentences of everyday signs and fingerspelling, not fluent continuous ASL; needs steady front lighting. Models
@@ -78,6 +79,9 @@ signing mode the camera tells you where to sit and calibrates by itself once you
 move). Sign one sign per movement, pause briefly between signs, lower your hands for about half a second to finish.
 If the picker appears, press 1-3 (Esc: none of these). `?dev=1` adds a box to type what the hearing person says;
 `?dev=1&camera=0` is speech-to-sign only. `?mode=review` plays each avatar clip beside the video it came from.
+`?demo=1` (or `LINGUAL_DEMO_SENTENCES=1` for the server) turns on demo-sentence snapping: a signed turn that closely
+matches one of the scripted sentences in `vocab/demo_sentences.yaml` is said as that sentence's English
+(`server/demo_sentences.py`; translator and mirror only, never lessons; see the top-level README's Accuracy section).
 
 ## Run on iPhone (the plushie)
 
@@ -96,7 +100,7 @@ cd web && npx cap sync ios && npx cap open ios           # first time, or after 
 In Xcode pick the iPhone and Run. In the app, paste the tunnel URL and tap Open: teaching mode opens with the phone's
 camera, mic and speaker. The URL changes every time the tunnel restarts: paste the new one (the app remembers the last)
 and restart the server with the new `ALLOWED_ORIGINS`. Installs from a free Apple ID expire after 7 days. Anyone who
-learns the tunnel URL can use the app while it runs: stop the tunnel after the demo. (`npm --prefix web run dev:tunnel`
+learns the tunnel URL can use the app while it runs: stop the tunnel when you're done. (`npm --prefix web run dev:tunnel`
 with the tunnel on :5173 instead gives live edits, but loads much slower on the phone.)
 
 ## Plushie arms and neck display (optional)
@@ -130,7 +134,7 @@ uv run --with playwright python scripts/record_demo.py   # screen recordings of 
 uv run pytest && (cd web && npx vitest run)          # unit tests
 ```
 
-Reports land in `data/eval/`. Results, decisions and their evidence are in the execution record (linked above).
+Reports land in `data/eval/`. Write-ups of past measurements are in `reports/`.
 
 ## Our own data (optional)
 

@@ -1,102 +1,91 @@
-# ASL Dragon (lingual): Two-Way ASL
+# ASL Dragon (lingual)
 
-A conversation and learning tool for American Sign Language. It has two halves that share one avatar, one camera
-pipeline and one backend:
+A two-way American Sign Language translator and an ASL course that share one signing avatar. It runs in a laptop
+browser, or on an iPad or iPhone inside a plush toy.
 
-- **Translator.** A Deaf ASL signer and a hearing person who doesn't sign talk face to face. Signing becomes spoken
-  English in a voice that carries the signer's emotion. Speech becomes a 3D avatar signing it, with the speaker's tone
-  and ASL facial grammar, beside English captions.
-- **Teaching mode.** A Duolingo-style ASL course: units of short lessons, an avatar that shows each sign, exercises that
+## The problem
+
+A Deaf ASL signer and a hearing person who doesn't sign have no shared language when they meet face to face, and an
+interpreter is not always there. Someone learning ASL at home has a different gap: nobody watches their signing and
+tells them whether it was right.
+
+## What it does
+
+- **Translator.** Signing becomes spoken English in a voice that carries the signer's emotion. Speech becomes a 3D
+  avatar signing it, with the speaker's tone and ASL facial grammar, beside English captions.
+- **Teaching mode.** A Duolingo-style course: units of short lessons, an avatar that shows each sign, exercises that
   check your own signing through the camera, spoken encouragement, and a "show me a sign" box for any word.
 
-It runs on a **laptop** in the browser, and on an **iPad inside a plush toy** (the plushie): the phone's screen shows
-the avatar, its front camera watches the kid, its speaker gives the plushie a voice, and two small servos flap its
-arms when the kid gets a sign right. Kids pick their **signing buddy**: six avatars, each with its own voice.
+Both halves share one avatar, one camera pipeline and one backend. In the plush toy (the plushie), the phone's screen
+shows the avatar, its front camera watches the kid, its speaker gives the plushie a voice, and an Arduino flaps the
+plushie's arms and shows a check or an X on a small display in its neck. Kids pick their signing buddy: six avatars,
+each with its own voice.
 
-> **Status: a working MVP for a pitch and demo video.** It has not been reviewed by a fluent Deaf signer, which is
-> required before anyone outside the team uses it. It reads single signs, short sentences of everyday signs and
-> fingerspelling, not fluent continuous ASL, and a sentence still often comes out with one sign wrong. It is meant to
-> complement interpreters and teachers, never to replace them.
+## Status
 
+This is a working prototype. A fluent Deaf signer has not reviewed it yet, and that review is required before anyone
+outside the team uses it. It reads single signs, short sentences of everyday signs and fingerspelling, not fluent
+continuous ASL. It is meant to complement interpreters and teachers, never to replace them.
 
-### Setup (about 5 minutes)
+## Accuracy and limitations
 
-You need [uv](https://docs.astral.sh/uv/) (Python 3.12), Node 20+, a webcam, and keys for
-[Cartesia](https://play.cartesia.ai) and [Anthropic](https://console.anthropic.com).
+Measured accuracy:
 
-```bash
-git clone https://github.com/kevinyyin/lingual.git && cd lingual/app
-uv sync                                   # backend dependencies
-cp .env.example .env                      # then put your CARTESIA_API_KEY and ANTHROPIC_API_KEY in .env
-npm --prefix web install                  # page dependencies (also fetches the MediaPipe models)
-```
+- Single signs: right 89% of the time on 995 held-out teaching videos (signers the model never saw), counting the
+  "which sign did you mean?" picker; 83% on an outside dictionary (ASL Signbank). Details:
+  [`app/reports/teaching_videos.md`](app/reports/teaching_videos.md).
+- Short sentences: 2-4 signs come out exactly right about 53% of the time, 59% with a brief pause between signs. This
+  is from 300 sentences spliced from single-sign clips the app already reads right on their own, replayed through the
+  translator (`app/training/teach_eval/sentence_eval.py`). Most errors come from cutting the turn into signs: it gets
+  the wrong number of pieces 34-40% of the time, usually two signs read as one. When a piece is cut right, its top
+  guess is right 90% of the time.
+- Live webcams do worse than these videos. Dim light, a signer far from the camera, or a learner's slower signing all
+  lower confidence, and the picker then appears more often.
 
-Run the backend and the page in two terminals, both from `app/`:
+### Demo sentences (off by default)
 
-```bash
-uv run asl-server                         # backend on :8000
-```
+The translator has an optional demo mode that snaps short sentences to a fixed list. It exists because open
+translation gets only about half of short sentences exactly right. The code history calls it Plan C (design note:
+[`docs/plan-C-scripted-demo-sentences.md`](docs/plan-C-scripted-demo-sentences.md)). It is off unless the page is
+opened with `?demo=1` or the server runs with `LINGUAL_DEMO_SENTENCES=1`. When it is on:
 
-```bash
-npm --prefix web run dev                  # page on :5173
-```
+1. After a signed turn is cut into pieces, each piece is read again for its 10 most likely signs.
+2. The pieces are aligned against each of the 14 sentences in
+   [`app/vocab/demo_sentences.yaml`](app/vocab/demo_sentences.yaml), such as HELLO NICE MEET and WANT COFFEE PLEASE.
+   The alignment allows one piece to stand for two signs, or one sign to be cut into two pieces.
+3. The best sentence wins only if its score per sign clears a floor (which still allows roughly one sign in three to
+   be missing from the guesses) and it leads the runner-up by a margin (`FLOOR` and `MARGIN` in
+   `app/server/demo_sentences.py`). The app then shows that sentence's signs and speaks its fixed English, for example
+   "Hello, nice to meet you!". It skips the picker and Claude.
+4. A turn with no clear match is translated the normal way.
 
-Open <http://localhost:5173> (the translator) or <http://localhost:5173/teach.html> (teaching mode) in Chrome or Edge,
-and allow the camera and mic. Keep **one** tab open: the backend serves one page at a time.
+Lessons and sign-by-sign mode never snap. The avatar mirror page (`?mode=mirror&demo=1`) snaps too, but only shows
+the sentence. The 53% and 59% above are for normal translation, without snapping. Snapping has not been measured
+live. Before it was built, an offline estimate put correct snaps at 96-98%, with the caveat that the test sentences
+overlapped less than the real list does (the design note expects 85-95%). A recording made with `?demo=1` shows the
+scripted sentences, not open translation.
 
-- **Signing to speech:** switch to **Signing**, sit head-to-waist in frame, hold still for 2 s while it calibrates,
-  sign, then lower your hands.
-- **Speech to signing:** switch to **Voice** and hold **Space** while you talk.
-- **No mic:** add `?dev=1` to type what the hearing person says instead.
+### Other limitations
 
-On Windows, if Application Control blocks the `asl-server.exe` launcher, run
-`uv run python -c "from server.main import run; run()"` instead. The iPad / plushie setup is under
-[Run it on an iPhone](#run-it-on-an-iphone-the-plushie).
-
-**Secrets:** the repo has no API keys. Keys live only in `app/.env`, which is git-ignored; `.env.example` lists the
-names with empty values.
-
-### Cartesia features used
-
-| Feature | Where | What it does here |
-|---|---|---|
-| **Sonic 3.6 TTS, streaming over one kept-open WebSocket** | `server/voice.py` | Says the signer's sentence out loud. It starts speaking as audio arrives (raw PCM, 24 kHz) and reuses one socket across turns, so there is no handshake per line. |
-| **`generation_config`: emotion, speed, volume** | `server/voice.py` `voice_controls` | The signer's face and signing energy drive the voice. Happy → `happy`/`excited`, sad → `sad`/`disappointed`, angry → `frustrated`/`angry`. Speed and volume scale with intensity, so a Deaf signer's tone is heard, not just their words. |
-| **Six voices** | `server/voice.py` `BUDDY_VOICES` | Each signing buddy (Leo, Benji, Zeke, Lexi, Avery, Daisy) speaks in its own Sonic voice, chosen from the page. |
-| **Context cancel** | `server/voice.py` | Cuts a line off when the conversation moves on (in teaching mode, the newest line replaces a stale one), keeping the socket for the next line. |
-| **Ink 2 STT with auto-finalize** | `server/stt.py` | The hearing person's push-to-talk speech becomes text with Cartesia's turn detection, then Claude plans it as ASL for the avatar. |
-| **Audio over the page's socket** | `server/phone_audio.py` | On the iPad, the phone's mic feeds Ink 2 and Sonic's audio plays on the phone's speaker: the plushie's voice. |
-
-### Known limitations
-
-- **Not reviewed by a Deaf signer** yet. That is required before real use.
-- **Vocabulary:** the camera reads 155 everyday signs plus fingerspelling. It does not read fluent continuous ASL.
-- **Measured accuracy** ([`app/reports/teaching_videos.md`](app/reports/teaching_videos.md)):
-  - **Single signs:** right 89% of the time on 995 held-out teaching videos (signers the model never saw), counting
-    the "which sign did you mean?" picker; 83% on an outside dictionary (ASL Signbank).
-  - **Short sentences:** 2–4 signs come out exactly right about 53% of the time, 59% with a brief pause between signs.
-    The main error is two signs read as one.
-  - **Live webcams** do worse than these videos: dim light, a signer far from the camera, or a learner's slower
-    signing all lower confidence, and the picker then appears more often.
-- **Fingerspelling** uses a Core ML model, so it reads letters only on a Mac. Elsewhere spelled words go to the
-  sign model.
-- **The iPad needs the backend running on a laptop**, reached through a Cloudflare tunnel; it does not run on its own yet.
-- **One page per backend:** opening a second tab takes the session away from the first.
-- **Licences:** the sign model and sign data come from research datasets (ASL Citizen, WLASL, ASL-LEX) that allow
+- Vocabulary: the camera reads 155 everyday signs plus fingerspelling.
+- Sign by sign (in the translator's More menu, or `?bysign=1`) avoids the cutting problem: you lower your hands after
+  each sign, the words build up on screen, and Say it (or a 3 s pause) speaks them. It reached about 92% of replayed
+  sentences exactly right but has not been measured live.
+- Fingerspelling uses a Core ML model, so it reads letters only on a Mac. Elsewhere spelled words go to the sign model.
+- The phone needs the backend running on a laptop, reached through a Cloudflare tunnel; it does not run on its own yet.
+- One page per backend: opening a second tab takes the session away from the first.
+- Licences: the sign model and sign data come from research datasets (ASL Citizen, WLASL, ASL-LEX) that allow
   non-commercial research use only. See [Data and licenses](#data-and-licenses).
-- **An experimental "sign by sign" mode** is on the `plan-E` branch. You lower your hands after each sign and the words
-  build up on screen. It reached about 92% of replayed sentences exactly right, but it is not merged or tested live.
 
 ---
 
 ## Contents
 
-0. [For the judges: setup, Cartesia features, limitations](#for-the-judges-cal-hacks-cartesia-track)
 1. [What you can do with it](#what-you-can-do-with-it)
 2. [How it works](#how-it-works)
 3. [Setup](#setup)
 4. [Run it on a laptop](#run-it-on-a-laptop)
-5. [Run it on an iPhone (the plushie)](#run-it-on-an-iphone-the-plushie)
+5. [Run it on an iPad or iPhone (the plushie)](#run-it-on-an-ipad-or-iphone-the-plushie)
 6. [Troubleshooting](#troubleshooting)
 7. [The avatar](#the-avatar)
 8. [Recognition, grammar, voice](#recognition-grammar-voice)
@@ -104,6 +93,7 @@ names with empty values.
 10. [Repository map](#repository-map)
 11. [Tech stack](#tech-stack)
 12. [Data and licenses](#data-and-licenses)
+13. [Team](#team)
 
 ---
 
@@ -131,18 +121,17 @@ position, calibrating or picking, **red** an error.
   when the target sign is in its top three guesses. It reads the whole attempt and its last 1.5 s, so a wrong sign
   corrected without resting counts the correction, and raising your hands into position and holding before you sign
   doesn't spoil the read. Replayed correct signing passes 94% of the time; a wrong sign passes about 5%. A miss gets
-  a second try with "That looked like *X*". After every attempt the **mini buddy** in the camera's corner signs back
-  the sign it saw. It tells you which sign it saw, not what to fix in your handshape.
+  a second try with "That looked like *X*". It tells you which sign it saw, not what to fix in your handshape.
 - **The plushie talks** in the buddy's voice: a greeting, "Your turn! Sign hello.", praise, "Almost! Let's try
   again.", "You did it!". Only one line ever waits behind the one playing, so speech never lags the screen. The
   **Sound effects** switch in Profile turns the voice off too. On a right answer the plushie flaps its arms (if its
-  Arduino is plugged in, see [The plushie's arms](#the-plushies-arms)).
+  Arduino is plugged in, see [The plushie's arms and neck display](#the-plushies-arms-and-neck-display)).
 - **Signing buddy** (Profile tab): Leo, Benji, Zeke, Lexi, Avery or Daisy, each with their own look and Cartesia voice.
   Tapping one swaps the avatar everywhere (lessons and translator) and says hello in that voice; the choice is saved
   on the device.
 - **Show me a sign** (Practice tab): type any word; the avatar signs it, or fingerspells it if there's no sign.
-- **Practice tab:** review weak signs, or sign words you know to the camera. **Challenges** and **Profile** track XP,
-  streaks and hearts; progress is stored in the browser.
+- **Practice tab:** review weak signs, or sign words you know to the camera. **Challenges** and **Profile** track XP
+  and streaks; progress is stored in the browser.
 
 ### Debug and tool pages
 
@@ -155,6 +144,9 @@ position, calibrating or picking, **red** an error.
 | `/?mode=bench` | The motion benchmark harness (driven by `scripts/motion_bench.py`) |
 | `?model=Male_Adult_11`, `?model=mpfb` | Other avatar bodies |
 | `?phone=1` / `?phone=0` | Turn phone-audio mode on or off for that browser (the iOS app sets it for you) |
+| `/?mode=mirror` | The avatar mirror: the avatar copies the signer live and labels each sign as it is read, then shows the English sentence (never spoken) |
+| `?bysign=1` / `?bysign=0` | Sign by sign on or off (also in the More menu); remembered per browser |
+| `?demo=1` | Demo sentences: signed turns that closely match a scripted sentence snap to it (see [Demo sentences](#demo-sentences-off-by-default)) |
 
 ---
 
@@ -166,19 +158,19 @@ Everything runs on one machine. The browser does the camera, tracking and avatar
 recognition, Claude, Cartesia and the laptop's own mic and speaker.
 
 ```
-browser (localhost:5173, Vite dev server)            backend (localhost:8000, FastAPI)
-┌──────────────────────────────────┐               ┌───────────────────────────────────────────┐
-│ camera → MediaPipe hand/pose/face │── points ───▶│ segmenter → re-cut → signs / fingerspell    │
-│   (only points leave, never video)│   WebSocket   │           → facial grammar + emotion       │
-│ 3D avatar (three.js) + captions   │◀── plans ────│ → Claude (English) → Cartesia Sonic ──▶ 🔈  │
-│ lessons, show-me, picker, mini    │               │ 🎙 → Cartesia Ink → Claude (sign plan)      │
-└──────────────────────────────────┘               └───────────────────────────────────────────┘
+browser (localhost:5173, Vite dev server)           backend (localhost:8000, FastAPI)
+┌────────────────────────────────────┐              ┌───────────────────────────────────────────────┐
+│ camera → MediaPipe hand/pose/face  │── points ───▶│ segmenter → re-cut → signs / fingerspell      │
+│   (only points leave, never video) │   WebSocket  │           → facial grammar + emotion          │
+│ 3D avatar (three.js) + captions    │◀── plans ────│ → Claude (English) → Cartesia Sonic → speaker │
+│ lessons, show-me, picker, mini     │              │ mic → Cartesia Ink → Claude (sign plan)       │
+└────────────────────────────────────┘              └───────────────────────────────────────────────┘
 ```
 
-### On the iPhone (the plushie)
+### On the phone (the plushie)
 
 ```
-iPhone (in the plushie)                          Laptop
+iPad/iPhone (plushie)                            Laptop
 ┌────────────────────────────┐                   ┌────────────────────────────────────┐
 │ iOS app (Capacitor)        │                   │ FastAPI :8000                      │
 │  start screen → paste URL  │  HTTPS tunnel     │  ├ serves the built page (web/dist)│
@@ -219,16 +211,19 @@ The design choices behind this, and why:
 
 ## Setup
 
-Requirements: macOS or Linux, [uv](https://docs.astral.sh/uv/) (Python 3.12), Node 20+, and API keys for
-[Anthropic](https://console.anthropic.com) and [Cartesia](https://play.cartesia.ai). For the iPhone: Xcode, an Apple
+Requirements: macOS or Linux, [uv](https://docs.astral.sh/uv/) (Python 3.12), Node 20+, a webcam, and API keys for
+[Anthropic](https://console.anthropic.com) and [Cartesia](https://play.cartesia.ai). For the phone: Xcode, an Apple
 ID, and `brew install cloudflared`.
 
 ```bash
-cd app
+git clone https://github.com/kevinyyin/lingual.git && cd lingual/app
 uv sync                         # Python backend
 cp .env.example .env            # add ANTHROPIC_API_KEY and CARTESIA_API_KEY
-cd web && npm install && cd ..  # also fetches MediaPipe wasm + models into web/public
+npm --prefix web install        # also fetches MediaPipe wasm + models into web/public
 ```
+
+The repo has no API keys. Keys live only in `app/.env`, which is git-ignored; `.env.example` lists the names with
+empty values.
 
 The sign model (`app/models/signs.pt`) is in the repo. The fingerspelling reader (18 MB, Macs only) is downloaded
 once from Hugging Face, and the vocabulary and the avatar's sign clips are built from public datasets. The commands
@@ -251,16 +246,26 @@ uv run asl-server                # backend on :8000
 npm --prefix web run dev         # page on :5173
 ```
 
-Open <http://localhost:5173> for the translator or <http://localhost:5173/teach.html> for teaching mode.
+Open <http://localhost:5173> for the translator or <http://localhost:5173/teach.html> for teaching mode in Chrome or
+Edge, and allow the camera and mic. Keep one tab open: the backend serves one page at a time.
 
-**Signing tips:** sit head-to-waist in frame with steady light from the front. The camera tells you where to sit (closer,
-back, to the middle, hands in your lap) and calibrates by itself once you're there; if you move, it calibrates again.
-In the translator, sign a short sentence at your own pace (pauses between signs are fine but not needed) and lower
-your hands for about half a second to finish a turn. Fingerspell with one hand, the wrist fairly still.
+- Signing to speech: switch to **Signing**, sit head-to-waist in frame, hold still for 2 s while it calibrates, sign,
+  then lower your hands.
+- Speech to signing: switch to **Voice** and hold **Space** while you talk.
+- No mic: add `?dev=1` to type what the hearing person says instead.
+
+On Windows, if Application Control blocks the `asl-server.exe` launcher, run
+`uv run python -c "from server.main import run; run()"` instead.
+
+Signing tips: sit head-to-waist in frame with steady light from the front. The camera tells you where to sit (closer,
+back, to the middle, hands in your lap) and calibrates by itself once you're there; if you move, it calibrates again,
+and **Recalibrate** in the More menu forces it. In the translator, sign a short sentence at your own pace (pauses
+between signs are fine but not needed) and lower your hands for about half a second to finish a turn. Fingerspell
+with one hand, the wrist fairly still.
 
 ---
 
-## Run it on an iPhone (the plushie)
+## Run it on an iPad or iPhone (the plushie)
 
 ### Every time
 
@@ -290,8 +295,8 @@ localhost and the exact addresses you list (comma-separated, a trailing `/` is f
 cd app/web && npx cap sync ios && npx cap open ios
 ```
 
-In Xcode: plug in the iPhone, pick it as the run target, set **App → Signing & Capabilities → Team** to your Apple ID,
-and press **Run**. If the phone asks, turn on Developer Mode (Settings → Privacy & Security) and trust the developer
+In Xcode: plug in the iPad or iPhone, pick it as the run target, set **App → Signing & Capabilities → Team** to your
+Apple ID, and press **Run**. If the phone asks, turn on Developer Mode (Settings → Privacy & Security) and trust the developer
 (Settings → General → VPN & Device Management). Allow the camera (and, for the translator, the mic) when asked.
 
 Re-run `npx cap sync ios` and press Run again only after changing `app/web/shell/` (the start screen) or `app/web/ios/`.
@@ -303,14 +308,15 @@ Keep your signing Team out of commits: each teammate signs with their own Apple 
 ### Live edits instead of a build
 
 `npm --prefix web run dev:tunnel` with the tunnel pointed at `:5173` serves the dev server to the phone, so edits show
-on reload without a build. It loads much more slowly on the phone, so use the build for demos.
+on reload without a build. It loads much more slowly on the phone, so use the build otherwise.
 
-### The plushie's arms
+### The plushie's arms and neck display
 
-Two 9 g servos on an Arduino Uno R4 WiFi (arm A on pin 6, arm B on pin 9), plugged into the laptop by USB. Upload
-`app/arduino/plush_arms/plush_arms.ino` with the Arduino IDE. The server finds the board by itself
-(`server/plush.py`) and sends it `c` when the kid gets a lesson sign right; the arms flap three times. With no board
-plugged in, nothing happens.
+An Arduino Uno R4 WiFi, plugged into the laptop by USB, drives two 9 g servos (arm A on pin 6, arm B on pin 9), a
+MAX7219 8x8 dot matrix in the plushie's neck and two LEDs. Upload `app/arduino/plush_arms/plush_arms.ino` with the
+Arduino IDE. The server finds the board by itself (`server/plush.py`) and tells it each lesson answer: a right answer
+shows a check, lights the right LED and flaps the arms three times; a wrong one shows an X; a missed first try shows a
+!. With no board plugged in, nothing happens. Wiring is in [`app/README.md`](app/README.md).
 
 To set the angles for your plush, stop the server, open the Serial Monitor at 115200 baud, and type `a90` or `b90` to
 turn arm A or B to 90°. Find where each arm hangs down and where it's raised without straining, then put those in
@@ -328,7 +334,7 @@ turn arm A or B to 90°. Find where each arm hangs down and where it's raised wi
 | "Open elsewhere" | Another tab or device took the session. Tap **Use it here**, or close the other one. |
 | Teaching page slow or unstyled on the phone | The tunnel points at the Vite dev server (`:5173`). Point it at `:8000` and run `npm --prefix web run build`. |
 | Camera slow to start | First load downloads ~30 MB of trackers; it starts in the background when teaching mode opens. Later loads are cached. |
-| "Camera blocked" | Allow the camera for the app in iPhone Settings. |
+| "Camera blocked" | Allow the camera for the app in the device's Settings. |
 | Stuck on "Rest your hands in your lap…" | It can't see you calibrate: step back so head to waist is in frame, light from the front, hands still. |
 | No sound from the plushie | Check **Sound effects** is on in teaching mode's Profile; turn the volume up; reopen the app (iOS unlocks audio on the first tap). |
 | No voice at all, server log shows HTTP 402 | The Cartesia account is out of credit. Top it up and restart the server. |
@@ -382,7 +388,18 @@ fingers; two-hand contact signs can overlap slightly.
 | Facial grammar and emotion | Rules over MediaPipe's face blendshapes and head angle: brows and headshake for grammar, mouth, eyes and signing speed and size for emotion, kept separate so a raised-brow question isn't read as "surprised". |
 | Signs to English | Claude (`claude-haiku-5-5`) composes a sentence from the recognized signs, grammar and emotion. |
 | English to signs | Claude turns English into a validated sign plan (ASL order, only signs the avatar can show, fingerspelling the rest) with grammar and tone; 182/182 plan checks pass. |
-| Voice and speech-to-text | Cartesia Sonic 3.6 (emotion, speed and volume controls over a kept-open socket) and Ink 2 (turn-detecting transcription). Each buddy has its own Sonic voice (Leo, Benji, Zeke, Lexi, Avery, Daisy: `server/voice.py` `BUDDY_VOICES`); the page sends the buddy's name and the server picks the voice. |
+| Demo sentences | Off by default (`?demo=1`): a signed turn that closely matches a scripted sentence is said as its fixed English (`server/demo_sentences.py`, see [Demo sentences](#demo-sentences-off-by-default)). |
+
+### Voice and speech-to-text (Cartesia)
+
+| Feature | Where | What it does here |
+|---|---|---|
+| Sonic 3.6 TTS, streaming over one kept-open WebSocket | `server/voice.py` | Says the signer's sentence out loud. It starts speaking as audio arrives (raw PCM, 24 kHz) and reuses one socket across turns, so there is no handshake per line. |
+| `generation_config`: emotion, speed, volume | `server/voice.py` `voice_controls` | The signer's face and signing energy drive the voice. Happy → `happy`/`excited`, sad → `sad`/`disappointed`, angry → `frustrated`/`angry`. Speed and volume scale with intensity, so a Deaf signer's tone is heard, not just their words. |
+| Six voices | `server/voice.py` `BUDDY_VOICES` | Each signing buddy (Leo, Benji, Zeke, Lexi, Avery, Daisy) speaks in its own Sonic voice; the page sends the buddy's name and the server picks the voice. |
+| Context cancel | `server/voice.py` | Cuts a line off when the conversation moves on (in teaching mode, the newest line replaces a stale one), keeping the socket for the next line. |
+| Ink 2 STT with auto-finalize | `server/stt.py` | The hearing person's push-to-talk speech becomes text with Cartesia's turn detection, then Claude plans it as ASL for the avatar. |
+| Audio over the page's socket | `server/phone_audio.py` | On the phone, its mic feeds Ink 2 and Sonic's audio plays on its speaker: the plushie's voice. |
 
 Vocabulary: 160 hand-checked signs (`app/vocab/vocab.yaml`) plus every ASL Citizen and WLASL sign (~2,900) in the
 generated `vocab_extended.yaml`, with English meanings from ASL-LEX 2.0. The camera reads only the hand-checked signs:
@@ -421,16 +438,19 @@ Measurement scripts (details in [`app/README.md`](app/README.md#evaluate)):
 
 | Path | What's there |
 |---|---|
-| `app/server/` | FastAPI backend: `main.py` (WebSocket, origin check, serving the built page), `session.py` (turn-taking, practice mode, lesson lines), `phone_audio.py` (phone mic and speaker over the socket), `stt.py` / `voice.py` (Cartesia, the buddies' voices), `compose.py` / `gloss.py` (Claude), `classifier.py` (the sign model), `segmenter.py` and `recut.py` (cutting turns into signs), `fingerspell_coreml.py` (fingerspelling), `plush.py` (the arms), grammar and emotion readers. |
+| `app/server/` | FastAPI backend: `main.py` (WebSocket, origin check, serving the built page), `session.py` (turn-taking, practice mode, lesson lines), `phone_audio.py` (phone mic and speaker over the socket), `stt.py` / `voice.py` (Cartesia, the buddies' voices), `compose.py` / `gloss.py` (Claude), `demo_sentences.py` (demo-sentence snapping), `classifier.py` (the sign model), `segmenter.py` and `recut.py` (cutting turns into signs), `fingerspell_coreml.py` (fingerspelling), `plush.py` (the plushie's Arduino), grammar and emotion readers. |
 | `app/models/signs.pt` | The sign model (the other models are downloaded, see `app/README.md`). |
 | `app/web/src/` | Translator (`main.ts`, `ui.ts`, `style.css`), camera and tracking (`camera.ts`), socket (`ws.ts`), phone audio (`phone.ts`), the buddies (`buddies.ts`), the avatar and mini buddy (`avatar/`), and teaching mode (`teach/`). |
-| `app/arduino/plush_arms/` | The sketch that flaps the plushie's arms. |
+| `app/arduino/plush_arms/` | The plushie's Arduino sketch: arms, neck display and LEDs. |
 | `app/web/shell/` | The iOS app's start screen (the only page bundled in the app). |
 | `app/web/ios/` | The Xcode project generated by Capacitor (`AppDelegate.swift`, `Info.plist`). |
 | `app/web/public/` | Sign clips (`signs/`), letters, avatar bodies, MediaPipe wasm and models; served in place, never copied into the build. |
 | `app/training/` | Building the vocabulary, clips and contact data; training and evaluation. |
 | `app/scripts/` | Avatar builders, the motion bench, round-trip and demo recording. |
 | `app/README.md` | Full setup, training, evaluation and own-data recording steps. |
+| `app/vocab/` | The hand-checked vocabulary (`vocab.yaml`) and the demo sentences (`demo_sentences.yaml`). |
+| `app/reports/` | Measurement write-ups: teaching-video accuracy, sign reliability, avatar motion. |
+| `docs/plan-C-scripted-demo-sentences.md` | The design note for demo-sentence snapping. |
 | `asl-spike/` | The team's earlier recognition spike and its models. |
 | `latency-bench/` | A separate harness that measured live speech-to-speech latency across providers. |
 
@@ -458,9 +478,15 @@ the plushie's Arduino, pytest.
 
 Code is MIT ([LICENSE](LICENSE)). The sign model, clips and letters derive from ASL Citizen, WLASL, ASL-LEX and the
 Kaggle ASL competitions, which allow **non-commercial research use only**; anything derived from them inherits that
-limit (fine for a pitch and demo, not for an App Store release). `app/models/signs.pt` is trained on ASL Citizen,
+limit (fine for a research prototype, not for an App Store release). `app/models/signs.pt` is trained on ASL Citizen,
 whose licence also forbids redistributing modified data; it is published here at the repo owner's decision and is
 for non-commercial research use only. The fingerspelling reader is Apache-2.0, trained on Google's ASL Fingerspelling
 corpus (CC-BY 4.0), and is downloaded, not committed. The six buddy avatars are generated here (MIT) on the MPFB rig
 (CC0); the Rocketbox bodies are MIT. Recordings of our own signing are stored as landmarks only, never video, and are
 not committed.
+
+---
+
+## Team
+
+Kevin Yin, Eric Wang (the avatar mirror), z57333 (sign-by-sign mode) and Nathan Tien.

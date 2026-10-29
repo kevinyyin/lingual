@@ -12,7 +12,7 @@ Commands (from `app/`, backend :8000 and Vite :5173 running):
 
 ## Placement audit (`placement_audit.json`)
 World-landmark vs aspect-corrected 2D wrist placement relative to the nose, worst frame per clip with a wrist within 1.3
-shoulder widths of the nose. **134 of 1976 clips (6.8%) exceed 0.3 shoulder widths** (median worst error 0.22). This share decides Task 7's path.
+shoulder widths of the nose. **134 of 1976 clips (6.8%) exceed 0.3 shoulder widths** (median worst error 0.22). This share decides whether placement needs a 2D-based path.
 
 ## Motion bench (`before.json`, `before.md`)
 Total: **129 spikes**, 7624 frames, max step 179.7 deg, p99 step 165.9 deg, 316 twist-out, 0 backward elbow,
@@ -26,7 +26,7 @@ Total: **129 spikes**, 7624 frames, max step 179.7 deg, p99 step 165.9 deg, 316 
 
 Same code, same signs: run-to-run drift is about 2 points on top-3/top-5 and none on top-1. Treat differences under ~2-3 points as noise.
 
-# Core (Task 6: arm solver + rotation filters + turn-rate cap)
+# Core (arm solver + rotation filters + turn-rate cap)
 
 Same commands with `--label core` / `core2` (Male_Adult_11, 60 fps). Arm filter QuatFilter(3, 0.5), fingers (8, 0.5),
 turn cap 1200 deg/s.
@@ -46,7 +46,7 @@ turn cap 1200 deg/s.
 Round-trip 150 (after review fix round 1): core .073 / .147 / .227, core2 .080 / .133 / .233 (top-1/3/5) vs before .087 / .153-.173 / .233-.240:
 below the baseline. `roundtrip_core_nofilter.json` (no filter, no cap, diagnostic) .093 / .147 / .227: the filtering costs ~1-2 points.
 
-# Final: before vs after (Task 10)
+# Final: before vs after
 
 `after.json` / `after.md` (`motion_bench.py --label after`) and `roundtrip_after.json` (`roundtrip.py --label after --n 150`),
 Male_Adult_11, at 841a815; `after.json` re-measured after the final-review fixes (twist re-anchoring, time-based torso ease, head gap ease),
@@ -78,7 +78,7 @@ Round-trip, 150 signs (top-1 / top-3 / top-5):
 
 The after round-trip is at or just below the before baseline (top-3 14.0% vs 15.3-17.3%, top-5 22.7% vs 23.3-24.0%; top-1 equal).
 The drift between the two before runs is about 2 points, so top-1 and top-5 are within noise and top-3 is 1-3 points low.
-The spec calls round-trip a weak signal (the recogniser was trained on real signers, not avatars).
+Round-trip is a weak signal (the recogniser was trained on real signers, not avatars).
 
 # Readability (2026-10-21)
 
@@ -100,13 +100,13 @@ sign edge against elsewhere (TOTAL: mean over items).
 | p95 frame (ms) | 2.7 | 2.4 | 2.4 | 2.6 |
 | round trip top-1 / top-3 / top-5 | .060 / .140 / .213 | .067 / .147 / .180 | .093 / .160 / .187 | .067 / .153 / .167 |
 
-Kept (a) by the spec's rule: (b) and (c) are each jerkier than (a) (rule 2), though (b) read best in the round trip (within its
-~2-point noise on top-3). Criteria 1, 2 and 4 pass; criterion 3 misses by 0.8 mm: REMEMBER's thumb now dips 8.3 mm into the forehead
-at its deepest frame (before: 0 for REMEMBER, worst MY 7.4 mm). The user watched the result on both screens and accepted it.
+Kept (a) by the acceptance rules: (b) and (c) are each jerkier than (a), though (b) read best in the round trip (within its
+~2-point noise on top-3). Every criterion but hand penetration passes, and that one misses by 0.8 mm: REMEMBER's thumb now dips 8.3 mm into the forehead
+at its deepest frame (before: 0 for REMEMBER, worst MY 7.4 mm). We watched the result on both screens and accepted it.
 Contact error mean 0.171 -> 0.183 m: 79% of the rise (+0.152 of +0.193 m summed over items) is the two HELLO items, 0.177 -> 0.252 m
 each. HELLO takes the fixed-trim fallback (142 frames before and after), so its change comes from the load-time cleaning alone, which
 moves its landmarks by at most 0.3 cm at the forehead; something in the live solve magnifies that (cause not found). HELLO also goes
-from 17.3 to 19.4 deg max step and 0.87 to 1.30 mm edge jerkiness. HELLO was in the set the user watched and signed off on both screens.
+from 17.3 to 19.4 deg max step and 0.87 to 1.30 mm edge jerkiness. HELLO was in the set we watched and signed off on both screens.
 
 # Sign spans (2026-10-22)
 
@@ -185,9 +185,9 @@ before merging: HELLO, THANK-YOU and MEET on the laptop and the phone, with and 
 
 # Hand twist (2026-10-22)
 
-Follow-up to the sign spans: which way a hand's turn takes the forearm as the hand appears. Branch
-`claude/elegant-wiles-fce637` (from `avatar-readability` with PR #7). Same toon body, bench items and 150-sign round trip
-as above (`twist_*.json`, `roundtrip_twist_b*.json`; `roundtrip_spans_c2` re-runs PR #7's code in this session). The
+Follow-up to the sign spans: which way a hand's turn takes the forearm as the hand appears. Branched
+from `avatar-readability` with PR #7. Same toon body, bench items and 150-sign round trip
+as above (`twist_*.json`, `roundtrip_twist_b*.json`; `roundtrip_spans_c2` re-runs PR #7's code in the same run). The
 measurements below that needed HELLO's old trim or the breathing frozen used debug-only switches, not committed. Two
 candidates; `twist_b` is kept:
 

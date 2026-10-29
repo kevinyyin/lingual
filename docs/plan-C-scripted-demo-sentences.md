@@ -2,9 +2,7 @@
 
 **Goal:** short signed sentences read right more than 80% of the time in the demo.
 
-**Effort:** about 1–2 h.
-
-**Owner:** _(teammate)_. Plan E (sign-by-sign mode) is being built separately on branch `plan-E`.
+**Status:** built (`app/server/demo_sentences.py`, `app/vocab/demo_sentences.yaml`, the hook in `app/server/session.py`). Off by default; on with `?demo=1` or `LINGUAL_DEMO_SENTENCES=1`. This note is the design as planned; the code is the reference.
 
 ## Why
 
@@ -108,6 +106,6 @@ Put it right after `segments, tops = ...` (currently about line 382) and before 
 - **Offline (only on the laptop that ran the evaluation):** the evaluation data in `app/data/teaching/` is not in git. Ask for a run of `uv run python -m training.teach_eval.sentence_eval --n 300 --patch <patch>` with sentences restricted to the demo list. The harness already supports `--patch` and per-sentence output.
 - **Regression:** with the flag off, nothing changes. `uv run pytest -q` must stay green.
 
-## Be upfront in the pitch
+## Be upfront about it
 
 This is a demo mode: it only recognises the scripted sentences. Present it as "demo phrases"; outside them, the app falls back to open translation, which gets about 53–59% of short sentences exactly right.
