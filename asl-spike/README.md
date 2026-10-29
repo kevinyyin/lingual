@@ -2,7 +2,7 @@
 
 This folder holds throwaway research code for a go/no-go feasibility check, run in October 2026 before the main
 build in `app/`. The app does not import this code, though `app/server/spike_classifier.py` can load the spike's trained sign
-be reused in the build. Only the knowledge carries over: see `REPORT-SPIKE.md` and `NEXT.md`.
+model as an optional extra. The findings carried over: see `REPORT-SPIKE.md` and `NEXT.md`.
 
 The MVP being de-risked is a two-way ASL bridge for one café scenario:
 

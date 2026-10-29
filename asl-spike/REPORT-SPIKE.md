@@ -21,7 +21,7 @@ Early research spike, run 2026-10-16 on one Windows 11 laptop (Intel Core Ultra 
 |---|---|---|
 | Accept the Kaggle rules for asl-signs and asl-fingerspelling (browser, signed in) | Kaggle download | done |
 | RWTH-BOSTON-104 download form | S2 continuous / S3 fallback data | done (archive placed in the repo) |
-| ASLLRP DAI account (https://dai.cs.rutgers.edu/dai/s/dai), hand-approved | real ASLLRP/NCSLGR videos with face close-up and yes/no questions: the missing piece for the S3 gate | not requested (user decision); fallbacks used |
+| ASLLRP DAI account (https://dai.cs.rutgers.edu/dai/s/dai), hand-approved | real ASLLRP/NCSLGR videos with face close-up and yes/no questions: the missing piece for the S3 gate | not requested; fallbacks used |
 | Download How2Sign frontal clips in a browser (Google Drive refuses scripted downloads: 'too many users have viewed or downloaded this file'). Files: val/test 'Green Screen RGB clips (frontal)' from http://how2sign.github.io/ into `asl-spike/data/how2sign/` | S3 fallback (b), weak labels | blocked; only the translation CSVs downloaded |
 | NCSLGR XML: the public XML link on the BU page is missing and the Rutgers mirror (secrets.rutgers.edu) does not respond | we decoded the public SignStream 2 database files instead (validated against the 3 XML files in the BU parser package) | worked around |
 | Ask Microsoft (ASL_Citizen@microsoft.com) whether a public demo and its derived avatar poses/model weights are permitted | ASL Citizen license: non-commercial research, no distribution of data or modified data | open |
@@ -195,7 +195,7 @@ A = meaning preserved; B = understandable but lossy or changed; W = wrong meanin
 | Option | Assessment |
 |---|---|
 | (a) sign.mt spoken-to-signed-translation | MIT code. Lexicons are Swiss (sgg/ssr/slf); ASL is a rule-based 'lexical plan' with no ASL lexicon listed. Outputs .pose/video. Non-manuals are explicitly 'downstream work'. The app is CC BY-NC-SA 4.0. Not usable for ASL as is. |
-| (b) AWS GenASL | MIT-0 code. Stitched 2D avatar videos rendered from ASLLVD citation clips with RTMPose. Needs Transcribe, Bedrock, Step Functions, Lambda, DynamoDB, S3 and Amplify. No facial grammar. ASLLVD videos come from BU, so their terms must be checked. Too heavy for 36 h. |
+| (b) AWS GenASL | MIT-0 code. Stitched 2D avatar videos rendered from ASLLVD citation clips with RTMPose. Needs Transcribe, Bedrock, Step Functions, Lambda, DynamoDB, S3 and Amplify. No facial grammar. ASLLVD videos come from BU, so their terms must be checked. Too heavy for the build's time budget. |
 | (c) ours: per-gloss MediaPipe poses → VRM avatar in three.js | Built (`avatar/index.html`). three.js 0.169, @pixiv/three-vrm 3.1, kalidokit 1.1.5 for fingers. VRM sample model 'VRM1_Constraint_Twist_Sample' (VRM Public License 1.0: commercial use and redistribution allowed). |
 
 Prototype: 3 sentences from S5 v2 outputs (wh: 6 signs, yes/no: 6, negation: 5). Glosses missing from ASL Citizen were dropped (SIZE, OAT). The page applies 200 ms slerp blends between signs, brow-only morph targets (Fcl_BRW_Surprised for raise, Fcl_BRW_Angry for lower) over each NMM span, and a 3 Hz head yaw for negation. Measured in Microsoft Edge (Playwright) on ANGLE (Intel, Intel(R) Arc(TM) 140V GPU (16GB) (0x000064A0) Direct3D11 vs_5_0 ps_5_0, D3D11):
