@@ -21,12 +21,6 @@ shows the avatar, its front camera watches the kid, its speaker gives the plushi
 plushie's arms and shows a check or an X on a small display in its neck. Kids pick their signing buddy: six avatars,
 each with its own voice.
 
-## Status
-
-This is a working prototype. A fluent Deaf signer has not reviewed it yet, and that review is required before anyone
-outside the team uses it. It reads single signs, short sentences of everyday signs and fingerspelling, not fluent
-continuous ASL. It is meant to complement interpreters and teachers, never to replace them.
-
 ## Accuracy and limitations
 
 Measured accuracy:
