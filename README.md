@@ -35,41 +35,6 @@ Measured accuracy:
   guess is right 90% of the time.
 - Live webcams do worse than these videos. Dim light, a signer far from the camera, or a learner's slower signing all
   lower confidence, and the picker then appears more often.
-
-### Demo sentences (off by default)
-
-The translator has an optional demo mode that snaps short sentences to a fixed list. It exists because open
-translation gets only about half of short sentences exactly right. The code history calls it Plan C (design note:
-[`docs/plan-C-scripted-demo-sentences.md`](docs/plan-C-scripted-demo-sentences.md)). It is off unless the page is
-opened with `?demo=1` or the server runs with `LINGUAL_DEMO_SENTENCES=1`. When it is on:
-
-1. After a signed turn is cut into pieces, each piece is read again for its 10 most likely signs.
-2. The pieces are aligned against each of the 14 sentences in
-   [`app/vocab/demo_sentences.yaml`](app/vocab/demo_sentences.yaml), such as HELLO NICE MEET and WANT COFFEE PLEASE.
-   The alignment allows one piece to stand for two signs, or one sign to be cut into two pieces.
-3. The best sentence wins only if its score per sign clears a floor (which still allows roughly one sign in three to
-   be missing from the guesses) and it leads the runner-up by a margin (`FLOOR` and `MARGIN` in
-   `app/server/demo_sentences.py`). The app then shows that sentence's signs and speaks its fixed English, for example
-   "Hello, nice to meet you!". It skips the picker and Claude.
-4. A turn with no clear match is translated the normal way.
-
-Lessons and sign-by-sign mode never snap. The avatar mirror page (`?mode=mirror&demo=1`) snaps too, but only shows
-the sentence. The 53% and 59% above are for normal translation, without snapping. Snapping has not been measured
-live. Before it was built, an offline estimate put correct snaps at 96-98%, with the caveat that the test sentences
-overlapped less than the real list does (the design note expects 85-95%). A recording made with `?demo=1` shows the
-scripted sentences, not open translation.
-
-### Other limitations
-
-- Vocabulary: the camera reads 155 everyday signs plus fingerspelling.
-- Sign by sign (in the translator's More menu, or `?bysign=1`) avoids the cutting problem: you lower your hands after
-  each sign, the words build up on screen, and Say it (or a 3 s pause) speaks them. It has not been measured live.
-- Fingerspelling uses a Core ML model, so it reads letters only on a Mac. Elsewhere spelled words go to the sign model.
-- The phone needs the backend running on a laptop, reached through a Cloudflare tunnel; it does not run on its own yet.
-- One page per backend: opening a second tab takes the session away from the first.
-- Licences: the sign model and sign data come from research datasets (ASL Citizen, WLASL, ASL-LEX) that allow
-  non-commercial research use only. See [Data and licenses](#data-and-licenses).
-
 ---
 
 ## Contents
