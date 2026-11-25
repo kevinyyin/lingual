@@ -3,6 +3,12 @@
 A two-way American Sign Language translator and an ASL course that share one signing avatar. It runs in a laptop
 browser, or on an iPad or iPhone inside a plush toy.
 
+[▶ Demo video](https://www.youtube.com/watch?v=1aXlMaCUVKA) · [Devpost](https://devpost.com/software/asl-dragon)
+
+Built at Cal Hacks 13.0 by Kevin Yin, Eric Wang, Zack Wu and Nathan Tien. Kevin wrote most of the code (29 of the
+repo's 45 commits), including the sign recognizer: a bidirectional GRU on MediaPipe landmarks trained on about 5,600
+ASL Citizen videos (155 signs). It is not yet reviewed by a fluent Deaf signer.
+
 ## The problem
 
 A Deaf ASL signer and a hearing person who doesn't sign have no shared language when they meet face to face, and an
